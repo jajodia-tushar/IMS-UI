@@ -24,12 +24,20 @@ namespace IMS_UI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] User user)
         {
-            var provider = new LoginProvider();
-            var response = await provider.ApiCaller(user, "/api/Login");
-            if (response.token != null)
-                return Ok(response);
-            else
-                return Unauthorized("invalid Credentials");           
+            try
+            {
+                var provider = new LoginProvider();
+                var response = await provider.ApiCaller(user, "/api/Login");
+                if (response.token != null)
+                    return Ok(response);
+                else
+                    return Unauthorized("invalid Credentials");
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500);
+            }
+                     
         }
 
         // PUT: api/Login/5

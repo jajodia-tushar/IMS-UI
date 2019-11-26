@@ -35,6 +35,11 @@ export class MaterialModule { };
     AppComponent,
     EmployeeComponent,
     PickItemComponent
+    AppComponent,
+    LoginComponent,
+    AdminComponent,
+    ClerkComponent,
+    EmployeeComponent
   ],
   imports: [
     MaterialModule,
@@ -46,7 +51,17 @@ export class MaterialModule { };
       { path: 'employee', component: EmployeeComponent },
       { path: 'pickitem', component: PickItemComponent }
     ])
+    BrowserModule,
+    RouterModule.forRoot([
+      { path: '', component: LoginComponent, canActivate: [AnonymousGaurdService] },
+      { path: 'login', component: LoginComponent, canActivate: [AnonymousGaurdService]},
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGaurdService] },
+      { path: 'clerk', component: ClerkComponent, canActivate: [AuthGaurdService] },
+      { path: 'shelf', component: EmployeeComponent, canActivate: [AuthGaurdService] }
+    ])
   ],
+
+  providers: [LoginService, AuthGaurdService, AnonymousGaurdService],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
 })

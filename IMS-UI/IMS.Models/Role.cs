@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class JwtToken
+    public class Role
     {
-        
-        public string token { get; set; }
-
-        
-
-        
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

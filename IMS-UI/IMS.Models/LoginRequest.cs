@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public enum Status
+    public class LoginRequest
     {
-        Failure,
-        Success
-
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

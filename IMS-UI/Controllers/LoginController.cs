@@ -28,7 +28,7 @@ namespace IMS_UI.Controllers
             {
                 var provider = new LoginProvider();
                 var response = await provider.ApiCaller(user, "/api/Login");
-                if (response.token != null)
+                if (response.Error == null)
                     return Ok(response);
                 else
                     return Unauthorized("invalid Credentials");
@@ -38,18 +38,6 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
                      
-        }
-
-        // PUT: api/Login/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

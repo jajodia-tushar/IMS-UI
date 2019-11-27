@@ -16,10 +16,10 @@ namespace IMS_UI.IMS.Providers
 {
     public class LoginProvider
     {
-        private const string BASEURL = "http://localhost:53640";
+        private const string BASEURL = "http://localhost:60110";
        
 
-        public async Task<JwtToken>  ApiCaller(Object requestData,string path)
+        public async Task<LoginResponse>  ApiCaller(Object requestData,string path)
         {
             try
             {
@@ -28,20 +28,12 @@ namespace IMS_UI.IMS.Providers
                 http.BaseAddress = new Uri(BASEURL);
                 http.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-                JwtToken token = new JwtToken();
-                var data = new StringContent(jsonString, Encoding.UTF8, "application/json");
                 JObject Json = JObject.Parse(jsonString);
                 var response = await http.PostAsJsonAsync(path, Json);
-                JwtToken jwtToken = new JwtToken();
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    JObject jsondata = JObject.Parse(result);
-                    jwtToken.token = jsondata["data"].ToString();
-                }
-                else
-                    jwtToken.token = null;
-                return jwtToken;
+                LoginResponse apiLoginResponse = new LoginResponse();
+                var result = await response.Content.ReadAsStringAsync();
+                apiLoginResponse = JsonConvert.DeserializeObject<LoginResponse>(result);
+                return apiLoginResponse;
             }
             catch(Exception e)
             {

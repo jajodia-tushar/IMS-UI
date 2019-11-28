@@ -29,6 +29,11 @@ import { PickItemComponent } from './employee/pick-item/pick-item.component';
   ]
 })
 export class MaterialModule { };
+import { AuthGaurdService } from './IMS.Services/auth-gaurd.service';
+import { AnonymousGaurdService } from './IMS.Services/anonymous-gaurd.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { FloorComponent } from './floor/floor.component';
 
 @NgModule({
   declarations: [
@@ -39,13 +44,15 @@ export class MaterialModule { };
     LoginComponent,
     AdminComponent,
     ClerkComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    FloorComponent
   ],
   imports: [
     MaterialModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,
+    MaterialModule,
     RouterModule.forRoot([
       { path: '', component: EmployeeComponent },
       { path: 'employee', component: EmployeeComponent },
@@ -58,10 +65,13 @@ export class MaterialModule { };
       { path: 'admin', component: AdminComponent, canActivate: [AuthGaurdService] },
       { path: 'clerk', component: ClerkComponent, canActivate: [AuthGaurdService] },
       { path: 'shelf', component: EmployeeComponent, canActivate: [AuthGaurdService] }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
 
   providers: [LoginService, AuthGaurdService, AnonymousGaurdService],
+  bootstrap: [AppComponent],
+  entryComponents: [FloorComponent]
   providers: [EmployeeService],
   bootstrap: [AppComponent]
 })

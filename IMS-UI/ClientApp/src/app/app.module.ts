@@ -11,6 +11,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { RouterModule } from '@angular/router';
 import { AuthGaurdService } from './IMS.Services/auth-gaurd.service';
 import { AnonymousGaurdService } from './IMS.Services/anonymous-gaurd.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { FloorComponent } from './floor/floor.component';
 
 @NgModule({
   declarations: [
@@ -18,22 +21,26 @@ import { AnonymousGaurdService } from './IMS.Services/anonymous-gaurd.service';
     LoginComponent,
     AdminComponent,
     ClerkComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    FloorComponent
   ],
   imports: [
     HttpClientModule,
     FormsModule,
     BrowserModule,
+    MaterialModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent, canActivate: [AnonymousGaurdService] },
       { path: 'login', component: LoginComponent, canActivate: [AnonymousGaurdService]},
       { path: 'admin', component: AdminComponent, canActivate: [AuthGaurdService] },
       { path: 'clerk', component: ClerkComponent, canActivate: [AuthGaurdService] },
       { path: 'shelf', component: EmployeeComponent, canActivate: [AuthGaurdService] }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
 
   providers: [LoginService, AuthGaurdService, AnonymousGaurdService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FloorComponent]
 })
 export class AppModule { }

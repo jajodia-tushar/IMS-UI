@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IMS_UI.IMS.Providers
+namespace IMS_UI.IMS.Models
 {
-    public class Class
+    public class EmployeeRequest
     {
+        public int Id { get; set; }
     }
 }

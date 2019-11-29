@@ -7,6 +7,8 @@ import { EmployeeComponent } from './employee/employee.component';
 import { RouterModule } from '@angular/router';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
+import { EmployeeService } from './IMS.Services/employee.service';
+import { PickItemComponent } from './pick-item/pick-item.component';
 
 @NgModule({
   imports: [
@@ -29,7 +31,8 @@ export class MaterialModule { };
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    PickItemComponent
   ],
   imports: [
     MaterialModule,
@@ -38,10 +41,11 @@ export class MaterialModule { };
     BrowserModule,
     RouterModule.forRoot([
       { path: '', component: AppComponent },
-      { path: 'employee', component: EmployeeComponent }
+      { path: 'employee', component: EmployeeComponent },
+      { path: 'pickitem', component: PickItemComponent }
     ])
   ],
-  providers: [],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

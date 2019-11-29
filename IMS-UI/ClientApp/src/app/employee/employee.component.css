@@ -4,6 +4,9 @@
   margin: 0 auto;
   padding: 0;
 }
+p{
+  color:red;
+}
 
 .sign-up {
   align-items: center;

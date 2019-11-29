@@ -4,11 +4,13 @@
     <div class="welcome">
       <div class="welcome2">
         <form class="form-input">
+          <p *ngIf="error">Invalid ID</p>
           <mat-form-field class="input-box">
-            <input matInput placeholder="Enter Employee ID.." />
+
+            <input [(ngModel)]="Emp_ID" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Employee ID.." />
           </mat-form-field>
           <mat-hint class="hint">Tap NEXT to verify your account with Employee ID</mat-hint>
-          <button mat-raised-button class="btnprop">NEXT</button>
+          <button (click)=Validation() mat-raised-button class="btnprop">NEXT</button>
         </form>
       </div>
     </div>

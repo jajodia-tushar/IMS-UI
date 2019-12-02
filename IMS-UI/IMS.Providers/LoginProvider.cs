@@ -1,4 +1,5 @@
 ﻿using IMS_UI.IMS.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,29 +18,40 @@ namespace IMS_UI.IMS.Providers
     public class LoginProvider
     {
         private const string BASEURL = "http://localhost:60110";
-       
+        private IHttpContextAccessor _httpContextAccessor;
+        private SessionManager _sessionManager;
+
+        public LoginProvider(IHttpContextAccessor httpContextAccessor,SessionManager sessionManager )
+        {
+            _httpContextAccessor = httpContextAccessor;
+            _sessionManager = sessionManager;
+        }
+
+
 
         public async Task<LoginResponse>  ApiCaller(Object requestData,string path)
         {
             try
             {
                 var jsonString = JsonConvert.SerializeObject(requestData);
-                HttpClient http = new HttpClient();
-                http.BaseAddress = new Uri(BASEURL);
-                http.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-                JObject Json = JObject.Parse(jsonString);
-                var response = await http.PostAsJsonAsync(path, Json);
-                LoginResponse apiLoginResponse = new LoginResponse();
-                var result = await response.Content.ReadAsStringAsync();
-                apiLoginResponse = JsonConvert.DeserializeObject<LoginResponse>(result);
-                return apiLoginResponse;
+                using (HttpClient http = new HttpClient())
+                {
+                    http.BaseAddress = new Uri(BASEURL);
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    JObject Json = JObject.Parse(jsonString);
+                    var response = await http.PostAsJsonAsync(path, Json);
+                    LoginResponse apiLoginResponse = new LoginResponse();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiLoginResponse = JsonConvert.DeserializeObject<LoginResponse>(result);
+                    return apiLoginResponse;
+                }                
             }
             catch(Exception e)
             {
                 throw e;
             }
             
-        }
+        }     
     }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './IMS.Services/login.service';
@@ -14,6 +14,7 @@ import { AnonymousGaurdService } from './IMS.Services/anonymous-gaurd.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FloorComponent } from './floor/floor.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { FloorComponent } from './floor/floor.component';
     BrowserAnimationsModule
   ],
 
-  providers: [LoginService, AuthGaurdService, AnonymousGaurdService],
+  providers: [LoginService, AuthGaurdService, AnonymousGaurdService ],
   bootstrap: [AppComponent],
   entryComponents: [FloorComponent]
 })

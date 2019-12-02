@@ -12,7 +12,6 @@ export class FloorComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<FloorComponent>, private router: Router) { }
   public selected='';
-  public display = false;
   ngOnInit() {
   }
   //this.display = true;  

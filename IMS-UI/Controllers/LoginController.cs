@@ -19,17 +19,27 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-       
+        private LoginProvider _loginProvider;
+        private SessionManager _sessionManager;
+        public LoginController(LoginProvider loginProvider,SessionManager sessionManager)
+        {
+            _loginProvider = loginProvider;
+            _sessionManager = sessionManager;
+        }
         // POST: api/Login
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] User user)
+        public async Task<IActionResult> PostLoginAsync([FromBody] LoginRequest loginRequest)
         {
             try
             {
-                var provider = new LoginProvider();
-                var response = await provider.ApiCaller(user, "/api/Login");
+                //var provider = new LoginProvider();
+                var response = await _loginProvider.ApiCaller(loginRequest, "/api/Login");
                 if (response.Error == null)
+                {    
+                    _sessionManager.SetString("token",response.AccessToken);
                     return Ok(response);
+                }
+                
                 else
                     return Unauthorized("invalid Credentials");
             }

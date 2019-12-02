@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Session;
 using System;
 
 namespace IMS_UI
@@ -22,6 +23,12 @@ namespace IMS_UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<LoginProvider>();
+            services.AddSingleton<SessionManager>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -51,6 +58,7 @@ namespace IMS_UI
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

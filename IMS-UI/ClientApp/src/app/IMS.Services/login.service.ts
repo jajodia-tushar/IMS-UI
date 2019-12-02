@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../IMS.Models/LoginResponse';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +19,13 @@ export class LoginService {
     });
   }
 
+  getData() {
+    return this.http.get('api/login');
+  }
+
   isUserLoggedIn() {
     let user = sessionStorage.getItem('username');
     return !(user === null);
   }
+  
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialogModule, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FloorComponent } from '../floor/floor.component';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
         else
           this.router.navigateByUrl('/' + data.user.role.name);
         sessionStorage.setItem('username', this.username);
+        
+
       },
       err => {
         this.error=true

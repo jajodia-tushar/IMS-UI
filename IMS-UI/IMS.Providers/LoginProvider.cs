@@ -1,6 +1,7 @@
 ﻿using IMS_UI.IMS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -17,14 +18,17 @@ namespace IMS_UI.IMS.Providers
 {
     public class LoginProvider
     {
-        private const string BASEURL = "http://localhost:60110";
+        
         private IHttpContextAccessor _httpContextAccessor;
         private SessionManager _sessionManager;
+        private IConfiguration _Configuration; 
 
-        public LoginProvider(IHttpContextAccessor httpContextAccessor,SessionManager sessionManager )
+        public LoginProvider(IHttpContextAccessor httpContextAccessor,SessionManager sessionManager,
+                                IConfiguration configuration)
         {
             _httpContextAccessor = httpContextAccessor;
             _sessionManager = sessionManager;
+            _Configuration = configuration;
         }
 
 
@@ -36,7 +40,7 @@ namespace IMS_UI.IMS.Providers
                 var jsonString = JsonConvert.SerializeObject(requestData);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(BASEURL);
+                    http.BaseAddress = new Uri(_Configuration["BASEURL"]);
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     JObject Json = JObject.Parse(jsonString);

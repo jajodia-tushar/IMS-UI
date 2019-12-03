@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Providers;
 using IMS_UI.IMS.Models;
+
 namespace IMS_UI.Controllers
 {
-    [Route("employee")]
+    [Route("emp")]
     [ApiController]
     public class EmployeeValidationController : ControllerBase
     {
         EmployeeProvider employeeProvider;
-        public EmployeeValidationController()
+        public EmployeeValidationController(EmployeeProvider provider)
         {
-            employeeProvider = new EmployeeProvider();
+            employeeProvider = provider;
         }
         [HttpGet("validate/{employeeId}")]
         public async Task<EmployeeResponse> GetEmployee(int employeeId)

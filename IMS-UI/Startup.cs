@@ -1,6 +1,6 @@
+using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +27,9 @@ namespace IMS_UI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<EmployeeProvider>();
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

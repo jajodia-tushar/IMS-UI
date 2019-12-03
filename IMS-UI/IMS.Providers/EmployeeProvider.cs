@@ -18,7 +18,7 @@ namespace IMS_UI.IMS.Providers
     {
         HttpClient client;
         string API;
-        private const string BASEURL = "http://localhost:52877/";
+        private const string BASEURL = "http://localhost:60865/";
 
         public EmployeeProvider()
         {

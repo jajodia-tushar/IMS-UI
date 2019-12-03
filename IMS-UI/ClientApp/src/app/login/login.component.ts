@@ -23,19 +23,21 @@ export class LoginComponent implements OnInit {
     this._loginService.authenticate(this.username, this.password).subscribe(
       data => {
         this.role = data.user.role.name;
-        sessionStorage.setItem('role', this.role);
-        if (this.role == 'shelf') {
-          var dialogConfig = new MatDialogConfig();
-          dialogConfig.disableClose = true;
-          dialogConfig.autoFocus = true;
-          dialogConfig.width = "20%";
-          this.dialog.open(FloorComponent, dialogConfig)
+        if (this.role != null) {
+          sessionStorage.setItem('role', this.role);
+          if (this.role == 'shelf') {
+            var dialogConfig = new MatDialogConfig();
+            dialogConfig.disableClose = false;
+            dialogConfig.autoFocus = true;
+            dialogConfig.width = "20%";
+            this.dialog.open(FloorComponent, dialogConfig)
+          }
+          else
+            this.router.navigateByUrl('/' + data.user.role.name);
+          sessionStorage.setItem('username', this.username);
         }
         else
-          this.router.navigateByUrl('/' + data.user.role.name);
-        sessionStorage.setItem('username', this.username);
-        
-
+          this.error = true;
       },
       err => {
         this.error=true

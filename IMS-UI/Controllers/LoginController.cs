@@ -10,6 +10,7 @@ using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,12 +20,13 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private LoginProvider _loginProvider;
-        private SessionManager _sessionManager;
+        private LoginProvider _LoginProvider;
+        private SessionManager _SessionManager;
+         
         public LoginController(LoginProvider loginProvider,SessionManager sessionManager)
         {
-            _loginProvider = loginProvider;
-            _sessionManager = sessionManager;
+            _LoginProvider = loginProvider;
+            _SessionManager = sessionManager;
         }
         // POST: api/Login
         [HttpPost]
@@ -33,10 +35,11 @@ namespace IMS_UI.Controllers
             try
             {
                 //var provider = new LoginProvider();
-                var response = await _loginProvider.ApiCaller(loginRequest, "/api/Login");
+                var response = await _LoginProvider.ApiCaller(loginRequest, "/api/Login");
                 if (response.Error == null)
                 {    
-                    _sessionManager.SetString("token",response.AccessToken);
+                    _SessionManager.SetString("token",response.AccessToken);
+                    _SessionManager.SetString("username", response.User.Firstname + " " + response.User.Lastname);
                     return Ok(response);
                 }
                 

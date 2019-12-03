@@ -40,7 +40,7 @@ export class MaterialModule { };
     FormsModule,
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: AppComponent },
+      { path: '', component: EmployeeComponent },
       { path: 'employee', component: EmployeeComponent },
       { path: 'pickitem', component: PickItemComponent }
     ])

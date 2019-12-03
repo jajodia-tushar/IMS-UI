@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../IMS.Services/employee.service';
 import { Router } from '@angular/router';
-import { PickItemComponent } from './pick-item/pick-item.component';
 
 @Component({
   selector: 'app-employee',

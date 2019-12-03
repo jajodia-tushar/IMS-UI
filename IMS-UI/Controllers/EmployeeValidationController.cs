@@ -5,14 +5,14 @@ using IMS_UI.IMS.Models;
 
 namespace IMS_UI.Controllers
 {
-    [Route("emp")]
+    [Route("employee")]
     [ApiController]
     public class EmployeeValidationController : ControllerBase
     {
         EmployeeProvider employeeProvider;
-        public EmployeeValidationController(EmployeeProvider provider)
+        public EmployeeValidationController(EmployeeProvider employeeProvider)
         {
-            employeeProvider = provider;
+            this.employeeProvider = employeeProvider;
         }
         [HttpGet("validate/{employeeId}")]
         public async Task<EmployeeResponse> GetEmployee(int employeeId)

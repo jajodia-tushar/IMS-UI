@@ -10,7 +10,7 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
   validate(Emp_ID: string): Observable<EmployeeResponse>
   {
-    return this.http.get<EmployeeResponse>("emp/validate/" + Emp_ID);
+    return this.http.get<EmployeeResponse>("employee/validate/" + Emp_ID);
   }
 
 }

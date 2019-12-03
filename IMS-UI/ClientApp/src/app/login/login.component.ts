@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           }
           else
             this.router.navigateByUrl('/' + data.user.role.name);
+          sessionStorage.setItem('role', this.role);
           sessionStorage.setItem('username', this.username);
         }
         else

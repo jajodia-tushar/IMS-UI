@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 import { EmployeeService } from './IMS.Services/employee.service';
-import { PickItemComponent } from './pick-item/pick-item.component';
+import { PickItemComponent } from './employee/pick-item/pick-item.component';
 
 @NgModule({
   imports: [
@@ -40,7 +40,7 @@ export class MaterialModule { };
     FormsModule,
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: AppComponent },
+      { path: '', component: EmployeeComponent },
       { path: 'employee', component: EmployeeComponent },
       { path: 'pickitem', component: PickItemComponent }
     ])

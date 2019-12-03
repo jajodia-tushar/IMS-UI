@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
       data => {
         this.role = data.user.role.name;
         if (this.role != null) {
-          sessionStorage.setItem('role', this.role);
           if (this.role == 'shelf') {
             var dialogConfig = new MatDialogConfig();
             dialogConfig.disableClose = false;
@@ -34,6 +33,7 @@ export class LoginComponent implements OnInit {
           }
           else
             this.router.navigateByUrl('/' + data.user.role.name);
+          sessionStorage.setItem('role', this.role);
           sessionStorage.setItem('username', this.username);
         }
         else

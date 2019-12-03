@@ -12,7 +12,7 @@ export class AnonymousGaurdService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!this.service.isUserLoggedIn())
       return true;
-    this.route.navigate([sessionStorage.getItem("role")]);
+    this.route.navigate([sessionStorage.getItem('role')]);
     return false;
   }
 }

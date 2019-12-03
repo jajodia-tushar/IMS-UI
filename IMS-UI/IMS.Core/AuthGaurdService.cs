@@ -15,7 +15,7 @@ namespace IMS_UI.IMS.Core
             _SessionManager = sessionManager;
         }
 
-        public Boolean ValidateUser()
+        public bool ValidateUser()
         {
             var userName = _SessionManager.GetString("username");
             if (userName != null)

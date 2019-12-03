@@ -17,6 +17,9 @@ export class FloorComponent implements OnInit {
   //this.display = true;  
   onSubmit() {
     this.dialogRef.close();
-    this.router.navigateByUrl('/' + sessionStorage.getItem("role"));
+    if (this.selected != null)
+      this.router.navigateByUrl('/' + sessionStorage.getItem("role"));
+    else
+      this.router.navigateByUrl('/login');
   }
 }

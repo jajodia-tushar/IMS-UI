@@ -24,8 +24,8 @@ export class LoginService {
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username');
-    return !(user === null);
+    
+    return this.http.get('api/AuthGaurd');
   }
   
 }

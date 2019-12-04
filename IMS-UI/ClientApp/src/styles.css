@@ -2,3 +2,4 @@
 body {
   height: 100vh;
 }
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';

@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
 import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
 import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
 import { EmployeeService } from './IMS.Services/employee.service';
-import { PickItemComponent } from './employee/pick-item/pick-item.component';
+import { PickItemComponent } from './employee/pick-item/pick-item.component'; 
+
 
 
 @NgModule({

@@ -17,8 +17,9 @@ export class FloorComponent implements OnInit {
   //this.display = true;  
   onSubmit() {
     this.dialogRef.close();
+    console.log(this.selected )
     if (this.selected != null)
-      this.router.navigateByUrl('/' + sessionStorage.getItem("role"));
+      this.router.navigate(['shelf']);
     else
       this.router.navigateByUrl('/login');
   }

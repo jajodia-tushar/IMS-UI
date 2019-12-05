@@ -6,8 +6,8 @@
       <div class="welcome2">
         <h2>Welcome</h2>
         <p *ngIf="error">Invalid username or password</p>
-        <input type="text" [(ngModel)]="username" class="form-control form-margin" placeholder="Enter User ID" required>
-        <input type="password" [(ngModel)]="password" class="form-control form-margin" placeholder="Password" required>
+        <input type="text" [(ngModel)]="Username" class="form-control form-margin" placeholder="Enter User ID" required>
+        <input type="password" [(ngModel)]="Password" class="form-control form-margin" placeholder="Password" required>
         <button class="form-margin btnprop btn btn-secondary btn-lg btn-block " (click)=login() >LOGIN</button>
       </div>
     </div>

@@ -19,9 +19,17 @@ namespace IMS_UI.Controllers
         }
         // GET: api/AuthGaurd
         [HttpGet]
-        public Boolean Get()
+        public IActionResult Get()
         {
-            return _AuthGaurdService.ValidateUser() ;
+            try
+            {
+                return Ok(_AuthGaurdService.ValidateUser());
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500);
+            }
+            
         }
 
         // GET: api/AuthGaurd/5

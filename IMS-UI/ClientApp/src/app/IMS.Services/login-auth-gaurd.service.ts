@@ -1,23 +1,20 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { log } from 'util';
-import { HttpClient } from '@angular/common/http';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 import { AuthGaurdResponse } from '../IMS.Models/AuthGaurdResponse';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGaurdService implements CanActivate {
+export class LoginAuthGaurdService implements CanActivate {
   public UserName;
   public role;
   isLoggedIn: boolean = false;
-
-  constructor(private _loginService: LoginService, private route: Router, private http: HttpClient)
-  {
-    
+  constructor(private _loginService: LoginService, private route: Router, private http: HttpClient) {
+   
   }
-
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     await this.http.get<AuthGaurdResponse>('api/AuthGaurd').toPromise().then(
@@ -31,11 +28,9 @@ export class AuthGaurdService implements CanActivate {
         this.isLoggedIn = false;
       }
     );
-    if (!this.isLoggedIn) {
-      console.log("Redirecting ", state.url);
-      this.route.navigateByUrl('login');
+    if (this.isLoggedIn) {
+      this.route.navigateByUrl(this.role);
     }
     return true;
   }
-
 }

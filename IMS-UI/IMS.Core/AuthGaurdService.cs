@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Providers;
+﻿using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,16 @@ namespace IMS_UI.IMS.Core
             _SessionManager = sessionManager;
         }
 
-        public bool ValidateUser()
+        public AuthGaurdResponse ValidateUser()
         {
-            var userName = _SessionManager.GetString("username");
-            if (userName != null)
-                return true;
-            else
-                return false;
+            AuthGaurdResponse response = new AuthGaurdResponse();
+            response.UserName = _SessionManager.GetString("username");
+            
+
+         
+                
+            response.Role = _SessionManager.GetString("role");
+            return response;
         }
 
     }

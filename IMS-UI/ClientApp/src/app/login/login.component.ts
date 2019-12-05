@@ -12,15 +12,15 @@ import { FloorComponent } from '../floor/floor.component';
 })
 export class LoginComponent implements OnInit {
 
-  public username = "";
-  public password = "";
+  public Username = "";
+  public Password = "";
   public role;
   public error = false;
   constructor(private _loginService: LoginService, private router: Router,
     private dialog: MatDialog) { }
 
   login() {
-    this._loginService.authenticate(this.username, this.password).subscribe(
+    this._loginService.authenticate(this.Username, this.Password).subscribe(
       data => {
         this.role = data.user.role.name;
         if (this.role != null) {
@@ -31,10 +31,12 @@ export class LoginComponent implements OnInit {
             dialogConfig.width = "20%";
             this.dialog.open(FloorComponent, dialogConfig)
           }
-          else
-            this.router.navigateByUrl('/' + data.user.role.name);
-          sessionStorage.setItem('role', this.role);
-          sessionStorage.setItem('username', this.username);
+          else {
+            console.log("Coming here", this.role)
+            this.router.navigateByUrl(this.role);
+          }
+          //sessionStorage.setItem('role', this.role);
+          //sessionStorage.setItem('username', this.username);
         }
         else
           this.error = true;

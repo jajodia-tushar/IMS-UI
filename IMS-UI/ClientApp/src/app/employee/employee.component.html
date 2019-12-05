@@ -1,0 +1,19 @@
+<div class="login">
+  <div class="sign-up">
+    <div class="blank-space">
+      <img src="../IMS.Images/ims_logo.png" alt="IMS Logo"/>
+    </div>
+    <div class="welcome">
+      <div class="welcome2">
+        <form class="form-input">
+          <p *ngIf="error">Invalid ID</p>
+          <mat-form-field class="input-box">
+            <input [(ngModel)]="Emp_ID" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter Employee ID.." />
+          </mat-form-field>
+          <mat-hint class="hint">Tap NEXT to verify your account with Employee ID</mat-hint>
+          <button (click)=Validation() mat-raised-button class="btnprop">NEXT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

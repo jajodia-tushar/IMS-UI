@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class Class
+    public class Error
     {
+        public int ErrorCode { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

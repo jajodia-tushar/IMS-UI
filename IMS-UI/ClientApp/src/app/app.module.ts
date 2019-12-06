@@ -5,9 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './IMS.Services/login.service';
-//import { AdminComponent } from './admin/admin.component';
-import { ClerkComponent } from './clerk/clerk.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { RouterModule } from '@angular/router';
 import { AuthGaurdService } from './IMS.Services/auth-gaurd.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,8 +19,6 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    ClerkComponent,
-    EmployeeComponent,
     FloorComponent
   ],
   imports: [

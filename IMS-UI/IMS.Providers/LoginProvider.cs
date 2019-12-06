@@ -40,7 +40,7 @@ namespace IMS_UI.IMS.Providers
                 var jsonString = JsonConvert.SerializeObject(requestData);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_Configuration["BASEURL"]);
+                    http.BaseAddress = new Uri(_Configuration["BaseUrl"]);
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     JObject Json = JObject.Parse(jsonString);
@@ -51,9 +51,9 @@ namespace IMS_UI.IMS.Providers
                     return apiLoginResponse;
                 }                
             }
-            catch(Exception e)
+            catch(Exception exception)
             {
-                throw e;
+                throw exception;
             }
             
         }     

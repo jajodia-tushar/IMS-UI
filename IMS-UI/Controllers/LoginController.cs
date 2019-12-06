@@ -47,7 +47,7 @@ namespace IMS_UI.Controllers
                 else
                     return Unauthorized("invalid Credentials");
             }
-            catch(Exception e)
+            catch(Exception exception)
             {
                 return StatusCode(500);
             }

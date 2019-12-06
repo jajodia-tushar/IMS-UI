@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Session;
 using System;
 using IMS_UI.IMS.Core;
+using Microsoft.AspNetCore.Http;
 
 namespace IMS_UI
 {

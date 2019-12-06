@@ -5,8 +5,12 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class EmployeeRequest
+    public class Shelf
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public bool IsActive { get; set; }
     }
 }

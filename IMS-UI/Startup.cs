@@ -1,6 +1,8 @@
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Session;
 using System;
 using IMS_UI.IMS.Core;
-using Microsoft.AspNetCore.Http;
 
 namespace IMS_UI
 {

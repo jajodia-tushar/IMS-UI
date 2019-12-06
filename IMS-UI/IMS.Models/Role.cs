@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class EmployeeRequest
+    public class Role
     {
         public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

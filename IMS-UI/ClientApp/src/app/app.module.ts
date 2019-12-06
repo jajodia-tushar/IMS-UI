@@ -1,53 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { EmployeeComponent } from './employee/employee.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './IMS.Services/login.service';
 import { RouterModule } from '@angular/router';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, NgModel } from '@angular/forms';
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
-import { EmployeeService } from './IMS.Services/employee.service';
-import { PickItemComponent } from './employee/pick-item/pick-item.component'; 
+import { AuthGaurdService } from './IMS.Services/auth-gaurd.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { FloorComponent } from './floor/floor.component';
+import { LoginAuthGaurdService } from './IMS.Services/login-auth-gaurd.service';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
-
-
-@NgModule({
-  imports: [
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
-    BrowserAnimationsModule
-  ],
-  exports: [
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
-    BrowserAnimationsModule
-  ]
-})
-export class MaterialModule { };
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent,
-    PickItemComponent
+    LoginComponent,
+    FloorComponent
   ],
   imports: [
     MaterialModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    RouterModule.forRoot([
-      { path: '', component: EmployeeComponent },
-      { path: 'employee', component: EmployeeComponent },
-      { path: 'pickitem', component: PickItemComponent }
-    ])
+    MaterialModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
-  providers: [EmployeeService],
-  bootstrap: [AppComponent]
+
+  providers: [LoginService, AuthGaurdService, LoginAuthGaurdService ],
+  bootstrap: [AppComponent],
+  entryComponents: [FloorComponent]
 })
 export class AppModule { }

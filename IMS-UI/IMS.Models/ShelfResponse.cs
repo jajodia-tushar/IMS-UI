@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public enum Status
+    public class ShelfResponse:Response
     {
-        Failure,
-        Success
-
+        public List<Shelf> Shelves { get; set; }
     }
 }
+

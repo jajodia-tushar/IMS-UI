@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public enum Status
+    public class AuthGaurdResponse
     {
-        Failure,
-        Success
-
+        public string UserName { get; set; }
+        public string Role { get; set; }
     }
 }

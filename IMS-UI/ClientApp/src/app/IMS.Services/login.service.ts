@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Type } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../IMS.Models/LoginResponse';
+import { AuthGaurdResponse } from '../IMS.Models/AuthGaurdResponse';
 
 
 @Injectable({
@@ -13,19 +14,17 @@ export class LoginService {
 
   authenticate(username, password)
   {
-    return this.http.post<LoginResponse>('api/Login', {
+    return this.http.post<LoginResponse>('api/login', {
       username: username,
       password: password
     });
   }
 
-  getData() {
-    return this.http.get('api/login');
-  }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username');
-    return !(user === null);
+    //let user = sessionStorage.getItem('username');
+    //return !(user === null);
+    return this.http.get<AuthGaurdResponse>('api/AuthGaurd');
     
   }
   

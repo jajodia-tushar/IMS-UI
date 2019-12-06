@@ -39,6 +39,7 @@ namespace IMS_UI.Controllers
                 if (response.Error == null)
                 {    
                     _SessionManager.SetString("token",response.AccessToken);
+                    _SessionManager.SetString("role", response.User.Role.Name);
                     _SessionManager.SetString("username", response.User.Firstname + " " + response.User.Lastname);
                     return Ok(response);
                 }

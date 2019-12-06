@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../IMS.Services/login.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,18 +7,9 @@ import { LoginService } from '../IMS.Services/login.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private _loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  clicked() {
-    this._loginService.getData().subscribe(
-      data => {
-        console.log(data);
-      }
-
-    )
   }
 
 }

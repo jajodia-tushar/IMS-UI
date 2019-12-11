@@ -1,77 +1,65 @@
-.login {
+.login-page {
   background-color: #efefef;
   height: 100%;
   margin: 0 auto;
   padding: 0;
 }
-p{
-  color:red;
+
+.invalid-user {
+  color: red;
 }
 
-
-.sign-up {
+.login-page__sign-up-section {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 60%;
   height: 100%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin: 0 20%;
+  width: 60%;
 }
 
-
-
-  .sign-up div {
+  .login-page__sign-up-section div {
     height: 300px;
-    border: black 1px;
-    margin-top: 20%;
-    margin-bottom: 20%;
+    margin: 20% 0;
   }
 
-
-
-.blank-space {
-  width: 55%;
-  background: #2e3235;
-  border-top-left-radius: 15px;
+.sign-upp-section__logo-section {
   border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  width: 52%;
 }
 
-
-
-.welcome {
+.login-page__credential-section {
   background-color: #ffffff;
-  width: 45%;
-  border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  width: 48%;
 }
 
-
-
-.welcome2 {
-  margin: 0 auto !important;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-top: 10;
-  margin-bottom: 10%;
-  padding-left: 10%;
-  padding-top: 8%;
-  padding-right: 10%;
+.credential-section__form {
   border-style: none;
-  height: 200px;
-  border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 200px;
+  margin: 10% !important;
+  padding: 8% 10% 0;
 }
 
-
-
-.form-margin {
-  margin-top: 10px !important;
-}
-
-
-
-.btnprop {
-  background-color: #2e3235 !important;
+.button-properties {
+  background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%);
+  border-radius: 5px;
+  color: white;
   font-size: 1.1rem !important;
+  margin: 5% 20%;
+}
+
+img {
+  border-bottom-left-radius: 15px;
+  border-top-left-radius: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
 }

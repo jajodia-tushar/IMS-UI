@@ -12,6 +12,9 @@ import { FloorComponent } from './floor/floor.component';
 import { LoginAuthGaurdService } from './IMS.Services/login-auth-gaurd.service';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { SpinLoaderService } from './IMS.Services/spin-loader.service';
+import { LoaderInterceptor } from './IMS.Services/IMS.Interceptor/loader.interceptor';
+import { SharedModule } from './IMS.Modules/shared/shared.module';
 
 
 @NgModule({
@@ -21,16 +24,22 @@ import { FormsModule } from '@angular/forms';
     FloorComponent
   ],
   imports: [
+    SharedModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    MaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule
+    
   ],
-
-  providers: [LoginService, AuthGaurdService, LoginAuthGaurdService ],
+  providers: [
+    LoginService,
+    AuthGaurdService,
+    LoginAuthGaurdService,
+    SpinLoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [FloorComponent]
 })

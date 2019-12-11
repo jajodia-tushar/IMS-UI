@@ -1,14 +1,25 @@
-<div class="login">
-  <div class="sign-up">
-    <div class="blank-space">
+<div class="login-page">
+  <div class="login-page__sign-up-section">
+    <div class="sign-upp-section__logo-section">
+      <img src="assets/IMS.Images/ims_logo.png" alt="IMS Logo" />
     </div>
-    <div class="welcome">
-      <div class="welcome2">
-        <h2>Welcome</h2>
-        <p *ngIf="error">Invalid username or password</p>
-        <input type="text" [(ngModel)]="Username" class="form-control form-margin" placeholder="Enter User ID" required>
-        <input type="password" [(ngModel)]="Password" class="form-control form-margin" placeholder="Password" required>
-        <button class="form-margin btnprop btn btn-secondary btn-lg btn-block " (click)=login() >LOGIN</button>
+    <div class="login-page__credential-section">
+      <div class="credential-section__form">
+        <form class="form-input">
+          <p class="invalid-user" *ngIf="error">Invalid username or password</p>
+          <mat-form-field floatPlaceholder="never" class="full-width">
+            <input type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" required />
+            <mat-placeholder>Enter User ID</mat-placeholder>
+          </mat-form-field>
+          <mat-form-field floatPlaceholder="never" class="full-width">
+            <input type="password" [(ngModel)]="Password" matInput [ngModelOptions]="{standalone: true}" required />
+            <mat-placeholder>Password</mat-placeholder>
+          </mat-form-field>
+          <br />
+          <button mat-raised-button class="button-properties" (click)=Login()>
+          <app-spinning-loader></app-spinning-loader>{{ButtonName}}
+          </button>
+        </form>
       </div>
     </div>
   </div>

@@ -14,13 +14,12 @@ export class FloorComponent implements OnInit {
   public selected='';
   ngOnInit() {
   }
-  //this.display = true;  
   onSubmit() {
     this.dialogRef.close();
     console.log(this.selected )
     if (this.selected != null)
-      this.router.navigate(['shelf']);
+      this.router.navigateByUrl('Shelf');
     else
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('login');
   }
 }

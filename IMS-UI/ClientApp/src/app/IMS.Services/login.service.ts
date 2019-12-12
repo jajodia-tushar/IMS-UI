@@ -19,13 +19,4 @@ export class LoginService {
       password: password
     });
   }
-
-
-  isUserLoggedIn() {
-    //let user = sessionStorage.getItem('username');
-    //return !(user === null);
-    return this.http.get<AuthGaurdResponse>('api/AuthGaurd');
-    
-  }
-  
 }

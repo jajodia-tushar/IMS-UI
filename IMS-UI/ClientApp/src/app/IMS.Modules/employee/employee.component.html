@@ -1,1 +1,22 @@
-<p>employee works!</p>
+<div class="login-page">
+    <mat-card><b>{{ShelfName}}</b></mat-card>
+  <div class="login-page__sign-up-section">
+    <div class="sign-upp-section__logo-section">
+      <img src="assets/IMS.Images/ims_logo.png" alt="IMS Logo" />
+    </div>
+    <div class="login-page__credential-section">
+      <div class="credential-section__form">
+        <form class="form-input">
+          <p class="invalid-user">{{errorMessage}}</p>
+          <mat-form-field floatPlaceholder="never" class="full-width">
+            <input type="text" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}" required />
+            <mat-placeholder>Enter Employee ID</mat-placeholder>
+          </mat-form-field>
+          <br /><br />
+          <mat-hint class="confirm-hint">Tap 'next' to verify your account with Employee ID</mat-hint>
+          <button (click)="employeeValidation()" mat-raised-button class="button-properties">{{buttonName}}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

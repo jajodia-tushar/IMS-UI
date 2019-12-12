@@ -37,11 +37,11 @@ namespace IMS_UI.Controllers
                 //var provider = new LoginProvider();
                 var response = await _LoginProvider.ApiCaller(loginRequest, "/api/Login");
                 if (response.Error == null)
-                {    
-                    _SessionManager.SetString("token",response.AccessToken);
-                    _SessionManager.SetString("role", response.User.Role.Name);
-                    _SessionManager.SetString("username", response.User.Firstname + " " + response.User.Lastname);
-                    return Ok(response);
+                {
+                    _SessionManager.SetString("token", response.AccessToken);
+                    _SessionManager.SetObject("user", response.User);
+
+                    return Ok(new UILoginResponse{user = response.User});
                 }
                 
                 else

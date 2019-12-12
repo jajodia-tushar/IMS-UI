@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from '../IMS.Models/Employee';
 import { Shelf, ShelfResponse } from '../IMS.Models/ShelfResponse';
 import { ShelfService } from './shelf.service';
+import { User } from '../IMS.Models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { ShelfService } from './shelf.service';
 export class CentralizedDataService {
   employee : Employee ;
   shelf : Shelf;
+  user : User;
 
   constructor(private shelfService : ShelfService){
 
@@ -34,5 +36,13 @@ export class CentralizedDataService {
 
   setEmployee(employee : Employee){
     this.employee  = JSON.parse(JSON.stringify(employee));
+  }
+
+  setUser(user : User){
+    this.user = user;
+  }
+
+  getUser() : User{
+    return this.user;
   }
 }

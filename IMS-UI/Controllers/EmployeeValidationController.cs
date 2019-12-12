@@ -15,7 +15,7 @@ namespace IMS_UI.Controllers
             this.employeeProvider = employeeProvider;
         }
         [HttpGet("validate/{employeeId}")]
-        public async Task<EmployeeResponse> GetEmployee(int employeeId)
+        public async Task<EmployeeResponse> GetEmployee(string employeeId)
         {
             var response = await employeeProvider.ValidateEmployee(employeeId);
             return response;

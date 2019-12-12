@@ -20,10 +20,10 @@ export class LoginGuard implements CanActivate {
 
     let response: SessionResponse = <SessionResponse>await this.authService.isAuthenticated();
     console.log(response);
-    if (response.userName == null)
+    if (response.user == null)
       return true;
     else {
-      this.route.navigateByUrl(response.role);
+      this.route.navigateByUrl(response.user.role.name);
       return false;
     }
   }

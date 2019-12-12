@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class SessionResponse
+    public class UILoginResponse : Response
     {
-        public User user { get; set; }
-        public string shelfCode { get; set; }
+       public User user { get; set; }
     }
 }

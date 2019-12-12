@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,29 @@ namespace IMS_UI.IMS.Providers
 
         public void SetString(string key,string value)
         {
-            _httpContextAccessor.HttpContext.Session.SetString(key, value);
+            ISession session = _httpContextAccessor.HttpContext.Session;
+            session.SetString(key, value);
+           
         }
+
+        public Object GetObject<Type>(string key)
+        {
+            ISession session = _httpContextAccessor.HttpContext.Session;
+            string str = session.GetString(key);
+            if (!string.IsNullOrEmpty(str))
+                return JsonConvert.DeserializeObject<Type>(str);
+            return null;
+        }
+
+        public void SetObject(string key, object value)
+        {
+            ISession session = _httpContextAccessor.HttpContext.Session;
+            if (value == null)
+                return;
+            var str = JsonConvert.SerializeObject(value);
+            session.SetString(key, str);
+        }
+
+
     }
 }

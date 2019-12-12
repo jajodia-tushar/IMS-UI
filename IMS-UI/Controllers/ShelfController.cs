@@ -12,8 +12,6 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class ShelfController : ControllerBase
     {
-        
-        private SessionManager _SessionManager;
         private ShelfProvider _ShelfProvider;
         public ShelfController(ShelfProvider shelfProvider)
         {
@@ -24,19 +22,15 @@ namespace IMS_UI.Controllers
         public async Task<IActionResult> Get()
         {
             var response =await _ShelfProvider.ApiGetCaller("/api/Shelf");
-            try
-            {
+            try {
                 if (response.Error == null)
                     return Ok(response);
                 else
                     return NotFound("no floors to display");
             }
-            
-            catch(Exception e)
-            {
+            catch (Exception){
                 return StatusCode(500);
             }
-
         }
 
         // GET: api/Shelf/A
@@ -51,7 +45,7 @@ namespace IMS_UI.Controllers
                 else
                     return NotFound("no floors to display");
             }
-            catch (Exception e){
+            catch (Exception){
                 return StatusCode(500);
             }
         }
@@ -67,7 +61,6 @@ namespace IMS_UI.Controllers
         public void Put(int id, [FromBody] string value)
         {
         }
-
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

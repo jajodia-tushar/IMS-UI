@@ -1,5 +1,6 @@
+import { User } from "./User"
+
 export class SessionResponse {
-  userName?: string;
-  role?: string;
+  user : User
   shelfCode : string
 }

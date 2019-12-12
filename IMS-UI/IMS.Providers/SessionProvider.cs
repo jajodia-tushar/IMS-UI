@@ -17,15 +17,14 @@ namespace IMS_UI.IMS.Core
 
         public SessionResponse getSession(){ /// Something Related To Session
             SessionResponse response = new SessionResponse();
-            response.UserName = _SessionManager.GetString("username");  
-            response.Role = _SessionManager.GetString("role");
-            response.ShelfCode = _SessionManager.GetString("ShelfCode");
+            response.user = (User)_SessionManager.GetObject<User>("user");  
+            response.shelfCode = _SessionManager.GetString("shelfCode");
             return response;
         }
 
         public SessionResponse postShelfData(Shelf shelf)
         {
-            _SessionManager.SetString("ShelfCode", shelf.Code);
+            _SessionManager.SetString("shelfCode", shelf.Code);
             return this.getSession();
         }
     }

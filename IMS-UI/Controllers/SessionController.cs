@@ -18,7 +18,7 @@ namespace IMS_UI.Controllers
             _sessionProvider = service;
         }
 
-        // GET: api/AuthGaurd
+        // GET: api/session
         [HttpGet]
         public IActionResult Get(){
             try{

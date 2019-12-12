@@ -17,12 +17,15 @@ import { LoginComponent } from './Components/login/login.component';
 import { FloorComponent } from './Components/floor/floor.component';
 import { MaterialModule } from './IMS.Modules/material/material.module';
 import { ShelfService } from './IMS.Services/shelf.service';
+import { EmployeeService } from './IMS.Services/employee.service';
+import { LoadSessionOnRefreshComponent } from './IMS.Services/load-session-on-refresh/load-session-on-refresh.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FloorComponent
+    FloorComponent,
+    LoadSessionOnRefreshComponent
   ],
   imports: [
     SharedModule,
@@ -41,6 +44,8 @@ import { ShelfService } from './IMS.Services/shelf.service';
     SecuredRouteGuard,
     SpinLoaderService,
     ShelfService,
+    EmployeeService,
+    LoadSessionOnRefreshComponent,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

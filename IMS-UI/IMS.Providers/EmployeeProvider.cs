@@ -15,7 +15,7 @@ namespace IMS_UI.IMS.Providers
         {
             _iconfiguration = configuration;
         }
-        public async Task<EmployeeResponse> ValidateEmployee(int employeeId)
+        public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
             HttpClient client = new HttpClient();
             var EndPoint = "api/employee/";

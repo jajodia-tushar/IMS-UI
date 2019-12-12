@@ -17,16 +17,16 @@ export class SecuredRouteGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let response: SessionResponse = <SessionResponse>await this.authServie.isAuthenticated();
 
-    if (response.userName == null) {
+    if (response.user == null) {
       this.route.navigateByUrl("login");
       return false;
     }
     else {
-      if (route.data.role == response.role) {
+      if (route.data.role == response.user.role.name) {
           return true;
       }
       else {
-        this.route.navigateByUrl(response.role);
+        this.route.navigateByUrl(response.user.role.name);
       }
     }
   }

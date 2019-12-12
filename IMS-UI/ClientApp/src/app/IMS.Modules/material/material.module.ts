@@ -5,7 +5,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule } from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 const materialModules = [
     MatDialogModule,
@@ -19,11 +19,11 @@ const materialModules = [
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule,
     MatSidenavModule,
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
+    FormsModule
 ]
 
 

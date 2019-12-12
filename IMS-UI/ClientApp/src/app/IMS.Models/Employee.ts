@@ -1,7 +1,5 @@
-
-
 export class Employee {
-  id: number;
+  id: string;
   firstname: string;
   lastname: string;
   email: string;
@@ -9,9 +7,5 @@ export class Employee {
   tCardNo?: any;
   accessCardNo?: any;
   isActive: boolean;
-}
-export class Error {
-  errorCode: number;
-  errorMessage: string;
 }
 

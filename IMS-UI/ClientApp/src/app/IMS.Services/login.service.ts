@@ -2,7 +2,7 @@ import { Injectable,Type } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../IMS.Models/LoginResponse';
-import { AuthGaurdResponse } from '../IMS.Models/AuthGaurdResponse';
+import { SessionResponse } from '../IMS.Models/SessionResponse';
 
 
 @Injectable({

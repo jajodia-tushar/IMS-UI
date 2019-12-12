@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { AuthGaurdResponse } from '../IMS.Models/AuthGaurdResponse';
+import { SessionResponse } from '../IMS.Models/SessionResponse';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,10 @@ import { AuthService } from './auth.service';
 export class SecuredRouteGuard implements CanActivate {
 
   constructor(private _loginService: LoginService, private route: Router, private http: HttpClient,
-    private authServie: AuthService) { }
+    private authServie: SessionService) { }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let response: AuthGaurdResponse = <AuthGaurdResponse>await this.authServie.isAuthenticated();
+    let response: SessionResponse = <SessionResponse>await this.authServie.isAuthenticated();
 
     if (response.userName == null) {
       this.route.navigateByUrl("login");

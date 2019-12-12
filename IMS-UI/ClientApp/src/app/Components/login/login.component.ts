@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../IMS.Services/login.service';
+import { LoginService } from '../../IMS.Services/login.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig} from '@angular/material'
+import { Employee } from '../../IMS.Models/Employee';
 import { FloorComponent } from '../floor/floor.component';
-import { Employee } from '../IMS.Models/Employee';
 
 @Component({
   selector: 'app-login',

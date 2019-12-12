@@ -1,0 +1,16 @@
+<div>
+    <app-header [isUser]="false"></app-header>
+</div>
+
+<div>
+    <div class="items-container">
+        <mat-card><b>Hello, {{name}}</b></mat-card>
+        <div class="flex-container">
+            <div class="item-list">
+                <app-items-list (onItemAdd)="onItemClicked($event)" [shelfItems]="shelfItems"></app-items-list>
+            </div>
+            <app-items-cart class="item-form" [selectedItems]="cartItems" (onCartItemDeleted)="onItemDeleted($event)">
+            </app-items-cart>
+        </div>
+    </div>>
+</div>

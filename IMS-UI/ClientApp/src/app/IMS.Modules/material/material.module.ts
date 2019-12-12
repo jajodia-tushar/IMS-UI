@@ -3,9 +3,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule } from '@angular/material';
+import { MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, 
+  MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule } from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';  
 
 const materialModules = [
     MatDialogModule,
@@ -23,7 +25,9 @@ const materialModules = [
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
+    CommonModule
 ]
 
 

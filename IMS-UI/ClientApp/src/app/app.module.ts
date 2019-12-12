@@ -19,6 +19,8 @@ import { MaterialModule } from './IMS.Modules/material/material.module';
 import { ShelfService } from './IMS.Services/shelf.service';
 import { EmployeeService } from './IMS.Services/employee.service';
 import { LoadSessionOnRefreshComponent } from './IMS.Services/load-session-on-refresh/load-session-on-refresh.component';
+import { ItemService } from './IMS.Services/item.service';
+import { EmployeeOrderService } from './IMS.Services/employee-order.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { LoadSessionOnRefreshComponent } from './IMS.Services/load-session-on-re
     SpinLoaderService,
     ShelfService,
     EmployeeService,
+    EmployeeOrderService,
     LoadSessionOnRefreshComponent,
+    ItemService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

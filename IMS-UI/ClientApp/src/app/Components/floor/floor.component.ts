@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Shelf } from 'src/app/IMS.Models/ShelfResponse';
+import { Shelf } from 'src/app/IMS.Models/Shelf';
 import { ShelfService } from 'src/app/IMS.Services/shelf.service';
 import { SessionService } from 'src/app/IMS.Services/session.service';
 import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';

@@ -46,7 +46,7 @@ export class EmployeeComponent implements OnInit {
         }
         else{
           this.centralizedRepo.setEmployee(employeeResponse.employee);
-          this.router.navigateByUrl('pickitem');
+          this.router.navigateByUrl('employee/pickItem');
         }
       },
       err => {

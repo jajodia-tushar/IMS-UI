@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using IMS_UI.IMS.Models;
 
 namespace IMS_UI.Controllers
 {
@@ -65,6 +66,13 @@ namespace IMS_UI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpGet("inventory/{shelfId}")]
+        public async Task<ShelfDataResponse> GetShelfData(string shelfId)
+        {
+            var response = await _ShelfProvider.GetShelfData(shelfId);
+            return response;
         }
     }
 }

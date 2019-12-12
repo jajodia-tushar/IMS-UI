@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Employee } from '../IMS.Models/Employee';
-import { Shelf, ShelfResponse } from '../IMS.Models/ShelfResponse';
+import { ShelfResponse } from '../IMS.Models/ShelfResponse';
 import { ShelfService } from './shelf.service';
 import { User } from '../IMS.Models/User';
+import { Shelf } from '../IMS.Models/Shelf';
 
 @Injectable({
   providedIn: 'root'

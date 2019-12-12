@@ -39,11 +39,21 @@ namespace IMS_UI.Controllers
 
         }
 
-        // GET: api/Shelf/5
+        // GET: api/Shelf/A
         [HttpGet("{id}", Name = "GetShelf")]
-        public string GetShelfById(int id)
+        public async Task<IActionResult> GetShelfById(string id)
         {
-            return "value";
+            var response = await _ShelfProvider.ApiGetCaller("/api/Shelf/"+id);
+            try
+            {
+                if (response.Error == null)
+                    return Ok(response);
+                else
+                    return NotFound("no floors to display");
+            }
+            catch (Exception e){
+                return StatusCode(500);
+            }
         }
 
         // POST: api/Shelf

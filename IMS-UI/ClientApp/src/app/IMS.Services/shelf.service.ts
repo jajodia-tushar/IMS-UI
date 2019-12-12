@@ -12,4 +12,8 @@ export class ShelfService {
   getAllShelves() {
     return this.http.get<ShelfResponse>('api/Shelf');
   }
+
+  getShelfByShelfCode(shelfCode : string){
+    return this.http.get<ShelfResponse>("api/shelf/"+shelfCode).toPromise();
+  }
 }

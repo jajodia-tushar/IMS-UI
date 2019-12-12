@@ -20,7 +20,7 @@ namespace IMS_UI.IMS.Providers
             _Configuration = config;
         }
 
-        public async Task<ShelfResponse> ApiGetCaller( string path)
+        public async Task<ShelfResponse> ApiGetCaller(string path)
         {
             try
             {

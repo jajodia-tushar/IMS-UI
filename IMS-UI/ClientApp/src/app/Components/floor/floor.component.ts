@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Shelf } from 'src/app/IMS.Models/ShelfResponse';
 import { ShelfService } from 'src/app/IMS.Services/shelf.service';
 import { SessionService } from 'src/app/IMS.Services/session.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
 
 
 @Component({
@@ -14,26 +15,22 @@ import { SessionService } from 'src/app/IMS.Services/session.service';
 export class FloorComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<FloorComponent>, private router: Router
-    ,private shelfService : ShelfService,private authService : SessionService) { }
-    selected : Shelf;
+    ,private shelfService : ShelfService,private sessionService : SessionService,private centralizedDataRepo : CentralizedDataService) { }
+    selectedShelf : Shelf;
     shelves : Shelf[] = [];
 
   ngOnInit() {
     this.shelfService.getAllShelves().subscribe( o => {
       this.shelves = JSON.parse(JSON.stringify(o.shelves));
     })
-  }
-  //this.display = true;  
-  onSubmit() {
+  }  
+  async onSubmit() {
     this.dialogRef.close();
-    console.log(this.selected)
-    if (this.selected != null){
-      this.authService.postShelfData(this.selected).subscribe(
-        data =>{
-          console.log(data);
-        }
-      );   // Adding the data to session --> Refresh Prevention
+    if (this.selectedShelf != null){
+      this.sessionService.postShelfData(this.selectedShelf).subscribe(); // Write for Error Condition
+      await this.centralizedDataRepo.setShelfByShelfCode(this.selectedShelf.code);
       this.router.navigate(['Shelf']);
+      console.log(this.centralizedDataRepo.getShelf());
     }
     else{
       this.router.navigateByUrl('/login');

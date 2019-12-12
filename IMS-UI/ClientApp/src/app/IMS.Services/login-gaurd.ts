@@ -3,8 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { LoginService } from './login.service';
 import { log } from 'util';
 import { HttpClient } from '@angular/common/http';
-import { SessionResponse } from '../IMS.Models/SessionResponse';
 import { SessionService } from './session.service';
+import { SessionResponse } from '../IMS.Models/SessionResponse';
 
 @Injectable({
   providedIn: 'root'

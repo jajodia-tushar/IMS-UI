@@ -31,7 +31,7 @@ namespace IMS_UI.IMS.Providers
             return JsonConvert.DeserializeObject<ShelfDataResponse>(
                 await response.Content.ReadAsStringAsync());
         }
-        public async Task<ShelfResponse> ApiGetCaller(string path)
+        public async Task<ShelfListResponse> ApiGetCaller(string path)
         {
             try
             {
@@ -43,9 +43,9 @@ namespace IMS_UI.IMS.Providers
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     //JObject Json = JObject.Parse(jsonString);
                     var response = await http.GetAsync(path);
-                    ShelfResponse apiShelfResponse = new ShelfResponse();
+                    ShelfListResponse apiShelfResponse = new ShelfListResponse();
                     var result = await response.Content.ReadAsStringAsync();
-                    apiShelfResponse = JsonConvert.DeserializeObject<ShelfResponse>(result);
+                    apiShelfResponse = JsonConvert.DeserializeObject<ShelfListResponse>(result);
                     return apiShelfResponse;
                 }
             }

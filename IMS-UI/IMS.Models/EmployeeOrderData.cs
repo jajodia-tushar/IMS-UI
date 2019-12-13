@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class SessionResponse
+    public class EmployeeOrderData
     {
-        public User user { get; set; }
-        public string shelfCode { get; set; }
+        public Employee Employee { get; set; }
+        public EmployeeOrder EmployeeOrder { get; set; }
     }
 }

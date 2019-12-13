@@ -21,9 +21,9 @@ namespace IMS_UI.Controllers
 
 
         [HttpPost]
-        public async Task<EmployeeOrdersResponse> PostOrder(Object obj)
+        public async Task<PlaceEmployeeOrderResponse> PostOrder(PlaceEmployeeOrderRequest placeEmployeeOrderRequest)
         {
-            var response = await orderProvider.PostOrders(obj);
+            var response = await orderProvider.PostOrders(placeEmployeeOrderRequest);
             return response;
         }
     }

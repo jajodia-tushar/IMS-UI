@@ -1,12 +1,11 @@
-﻿using System;
+﻿using IMS_UI.IMS.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IMS_UI.IMS.Models;
+using System.Text;
 
 namespace IMS_UI.IMS.Models
 {
-    public class EmployeeOrder
+    public class EmployeeOrderResponse
     {
         public int OrderId { get; set; }
         public DateTime Date { get; set; }

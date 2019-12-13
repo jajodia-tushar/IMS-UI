@@ -6,6 +6,7 @@ using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Infra;
 
 namespace IMS_UI.Controllers
 {
@@ -14,9 +15,11 @@ namespace IMS_UI.Controllers
     public class ShelfController : ControllerBase
     {
         private ShelfProvider _ShelfProvider;
-        public ShelfController(ShelfProvider shelfProvider)
+        private SessionManager _sessionManager;
+        public ShelfController(ShelfProvider shelfProvider, SessionManager sessionManager)
         {
             _ShelfProvider = shelfProvider;
+            _sessionManager = sessionManager;
         }
         // GET: api/Shelf
         [HttpGet]
@@ -51,11 +54,7 @@ namespace IMS_UI.Controllers
             }
         }
 
-        // POST: api/Shelf
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+       
 
         // PUT: api/Shelf/5
         [HttpPut("{id}")]
@@ -71,8 +70,24 @@ namespace IMS_UI.Controllers
         [HttpGet("inventory/{shelfId}")]
         public async Task<ShelfDataResponse> GetShelfData(string shelfId)
         {
+
             var response = await _ShelfProvider.GetShelfData(shelfId);
             return response;
+        }
+
+        // POST: api/Shelf
+        [HttpPost]
+        public IActionResult SetShelfCode([FromBody] Shelf shelf)
+        {
+            _sessionManager.SetObject("Shelf", shelf);
+            return Ok(shelf);
+        }
+
+        [HttpGet("selected")]
+        public IActionResult GetSelectedShelf()
+        {
+            var shelfResponse = new ShelfResponse { shelf = (Shelf)_sessionManager.GetObject<Shelf>("Shelf") };
+            return Ok(shelfResponse);   
         }
     }
 }

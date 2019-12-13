@@ -9,6 +9,6 @@ import { EmployeeOrderData } from '../IMS.Models/EmployeeOrderData';
 export class EmployeeOrderService {
   constructor(private http : HttpClient) { }
   postOrderData(body :EmployeeOrderData) : Observable<any>{
-    return this.http.post<any>("orders",body); 
+    return this.http.post<any>("orders",body);
   }
 }

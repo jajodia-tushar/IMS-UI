@@ -1,8 +1,8 @@
-import { Injectable,Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from '../IMS.Models/LoginResponse';
-import { SessionResponse } from '../IMS.Models/SessionResponse';
+import { UserResponse } from '../IMS.Models/UserResponse';
 
 
 @Injectable({
@@ -18,5 +18,9 @@ export class LoginService {
       username: username,
       password: password
     });
+  }
+
+  getUser(){
+    return this.http.get<UserResponse>('api/user').toPromise();
   }
 }

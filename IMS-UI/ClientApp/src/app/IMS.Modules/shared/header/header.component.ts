@@ -12,14 +12,14 @@ export class HeaderComponent implements OnInit {
   name : string
   email : string;
   @Input() isUser : boolean;
-
   constructor(private centralizedRepo : CentralizedDataService) { }
 
   ngOnInit() {
-      this.name = this.centralizedRepo.employee.firstname + 
-        this.centralizedRepo.employee.lastname;
-
-      this.email = this.centralizedRepo.employee.email;
+    if(this.isUser){
+      this.name = this.centralizedRepo.getUser().firstname + 
+      this.centralizedRepo.getUser().lastname;
+      this.email = this.centralizedRepo.getUser().email;
+    }
   }
 
 }

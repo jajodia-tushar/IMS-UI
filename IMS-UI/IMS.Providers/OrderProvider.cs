@@ -15,22 +15,22 @@ namespace IMS_UI.IMS.Providers
         {
             _iconfiguration = configuration;
         }
-        public async Task<EmployeeOrdersResponse> PostOrders(Object obj)
+        public async Task<PlaceEmployeeOrderResponse> PostOrders(PlaceEmployeeOrderRequest placeEmployeeOrderRequest)
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "/api/orders/EmployeeOrders";
+            var EndPoint = "/api/order/EmployeeOrders";
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             client.BaseAddress = new Uri(_iconfiguration["BaseURL1"]);
 
-            var myData = JsonConvert.SerializeObject(obj);
+            var myData = JsonConvert.SerializeObject(placeEmployeeOrderRequest);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
             var byteData = new ByteArrayContent(buffer);
             byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
-            return JsonConvert.DeserializeObject<EmployeeOrdersResponse>(
+            return JsonConvert.DeserializeObject<PlaceEmployeeOrderResponse>(
                 await response.Content.ReadAsStringAsync());
         }
     }

@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
-import { SessionService } from 'src/app/IMS.Services/session.service';
-import { SessionResponse } from 'src/app/IMS.Models/SessionResponse';
 import { EmployeeService } from 'src/app/IMS.Services/employee.service';
-import { EmployeeResponse } from 'src/app/IMS.Models/EmployeeResponse';
-import { LoadSessionOnRefreshComponent } from 'src/app/IMS.Services/load-session-on-refresh/load-session-on-refresh.component';
 
 @Component({
   selector: 'app-employee',
@@ -14,8 +10,7 @@ import { LoadSessionOnRefreshComponent } from 'src/app/IMS.Services/load-session
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private router : Router, private centralizedRepo : CentralizedDataService,
-   private loadSessionOnRefresh : LoadSessionOnRefreshComponent, private employeeService : EmployeeService){}
+  constructor(private router : Router, private centralizedRepo : CentralizedDataService,private employeeService : EmployeeService){}
     
     ShelfName : string;
     employeeID: string;
@@ -24,7 +19,7 @@ export class EmployeeComponent implements OnInit {
    
   async ngOnInit() {
     if(this.centralizedRepo.getShelf() == null){
-      await this.loadSessionOnRefresh.loadDataEmployeePageRefresh();
+      await this.centralizedRepo.loadSelectedShelf();
       this.ShelfName = this.centralizedRepo.getShelf().name;
     }
     else{

@@ -3,8 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { LoginService } from './login.service';
 import { log } from 'util';
 import { HttpClient } from '@angular/common/http';
-import { SessionService } from './session.service';
-import { SessionResponse } from '../IMS.Models/SessionResponse';
+import { UserResponse } from '../IMS.Models/UserResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +12,16 @@ export class LoginGuard implements CanActivate {
   isLoggedIn: boolean = false;
   pathToNavigate: string;
 
-  constructor(private _loginService: LoginService, private route: Router, private http: HttpClient,
-    private authService: SessionService) { }
+  constructor(private loginService: LoginService, private route: Router, private http: HttpClient) { }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    let userResponse : UserResponse = <UserResponse> await this.loginService.getUser();
+    console.log(userResponse);
 
-    let response: SessionResponse = <SessionResponse>await this.authService.isAuthenticated();
-    console.log(response);
-    if (response.user == null)
+    if (userResponse.user == null)
       return true;
     else {
-      this.route.navigateByUrl(response.user.role.name);
+      this.route.navigateByUrl(userResponse.user.role.name);
       return false;
     }
   }

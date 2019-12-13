@@ -25,6 +25,7 @@ export class PickItemComponent implements OnInit {
     this.employee = this.centralizedRepo.getEmployee();
     if (this.employee == null) {
       this.router.navigateByUrl("employee");
+      return;
     }
 
     this.name = this.centralizedRepo.getEmployee().firstname + " " + this.centralizedRepo.getEmployee().lastname;

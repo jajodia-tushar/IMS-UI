@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Session;
 using System;
 using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Infra;
 
 namespace IMS_UI
 {
@@ -32,7 +33,7 @@ namespace IMS_UI
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<LoginProvider>();
             services.AddSingleton<SessionManager>();
-            services.AddSingleton<SessionProvider>();
+            services.AddSingleton<OrderProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

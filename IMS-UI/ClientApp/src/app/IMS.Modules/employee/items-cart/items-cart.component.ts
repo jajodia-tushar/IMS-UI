@@ -6,6 +6,7 @@ import { EmployeeOrderService } from 'src/app/IMS.Services/employee-order.servic
 import { EmployeeOrderData } from 'src/app/IMS.Models/EmployeeOrderData';
 import { SnackbarComponent } from '../../shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
+import { EmployeeOrderResponse } from 'src/app/IMS.Models/EmployeeOrderResponse';
 
 @Component({
   selector: 'app-items-cart',
@@ -38,13 +39,10 @@ onCancel() {
 }
 
 onMakingOrder() {
-  let obj: EmployeeOrderData;
-  obj = this.prepareOrderData();
-
-  var x = this.employeeOrderService.postOrderData(obj);
-  console.log(x);
-  x.subscribe(o => {
-    if(o.status == "Success"){
+  let employeeOrderData: EmployeeOrderData = this.prepareOrderData();
+  this.employeeOrderService.postOrderData(employeeOrderData)
+  .subscribe(employeeOrderRes  => {
+    if(employeeOrderRes.status == "Success"){
       this._snackBar.openFromComponent(SnackbarComponent, {
         duration: this.durationInSeconds * 1000,
       });
@@ -52,7 +50,9 @@ onMakingOrder() {
     }
     else{
       this.ButtonName="Submit"
-      alert("Something Went Wrong");
+      this._snackBar.openFromComponent(SnackbarComponent, {
+        duration: this.durationInSeconds * 1000,
+      });
     }
   });
 }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class ShelfResponse : Response
+    public class EmployeeOrderResponseData : Response
     {
-        public Shelf shelf { get; set; }
+        public EmployeeOrderResponse employeeOrderResponse { get; set; }
     }
 }

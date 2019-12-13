@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,7 @@ using Newtonsoft.Json.Linq;
 
 namespace IMS_UI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -29,7 +30,7 @@ namespace IMS_UI.Controllers
             _SessionManager = sessionManager;
         }
         // POST: api/Login
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> PostLoginAsync([FromBody] LoginRequest loginRequest)
         {
             try
@@ -40,18 +41,28 @@ namespace IMS_UI.Controllers
                 {
                     _SessionManager.SetString("token", response.AccessToken);
                     _SessionManager.SetObject("user", response.User);
-
                     return Ok(new UILoginResponse{user = response.User});
                 }
                 
                 else
                     return Unauthorized("invalid Credentials");
             }
-            catch(Exception exception)
+            catch(Exception)
             {
                 return StatusCode(500);
             }
                      
+        }
+
+        [HttpGet("user")]
+        public IActionResult GetUser()
+        {
+            var user = (User)_SessionManager.GetObject<User>("user");
+                UserResponse userResponse = new UserResponse
+                {
+                    user = user
+                };
+                return Ok(userResponse);
         }
     }
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { SpinLoaderService } from '../../../IMS.Services/spin-loader.service';
+import { SpinLoaderService } from '../../../IMS.Services/shared/spin-loader.service';
 
 @Component({
   selector: 'app-spinning-loader',
@@ -10,10 +10,17 @@ import { SpinLoaderService } from '../../../IMS.Services/spin-loader.service';
 export class SpinningLoaderComponent implements OnInit {
 
   constructor(private loaderService: SpinLoaderService) { }
-  
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
+  isLoading: Subject<boolean> = this.loaderService.isLoading; 
   
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.isLoading.next();
+    
   }
 
   mode = 'indeterminate';

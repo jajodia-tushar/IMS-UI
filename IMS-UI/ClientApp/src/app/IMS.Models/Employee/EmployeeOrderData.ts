@@ -1,5 +1,5 @@
-import { CartItem } from "./CartItem";
-import { Shelf } from "./Shelf";
+import { CartItem } from "../CartItem";
+import { Shelf } from "../Shelf/Shelf";
 
 export class EmployeeOrderData{
       employee : {

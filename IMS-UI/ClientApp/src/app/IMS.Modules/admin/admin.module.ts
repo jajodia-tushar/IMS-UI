@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
+import { AdminComponent } from './Components/admin/admin.component';
 import { MaterialModule } from '../material/material.module';
 
 

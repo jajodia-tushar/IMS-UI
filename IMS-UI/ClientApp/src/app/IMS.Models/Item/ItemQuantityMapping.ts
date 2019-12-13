@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 
-export class ItemQuantityMapping{  // RR ki ItemQuantityMapping
+export class ItemQuantityMapping{ 
     item : Item;
     availableQuantity : number;
   }

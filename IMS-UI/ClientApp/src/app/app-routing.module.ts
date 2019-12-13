@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginGuard } from './IMS.Services/login-gaurd';
+import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { LoginComponent } from './Components/login/login.component';
 
 const routes: Routes = [

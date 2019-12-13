@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
-import { Item } from 'src/app/IMS.Models/Item';
+import { Item } from 'src/app/IMS.Models/Item/Item';
 
 @Component({
   selector: 'app-items-list',

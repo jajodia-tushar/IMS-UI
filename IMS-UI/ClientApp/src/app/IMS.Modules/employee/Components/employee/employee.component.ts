@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
-import { EmployeeService } from 'src/app/IMS.Services/employee.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
+import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
 
 @Component({
   selector: 'app-employee',

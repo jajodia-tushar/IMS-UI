@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ClerkComponent } from './clerk.component';
-import { LoginGuard } from 'src/app/IMS.Services/login-gaurd';
-import { SecuredRouteGuard } from 'src/app/IMS.Services/secured-route-guard';
+import { LoginGuard } from 'src/app/IMS.Services/Route/login-gaurd';
+import { SecuredRouteGuard } from 'src/app/IMS.Services/Route/secured-route-guard';
+import { ClerkComponent } from './Components/clerk/clerk.component';
 
 const routes: Routes = [{ path: '', component: ClerkComponent, canActivate:[SecuredRouteGuard], data : { role : "Clerk"} }];
 

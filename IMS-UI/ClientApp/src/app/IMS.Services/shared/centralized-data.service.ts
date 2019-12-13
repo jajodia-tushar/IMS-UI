@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Employee } from '../IMS.Models/Employee';
-import { ShelfService } from './shelf.service';
-import { User } from '../IMS.Models/User';
-import { Shelf } from '../IMS.Models/Shelf';
-import { ShelfListResponse } from '../IMS.Models/ShelfListResponse';
-import { ShelfResponse } from '../IMS.Models/ShelfResponse';
-import { LoginService } from './login.service';
-import { UserResponse } from '../IMS.Models/UserResponse';
+import { Employee } from '../../IMS.Models/Employee/Employee';
+import { User } from '../../IMS.Models/User/User';
+import { Shelf } from '../../IMS.Models/Shelf/Shelf';
+import { ShelfResponse } from '../../IMS.Models/Shelf/ShelfResponse';
+import { UserResponse } from '../../IMS.Models/User/UserResponse';
+import { ShelfService } from '../Shelf/shelf.service';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'

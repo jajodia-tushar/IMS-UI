@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
-import { Employee } from 'src/app/IMS.Models/Employee';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
+import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { Router } from '@angular/router';
-import { CartItem } from '../../../IMS.Models/CartItem';
-import { Item } from 'src/app/IMS.Models/Item';
-import { ItemService } from 'src/app/IMS.Services/item.service';
+import { CartItem } from '../../../../IMS.Models/CartItem';
+import { Item } from 'src/app/IMS.Models/Item/Item';
+import { ItemService } from 'src/app/IMS.Services/item/item.service';
 
 @Component({
   selector: 'app-pick-item',
@@ -35,12 +35,10 @@ export class PickItemComponent implements OnInit {
         this.shelfItems.push(itemQuantityMapping.item);
       });
       this.shelfItems = JSON.parse(JSON.stringify(this.shelfItems));
-      console.log(this.shelfItems);
     });
   }
 
   onItemDeleted(event) {
-    console.log(event);
     this.cartItems = JSON.parse(JSON.stringify(event));
   }
 

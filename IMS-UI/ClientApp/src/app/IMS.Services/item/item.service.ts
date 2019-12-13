@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ShelfData } from '../IMS.Models/ShelfData';
+import { ShelfData } from '../../IMS.Models/Shelf/ShelfData';
 
 @Injectable({
   providedIn: 'root'

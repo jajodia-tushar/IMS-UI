@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { CommonModule } from '@angular/common'; 
 
 @Component({

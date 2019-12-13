@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostBinding } from '@angular/core';
-import { CentralizedDataService } from 'src/app/IMS.Services/centralized-data.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { Router } from '@angular/router';
 import { CartItem } from 'src/app/IMS.Models/CartItem';
-import { EmployeeOrderService } from 'src/app/IMS.Services/employee-order.service';
-import { EmployeeOrderData } from 'src/app/IMS.Models/EmployeeOrderData';
-import { SnackbarComponent } from '../../shared/snackbar/snackbar.component';
+import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
+import { EmployeeOrderData } from 'src/app/IMS.Models/Employee/EmployeeOrderData';
+import { SnackbarComponent } from '../../../shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
-import { EmployeeOrderResponse } from 'src/app/IMS.Models/EmployeeOrderResponse';
+import { EmployeeOrderResponse } from 'src/app/IMS.Models/Employee/EmployeeOrderResponse';
 
 @Component({
   selector: 'app-items-cart',
@@ -78,7 +78,6 @@ prepareOrderData() {
 
 ngOnChanges(changes: SimpleChanges): void {
   let lengthOfArray = changes.selectedItems.currentValue.length;
-  console.log(lengthOfArray);
   if (lengthOfArray >= 1) {
     this.display = 'block';
   }

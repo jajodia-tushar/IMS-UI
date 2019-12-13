@@ -18,7 +18,7 @@ export class ItemsCartComponent implements OnInit {displayedColumns: string[] = 
 ButtonName = 'Submit';
 
 constructor(private employeeOrderService: EmployeeOrderService,private centralizedRepo : CentralizedDataService,
-  private router: Router, private _snackBar: MatSnackBar) {
+  private router: Router, private snackBar: MatSnackBar) {
 
  }
 
@@ -43,17 +43,23 @@ onMakingOrder() {
   this.employeeOrderService.postOrderData(employeeOrderData)
   .subscribe(employeeOrderRes  => {
     if(employeeOrderRes.status == "Success"){
-      this._snackBar.openFromComponent(SnackbarComponent, {
-        duration: this.durationInSeconds * 1000,
-      });
+
+      this.showMessage(2,"Please Collect The Items");
       this.router.navigateByUrl('/Shelf');
+    
     }
     else{
+      
       this.ButtonName="Submit"
-      this._snackBar.openFromComponent(SnackbarComponent, {
-        duration: this.durationInSeconds * 1000,
-      });
+      this.showMessage(3,"Something Went Wrong");
+    
     }
+  });
+}
+
+showMessage(time,message){
+  this.snackBar.openFromComponent(SnackbarComponent, {
+    duration: 1000 * time , data : { message : message }
   });
 }
 

@@ -6,7 +6,7 @@ using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Models;
-using IMS_UI.IMS.Infra;
+using IMS_UI.IMS.Core.Infra;
 
 namespace IMS_UI.Controllers
 {

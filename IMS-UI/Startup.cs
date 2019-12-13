@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Session;
 using System;
 using IMS_UI.IMS.Core;
-using IMS_UI.IMS.Infra;
+using IMS_UI.IMS.Core.Infra;
 
 namespace IMS_UI
 {

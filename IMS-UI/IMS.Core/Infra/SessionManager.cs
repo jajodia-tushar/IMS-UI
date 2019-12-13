@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IMS_UI.IMS.Infra
+namespace IMS_UI.IMS.Core.Infra
 {
     public class SessionManager
     {

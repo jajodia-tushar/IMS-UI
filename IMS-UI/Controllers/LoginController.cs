@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using IMS_UI.IMS.Infra;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;

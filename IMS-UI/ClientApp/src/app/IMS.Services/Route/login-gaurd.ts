@@ -4,7 +4,6 @@ import { log } from 'util';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../IMS.Models/User/UserResponse';
 import { CentralizedDataService } from '../shared/centralized-data.service';
-import { ShelfResponse } from '../../IMS.Models/Shelf/ShelfResponse';
 import { LoginService } from '../login/login.service';
 
 @Injectable({

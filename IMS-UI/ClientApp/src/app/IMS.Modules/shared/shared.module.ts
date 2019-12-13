@@ -13,10 +13,7 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     MaterialModule
   ],
-  providers : [
-    SpinLoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
-  ],
+  providers : [],
   exports : [SpinningLoaderComponent,SnackbarComponent,HeaderComponent],
   entryComponents : [SnackbarComponent]
 })

@@ -11,7 +11,7 @@ import { ShelfService } from '../Shelf/shelf.service';
   providedIn: 'root'
 })
 export class SecuredRouteGuard implements CanActivate {
-  constructor(private loginService: LoginService, private route: Router, private http: HttpClient
+  constructor(private loginService: LoginService, private router: Router, private http: HttpClient
     ,private centralizedRepo : CentralizedDataService,private selfService : ShelfService) { }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -19,7 +19,7 @@ export class SecuredRouteGuard implements CanActivate {
     await this.centralizedRepo.loadSelectedShelf();
     
     if (userResponse.user == null || this.centralizedRepo.getShelf() == null)  {
-      this.route.navigateByUrl("login");
+      this.router.navigateByUrl("login");
       return false;
     }
     else {
@@ -27,7 +27,7 @@ export class SecuredRouteGuard implements CanActivate {
           return true;
       }
       else {
-        this.route.navigateByUrl(userResponse.user.role.name);
+        this.router.navigateByUrl(userResponse.user.role.name);
       }
     }
   }

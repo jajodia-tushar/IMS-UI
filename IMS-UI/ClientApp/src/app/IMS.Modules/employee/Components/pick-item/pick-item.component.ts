@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CartItem } from '../../../../IMS.Models/CartItem';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-pick-item',
@@ -19,7 +21,7 @@ export class PickItemComponent implements OnInit {
   name : string;
 
   constructor(private centralizedRepo: CentralizedDataService, private router: Router,
-    private itemService: ItemService) { }
+    private itemService: ItemService,private snackBar : MatSnackBar) { }
 
   ngOnInit() {
     this.employee = this.centralizedRepo.getEmployee();
@@ -43,24 +45,32 @@ export class PickItemComponent implements OnInit {
   }
 
   onItemClicked(event: Item) {
-    var obj = this.cartItems.find(obj => {
+    var cartItem = this.cartItems.find(obj => {
       return obj.item.id == event.id;
     });
 
-    if (obj == null) {
+    if (cartItem == null) {
       this.cartItems.push({
         item: event,
         quantity: 1
       });
     }
     else {
-      if (obj.quantity < obj.item.maxLimit) {
-        obj.quantity += 1;
+      if (cartItem.quantity < cartItem.item.maxLimit) {
+        cartItem.quantity += 1;
       }
       else {
-        alert(`You cannot add ${obj.item.name} more than ${obj.item.maxLimit}`);
+        this.showMessage(1,`You cannot add "${cartItem.item.name}" more than ${cartItem.item.maxLimit}`);
       }
     }
     this.cartItems = JSON.parse(JSON.stringify(this.cartItems));
   }
+
+  showMessage(time,message){
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 1000 * time , data : { message : message }
+    });
+  }
+
+
 }

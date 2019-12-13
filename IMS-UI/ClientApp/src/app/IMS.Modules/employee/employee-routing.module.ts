@@ -8,7 +8,7 @@ import { PickItemComponent } from './Components/pick-item/pick-item.component';
 
 const routes: Routes = [
   { path: '', component: EmployeeComponent,canActivate:[SecuredRouteGuard], data : { role : "Shelf"}},
-  { path: 'pickItem', component: PickItemComponent,canActivate:[SecuredRouteGuard], data : { role : "Shelf"}}
+  { path: 'pickItem', component: PickItemComponent,canActivate:[SecuredRouteGuard], data : { role: "Shelf"}}
 ];
 
 @NgModule({

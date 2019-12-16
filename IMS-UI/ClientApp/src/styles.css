@@ -1,7 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-    height: 100vh;
+  height: 100vh;
+  background-color:#eeeeee;
+}
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
 }
 
 .mat-snack-bar-container {

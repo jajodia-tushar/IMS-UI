@@ -44,13 +44,20 @@ namespace IMS_UI
             services.AddSingleton<ItemWiseAnalysisProvider>();
             services.AddSingleton<StockProvider>();
             services.AddSingleton<RecentEntriesProvider>();
+            services.AddSingleton<AuthGaurdService>();
+            services.AddSingleton<AdminListProvider>();
+            services.AddSingleton<ItemListProvider>();
+            services.AddSingleton<VendorListProvider>();
+            services.AddSingleton<UserService>();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            
+            services.AddSingleton<EmployeeProvider>();
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

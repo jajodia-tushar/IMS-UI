@@ -1,0 +1,53 @@
+.container {
+    background-color: white;
+    margin-right: 3%;
+    border-radius: 7px;
+    border: 3px solid #d9d1d1;
+    overflow: auto;
+    min-width: 600px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.actionButton {
+    position: absolute;
+    bottom: 8%;
+    right: 10%;
+}
+
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+    overflow: hidden;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+    padding: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: beige;
+}
+
+.actionButton {
+    position: absolute;
+    bottom: 8%;
+    right: 10%;
+}
+
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+    overflow: hidden;
+}
+
+.action-buttons {
+    float: right;
+    padding: 30px;
+}

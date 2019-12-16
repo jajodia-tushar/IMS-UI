@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { LoginAuthGaurdService } from './IMS.Services/login-auth-gaurd.service';
-import { AuthGaurdService } from './IMS.Services/auth-gaurd.service';
-
+import { LoginGuard } from './IMS.Services/Route/login-gaurd';
+import { LoginComponent } from './Components/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, canActivate:[LoginAuthGaurdService] },
-  { path: 'login', component: LoginComponent },
-  { path: '*', component: LoginComponent },
-  { path: 'admin', loadChildren: () => import('./IMS.Modules/admin/admin.module').then(m => m.AdminModule) },
-  { path: 'clerk', loadChildren: () => import('./IMS.Modules/clerk/clerk.module').then(m => m.ClerkModule) },
-  { path: 'shelf', loadChildren: () => import('./IMS.Modules/employee/employee.module').then(m => m.EmployeeModule) }
-]
+  { path: '', redirectTo : 'login' , pathMatch : 'full'},
+  { path: 'login', component : LoginComponent , canActivate : [LoginGuard] },
+  { path: 'employee', loadChildren: () => import('./IMS.Modules/employee/employee.module').then(m => m.EmployeeModule)},
+  { path: 'Shelf', redirectTo : 'employee' },
+  { path: 'Admin', loadChildren: () => import('./IMS.Modules/admin/admin.module').then(m => m.AdminModule)},
+  { path: 'Clerk', loadChildren: () => import('./IMS.Modules/clerk/clerk.module').then(m => m.ClerkModule)},
+  { path: '**', redirectTo : 'login' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+

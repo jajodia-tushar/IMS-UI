@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ClerkComponent } from './clerk.component';
-import { AuthGaurdService } from 'src/app/IMS.Services/auth-gaurd.service';
+import { LoginGuard } from 'src/app/IMS.Services/Route/login-gaurd';
+import { SecuredRouteGuard } from 'src/app/IMS.Services/Route/secured-route-guard';
+import { ClerkComponent } from './Components/clerk/clerk.component';
 
-const routes: Routes = [{ path: '', component: ClerkComponent, canActivate: [AuthGaurdService] }];
+const routes: Routes = [{ path: '', component: ClerkComponent, canActivate:[SecuredRouteGuard], data : { role : "Clerk"} }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

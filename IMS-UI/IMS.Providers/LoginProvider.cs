@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Models;
+﻿using IMS_UI.IMS.Core.Infra;
+using IMS_UI.IMS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

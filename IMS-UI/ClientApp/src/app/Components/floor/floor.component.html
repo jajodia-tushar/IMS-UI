@@ -1,0 +1,16 @@
+<div class="popup">
+  <mat-form-field>
+    <mat-label>Choose a Floor</mat-label>
+    <mat-select [(value)]="selectedShelf">
+      <mat-option *ngFor='let shelf of shelves' [value]="shelf">{{shelf.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p *ngIf="selectedShelf">You selected {{selectedShelf.name}}</p>
+  <div class="center_Confirm_Button" *ngIf="selectedShelf">
+    <button  mat-raised-button disableRipple class="button" (click)="onSubmit()">Confirm</button>
+  </div>
+</div>
+
+  
+
+

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Core.Infra;
+using IMS_UI.IMS.Providers.Interfaces;
 
 namespace IMS_UI.Controllers
 {
@@ -14,18 +15,18 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class ShelfController : ControllerBase
     {
-        private ShelfProvider _ShelfProvider;
+        private IShelfProvider _shelfProvider;
         private SessionManager _sessionManager;
-        public ShelfController(ShelfProvider shelfProvider, SessionManager sessionManager)
+        public ShelfController(IShelfProvider shelfProvider, SessionManager sessionManager)
         {
-            _ShelfProvider = shelfProvider;
+            _shelfProvider = shelfProvider;
             _sessionManager = sessionManager;
         }
         // GET: api/Shelf
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response =await _ShelfProvider.ApiGetCaller("/api/Shelf");
+            var response =await _shelfProvider.ApiGetCaller("/api/Shelf");
             try {
                 if (response.Error == null)
                     return Ok(response);
@@ -41,7 +42,7 @@ namespace IMS_UI.Controllers
         [HttpGet("{id}", Name = "GetShelf")]
         public async Task<IActionResult> GetShelfById(string id)
         {
-            var response = await _ShelfProvider.ApiGetCaller("/api/Shelf/"+id);
+            var response = await _shelfProvider.ApiGetCaller("/api/Shelf/"+id);
             try
             {
                 if (response.Error == null)
@@ -71,7 +72,7 @@ namespace IMS_UI.Controllers
         public async Task<ShelfDataResponse> GetShelfData(string shelfId)
         {
 
-            var response = await _ShelfProvider.GetShelfData(shelfId);
+            var response = await _shelfProvider.GetShelfData(shelfId);
             return response;
         }
 

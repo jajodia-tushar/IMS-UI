@@ -10,14 +10,14 @@ import { LoginService } from 'src/app/IMS.Services/login/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private ButtonName: string = "LOGIN";
-  private Username: string = "";
-  private Password: string = "";
+  public ButtonName: string = "LOGIN";
+  public Username: string = "";
+  public Password: string = "";
 
   private isPopedUp: boolean = false;
 
   private role: string;
-  private error: boolean = false;
+  public error: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router,
     private dialog: MatDialog) { }

@@ -1,4 +1,5 @@
 ﻿using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Providers
 {
-    public class EmployeeProvider
+    public class EmployeeProvider : IEmployeeProvider
     {
         private IConfiguration _iconfiguration;
         public EmployeeProvider(IConfiguration configuration)

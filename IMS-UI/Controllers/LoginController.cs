@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,12 +22,12 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private LoginProvider _LoginProvider;
+        private ILoginProvider _loginProvider;
         private SessionManager _SessionManager;
          
-        public LoginController(LoginProvider loginProvider,SessionManager sessionManager)
+        public LoginController(ILoginProvider loginProvider,SessionManager sessionManager)
         {
-            _LoginProvider = loginProvider;
+            _loginProvider = loginProvider;
             _SessionManager = sessionManager;
         }
         // POST: api/Login
@@ -36,7 +37,7 @@ namespace IMS_UI.Controllers
             try
             {
                 //var provider = new LoginProvider();
-                var response = await _LoginProvider.ApiCaller(loginRequest, "/api/Login");
+                var response = await _loginProvider.ApiCaller(loginRequest, "/api/Login");
                 if (response.Error == null)
                 {
                     _SessionManager.SetString("token", response.AccessToken);

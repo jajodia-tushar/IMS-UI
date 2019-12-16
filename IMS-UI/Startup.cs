@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Session;
 using System;
 using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
+using IMS_UI.IMS.Providers.Interfaces;
 
 namespace IMS_UI
 {
@@ -31,9 +32,12 @@ namespace IMS_UI
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<LoginProvider>();
             services.AddSingleton<SessionManager>();
-            services.AddSingleton<OrderProvider>();
+            services.AddSingleton<ILoginProvider, LoginProvider>();
+            services.AddSingleton<IOrderProvider, OrderProvider>();
+            services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
+            services.AddSingleton<IShelfProvider, ShelfProvider>();
+            services.AddSingleton<IConfiguration>(Configuration);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -41,9 +45,7 @@ namespace IMS_UI
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddSingleton<EmployeeProvider>();
-            services.AddSingleton<ShelfProvider>();
-            services.AddSingleton<IConfiguration>(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

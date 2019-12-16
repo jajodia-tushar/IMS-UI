@@ -69,13 +69,13 @@ prepareOrderData() {
     employee: {
       id: this.centralizedRepo.getEmployee().id.toString(),
     },
-    employeeOrder: {
+    employeeOrderDetails: {
       shelf: this.centralizedRepo.getShelf(),
       employeeItemsQuantityList : []
     }
   }
   this.selectedItems.forEach( obj => {
-    orderDataObj.employeeOrder.employeeItemsQuantityList.push(obj);
+    orderDataObj.employeeOrderDetails.employeeItemsQuantityList.push(obj);
   });
   return orderDataObj;
 }

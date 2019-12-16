@@ -7,10 +7,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Providers.Interfaces;
 
 namespace IMS_UI.IMS.Providers
 {
-    public class ShelfProvider
+    public class ShelfProvider : IShelfProvider
     {
         private IConfiguration _iconfiguration;
         public ShelfProvider(IConfiguration configuration)

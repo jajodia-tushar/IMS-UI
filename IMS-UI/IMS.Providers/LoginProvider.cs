@@ -1,5 +1,6 @@
 ﻿using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Providers
 {
-    public class LoginProvider
+    public class LoginProvider : ILoginProvider
     {
         
         private IHttpContextAccessor _httpContextAccessor;

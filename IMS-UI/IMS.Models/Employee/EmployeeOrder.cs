@@ -6,7 +6,7 @@ using IMS_UI.IMS.Models;
 
 namespace IMS_UI.IMS.Models
 {
-    public class EmployeeOrder
+    public class EmployeeOrderDetails
     {
         public int OrderId { get; set; }
         public DateTime Date { get; set; }

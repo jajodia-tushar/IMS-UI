@@ -19,12 +19,21 @@ export class LoginGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let userResponse : UserResponse = <UserResponse> await this.loginService.getUser();
     await this.centralizedReop.loadSelectedShelf();
-
-    if (userResponse.user == null || this.centralizedReop.getShelf() == null)
+    if (userResponse.user == null){
       return true;
+    }
     else {
-      this.route.navigateByUrl(userResponse.user.role.name);
-      return false;
+      if(userResponse.user.role.name=='Shelf' && this.centralizedReop.getShelf() == null){
+        
+        return true;
+      }
+      else{
+        if(userResponse.user.role.name=='SuperAdmin')
+          this.route.navigateByUrl('Admin')
+        else
+          this.route.navigateByUrl(userResponse.user.role.name);
+        return false;
+      }
     }
   }
 }

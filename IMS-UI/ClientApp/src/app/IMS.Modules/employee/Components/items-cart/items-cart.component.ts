@@ -55,6 +55,8 @@ onMakingOrder() {
     
     }
   });
+  // this.ButtonName="Try Again";
+
 }
 
 showMessage(time,message){

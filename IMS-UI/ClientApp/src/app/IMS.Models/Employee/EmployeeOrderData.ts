@@ -5,7 +5,7 @@ export class EmployeeOrderData{
       employee : {
         id : string;
       };
-      employeeOrder : {
+      employeeOrderDetails : {
         shelf : Shelf;
         employeeItemsQuantityList : CartItem[];
       }

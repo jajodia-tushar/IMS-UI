@@ -5,17 +5,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers.Interfaces;
 
 namespace IMS_UI.IMS.Providers
 {
-    public class OrderProvider
+    public class OrderProvider : IOrderProvider
     {
         private IConfiguration _iconfiguration;
         public OrderProvider(IConfiguration configuration)
         {
             _iconfiguration = configuration;
         }
-        public async Task<PlaceEmployeeOrderResponse> PostOrders(PlaceEmployeeOrderRequest placeEmployeeOrderRequest)
+        public async Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest)
         {
             HttpClient client = new HttpClient();
             var EndPoint = "/api/order/EmployeeOrders";
@@ -30,7 +31,7 @@ namespace IMS_UI.IMS.Providers
             var byteData = new ByteArrayContent(buffer);
             byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
-            return JsonConvert.DeserializeObject<PlaceEmployeeOrderResponse>(
+            return JsonConvert.DeserializeObject<EmployeeOrderResponse>(
                 await response.Content.ReadAsStringAsync());
         }
     }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class PlaceEmployeeOrderResponse : Response
+    public class EmployeeOrderResponse : Response
     {
-        public EmployeeOrder employeeOrder { get; set; }
+        public EmployeeOrder EmployeeOrder { get; set; }
     }
 }

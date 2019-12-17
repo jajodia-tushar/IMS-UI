@@ -6,6 +6,7 @@ using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers.Interfaces;
 
 namespace IMS_UI.Controllers
 {
@@ -13,17 +14,17 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class EmployeeOrderController : ControllerBase
     {
-        OrderProvider orderProvider;
-        public EmployeeOrderController(OrderProvider orderProvider)
+        private IOrderProvider _orderProvider;
+        public EmployeeOrderController(IOrderProvider orderProvider)
         {
-            this.orderProvider = orderProvider;
+            _orderProvider = orderProvider;
         }
 
 
         [HttpPost]
-        public async Task<PlaceEmployeeOrderResponse> PostOrder(PlaceEmployeeOrderRequest placeEmployeeOrderRequest)
+        public async Task<EmployeeOrderResponse> PostOrder(EmployeeOrder placeEmployeeOrderRequest)
         {
-            var response = await orderProvider.PostOrders(placeEmployeeOrderRequest);
+            var response = await _orderProvider.PostOrders(placeEmployeeOrderRequest);
             return response;
         }
     }

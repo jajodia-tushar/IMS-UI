@@ -24,7 +24,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL1"]);
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
 
             var myData = JsonConvert.SerializeObject(placeEmployeeOrderRequest);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myData);

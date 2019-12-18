@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SecuredRouteGuard } from './IMS.Services/Route/secured-route-guard';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { SpinLoaderService } from './IMS.Services/shared/spin-loader.service';
@@ -21,6 +20,9 @@ import { ItemService } from './IMS.Services/item/item.service';
 import { EmployeeOrderService } from './IMS.Services/employee/employee-order.service';
 import { LoginService } from './IMS.Services/login/login.service';
 import { ShelfService } from './IMS.Services/Shelf/shelf.service';
+import { ClerkRouteGuardService } from './IMS.Services/Route/clerk-route-guard.service';
+import { EmployeeRouteGuardService } from './IMS.Services/Route/employee-route-guard.service';
+import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ShelfService } from './IMS.Services/Shelf/shelf.service';
   providers: [
     LoginService,
     LoginGuard,
-    SecuredRouteGuard,
+    AdminRouteGuardService,
+    ClerkRouteGuardService,
+    EmployeeRouteGuardService,
     SpinLoaderService,
     ShelfService,
     EmployeeService,

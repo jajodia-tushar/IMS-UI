@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './Components/admin/admin.component';
-import { LoginGuard } from 'src/app/IMS.Services/Route/login-gaurd';
-import { SecuredRouteGuard } from 'src/app/IMS.Services/Route/secured-route-guard';
+import { AdminRouteGuardService } from 'src/app/IMS.Services/Route/admin-route-guard.service';
 
-const routes: Routes = [{ path: '', component: AdminComponent , canActivate:[SecuredRouteGuard], data : { role : "Admin"}}];
+const routes: Routes = [{ path: '', component: AdminComponent , canActivate:[AdminRouteGuardService], data : { allowedRoles : ["Admin","SuperAdmin"]}}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

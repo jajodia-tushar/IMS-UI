@@ -1,11 +1,9 @@
-<div class="example-container">
-  <form class="example-container" [formGroup]="createUserForm" (ngSubmit)="createUser()">
+<div class="form-container">
+  <form class="form-container" [formGroup]="createUserForm" (ngSubmit)="createUser()">
     <div>
       <label>Role: </label>
-      <mat-radio-group >
-        <mat-radio-button value="Admin">Admin</mat-radio-button>
-        <mat-radio-button value="Clerk">Clerk</mat-radio-button>
-        <mat-radio-button value="Shelf">Shelf</mat-radio-button>
+      <mat-radio-group formControlName="role" >
+        <mat-radio-button *ngFor="let role of roles" [value]="role">{{role.name}}</mat-radio-button>
       </mat-radio-group>
     </div>
 
@@ -13,30 +11,30 @@
   <mat-form-field
       hideRequiredMarker="false"
       floatLabel="auto">
-    <input matInput formControlName="userName" placeholder="First Name">
-    <mat-error *ngIf="userName.invalid">Invalid Username</mat-error>
-    <mat-error *ngIf="userName.errors?.minlength">Length{{userName.errors.minlength.requiredLength}}</mat-error>
+    <input matInput formControlName="username" placeholder="UserName">
+    <mat-error *ngIf="username.invalid">Invalid Username</mat-error>
+    <mat-error *ngIf="username.errors?.minlength">Length{{username.errors.minlength.requiredLength}}</mat-error>
   </mat-form-field>
     
   <mat-form-field
       hideRequiredMarker="true"
       floatLabel="auto">
-    <input matInput placeholder="First Name" formControlName="firstName" required>
-    <mat-error *ngIf="firstName.invalid">Invalid FirstName</mat-error>
+    <input matInput placeholder="First Name" formControlName="firstname" required>
+    <mat-error *ngIf="firstname.invalid">Invalid firstname</mat-error>
   </mat-form-field>
 
   <mat-form-field
       hideRequiredMarker="true"
       floatLabel="auto">
-    <input matInput placeholder="Last Name" formControlName="lastName">
-    <mat-error *ngIf="lastName.invalid">Invalid</mat-error>
+    <input matInput placeholder="Last Name" formControlName="lastname">
+    <mat-error *ngIf="lastname.invalid">Invalid</mat-error>
   </mat-form-field>
 
   <mat-form-field
       hideRequiredMarker="false"
       floatLabel="auto">
-    <input matInput placeholder="Email" formControlName="userMail" required>
-    <mat-error *ngIf="userMail.invalid">Invalid Email</mat-error>
+    <input matInput placeholder="Email" formControlName="email" required>
+    <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
   </mat-form-field>
 
   <mat-form-field
@@ -47,7 +45,6 @@
   </mat-form-field>
 
   <button mat-button type="submit">Submit</button>
-  <button mat-button type="cancel">Cancel</button>
 
     </form>
 </div>

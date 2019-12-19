@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
+import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
+import { User } from 'src/app/IMS.Models/User/User';
+import { Role } from 'src/app/IMS.Models/User/Role';
 
 @Component({
   selector: 'app-user-add-form',
@@ -9,31 +12,56 @@ import { ErrorStateMatcher } from '@angular/material';
 })
 export class UserAddFormComponent {
   createUserForm : FormGroup
-  constructor(formBuilder: FormBuilder){
+  constructor(formBuilder: FormBuilder, private userManageService: UserManagementService){
     this.createUserForm = formBuilder.group({
-        userName : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-        userMail : ["", [Validators.required, Validators.email]],
-        firstName : ["", [Validators.required, Validators.maxLength]],
-        lastName : ["",[]],
+        username : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+        role : ['',[Validators.required]],
+        email : ["", [Validators.required, Validators.email]],
+        firstname : ["", [Validators.required, Validators.maxLength]],
+        lastname : ["",[]],
         password : ["", [Validators.minLength(8),Validators.maxLength(16)]]
     })
   }
+
+  roles : Role[] = [
+    {
+    "id" : 1,
+    "name" : "Admin"
+    },
+    {
+      "id" : 2,
+      "name" : "Clerk"
+    },
+    {
+      "id" : 3,
+      "name" : "Shelf"
+    },
+    {
+      "id" : 4,
+      "name" : "SuperAdmin"
+    }
+  ]
+  
  
 
-  get userName(){
-    return this.createUserForm.get('userName');
+  get username(){
+    return this.createUserForm.get('username');
   }
 
-  get userMail(){
-    return this.createUserForm.get('userMail');
+  get role(){
+    return this.createUserForm.get('role');
   }
 
-  get firstName(){
-    return this.createUserForm.get('firstName');
+  get email(){
+    return this.createUserForm.get('email');
   }
 
-  get lastName(){
-    return this.createUserForm.get('lastName');
+  get firstname(){
+    return this.createUserForm.get('firstname');
+  }
+
+  get lastname(){
+    return this.createUserForm.get('lastname');
   }
 
   get password(){
@@ -41,8 +69,10 @@ export class UserAddFormComponent {
   }
 
   createUser(){
-    let isValid = true//callService();
-    if(!isValid){
+    let user: User = <User>this.createUserForm.getRawValue();
+    console.log(user);
+    let response = this.userManageService.createUser(user);
+    if(!response){
       this.createUserForm.setErrors({
       })
     }

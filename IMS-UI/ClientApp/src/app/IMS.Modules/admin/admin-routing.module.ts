@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SecuredRouteGuard } from 'src/app/IMS.Services/Route/secured-route-guard';
 import { AdminComponent } from './Components/admin/admin.component';
 import { AdminRouteGuardService } from 'src/app/IMS.Services/Route/admin-route-guard.service';
 import { MainnavComponent } from './Components/mainnav/mainnav.component';

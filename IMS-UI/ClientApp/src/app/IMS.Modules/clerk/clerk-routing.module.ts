@@ -5,6 +5,7 @@ import { ClerkRouteGuardService } from 'src/app/IMS.Services/Route/clerk-route-g
 import { ClerkComponent } from './Components/clerk/clerk.component';
 
 const routes: Routes = [{ path: '', component: ClerkComponent, canActivate:[ClerkRouteGuardService], data : { role : "Clerk"} }];
+const routes: Routes = [{ path: '', component: ClerkComponent/*, canActivate:[SecuredRouteGuard], data : { role : "Clerk"} }*/ }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

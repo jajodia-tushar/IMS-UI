@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
@@ -7,11 +7,11 @@ import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 
 @Component({
-  selector: 'app-user-add-form',
-  templateUrl: './user-add-form.component.html',
-  styleUrls: ['./user-add-form.component.css']
+  selector: 'app-user-manage-form',
+  templateUrl: './user-manage-form.component.html',
+  styleUrls: ['./user-manage-form.component.css']
 })
-export class UserAddFormComponent implements OnInit{
+export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
   constructor(formBuilder: FormBuilder, private userManageService: UserManagementService){
@@ -25,8 +25,14 @@ export class UserAddFormComponent implements OnInit{
     })
   }
 
+  @Input() userDetails;
+
   async ngOnInit(){
     this.setUserRoles();
+    if(this.userDetails){
+      delete this.userDetails.id;
+      this.createUserForm.setValue(this.userDetails);
+    }
   }
   
   async setUserRoles(){

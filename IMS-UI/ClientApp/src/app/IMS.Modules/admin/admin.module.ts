@@ -15,8 +15,8 @@ import { StoreComponent } from './Components/store/store.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
 import { UserManageDialogComponent } from './Components/user-manage-dialog/user-manage-dialog.component';
-import { UserAddFormComponent } from './Components/user-add-form/user-add-form.component';
 import { UserListComponent } from './Components/user-list/user-list.component';
+import { UserManageFormComponent } from './Components/user-manage-form/user-manage-form.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
@@ -39,8 +39,8 @@ import { SharedModule } from '../shared/shared.module';
     UserManagementComponent,
     ReportsTableComponent,
     ReportsTabsComponent,
-    UserAddDialogComponent,
     UserManageDialogComponent,
+    UserManageFormComponent,
     UserListComponent,
     DetailsPipe
     ],

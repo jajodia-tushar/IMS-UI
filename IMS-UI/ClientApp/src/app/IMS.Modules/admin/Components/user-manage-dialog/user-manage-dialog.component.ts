@@ -1,34 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
-import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
-import { User } from 'src/app/IMS.Models/User/User';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Role } from 'src/app/IMS.Models/User/Role';
-import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
+import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 
 @Component({
-  selector: 'app-user-add-form',
-  templateUrl: './user-add-form.component.html',
-  styleUrls: ['./user-add-form.component.css']
+  selector: 'app-user-manage-dialog',
+  templateUrl: './user-manage-dialog.component.html',
+  styleUrls: ['./user-manage-dialog.component.css']
 })
-export class UserAddFormComponent implements OnInit{
+export class UserAddDialogComponent implements OnInit {
   createUserForm : FormGroup
   roles : Role[];
-  constructor(formBuilder: FormBuilder, private userManageService: UserManagementService){
+  constructor( @Inject(MAT_DIALOG_DATA) data, formBuilder: FormBuilder, private userManageService: UserManagementService) { 
     this.createUserForm = formBuilder.group({
-        username : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-        role : ['',[Validators.required]],
-        email : ["", [Validators.required, Validators.email]],
-        firstname : ["", [Validators.required, Validators.maxLength]],
-        lastname : ["",[]],
-        password : ["", [Validators.minLength(8),Validators.maxLength(16)]]
-    })
+      username : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      role : ['',[Validators.required]],
+      email : ["", [Validators.required, Validators.email]],
+      firstname : ["", [Validators.required, Validators.maxLength]],
+      lastname : ["",[]],
+      password : ["", [Validators.minLength(8),Validators.maxLength(16)]]
+  })
+    console.log(data)
   }
 
-  async ngOnInit(){
+  ngOnInit() {
     this.setUserRoles();
   }
-  
+
   async setUserRoles(){
     // let roles : Role[] = (<RolesResponse> await this.userManageService.getAllRoles()).roles;
     let roles : Role[] = [

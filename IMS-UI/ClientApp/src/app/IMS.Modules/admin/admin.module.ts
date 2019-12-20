@@ -14,7 +14,7 @@ import { LineChartComponent } from './Components/line-chart/line-chart.component
 import { StoreComponent } from './Components/store/store.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
-import { UserAddDialogComponent } from './Components/user-add-dialog/user-add-dialog.component';
+import { UserManageDialogComponent } from './Components/user-manage-dialog/user-manage-dialog.component';
 import { UserAddFormComponent } from './Components/user-add-form/user-add-form.component';
 import { UserListComponent } from './Components/user-list/user-list.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
@@ -40,7 +40,7 @@ import { SharedModule } from '../shared/shared.module';
     ReportsTableComponent,
     ReportsTabsComponent,
     UserAddDialogComponent,
-    UserAddFormComponent,
+    UserManageDialogComponent,
     UserListComponent,
     DetailsPipe
     ],
@@ -49,6 +49,6 @@ import { SharedModule } from '../shared/shared.module';
       AdminRoutingModule,
       SharedModule
     ],
-  entryComponents: [UserAddDialogComponent]
+  entryComponents: [UserManageDialogComponent]
 })
 export class AdminModule { }

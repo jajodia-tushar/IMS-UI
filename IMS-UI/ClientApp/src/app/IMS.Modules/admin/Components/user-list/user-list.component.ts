@@ -5,7 +5,7 @@ import { User } from 'src/app/IMS.Models/User/User';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 import { Users } from 'src/app/IMS.Models/User/Users';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UserAddDialogComponent } from '../user-add-dialog/user-add-dialog.component';
+import { UserManageDialogComponent } from '../user-manage-dialog/user-manage-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     // dialogConfig.disableClose = true;
-    const dialogRef = this.dialog.open(UserAddDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

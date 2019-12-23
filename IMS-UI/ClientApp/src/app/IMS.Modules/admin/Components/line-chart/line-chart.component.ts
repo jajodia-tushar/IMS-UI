@@ -1,84 +1,58 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
+import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
-import { ShelfWiseAnalysisModel } from "src/app/IMS.Models/Shelf/ShelfWiseAnalysisModel";
 
 @Component({
-  selector: "app-line-chart",
-  templateUrl: "./line-chart.component.html",
-  styleUrls: ["./line-chart.component.css"]
+  selector: "app-pie-chart",
+  templateUrl: "./pie-chart.component.html",
+  styleUrls: ["./pie-chart.component.css"]
 })
-export class LineChartComponent implements OnInit {
-  constructor(private randomColorGenerator: RandomColorGeneratorService) { }
+export class PieChartComponent implements OnInit {
+  constructor(
+    private randomColorGeneratorService: RandomColorGeneratorService
+  ) {}
 
   @Input()
-  totalFloorWisedItem: ShelfWiseAnalysisModel;
+  topItemConsumed: FrequentlyUsedItemModel; /// ngOnChange() {  check if error then handle}
+  ngOnInit() {}
 
-  backgroundColor: string[];
-  dataset: any[] = [];
-  isRefresh: boolean = true;
-  value: string = "fa fa-refresh";
-
-  ngOnInit() { }
-
-  onRefresh() {
-    let element = document.getElementById("refreshLine");
-    element.classList.toggle("fa-spin");
-    setTimeout(() => {
-      element.classList.remove("fa-spin");
-      this.itemsConsumedPerDayFloorWise();
-
-    }, 2000);
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.topItemConsumed.currentValue != null){
+      this.mostFrequentlyConsumedItems();
+    }
   }
 
-
-
-  ngAfterViewInit() {
-    this.backgroundColor = this.randomColorGenerator.getRandomColor(
-      this.totalFloorWisedItem.floors.length
-    );
-    this.itemsConsumedPerDayFloorWise();
-  }
-
-  private itemsConsumedPerDayFloorWise() {
-    new Chart("line-chart", {
-      type: "line",
+  private mostFrequentlyConsumedItems() {
+    new Chart("pie-chart", {
+      type: "pie",
       data: {
-        labels: this.totalFloorWisedItem.date,
-        datasets: this.totalFloorWisedItem.floors.map((floor, index) => {
-          return {
-            label: floor.name,
-            backgroundColor: this.backgroundColor[index],
-            borderColor: this.backgroundColor[index],
-            data: floor.quantity,
-            fill: false
-          };
-        })
+        labels: this.topItemConsumed.itemQuantityMapping.map(data =>data.item.name),
+        datasets: [
+          {
+            label: `Top ${this.topItemConsumed.itemQuantityMapping.length} items Consumed`,
+            borderWidth: 0,
+            borderColor: "#000",
+            data: this.topItemConsumed.itemQuantityMapping.map(data => data.quantity),
+            backgroundColor: this.randomColorGeneratorService.getRandomColor(
+              this.topItemConsumed.itemQuantityMapping.length
+            )
+          }
+        ]
       },
       options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: ""
-        },
-        tooltips: {
-          mode: "index",
-          intersect: false
-        },
-        hover: {
-          mode: "nearest",
-          intersect: true
+        legend: {
+          display: true
         },
         scales: {
           xAxes: [
             {
-              display: true
+              display: false
             }
           ],
           yAxes: [
             {
-              display: true
+              display: false
             }
           ]
         }

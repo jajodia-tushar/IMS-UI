@@ -3,9 +3,9 @@ import { Chart } from "chart.js";
 import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
 import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
-import { FrequentlyUsedItemModel } from "src/app/IMS.Models/FrequentlyUsedItemModel";
-import { ItemWiseAnalysisModel } from "src/app/IMS.Models/Item/ItemWiseAnalysisModel";
-import { ShelfWiseAnalysisModel } from "src/app/IMS.Models/Shelf/ShelfWiseAnalysisModel";
+import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
+import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
+import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
 
 @Component({
   selector: "app-charts-component",
@@ -23,14 +23,29 @@ export class ChartsComponentComponent implements OnInit {
   }
 
   topItemConsumed: FrequentlyUsedItemModel;
-  totalConsumedItem: ItemWiseAnalysisModel;
-  totalFloorWisedItem: ShelfWiseAnalysisModel;
+  totalConsumedItem: ItemWiseAnalysisResponse;
+  totalFloorWisedItem: ShelfWiseOrderCountResponse;
 
   ngOnInit() {
-    this.topItemConsumed = this.frequentlyUsedItemService.getFrequentlyUsedItemData();
+    this.frequentlyUsedItemService.getFrequentlyUsedItemData("20191210","20191213","5").subscribe(
+      data => {
+        this.topItemConsumed = JSON.parse(JSON.stringify(data));
+      }
+    );
 
-    this.totalConsumedItem = this.itemWiseDataService.getItemWiseTotalData();
+    // This can change according to The API of Varsha
+    this.itemWiseDataService.getItemWiseTotalData("20191210", "20191219").subscribe(
+      data => {
+        this.totalConsumedItem = JSON.parse(JSON.stringify(data));
+        console.log(this.totalConsumedItem);
+      }
+    );
 
-    this.totalFloorWisedItem = this.shelfWiseDataService.getShelfWiseData();
+    this.shelfWiseDataService.getShelfWiseData("20191210", "20191219").subscribe(
+      data => {
+        this.totalFloorWisedItem = JSON.parse(JSON.stringify(data));
+      }
+    );
+    
   }
 }

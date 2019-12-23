@@ -25,6 +25,7 @@ import { EmployeeRouteGuardService } from './IMS.Services/Route/employee-route-g
 import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.service';
 import { ItemWiseDataService } from './IMS.Services/admin/item-wise-data.service';
 import { RagStatusService } from './IMS.Services/admin/rag-status.service';
+import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { RagStatusService } from './IMS.Services/admin/rag-status.service';
     ItemService,
     ItemWiseDataService,
     RagStatusService,
-    // RandomColorGeneratorService,
+    RandomColorGeneratorService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

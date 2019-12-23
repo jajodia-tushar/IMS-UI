@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
-import { FrequentlyUsedItemModel } from "src/app/IMS.Models/FrequentlyUsedItemModel";
+import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 
 @Component({
@@ -11,39 +11,31 @@ import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-g
 export class PieChartComponent implements OnInit {
   constructor(
     private randomColorGeneratorService: RandomColorGeneratorService
-  ) { }
+  ) {}
 
   @Input()
-  topItemConsumed: FrequentlyUsedItemModel;
-  ngOnInit() { }
+  topItemConsumed: FrequentlyUsedItemModel; /// ngOnChange() {  check if error then handle}
+  ngOnInit() {}
 
-  onRefresh() {
-    let element = document.getElementById("refreshPie");
-    element.classList.toggle("fa-spin");
-    setTimeout(() => {
-      element.classList.remove("fa-spin");
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.topItemConsumed.currentValue != null){
       this.mostFrequentlyConsumedItems();
-
-    }, 2000);
-
-  }
-  ngAfterViewInit() {
-    this.mostFrequentlyConsumedItems();
+    }
   }
 
   private mostFrequentlyConsumedItems() {
     new Chart("pie-chart", {
       type: "pie",
       data: {
-        labels: this.topItemConsumed.item.map(item => item.name),
+        labels: this.topItemConsumed.itemQuantityMapping.map(data =>data.item.name),
         datasets: [
           {
-            label: `Top ${this.topItemConsumed.item.length} items Consumed`,
+            label: `Top ${this.topItemConsumed.itemQuantityMapping.length} items Consumed`,
             borderWidth: 0,
             borderColor: "#000",
-            data: this.topItemConsumed.quantity,
+            data: this.topItemConsumed.itemQuantityMapping.map(data => data.quantity),
             backgroundColor: this.randomColorGeneratorService.getRandomColor(
-              this.topItemConsumed.item.length
+              this.topItemConsumed.itemQuantityMapping.length
             )
           }
         ]

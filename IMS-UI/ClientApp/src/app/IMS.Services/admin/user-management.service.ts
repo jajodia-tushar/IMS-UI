@@ -9,9 +9,12 @@ import { Users } from 'src/app/IMS.Models/User/Users';
   providedIn: 'root'
 })
 export class UserManagementService {
-
+  
   constructor(private http: HttpClient) { }
-
+  
+  deactivate(user: any) {
+   return this.http.delete<User>("api/user/",user).toPromise(); 
+  }
   createUser(user : User){
     return this.http.post<User>("api/user/", user).toPromise();
   }

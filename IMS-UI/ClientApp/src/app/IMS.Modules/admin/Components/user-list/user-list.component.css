@@ -1,3 +1,4 @@
+
 table {
     width: 100%;
   }
@@ -8,5 +9,25 @@ table {
 
   .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    width: 30%;
+    
+  }
+
+
+  .mat-input-flex.mat-form-field-flex{
+    border: 1px solid black;
+  }
+
+  
+
+  table{
+    position: absolute;
+    border-collapse: separate !important;
+    border-radius: 8px;
+    background-color: #bec0cf;
+    border: 3px solid rgb(231, 227, 227);
+    min-height: 200px;
+    min-height: 201px;
+    color: white;
+
   }

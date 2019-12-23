@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserManageDialogComponent } from '../user-manage-dialog/user-manage-dialog.component';
 
 @Component({
@@ -15,7 +15,9 @@ export class UserManagementComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(UserManageDialogComponent);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

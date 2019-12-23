@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+  Deactivate Account
+</h1>
+
+<div mat-dialog-content>
+  <p>Do you Want to Deactivate {{user.firstname}}'s account.</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onDismiss()">No</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+</div>

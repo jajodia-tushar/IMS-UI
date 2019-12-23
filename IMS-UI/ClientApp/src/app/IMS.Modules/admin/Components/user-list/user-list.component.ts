@@ -6,6 +6,7 @@ import { UserManagementService } from 'src/app/IMS.Services/admin/user-managemen
 import { Users } from 'src/app/IMS.Models/User/Users';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserManageDialogComponent } from '../user-manage-dialog/user-manage-dialog.component';
+import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
 
 @Component({
   selector: 'app-user-list',
@@ -26,6 +27,7 @@ export class UserListComponent implements OnInit {
     this.setUsers();
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sort = this.sort;
+    // this.dataSource.sortingDataAccessor = this.pathDataAccessor;
     console.log(this.ELEMENT_DATA)
   }
 
@@ -38,6 +40,12 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  // pathDataAccessor(item: any, path: string): any {
+  //   return path.split('.')
+  //     .reduce((accumulator: any, key: string) => {
+  //       return accumulator ? accumulator[key] : undefined;
+  //     }, item);
+  // }
   editUserDetails(user){
     console.log(user);
     // open same dialog box used for creating user
@@ -57,6 +65,14 @@ export class UserListComponent implements OnInit {
 
   deactivateUser(user){
     console.log(user);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = user;
+    // dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(DeactivateDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   } 
 
   async setUsers(){

@@ -16,6 +16,7 @@ export class UserManageFormComponent implements OnInit{
   roles : Role[];
   constructor(formBuilder: FormBuilder, private userManageService: UserManagementService){
     this.createUserForm = formBuilder.group({
+        id : ['',[]],
         username : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
         role : ['',[Validators.required]],
         email : ["", [Validators.required, Validators.email]],
@@ -26,12 +27,16 @@ export class UserManageFormComponent implements OnInit{
   }
 
   @Input() userDetails;
-
-  async ngOnInit(){
+  isEditUserForm : boolean;
+  
+  ngOnInit(){
     this.setUserRoles();
     if(this.userDetails){
-      delete this.userDetails.id;
+      // delete this.userDetails.id;
+      console.log('onInit called')
+      this.isEditUserForm = this.userDetails?true: false;
       this.createUserForm.setValue(this.userDetails);
+      console.log(this.isEditUserForm);
     }
   }
   
@@ -61,6 +66,10 @@ export class UserManageFormComponent implements OnInit{
     return this.createUserForm.get('username');
   }
 
+  get id(){
+    return this.createUserForm.get('id');
+  }
+
   get role(){
     return this.createUserForm.get('role');
   }
@@ -81,7 +90,22 @@ export class UserManageFormComponent implements OnInit{
     return this.createUserForm.get('password');
   }
 
-  createUser(){
+  submitForm(){
+    //create user or update existing user based on editUserForm variable
+    if(this.isEditUserForm){
+      this.editUserDetails();
+    }
+    else{
+      this.createNewUser();
+    }
+  }
+
+  editUserDetails(){
+    let user: User = <User>this.createUserForm.getRawValue();
+    console.log(user);
+  }
+
+  createNewUser(){
     let user: User = <User>this.createUserForm.getRawValue();
     console.log(user);
     // let response = this.userManageService.createUser(user);

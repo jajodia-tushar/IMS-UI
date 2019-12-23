@@ -15,37 +15,22 @@ import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalys
 export class ChartsComponentComponent implements OnInit {
 
   constructor(
-    private frequentlyUsedItemService: FrequentlyUsedItemService,
-    private itemWiseDataService: ItemWiseDataService,
     private shelfWiseDataService: ShelfWiseDataService
   ) {
     Chart.defaults.global.defaultFontColor = "#fff";
   }
-
-  topItemConsumed: FrequentlyUsedItemModel;
-  totalConsumedItem: ItemWiseAnalysisResponse;
   totalFloorWisedItem: ShelfWiseOrderCountResponse;
 
   ngOnInit() {
-    this.frequentlyUsedItemService.getFrequentlyUsedItemData("20191210","20191213","5").subscribe(
-      data => {
-        this.topItemConsumed = JSON.parse(JSON.stringify(data));
-      }
-    );
 
-    // This can change according to The API of Varsha
-    this.itemWiseDataService.getItemWiseTotalData("20191210", "20191219").subscribe(
-      data => {
-        this.totalConsumedItem = JSON.parse(JSON.stringify(data));
-        console.log(this.totalConsumedItem);
-      }
-    );
+
+
 
     this.shelfWiseDataService.getShelfWiseData("20191210", "20191219").subscribe(
       data => {
         this.totalFloorWisedItem = JSON.parse(JSON.stringify(data));
       }
     );
-    
+
   }
 }

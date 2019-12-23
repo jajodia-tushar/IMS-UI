@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class RandomColorGeneratorService {
-  constructor() {}
+  constructor() { }
 
   color: string[] = [
     "#42635f",
@@ -36,6 +36,6 @@ export class RandomColorGeneratorService {
   ];
 
   getRandomColor(size: number): string[] {
-    return this.color.splice(1, size);
+    return this.color.slice(0, size);
   }
 }

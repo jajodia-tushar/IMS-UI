@@ -7,6 +7,6 @@ namespace IMS_UI.IMS.Models.Admin
 {
     public class DateItemConsumptionResponse : Response
     {
-        public List<DateItemConsumptionModel> getDateItemConsumptions { get; set; }
+        public List<DateItemConsumptionModel> ItemConsumptions { get; set; }
     }
 }

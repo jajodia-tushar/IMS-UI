@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
+import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 
 
 @Component({
@@ -10,39 +11,23 @@ import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalys
   styleUrls: ["./bar-chart.component.css"]
 })
 export class BarChartComponent implements OnInit {
-  constructor(private randomColorGenerator: RandomColorGeneratorService) {
-    
+  constructor(private randomColorGenerator: RandomColorGeneratorService, private itemWiseDataService: ItemWiseDataService) {
+
+  }
+  chart: Chart;
+
+  ngOnInit() {
+    this.getData().then((data) => {
+      console.log(data);
+      this.createBarChart();
+      this.plotDataOnChart(this.chart, data);
+    });
   }
 
-  @Input()
-  totalConsumedItem: ItemWiseAnalysisResponse;
-
-  ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.totalConsumedItem.currentValue != null) {
-      this.itemsConsumedPerDay();
-    }
-  }
-
-  private itemsConsumedPerDay() {
-    new Chart("bar-chart", {
+  createBarChart() {
+    this.chart = new Chart("bar-chart", {
       type: "bar",
-      data: {
-        labels: this.totalConsumedItem.getDateItemConsumptions.map((data, index, array) => {
-          let date = new Date(data.Date);
-          if (array.length > 7) return `${date.getMonth()+1}/${date.getDate()}`;
-          else date.toString().split(' ')[0];
-        }),
-        datasets: [
-          {
-            data: this.totalConsumedItem.getDateItemConsumptions.map(data => data.ItemsConsumptionCount),
-            backgroundColor: this.randomColorGenerator.getRandomColor(
-              this.totalConsumedItem.getDateItemConsumptions.length
-            )
-          }
-        ]
-      },
+      data: {},
       options: {
         legend: {
           display: false
@@ -66,4 +51,47 @@ export class BarChartComponent implements OnInit {
       }
     });
   }
+
+  plotDataOnChart(chart: Chart, data: ItemWiseAnalysisResponse) {
+    chart.data = this.convertDataModel(data);
+    chart.update();
+  }
+
+  getData(): Promise<ItemWiseAnalysisResponse> {
+    // This can change according to The API of Varsha
+    return this.itemWiseDataService.getItemWiseTotalData("20191210", "20191219").toPromise();
+  }
+
+
+  convertDataModel(itemwiseAnalysisData: ItemWiseAnalysisResponse) {
+    return {
+      labels: itemwiseAnalysisData.itemConsumptions.map((data, index, array) => {
+
+        let date = new Date(Date.parse(data.date));
+        if (array.length > 7) return `${date.getMonth() + 1}/${date.getDate()}`;
+        else return date.toString().split(' ')[0];
+      }),
+      datasets: [
+        {
+          data: itemwiseAnalysisData.itemConsumptions.map(data => data.itemsConsumptionCount),
+          backgroundColor: this.randomColorGenerator.getRandomColor(itemwiseAnalysisData.itemConsumptions.length
+          )
+        }
+      ]
+    }
+  }
+
+  onRefresh() {
+    let element = document.getElementById("refreshBar");
+    element.classList.toggle("fa-spin");
+    setTimeout(() => {
+      element.classList.remove("fa-spin");
+      this.getData().then((data) => {
+        this.plotDataOnChart(this.chart, data);
+      });
+    }, 2000);
+
+  }
+
+
 }

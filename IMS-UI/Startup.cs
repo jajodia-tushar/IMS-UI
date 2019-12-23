@@ -41,6 +41,7 @@ namespace IMS_UI
             services.AddSingleton<FrequentlyUsedItemProvider>();
             services.AddSingleton<RAGStatusProvider>();
             services.AddSingleton<ShelfWiseOrderCountProvider>();
+            services.AddSingleton<ItemWiseAnalysisProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

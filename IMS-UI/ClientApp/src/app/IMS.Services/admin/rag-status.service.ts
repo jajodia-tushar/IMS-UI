@@ -9,9 +9,9 @@ import { RAGStatusResponse } from 'src/app/IMS.Models/Admin/RAGStatusResponse';
 })
 export class RagStatusService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getRAGStatusData(): Observable<RAGStatusResponse> {
+  getRAGStatusData() {
     return this.httpClient.get<RAGStatusResponse>("api/ragstatus/");
   }
 

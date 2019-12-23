@@ -1,58 +1,80 @@
 import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
-import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
-
+import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
 @Component({
-  selector: "app-pie-chart",
-  templateUrl: "./pie-chart.component.html",
-  styleUrls: ["./pie-chart.component.css"]
+  selector: "app-line-chart",
+  templateUrl: "./line-chart.component.html",
+  styleUrls: ["./line-chart.component.css"]
 })
-export class PieChartComponent implements OnInit {
-  constructor(
-    private randomColorGeneratorService: RandomColorGeneratorService
-  ) {}
+export class LineChartComponent implements OnInit {
+  constructor(private randomColorGenerator: RandomColorGeneratorService) { }
 
   @Input()
-  topItemConsumed: FrequentlyUsedItemModel; /// ngOnChange() {  check if error then handle}
-  ngOnInit() {}
+  totalFloorWisedItem: ShelfWiseOrderCountResponse;
+  backgroundColor: string[];
+  dataset: any[] = [];
+
+  ngOnInit() { }
+
+  ngAfterViewInit() {
+
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.topItemConsumed.currentValue != null){
-      this.mostFrequentlyConsumedItems();
+    if (changes.totalFloorWisedItem.currentValue != null) {
+
+      this.backgroundColor = this.randomColorGenerator.getRandomColor(
+        this.totalFloorWisedItem.dateWiseShelfOrderCount[0].shelfOrderCountMappings.length
+      );
+      this.itemsConsumedPerDayFloorWise();
     }
   }
 
-  private mostFrequentlyConsumedItems() {
-    new Chart("pie-chart", {
-      type: "pie",
+  private itemsConsumedPerDayFloorWise() {
+    new Chart("line-chart", {
+      type: "line",
       data: {
-        labels: this.topItemConsumed.itemQuantityMapping.map(data =>data.item.name),
-        datasets: [
-          {
-            label: `Top ${this.topItemConsumed.itemQuantityMapping.length} items Consumed`,
-            borderWidth: 0,
-            borderColor: "#000",
-            data: this.topItemConsumed.itemQuantityMapping.map(data => data.quantity),
-            backgroundColor: this.randomColorGeneratorService.getRandomColor(
-              this.topItemConsumed.itemQuantityMapping.length
-            )
-          }
-        ]
+        labels: this.totalFloorWisedItem.dateWiseShelfOrderCount.map((data, index, array) => {
+          let date = new Date(data.date);
+          if (array.length > 7)
+            return `${date.getMonth() + 1}/${date.getDate()}`;
+          else
+            return date.toString().split(' ')[0];
+        }),
+        datasets: this.totalFloorWisedItem.dateWiseShelfOrderCount[0].shelfOrderCountMappings.map((data, index) => {
+          return {
+            label: data.shelfName,
+            backgroundColor: this.backgroundColor[index],
+            borderColor: this.backgroundColor[index],
+            data: this.totalFloorWisedItem.dateWiseShelfOrderCount.map(shelfData => shelfData.shelfOrderCountMappings[index].totalNumberOfOrder),
+            fill: false
+          };
+        })
       },
       options: {
-        legend: {
-          display: true
+        responsive: true,
+        title: {
+          display: true,
+          text: ""
+        },
+        tooltips: {
+          mode: "index",
+          intersect: false
+        },
+        hover: {
+          mode: "nearest",
+          intersect: true
         },
         scales: {
           xAxes: [
             {
-              display: false
+              display: true
             }
           ],
           yAxes: [
             {
-              display: false
+              display: true
             }
           ]
         }

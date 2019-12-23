@@ -22,12 +22,12 @@ namespace IMS_UI.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get(
-            string fromDate,
-            string toDate
+            string startDate,
+            string endDate
         )
         {
             var response =
-                await itemWiseAnalysisProvider.GetItemWiseAnalysis(fromDate, toDate);
+                await itemWiseAnalysisProvider.GetItemWiseAnalysis(startDate, endDate);
 
             try
             {

@@ -9,7 +9,7 @@ import { RAGDataModel } from "src/app/IMS.Models/Admin/RAGDataModel";
   styleUrls: ["./rag-status.component.css"]
 })
 export class RagStatusComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
   backgroundColor: string[] = ["#da2d2d", "#ff971d", "#c3f584"];
 
@@ -52,13 +52,15 @@ export class RagStatusComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit() {
-    if(this.ragData != null){
+    if (this.ragData != null) {
+      console.log(this.ragData);
       this.generateRagChart(this.ragData);
     }
+
   }
 
-  
+
 }

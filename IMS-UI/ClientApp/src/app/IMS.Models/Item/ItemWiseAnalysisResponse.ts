@@ -1,10 +1,11 @@
 export class ItemWiseAnalysisModel {
-  Date: string;
-  ItemsConsumptionCount: number;
+  date: string;
+  itemsConsumptionCount: number;
 }
 
 export class ItemWiseAnalysisResponse {
-  getDateItemConsumptions : ItemWiseAnalysisModel[];
-  error : Error;
-  status : string;
+
+  itemConsumptions: ItemWiseAnalysisModel[];
+  error: Error;
+  status: string;
 }

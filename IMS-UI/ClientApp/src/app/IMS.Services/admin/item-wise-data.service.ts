@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class ItemWiseDataService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getItemWiseTotalData(fromDate : string, toDate : string): Observable<ItemWiseAnalysisResponse> {
+  getItemWiseTotalData(startDate: string, endDate: string): Observable<ItemWiseAnalysisResponse> {
     let params = new HttpParams();
-    params = params.append("fromDate",fromDate);
-    params = params.append("toDate",toDate);
+    params = params.append("startDate", startDate);
+    params = params.append("endDate", endDate);
 
-    return this.httpClient.get<ItemWiseAnalysisResponse>("api/itemwiseanalysis", {params : params});
+    return this.httpClient.get<ItemWiseAnalysisResponse>("api/itemwiseanalysis", { params: params });
   }
 }

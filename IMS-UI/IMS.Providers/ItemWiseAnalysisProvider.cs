@@ -23,14 +23,14 @@ namespace IMS_UI.IMS.Providers
         }
 
         public async Task<DateItemConsumptionResponse> GetItemWiseAnalysis(
-            string fromDate,
-            string toDate
+            string startDate,
+            string endDate
         )
         {
             HttpClient client = new HttpClient();
 
             // CAN CHANGE LATER
-            var EndPoint = "api/reports/getitemwiseanalysis";
+            var EndPoint = "api/reports/getitemconsumption";
 
             UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
@@ -43,8 +43,8 @@ namespace IMS_UI.IMS.Providers
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                new KeyValuePair<string, string>("fromDate", fromDate),
-                new KeyValuePair<string, string>("toDate", toDate)
+                new KeyValuePair<string, string>("startDate", startDate),
+                new KeyValuePair<string, string>("endDate", endDate)
             }))
             {
                 query = content.ReadAsStringAsync().Result;

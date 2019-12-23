@@ -2,6 +2,8 @@ import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
+import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-pie-chart",
@@ -10,36 +12,60 @@ import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-g
 })
 export class PieChartComponent implements OnInit {
   constructor(
-    private randomColorGeneratorService: RandomColorGeneratorService
-  ) {}
+    private randomColorGeneratorService: RandomColorGeneratorService,
+    private frequentlyUsedItemService: FrequentlyUsedItemService
+  ) { }
 
-  @Input()
-  topItemConsumed: FrequentlyUsedItemModel; /// ngOnChange() {  check if error then handle}
-  ngOnInit() {}
+  chart: Chart;
+  ngOnInit() {
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes.topItemConsumed.currentValue != null){
-      this.mostFrequentlyConsumedItems();
+    this.getData().then((data) => {
+      console.log(data);
+      this.createPieChart();
+      this.plotDataOnChart(this.chart, data);
+    });
+  }
+
+  getData(): Promise<FrequentlyUsedItemModel> {
+    return this.frequentlyUsedItemService.getFrequentlyUsedItemData("20191210", "20191213", "5").toPromise();
+  }
+
+  plotDataOnChart(chart: Chart, data: FrequentlyUsedItemModel) {
+    chart.data = this.convertDataModel(data);
+    chart.update();
+  }
+
+  convertDataModel(data: FrequentlyUsedItemModel) {
+    return {
+      labels: data.itemQuantityMapping.map(data => data.item.name),
+      datasets: [
+        {
+          label: `Top ${data.itemQuantityMapping.length} items Consumed`,
+          borderWidth: 0,
+          borderColor: "#000",
+          data: data.itemQuantityMapping.map(data => data.quantity),
+          backgroundColor: this.randomColorGeneratorService.getRandomColor(data.itemQuantityMapping.length)
+        }
+      ]
     }
   }
 
-  private mostFrequentlyConsumedItems() {
-    new Chart("pie-chart", {
+  onRefresh() {
+    let element = document.getElementById("refreshPie");
+    element.classList.toggle("fa-spin");
+    setTimeout(() => {
+      element.classList.remove("fa-spin");
+      this.getData().then((data) => {
+        this.plotDataOnChart(this.chart, data);
+      });
+    }, 2000);
+
+  }
+
+  private createPieChart() {
+    this.chart = new Chart("pie-chart", {
       type: "pie",
-      data: {
-        labels: this.topItemConsumed.itemQuantityMapping.map(data =>data.item.name),
-        datasets: [
-          {
-            label: `Top ${this.topItemConsumed.itemQuantityMapping.length} items Consumed`,
-            borderWidth: 0,
-            borderColor: "#000",
-            data: this.topItemConsumed.itemQuantityMapping.map(data => data.quantity),
-            backgroundColor: this.randomColorGeneratorService.getRandomColor(
-              this.topItemConsumed.itemQuantityMapping.length
-            )
-          }
-        ]
-      },
+      data: {},
       options: {
         legend: {
           display: true

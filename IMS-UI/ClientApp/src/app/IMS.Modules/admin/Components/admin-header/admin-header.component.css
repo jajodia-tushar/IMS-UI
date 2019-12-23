@@ -1,0 +1,172 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* .dropdown-content a:hover {background-color: #f1f1f1}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+} */
+
+.rightside {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+/* .logout-section {
+  position: absolute;
+  right: 1%;
+} */
+/* 
+.notification-section {
+  position: absolute;
+  right: 30%;
+  display: flex;
+} */
+
+.material-icons.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 29px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  color: #606a96;
+}
+
+button {
+  text-transform: none;
+
+  border: none;
+}
+
+.mat-list-item-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 30%;
+  position: relative;
+  height: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  background: #222437;
+  color: #fff;
+}
+
+.mat-drawer-inner-container {
+  background-color: #222437;
+}
+
+.mat-drawer-content {
+  background-color: #1c1e2f;
+}
+
+button {
+  outline: none !important;
+}
+
+.ui.dropdown {
+  margin: 3px;
+}
+
+.ui.dropdown .menu > .item > .image,
+.ui.dropdown .menu > .item > img,
+.ui.dropdown > .text > .image,
+.ui.dropdown > .text > img {
+  border-radius: 20px;
+}
+
+.ui.dropdown .menu > .item > .image,
+.ui.dropdown .menu > .item > img,
+.ui.dropdown > .text > .image,
+.ui.dropdown > .text > img {
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+  margin-top: 0px;
+  margin-bottom: -0.5em;
+  max-height: 2em;
+}
+
+.name {
+  position: absolute;
+  top: 5px;
+  right: 64px;
+  display: flex;
+  font-weight: 200;
+  font-family: roboto;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}

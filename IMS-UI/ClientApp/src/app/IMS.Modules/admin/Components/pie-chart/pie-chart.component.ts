@@ -4,6 +4,7 @@ import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsed
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-pie-chart",
@@ -13,7 +14,8 @@ import { Observable } from "rxjs";
 export class PieChartComponent implements OnInit {
   constructor(
     private randomColorGeneratorService: RandomColorGeneratorService,
-    private frequentlyUsedItemService: FrequentlyUsedItemService
+    private frequentlyUsedItemService: FrequentlyUsedItemService,
+    private router: Router
   ) { }
 
   chart: Chart;
@@ -30,14 +32,18 @@ export class PieChartComponent implements OnInit {
     this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
 
     this.getData().then((data) => {
-      console.log(data);
-      this.createPieChart();
-      this.plotDataOnChart(this.chart, data);
+      if (data.status == "Success") {
+        this.createPieChart();
+        this.plotDataOnChart(this.chart, data);
+      }
+      else if (data.error.errorCode == 401) {
+        this.router.navigateByUrl("/login");
+      }
     });
   }
 
   getData(): Promise<FrequentlyUsedItemModel> {
-    return this.frequentlyUsedItemService.getFrequentlyUsedItemData(this.fromDate, this.toDate, "6").toPromise();
+    return this.frequentlyUsedItemService.getFrequentlyUsedItemData(this.fromDate, this.toDate, "5").toPromise();
   }
 
   plotDataOnChart(chart: Chart, data: FrequentlyUsedItemModel) {
@@ -66,7 +72,12 @@ export class PieChartComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove("fa-spin");
       this.getData().then((data) => {
-        this.plotDataOnChart(this.chart, data);
+        if (data.status == "Success") {
+          this.plotDataOnChart(this.chart, data);
+        }
+        else if (data.error.errorCode == 401) {
+          this.router.navigateByUrl("/login");
+        }
       });
     }, 2000);
 

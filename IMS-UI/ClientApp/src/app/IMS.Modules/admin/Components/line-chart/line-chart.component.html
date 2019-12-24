@@ -10,7 +10,6 @@
         </div>
     </div>
     <div class="card-body">
-
         <div class="d-flex align-items-start justify-content-between">
             <i class="fa fa-refresh" (click)="onRefresh()" id="refreshLine"
                 style="font-size:24px; color: #606a96; margin-top: 6px;"></i>
@@ -18,14 +17,14 @@
                 <button mat-button [matMenuTriggerFor]="beforeMenu">
                     <mat-icon>more_horiz</mat-icon>
                 </button>
-                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                <mat-menu #beforeMenu="matMenu" xPosition="before" style="background-color: #606a96;margin-top: 6px;">
                     <button mat-menu-item (click)="dateChange($event)" value="7">7 days ago</button>
                     <button mat-menu-item (click)="dateChange($event)" value="14">14 days ago</button>
                 </mat-menu>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <h3 class="font-weight-normal text-black">Shelf Wise Analysis</h3>
+            <h3 class="font-weight-normal text-black">Floor Wise Analysis</h3>
         </div>
     </div>
 

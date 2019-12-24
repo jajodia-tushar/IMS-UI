@@ -4,13 +4,15 @@ import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-g
 import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
 import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
 import { ChartsComponentComponent } from "../charts-component/charts-component.component";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-line-chart",
   templateUrl: "./line-chart.component.html",
   styleUrls: ["./line-chart.component.css"]
 })
 export class LineChartComponent implements OnInit {
-  constructor(private randomColorGenerator: RandomColorGeneratorService, private shelfWiseDataService: ShelfWiseDataService) { }
+  constructor(private randomColorGenerator: RandomColorGeneratorService, private shelfWiseDataService: ShelfWiseDataService,
+    private router: Router) { }
   chart: Chart;
   toDate: string;
   fromDate: string;
@@ -25,8 +27,13 @@ export class LineChartComponent implements OnInit {
 
     this.getData().then((data) => {
       console.log(data);
-      this.createLineChart();
-      this.plotDataOnChart(this.chart, data);
+      if (data.status == "Success") {
+        this.createLineChart();
+        this.plotDataOnChart(this.chart, data);
+      }
+      else if (data.error.errorCode == 401) {
+        this.router.navigateByUrl("/login");
+      }
     });
   }
 
@@ -46,7 +53,12 @@ export class LineChartComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove("fa-spin");
       this.getData().then((data) => {
-        this.plotDataOnChart(this.chart, data);
+        if (data.status == "Success") {
+          this.plotDataOnChart(this.chart, data);
+        }
+        else if (data.error.errorCode == 401) {
+          this.router.navigateByUrl("/login");
+        }
       });
     }, 2000);
 
@@ -57,7 +69,7 @@ export class LineChartComponent implements OnInit {
       labels: shelfwiseOrderCountData.dateWiseShelfOrderCount.map((data, index, array) => {
         let date = new Date(data.date);
         if (array.length > 7)
-          return `${date.getDate()}/${date.getMonth() + 1}`;
+          return `${date.getDate()}`;
         else
           return date.toString().split(' ')[0];
       }),
@@ -66,7 +78,7 @@ export class LineChartComponent implements OnInit {
           label: data.shelfName,
           backgroundColor: backgroundColor[index],
           borderColor: backgroundColor[index],
-          data: shelfwiseOrderCountData.dateWiseShelfOrderCount.map(shelfData => shelfData.shelfOrderCountMappings[index].totalNumberOfOrder),
+          data: shelfwiseOrderCountData.dateWiseShelfOrderCount.map(shelfData => shelfData.shelfOrderCountMappings[index].orderCount),
           fill: false
         };
       })

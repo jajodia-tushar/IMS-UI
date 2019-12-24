@@ -58,6 +58,11 @@ namespace IMS_UI.IMS.Core.Infra
             _session.SetString(key, str);
         }
 
+        public void ClearSession()
+        {
+            _session.Clear();
+        }
+
 
     }
 }

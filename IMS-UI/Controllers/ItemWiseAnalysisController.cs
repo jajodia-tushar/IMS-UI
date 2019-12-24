@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
@@ -14,10 +15,12 @@ namespace IMS_UI.Controllers
     public class ItemWiseAnalysisController : ControllerBase
     {
         private ItemWiseAnalysisProvider itemWiseAnalysisProvider;
+        private SessionManager sessionManager;
         
-        public ItemWiseAnalysisController(ItemWiseAnalysisProvider itemWiseAnalysisProvider)
+        public ItemWiseAnalysisController(ItemWiseAnalysisProvider itemWiseAnalysisProvider, SessionManager sessionManager)
         {
             this.itemWiseAnalysisProvider = itemWiseAnalysisProvider;
+            this.sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -31,12 +34,12 @@ namespace IMS_UI.Controllers
 
             try
             {
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return NotFound("No Items Found");
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch(Exception)
+            catch
             {
                 return StatusCode(500);
             }

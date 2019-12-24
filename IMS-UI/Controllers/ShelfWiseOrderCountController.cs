@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace IMS_UI.Controllers
     public class ShelfWiseOrderCountController : ControllerBase
     {
         private ShelfWiseOrderCountProvider shelfWiseOrderCountProvider;
+        private SessionManager sessionManager;
 
-        public ShelfWiseOrderCountController(ShelfWiseOrderCountProvider shelfWiseOrderCountProvider)
+        public ShelfWiseOrderCountController(ShelfWiseOrderCountProvider shelfWiseOrderCountProvider, SessionManager sessionManager)
         {
             this.shelfWiseOrderCountProvider = shelfWiseOrderCountProvider;
+            this.sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -32,12 +35,12 @@ namespace IMS_UI.Controllers
                 );
             try
             {
-                if (response.Error == null)
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+            
                     return Ok(response);
-                else
-                    return NotFound("no floors to display");
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }

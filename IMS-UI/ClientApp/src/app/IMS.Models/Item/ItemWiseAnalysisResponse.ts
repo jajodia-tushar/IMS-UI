@@ -1,3 +1,5 @@
+import { Error } from "../Error";
+
 export class ItemWiseAnalysisModel {
   date: string;
   itemsConsumptionCount: number;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Providers;
@@ -16,9 +17,11 @@ namespace IMS_UI.Controllers
     {
 
         private FrequentlyUsedItemProvider frequentlyUsedItemProvider;
-        public FrequentlyUsedItemController(FrequentlyUsedItemProvider frequentlyUsedItemProvider)
+        private SessionManager sessionManager;
+        public FrequentlyUsedItemController(FrequentlyUsedItemProvider frequentlyUsedItemProvider, SessionManager sessionManager)
         {
             this.frequentlyUsedItemProvider = frequentlyUsedItemProvider;
+            this.sessionManager = sessionManager;
         }
 
         [HttpGet]
@@ -34,14 +37,15 @@ namespace IMS_UI.Controllers
                     endDate,
                     itemsCount
                 );
+
             try
             {
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return NotFound("No Item Found");
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { ChangeDetectorRef, OnDestroy } from "@angular/core";
+import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-data.service";
+import { User } from "src/app/IMS.Models/User/User";
 
 @Component({
   selector: "app-admin-header",
@@ -27,7 +29,7 @@ export class AdminHeader implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);

@@ -3,6 +3,7 @@ import { Chart } from "chart.js";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
 import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,9 @@ import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.s
   styleUrls: ["./bar-chart.component.css"]
 })
 export class BarChartComponent implements OnInit {
-  constructor(private randomColorGenerator: RandomColorGeneratorService, private itemWiseDataService: ItemWiseDataService) {
+  constructor(private randomColorGenerator: RandomColorGeneratorService,
+    private itemWiseDataService: ItemWiseDataService,
+    private router: Router) {
 
   }
   chart: Chart;
@@ -27,9 +30,13 @@ export class BarChartComponent implements OnInit {
     this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
 
     this.getData().then((data) => {
-      console.log(data);
-      this.createBarChart();
-      this.plotDataOnChart(this.chart, data);
+      if (data.status == "Success") {
+        this.createBarChart();
+        this.plotDataOnChart(this.chart, data);
+      }
+      else if (data.error.errorCode == 401) {
+        this.router.navigateByUrl("/login");
+      }
     });
   }
 
@@ -63,6 +70,21 @@ export class BarChartComponent implements OnInit {
 
   plotDataOnChart(chart: Chart, data: ItemWiseAnalysisResponse) {
     chart.data = this.convertDataModel(data);
+    chart.options.scales.yAxes[0] = {
+      scaleLabel: {
+        display: true,
+        labelString: 'Quantity Consumed'
+      }
+    };
+
+    chart.options.scales.xAxes[0] = {
+      scaleLabel: {
+        display: true,
+        labelString: 'Day'
+      }
+    };
+
+
     chart.update();
   }
 
@@ -77,7 +99,7 @@ export class BarChartComponent implements OnInit {
       labels: itemwiseAnalysisData.itemConsumptions.map((data, index, array) => {
 
         let date = new Date(Date.parse(data.date));
-        if (array.length > 7) return `${date.getDate()}/${date.getMonth() + 1}`;
+        if (array.length > 7) return `${date.getDate()}`;
         else return date.toString().split(' ')[0];
       }),
       datasets: [
@@ -96,7 +118,12 @@ export class BarChartComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove("fa-spin");
       this.getData().then((data) => {
-        this.plotDataOnChart(this.chart, data);
+        if (data.status == "Success") {
+          this.plotDataOnChart(this.chart, data);
+        }
+        else if (data.error.errorCode == 401) {
+          this.router.navigateByUrl("/login");
+        }
       });
     }, 2000);
 

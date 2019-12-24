@@ -5,6 +5,8 @@ import { UserManagementService } from 'src/app/IMS.Services/admin/user-managemen
 import { User } from 'src/app/IMS.Models/User/User';
 import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
+import { LoginService } from 'src/app/IMS.Services/login/login.service';
 
 @Component({
   selector: 'app-user-manage-form',
@@ -14,30 +16,39 @@ import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
-  constructor(formBuilder: FormBuilder, private userManageService: UserManagementService){
-    this.createUserForm = formBuilder.group({
-        id : ['',[]],
-        username : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-        role : ['',[Validators.required]],
-        email : ["", [Validators.required, Validators.email]],
-        firstname : ["", [Validators.required, Validators.maxLength]],
-        lastname : ["",[]],
-        password : ["", [Validators.minLength(8),Validators.maxLength(16)]]
-    })
+  constructor(private formBuilder: FormBuilder, private userManageService: UserManagementService,
+              private centralizedDataRepo: CentralizedDataService){
+    
   }
 
   @Input() userDetails;
   isEditUserForm : boolean;
+  isSuperAdmin : boolean;
   
-  ngOnInit(){
+  async ngOnInit(){
     this.setUserRoles();
+    if(this.centralizedDataRepo.getUser().role.id==4)
+      this.isSuperAdmin = true;
     if(this.userDetails){
       // delete this.userDetails.id;
       console.log('onInit called')
       this.isEditUserForm = this.userDetails?true: false;
-      this.createUserForm.setValue(this.userDetails);
       console.log(this.isEditUserForm);
     }
+    
+    this.createUserForm = this.formBuilder.group({
+      id : [ -1,[]],
+      username : [{value:'', disabled:this.isEditUserForm},[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      role : [{value:{},disabled:!this.isSuperAdmin && this.isEditUserForm},[Validators.required]],
+      email : ["", [Validators.required, Validators.email]],
+      firstname : ["", [Validators.required, Validators.maxLength]],
+      lastname : ["",[]],
+      password : [{value:"",disabled:this.isEditUserForm}, [Validators.minLength(8),Validators.maxLength(16)]]
+  })
+    if(this.isEditUserForm){
+      this.createUserForm.setValue(this.userDetails);
+    }
+   
   }
   
   async setUserRoles(){
@@ -108,12 +119,7 @@ export class UserManageFormComponent implements OnInit{
   createNewUser(){
     let user: User = <User>this.createUserForm.getRawValue();
     console.log(user);
-    // let response = this.userManageService.createUser(user);
-    let response = true;
-    if(!response){
-      this.createUserForm.setErrors({
-      })
-    }
+    this.userManageService.createUser(user);
   }
 
 }

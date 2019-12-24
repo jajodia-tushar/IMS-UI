@@ -76,15 +76,15 @@ export class UserListComponent implements OnInit {
   } 
 
   async setUsers(){
-    // let users : User[] =  await this.userManagementService.getAllUsers();
-    let users : User[] = [
-      {id:'1', username: 'aniket', role:{id:1,name:"Admin"}, firstname:'Aniket', lastname:'Singla',email:'1singlaaniket@gmail.com', password:'12345'},
-      {id:'2', username: 'tushar', role:{id:2,name:"Clerk"}, firstname:'tushar', lastname:'Jajodio',email:'jajodia@gmail.com',password:'12345'},
-      {id:'3', username: 'chaman', role:{id:3,name:"Shelf"}, firstname:'chaman', lastname:'chaudhwary',email:'chaman@gmail.com',password:'12345'},
-      {id:'4', username: 'jaideb', role:{id:4,name:"SuperAdmin"}, firstname:'jaideb', lastname:'mandal',email:'jai@gmail.com',password:'12345'},
-      {id:'5', username: 'rochit', role:{id:1,name:"Admin"}, firstname:'rochit', lastname:'aggarwal',email:'rochit@gmail.com',password:'12345'},
-      {id:'6', username: 'ebran', role:{id:2,name:"Clerk"}, firstname:'ebran', lastname:'Khan',email:'ebran@gmail.com',password:'12345'},
-    ];
+    let users : User[] =  (<Users>await this.userManagementService.getAllUsers()).users;
+    // let users : User[] = [
+    //   {id:1, username: 'aniket', role:{id:1,name:"Admin"}, firstname:'Aniket', lastname:'Singla',email:'1singlaaniket@gmail.com', password:'12345'},
+    //   {id:2, username: 'tushar', role:{id:2,name:"Clerk"}, firstname:'tushar', lastname:'Jajodio',email:'jajodia@gmail.com',password:'12345'},
+    //   {id:3, username: 'chaman', role:{id:3,name:"Shelf"}, firstname:'chaman', lastname:'chaudhwary',email:'chaman@gmail.com',password:'12345'},
+    //   {id:4, username: 'jaideb', role:{id:4,name:"SuperAdmin"}, firstname:'jaideb', lastname:'mandal',email:'jai@gmail.com',password:'12345'},
+    //   {id:5, username: 'rochit', role:{id:1,name:"Admin"}, firstname:'rochit', lastname:'aggarwal',email:'rochit@gmail.com',password:'12345'},
+    //   {id:6, username: 'ebran', role:{id:2,name:"Clerk"}, firstname:'ebran', lastname:'Khan',email:'ebran@gmail.com',password:'12345'},
+    // ];
     console.log('set users')
     this.ELEMENT_DATA = users;
   }

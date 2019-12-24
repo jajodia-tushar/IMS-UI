@@ -13,14 +13,27 @@ export class UserManagementService {
   constructor(private http: HttpClient) { }
   
   deactivate(user: any) {
-   return this.http.delete<User>("api/user/",user).toPromise(); 
+   return this.http.delete<User>("api/users",user).toPromise(); 
   }
+
   createUser(user : User){
-    return this.http.post<User>("api/user/", user).toPromise();
+    return this.http.post<User>("api/users", user).subscribe(
+      data =>{
+        console.log(data);
+      }
+    );
+  }
+
+  editUser(user : User){
+    return this.http.post<User>("api/users", user).subscribe(
+      data =>{
+        console.log(data);
+      }
+    );
   }
 
   getAllUsers(){
-    return this.http.get<User[]>("api/user/").toPromise();
+    return this.http.get<User[]>("api/users").toPromise();
   
   }
   

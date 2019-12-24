@@ -11,6 +11,9 @@ import { RecentEntriesComponent } from './Components/recent-entries/recent-entri
 import { PieChartComponent } from './Components/pie-chart/pie-chart.component';
 import { BarChartComponent } from './Components/bar-chart/bar-chart.component';
 import { LineChartComponent } from './Components/line-chart/line-chart.component';
+import { StoreComponent } from './Components/store/store.component';
+import { ReportsComponent } from './Components/reports/reports.component';
+import { UserManagementComponent } from './Components/user-management/user-management.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { LineChartComponent } from './Components/line-chart/line-chart.component
     RecentEntriesComponent,
     PieChartComponent,
     BarChartComponent,
-    LineChartComponent,],
+    LineChartComponent,
+    StoreComponent,
+    ReportsComponent,
+    UserManagementComponent,],
   imports: [
     MaterialModule,
     AdminRoutingModule

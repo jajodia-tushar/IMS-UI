@@ -113,6 +113,7 @@ export class UserManageFormComponent implements OnInit{
 
   editUserDetails(){
     let user: User = <User>this.createUserForm.getRawValue();
+    this.userManageService.editUser(user);
     console.log(user);
   }
 

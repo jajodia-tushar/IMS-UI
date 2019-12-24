@@ -27,9 +27,10 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                prepareClient(http);
                 JObject userJson = JsonMaker(user, http);
                 var response = await http.PostAsJsonAsync("api/user", userJson);
-                return await ResultParser(response);
+                return await UserResultParser(response);
             }
         }
 
@@ -40,13 +41,14 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                prepareClient(http);
                 JObject userJson = JsonMaker(user, http);
                 var response = await http.PutAsJsonAsync("api/user", userJson);
-                return await ResultParser(response);
+                return await UserResultParser(response);
             }
         }
 
-        private async Task<UserResponse> ResultParser(HttpResponseMessage response)
+        private async Task<UserResponse> UserResultParser(HttpResponseMessage response)
         {
             UserResponse apiLoginResponse = new UserResponse();
             var result = await response.Content.ReadAsStringAsync();
@@ -54,20 +56,37 @@ namespace IMS_UI.IMS.Providers
             return apiLoginResponse;
         }
 
+        private async Task<UsersResponse> UsersResultParser(HttpResponseMessage response)
+        {
+            UsersResponse apiLoginResponse = new UsersResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiLoginResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
+            return apiLoginResponse;
+        }
+
         private JObject JsonMaker(User user, HttpClient http)
         {
             string jsonString = JsonConvert.SerializeObject(user);
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
-            http.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
             JObject Json = JObject.Parse(jsonString);
             return Json;
         }
 
-        public Task<UsersResponse> GetAllUsers()
+        private void prepareClient(HttpClient http)
         {
-            throw new NotImplementedException();
+            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+        }
+
+        public async Task<UsersResponse> GetAllUsers()
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/user");//PutAsJsonAsync("api/user", userJson);
+                return await UsersResultParser(response);
+            }
         }
     }
 }

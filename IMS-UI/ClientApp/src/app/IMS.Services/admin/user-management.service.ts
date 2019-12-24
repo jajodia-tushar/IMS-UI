@@ -25,7 +25,7 @@ export class UserManagementService {
   }
 
   editUser(user : User){
-    return this.http.post<User>("api/users", user).subscribe(
+    return this.http.put<User>("api/users", user).subscribe(
       data =>{
         console.log(data);
       }
@@ -33,7 +33,7 @@ export class UserManagementService {
   }
 
   getAllUsers(){
-    return this.http.get<User[]>("api/users").toPromise();
+    return this.http.get<Users>("api/users").toPromise();
   
   }
   

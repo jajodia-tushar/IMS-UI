@@ -1,5 +1,4 @@
 ﻿using IMS_UI.IMS.Models;
-using IMS_UI.IMS.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

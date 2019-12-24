@@ -30,9 +30,17 @@ namespace IMS_UI.Controllers
             return BadRequest(response);
         }
 
+        [HttpPut]
         public async Task<UserResponse> EditUserDetails([FromBody] User user)
         {
             var response = await _userProvider.EditUser(user);
+            return response;
+        }
+
+        [HttpGet]
+        public async Task<UsersResponse> getAllUsers()
+        {
+            var response = await _userProvider.GetAllUsers();
             return response;
         }
     }

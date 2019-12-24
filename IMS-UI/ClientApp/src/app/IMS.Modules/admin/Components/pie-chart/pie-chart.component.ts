@@ -17,7 +17,17 @@ export class PieChartComponent implements OnInit {
   ) { }
 
   chart: Chart;
+  toDate: string;
+  fromDate: string;
+
+
   ngOnInit() {
+
+    let currentDate: Date = new Date();
+    this.toDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+
+    currentDate.setDate(currentDate.getDate() - 6);
+    this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
 
     this.getData().then((data) => {
       console.log(data);
@@ -27,7 +37,7 @@ export class PieChartComponent implements OnInit {
   }
 
   getData(): Promise<FrequentlyUsedItemModel> {
-    return this.frequentlyUsedItemService.getFrequentlyUsedItemData("20191210", "20191213", "5").toPromise();
+    return this.frequentlyUsedItemService.getFrequentlyUsedItemData(this.fromDate, this.toDate, "6").toPromise();
   }
 
   plotDataOnChart(chart: Chart, data: FrequentlyUsedItemModel) {
@@ -84,5 +94,19 @@ export class PieChartComponent implements OnInit {
         }
       }
     });
+  }
+
+  dateChange(event: Event) {
+    let data = (<HTMLButtonElement>event.target).value;
+    let currentDate: Date = new Date();
+    if (data === "7") {
+      currentDate.setDate(currentDate.getDate() - 6);
+      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    }
+    else if (data === "14") {
+      currentDate.setDate(currentDate.getDate() - 13);
+      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    }
+    this.onRefresh();
   }
 }

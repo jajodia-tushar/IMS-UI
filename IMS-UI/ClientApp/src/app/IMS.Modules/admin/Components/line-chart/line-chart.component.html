@@ -19,9 +19,8 @@
                     <mat-icon>more_horiz</mat-icon>
                 </button>
                 <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <button mat-menu-item>7 days ago</button>
-                    <button mat-menu-item>14 days ago</button>
-
+                    <button mat-menu-item (click)="dateChange($event)" value="7">7 days ago</button>
+                    <button mat-menu-item (click)="dateChange($event)" value="14">14 days ago</button>
                 </mat-menu>
             </div>
         </div>

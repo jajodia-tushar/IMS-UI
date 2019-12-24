@@ -31,7 +31,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = "api/reports/getshelfwiseordercount";
 
             UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL2"] + EndPoint);
+                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

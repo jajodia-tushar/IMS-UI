@@ -60,13 +60,12 @@
       #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav" style="color:#606a96 ;"
-          onmouseover="{this.style.color='#fff'}"
-          onMouseOut="{this.style.color='#606a96';this.style.backgroundColor='#' }">{{ nav }}</a>
+        <a mat-list-item *ngFor="let nav of fillerNav" style="color:#606a96 ;" onmouseover="{this.style.color='#fff'}"
+          routerLink="{{nav}}" onMouseOut="{this.style.color='#606a96';this.style.backgroundColor='#' }">{{ nav }}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <app-mainnav></app-mainnav>
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
 
   </mat-sidenav-container>

@@ -21,16 +21,5 @@ export class ChartsComponentComponent implements OnInit {
   }
   totalFloorWisedItem: ShelfWiseOrderCountResponse;
 
-  ngOnInit() {
-
-
-
-
-    this.shelfWiseDataService.getShelfWiseData("20191210", "20191219").subscribe(
-      data => {
-        this.totalFloorWisedItem = JSON.parse(JSON.stringify(data));
-      }
-    );
-
-  }
+  ngOnInit() { }
 }

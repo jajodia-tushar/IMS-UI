@@ -15,8 +15,17 @@ export class BarChartComponent implements OnInit {
 
   }
   chart: Chart;
+  toDate: string;
+  fromDate: string;
+
 
   ngOnInit() {
+    let currentDate: Date = new Date();
+    this.toDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+
+    currentDate.setDate(currentDate.getDate() - 6);
+    this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+
     this.getData().then((data) => {
       console.log(data);
       this.createBarChart();
@@ -59,7 +68,7 @@ export class BarChartComponent implements OnInit {
 
   getData(): Promise<ItemWiseAnalysisResponse> {
     // This can change according to The API of Varsha
-    return this.itemWiseDataService.getItemWiseTotalData("20191210", "20191219").toPromise();
+    return this.itemWiseDataService.getItemWiseTotalData(this.fromDate, this.toDate).toPromise();
   }
 
 
@@ -68,7 +77,7 @@ export class BarChartComponent implements OnInit {
       labels: itemwiseAnalysisData.itemConsumptions.map((data, index, array) => {
 
         let date = new Date(Date.parse(data.date));
-        if (array.length > 7) return `${date.getMonth() + 1}/${date.getDate()}`;
+        if (array.length > 7) return `${date.getDate()}/${date.getMonth() + 1}`;
         else return date.toString().split(' ')[0];
       }),
       datasets: [
@@ -91,6 +100,20 @@ export class BarChartComponent implements OnInit {
       });
     }, 2000);
 
+  }
+
+  dateChange(event: Event) {
+    let data = (<HTMLButtonElement>event.target).value;
+    let currentDate: Date = new Date();
+    if (data === "7") {
+      currentDate.setDate(currentDate.getDate() - 6);
+      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    }
+    else if (data === "14") {
+      currentDate.setDate(currentDate.getDate() - 13);
+      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    }
+    this.onRefresh();
   }
 
 

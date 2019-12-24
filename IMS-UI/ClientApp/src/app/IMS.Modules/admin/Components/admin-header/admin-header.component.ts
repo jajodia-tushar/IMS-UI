@@ -11,7 +11,6 @@ export class AdminHeader implements OnDestroy {
   mobileQuery: MediaQueryList;
   tabs = ["Dashboard", "Store", "Users", "Reports"];
 
-
   fillerNav = Array.from({ length: 4 }, (_, i) => `${this.tabs[i]}`);
 
   isVisible = false;

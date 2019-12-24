@@ -1,0 +1,71 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" rel="stylesheet" />
+
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img src="../../../../../assets/IMS.Images/157595914143509549 (1).png" style="height: 48px; margin-top: 8px;">
+    <div class="rightside">
+      <!-- <div class="notification-section">
+        <button class="notfication" [style.display]="isVisible ? 'block' : 'none'" (click)="changeNotificationIcon()">
+          <i class="material-icons md-light">
+            notifications
+          </i>
+        </button>
+
+        <button class="notfication" [style.display]="!isVisible ? 'block' : 'none'" (click)="changeNotificationIcon()">
+          <i class="material-icons md-light">
+            notifications_active
+          </i>
+        </button>
+      </div> -->
+      <div class="logout-section">
+
+        <span>
+          <div class="ui inline dropdown">
+            <div class="text dropbtn">
+              <img class="ui avatar image" src="assets/IMS.Images/elliot.jpg" [matMenuTriggerFor]="menu">
+              <p class="name">Mangesh Naukarkar</p>
+
+              <div class="matMenuItems">
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>notifications_on</mat-icon>
+                    <span>Notifications</span>
+                  </button>
+
+                  <button mat-menu-item>
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span>Logout</span>
+                  </button>
+                </mat-menu>
+              </div>
+              <!-- <div class="dropdown-content">
+            <a href="#">Logout</a>
+            <a href="#">Account Settings</a>
+          </div> -->
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav
+      style="transform: none;visibility: visible;min-width: 12%;top: 56px;bottom: 0px; width: 13%;background-color: #222437;"
+      #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let nav of fillerNav" style="color:#606a96 ;" onmouseover="{this.style.color='#fff'}"
+          routerLink="{{nav}}" onMouseOut="{this.style.color='#606a96';this.style.backgroundColor='#' }">{{ nav }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>

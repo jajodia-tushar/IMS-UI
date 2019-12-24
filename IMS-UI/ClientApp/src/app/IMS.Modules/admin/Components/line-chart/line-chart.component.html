@@ -1,0 +1,33 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="card">
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between">
+            <i class="fa fa-refresh" (click)="onRefresh()" id="refreshLine"
+                style="font-size:24px; color: #606a96; margin-top: 6px;"></i>
+            <div class="dropdown">
+                <button mat-button [matMenuTriggerFor]="beforeMenu">
+                    <mat-icon>more_horiz</mat-icon>
+                </button>
+                <mat-menu #beforeMenu="matMenu" xPosition="before" style="background-color: #606a96;margin-top: 6px;">
+                    <button mat-menu-item (click)="dateChange($event)" value="7">7 days ago</button>
+                    <button mat-menu-item (click)="dateChange($event)" value="14">14 days ago</button>
+                </mat-menu>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h3 class="font-weight-normal text-black">Floor Wise Analysis</h3>
+        </div>
+    </div>
+
+    <canvas height="400" id="line-chart" style="display: block; width: 670px; height: 228px;" width="670"
+        class="chartjs-render-monitor"></canvas>
+</div>

@@ -29,7 +29,7 @@ namespace IMS_UI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(100);
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<SessionManager>();
@@ -38,6 +38,10 @@ namespace IMS_UI
             services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
             services.AddSingleton<IShelfProvider, ShelfProvider>();
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<FrequentlyUsedItemProvider>();
+            services.AddSingleton<RAGStatusProvider>();
+            services.AddSingleton<ShelfWiseOrderCountProvider>();
+            services.AddSingleton<ItemWiseAnalysisProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

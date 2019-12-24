@@ -1,0 +1,112 @@
+.card {
+  width: 100%;
+  min-width: 100%;
+}
+.card .card-body {
+  padding: 1.25rem 1.25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.justify-content-center,
+.email-wrapper .mail-view .message-body .attachments-sections ul li .thumb {
+  justify-content: center !important;
+}
+
+.flex-column,
+.nav-tabs.nav-tabs-vertical,
+.nav-tabs.nav-tabs-vertical-custom,
+.nav-pills.nav-pills-vertical,
+.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user {
+  flex-direction: column !important;
+}
+
+.chartjs-render-monitor {
+  animation: chartjs-render-animation 1ms;
+}
+
+.grid-margin {
+  margin-bottom: 1.875rem;
+}
+
+.card {
+  border: 0.5px solid transparent;
+  box-shadow: 5px 11px 23px -13px #191b28;
+  -webkit-box-shadow: 5px 11px 23px -13px #191b28;
+  -moz-box-shadow: 5px 11px 23px -13px #191b28;
+  -ms-box-shadow: 5px 11px 23px -13px #191b28;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #1f2132;
+  background-clip: border-box;
+  border: 0 solid transparent;
+  border-radius: 0.625rem;
+
+  margin: 20px 20px 20px 10%;
+}
+
+h3 {
+  color: whitesmoke;
+  font-size: 1.5rem;
+}
+
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 30.333333%;
+}
+.content-wrapper {
+  background: #1c1e2f;
+  padding: 1.1rem 2.5rem 2.5rem;
+  width: 100%;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #606a96;
+  text-align: left;
+  list-style: none;
+  background-color: #222437;
+  background-clip: padding-box;
+}
+
+.material-icons {
+  font-size: 28px;
+  color: #606a96;
+}
+
+button:focus,
+button:active:focus,
+button.active:focus {
+  outline: none !important;
+  outline-style: none !important;
+}
+
+.mat-menu-panel {
+  min-width: 112px;
+  max-width: 280px;
+  overflow: auto;
+  max-height: calc(100vh - 48px);
+  border-radius: 4px;
+  outline: 0;
+  min-height: 64px;
+  background-color: #606a96;
+}

@@ -23,6 +23,9 @@ import { ShelfService } from './IMS.Services/Shelf/shelf.service';
 import { ClerkRouteGuardService } from './IMS.Services/Route/clerk-route-guard.service';
 import { EmployeeRouteGuardService } from './IMS.Services/Route/employee-route-guard.service';
 import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.service';
+import { ItemWiseDataService } from './IMS.Services/admin/item-wise-data.service';
+import { RagStatusService } from './IMS.Services/admin/rag-status.service';
+import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,7 @@ import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.s
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
-    
+
   ],
   providers: [
     LoginService,
@@ -51,6 +54,9 @@ import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.s
     EmployeeService,
     EmployeeOrderService,
     ItemService,
+    ItemWiseDataService,
+    RagStatusService,
+    RandomColorGeneratorService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

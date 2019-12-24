@@ -1,0 +1,34 @@
+.row {
+  margin: 30px;
+}
+.btn {
+  margin-right: 58px;
+}
+
+.row-rag {
+  /* display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px; */
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 56px;
+  margin-left: -15px;
+}
+
+/* .stretch-card {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+} */
+
+.flex {
+  display: flex;
+  position: fixed;
+  right: 42px;
+  top: 91px;
+}
+
+.rowDashBoardAndRefreshIcon {
+  display: contents;
+}

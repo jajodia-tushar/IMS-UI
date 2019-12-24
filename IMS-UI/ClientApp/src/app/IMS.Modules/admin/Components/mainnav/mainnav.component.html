@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12 grid-margin">
+    <div class="d-flex justify-content-between flex-wrap">
+      <div class="rowDashBoardAndRefreshIcon">
+        <h5 class="mr-4 mb-0 font-weight-bold" style="color: aliceblue;">
+          Dashboard
+        </h5>
+
+
+        <div class="refreshIcon">
+          <i class="fa fa-refresh" (click)="onRefresh()" id="refresh" style="font-size:24px; color: #606a96;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-rag">
+
+  <app-rag-status class="col-md-4 grid-margin stretch-card" *ngFor="let ragData of ragDatas" [ragData]="ragData">
+  </app-rag-status>
+</div>
+
+<app-charts-component></app-charts-component>

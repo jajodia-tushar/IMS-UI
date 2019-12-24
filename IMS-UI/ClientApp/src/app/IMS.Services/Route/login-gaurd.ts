@@ -14,21 +14,21 @@ export class LoginGuard implements CanActivate {
   pathToNavigate: string;
 
   constructor(private loginService: LoginService, private route: Router, private http: HttpClient
-    ,private centralizedReop : CentralizedDataService) { }
+    , private centralizedReop: CentralizedDataService) { }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let userResponse : UserResponse = <UserResponse> await this.loginService.getUser();
+    let userResponse: UserResponse = <UserResponse>await this.loginService.getUser();
     await this.centralizedReop.loadSelectedShelf();
-    if (userResponse.user == null){
+    if (userResponse.user == null) {
       return true;
     }
     else {
-      if(userResponse.user.role.name=='Shelf' && this.centralizedReop.getShelf() == null){
-        
+      if (userResponse.user.role.name == 'Shelf' && this.centralizedReop.getShelf() == null) {
+
         return true;
       }
-      else{
-        if(userResponse.user.role.name=='SuperAdmin')
+      else {
+        if (userResponse.user.role.name == 'SuperAdmin')
           this.route.navigateByUrl('Admin')
         else
           this.route.navigateByUrl(userResponse.user.role.name);

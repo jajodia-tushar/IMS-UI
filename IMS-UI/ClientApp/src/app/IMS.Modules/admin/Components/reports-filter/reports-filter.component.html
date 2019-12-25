@@ -2,32 +2,15 @@
     <div class="dropdownBoxes">
         <div class="content">
             <mat-nav-list class="list-horizontal" role="list">
-                <mat-list-item class="mat-list-item" role="listitem">
+                <mat-list-item class="mat-list-item" role="listitem" *ngFor="let dropDown of dropdownListDatas">
 
-                    <mat-select class="dropDownList" matNativeControl required>
-                        <mat-option value="volvo">Volvo</mat-option>
-                        <mat-option value="saab">Saab</mat-option>
-                        <mat-option value="mercedes">Mercedes</mat-option>
-                        <mat-option value="audi">Audi</mat-option>
+                    <mat-select class="dropDownList" placeholder="{{dropDown.placeHolderName}}" matNativeControl required>
+                        <mat-option *ngFor="let dropDownOption of dropDown.dropDownOptions" value="{{dropDownOption}}">
+                            {{dropDownOption}}</mat-option>
                     </mat-select>
-                </mat-list-item>
-                <mat-list-item class="mat-list-item" role="listitem">
-                    <mat-select class="dropDownList" matNativeControl required>
-                        <mat-option value="volvo">Volvo</mat-option>
-                        <mat-option value="saab">Saab</mat-option>
-                        <mat-option value="mercedes">Mercedes</mat-option>
-                        <mat-option value="audi">Audi</mat-option>
-                    </mat-select>
+
                 </mat-list-item>
 
-                <mat-list-item class="mat-list-item" role="listitem">
-                    <mat-select class="dropDownList" matNativeControl required>
-                        <mat-option value="volvo">Volvo</mat-option>
-                        <mat-option value="saab">Saab</mat-option>
-                        <mat-option value="mercedes">Mercedes</mat-option>
-                        <mat-option value="audi">Audi</mat-option>
-                    </mat-select>
-                </mat-list-item>
                 <button mat-raised-button color="primary" style="outline: none;">Search</button>
             </mat-nav-list>
 

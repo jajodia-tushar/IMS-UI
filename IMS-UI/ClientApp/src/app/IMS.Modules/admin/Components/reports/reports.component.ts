@@ -8,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class ReportsComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit() {
   }
+}
 
+
+
+
+
+export interface Food {
+  value: string;
+  viewValue: string;
 }

@@ -15,6 +15,7 @@ import { StoreComponent } from './Components/store/store.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
+import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { DetailsPipe } from './Components/recent-entries/details.pipe';
     StoreComponent,
     ReportsComponent,
     UserManagementComponent,
-    DetailsPipe,],
+    DetailsPipe,
+    ReportsTableComponent,],
   imports: [
     MaterialModule,
     AdminRoutingModule

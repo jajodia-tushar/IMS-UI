@@ -34,10 +34,7 @@ const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatPaginatorModule,
-  FormsModule,
   ReactiveFormsModule,
-  MatSnackBarModule,
-  CommonModule,
   MatAutocompleteModule,
   MatFormFieldModule,
   MatSelectModule,
@@ -57,7 +54,8 @@ const materialModules = [
   MatSnackBarModule,
   CommonModule,
   MatToolbarModule,
-  MatListModule
+  MatListModule,
+  MatTabsModule
 ]
 
 

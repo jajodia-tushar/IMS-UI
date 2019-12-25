@@ -16,7 +16,3 @@ export class ReportsComponent implements OnInit {
 
 
 
-export interface Food {
-  value: string;
-  viewValue: string;
-}

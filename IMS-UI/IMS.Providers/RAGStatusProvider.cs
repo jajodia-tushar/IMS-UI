@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -24,7 +25,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<RAGStatusResponse> GetList()
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "api/reports/getragstatus";
+            var EndPoint = Constants.APIEndpoints.RAGStatusProvider;
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

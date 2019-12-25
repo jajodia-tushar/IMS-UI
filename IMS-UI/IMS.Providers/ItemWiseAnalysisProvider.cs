@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -30,7 +31,7 @@ namespace IMS_UI.IMS.Providers
             HttpClient client = new HttpClient();
 
             // CAN CHANGE LATER
-            var EndPoint = "api/reports/getitemconsumption";
+            var EndPoint = Constants.APIEndpoints.ItemWiseAnalysisProvider;
 
             UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);

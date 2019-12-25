@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -28,8 +29,8 @@ namespace IMS_UI.IMS.Providers
         )
         {
             HttpClient client = new HttpClient();
-           
-            var EndPoint = "api/reports/getmostconsumeditems";
+
+            var EndPoint = Constants.APIEndpoints.FrequentlyUsedItemProvider;
 
             UriBuilder uriBuilder = 
                 new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);

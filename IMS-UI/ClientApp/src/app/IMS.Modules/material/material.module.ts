@@ -8,6 +8,11 @@ import {
   MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, 
   MatRadioModule, MatSortModule
 } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -63,7 +68,8 @@ const materialModules = [
   MatNativeDateModule,
   MatSortModule,
   MatRadioModule,
-  MatListModule 
+    MatDividerModule,
+    CdkTableModule,
 ]
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IMS_UI.IMS.Models
+namespace IMS_UI.IMS.Models.Vendor
 {
     public class VendorOrderDetails
     {
@@ -35,3 +35,4 @@ namespace IMS_UI.IMS.Models
         }
     }
 }
+

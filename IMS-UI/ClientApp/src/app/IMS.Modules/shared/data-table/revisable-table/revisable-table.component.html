@@ -1,0 +1,37 @@
+<table mat-table [dataSource]="datasource" class="mat-elevation-z8 data-table" > 
+
+    <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
+    
+    <mat-header-cell *cdkHeaderCellDef style="text-align:center" mat-sort-header>{{ column.header }}
+    </mat-header-cell>
+    <mat-cell *cdkCellDef="let row">
+    
+           <div *ngIf="column.columnDef == 'itemName'">{{ column.cell(row) }}</div>
+           <div *ngIf="column.columnDef == 'Quantity'">{{ column.cell(row) }}</div>
+           <div *ngIf="column.columnDef == 'Price'">
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput value="{{ column.cell(row) }}">
+                </mat-form-field>
+              </form>
+            </div>
+            
+
+           <div title="delete" *ngIf="column.columnDef === 'actions' ">
+    
+               <button mat-icon-button class="action-buttons">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deleteSession(row)">delete</mat-icon>
+               </button>
+               <ng-container *ngIf="show">
+               <button mat-icon-button class="action-buttons">
+                  <mat-icon aria-hidden="false" aria-label="Example home icon">edit </mat-icon>
+               </button>
+           </ng-container>
+           </div>  
+    </mat-cell>   
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    
+     </table>

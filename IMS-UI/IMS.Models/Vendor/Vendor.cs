@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IMS_UI.IMS.Models
+namespace IMS_UI.IMS.Models.Vendor
 {
     public class Vendor
     {
@@ -14,11 +14,7 @@ namespace IMS_UI.IMS.Models
         public string Address { get; set; }
         public string PAN { get; set; }
 
-
-
         public string GST { get; set; }
-
-
 
         public string CompanyIdentificationNumber { get; set; }
     }

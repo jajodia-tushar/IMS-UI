@@ -15,12 +15,10 @@ const routes: Routes = [
       { path: 'Dashboard', component: MainnavComponent },
       { path: 'Store', component: StoreComponent },
       { path: 'Users', component: UserManagementComponent },
-      { path: 'Reports', component: ReportsComponent }
+        { path: 'Reports', component: ReportsComponent },
+        { path: 'EditInvoice', component: InvoiceEditorComponent }
     ]
   }
-
-];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

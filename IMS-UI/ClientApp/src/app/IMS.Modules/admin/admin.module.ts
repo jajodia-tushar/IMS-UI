@@ -19,9 +19,10 @@ import { UserListComponent } from './Components/user-list/user-list.component';
 import { UserManageFormComponent } from './Components/user-manage-form/user-manage-form.component';
 import { DeactivateDialogComponent } from './Components/deactivate-dialog/deactivate-dialog.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
+import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-editor.component';
+import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
-import { SharedModule } from '../shared/shared.module';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
 
 
@@ -46,7 +47,8 @@ import { StoreUpdateComponent } from './Components/store-update/store-update.com
     UserListComponent,
     DeactivateDialogComponent,
     DetailsPipe,
-    StoreUpdateComponent
+      StoreUpdateComponent,
+      InvoiceEditorComponent
     ],
   imports: [
     MaterialModule,

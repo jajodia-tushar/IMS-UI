@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsTabsComponent implements OnInit {
 
+  tabsNames : string[] = ["RAG","Vendor","Employee","Item","Shelf"];
+
   constructor() { }
 
   ngOnInit() {

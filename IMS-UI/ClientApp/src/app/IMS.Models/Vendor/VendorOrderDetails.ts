@@ -13,7 +13,7 @@ export class VendorOrderDetails {
   invoiceImageUrl?: string;
   challanNumber?: string;
   challanImageUrl?: string;
-  date: Date;
+  date: string;
   orderItemDetails?: ItemQuantityPriceMapping[];
   finalAmount: number;
 }

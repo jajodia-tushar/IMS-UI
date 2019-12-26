@@ -16,15 +16,15 @@ import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
   styleUrls: ['./vendordetails.component.css']
 })
 export class VendordetailsComponent implements OnInit {
-  public LoggedINClerk = "";
+  public LoggedINClerk;
   VendorControl = new FormControl('', [Validators.required]);
   DateControl = new FormControl('', [Validators.required]);
   maxDate = new Date();
   public orderDetails: OrderDetails = {
     challanNumber: "",
     vendor: null,
-    submitedTo: "mahalakshmi",
-    receivedBy: "siva",
+    submitedTo: null,
+    receivedBy: "",
     date: null
   };
   public Admins = [];
@@ -45,11 +45,11 @@ export class VendordetailsComponent implements OnInit {
     this.isDataToBeSend();
   }
   selectedAdminName() {
-    this.orderDetails.receivedBy = this.SelectedAdmin;
+    this.orderDetails.submitedTo = this.SelectedAdmin;
     this.isDataToBeSend();
   }
   SelectedDate() {
-    this.orderDetails.date = this.RecievedDate;
+    this.orderDetails.date = this.RecievedDate.getDate() + "-" + (this.RecievedDate.getMonth() + 1) + "-" + this.RecievedDate.getFullYear();
     this.isDataToBeSend();
   }
   isDataToBeSend() {
@@ -60,7 +60,7 @@ export class VendordetailsComponent implements OnInit {
        this._CentralizedDataService.setSiblingData(this.orderDetails);
     }
   }
-  ngOnInit() {
+  async ngOnInit() {
     this._adminService.getAllAdmins().subscribe(
       data => {
         this.Admins = data.users;
@@ -71,11 +71,20 @@ export class VendordetailsComponent implements OnInit {
         this.Vendors = data.vendors;
       }
     )
-    this.http.get("api/UserName").subscribe(
-
-      data => {
-        this.LoggedINClerk = data["username"];
-      })
+    //this.http.get<User>("api/user").subscribe(
+    //  data => {
+    //    this.LoggedINClerk = data.username;
+    //    console.log(this.LoggedINClerk);
+    //    console.log(data)
+    //  })
+    
+    await this._CentralizedDataService.getLoggedInUser();
+    this.LoggedINClerk = this._CentralizedDataService.getUser().firstname + " " + this._CentralizedDataService.getUser().lastname;
+    this.orderDetails.receivedBy = this.LoggedINClerk;
+    
+     
+      
+      
   }
 
 }

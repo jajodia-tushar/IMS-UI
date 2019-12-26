@@ -1,65 +1,130 @@
-table {
+
+.card-size {
+  height: 450px;
+  margin-top: 2%;
+  margin-left: 4%;
+  width: 100%;
+  background-color:white;
+}
+.empty-items-display p {
+  font-size: large;
+}
+.empty-items-display {
+  height: 300px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 300px;
+}
+
+.mat-table {
   width: 100%;
 }
-.orderdetails{
- margin:0% 9%;
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px !important;
 }
-cell:first-of-type {
-  padding-left: 0px;
+
+.mat-header-cell {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.mat-form-field {
+  padding-bottom: 0px !important;
+  padding-top:10px !important;
 }
 
 .input_fileupload--hidden {
   display: none;
 }
-
-th.mat-header-cell {
-  text-align: center;
+.content-size{
+  margin-top:3%;
 }
-  .mat-card{
-    text-align :center !important; 
-  }
-  td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
-    padding-left: 0px;
-  }
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
-  padding: 0;
-  text-align: center;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-}
-.table-height{
-  height:400px;
-  overflow:auto;
+.table-height {
+  min-height: 300px;
+  max-height:300px;
+  overflow-y: scroll;
 }
 
-.icon {
-  color: #3d23ff;
-  font-size: 30px;
+.table-height::-webkit-scrollbar {
+  width: 10px !important
 }
-.mat-icon-button{
-  float:right !important;
+  .table-height::-webkit-scrollbar {
+    width: 10px;
+  }
+
+/* Track */
+  .table-height::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+/* Handle */
+  .table-height::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+    .table-height::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+
+
+.upload-icon-size {
+  font-size: 22px !important;
+}
+.mat-icon-button {
+  float: right !important;
 }
 .edit-delete-icon-center{
   align-content:center
 }
 
-.mat-header-cell {
-  background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%) !important;
+.mat-button{
+  font-size:16px !important;
 }
-.mat-header-cell {
-  font-size: 16px;
-  font-weight: 500;
-  color: white !important;
-}
-.upload-submit-button-position{
-  float:right !important;
-  margin-top:2%;
+
+
+.upload-submit-button-position {
+  float: right !important;
+  /*margin: 2% 1%;*/
+  padding-top:2%;
+  margin-bottom:5%;
+  margin-right:-5%;
 }
 .upload-button {
-  background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%) !important;
+  background: black !important;
   color: white !important;
+  margin-right: 12px;
+  /*padding-left: 7px;*/
+  padding: 0px 9px 0px 4px;
+  /*float: right !important;
+  margin-top: 2%;*/
 }
 .submit-button {
-  background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%) !important;
+  background: black !important;
   color: white !important;
+  /*float: right !important;
+  margin-top: 2%;*/
+}
+
+.mat-column-ItemName{
+  width: 50% !important;
+}
+.add-row{
+  margin-top:4%;
+  float:right;
+}
+
+.mat-column-Quantity {
+  width: 40% !important;
+}
+
+.mat-column-action{
+  width: 10% !important;
+}
+
+::ng-deep .mat-column-ItemName div.mat-form-field-infix,
+::ng-deep .mat-column-Quantity div.mat-form-field-infix,
+::ng-deep .mat-column-action div.mat-form-field-infix{
+  width: 33% !important;
 }

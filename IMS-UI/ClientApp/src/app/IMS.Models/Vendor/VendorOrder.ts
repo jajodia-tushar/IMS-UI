@@ -1,4 +1,7 @@
+import { VendorOrderDetails } from "./VendorOrderDetails";
+import { Vendor } from "./Vendor";
+
 export class VendorOrder {
-        vendor?: any;
-        vendorOrderDetails ?: any;
-    }
+  vendor?: Vendor;
+  vendorOrderDetails?: VendorOrderDetails;
+}

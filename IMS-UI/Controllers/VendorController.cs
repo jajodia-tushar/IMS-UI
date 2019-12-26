@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +15,11 @@ namespace IMS_UI.Controllers
     public class VendorController : ControllerBase
     {
         private VendorListProvider _VendorListProvider;
+        private IVendorOrderProvider _VendorOrderProvider;
 
-        public VendorController(VendorListProvider provider)
+        public VendorController(VendorListProvider provider,IVendorOrderProvider vendorOrderProvider)
         {
+            _VendorOrderProvider = vendorOrderProvider;
             _VendorListProvider = provider;
         }
         // GET: api/Vendor
@@ -46,8 +50,20 @@ namespace IMS_UI.Controllers
 
         // POST: api/Vendor
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] VendorOrder vendorOrder)
         {
+            try
+            {
+                var response = await _VendorOrderProvider.postVendorOrder(vendorOrder);
+                if (response.Error == null)
+                    return Ok(response);
+                else
+                    return StatusCode(500);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(500);
+            }
         }
 
         // PUT: api/Vendor/5

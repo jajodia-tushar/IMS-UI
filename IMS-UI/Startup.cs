@@ -12,6 +12,8 @@ using System;
 using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Providers.Interfaces;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace IMS_UI
 {
@@ -45,10 +47,13 @@ namespace IMS_UI
             services.AddSingleton<StockProvider>();
             services.AddSingleton<RecentEntriesProvider>();
             services.AddSingleton<AuthGaurdService>();
+            //    services.AddSingleton<AuthGaurdService>();
+            services.AddSingleton<IFileStorage, FileSystemStorage>();
+            services.AddSingleton<IVendorOrderProvider, VendorOrderProvider>();
             services.AddSingleton<AdminListProvider>();
             services.AddSingleton<ItemListProvider>();
             services.AddSingleton<VendorListProvider>();
-            services.AddSingleton<UserService>();
+            services.AddSingleton<OrderProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -77,6 +82,11 @@ namespace IMS_UI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
             app.UseSession();
             app.UseMvc(routes =>

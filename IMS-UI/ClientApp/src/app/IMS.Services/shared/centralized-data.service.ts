@@ -48,7 +48,8 @@ export class CentralizedDataService {
     this.user = user;
   }
 
-  getUser() : User{
+  getUser(): User{
+    console.log(this.user)
     return this.user;
   }
 

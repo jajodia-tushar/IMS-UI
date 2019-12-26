@@ -1,33 +1,42 @@
 <mat-card>
-  <mat-form-field>
-    <input matInput #challan placeholder="Challan Number" (keyup)="onKey(challan.value)">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Vendor Name</mat-label>
-    <mat-select [(ngModel)]="SelectedVendor" (selectionChange)="selectedVendor()" [formControl]="VendorControl" required>
-      <mat-option *ngFor="let vendor of Vendors" [value]="vendor">
-        {{vendor.name}}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="VendorControl.hasError('required')">Please choose a Vendor</mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Submitted To</mat-label>
-    <mat-select [(ngModel)]="SelectedAdmin" (selectionChange)="selectedAdminName()">
-      <mat-option *ngFor="let admin of Admins" [value]="admin.firstname+admin.lastname">
-        {{admin.firstname+" "+admin.lastname}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Received By" value="{{LoggedINClerk}}">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Choose a date" [(ngModel)]="RecievedDate" (dateChange)="SelectedDate()" [formControl]="DateControl" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="DateControl.hasError('required')">Please select a Date</mat-error>
-  </mat-form-field>
+  <mat-card-title>Invoice</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="fields-size">
+      <mat-form-field appearance="outline">
+        <mat-label>Challan Number</mat-label>
+        <input matInput #challan placeholder="E.g 234567  " (keyup)="onKey(challan.value)">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Vendor Name</mat-label>
+        <mat-select [(ngModel)]="SelectedVendor" (selectionChange)="selectedVendor()" [formControl]="VendorControl" required>
+          <mat-option *ngFor="let vendor of Vendors" [value]="vendor">
+            {{vendor.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="VendorControl.hasError('required')">Please choose a Vendor</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Submitted To</mat-label>
+        <mat-select [(ngModel)]="SelectedAdmin" (selectionChange)="selectedAdminName()">
+          <mat-option *ngFor="let admin of Admins" [value]="admin.firstname+admin.lastname">
+            {{admin.firstname+" "+admin.lastname}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="disable-input" appearance="outline">
+        <mat-label>Received By</mat-label>
+        <input matInput value="{{LoggedINClerk}}">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate"  onkeydown="return false" [(ngModel)]="RecievedDate" (dateChange)="SelectedDate()" [formControl]="DateControl" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="DateControl.hasError('required')">Please select a Date</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
 </mat-card>
 
 

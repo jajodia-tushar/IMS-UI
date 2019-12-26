@@ -19,10 +19,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 const materialModules = [
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatSelectModule,
     MatDialogModule,

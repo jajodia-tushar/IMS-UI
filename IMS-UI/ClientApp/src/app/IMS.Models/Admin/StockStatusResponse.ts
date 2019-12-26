@@ -1,4 +1,5 @@
 import { Item } from "../Item/Item";
+import { Error } from "../Error";
 
 export class StockStatusResponse {
   stockStatusList: ItemStockStatus[];

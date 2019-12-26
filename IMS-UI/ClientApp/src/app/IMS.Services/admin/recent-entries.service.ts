@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RecentEntriesResponse } from '../IMS.Models/RecentEntriesResponse';
+import { RecentEntriesResponse } from 'src/app/IMS.Models/Admin/RecentEntriesResponse';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecentEntriesService {
-  getRecentEntries() {
+  getRecentEntries(): Observable<RecentEntriesResponse> {
     return this._http.get<RecentEntriesResponse>("recentEntry");
   }
 

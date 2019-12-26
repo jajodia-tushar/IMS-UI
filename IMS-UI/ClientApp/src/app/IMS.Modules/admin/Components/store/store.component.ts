@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 import { StoreResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 
@@ -11,12 +11,20 @@ export class StoreComponent implements OnInit {
   dataSource: StoreResponse[] = [];
   columnsToDisplay: string[] = [];
 
+  @Input()
+  numberOfItems : string;
+
   constructor(private storeService: StoreService) { }
 
   ngOnInit() {
     this.storeService.getAdminStoreStatus().subscribe(
       data => {
         this.columnsToDisplay.push("Item Name");
+        if (data.stockStatusList == null)
+          console.log("error");
+        if(this.numberOfItems !=null){
+          data.stockStatusList = data.stockStatusList.splice(1,10);
+        }
         data.stockStatusList.forEach(element => {
           let stockColourQuantity = element.storeStatus;
           if (stockColourQuantity != null) {

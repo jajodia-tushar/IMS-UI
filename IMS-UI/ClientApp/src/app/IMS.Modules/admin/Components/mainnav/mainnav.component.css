@@ -32,3 +32,17 @@
 .rowDashBoardAndRefreshIcon {
   display: contents;
 }
+
+.store {
+  float: left;
+  width: 60%;
+  overflow: hidden;
+  height: 650px;
+}
+
+.recent-entries  {
+  float: right;
+  overflow: hidden;
+  height: 625px;
+  width: 40%;
+}

@@ -2,12 +2,21 @@
     <div class="dropdownBoxes">
         <div class="content">
             <mat-nav-list class="list-horizontal" role="list">
-                <mat-list-item class="mat-list-item" role="listitem" *ngFor="let dropDown of dropdownListDatas">
 
-                    <mat-select class="dropDownList" placeholder="{{dropDown.placeHolderName}}" matNativeControl required>
-                        <mat-option *ngFor="let dropDownOption of dropDown.dropDownOptions" value="{{dropDownOption}}">
-                            {{dropDownOption}}</mat-option>
-                    </mat-select>
+                <mat-list-item class="mat-list-item" role="listitem" *ngFor="let reportsData of reportsFilterDataList">
+
+                    <ng-container *ngIf="reportsData.type == 'dropDown'">
+                        <mat-select class="dropDownList" placeholder="{{reportsData.placeHolderName}}" matNativeControl required>
+                            <mat-option *ngFor="let item of reportsData.dropDownOptions" value="{{item}}">
+                                {{item}}</mat-option>
+                        </mat-select>
+                    </ng-container>
+
+                    <ng-container *ngIf="reportsData.type== 'datePicker'">
+                        <input matInput [matDatepicker]="picker" placeholder="{{reportsData.placeHolderName}}">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </ng-container>
 
                 </mat-list-item>
 

@@ -1,0 +1,7 @@
+::ng-deep .mat-tab-label .mat-tab-label-content {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    color: white;
+}

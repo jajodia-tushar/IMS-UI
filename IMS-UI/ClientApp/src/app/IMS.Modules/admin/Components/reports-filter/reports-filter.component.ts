@@ -9,26 +9,11 @@ export class ReportsFilterComponent implements OnInit {
 
 
   @Input()
-  dropdownListDatas : reportsDropDownListData[];
+  reportsFilterDataList : reportsFilterOptions[];
 
   constructor() { }
 
   ngOnInit() {
-
-    // this.dropdownListDatas = [
-    //     {
-    //       placeHolderName : "Shelf",
-    //       dropDownOptions : [
-    //         "Warehouse","First Floor","Sixth Floor"
-    //       ]
-    //     },
-    //     {
-    //       placeHolderName : "color",
-    //       dropDownOptions : [
-    //         "Red", "Amber", "Green"
-    //       ]
-    //     }
-    // ]
   }
 }
 
@@ -37,12 +22,13 @@ export interface Food {
   viewValue: string;
 }
 
-export class reportsDropDownListData{
+export class reportsFilterOptions{
   placeHolderName : string;
+  type : string;
   dropDownOptions : string[];
 }
 
-export class reportsData{
+export class reportsSelectionDataModel{
   reportName : string;
-  data : reportsDropDownListData[];
+  reportsFilterOptions : reportsFilterOptions[];
 }

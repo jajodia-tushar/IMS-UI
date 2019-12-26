@@ -2,7 +2,7 @@
 <div class="items-container">
     <div class="flex-container">
         <div class="container">
-            <h4>Reports</h4>
+            <h4>Data</h4>
             <table mat-table [dataSource]="dataSource">
                 <ng-container *ngFor="let columns of columnsToDisplay" [matColumnDef]="columns">
                     <th mat-header-cell *matHeaderCellDef style="color:white">{{columns}}</th>
@@ -13,7 +13,7 @@
                 <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" class="example-element-row"></tr>
             </table>
 
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <mat-tab-group dynamicHeight>
 
     <mat-tab *ngFor="let reportsData of reportsSelectionData" label="{{reportsData.reportName}}">
-        <app-reports-filter [dropdownListDatas]="reportsData.data"></app-reports-filter>
+        <app-reports-filter [reportsFilterDataList]="reportsData.reportsFilterOptions"></app-reports-filter>
     </mat-tab>
 
 

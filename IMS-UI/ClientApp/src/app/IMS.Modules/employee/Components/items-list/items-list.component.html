@@ -1,4 +1,3 @@
-<div class="flex-container">
-    <app-item class="col s2" *ngFor='let item of shelfItems' [item]="item" (onItemClick)="onItemClicked($event)">
-    </app-item>
+<div class="flex-container" style="background-color: #1c1e2f;">
+    <app-item *ngFor="let item of shelfItems" [item]="item" (onItemClick)="onItemClicked($event)" style="margin: 20px;"></app-item>
 </div>

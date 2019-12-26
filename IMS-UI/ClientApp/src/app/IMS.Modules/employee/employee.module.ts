@@ -7,6 +7,7 @@ import { ItemComponent } from './Components/item/item.component';
 import { ItemsCartComponent } from './Components/items-cart/items-cart.component';
 import { ItemsListComponent } from './Components/items-list/items-list.component';
 import { SharedModule } from '../shared/shared.module';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     MaterialModule,
     EmployeeRoutingModule,
+    MatGridListModule
   ]
 })
 export class EmployeeModule { }

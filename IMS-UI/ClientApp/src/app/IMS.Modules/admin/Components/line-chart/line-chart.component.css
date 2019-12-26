@@ -1,37 +1,7 @@
-.card {
+/* .stretch-card > .card {
   width: 100%;
   min-width: 100%;
-}
-.card .card-body {
-  padding: 1.25rem 1.25rem;
-}
-
-.card-body {
-  flex: 1 1 auto;
-  padding: 1.25rem;
-}
-
-.justify-content-center,
-.email-wrapper .mail-view .message-body .attachments-sections ul li .thumb {
-  justify-content: center !important;
-}
-
-.flex-column,
-.nav-tabs.nav-tabs-vertical,
-.nav-tabs.nav-tabs-vertical-custom,
-.nav-pills.nav-pills-vertical,
-.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user {
-  flex-direction: column !important;
-}
-
-.chartjs-render-monitor {
-  animation: chartjs-render-animation 1ms;
-}
-
-.grid-margin {
-  margin-bottom: 1.875rem;
-}
-
+} */
 .card {
   border: 0.5px solid transparent;
   box-shadow: 5px 11px 23px -13px #191b28;
@@ -49,8 +19,42 @@
   background-clip: border-box;
   border: 0 solid transparent;
   border-radius: 0.625rem;
+  margin: 0px;
+}
+.card .card-body {
+  padding: 1.25rem 1.25rem;
+}
 
-  margin: 20px 20px 20px 10%;
+.card-body {
+  flex: 1 1 auto;
+}
+
+.justify-content-center,
+.email-wrapper .mail-view .message-body .attachments-sections ul li .thumb {
+  justify-content: center !important;
+}
+
+.flex-column,
+.nav-tabs.nav-tabs-vertical,
+.nav-tabs.nav-tabs-vertical-custom,
+.nav-pills.nav-pills-vertical,
+.email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user {
+  flex-direction: column !important;
+}
+
+.chart-container {
+  position: relative;
+  margin: 0px auto;
+  height: 100%;
+  width: 100%;
+}
+
+.chartjs-render-monitor {
+  animation: chartjs-render-animation 1ms;
+}
+
+.grid-margin {
+  margin-bottom: 1.875rem;
 }
 
 h3 {
@@ -100,13 +104,25 @@ button.active:focus {
   outline-style: none !important;
 }
 
-.mat-menu-panel {
-  min-width: 112px;
-  max-width: 280px;
-  overflow: auto;
-  max-height: calc(100vh - 48px);
-  border-radius: 4px;
-  outline: 0;
-  min-height: 64px;
-  background-color: #606a96;
+canvas {
+  padding: 0;
+  margin: 0px auto;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+  position: absolute;
+  direction: ltr;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: -1;
 }

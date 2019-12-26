@@ -91,10 +91,7 @@ export class LineChartComponent implements OnInit {
       data: {},
       options: {
         responsive: true,
-        title: {
-          display: true,
-          text: ""
-        },
+
         tooltips: {
           mode: "index",
           intersect: false

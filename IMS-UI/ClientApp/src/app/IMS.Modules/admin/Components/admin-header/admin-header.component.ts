@@ -10,11 +10,30 @@ import { User } from "src/app/IMS.Models/User/User";
   styleUrls: ["./admin-header.component.css"]
 })
 export class AdminHeader implements OnDestroy {
+
   mobileQuery: MediaQueryList;
-  tabs = ["Dashboard", "Store", "Users", "Reports"];
 
-  fillerNav = Array.from({ length: 4 }, (_, i) => `${this.tabs[i]}`);
+  navBarItems = [{
+    tab: "Dashboard",
+    icon: "dashboard",
+    color: "#01d28e"
+  }, {
+    tab: "Store",
+    icon: "store_mall_directory",
+    color: "#ff7315"
+  },
+  {
+    tab: "Users",
+    icon: "person_pin",
+    color: "#46b5d1",
 
+  },
+  {
+    tab: "Reports",
+    icon: "bar_chart",
+    color: "#ffd800"
+
+  }]
   isVisible = false;
   isPersonVisible = false;
 

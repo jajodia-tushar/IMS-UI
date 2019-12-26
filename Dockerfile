@@ -1,12 +1,12 @@
-FROM pixel238/dotnet.core_2.2_with_node:sdkandnode AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /app
 COPY . /app
 
-#RUN apt-get update && \
- #   apt-get install -y wget && \
-  #  apt-get install -y gnupg2 && \
-   # wget -qO- https://deb.nodesource.com/setup_10.x | bash - && \
-    #apt-get install -y build-essential nodejs
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get install -y gnupg2 && \
+    wget -qO- https://deb.nodesource.com/setup_10.x | bash - && \
+    apt-get install -y build-essential nodejs
 
 RUN dotnet restore IMS-UI.sln --source https://api.nuget.org/v3/index.json  && \
     dotnet build IMS-UI.sln -c Release && \

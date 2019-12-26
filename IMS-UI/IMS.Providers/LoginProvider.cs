@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -35,18 +36,19 @@ namespace IMS_UI.IMS.Providers
 
 
 
-        public async Task<LoginResponse>  ApiCaller(Object requestData,string path)
+        public async Task<LoginResponse>  ApiCaller(Object requestData)
         {
             try
             {
                 var jsonString = JsonConvert.SerializeObject(requestData);
+                var endPoint = Constants.APIEndpoints.LoginProvider;
                 using (HttpClient http = new HttpClient())
                 {
                     http.BaseAddress = new Uri(_Configuration["BASEURL"]);
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     JObject Json = JObject.Parse(jsonString);
-                    var response = await http.PostAsJsonAsync(path, Json);
+                    var response = await http.PostAsJsonAsync(endPoint, Json);
                     LoginResponse apiLoginResponse = new LoginResponse();
                     var result = await response.Content.ReadAsStringAsync();
                     apiLoginResponse = JsonConvert.DeserializeObject<LoginResponse>(result);

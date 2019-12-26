@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Providers.Interfaces;
+using IMS_UI.IMS.Core;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -21,7 +22,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<ShelfDataResponse> GetShelfData(string shelfId)
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "api/inventory/";
+            var EndPoint = Constants.APIEndpoints.ShelfProviderShelfData;
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

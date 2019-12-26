@@ -1,5 +1,6 @@
 ﻿
 using IMS.Contracts;
+using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -28,7 +29,7 @@ namespace IMS_UI.IMS.Providers
         {
             HttpClient client = new HttpClient();
 
-            var EndPoint = "api/reports/getshelfwiseordercount";
+            var EndPoint = Constants.APIEndpoints.ShelfWiseOrderCountProvider;
 
             UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);

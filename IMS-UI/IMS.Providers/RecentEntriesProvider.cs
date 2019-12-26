@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -25,6 +26,7 @@ namespace IMS_UI.IMS.Providers
         {
            try
             {
+                var endPoint = Constants.APIEndpoints.RecentEntriesProvider;
                 using (HttpClient _client = new HttpClient())
                 {
                     _client.BaseAddress = new Uri(_configuration["BASEURL"]);
@@ -32,7 +34,7 @@ namespace IMS_UI.IMS.Providers
                         new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
-                    var response = await _client.GetAsync("api/Order/EmployeeRecentOrderDetails");
+                    var response = await _client.GetAsync(endPoint);
                     return JsonConvert.DeserializeObject<EmployeeRecentOrderResponse>(
                         await response.Content.ReadAsStringAsync());
                 }

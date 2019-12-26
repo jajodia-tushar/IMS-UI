@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -19,7 +20,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "api/employee/";
+            var EndPoint = Constants.APIEndpoints.EmployeeProvider;
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);

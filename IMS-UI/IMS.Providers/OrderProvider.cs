@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
+using IMS_UI.IMS.Core;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -19,7 +20,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest)
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "/api/order/EmployeeOrders";
+            var EndPoint = Constants.APIEndpoints.OrderProvider;
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

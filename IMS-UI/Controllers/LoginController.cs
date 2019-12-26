@@ -37,7 +37,7 @@ namespace IMS_UI.Controllers
             try
             {
                 //var provider = new LoginProvider();
-                var response = await _loginProvider.ApiCaller(loginRequest, "/api/Login");
+                var response = await _loginProvider.ApiCaller(loginRequest);
                 if (response.Error == null)
                 {
                     _SessionManager.SetString("token", response.AccessToken);

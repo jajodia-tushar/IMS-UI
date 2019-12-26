@@ -38,9 +38,16 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<UsersResponse> getAllUsers()
+        public async Task<UsersResponse> GetAllUsers()
         {
             var response = await _userProvider.GetAllUsers();
+            return response;
+        }
+
+        [HttpDelete]
+        public async Task<Response> DeactivateUser([FromBody] User user)
+        {
+            var response = await _userProvider.DeactivateUser(user);
             return response;
         }
     }

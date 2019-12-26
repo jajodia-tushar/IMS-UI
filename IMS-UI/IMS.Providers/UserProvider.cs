@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Providers
@@ -28,7 +29,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-                JObject userJson = JsonMaker(user, http);
+                JObject userJson = JsonMaker(user);
                 var response = await http.PostAsJsonAsync("api/user", userJson);
                 return await UserResultParser(response);
             }
@@ -42,7 +43,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-                JObject userJson = JsonMaker(user, http);
+                JObject userJson = JsonMaker(user);
                 var response = await http.PutAsJsonAsync("api/user", userJson);
                 return await UserResultParser(response);
             }
@@ -50,21 +51,29 @@ namespace IMS_UI.IMS.Providers
 
         private async Task<UserResponse> UserResultParser(HttpResponseMessage response)
         {
-            UserResponse apiLoginResponse = new UserResponse();
+            UserResponse apiResponse = new UserResponse();
             var result = await response.Content.ReadAsStringAsync();
-            apiLoginResponse = JsonConvert.DeserializeObject<UserResponse>(result);
-            return apiLoginResponse;
+            apiResponse = JsonConvert.DeserializeObject<UserResponse>(result);
+            return apiResponse;
+        }
+
+        private async Task<Response> ResultParser(HttpResponseMessage response)
+        {
+            Response apiResponse = new UserResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiResponse = JsonConvert.DeserializeObject<Response>(result);
+            return apiResponse;
         }
 
         private async Task<UsersResponse> UsersResultParser(HttpResponseMessage response)
         {
-            UsersResponse apiLoginResponse = new UsersResponse();
+            UsersResponse apiParsedResponse = new UsersResponse();
             var result = await response.Content.ReadAsStringAsync();
-            apiLoginResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
-            return apiLoginResponse;
+            apiParsedResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
+            return apiParsedResponse;
         }
 
-        private JObject JsonMaker(User user, HttpClient http)
+        private JObject JsonMaker(User user)
         {
             string jsonString = JsonConvert.SerializeObject(user);
             JObject Json = JObject.Parse(jsonString);
@@ -84,8 +93,25 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-                var response = await http.GetAsync("api/user");//PutAsJsonAsync("api/user", userJson);
+                var response = await http.GetAsync("api/user");
                 return await UsersResultParser(response);
+            }
+        }
+
+        public async Task<Response> DeactivateUser(User user)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+              
+                HttpRequestMessage request = new HttpRequestMessage
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"),
+                    Method = HttpMethod.Delete,
+                    RequestUri = new Uri(_iconfiguration["BASEURL"]+"api/user")
+                };
+                request.Headers.Add("Authorization", "Bearer " + _sessionManager.GetString("token"));
+                var response = await http.SendAsync(request);
+                return await ResultParser(response);
             }
         }
     }

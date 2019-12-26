@@ -11,5 +11,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<UserResponse> AddUser(User user);
         Task<UserResponse> EditUser(User user);
         Task<UsersResponse> GetAllUsers();
+        Task<Response> DeactivateUser(User user);
+
     }
 }

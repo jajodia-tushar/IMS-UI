@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/IMS.Models/User/User';
 
 @Component({
@@ -9,7 +9,7 @@ import { User } from 'src/app/IMS.Models/User/User';
 })
 export class UserManageDialogComponent implements OnInit {
   userData : User;
-  constructor( @Inject(MAT_DIALOG_DATA) data) { 
+  constructor(private dialogRef: MatDialogRef<UserManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.userData = data;
     console.log(data)
   }
@@ -17,6 +17,9 @@ export class UserManageDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+  notifyTableUserEditted(user){
+      console.log("inside dialog");
+      this.dialogRef.close(user);      
+  }
 
 }

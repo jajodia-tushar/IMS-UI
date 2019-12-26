@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
@@ -7,6 +7,7 @@ import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
+import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
 
 @Component({
   selector: 'app-user-manage-form',
@@ -22,6 +23,8 @@ export class UserManageFormComponent implements OnInit{
   }
 
   @Input() userDetails;
+  @Output() userEditted : EventEmitter<User> = new EventEmitter<User>();
+  @Output() userCreated = new EventEmitter();
   isEditUserForm : boolean;
   isSuperAdmin : boolean;
   
@@ -111,16 +114,34 @@ export class UserManageFormComponent implements OnInit{
     }
   }
 
-  editUserDetails(){
+  async editUserDetails(){
     let user: User = <User>this.createUserForm.getRawValue();
-    this.userManageService.editUser(user);
+    let editedUser: UserResponse = <UserResponse> await this.userManageService.editUser(user);
+    if(editedUser.error==null){
+      // send to parent dialog
+      console.log("User Edited : ");
+      this.userEditted.emit(user);
+    }
+    else{
+      console.log("User Not Edited : ");
+    }
     console.log(user);
   }
 
-  createNewUser(){
+  async createNewUser(){
     let user: User = <User>this.createUserForm.getRawValue();
     console.log(user);
-    this.userManageService.createUser(user);
+    let createdUser: UserResponse = <UserResponse>await this.userManageService.createUser(user);
+    if(createdUser.error==null){
+      //send to parent dialog
+      console.log("User Created : ");
+      console.log(user);
+      this.userCreated.emit(user);
+    }
+    else{
+      console.log("User Not Created : ");
+      console.log(user);
+    }
   }
 
 }

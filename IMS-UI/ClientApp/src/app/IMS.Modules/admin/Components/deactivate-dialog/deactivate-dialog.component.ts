@@ -4,6 +4,7 @@ import { User } from 'src/app/IMS.Models/User/User';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteResponse } from 'src/app/IMS.Models/User/DeleteResponse';
 
 @Component({
   selector: 'app-deactivate-dialog',
@@ -22,10 +23,15 @@ export class DeactivateDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  onConfirm(): void {
-    // Close the dialog, return true
-    // call user delete  service
-    // this.userManageService.deactivate(this.user);
+  async onConfirm() {
+    let response = <DeleteResponse>await this.userManageService.deactivate(this.user);
+    if(response.error==null){
+      this.dialogRef.close(true);
+    }
+    else{
+      this.dialogRef.close(false)
+    }
+    console.log(this.user);
     this.showMessage(2,"User Deactivated Successfully");
     this.dialogRef.close(true);
   }

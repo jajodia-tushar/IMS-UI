@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/IMS.Models/User/User';
 import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { Users } from 'src/app/IMS.Models/User/Users';
+import { DeleteResponse } from 'src/app/IMS.Models/User/DeleteResponse';
+import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +15,22 @@ export class UserManagementService {
   
   constructor(private http: HttpClient) { }
   
-  deactivate(user: any) {
-   return this.http.delete<User>("api/users",user).toPromise(); 
+  deactivate(user: any) : Promise<DeleteResponse>{
+   let headers=new HttpHeaders().set('Content-Type','application/json; charset=utf8');
+   const options = {
+    headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    }), body: user
+    }; 
+   return this.http.delete<DeleteResponse>("api/users",options).toPromise(); 
   }
 
   createUser(user : User){
-    return this.http.post<User>("api/users", user).subscribe(
-      data =>{
-        console.log(data);
-      }
-    );
+    return this.http.post<UserResponse>("api/users", user).toPromise();
   }
 
   editUser(user : User){
-    return this.http.put<User>("api/users", user).subscribe(
-      data =>{
-        console.log(data);
-      }
-    );
+    return this.http.put<UserResponse>("api/users", user).toPromise();
   }
 
   getAllUsers(){

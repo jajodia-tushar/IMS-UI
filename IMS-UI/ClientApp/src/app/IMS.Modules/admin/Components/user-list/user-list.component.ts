@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { User } from 'src/app/IMS.Models/User/User';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
@@ -19,7 +19,9 @@ export class UserListComponent implements OnInit {
 
   dataSource
 
+  @Input() event:User;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatTable,{static: true}) table: MatTable<any>;
   
   constructor(private userManagementService:UserManagementService, public dialog: MatDialog) { }
 
@@ -43,18 +45,22 @@ export class UserListComponent implements OnInit {
   editUserDetails(user){
     console.log(user);
 
-    this.openDialog(user);
+    this.openUserEditDialog(user);
   }
 
-  openDialog(data) {
+  openUserEditDialog(data) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     // dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.editUserInTable(result);
     });
+  }
+
+  public addUserToTable(newUser: User){
+    this.dataSource.data = this.ELEMENT_DATA.push(newUser);
   }
 
   deactivateUser(user){
@@ -65,14 +71,52 @@ export class UserListComponent implements OnInit {
     const dialogRef = this.dialog.open(DeactivateDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(result==true){
+        this.removeUserFromTableById(user.id);
+        console.log("User was Deleted");
+      }
+      else {
+        console.log("User was not  Deleted ");
+      }
     });
+
   } 
+
+  removeUserFromTableById(id){
+    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
+      if ( this.ELEMENT_DATA[index].id === id) {
+        this.ELEMENT_DATA.splice(index, 1); 
+      }
+   }
+    this.dataSource.data = this.ELEMENT_DATA;
+    // this.table.renderRows();    
+  }
+
+  editUserInTable(user){
+    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
+      if ( this.ELEMENT_DATA[index].id === user.id) {
+        this.ELEMENT_DATA[index] = user;
+        break;
+      }
+   }
+    this.dataSource.data = this.ELEMENT_DATA;
+    this.table.renderRows();    
+  }
 
   async setUsers(){
     let users : User[] =  (<Users>await this.userManagementService.getAllUsers()).users;
     console.log('set users')
     console.log(users);
     this.ELEMENT_DATA = users;
+  }
+
+  openDialog() {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

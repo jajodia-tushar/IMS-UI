@@ -1,1 +1,1 @@
-<app-user-manage-form [userDetails]="userData"></app-user-manage-form>
+<app-user-manage-form [userDetails]="userData" (userCreated)="notifyTableUserCreated($event)" (userEditted)="notifyTableUserEditted($event)"></app-user-manage-form>

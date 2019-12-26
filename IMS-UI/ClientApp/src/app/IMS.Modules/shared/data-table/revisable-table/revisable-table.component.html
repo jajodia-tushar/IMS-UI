@@ -3,15 +3,24 @@
     <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
     
     <mat-header-cell *cdkHeaderCellDef style="text-align:center" mat-sort-header>{{ column.header }}
+        <div *ngIf="column.columnDef == 'actions'">
+        
+        </div>
     </mat-header-cell>
     <mat-cell *cdkCellDef="let row">
     
            <div *ngIf="column.columnDef == 'itemName'">{{ column.cell(row) }}</div>
-           <div *ngIf="column.columnDef == 'Quantity'">{{ column.cell(row) }}</div>
+           <div *ngIf="column.columnDef == 'Quantity'">
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)">
+                </mat-form-field>
+              </form>
+           </div>
            <div *ngIf="column.columnDef == 'Price'">
             <form class="example-form">
                 <mat-form-field class="example-full-width">
-                  <input matInput value="{{ column.cell(row) }}">
+                  <input matInput value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)">
                 </mat-form-field>
               </form>
             </div>
@@ -20,7 +29,7 @@
            <div title="delete" *ngIf="column.columnDef === 'actions' ">
     
                <button mat-icon-button class="action-buttons">
-                  <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deleteSession(row)">delete</mat-icon>
+                  <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deletedata(row)">delete</mat-icon>
                </button>
                <ng-container *ngIf="show">
                <button mat-icon-button class="action-buttons">
@@ -28,10 +37,20 @@
                </button>
            </ng-container>
            </div>  
+           
     </mat-cell>   
+    <mat-footer-cell *cdkFooterCellDef>
+      <div *ngIf="column.columnDef == 'actions'">
+        
+        <button mat-raised-button class="Add-icon" (click)="AddRow()">
+            <mat-icon class="icon">add</mat-icon>Add
+          </button>
+          </div> 
+    </mat-footer-cell>
+    
     </ng-container>
     
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    
+    <mat-footer-row *cdkFooterRowDef="displayedColumns"></mat-footer-row>
      </table>

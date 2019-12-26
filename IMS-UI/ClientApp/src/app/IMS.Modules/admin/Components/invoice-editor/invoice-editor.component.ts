@@ -18,7 +18,7 @@ export class InvoiceEditorComponent implements OnInit {
    
   public columns;
   itemquantityprice: MatTableDataSource<OrderItemDetail>;
-
+  // datasourceitems:OrderItemDetail[]=[];
   constructor(public vendorOrderdetailsService:VendorOrderdetailsService) { }
 
   ngOnInit() {
@@ -30,17 +30,29 @@ export class InvoiceEditorComponent implements OnInit {
         this.InvoiceNo = data.listOfVendorOrders[0].vendorOrderDetails.invoiceNumber;
         this.OrderID = data.listOfVendorOrders[0].vendorOrderDetails.orderId;
         this.VendorName = data.listOfVendorOrders[0].vendor.name;
-        console.log(data);
+       // console.log(data);
       }
         );
 
         this.vendorOrderdetailsService.getclerkOrderData().subscribe(
           res => {
             this.itemquantityprice=res.data;
-            console.log(res);
+            console.log(res.data);
           });
         this.columns = this.vendorOrderdetailsService.getColumn();
       }
+
+      // delete(row:any){
+      //      let index = this.datasourceitems.indexOf(row);
+      //      if (index != -1) {
+      //        this.datasourceitems.splice(index, 1);
+      //        this.renderTable();
+      //      }
+      //    }
+      
+      //    renderTable() {
+      //      this.itemquantityprice = new MatTableDataSource(this.datasourceitems);
+      //    }
   }
 
 

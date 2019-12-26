@@ -10,5 +10,5 @@
       ChallanNo:{{ChallanNo}}
     </mat-card-content>
   </mat-card>
-  <app-revisable-table [columnHeader]=columns [griddata]="itemquantityprice"></app-revisable-table>
+  <app-revisable-table [columnHeader]=columns [griddata]="itemquantityprice" (deleteRow)="delete($event)"></app-revisable-table>
 </div>

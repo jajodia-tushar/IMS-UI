@@ -135,7 +135,7 @@
 	left: 0;
 	width: 60px;
 	height: 60px;
-	background: crimson;
+	background: #222437;
 	border-radius: 50%;
 	transition: all 1s;
 	z-index: 4;
@@ -188,12 +188,12 @@
 	height: 50px;
 	outline: none;
 	border: none;
-	background: crimson;
+	background: #222437;
 	color: white;
-	text-shadow: 0 0 10px crimson;
+	text-shadow: 0 0 10px #222437;
 	padding: 0 80px 0 20px;
 	border-radius: 30px;
-	box-shadow: 0 0 25px 0 crimson, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 25px 0 #222437, 0 20px 25px 0 rgba(0, 0, 0, 0.2);
 	transition: all 1s;
 	opacity: 0;
 	z-index: 5;

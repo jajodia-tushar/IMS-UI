@@ -1,11 +1,17 @@
 .container {
-    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 4em;
+    background-color: #222437;
     margin-right: 3%;
     border-radius: 7px;
-    border: 3px solid #d9d1d1;
+    /* border: 3px solid #d9d1d1; */
     overflow: auto;
     min-width: 600px;
-    margin-top: 6%
+    margin-top: 6%;
 }
 
 table {

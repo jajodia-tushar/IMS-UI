@@ -59,8 +59,7 @@
       #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item *ngFor="let nav of navBarItems" style="color:#606a96 ;" onmouseover="{this.style.color='#fff'}"
-          routerLink="{{nav.tab}}" onMouseOut="{this.style.color='#606a96';this.style.backgroundColor='#' }">
+        <a mat-list-item *ngFor="let nav of navBarItems;" [routerLink]="[nav.tab]" routerLinkActive="active">
 
           <mat-icon style="
             font-size: 1rem;

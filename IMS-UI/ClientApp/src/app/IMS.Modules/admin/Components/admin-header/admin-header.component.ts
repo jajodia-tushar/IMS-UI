@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-data.service";
 import { User } from "src/app/IMS.Models/User/User";
+import { chainedInstruction } from "@angular/compiler/src/render3/view/util";
+import { elementAt } from "rxjs/operators";
 
 @Component({
   selector: "app-admin-header",
@@ -36,6 +38,7 @@ export class AdminHeader implements OnDestroy {
   }]
   isVisible = false;
   isPersonVisible = false;
+  selectedIndexs: any;
 
   changeNotificationIcon() {
     this.isVisible = !this.isVisible;
@@ -48,13 +51,15 @@ export class AdminHeader implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+
 }

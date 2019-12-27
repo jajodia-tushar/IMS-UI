@@ -17,7 +17,6 @@ import { UserManagementComponent } from './Components/user-management/user-manag
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
-import { ReportsFilterComponent } from './Components/reports-filter/reports-filter.component';
 
 
 @NgModule({
@@ -36,8 +35,7 @@ import { ReportsFilterComponent } from './Components/reports-filter/reports-filt
     UserManagementComponent,
     ReportsTableComponent,
     ReportsTabsComponent,
-    DetailsPipe,
-    ReportsTableComponent,],
+    DetailsPipe],
   imports: [
     MaterialModule,
     AdminRoutingModule

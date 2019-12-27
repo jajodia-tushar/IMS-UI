@@ -12,6 +12,7 @@ export class ReportsTabsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    
     this.reportsSelectionData = [
       {
         reportName: "RAG",

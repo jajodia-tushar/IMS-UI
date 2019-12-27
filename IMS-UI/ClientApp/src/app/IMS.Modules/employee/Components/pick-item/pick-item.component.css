@@ -34,10 +34,8 @@
 
 .flex-container {
     display: flex;
-    flex-wrap: nowrap;
-    background-color: white;
-    margin: 24px 24px 24px 24px;
-    border-radius: 7px;
+    /* flex-wrap: nowrap; */
+    background-color: #1c1e2f;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
 }
 
@@ -63,4 +61,40 @@
 
 .mat-card {
     text-align: center;
+}
+
+
+
+ /* Employee Header */
+
+ .employee-header span {
+    float: left;
+    color: #ffc04e;
+    text-align: center;
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 25px;
+    opacity: 0.9;
+    margin-top: 21px;
+    margin-left: 24px;
+ }
+
+.company-logo {
+    font-size: 25px;
+    font-weight: bold;
+    float: left;
+}
+
+.icon img {
+    height: 60px;
+    width: auto;
+    /* margin: 10px; */
+    margin-top: -10%;
+    margin-left: 35%;
+}
+
+.employee-header {
+    overflow: hidden;
+    background: #222437;
+    height: 10%;
 }

@@ -5,8 +5,9 @@ import { CartItem } from 'src/app/IMS.Models/CartItem';
 import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
 import { EmployeeOrderData } from 'src/app/IMS.Models/Employee/EmployeeOrderData';
 import { SnackbarComponent } from '../../../shared/snackbar/snackbar.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, getMatInputUnsupportedTypeError } from '@angular/material';
 import { EmployeeOrderResponse } from 'src/app/IMS.Models/Employee/EmployeeOrderResponse';
+import { publishLast } from 'rxjs/operators';
 
 @Component({
   selector: 'app-items-cart',
@@ -101,4 +102,33 @@ delete(element) {
   this.onCartItemDeleted.emit(this.selectedItems);
 }
 
+plus(element) {
+  this.selectedItems.forEach(obj => {
+    if (obj == element) {
+      if (element.quantity < obj.item.maxLimit) {
+        obj.quantity++;
+      } else {
+        this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
+      }
+    }
+  });
 }
+
+minus(element) {
+  this.selectedItems.forEach(obj => {
+    if (obj == element) {
+      if (element.quantity > 0) {
+        obj.quantity--; 
+        if (obj.quantity == 0) {
+          this.delete(element);
+          this.showMessage(1, `"${obj.item.name}" is removed from your cart`);
+        }
+      } /* else {
+        this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
+      } */
+    }
+  });
+}
+
+}
+

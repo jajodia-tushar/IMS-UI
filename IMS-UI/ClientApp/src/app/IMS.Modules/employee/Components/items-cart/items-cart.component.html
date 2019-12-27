@@ -1,6 +1,5 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
 
 <div class="container">
     <div>
@@ -12,16 +11,16 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> No. </th>
-                <td mat-cell *matCellDef="let element;index as i"  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> {{i+1}} </td>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> No. </th>
+                <td mat-cell *matCellDef="let element;index as i"  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> {{i+1}} </td>
             </ng-container>
 
 
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> Name </th>
-                <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> {{element.item.name}} </td>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> Name </th>
+                <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> {{element.item.name}} </td>
             </ng-container>
 
 
@@ -29,15 +28,21 @@
             <!-- Weight Column -->
             <ng-container matColumnDef="Quantity">
                 <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> Quantity </th>
-                <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> {{element.quantity}} </td>
+                    <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}">
+                        <span class="stepper">
+                            <button class="minus" (click)="minus(element)">–</button>
+                            <input type="number" id="stepper" value="{{element.quantity}}" min="0" max="{{element.item.maxLimit}}" readonly>
+                            <button class="plus" (click)="plus(element)">+</button>
+                        </span>
+                    </td>
             </ng-container>
 
 
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="Symbol">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"></th>
-                <td mat-cell *matCellDef="let element" (click)="delete(element)"  [ngStyle]="{'color': 'white', 'text-align': 'center'}">
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'right'}"></th>
+                <td mat-cell *matCellDef="let element" (click)="delete(element)"  [ngStyle]="{'color': 'white', 'text-align': 'right'}">
                     <mat-icon style="cursor: pointer;">delete</mat-icon>
                 </td>
             </ng-container>

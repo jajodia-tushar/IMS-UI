@@ -32,7 +32,7 @@ import { RecentEntriesService } from './IMS.Services/admin/recent-entries.servic
   declarations: [
     AppComponent,
     LoginComponent,
-    FloorComponent,
+    FloorComponent
   ],
   imports: [
     SharedModule,

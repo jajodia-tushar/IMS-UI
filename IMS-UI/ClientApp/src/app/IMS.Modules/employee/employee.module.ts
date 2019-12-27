@@ -9,14 +9,19 @@ import { ItemsListComponent } from './Components/items-list/items-list.component
 import { SharedModule } from '../shared/shared.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { FilterPipe} from './Components/pick-item/filter.pipe';
+
 
 @NgModule({
-  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent],
+  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe],
   imports: [
     SharedModule,
     MaterialModule,
     EmployeeRoutingModule,
     MatGridListModule
+  ], 
+  exports: [
+    FilterPipe
   ]
 })
 export class EmployeeModule { }

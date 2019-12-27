@@ -14,6 +14,7 @@ import { LineChartComponent } from './Components/line-chart/line-chart.component
 import { StoreComponent } from './Components/store/store.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
+import { DetailsPipe } from './Components/recent-entries/details.pipe';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { UserManagementComponent } from './Components/user-management/user-manag
     LineChartComponent,
     StoreComponent,
     ReportsComponent,
-    UserManagementComponent,],
+    UserManagementComponent,
+    DetailsPipe,],
   imports: [
     MaterialModule,
     AdminRoutingModule

@@ -42,7 +42,8 @@ namespace IMS_UI
             services.AddSingleton<RAGStatusProvider>();
             services.AddSingleton<ShelfWiseOrderCountProvider>();
             services.AddSingleton<ItemWiseAnalysisProvider>();
-
+            services.AddSingleton<StockProvider>();
+            services.AddSingleton<RecentEntriesProvider>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

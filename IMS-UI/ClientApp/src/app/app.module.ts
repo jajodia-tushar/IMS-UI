@@ -26,6 +26,7 @@ import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.s
 import { ItemWiseDataService } from './IMS.Services/admin/item-wise-data.service';
 import { RagStatusService } from './IMS.Services/admin/rag-status.service';
 import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
+import { RecentEntriesService } from './IMS.Services/admin/recent-entries.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RandomColorGeneratorService } from './IMS.Services/random-color-generat
 
   ],
   providers: [
+    RecentEntriesService,
     LoginService,
     LoginGuard,
     AdminRouteGuardService,

@@ -43,6 +43,7 @@ tr.example-detail-row {
 
 tr.example-element-row:not(.example-expanded-row):hover {
   background: #484F71;
+  cursor: pointer;
 }
 
 .example-element-row :hover {
@@ -78,7 +79,7 @@ table {
 }
 
 .router-link {
-  
+  margin-right: 2%;
   margin-bottom: 7%;
   text-align: right;
   position: absolute;
@@ -90,6 +91,8 @@ table {
 .router-link > a  {
   color: white;
   text-decoration: none;
-  border: 1px dotted;
-  padding: 0 1px;
+  border: 0.5px solid;
+  border-radius: 1rem;
+  padding: 0 10px;
+  height: 30px;
 }

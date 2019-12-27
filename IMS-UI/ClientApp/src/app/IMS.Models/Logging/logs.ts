@@ -1,6 +1,6 @@
 export class Logs
    {
-        public  id : number;
+        public  logId : number;
         public  userId : number;
         public  callType : string; 
         public  request : string ;

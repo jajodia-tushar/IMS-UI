@@ -37,12 +37,12 @@
   float: left;
   width: 60%;
   overflow: hidden;
-  height: 650px;
+  height: 700px;
 }
 
 .recent-entries  {
   float: right;
   overflow: hidden;
-  height: 625px;
+  height: 645px;
   width: 40%;
 }

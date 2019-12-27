@@ -6,6 +6,7 @@
   position: relative;
   color: white;
   overflow: hidden;
+  top: 20px;
 }
 
 .flex-container {
@@ -67,6 +68,7 @@ table {
 
 .router-link > a {
   color: white;
-  margin: 5%;
   text-decoration: none;
+  border: 1px dotted;
+  padding: 0 1px;
 }

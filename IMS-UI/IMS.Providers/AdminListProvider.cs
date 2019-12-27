@@ -1,5 +1,6 @@
 ﻿using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Providers
 {
-    public class AdminListProvider
+    public class AdminListProvider:IAdminListProvider
     {
         private IConfiguration _IConfiguration;
         private SessionManager _SessionManager;

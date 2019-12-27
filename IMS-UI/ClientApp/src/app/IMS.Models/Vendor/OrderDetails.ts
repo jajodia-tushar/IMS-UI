@@ -6,5 +6,5 @@ export class OrderDetails {
   vendor: Vendor;
   submitedTo: string;
   receivedBy: string;
-  date: string;
+  date: Date;
 }

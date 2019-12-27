@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Providers;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +13,9 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private ItemListProvider _ItemListProvider;
+        private IItemListProvider _ItemListProvider;
 
-        public ItemController(ItemListProvider provider)
+        public ItemController(IItemListProvider provider)
         {
             _ItemListProvider = provider;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Providers;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +14,9 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private AdminListProvider _AdminListProvider;
+        private IAdminListProvider _AdminListProvider;
 
-        public AdminController(AdminListProvider provider)
+        public AdminController(IAdminListProvider provider)
         {
             _AdminListProvider = provider;
         }

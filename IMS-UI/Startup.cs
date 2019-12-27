@@ -50,8 +50,8 @@ namespace IMS_UI
             //    services.AddSingleton<AuthGaurdService>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();
             services.AddSingleton<IVendorOrderProvider, VendorOrderProvider>();
-            services.AddSingleton<AdminListProvider>();
-            services.AddSingleton<ItemListProvider>();
+            services.AddSingleton<IAdminListProvider,AdminListProvider>();
+            services.AddSingleton<IItemListProvider,ItemListProvider>();
             services.AddSingleton<VendorListProvider>();
             services.AddSingleton<OrderProvider>();
 

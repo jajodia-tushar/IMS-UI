@@ -10,6 +10,7 @@ import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.
 import { HttpClient } from '@angular/common/http';
 import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/VendorOrderDetails';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
+import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 
 interface DATASOURCE_ITEM {
   Item: Item;
@@ -48,17 +49,17 @@ export class OrderdetailsComponent implements OnInit {
     vendor: null,
     vendorOrderDetails: {
       challanNumber: "",
-      orderId: null,
-      isApproved: null,
+      orderId: 0,
+      isApproved: false,
       recievedBy: "",
       submittedTo: "",
       challanImageUrl: "",
-      date: "",
-      finalAmount: null,
+      date: null,
+      finalAmount: 0,
       invoiceImageUrl: null,
       invoiceNumber: null,
       orderItemDetails: null,
-      taxableAmount: null
+      taxableAmount: 0
     }
   };
 
@@ -100,7 +101,7 @@ export class OrderdetailsComponent implements OnInit {
   public Items: Item[];
   filteredItems: string[];
   constructor(private _ItemService: ItemService, private _CentralizedDataService: CentralizedDataService,
-    private snackBar: MatSnackBar, private http: HttpClient) { }
+    private snackBar: MatSnackBar, private http: HttpClient, private _VendorSerice: VendorService) { }
 
  
   uploadImage(file) {
@@ -133,17 +134,6 @@ export class OrderdetailsComponent implements OnInit {
     });
   }
 
-  //filterItemsByKey(value: string)
-  //{
-  //  if (value == null)
-  //  {
-  //    value = '';
-  //  }
-  //  const filterValue = value.toLowerCase();
-  //  this.filteredItems = this.itemNames.filter(name => name.toLowerCase().includes(filterValue));
-  //}
-
-
   isItemAlreadySelected(item: Item) {
     return this.dataSourceItems.find(i => i.item.name == item.name) != null;
   }
@@ -167,7 +157,7 @@ export class OrderdetailsComponent implements OnInit {
 
   allowOnlyDigits(e: KeyboardEvent) {
     //let inputText = event.target.value;
-    console.log(e);
+    //console.log(e);
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -202,8 +192,8 @@ export class OrderdetailsComponent implements OnInit {
   }
   onSubmit() {
     if (this.orderDetails) {
-      console.log(this.orderDetails);
-      console.log(this.dataSourceItems);
+      //console.log(this.orderDetails);
+      //console.log(this.dataSourceItems);
       this.vendorOrder.vendorOrderDetails.challanNumber = this.orderDetails.challanNumber;
       this.vendorOrder.vendorOrderDetails.date = this.orderDetails.date;
       this.vendorOrder.vendorOrderDetails.orderItemDetails = this.dataSourceItems;
@@ -212,6 +202,18 @@ export class OrderdetailsComponent implements OnInit {
       this.vendorOrder.vendor = this.orderDetails.vendor;
 //      this.vendorOrder.vendorOrderDetails = this.vendorOrder;
       console.log(this.vendorOrder);
+      this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
+        data => {
+          console.log(data);
+          
+        },
+        error => {
+          console.log("error came");
+          console.log(error);
+        }
+
+      )
+
     }
     else {
       this.showMessage(5, "fill completely");

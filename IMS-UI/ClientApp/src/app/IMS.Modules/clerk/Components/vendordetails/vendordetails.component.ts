@@ -49,7 +49,10 @@ export class VendordetailsComponent implements OnInit {
     this.isDataToBeSend();
   }
   SelectedDate() {
-    this.orderDetails.date = this.RecievedDate.getDate() + "-" + (this.RecievedDate.getMonth() + 1) + "-" + this.RecievedDate.getFullYear();
+    console.log(this.RecievedDate)
+
+    this.orderDetails.date = this.RecievedDate;
+    console.log(this.orderDetails.date)
     this.isDataToBeSend();
   }
   isDataToBeSend() {

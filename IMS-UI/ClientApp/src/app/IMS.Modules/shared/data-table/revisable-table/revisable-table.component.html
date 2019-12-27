@@ -9,7 +9,23 @@
     </mat-header-cell>
     <mat-cell *cdkCellDef="let row">
     
-           <div *ngIf="column.columnDef == 'itemName'">{{ column.cell(row) }}</div>
+        <!-- <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">              
+            <mat-select [(ngModel)]="element.item">
+              <mat-option *ngFor="let Item of Items" [value]="Item" [disabled]="isItemAlreadySelected(Item)">
+                {{Item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+           <div *ngIf="column.columnDef == 'itemName'">
+            <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size" > 
+            <mat-select  (selectionChange)="selectedOption(row,$event)" placeholder= "{{ column.cell(row) }}">
+                <mat-option  *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+            </mat-select>  
+        </mat-form-field> 
+            </div>
            <div *ngIf="column.columnDef == 'Quantity'">
             <form class="example-form">
                 <mat-form-field class="example-full-width">
@@ -46,11 +62,27 @@
             <mat-icon class="icon">add</mat-icon>Add
           </button>
           </div> 
+          <div *ngIf="column.columnDef == 'itemName'">
+        
+           TOTAL
+              </div>
+              
+              <div *ngIf="column.columnDef == 'Price'">
+        
+                {{getTotalCost(row) | currency}}
+                  </div> 
     </mat-footer-cell>
     
+    <!-- <ng-container cdkColumnDef="aloo">
+        <mat-footer-cell *cdkFooterCellDef>
+          <p>hii</p>
+        </mat-footer-cell>>
+      </ng-container> -->
+
     </ng-container>
-    
+   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     <mat-footer-row *cdkFooterRowDef="displayedColumns"></mat-footer-row>
+   
      </table>

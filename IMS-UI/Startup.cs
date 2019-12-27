@@ -39,6 +39,7 @@ namespace IMS_UI
             services.AddSingleton<IOrderProvider, OrderProvider>();
             services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
             services.AddSingleton<IShelfProvider, ShelfProvider>();
+            services.AddSingleton<ILogsProvider, LogsProvider>();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<FrequentlyUsedItemProvider>();
             services.AddSingleton<RAGStatusProvider>();

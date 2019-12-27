@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { LoginComponent } from './Components/login/login.component';
+import { LoggingComponent } from './Components/logging/logging.component';
 
 const routes: Routes = [
   { path: '', redirectTo : 'login' , pathMatch : 'full'},
@@ -9,7 +10,8 @@ const routes: Routes = [
   { path: 'employee', loadChildren: () => import('./IMS.Modules/employee/employee.module').then(m => m.EmployeeModule)},
   { path: 'Shelf', redirectTo : 'employee' },
   { path: 'Admin', loadChildren: () => import('./IMS.Modules/admin/admin.module').then(m => m.AdminModule)},
-  { path: 'Clerk', loadChildren: () => import('./IMS.Modules/clerk/clerk.module').then(m => m.ClerkModule)},
+  { path: 'Clerk', loadChildren: () => import('./IMS.Modules/clerk/clerk.module').then(m => m.ClerkModule) },
+  { path: 'logs', component: LoggingComponent, pathMatch: 'full' },
   { path: '**', redirectTo : 'login' }
 ];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -10,20 +10,12 @@ import {MatTableDataSource} from '@angular/material/table';
 export class ReportsTableComponent implements OnInit {
   constructor() { }
 
-  columnsToDisplay: string[] = ['position', 'name', 'weight', 'symbol'];
+  @Input()
+  columnsToDisplay: string[];
+  @Input()
   dataSource = [];
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  ngOnInit() {
-  }
-}
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  ngOnInit() {}
 }
  
 

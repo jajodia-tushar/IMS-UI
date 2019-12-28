@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { MatTabChangeEvent, MatSelect, MatSelectChange } from "@angular/material";
+import {
+  MatTabChangeEvent,
+  MatSelect,
+  MatSelectChange
+} from "@angular/material";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
 @Component({
@@ -9,9 +13,12 @@ import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 })
 export class ReportsTabsComponent implements OnInit {
   reportsSelectionData: reportsSelectionDataModel[] = [];
-  selectedTab : number;
+  selectedTab: number;
 
-  constructor(private reportsService : ReportsService) {}
+  columnToDisplay: string[];
+  dataToDisplay: any[] = [];
+
+  constructor(private reportsService: ReportsService) {}
 
   ngOnInit() {
     this.selectedTab = 0;
@@ -23,16 +30,18 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "Shelf",
             type: "dropDown",
             dropDownOptions: ["Warehouse", "First Floor", "Sixth Floor"],
-            dataFromUser : ""
+            dropDownValues: ["warehouse", "A", "B"],
+            dataFromUser: ""
           },
           {
             placeHolderName: "Color",
             type: "dropDown",
             dropDownOptions: ["Red", "Amber", "Green"],
-            dataFromUser : ""
+            dropDownValues: ["Red", "Amber", "Green"],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       },
       {
         reportName: "Vendor",
@@ -41,22 +50,25 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "VendorName",
             type: "dropDown",
             dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
-            dataFromUser : ""
+            dropDownValues: ["Vendor 1", "Vendor 2", "Vendor 3"],
+            dataFromUser: ""
           },
           {
             placeHolderName: "FromDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       },
       {
         reportName: "Employee",
@@ -65,22 +77,25 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "Employee Id",
             type: "dropDown",
             dropDownOptions: ["1", "2", "3"],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "FromDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       },
       {
         reportName: "Item",
@@ -89,22 +104,25 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "Item Name",
             type: "dropDown",
             dropDownOptions: ["Pen", "Pencil", "Notebook"],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "FromDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       },
       {
         reportName: "Shelf",
@@ -113,22 +131,25 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "ShelfName",
             type: "dropDown",
             dropDownOptions: ["First Floor", "Sixth Floor"],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "FromDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       },
       {
         reportName: "Rochit",
@@ -137,53 +158,71 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "Chaman",
             type: "dropDown",
             dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "FromDate",
             type: "drop",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
-            dataFromUser : ""
+            dropDownValues: [],
+            dataFromUser: ""
           }
         ],
-        urlToRequest : ""
+        urlToRequest: ""
       }
     ];
   }
 
-  tabChanged(event : Event){
+  tabChanged(event: Event) {
     console.log(this.selectedTab);
   }
 
-  searchButtonClicked(){  
-    this.reportsService.getRAGReport("x", "B", "red").subscribe(
-      data => console.log(data)
-   );
+  searchButtonClicked() {
+    let a = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0]
+      .dataFromUser;
+    let b = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1]
+      .dataFromUser;
+    this.reportsService
+      .getRAGReport(a, a, b)
+      .subscribe(data => {
+        this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
+        this.dataToDisplay = [];
+        if (data.status  == "Failure") {
+          this.dataToDisplay = JSON.parse(JSON.stringify([]));
+          return;
+        }
+        data.itemQuantityMappings.forEach(
+          data => this.dataToDisplay.push({
+            "item": data.item.name,
+            "quantity": data.quantity
+          })
+        )
+        this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
+        console
+      }
+      );
   }
-
 }
 export class reportsSelectionDataModel {
   reportName: string;
   reportsFilterOptions: reportsFilterOption[];
-  urlToRequest : string;
-  
+  urlToRequest: string;
 }
 
-export class RequestModel{
-  
-
-
-}
+export class RequestModel {}
 
 export class reportsFilterOption {
   placeHolderName: string;
   type: string;
   dropDownOptions: string[];
-  dataFromUser : string;
+  dropDownValues: string[];
+  dataFromUser: string;
 }

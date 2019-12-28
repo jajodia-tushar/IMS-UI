@@ -15,6 +15,7 @@
   }
   
   .card {
+    cursor: pointer;
     display: flex;
     height: 280px;
     width: 200px;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTabChangeEvent, MatSelect, MatSelectChange } from "@angular/material";
+import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -9,14 +10,8 @@ import { MatTabChangeEvent, MatSelect, MatSelectChange } from "@angular/material
 export class ReportsTabsComponent implements OnInit {
   reportsSelectionData: reportsSelectionDataModel[] = [];
   selectedTab : number;
-  
-  request = {
-    locationName : "",
-    locationCode : "",
-    colour : ""
-  }
 
-  constructor() {}
+  constructor(private reportsService : ReportsService) {}
 
   ngOnInit() {
     this.selectedTab = 0;
@@ -166,8 +161,10 @@ export class ReportsTabsComponent implements OnInit {
     console.log(this.selectedTab);
   }
 
-  searchButtonClicked(){
-    
+  searchButtonClicked(){  
+    this.reportsService.getRAGReport("x", "B", "red").subscribe(
+      data => console.log(data)
+   );
   }
 
 }

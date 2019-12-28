@@ -21,7 +21,6 @@ export class UserListComponent implements OnInit {
 
   @Input() event:User;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatTable,{static: true}) table: MatTable<any>;
   
   constructor(private userManagementService:UserManagementService, public dialog: MatDialog) { }
 
@@ -59,10 +58,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  public addUserToTable(newUser: User){
-    this.dataSource.data = this.ELEMENT_DATA.push(newUser);
-  }
-
   deactivateUser(user){
     console.log(user);
     let dialogConfig = new MatDialogConfig();
@@ -88,8 +83,7 @@ export class UserListComponent implements OnInit {
         this.ELEMENT_DATA.splice(index, 1); 
       }
    }
-    this.dataSource.data = this.ELEMENT_DATA;
-    // this.table.renderRows();    
+    this.dataSource.data = this.ELEMENT_DATA;  
   }
 
   editUserInTable(user){
@@ -100,23 +94,21 @@ export class UserListComponent implements OnInit {
       }
    }
     this.dataSource.data = this.ELEMENT_DATA;
-    this.table.renderRows();    
   }
 
   async setUsers(){
     let users : User[] =  (<Users>await this.userManagementService.getAllUsers()).users;
-    console.log('set users')
-    console.log(users);
     this.ELEMENT_DATA = users;
   }
 
-  openDialog() {
+  openAddUserDialog() {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = null;
     const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe((result:User) => {
+        this.ELEMENT_DATA.push(<User>result);
+        this.dataSource.data = this.ELEMENT_DATA;
     });
   }
 }

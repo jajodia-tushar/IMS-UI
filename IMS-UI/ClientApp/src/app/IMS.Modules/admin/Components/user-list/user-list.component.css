@@ -40,3 +40,9 @@ table {
     color: white;
 
   }
+
+  #add-user{
+    position: absolute;
+    right: 10px;
+    background-color: #606a96;
+}

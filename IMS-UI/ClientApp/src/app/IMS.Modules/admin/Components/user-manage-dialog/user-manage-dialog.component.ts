@@ -22,4 +22,9 @@ export class UserManageDialogComponent implements OnInit {
       this.dialogRef.close(user);      
   }
 
+  notifyTableUserCreated(user){
+    console.log("inside dialog");
+    this.dialogRef.close(user);      
+}
+
 }

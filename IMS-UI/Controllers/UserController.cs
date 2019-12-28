@@ -21,6 +21,13 @@ namespace IMS_UI.Controllers
             this._userProvider = userProvider;
         }
 
+        [HttpGet]
+        public async Task<UsersResponse> GetAllUsers()
+        {
+            var response = await _userProvider.GetAllUsers();
+            return response;
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
@@ -34,13 +41,6 @@ namespace IMS_UI.Controllers
         public async Task<UserResponse> EditUserDetails([FromBody] User user)
         {
             var response = await _userProvider.EditUser(user);
-            return response;
-        }
-
-        [HttpGet]
-        public async Task<UsersResponse> GetAllUsers()
-        {
-            var response = await _userProvider.GetAllUsers();
             return response;
         }
 

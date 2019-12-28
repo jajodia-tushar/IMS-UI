@@ -24,7 +24,7 @@ export class UserManageFormComponent implements OnInit{
 
   @Input() userDetails;
   @Output() userEditted : EventEmitter<User> = new EventEmitter<User>();
-  @Output() userCreated = new EventEmitter();
+  @Output() userCreated = new EventEmitter<User>();
   isEditUserForm : boolean;
   isSuperAdmin : boolean;
   
@@ -55,25 +55,7 @@ export class UserManageFormComponent implements OnInit{
   }
   
   async setUserRoles(){
-    // let roles : Role[] = (<RolesResponse> await this.userManageService.getAllRoles()).roles;
-    let roles : Role[] = [
-      {
-      "id" : 1,
-      "name" : "Admin"
-      },
-      {
-        "id" : 2,
-        "name" : "Clerk"
-      },
-      {
-        "id" : 3,
-        "name" : "Shelf"
-      },
-      {
-        "id" : 4,
-        "name" : "SuperAdmin"
-      }
-    ]
+    let roles : Role[] = (<RolesResponse> await this.userManageService.getAllRoles()).roles;
     this.roles = roles;
   }
   get username(){

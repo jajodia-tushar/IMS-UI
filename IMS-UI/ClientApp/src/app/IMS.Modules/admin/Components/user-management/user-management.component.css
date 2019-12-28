@@ -10,11 +10,11 @@
 h1{
     margin :20px;
 }
-  button{
+  /* button{
       position: absolute;
       right: 10px;
       background-color: #606a96;
-  }
+  } */
 
 .table-container{
     position: relative;

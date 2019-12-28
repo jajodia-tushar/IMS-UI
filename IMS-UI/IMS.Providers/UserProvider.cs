@@ -73,6 +73,16 @@ namespace IMS_UI.IMS.Providers
             return apiParsedResponse;
         }
 
+        public async Task<UsersResponse> GetAllUsers()
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/user");
+                return await UsersResultParser(response);
+            }
+        }
+
         private JObject JsonMaker(User user)
         {
             string jsonString = JsonConvert.SerializeObject(user);
@@ -86,16 +96,6 @@ namespace IMS_UI.IMS.Providers
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
-        }
-
-        public async Task<UsersResponse> GetAllUsers()
-        {
-            using (HttpClient http = new HttpClient())
-            {
-                prepareClient(http);
-                var response = await http.GetAsync("api/user");
-                return await UsersResultParser(response);
-            }
         }
 
         public async Task<Response> DeactivateUser(User user)

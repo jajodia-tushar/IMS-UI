@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor() { }
+  locationCode: string;
+  locationName: string;
+  colour: string;
+
+  constructor() { 
+    
+
+  }
   ngOnInit() {
   }
 }

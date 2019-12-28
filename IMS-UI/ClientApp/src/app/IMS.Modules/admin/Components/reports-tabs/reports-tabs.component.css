@@ -63,8 +63,8 @@ mat-list-item {
 .mat-flat-button.mat-primary,
 .mat-mini-fab.mat-primary,
 .mat-raised-button.mat-primary {
-    background-color: #222437;
-    height: 34px;
+    background-color: #333748;
+    height: 45px;
     margin-left: 16px;
 }
 

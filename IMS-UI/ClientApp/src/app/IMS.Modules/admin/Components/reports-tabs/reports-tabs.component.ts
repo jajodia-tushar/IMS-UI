@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import {
   MatTabChangeEvent,
   MatSelect,
   MatSelectChange
 } from "@angular/material";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-reports-tabs",
@@ -15,10 +16,18 @@ export class ReportsTabsComponent implements OnInit {
   reportsSelectionData: reportsSelectionDataModel[] = [];
   selectedTab: number;
 
+  locationCode: string;
+  locationName: string;
+  colour: string;
+
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
 
-  constructor(private reportsService: ReportsService) {}
+  constructor(private reportsService: ReportsService,private route: ActivatedRoute) {
+    this.locationName = this.route.snapshot.queryParams.locationName
+    this.locationCode =  this.route.snapshot.queryParams.locationCode
+    this.colour = this.route.snapshot.queryParams.colour
+  }
 
   ngOnInit() {
     this.selectedTab = 0;
@@ -30,15 +39,15 @@ export class ReportsTabsComponent implements OnInit {
             placeHolderName: "Shelf",
             type: "dropDown",
             dropDownOptions: ["Warehouse", "First Floor", "Sixth Floor"],
-            dropDownValues: ["warehouse", "A", "B"],
-            dataFromUser: ""
+            dropDownValues: ["WH", "A", "B"],
+            dataFromUser: this.locationCode
           },
           {
             placeHolderName: "Color",
             type: "dropDown",
             dropDownOptions: ["Red", "Amber", "Green"],
             dropDownValues: ["Red", "Amber", "Green"],
-            dataFromUser: ""
+            dataFromUser: this.colour
           }
         ],
         urlToRequest: ""
@@ -152,6 +161,10 @@ export class ReportsTabsComponent implements OnInit {
         urlToRequest: ""
       }
     ];
+
+    if (this.locationCode != null) {
+      this.searchButtonClicked();
+    }
   }
 
   tabChanged(event: Event) {

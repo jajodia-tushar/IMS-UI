@@ -2,6 +2,6 @@ import { ColorCount } from "./ColorCount";
 
 export class RAGDataModel {
   name: string;
-  code: String;
+  code: string;
   colourCountMappings: ColorCount[];
 }

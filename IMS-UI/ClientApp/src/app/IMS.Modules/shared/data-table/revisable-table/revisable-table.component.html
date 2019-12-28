@@ -69,7 +69,7 @@
               
               <div *ngIf="column.columnDef == 'Price'">
         
-                {{getTotalCost(row) | currency}}
+                {{getTotalCost() | currency:"₹"}}
                   </div> 
     </mat-footer-cell>
     

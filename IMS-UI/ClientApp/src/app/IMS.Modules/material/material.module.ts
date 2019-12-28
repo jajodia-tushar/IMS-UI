@@ -9,7 +9,8 @@ import {
   MatRadioModule, MatSortModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
+
 
 const materialModules = [
   MatDividerModule,
@@ -70,6 +72,8 @@ const materialModules = [
   MatRadioModule,
     MatDividerModule,
     CdkTableModule,
+    FlexLayoutModule,
+    ReactiveFormsModule
 ]
 
 

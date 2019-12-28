@@ -68,14 +68,14 @@ export class RevisableTableComponent implements OnInit {
 
   changeprice(row,event){
      console.log(row);
-     row.totalPrice= +(<HTMLInputElement>event.target).value;
+     row.totalPrice=  +(<HTMLInputElement>event.target).value;
      this.renderTable();
      
    }
 
    changequantity(row,event){
     
-    row.quantity=(<HTMLInputElement>event.target).value;
+    row.quantity= +(<HTMLInputElement>event.target).value;
     this.renderTable();
    }
 
@@ -122,7 +122,7 @@ getTotalCost(){
   let totalcost;
  
    totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-  //console.log(totalcost);
+  console.log(totalcost);
   return totalcost;
 }
   ngOnInit() {

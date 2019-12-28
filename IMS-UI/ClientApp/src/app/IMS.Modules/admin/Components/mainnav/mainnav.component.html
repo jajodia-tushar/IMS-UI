@@ -31,6 +31,11 @@
 </div>
 
 <app-charts-component></app-charts-component>
-
-<app-store [numberOfItems]='10' class="store"></app-store>
-<app-recent-entries class="recent-entries"></app-recent-entries>
+<div class="container-stock-recent-entries">
+  <div class="column-store-entries">
+    <app-store [numberOfItems]='10' class="store"></app-store>
+  </div>
+  <div class="column-recent-entries">
+    <app-recent-entries class="recent-entries"></app-recent-entries>
+  </div>
+</div>

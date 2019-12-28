@@ -1,12 +1,12 @@
 .items-container {
-  margin: 0px 20px 10px 20px;
+  /* margin: 0px 20px 10px 20px; */
   background-color: #222437;
   border-radius: 8px;
   overflow: auto;
   position: relative;
   color: white;
   overflow: hidden;
-  top: 20px;
+  /* top: 20px; */
 }
 
 .flex-container {
@@ -15,15 +15,16 @@
 }
 
 .flex-container > div {
-  margin: 10px;
+  /* margin: 10px; */
   text-align: left;
 }
 
 .container {
-  margin-right: 3%;
+  margin-right: 0px;
   border-radius: 7px;
-  overflow: auto;
-  /* min-width: 290px; */
+
+  min-width: 290px;
+  margin-top: 10px;
 }
 
 .container > h4 {
@@ -63,15 +64,26 @@ table {
   width: 100%;
 }
 
-.router-link {
+.viewAllStoreEntries {
   text-align: right;
 }
 
-.router-link > a {
+.viewAllStoreEntries > p {
   color: white;
   text-decoration: none;
   border: 0.5px solid;
   border-radius: 1rem;
   padding: 0 10px;
   height: 30px;
+}
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 8px;
+}
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+  padding-right: 0px;
 }

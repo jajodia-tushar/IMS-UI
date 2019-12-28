@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     private dialog: MatDialog) { }
 
   Login() {
+    this.ButtonName = null;
     this.loginService.authenticate(this.Username, this.Password).subscribe(
       data => {
         this.role = data.user.role.name;
@@ -37,10 +38,10 @@ export class LoginComponent implements OnInit {
             }
           }
           else {
-            if(this.role=='SuperAdmin')
-                this.router.navigateByUrl('Admin')
+            if (this.role == 'SuperAdmin')
+              this.router.navigateByUrl('Admin')
             else
-                this.router.navigateByUrl(this.role);
+              this.router.navigateByUrl(this.role);
           }
         }
         else {

@@ -1,19 +1,21 @@
-.row {
-  margin: 30px;
-}
 .btn {
   margin-right: 58px;
 }
 
-.row-rag {
-  /* display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px; */
+.row {
   display: flex;
   flex-wrap: wrap;
   margin-right: 0px;
   margin-left: 0px;
+  margin-top: 20px;
+}
+
+.row-rag {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 20px;
 }
 
 .refreshIcon {
@@ -43,28 +45,52 @@
   justify-content: stretch;
 } */
 
-.flex {
+/* .flex {
   display: flex;
   position: fixed;
   right: 42px;
   top: 91px;
-}
+} */
 
 .rowDashBoardAndRefreshIcon {
   display: contents;
   position: relative;
 }
 
-.store {
+.column-store-entries {
   float: left;
-  width: 60%;
-  overflow: hidden;
-  height: 700px;
+  width: 55%;
+  padding: 10px;
+}
+.column-recent-entries {
+  float: left;
+  width: 45%;
+  padding: 10px;
 }
 
-.recent-entries  {
-  float: right;
-  overflow: hidden;
-  height: 645px;
-  width: 40%;
+.container-stock-recent-entries {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+/* Clear floats after the columns */
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 768px) {
+  .column-recent-entries {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .column-store-entries {
+    width: 100%;
+  }
 }

@@ -12,8 +12,8 @@
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" class="example-element-row"></tr>
       </table>
-      <div class="router-link" *ngIf="numberOfItems">
-        <a routerLink='../Store'>View All </a>
+      <div class="viewAllStoreEntries" routerLink='../Store' *ngIf="numberOfItems">
+        <p>View All </p>
       </div>
     </div>
   </div>

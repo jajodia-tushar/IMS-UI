@@ -6,12 +6,23 @@
   position: relative;
   color: white;
   overflow: hidden;
+  height: 100%;
+
   /* top: 20px; */
+}
+
+*:focus {
+  outline: none;
+}
+.mat-cell,
+.mat-footer-cell {
+  font-size: 12px;
 }
 
 .flex-container {
   display: flex;
   flex-wrap: nowrap;
+  position: relative;
 }
 
 .flex-container > div {
@@ -22,9 +33,10 @@
 .container {
   margin-right: 0px;
   border-radius: 7px;
-
+  position: relative;
   min-width: 290px;
   margin-top: 10px;
+  height: 100%;
 }
 
 .container > h4 {
@@ -37,13 +49,13 @@ tr.example-detail-row {
 }
 
 .example-element-row td {
-  color: white;
+  color: beige;
   /* font-size: medium; */
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
   background: #484f71;
-  cursor: pointer;
+  color: white;
 }
 
 .example-element-row :hover {
@@ -65,16 +77,21 @@ table {
 }
 
 .viewAllStoreEntries {
-  text-align: right;
+  /* text-align: right; */
+  position: absolute;
+  right: 24px;
+  top: 10px;
+  cursor: pointer;
 }
 
 .viewAllStoreEntries > p {
-  color: white;
   text-decoration: none;
   border: 0.5px solid;
-  border-radius: 1rem;
-  padding: 0 10px;
-  height: 30px;
+  border-radius: 5px;
+  padding: 1px 10px;
+  margin-top: 13px;
+  color: #42e6a4;
+  height: 24px;
 }
 td.mat-cell:first-of-type,
 td.mat-footer-cell:first-of-type,

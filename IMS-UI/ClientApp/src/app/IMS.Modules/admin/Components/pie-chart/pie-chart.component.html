@@ -1,20 +1,11 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="card">
-    <div class="chartjs-size-monitor">
-        <div class="chartjs-size-monitor-expand">
-            <div class=""></div>
-        </div>
-        <div class="chartjs-size-monitor-shrink">
-            <div class=""></div>
-        </div>
-    </div>
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
             <i class="fa fa-refresh" (click)="onRefresh()" id="refreshPie"
                 style="font-size:24px; color: #606a96; cursor: pointer;"></i>
             <div class="dropdown">
-
                 <button mat-button [matMenuTriggerFor]="beforeMenu">
                     <mat-icon>more_horiz</mat-icon>
                 </button>

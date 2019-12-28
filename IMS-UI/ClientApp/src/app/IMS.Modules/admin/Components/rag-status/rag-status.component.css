@@ -10,11 +10,6 @@
   padding: 1.25rem;
 }
 
-.card {
-  width: 100%;
-  min-width: 100%;
-}
-
 .card .card-body {
   /* padding: 1.25rem 1.25rem; */
   padding: 0.8em 0.25rem;
@@ -47,13 +42,8 @@
 }
 
 .card {
-  border: 0.5px solid transparent;
-  box-shadow: 5px 11px 23px -13px #191b28;
-  -webkit-box-shadow: 5px 11px 23px -13px #191b28;
-  -moz-box-shadow: 5px 11px 23px -13px #191b28;
-  -ms-box-shadow: 5px 11px 23px -13px #191b28;
-}
-.card {
+  width: 100%;
+  min-width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -63,8 +53,14 @@
   background-clip: border-box;
   border: 0 solid transparent;
   border-radius: 0.625rem;
-
-  margin: 0px;
+  margin-top: 20px;
+  /* margin-top: 20px;
+  margin: 0px; */
+  border: 0.5px solid transparent;
+  box-shadow: 5px 11px 23px -13px #191b28;
+  -webkit-box-shadow: 5px 11px 23px -13px #191b28;
+  -moz-box-shadow: 5px 11px 23px -13px #191b28;
+  -ms-box-shadow: 5px 11px 23px -13px #191b28;
 }
 
 h1 {

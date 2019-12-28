@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { reportsSelectionDataModel } from "../reports-filter/reports-filter.component";
+import { MatTabChangeEvent, MatSelect, MatSelectChange } from "@angular/material";
 
 @Component({
   selector: "app-reports-tabs",
@@ -8,107 +8,185 @@ import { reportsSelectionDataModel } from "../reports-filter/reports-filter.comp
 })
 export class ReportsTabsComponent implements OnInit {
   reportsSelectionData: reportsSelectionDataModel[] = [];
+  selectedTab : number;
+  
+  request = {
+    locationName : "",
+    locationCode : "",
+    colour : ""
+  }
 
   constructor() {}
 
   ngOnInit() {
-    
+    this.selectedTab = 0;
     this.reportsSelectionData = [
       {
         reportName: "RAG",
         reportsFilterOptions: [
           {
             placeHolderName: "Shelf",
-            type : "dropDown",
-            dropDownOptions: ["Warehouse", "First Floor", "Sixth Floor"]
+            type: "dropDown",
+            dropDownOptions: ["Warehouse", "First Floor", "Sixth Floor"],
+            dataFromUser : ""
           },
           {
-            placeHolderName: "color",
-            type : "dropDown",
-            dropDownOptions: ["Red", "Amber", "Green"]
+            placeHolderName: "Color",
+            type: "dropDown",
+            dropDownOptions: ["Red", "Amber", "Green"],
+            dataFromUser : ""
           }
-        ]
+        ],
+        urlToRequest : ""
       },
       {
         reportName: "Vendor",
         reportsFilterOptions: [
           {
             placeHolderName: "VendorName",
-            type : "dropDown",
-            dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"]
+            type: "dropDown",
+            dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
+            dataFromUser : ""
           },
           {
             placeHolderName: "FromDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           },
           {
             placeHolderName: "ToDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           }
-        ]
+        ],
+        urlToRequest : ""
       },
       {
         reportName: "Employee",
         reportsFilterOptions: [
           {
             placeHolderName: "Employee Id",
-            type : "dropDown",
-            dropDownOptions: ["1", "2", "3"]
+            type: "dropDown",
+            dropDownOptions: ["1", "2", "3"],
+            dataFromUser : ""
           },
           {
             placeHolderName: "FromDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           },
           {
             placeHolderName: "ToDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           }
-        ]
+        ],
+        urlToRequest : ""
       },
       {
         reportName: "Item",
         reportsFilterOptions: [
           {
             placeHolderName: "Item Name",
-            type : "dropDown",
-            dropDownOptions: ["Pen", "Pencil", "Notebook"]
+            type: "dropDown",
+            dropDownOptions: ["Pen", "Pencil", "Notebook"],
+            dataFromUser : ""
           },
           {
             placeHolderName: "FromDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           },
           {
             placeHolderName: "ToDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           }
-        ]
+        ],
+        urlToRequest : ""
       },
       {
         reportName: "Shelf",
         reportsFilterOptions: [
           {
             placeHolderName: "ShelfName",
-            type : "dropDown",
-            dropDownOptions: ["First Floor", "Sixth Floor"]
+            type: "dropDown",
+            dropDownOptions: ["First Floor", "Sixth Floor"],
+            dataFromUser : ""
           },
           {
             placeHolderName: "FromDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           },
           {
             placeHolderName: "ToDate",
-            type : "datePicker",
-            dropDownOptions: []
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
           }
-        ]
+        ],
+        urlToRequest : ""
+      },
+      {
+        reportName: "Rochit",
+        reportsFilterOptions: [
+          {
+            placeHolderName: "Chaman",
+            type: "dropDown",
+            dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
+            dataFromUser : ""
+          },
+          {
+            placeHolderName: "FromDate",
+            type: "drop",
+            dropDownOptions: [],
+            dataFromUser : ""
+          },
+          {
+            placeHolderName: "ToDate",
+            type: "datePicker",
+            dropDownOptions: [],
+            dataFromUser : ""
+          }
+        ],
+        urlToRequest : ""
       }
     ];
   }
+
+  tabChanged(event : Event){
+    console.log(this.selectedTab);
+  }
+
+  searchButtonClicked(){
+    
+  }
+
+}
+export class reportsSelectionDataModel {
+  reportName: string;
+  reportsFilterOptions: reportsFilterOption[];
+  urlToRequest : string;
+  
+}
+
+export class RequestModel{
+  
+
+
+}
+
+export class reportsFilterOption {
+  placeHolderName: string;
+  type: string;
+  dropDownOptions: string[];
+  dataFromUser : string;
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { MatTableDataSource } from '@angular/material';
 import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
+import { ItemService } from 'src/app/IMS.Services/item/item.service';
+import { Item } from 'src/app/IMS.Models/Item/Item';
 
 @Component({
   selector: 'app-invoice-editor',
@@ -19,7 +21,8 @@ export class InvoiceEditorComponent implements OnInit {
   public columns;
   itemquantityprice: MatTableDataSource<OrderItemDetail>;
   // datasourceitems:OrderItemDetail[]=[];
-  constructor(public vendorOrderdetailsService:VendorOrderdetailsService) { }
+  public Items: Item[];
+  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, private _ItemService: ItemService) { }
 
   ngOnInit() {
     this.vendorOrderdetailsService.VendorOrderDetails().subscribe(
@@ -30,7 +33,7 @@ export class InvoiceEditorComponent implements OnInit {
         this.InvoiceNo = data.listOfVendorOrders[0].vendorOrderDetails.invoiceNumber;
         this.OrderID = data.listOfVendorOrders[0].vendorOrderDetails.orderId;
         this.VendorName = data.listOfVendorOrders[0].vendor.name;
-       // console.log(data);
+       console.log(data);
       }
         );
 
@@ -39,7 +42,15 @@ export class InvoiceEditorComponent implements OnInit {
             this.itemquantityprice=res.data;
             console.log(res.data);
           });
-        this.columns = this.vendorOrderdetailsService.getColumn();
+    this.columns = this.vendorOrderdetailsService.getColumn();
+
+    this._ItemService.getAllItems().subscribe(
+      data => {
+        console.log(data);
+
+        this.Items = data.items;
+      }
+      )
       }
 
       // delete(row:any){

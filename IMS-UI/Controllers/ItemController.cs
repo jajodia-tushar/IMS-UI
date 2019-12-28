@@ -44,13 +44,6 @@ namespace IMS_UI.Controllers
 
         }
 
-        // GET: api/Item/5
-        [HttpGet("{id}", Name = "GetItem")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Item
         [HttpPost]
         public void Post([FromBody] string value)

@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\IMS.Models\Employee.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Item\ItemResponse.ts" />
     <None Remove="ClientApp\src\app\IMS.Models\Vendor\item.ts" />
     <None Remove="ClientApp\src\app\IMS.Models\Vendor\ListOfVendorOrder.ts" />
     <None Remove="ClientApp\src\app\IMS.Models\Vendor\OrderItemDetail.ts" />
@@ -40,6 +41,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Employee.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Item\ItemResponse.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\item.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\ListOfVendorOrder.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\OrderItemDetail.ts" />

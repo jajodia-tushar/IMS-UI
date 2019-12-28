@@ -13,7 +13,6 @@ export class ItemService {
   getShelfData(ShelfId: string): Observable<ShelfData>{
     return this.http.get<ShelfData>("api/shelf/inventory/" + ShelfId);
   }
-
   getAllItems() {
     return this.http.get<ItemResponse>("/api/Item");
   }

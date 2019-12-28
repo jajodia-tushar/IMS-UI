@@ -70,3 +70,10 @@
     color: white;
   }
   
+.cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,0);
+}
+
+.mat-dialog-container {
+  display: none;
+}

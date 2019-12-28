@@ -101,10 +101,10 @@ export class RevisableTableComponent implements OnInit {
    }
 
    selectedOption(row,event){
-    //  console.log(row);
-    //  console.log(row.item);
-    //  console.log(row.item.name);
-    //  console.log(event.value);
+      console.log(row);
+      console.log(row.item);
+      console.log(row.item.name);
+      console.log(event.value);
      row.item.name=event.value;
      this.renderTable();
      
@@ -118,13 +118,13 @@ export class RevisableTableComponent implements OnInit {
 //     console.log(selectedValue);
 //  }
 
-//getTotalCost(){
-//  let totalcost;
+getTotalCost(){
+  let totalcost;
  
-//   totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-//  console.log(totalcost);
-//  return totalcost;
-//}
+   totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
+  console.log(totalcost);
+  return totalcost;
+}
   ngOnInit() {
     this.displayedColumns= this.columnHeader.map(c => c.columnDef)
     console.log(this.datasource.data);
@@ -137,7 +137,4 @@ export class RevisableTableComponent implements OnInit {
 
 
 }
-export interface Food {
-  value: string;
-  viewValue: string;
-}
+

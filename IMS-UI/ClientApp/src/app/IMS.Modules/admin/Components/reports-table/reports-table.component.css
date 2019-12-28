@@ -30,32 +30,15 @@
     margin-top: inherit;
 }
 
-tr.example-detail-row {
-    background-color: #222437;
-    height: 0;
-}
-
 .example-element-row td {
     color: white;
     font-size: medium;
 }
 
-tr.example-element-row:not(.example-expanded-row):hover {
-    background: #484f71;
-}
-
-.example-element-row :hover {
-    color: white;
-}
-
-tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-}
-
-.example-element-row td {
-    line-height: 2px;
-    border-bottom-width: 0;
-    padding-left: 8px;
+th {
+    color: #9597ab;
+    font-size: large;
+    text-transform: uppercase;
 }
 
 table {

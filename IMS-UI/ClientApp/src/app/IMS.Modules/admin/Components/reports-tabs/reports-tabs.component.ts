@@ -150,33 +150,6 @@ export class ReportsTabsComponent implements OnInit {
           }
         ],
         urlToRequest: ""
-      },
-      {
-        reportName: "Rochit",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Chaman",
-            type: "dropDown",
-            dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "drop",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
       }
     ];
   }

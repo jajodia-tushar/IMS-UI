@@ -16,17 +16,17 @@ export class RevisableTableComponent implements OnInit {
   @Input() show;
   @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
-   
   }
+  @Input() ItemList;
  
   @Output() deleteRow: EventEmitter<any> = new EventEmitter();
 
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  //foods: Food[] = [
+  //  {value: 'steak-0', viewValue: 'Steak'},
+  //  {value: 'pizza-1', viewValue: 'Pizza'},
+  //  {value: 'tacos-2', viewValue: 'Tacos'}
+  //];
   // deletedata(data:any){
   //   let index = this.datasource.indexOf(data);
   //   if (index != -1) {

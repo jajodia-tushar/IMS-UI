@@ -6,6 +6,7 @@ import { MainnavComponent } from './Components/mainnav/mainnav.component';
 import { StoreComponent } from './Components/store/store.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
 import { ReportsComponent } from './Components/reports/reports.component';
+import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-editor.component';
 
 const routes: Routes = [
   {
@@ -15,10 +16,11 @@ const routes: Routes = [
       { path: 'Dashboard', component: MainnavComponent },
       { path: 'Store', component: StoreComponent },
       { path: 'Users', component: UserManagementComponent },
-        { path: 'Reports', component: ReportsComponent },
-        { path: 'EditInvoice', component: InvoiceEditorComponent }
+      { path: 'Reports', component: ReportsComponent },
+      { path: 'EditInvoice', component: InvoiceEditorComponent }
     ]
   }
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

@@ -20,8 +20,8 @@
            <div *ngIf="column.columnDef == 'itemName'">
             <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size" > 
             <mat-select  (selectionChange)="selectedOption(row,$event)" placeholder= "{{ column.cell(row) }}">
-                <mat-option  *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+                <mat-option  *ngFor="let item of ItemList" [value]="item.value">
+                    {{item.name}}
                 </mat-option>
             </mat-select>  
         </mat-form-field> 

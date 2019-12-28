@@ -23,8 +23,6 @@ namespace IMS_UI.Controllers
             _ItemListProvider = provider;
             this.sessionManager = sessionManager;
         }
-
-
         // GET: api/Item
         [HttpGet]
         public async Task<IActionResult> GetAllItems()
@@ -42,24 +40,6 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
 
-        }
-
-        // POST: api/Item
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Item/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

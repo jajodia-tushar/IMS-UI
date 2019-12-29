@@ -1,11 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import {
-  MatTabChangeEvent,
-  MatSelect,
-  MatSelectChange
-} from "@angular/material";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 import { ActivatedRoute } from "@angular/router";
+import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -13,6 +9,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./reports-tabs.component.css"]
 })
 export class ReportsTabsComponent implements OnInit {
+
   reportsSelectionData: reportsSelectionDataModel[] = [];
   selectedTab: number;
 
@@ -23,14 +20,67 @@ export class ReportsTabsComponent implements OnInit {
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
 
-  constructor(private reportsService: ReportsService,private route: ActivatedRoute) {
-    this.locationName = this.route.snapshot.queryParams.locationName
-    this.locationCode =  this.route.snapshot.queryParams.locationCode
-    this.colour = this.route.snapshot.queryParams.colour
+  constructor(private reportsService: ReportsService, private route: ActivatedRoute,
+    private ragStatusService: RagStatusService) {
+    this.locationName = this.route.snapshot.queryParams.locationName;
+    this.locationCode = this.route.snapshot.queryParams.locationCode;
+    this.colour = this.route.snapshot.queryParams.colour;
+    this.selectedTab = this.route.snapshot.queryParams.selectedTab;
   }
 
-  ngOnInit() {
+  async getRAGReportDropDownList() {
+    return await this.ragStatusService.getRAGStatusData().toPromise();
+  }
+  
+
+  async ngOnInit() {
     this.selectedTab = 0;
+    await this.initializeEmptyData();
+
+    if (this.locationCode != null) {
+      this.searchButtonClicked();
+    }
+  }
+
+  tabChanged(event: Event) {
+    // console.log(this.selectedTab);
+  }
+
+  searchButtonClicked() {
+    
+    if (this.selectedTab == 0) {
+      this.showRAGDataTable();
+    }
+  }
+
+  showRAGDataTable() {
+    let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
+      .dataFromUser;
+    let colourSelected = this.reportsSelectionData[0].reportsFilterOptions[1]
+      .dataFromUser;
+
+    let locationNameSelected = this.reportsSelectionData[0].reportsFilterOptions[0].dropDownOptions[this.reportsSelectionData[0].reportsFilterOptions[0].
+      dropDownValues.indexOf(this.reportsSelectionData[0].reportsFilterOptions[0].dataFromUser)]
+    
+    this.reportsService
+      .getRAGReport(locationNameSelected, locationCodeSelected, colourSelected)
+      .subscribe(data => {
+        this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
+        this.dataToDisplay = [];
+        if (data.status == "Failure") {
+          this.dataToDisplay = JSON.parse(JSON.stringify([]));
+          return;
+        }
+        data.itemQuantityMappings.forEach(data => this.dataToDisplay.push({
+          "item": data.item.name,
+          "quantity": data.quantity
+        }));
+        this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
+        console;
+      });
+  }
+
+  async initializeEmptyData() {
     this.reportsSelectionData = [
       {
         reportName: "RAG",
@@ -38,8 +88,8 @@ export class ReportsTabsComponent implements OnInit {
           {
             placeHolderName: "Shelf",
             type: "dropDown",
-            dropDownOptions: ["Warehouse", "First Floor", "Sixth Floor"],
-            dropDownValues: ["WH", "A", "B"],
+            dropDownOptions: [],
+            dropDownValues: [],
             dataFromUser: this.locationCode
           },
           {
@@ -160,45 +210,15 @@ export class ReportsTabsComponent implements OnInit {
         ],
         urlToRequest: ""
       }
+      
     ];
 
-    if (this.locationCode != null) {
-      this.searchButtonClicked();
-    }
-  }
-
-  tabChanged(event: Event) {
-    console.log(this.selectedTab);
-  }
-
-  searchButtonClicked() {
-    let a = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0]
-      .dataFromUser;
-    let b = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1]
-      .dataFromUser;
-    
-    if (a == "WH") {
-      a = "warehouse";
-    }
-    this.reportsService
-      .getRAGReport(a, a, b)
-      .subscribe(data => {
-        this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
-        this.dataToDisplay = [];
-        if (data.status  == "Failure") {
-          this.dataToDisplay = JSON.parse(JSON.stringify([]));
-          return;
-        }
-        data.itemQuantityMappings.forEach(
-          data => this.dataToDisplay.push({
-            "item": data.item.name,
-            "quantity": data.quantity
-          })
-        )
-        this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
-        console
+    await this.getRAGReportDropDownList().then(
+      data => {
+        this.reportsSelectionData[0].reportsFilterOptions[0].dropDownOptions = data.ragStatusList.map(x => x.name);
+        this.reportsSelectionData[0].reportsFilterOptions[0].dropDownValues = data.ragStatusList.map(x => x.code);
       }
-      );
+    );
   }
 }
 export class reportsSelectionDataModel {

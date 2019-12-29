@@ -55,12 +55,16 @@ export class RagStatusComponent implements OnInit {
         },
         onClick: (data, item) => {
           let index = item[0]._index;
+          
+          let selectedTab = 0;
           let colour = ragData.colourCountMappings[index].colour;
-          let locationName= ragData.name;
+          let locationName = ragData.name;
           let locationCode = ragData.code;
-          let params: HttpParams = new HttpParams();
-          params.append("locationCode", locationCode).append("locationName", locationName).append("colour", colour);      
-          router.navigateByUrl('/Admin/Reports?locationName=' + locationName + "&locationCode=" + locationCode + "&colour=" + colour);
+          
+          let queryParams = {
+            locationCode,locationName,colour,selectedTab
+          }
+          router.navigate(['/Admin/Reports'], { queryParams });
         }
       }
     });

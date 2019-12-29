@@ -17,10 +17,10 @@ export class InvoiceEditorComponent implements OnInit {
   public VendorName;
   public InvoiceNo;
   public ChallanNo;
-  public aloo;
+  
   public columns;
   itemquantityprice: MatTableDataSource<OrderItemDetail>;
-  // datasourceitems:OrderItemDetail[]=[];
+ 
   public Items: Item[];
   constructor(public vendorOrderdetailsService: VendorOrderdetailsService, private _ItemService: ItemService) { }
 
@@ -34,8 +34,8 @@ export class InvoiceEditorComponent implements OnInit {
         this.OrderID = data.listOfVendorOrders[0].vendorOrderDetails.orderId;
         this.VendorName = data.listOfVendorOrders[0].vendor.name;
         this.itemquantityprice = data.listOfVendorOrders[0].vendorOrderDetails.orderItemDetails;
-        console.log(data);
-        console.log(this.aloo);
+        console.log(this.itemquantityprice);
+       
        
       }
         );
@@ -56,17 +56,10 @@ export class InvoiceEditorComponent implements OnInit {
       )
       }
 
-      // delete(row:any){
-      //      let index = this.datasourceitems.indexOf(row);
-      //      if (index != -1) {
-      //        this.datasourceitems.splice(index, 1);
-      //        this.renderTable();
-      //      }
-      //    }
-      
-      //    renderTable() {
-      //      this.itemquantityprice = new MatTableDataSource(this.datasourceitems);
-      //    }
+  edit(aloo: any) {
+    console.log(aloo);
+     console.log(this.itemquantityprice);
+  }
   }
 
 

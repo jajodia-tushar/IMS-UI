@@ -5,107 +5,107 @@
     fxLayoutGap="10px"
     fxLayoutGap.xs="2px"
     >
-<div>
-  <mat-card>
-    <mat-card-header>
-      
+  <div>
+    <mat-card>
+      <mat-card-header>
+
         <div class="container"
-        fxLayout
-        fxLayout.xs="column"
-       
-        fxLayoutGap="20px"
-        fxLayoutGap.xs="0">
-        <mat-card-title>Invoice</mat-card-title>
-        <div class="margin">Order ID:{{OrderID}}</div>
+             fxLayout
+             fxLayout.xs="column"
+             fxLayoutGap="20px"
+             fxLayoutGap.xs="0">
+          <mat-card-title>Invoice</mat-card-title>
+          <div class="margin">Order ID:{{OrderID}}</div>
         </div>
-     
-    </mat-card-header>
-    <mat-divider [inset]="true"></mat-divider>
-    <mat-card-content style="margin-top: 10px;">
-<div class="container"
-    fxLayout
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="20px"
-    fxLayoutGap.xs="0">
 
-    <div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    fxFlex="20%">
+      </mat-card-header>
+      <mat-divider [inset]="true"></mat-divider>
+      <mat-card-content style="margin-top: 10px;">
+        <div class="container"
+             fxLayout
+             fxLayout.xs="column"
+             fxLayoutAlign="center"
+             fxLayoutGap="20px"
+             fxLayoutGap.xs="0">
 
- <div>Challan Number</div>
+          <div class="container"
+               fxLayout="column"
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="2px"
+               fxFlex="20%">
 
-    <div class="border">{{ChallanNo}}</div>
+            <div>Challan Number</div>
 
-
-</div>
-
-<div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    fxFlex="20%">
-
-    <div>Invoice Number</div>
-
-    <div class="border">{{InvoiceNo}}</div>
+            <div class="border">{{ChallanNo}}</div>
 
 
-</div>
-<div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    fxFlex="20%">
+          </div>
 
-    <div>Received By</div>
+          <div class="container"
+               fxLayout="column"
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="2px"
+               fxFlex="20%">
 
-    <div class="border"> {{ AdminName}}</div>
+            <div>Invoice Number</div>
 
-
-</div> 
-<div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    fxFlex="20%">
-
-    <div>Submitted To</div>
-
-    <div class="border">{{ClerkName}}</div>
+            <div class="border">{{InvoiceNo}}</div>
 
 
-</div>
-<div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    fxFlex="20%">
+          </div>
+          <div class="container"
+               fxLayout="column"
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="2px"
+               fxFlex="20%">
 
-    <div>Vendor Name</div>
+            <div>Received By</div>
 
-    <div class="border">{{VendorName}}</div>
+            <div class="border"> {{ AdminName}}</div>
 
 
-</div>
-</div>
-</mat-card-content>
+          </div>
+          <div class="container"
+               fxLayout="column"
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="2px"
+               fxFlex="20%">
 
-</mat-card>
+            <div>Submitted To</div>
 
-  <app-revisable-table [columnHeader]=columns [griddata]="itemquantityprice" [ItemList]="Items"></app-revisable-table>
-</div>
+            <div class="border">{{ClerkName}}</div>
+
+
+          </div>
+          <div class="container"
+               fxLayout="column"
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="2px"
+               fxFlex="20%">
+
+            <div>Vendor Name</div>
+
+            <div class="border">{{VendorName}}</div>
+
+
+          </div>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+
+    <app-revisable-table [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items" (selectedEditRow)="edit($event)"></app-revisable-table>
+    <button mat-button color="accent">Accent</button>
+  </div>
 
 

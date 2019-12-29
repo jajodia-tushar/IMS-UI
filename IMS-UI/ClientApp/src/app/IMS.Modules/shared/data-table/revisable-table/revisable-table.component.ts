@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
+import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
 
 @Component({
   selector: 'app-revisable-table',
@@ -10,38 +11,21 @@ import { DataSource } from '@angular/cdk/table';
 export class RevisableTableComponent implements OnInit {
 
   displayedColumns;
-  datasource = new MatTableDataSource();
+ public datasource = new MatTableDataSource<OrderItemDetail>();
  
   @Input() columnHeader;
   @Input() show;
+    aloo: any;
   @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
   }
   @Input() ItemList;
  
-  @Output() deleteRow: EventEmitter<any> = new EventEmitter();
+  //@Output() griddataChange: EventEmitter<any> = new EventEmitter();
+  @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
 
 
-  //foods: Food[] = [
-  //  {value: 'steak-0', viewValue: 'Steak'},
-  //  {value: 'pizza-1', viewValue: 'Pizza'},
-  //  {value: 'tacos-2', viewValue: 'Tacos'}
-  //];
-  // deletedata(data:any){
-  //   let index = this.datasource.indexOf(data);
-  //   if (index != -1) {
-  //     this.datasource.splice(index, 1);
-  //     this.renderTable();
-  //   }
-  // }
-
-  // renderTable() {
-  //   this.datasource = new MatTableDataSource(this.datasource);
-  // }
-
-  // deletedata(row:any):void {
-  //   this.deleteRow.next(row);
-  //  }
+  
 
    deletedata(row:any){
      console.log(row);
@@ -61,10 +45,20 @@ export class RevisableTableComponent implements OnInit {
   renderTable() {
     
     this.datasource = new MatTableDataSource(this.datasource.data);
-    
     console.log(this.datasource.data);
+    //this.ChangeIngridDataValue();
+    this.editAction(this.datasource.data);
     
   }
+  editAction(data: any): void {
+    this.selectedEditRow.next(data);
+  }
+  //ChangeIngridDataValue() {
+   
+  //  this.griddata(this.datasource.data);
+  //  this.griddataChange.emit(this.griddata);
+    
+  //}
 
   changeprice(row,event){
      console.log(row);
@@ -79,16 +73,7 @@ export class RevisableTableComponent implements OnInit {
     this.renderTable();
    }
 
-  //  AddRow() {
-  //   let itemData: ItemQuantityPriceMapping = {
-  //     item: { id: null, name: "", maxLimit: 0, isActive: false, imageUrl: "", rate: 0},
-  //     quantity: 0,
-  //     totalPrice:0
-  //   };
-  //   this.dataSourceItems.push(itemData);
-  //   this.renderTable();
-  //   console.log(this.dataSourceItems);
-  // }
+ 
    AddRow(){
      let datasoucelength=this.datasource.data.length;
      console.log(datasoucelength);
@@ -108,15 +93,10 @@ export class RevisableTableComponent implements OnInit {
      row.item.name=event.value;
      this.renderTable();
      
-     //console.log(event.value);
-    // row.item.name=event.item.value;
-    // row.item.name=
+     
    }
 
-//    selectedOption(event) {
-//     const selectedValue = event.option.value;
-//     console.log(selectedValue);
-//  }
+
 
 getTotalCost(){
   let totalcost;
@@ -124,7 +104,14 @@ getTotalCost(){
    totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
   console.log(totalcost);
   return totalcost;
-}
+  }
+
+
+  getTotalQuantity() {
+    
+    return this.datasource.data.map(t => t.quantity).reduce((acc, value) => acc + value, 0);
+    
+  }
   ngOnInit() {
     this.displayedColumns= this.columnHeader.map(c => c.columnDef)
     console.log(this.datasource.data);

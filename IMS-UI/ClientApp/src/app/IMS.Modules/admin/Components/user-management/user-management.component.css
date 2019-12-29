@@ -4,11 +4,12 @@
    /* background-color: rgb(212, 41, 41);*/
     position: relative;
     margin: 30px;
-
+    color : white;
   }
 
-h1{
+h5{
     margin :20px;
+    color: white;
 }
   /* button{
       position: absolute;

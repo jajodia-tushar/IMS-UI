@@ -7,6 +7,9 @@ import { Users } from 'src/app/IMS.Models/User/Users';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserManageDialogComponent } from '../user-manage-dialog/user-manage-dialog.component';
 import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
+import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-user-list',
@@ -16,16 +19,21 @@ import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialo
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'role', 'actions'];
   ELEMENT_DATA: User[];
-
+  isSuperAdmin : boolean;
   dataSource
 
   @Input() event:User;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
-  constructor(private userManagementService:UserManagementService, public dialog: MatDialog) { }
+  constructor(private userManagementService:UserManagementService,
+    public dialog: MatDialog,
+    private centralizedRepo: CentralizedDataService,
+    private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     await this.setUsers();
+    if(this.centralizedRepo.getUser().role.id==4)
+      this.isSuperAdmin = true;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sort = this.sort;
     // this.dataSource.sortingDataAccessor = this.pathDataAccessor;
@@ -41,6 +49,30 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  openAddUserDialog() {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result==false){
+        console.log('Some error occurred in adding User')
+        this.showErrorMessage("Create Failed or Cancelled",34)
+      }
+      else{
+        if(this.isSuperAdmin){
+          this.ELEMENT_DATA.push(<User>result);
+          this.dataSource.data = this.ELEMENT_DATA;
+          this.showSuccessMessage("User Was Created Successfully",12);
+        }
+        else{
+          this.showSuccessMessage("User was Created and is up for Review By SuperAdmin",21)
+        }
+      }        
+    });
+  }
+
   editUserDetails(user){
     console.log(user);
 
@@ -50,11 +82,16 @@ export class UserListComponent implements OnInit {
   openUserEditDialog(data) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
-    // dialogConfig.disableClose = true;
+    dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.editUserInTable(result);
+      if(result==false){
+        this.showErrorMessage("Some Error in Updating User",12);
+      }
+      else{
+        this.editUserInTable(result);
+      }
     });
   }
 
@@ -68,10 +105,10 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result==true){
         this.removeUserFromTableById(user.id);
-        console.log("User was Deleted");
+        this.showSuccessMessage("User Account Was Deactivated Successfully",12)
       }
       else {
-        console.log("User was not  Deleted ");
+        this.showErrorMessage("Error in Deacting User",10)
       }
     });
 
@@ -94,6 +131,19 @@ export class UserListComponent implements OnInit {
       }
    }
     this.dataSource.data = this.ELEMENT_DATA;
+    this.showSuccessMessage("User Was Updated Successfully",12)
+  }
+
+  showErrorMessage(message: string, timeInSeconds){
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 1000 * timeInSeconds , data : { message : message }
+    });
+  }
+
+  showSuccessMessage(message: string, timeInSeconds){
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 1000 * timeInSeconds , data : { message : message }
+    });
   }
 
   async setUsers(){
@@ -101,14 +151,5 @@ export class UserListComponent implements OnInit {
     this.ELEMENT_DATA = users;
   }
 
-  openAddUserDialog() {
-    let dialogConfig = new MatDialogConfig();
-    dialogConfig.data = null;
-    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
-
-    dialogRef.afterClosed().subscribe((result:User) => {
-        this.ELEMENT_DATA.push(<User>result);
-        this.dataSource.data = this.ELEMENT_DATA;
-    });
-  }
+  
 }

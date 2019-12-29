@@ -8,10 +8,10 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface IUserProvider
     {
-        Task<UserResponse> AddUser(User user);
-        Task<UserResponse> EditUser(User user);
+        Task<UsersResponse> AddUser(User user);
+        Task<UsersResponse> EditUser(User user);
         Task<UsersResponse> GetAllUsers();
-        Task<Response> DeactivateUser(User user);
+        Task<Response> DeactivateUser(int userId, bool isHardDelete);
 
     }
 }

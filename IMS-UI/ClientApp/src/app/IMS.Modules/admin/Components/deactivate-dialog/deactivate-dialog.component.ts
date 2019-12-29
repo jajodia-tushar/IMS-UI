@@ -4,7 +4,8 @@ import { User } from 'src/app/IMS.Models/User/User';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DeleteResponse } from 'src/app/IMS.Models/User/DeleteResponse';
+import {Response} from 'src/app/IMS.Models/Shared/Response'
+
 
 @Component({
   selector: 'app-deactivate-dialog',
@@ -24,7 +25,7 @@ export class DeactivateDialogComponent implements OnInit {
   }
 
   async onConfirm() {
-    let response = <DeleteResponse>await this.userManageService.deactivate(this.user);
+    let response = <Response>await this.userManageService.deactivate(this.user.id,false);
     if(response.error==null){
       this.dialogRef.close(true);
     }

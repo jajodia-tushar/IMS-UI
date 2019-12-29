@@ -33,11 +33,10 @@ table {
     position: absolute;
     border-collapse: separate !important;
     border-radius: 8px;
-    background-color: #bec0cf;
+    background-color: #222437;
     border: 3px solid rgb(231, 227, 227);
     min-height: 200px;
     min-height: 201px;
-    color: white;
 
   }
 
@@ -45,4 +44,12 @@ table {
     position: absolute;
     right: 10px;
     background-color: #606a96;
+}
+
+.mat-cell{
+  color : white;
+}
+
+.mat-header-cell{  
+  color : white;
 }

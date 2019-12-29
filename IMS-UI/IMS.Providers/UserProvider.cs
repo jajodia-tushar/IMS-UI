@@ -24,42 +24,33 @@ namespace IMS_UI.IMS.Providers
             _iconfiguration = configuration;
             _sessionManager = sessionManager;
         }
-        public async Task<UserResponse> AddUser(User user)
+        public async Task<UsersResponse> AddUser(User user)
         {
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
                 JObject userJson = JsonMaker(user);
                 var response = await http.PostAsJsonAsync("api/user", userJson);
-                return await UserResultParser(response);
+                return await UsersResultParser(response);
             }
         }
 
-
-        
-
-        public async Task<UserResponse> EditUser(User user)
+        public async Task<UsersResponse> EditUser(User user)
         {
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
                 JObject userJson = JsonMaker(user);
                 var response = await http.PutAsJsonAsync("api/user", userJson);
-                return await UserResultParser(response);
+                return await UsersResultParser(response);
             }
         }
 
-        private async Task<UserResponse> UserResultParser(HttpResponseMessage response)
-        {
-            UserResponse apiResponse = new UserResponse();
-            var result = await response.Content.ReadAsStringAsync();
-            apiResponse = JsonConvert.DeserializeObject<UserResponse>(result);
-            return apiResponse;
-        }
+        
 
         private async Task<Response> ResultParser(HttpResponseMessage response)
         {
-            Response apiResponse = new UserResponse();
+            Response apiResponse = new UsersResponse();
             var result = await response.Content.ReadAsStringAsync();
             apiResponse = JsonConvert.DeserializeObject<Response>(result);
             return apiResponse;
@@ -98,21 +89,16 @@ namespace IMS_UI.IMS.Providers
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
         }
 
-        public async Task<Response> DeactivateUser(User user)
+        public async Task<Response> DeactivateUser(int userId, bool isHardDelete)
         {
             using (HttpClient http = new HttpClient())
             {
-              
-                HttpRequestMessage request = new HttpRequestMessage
-                {
-                    Content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"),
-                    Method = HttpMethod.Delete,
-                    RequestUri = new Uri(_iconfiguration["BASEURL"]+"api/user")
-                };
-                request.Headers.Add("Authorization", "Bearer " + _sessionManager.GetString("token"));
-                var response = await http.SendAsync(request);
+                prepareClient(http);
+                
+                var response = await http.DeleteAsync("api/user/"+ userId.ToString()+"?isHardDelete="+"False");
                 return await ResultParser(response);
             }
         }
+
     }
 }

@@ -8,6 +8,7 @@ import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
+import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 
 @Component({
   selector: 'app-user-manage-form',
@@ -23,13 +24,14 @@ export class UserManageFormComponent implements OnInit{
   }
 
   @Input() userDetails;
-  @Output() userEditted : EventEmitter<User> = new EventEmitter<User>();
-  @Output() userCreated = new EventEmitter<User>();
+  @Output() userEditted : EventEmitter<UsersResponse> = new EventEmitter<UsersResponse>();
+  @Output() userCreated : EventEmitter<UsersResponse> = new EventEmitter<UsersResponse>();
   isEditUserForm : boolean;
   isSuperAdmin : boolean;
   
   async ngOnInit(){
-    this.setUserRoles();
+    if (this.roles==null || this.roles==undefined)
+      this.setUserRoles();
     if(this.centralizedDataRepo.getUser().role.id==4)
       this.isSuperAdmin = true;
     if(this.userDetails){
@@ -58,6 +60,34 @@ export class UserManageFormComponent implements OnInit{
     let roles : Role[] = (<RolesResponse> await this.userManageService.getAllRoles()).roles;
     this.roles = roles;
   }
+  
+  async editUserDetails(){
+    let user: User = <User>this.createUserForm.getRawValue();
+    let edittedUser: UsersResponse = <UsersResponse> await this.userManageService.editUser(user);
+    this.userEditted.emit(edittedUser);
+  }
+
+  async createNewUser(){
+    let user: User = <User>this.createUserForm.getRawValue();
+    let createdUser: UsersResponse = <UsersResponse>await this.userManageService.createUser(user);
+    // if(createdUser==null){
+    //   // show snackbar
+    // }
+    // else if(createdUser.error==null){
+    //   //pass to the dialog, and also show snackbar. If admin don't emit , if superadmin emit user
+    // }
+    // if(this.isSuperAdmin){
+    //   // create and Show that User Was Created . Also Check for error
+    // }
+    // else{
+    //   // user is admin. Just show a message that request is pending.
+    // }
+
+
+
+    this.userCreated.emit(createdUser);
+  }
+
   get username(){
     return this.createUserForm.get('username');
   }
@@ -96,34 +126,13 @@ export class UserManageFormComponent implements OnInit{
     }
   }
 
-  async editUserDetails(){
-    let user: User = <User>this.createUserForm.getRawValue();
-    let editedUser: UserResponse = <UserResponse> await this.userManageService.editUser(user);
-    if(editedUser.error==null){
-      // send to parent dialog
-      console.log("User Edited : ");
-      this.userEditted.emit(user);
-    }
-    else{
-      console.log("User Not Edited : ");
-    }
-    console.log(user);
+  cancelUpdate(){
+    this.userEditted.emit(null);
   }
 
-  async createNewUser(){
-    let user: User = <User>this.createUserForm.getRawValue();
-    console.log(user);
-    let createdUser: UserResponse = <UserResponse>await this.userManageService.createUser(user);
-    if(createdUser.error==null){
-      //send to parent dialog
-      console.log("User Created : ");
-      console.log(user);
-      this.userCreated.emit(user);
-    }
-    else{
-      console.log("User Not Created : ");
-      console.log(user);
-    }
+  cancelCreate(){
+    this.userCreated.emit(null);
   }
+
 
 }

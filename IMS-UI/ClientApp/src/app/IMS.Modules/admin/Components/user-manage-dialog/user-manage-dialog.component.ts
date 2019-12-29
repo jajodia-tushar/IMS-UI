@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/IMS.Models/User/User';
+import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
+import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 
 @Component({
   selector: 'app-user-manage-dialog',
@@ -17,14 +19,30 @@ export class UserManageDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  notifyTableUserEditted(user){
+  notifyTableUserEditted(usersResponse:UsersResponse){
       console.log("inside dialog");
-      this.dialogRef.close(user);      
+      console.log(usersResponse);
+      if(usersResponse==null){
+        this.dialogRef.close(false);
+      }
+      else if(usersResponse.error==null){
+        this.dialogRef.close(usersResponse.users[0]);
+      }
+      // else if(usersResponse!=null){
+      //   this.dialogRef.close(false);
+      // }
   }
 
-  notifyTableUserCreated(user){
-    console.log("inside dialog");
-    this.dialogRef.close(user);      
+  notifyTableUserCreated(usersResponse:UsersResponse){
+    if(usersResponse==null){
+      this.dialogRef.close(false);
+    }
+    else if(usersResponse.error==null){
+      this.dialogRef.close(usersResponse.users[0]);
+    }
+    // else if(usersResponse!=null){
+    //   this.dialogRef.close(false);
+    // }
 }
 
 }

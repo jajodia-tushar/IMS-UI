@@ -37,7 +37,7 @@
     <th mat-header-cell *matHeaderCellDef> Actions</th>
     <td mat-cell *matCellDef="let element"> 
         <button mat-icon-button (click)="editUserDetails(element)"><mat-icon>edit</mat-icon></button> 
-        <button mat-icon-button (click)="deactivateUser(element)"><mat-icon>delete</mat-icon></button>
+        <button *ngIf="isSuperAdmin" mat-icon-button (click)="deactivateUser(element)"><mat-icon>delete</mat-icon></button>
     </td>
   </ng-container>
 

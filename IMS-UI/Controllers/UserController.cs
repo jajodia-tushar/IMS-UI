@@ -32,22 +32,22 @@ namespace IMS_UI.Controllers
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
             var response = await _userProvider.AddUser(user);
-            if(response!=null)
+            if (response != null)
                 return Ok(response);
             return BadRequest(response);
         }
 
         [HttpPut]
-        public async Task<UserResponse> EditUserDetails([FromBody] User user)
+        public async Task<UsersResponse> EditUserDetails([FromBody] User user)
         {
             var response = await _userProvider.EditUser(user);
             return response;
         }
 
-        [HttpDelete]
-        public async Task<Response> DeactivateUser([FromBody] User user)
+        [HttpDelete("{userId}")]
+        public async Task<Response> DeactivateUser(int userId, bool isHardDelete)
         {
-            var response = await _userProvider.DeactivateUser(user);
+            var response = await _userProvider.DeactivateUser(userId, isHardDelete);
             return response;
         }
     }

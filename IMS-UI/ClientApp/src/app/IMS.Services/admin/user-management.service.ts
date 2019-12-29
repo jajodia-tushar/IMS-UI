@@ -5,41 +5,56 @@ import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { Users } from 'src/app/IMS.Models/User/Users';
 import { DeleteResponse } from 'src/app/IMS.Models/User/DeleteResponse';
-import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
+import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 import { BehaviorSubject } from 'rxjs';
+import {Response} from 'src/app/IMS.Models/Shared/Response'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
+
+  private roles;
   
   constructor(private http: HttpClient) { }
   
-  deactivate(user: any) : Promise<DeleteResponse>{
+  deactivate(userId: any,isHardDelete:boolean) : Promise<Response>{
    let headers=new HttpHeaders().set('Content-Type','application/json; charset=utf8');
-   const options = {
-    headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    }), body: user
-    }; 
-   return this.http.delete<DeleteResponse>("api/users",options).toPromise(); 
+   return this.http.delete<Response>("api/users/"+ userId+ "?isHardDelete="+isHardDelete).toPromise(); 
   }
 
-  createUser(user : User){
-    return this.http.post<UserResponse>("api/users", user).toPromise();
+  createUser(user : User): Promise<UsersResponse>{
+    return this.http.post<UsersResponse>("api/users", user).toPromise();
   }
 
-  editUser(user : User){
-    return this.http.put<UserResponse>("api/users", user).toPromise();
+  editUser(user : User) :Promise<UsersResponse>{
+    return this.http.put<UsersResponse>("api/users", user).toPromise();
   }
 
-  getAllUsers(){
-    return this.http.get<Users>("api/users").toPromise();
+  getAllUsers() : Promise<UsersResponse>{
+    return this.http.get<UsersResponse>("api/users").toPromise();
   
   }
   
-  getAllRoles(){
+  getAllRoles() : Promise<RolesResponse>{
     return this.http.get<RolesResponse>("api/roles").toPromise();
   }
+
+  // async setUserRoles(){
+  //   let roles : Role[] = (<RolesResponse> await this.getAllRoles()).roles;
+  //   this.roles = roles;
+  // }
+
+  // getAllRolesFromService(){
+  //   if(this.roles!=null || this.roles!= undefined)
+  //     return this.roles;
+  //   else{
+  //     this.setUserRoles()
+  //     return this.roles;
+  // //   }
+
+  // }
+
+
 
 }

@@ -34,7 +34,6 @@ export class ReportsTabsComponent implements OnInit {
   
 
   async ngOnInit() {
-    this.selectedTab = 0;
     await this.initializeEmptyData();
 
     if (this.locationCode != null) {

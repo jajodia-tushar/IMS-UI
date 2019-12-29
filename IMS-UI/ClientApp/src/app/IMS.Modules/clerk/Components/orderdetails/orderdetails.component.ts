@@ -11,11 +11,8 @@ import { HttpClient } from '@angular/common/http';
 import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/VendorOrderDetails';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
-
-interface DATASOURCE_ITEM {
-  Item: Item;
-  Quantity: number;
-}
+import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface FileUrl {
   locationUrl: string;
@@ -42,6 +39,7 @@ export class OrderdetailsComponent implements OnInit {
     'Paste'
   ];
   displayedColumns: string[] = ['ItemName', 'Quantity', 'action'];
+  ItemControl = new FormControl('', [Validators.required]);
   public selectedFile = null;
   public datasource: MatTableDataSource<ItemQuantityPriceMapping>;
   public dataSourceItems: ItemQuantityPriceMapping[] = [];
@@ -100,7 +98,7 @@ export class OrderdetailsComponent implements OnInit {
   itemNames: string[] = []
   public Items: Item[];
   filteredItems: string[];
-  constructor(private _ItemService: ItemService, private _CentralizedDataService: CentralizedDataService,
+  constructor(private _ItemService: ItemService, private _CentralizedDataService: CentralizedDataService, private router:Router,
     private snackBar: MatSnackBar, private http: HttpClient, private _VendorSerice: VendorService) { }
 
  
@@ -111,21 +109,13 @@ export class OrderdetailsComponent implements OnInit {
     let fileToUpload = <File>file[0];
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    console.log(formData);
     this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
       data => {
         this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
-        console.log(this.vendorOrder.vendorOrderDetails.challanImageUrl)
-        console.log(data.locationUrl);
-        console.log("sucessfully uploaded")
-      },
-      err => {
-        console.log("fdf")
-        console.log("error");
+        this.showMessage(5, "image is uploaded");
       }
     );
 
-    
   }
 
   showMessage(time, message) {
@@ -137,27 +127,45 @@ export class OrderdetailsComponent implements OnInit {
   isItemAlreadySelected(item: Item) {
     return this.dataSourceItems.find(i => i.item.name == item.name) != null;
   }
-
-
-  selectionComplete(row: DATASOURCE_ITEM, itemName: string) {
-    row.Item = this.Items.find(item => item.name == itemName);
-    this.filteredItems = this.itemNames.slice();
+  rowValidation() {
+    if (this.dataSourceItems.length > 0) {
+      for (let i = 0; i < this.dataSourceItems.length; i++) {
+        if (this.dataSourceItems[i].item.id == null)
+          return i;
+        else if (!this.dataSourceItems[i].quantity)
+          return i
+        else if (this.dataSourceItems[i].quantity == 0)
+          return i;
+      }
+      return -1;
+    }
+    else
+      return -1;    
   }
 
   AddRow() {
-    let itemData: ItemQuantityPriceMapping = {
-      item: { id: null, name: "", maxLimit: 0, isActive: false, imageUrl: "", rate: 0},
-      quantity: 0,
-      totalPrice:0
-    };
-    this.dataSourceItems.push(itemData);
-    this.renderTable();
-    console.log(this.dataSourceItems);
+    let lastIndex = this.dataSourceItems.length - 1;
+    let errorRowIndex = this.rowValidation();
+    if (errorRowIndex === -1) {
+      let itemData: ItemQuantityPriceMapping = {
+        item: { id: null, name: "", maxLimit: 0, isActive: false, imageUrl: "", rate: 0 },
+        quantity: 0,
+        totalPrice: 0
+      };
+      this.dataSourceItems.push(itemData);
+      this.renderTable();
+    }
+    else {
+      if (this.dataSourceItems[errorRowIndex].item.id == null)
+        this.showMessage(5,"item in row " + (errorRowIndex + 1) + " is not selected");
+      else if (!this.dataSourceItems[errorRowIndex].quantity)
+        this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " is not filled");
+      else if (this.dataSourceItems[errorRowIndex].quantity == 0)
+        this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " should be greater than 0");
+    }   
   }
 
   allowOnlyDigits(e: KeyboardEvent) {
-    //let inputText = event.target.value;
-    //console.log(e);
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.
       (e.key === 'a' && e.ctrlKey === true) || // Allow: Ctrl+A
@@ -174,7 +182,6 @@ export class OrderdetailsComponent implements OnInit {
     }
     // Ensure that it is a number and stop the keypress
     if (e.key === ' ' || isNaN(Number(e.key))) {
-      console.log(e.key);
       return false;
     }
   }
@@ -190,34 +197,43 @@ export class OrderdetailsComponent implements OnInit {
       this.renderTable();
     }
   }
-  onSubmit() {
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(["/Clerk"]);
+  }
+    
+  onSubmit() { 
+    let errorRowIndex = this.rowValidation();
     if (this.orderDetails) {
-      //console.log(this.orderDetails);
-      //console.log(this.dataSourceItems);
-      this.vendorOrder.vendorOrderDetails.challanNumber = this.orderDetails.challanNumber;
-      this.vendorOrder.vendorOrderDetails.date = this.orderDetails.date;
-      this.vendorOrder.vendorOrderDetails.orderItemDetails = this.dataSourceItems;
-      this.vendorOrder.vendorOrderDetails.recievedBy = this.orderDetails.receivedBy;
-      this.vendorOrder.vendorOrderDetails.submittedTo = this.orderDetails.submitedTo;
-      this.vendorOrder.vendor = this.orderDetails.vendor;
-//      this.vendorOrder.vendorOrderDetails = this.vendorOrder;
-      console.log(this.vendorOrder);
-      this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
-        data => {
-          console.log(data);
-          
-        },
-        error => {
-          console.log("error came");
-          console.log(error);
+      if (errorRowIndex=== -1 && this.dataSourceItems.length > 0) {
+        this.vendorOrder.vendorOrderDetails.challanNumber = this.orderDetails.challanNumber;
+        this.vendorOrder.vendorOrderDetails.date = this.orderDetails.date;
+        this.vendorOrder.vendorOrderDetails.orderItemDetails = this.dataSourceItems;
+        this.vendorOrder.vendorOrderDetails.recievedBy = this.orderDetails.receivedBy;
+        this.vendorOrder.vendorOrderDetails.submittedTo = this.orderDetails.submitedTo;
+        this.vendorOrder.vendor = this.orderDetails.vendor;
+        this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
+          data => {
+            this.reloadComponent();
+          }
+        )
+      }
+      else {
+        if (this.dataSourceItems.length == 0)
+          this.showMessage(5, "no Items are added in Item Details ");
+        else {
+          if (this.dataSourceItems[errorRowIndex].item.id == null)
+            this.showMessage(5,"item in row " + (errorRowIndex + 1) + " is not selected");
+          else if (!this.dataSourceItems[errorRowIndex].quantity)
+            this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " is not filled");
+          else if (this.dataSourceItems[errorRowIndex].quantity == 0)
+            this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " should be greater than 0")
         }
-
-      )
-
+      }
     }
     else {
-      this.showMessage(5, "fill completely");
-      console.log("fill completely");
+      this.showMessage(5, "some fields in Invoice are empty");
     }
   }
   ngDoCheck() {
@@ -225,20 +241,13 @@ export class OrderdetailsComponent implements OnInit {
     
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {  
     this._ItemService.getAllItems().subscribe(
       data => {
-        console.log(data);
-        
         this.Items = data.items;
       }
     )
     //this.Items = this.MockItems.slice();
-    //this.Items.forEach(item => {
-    //  this.itemNames.push(item.name);
-    //});
-    //this.filteredItems = this.itemNames.slice();
     this.renderTable();
   }
 

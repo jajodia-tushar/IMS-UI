@@ -16,7 +16,6 @@ export class VendorService {
     return this.http.get<VendorResponse>("api/Vendor");
   }
   postVendorOrder(vendorOrder: VendorOrder) {
-    console.log(vendorOrder);
     return this.http.post<VendorOrder>("api/Vendor", vendorOrder);
   }
 

@@ -26,7 +26,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _AdminListProvider.ApiGetCaller("/api/User/Role/Admin");
+                var response = await _AdminListProvider.ApiGetCaller("/api/User/Role/superadmin");
                 if (response.Error == null)
                     return Ok(response);
                 else

@@ -49,14 +49,10 @@ export class VendordetailsComponent implements OnInit {
     this.isDataToBeSend();
   }
   SelectedDate() {
-    console.log(this.RecievedDate)
-
     this.orderDetails.date = this.RecievedDate;
-    console.log(this.orderDetails.date)
     this.isDataToBeSend();
   }
   isDataToBeSend() {
-    console.log(this.orderDetails);
     if (this.orderDetails.date != null && this.orderDetails.receivedBy != null
              && this.orderDetails.vendor != null && this.orderDetails.submitedTo != null)
     {
@@ -73,21 +69,10 @@ export class VendordetailsComponent implements OnInit {
       data => {
         this.Vendors = data.vendors;
       }
-    )
-    //this.http.get<User>("api/user").subscribe(
-    //  data => {
-    //    this.LoggedINClerk = data.username;
-    //    console.log(this.LoggedINClerk);
-    //    console.log(data)
-    //  })
-    
+    )  
     await this._CentralizedDataService.getLoggedInUser();
     this.LoggedINClerk = this._CentralizedDataService.getUser().firstname + " " + this._CentralizedDataService.getUser().lastname;
-    this.orderDetails.receivedBy = this.LoggedINClerk;
-    
-     
-      
-      
+    this.orderDetails.receivedBy = this.LoggedINClerk;    
   }
 
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="itemForm" novalidate>
+
   <mat-card class="card-size">
     <mat-card-title>Items Details</mat-card-title>
     <mat-divider></mat-divider>
@@ -10,7 +10,7 @@
               <th mat-header-cell *matHeaderCellDef> Item Name </th>
               <td mat-cell *matCellDef="let element">
                 <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
-                  <mat-select [(ngModel)]="element.item" formControlName="itemNameControl">
+                  <mat-select [(ngModel)]="element.item" >
                     <mat-option *ngFor="let Item of Items" [value]="Item" [disabled]="isItemAlreadySelected(Item)">
                       {{Item.name}}
                     </mat-option>
@@ -24,10 +24,10 @@
               <th mat-header-cell *matHeaderCellDef> Quantity </th>
               <td mat-cell *matCellDef="let element">
                 <mat-form-field appearance="outline" style="width:80%">
-                  <input matInput #quantity="ngModel" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)" required>
-                  <mat-error *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
+                  <input matInput #quantity="ngModel" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)" >
+                  <!--<mat-error *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
                     <strong *ngIf="quantity.errors.required">Quantity is mandatory</strong>
-                  </mat-error>
+                  </mat-error>-->
                 </mat-form-field>
 
               </td>
@@ -72,7 +72,7 @@
     </button>
     <button mat-raised-button class="submit-button" (click)="onSubmit()">submit</button>
   </div>
-</form>
+
 
 
 

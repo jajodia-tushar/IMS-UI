@@ -65,5 +65,24 @@ namespace IMS_UI.Controllers
                 };
                 return Ok(userResponse);
         }
+
+        [HttpDelete("logout")]
+        public async Task<IActionResult> Logout()
+        {
+           var response = await _loginProvider.LogOut();
+
+            if(response.Status == Status.Success)
+            {
+                _SessionManager.ClearSession();
+                return Ok(response);
+            }
+            else
+            {
+                return Ok(new Response
+                {
+                    Status = Status.Failure
+                });
+            }
+        }
     }
 }

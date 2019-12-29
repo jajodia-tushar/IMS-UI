@@ -9,5 +9,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
     public interface ILoginProvider
     {
         Task<LoginResponse> ApiCaller(Object requestData);
+
+        Task<Response> LogOut();
     }
 }

@@ -5,6 +5,8 @@ import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-
 import { User } from "src/app/IMS.Models/User/User";
 import { chainedInstruction } from "@angular/compiler/src/render3/view/util";
 import { elementAt } from "rxjs/operators";
+import { LoginService } from "src/app/IMS.Services/login/login.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-admin-header",
@@ -51,7 +53,8 @@ export class AdminHeader implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+    private centralizedRepo: CentralizedDataService,private loginService : LoginService, private router : Router) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -61,5 +64,16 @@ export class AdminHeader implements OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-
+  logout() {
+    this.loginService.logOut().subscribe(
+      data => {
+        if (data.status == "Success") {
+          this.router.navigateByUrl("/login");
+        }
+        else {
+          alert("Something Went Wrong");
+        }
+      }
+    )
+  }
 }

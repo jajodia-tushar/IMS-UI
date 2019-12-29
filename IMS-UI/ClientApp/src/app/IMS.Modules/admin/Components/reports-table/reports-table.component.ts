@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+
 
 @Component({
   selector: 'app-reports-table',

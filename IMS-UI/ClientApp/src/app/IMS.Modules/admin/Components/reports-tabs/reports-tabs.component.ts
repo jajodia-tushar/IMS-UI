@@ -176,6 +176,10 @@ export class ReportsTabsComponent implements OnInit {
       .dataFromUser;
     let b = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1]
       .dataFromUser;
+    
+    if (a == "WH") {
+      a = "warehouse";
+    }
     this.reportsService
       .getRAGReport(a, a, b)
       .subscribe(data => {

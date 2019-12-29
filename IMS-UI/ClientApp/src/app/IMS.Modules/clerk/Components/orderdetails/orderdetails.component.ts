@@ -157,11 +157,11 @@ export class OrderdetailsComponent implements OnInit {
     }
     else {
       if (this.dataSourceItems[errorRowIndex].item.id == null)
-        this.showMessage(5,"item in row " + (errorRowIndex + 1) + " is not selected");
+        this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
       else if (!this.dataSourceItems[errorRowIndex].quantity)
-        this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " is not filled");
+        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Is Not Filled");
       else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-        this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " should be greater than 0");
+        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Should Be Greater Than 0");
     }   
   }
 
@@ -215,25 +215,27 @@ export class OrderdetailsComponent implements OnInit {
         this.vendorOrder.vendor = this.orderDetails.vendor;
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
+            this.showMessage(5,"Items Are Added")
             this.reloadComponent();
+
           }
         )
       }
       else {
         if (this.dataSourceItems.length == 0)
-          this.showMessage(5, "no Items are added in Item Details ");
+          this.showMessage(5, "No Items Are Added In Item Details ");
         else {
           if (this.dataSourceItems[errorRowIndex].item.id == null)
-            this.showMessage(5,"item in row " + (errorRowIndex + 1) + " is not selected");
+            this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
           else if (!this.dataSourceItems[errorRowIndex].quantity)
-            this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " is not filled");
+            this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Is Not Filled");
           else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-            this.showMessage(5,"quantity in row " + (errorRowIndex + 1) + " should be greater than 0")
+            this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Should Be Greater Than 0")
         }
       }
     }
     else {
-      this.showMessage(5, "some fields in Invoice are empty");
+      this.showMessage(5, "Some Fields In Invoice Are Empty");
     }
   }
   ngDoCheck() {

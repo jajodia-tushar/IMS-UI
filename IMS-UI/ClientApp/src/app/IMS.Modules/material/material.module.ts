@@ -7,13 +7,9 @@ import {
   MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
   MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule
 } from '@angular/material';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, 
-  MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -23,30 +19,27 @@ import { MatDividerModule } from '@angular/material/divider';
 
 
 const materialModules = [
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatInputModule,
-    MatRippleModule,
-    MatMenuModule,
-    MatCardModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatSidenavModule,
-    MatGridListModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    CommonModule,
-    MatAutocompleteModule
-  MatDialogModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatInputModule,
+  MatRippleModule,
+  MatMenuModule,
+  MatCardModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatGridListModule,
+  MatTableModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatSnackBarModule,
+  CommonModule,
+  MatAutocompleteModule,
   MatFormFieldModule,
   MatSelectModule,
   MatDialogModule,

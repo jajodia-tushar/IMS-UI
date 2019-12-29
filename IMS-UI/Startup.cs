@@ -46,7 +46,7 @@ namespace IMS_UI
             services.AddSingleton<ItemWiseAnalysisProvider>();
             services.AddSingleton<StockProvider>();
             services.AddSingleton<RecentEntriesProvider>();
-            services.AddSingleton<AuthGaurdService>();
+           
             //    services.AddSingleton<AuthGaurdService>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();
             services.AddSingleton<IVendorOrderProvider, VendorOrderProvider>();

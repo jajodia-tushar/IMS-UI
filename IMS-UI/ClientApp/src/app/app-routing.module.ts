@@ -4,7 +4,7 @@ import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { LoginComponent } from './Components/login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo : 'Clerk' , pathMatch : 'full'},
+  { path: '', redirectTo : 'login' , pathMatch : 'full'},
   { path: 'login', component : LoginComponent , canActivate : [LoginGuard] },
   { path: 'employee', loadChildren: () => import('./IMS.Modules/employee/employee.module').then(m => m.EmployeeModule)},
   { path: 'Shelf', redirectTo : 'employee' },

@@ -26,6 +26,10 @@ export class ReportsTabsComponent implements OnInit {
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
     this.selectedTab = this.route.snapshot.queryParams.selectedTab;
+
+    if (this.selectedTab == null) {
+      this.selectedTab = 0;
+    }
   }
 
   async getRAGReportDropDownList() {

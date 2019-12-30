@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 export class FloorComponent implements OnInit {
 
   constructor(private router: Router
-    ,private shelfService : ShelfService,private centralizedDataRepo : CentralizedDataService) { }
+    ,private shelfService : ShelfService,private centralizedDataRepo : CentralizedDataService,
+    private dialogRef: MatDialogRef<FloorComponent>,) { }
     selectedShelf : Shelf;
     shelves : Shelf[] = [];
 
@@ -34,6 +36,7 @@ export class FloorComponent implements OnInit {
       this.router.navigate(['Shelf']);
       console.log(this.shelves);
       this.isFloorNotSelected = false;
+      this.dialogRef.close(true);
     }
     else{
       this.router.navigateByUrl('/login');

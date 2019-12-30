@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
               let dialogConfig = new MatDialogConfig();
               dialogConfig.disableClose = false;
               dialogConfig.autoFocus = true;
-              dialogConfig.width = "20%";
+              // dialogConfig.width = "%";
               let dialogRef = this.dialog.open(FloorComponent, dialogConfig);
+              // dialogRef.close(false);
             }
           }
           else {

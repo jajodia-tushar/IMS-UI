@@ -4,8 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
-  MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, MatSortModule
+  MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, MatSortModule
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';

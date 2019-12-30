@@ -1,0 +1,12 @@
+.vendor{
+  float :left;
+  width:35%;
+}
+.order{
+  float:left;
+  width:50%;
+}
+h2{
+  padding-left:5%;
+  padding-top:1%;
+}

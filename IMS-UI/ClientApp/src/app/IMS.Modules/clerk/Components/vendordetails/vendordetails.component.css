@@ -1,0 +1,26 @@
+.mat-card {
+  margin: 3% -3% 0% 15%;
+  height: 450px;
+}
+.mat-form-field {
+  width: 80%;
+  margin-top: 7%;
+  margin-bottom: -11%;
+  
+}
+.fields-size{
+  height:400px;
+}
+.mat-divider {
+  padding-left: 4%;
+}
+/*.mat-form-field-appearance-outline .mat-form-field-wrapper {
+   margin: 0% !important;
+}*/
+.mat-card-title{
+  margin-left:4%;
+}
+
+.disable-input {
+  pointer-events: none !important;
+}

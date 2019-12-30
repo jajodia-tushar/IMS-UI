@@ -1,0 +1,130 @@
+
+.card-size {
+  height: 450px;
+  margin-top: 2%;
+  margin-left: 4%;
+  width: 100%;
+  background-color:white;
+}
+.empty-items-display p {
+  font-size: large;
+}
+.empty-items-display {
+  height: 300px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 300px;
+}
+
+.mat-table {
+  width: 100%;
+}
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px !important;
+}
+
+.mat-header-cell {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+.mat-form-field {
+  padding-bottom: 0px !important;
+  padding-top:10px !important;
+}
+
+.input_fileupload--hidden {
+  display: none;
+}
+.content-size{
+  margin-top:3%;
+}
+.table-height {
+  min-height: 300px;
+  max-height:300px;
+  overflow-y: scroll;
+}
+
+.table-height::-webkit-scrollbar {
+  width: 10px !important
+}
+  .table-height::-webkit-scrollbar {
+    width: 10px;
+  }
+
+/* Track */
+  .table-height::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+/* Handle */
+  .table-height::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+    .table-height::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+
+
+.upload-icon-size {
+  font-size: 22px !important;
+}
+.mat-icon-button {
+  float: right !important;
+}
+.edit-delete-icon-center{
+  align-content:center
+}
+
+.mat-button{
+  font-size:16px !important;
+}
+
+
+.upload-submit-button-position {
+  float: right !important;
+  /*margin: 2% 1%;*/
+  padding-top:2%;
+  margin-bottom:5%;
+  margin-right:-5%;
+}
+.upload-button {
+  background: black !important;
+  color: white !important;
+  margin-right: 12px;
+  /*padding-left: 7px;*/
+  padding: 0px 9px 0px 4px;
+  /*float: right !important;
+  margin-top: 2%;*/
+}
+.submit-button {
+  background: black !important;
+  color: white !important;
+  /*float: right !important;
+  margin-top: 2%;*/
+}
+
+.mat-column-ItemName{
+  width: 50% !important;
+}
+.add-row{
+  margin-top:4%;
+  float:right;
+}
+
+.mat-column-Quantity {
+  width: 40% !important;
+}
+
+.mat-column-action{
+  width: 10% !important;
+}
+
+::ng-deep .mat-column-ItemName div.mat-form-field-infix,
+::ng-deep .mat-column-Quantity div.mat-form-field-infix,
+::ng-deep .mat-column-action div.mat-form-field-infix{
+  width: 33% !important;
+}

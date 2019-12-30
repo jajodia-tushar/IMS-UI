@@ -37,6 +37,7 @@
     "popper.js": "^1.14.3",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
+    "select-autocomplete": "0.0.1",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {

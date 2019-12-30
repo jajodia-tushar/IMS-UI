@@ -13,7 +13,8 @@ import { LoginService } from '../login/login.service';
 export class CentralizedDataService {
   employee : Employee ;
   shelf : Shelf;
-  user : User;
+  user: User;
+  siblingData: any;
 
   constructor(private shelfService : ShelfService,private loginService : LoginService){}
 
@@ -47,7 +48,15 @@ export class CentralizedDataService {
     this.user = user;
   }
 
-  getUser() : User{
+  getUser(): User{
     return this.user;
+  }
+
+  setSiblingData(data: any) {
+    this.siblingData = data;
+  }
+
+  getSiblingData(): any{
+    return this.siblingData;
   }
 }

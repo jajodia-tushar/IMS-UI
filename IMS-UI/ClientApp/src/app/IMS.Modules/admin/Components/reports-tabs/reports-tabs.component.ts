@@ -46,7 +46,8 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   tabChanged(event: Event) {
-    // console.log(this.selectedTab);
+    this.columnToDisplay = [];
+    this.dataToDisplay = [];
   }
 
   searchButtonClicked() {

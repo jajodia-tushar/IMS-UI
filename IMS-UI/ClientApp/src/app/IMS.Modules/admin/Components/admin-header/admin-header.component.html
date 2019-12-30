@@ -54,14 +54,25 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav style="transform: none;visibility: visible;min-width: 12%;top: 56px;bottom: 0px; width: 13%;background-color: #222437;" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+    <mat-sidenav style="transform: none;visibility: visible;min-width: 12%;min-height:calc(100vh - 59px); top: 56px;bottom: 0px; width: 13%;background-color: #222437;" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true" [fixedInViewport]="mobileQuery.matches"
+        fixedTopGap="56">
         <mat-nav-list>
-            <a mat-list-item *ngFor="let nav of fillerNav" style="color:#606a96 ;" onmouseover="{this.style.color='#fff'}" routerLink="{{nav}}" onMouseOut="{this.style.color='#606a96';this.style.backgroundColor='#' }">{{ nav }}</a>
+            <a mat-list-item *ngFor="let nav of navBarItems;" [routerLink]="[nav.tab]" routerLinkActive="active">
+
+                <mat-icon style="
+          font-size: 1rem;
+          line-height: 1.5;
+          margin-right: .625rem;
+          " style.color="{{nav.color}}">{{ nav.icon}}
+                </mat-icon>{{nav.tab}}
+            </a>
+
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
+        <!-- <app-mainnav></app-mainnav> -->
         <router-outlet></router-outlet>
     </mat-sidenav-content>
-
 </mat-sidenav-container>
 </div>

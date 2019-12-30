@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 import { User } from 'src/app/IMS.Models/User/User';
@@ -19,8 +19,22 @@ export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
   constructor(private formBuilder: FormBuilder, private userManageService: UserManagementService,
-              private centralizedDataRepo: CentralizedDataService){
-    
+    private centralizedDataRepo: CentralizedDataService){
+
+      this.createUserForm = this.formBuilder.group({
+        id : [ -1,[]],
+        username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15), this.cannotContainSpace]],
+        role : ["",[Validators.required]],
+        email : ["", [Validators.required, Validators.email]],
+        firstname : ["", [Validators.required, Validators.maxLength(16),this.cannotContainSpace]],
+        lastname : ["",[this.cannotContainSpace, Validators.maxLength(16)]],
+        password : ["", [Validators.minLength(8),Validators.maxLength(16),this.cannotContainSpace,
+          this.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+          this.patternValidator(/\d/, {hasNumber: true}),
+          this.patternValidator(/[a-z]/, {hasSmallCase: true}),
+          this.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
+        ]]
+    })
   }
 
   @Input() userDetails;
@@ -39,25 +53,23 @@ export class UserManageFormComponent implements OnInit{
       console.log('onInit called')
       this.isEditUserForm = this.userDetails?true: false;
       console.log(this.isEditUserForm);
+
     }
     
-    this.createUserForm = this.formBuilder.group({
-      id : [ -1,[]],
-      username : [{value:'', disabled:this.isEditUserForm},[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-      role : [{value:{},disabled:!this.isSuperAdmin && this.isEditUserForm},[Validators.required]],
-      email : ["", [Validators.required, Validators.email]],
-      firstname : ["", [Validators.required, Validators.maxLength]],
-      lastname : ["",[]],
-      password : [{value:"",disabled:this.isEditUserForm}, [Validators.minLength(8),Validators.maxLength(16)]]
-  })
+    
     if(this.isEditUserForm){
       this.createUserForm.setValue(this.userDetails);
+      this.createUserForm.get("username").disable();
+      this.createUserForm.get("password").disable();
+    }
+    if(!this.isSuperAdmin && this.isEditUserForm){
+      this.createUserForm.get("role").disable();
     }
    
   }
   
   async setUserRoles(){
-    let roles : Role[] = (<RolesResponse> await this.userManageService.getAllRoles()).roles;
+    let roles : Role[] = await this.userManageService.getAllRolesFromService();
     this.roles = roles;
   }
   
@@ -70,21 +82,6 @@ export class UserManageFormComponent implements OnInit{
   async createNewUser(){
     let user: User = <User>this.createUserForm.getRawValue();
     let createdUser: UsersResponse = <UsersResponse>await this.userManageService.createUser(user);
-    // if(createdUser==null){
-    //   // show snackbar
-    // }
-    // else if(createdUser.error==null){
-    //   //pass to the dialog, and also show snackbar. If admin don't emit , if superadmin emit user
-    // }
-    // if(this.isSuperAdmin){
-    //   // create and Show that User Was Created . Also Check for error
-    // }
-    // else{
-    //   // user is admin. Just show a message that request is pending.
-    // }
-
-
-
     this.userCreated.emit(createdUser);
   }
 
@@ -125,6 +122,22 @@ export class UserManageFormComponent implements OnInit{
       this.createNewUser();
     }
   }
+
+  cannotContainSpace(control: AbstractControl) : ValidationErrors | null {
+    if((control.value as string).trim().indexOf(' ') >= 0){
+        return {cannotContainSpace: true}
+    }
+    return null;
+}
+   patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } => {
+    if (!control.value) {
+      return null;
+    }
+    const valid = regex.test(control.value);
+    return valid ? null : error;
+  };
+}
 
   cancelUpdate(){
     this.userEditted.emit(null);

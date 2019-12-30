@@ -1,37 +1,40 @@
 <div class="form-container">
   <form class="form-container" [formGroup]="createUserForm" (ngSubmit)="submitForm()">
-    <div>
+   
       <label>Role: </label>
       <mat-radio-group formControlName="role" >
         <mat-radio-button *ngFor="let roleOption of roles" [value]="roleOption" [checked]="role.value.name== roleOption.name">{{roleOption.name}}</mat-radio-button>
+        <mat-error *ngIf="role.invalid">Select Role</mat-error>
       </mat-radio-group>
-    </div>
+ 
 
   <mat-form-field
       hidden="true">
     <input matInput formControlName="id" placeholder="id" type="number">
-    <mat-error *ngIf="id.invalid">Invalid Username</mat-error>
   </mat-form-field>
 
 
   <mat-form-field
       floatLabel="auto">
     <input matInput formControlName="username" placeholder="UserName" required >
-    <mat-error *ngIf="username.invalid">Invalid Username</mat-error>
-    <mat-error *ngIf="username.errors?.minlength">Length{{username.errors.minlength.requiredLength}}</mat-error>
+    <mat-error *ngIf="username.errors?.minlength">Min Length{{username.errors.minlength.requiredLength}}</mat-error>
+    <mat-error *ngIf="username.errors?.maxlength">Max Length{{username.errors.maxlength.requiredLength}}</mat-error>
+    <mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
   </mat-form-field>
     
   <mat-form-field
       floatLabel="auto">
     <input matInput placeholder="First Name" formControlName="firstname" required>
-    <mat-error *ngIf="firstname.invalid">Invalid firstname</mat-error>
+    <mat-error *ngIf="firstname.errors?.cannotContainSpace">First Name can not contain space.</mat-error>
+    <mat-error *ngIf="firstname.errors?.maxlength">Max Length{{firstname.errors.maxlength.requiredLength}}</mat-error>
   </mat-form-field>
 
   <mat-form-field
       hideRequiredMarker="true"
       floatLabel="auto">
     <input matInput placeholder="Last Name" formControlName="lastname">
-    <mat-error *ngIf="lastname.invalid">Invalid</mat-error>
+    <mat-error *ngIf="lastname.errors?.cannotContainSpace">Last Name can not contain space.</mat-error>
+    <mat-error *ngIf="lastname.errors?.maxlength">Max Length{{lastname.errors.maxlength.requiredLength}}</mat-error>
   </mat-form-field>
 
   <mat-form-field
@@ -45,12 +48,19 @@
       hideRequiredMarker="false"
       floatLabel="auto">
     <input matInput placeholder="Password" formControlName="password" required type="password">
-    <mat-error *ngIf="password.invalid">Invalid</mat-error>
+    <mat-hint align="end">Password must contain numeric, special and small and capital alphabets.</mat-hint>
+    <mat-error *ngIf="password.errors?.minlength">Min Length{{password.errors.minlength.requiredLength}}</mat-error>
+    <mat-error *ngIf="password.errors?.cannotContainSpace">Password can not contain space.</mat-error>
+    <mat-error *ngIf="password.errors?.maxlength">Max Length{{password.errors.maxlength.requiredLength}}</mat-error>
+    <mat-error *ngIf="password.errors?.hasCapitalCase">Must Contain At Least 1 Capital Case!</mat-error>
+    <mat-error *ngIf="password.errors?.hasNumber">Must Contain At Least 1 Number!</mat-error>
+    <mat-error *ngIf="password.errors?.hasSmallCase">Must Contain At Least 1 Small Case!</mat-error>
+    <mat-error *ngIf="password.errors?.hasSpecialCharacters">Must Contain At Least 1 Special Character!</mat-error>
   </mat-form-field>
 
   
-  <button *ngIf="isEditUserForm==null" mat-button type="submit">Submit</button>
-  <button *ngIf="isEditUserForm==true" mat-button type="submit">Update</button>
+  <button *ngIf="isEditUserForm==null" [disabled]="!createUserForm.valid" mat-button type="submit">Submit</button>
+  <button *ngIf="isEditUserForm==true" [disabled]="!createUserForm.valid" mat-button type="submit">Update</button>
   <button *ngIf="isEditUserForm==null" mat-button type="cancel" (click)="cancelCreate()">Cancel</button>
   <button *ngIf="isEditUserForm==true" mat-button type="cancel" (click)="cancelUpdate()">Cancel</button>
 

@@ -40,20 +40,20 @@ export class UserManagementService {
     return this.http.get<RolesResponse>("api/roles").toPromise();
   }
 
-  // async setUserRoles(){
-  //   let roles : Role[] = (<RolesResponse> await this.getAllRoles()).roles;
-  //   this.roles = roles;
-  // }
+  async setUserRoles(){
+    let roles : Role[] = (<RolesResponse> await this.getAllRoles()).roles;
+    this.roles = roles;
+  }
 
-  // getAllRolesFromService(){
-  //   if(this.roles!=null || this.roles!= undefined)
-  //     return this.roles;
-  //   else{
-  //     this.setUserRoles()
-  //     return this.roles;
-  // //   }
+  async getAllRolesFromService(){
+    if(this.roles!=null || this.roles!= undefined)
+      return this.roles;
+    else{
+      await this.setUserRoles()
+      return this.roles;
+    }
 
-  // }
+  }
 
 
 

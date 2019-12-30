@@ -80,5 +80,13 @@ export class PickItemComponent implements OnInit {
     });
   }
 
+  addWidthStyle() {
+    console.log(this.cartItems);
+    let style = {
+      'width': (this.cartItems.length != 0) ? '50vw' : '100vw'
+    };
+    
+    return style;
+  }
 
 }

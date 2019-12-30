@@ -59,6 +59,12 @@ th.mat-header-cell {
     padding: 30px;
 }
 
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 740px;
+    }
+}
+
 
 /* Stepper Styling */
 

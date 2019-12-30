@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="flex-container" style="padding-top: 4%;">
-            <div class="item-list">
+            <div class="item-list" [ngStyle]="addWidthStyle()">
                 <app-items-list (onItemAdd)="onItemClicked($event)" [shelfItems]="shelfItems | filter : searchText"></app-items-list>
             </div>
             <app-items-cart class="item-form" [selectedItems]="cartItems" (onCartItemDeleted)="onItemDeleted($event)">

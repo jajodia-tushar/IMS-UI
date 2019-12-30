@@ -15,7 +15,7 @@ import { SnackbarComponent } from "src/app/IMS.Modules/shared/snackbar/snackbar.
   templateUrl: "./admin-header.component.html",
   styleUrls: ["./admin-header.component.css"]
 })
-export class AdminHeader implements OnDestroy {
+export class AdminHeader implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
@@ -39,10 +39,18 @@ export class AdminHeader implements OnDestroy {
     icon: "bar_chart",
     color: "#ffd800"
 
-  }]
+    }]
+  
+  async ngOnInit() {
+    await this.centralizedRepo.getLoggedInUser();
+    this.name = this.centralizedRepo.getUser().firstname + " " +
+      this.centralizedRepo.getUser().lastname;
+  }
   isVisible = false;
   isPersonVisible = false;
   selectedIndexs: any;
+
+  name: string;
 
   changeNotificationIcon() {
     this.isVisible = !this.isVisible;

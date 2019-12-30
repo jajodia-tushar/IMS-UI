@@ -5,7 +5,7 @@
     </div>
     <div class="login-page__credential-section">
       <div class="credential-section__form">
-        <form class="form-input">
+        <form class="form-input" style="position: relative;margin-top: 12px;">
           <p class="invalid-user" *ngIf="error">Invalid username or password</p>
           <mat-form-field floatPlaceholder="never" class="full-width">
             <input type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" required />
@@ -17,9 +17,10 @@
           </mat-form-field>
           <br />
           <button mat-raised-button class="button-properties" (click)=Login()>
-          <app-spinning-loader></app-spinning-loader>{{ButtonName}}
+            <app-spinning-loader></app-spinning-loader>{{ButtonName}}
           </button>
         </form>
+
       </div>
     </div>
   </div>

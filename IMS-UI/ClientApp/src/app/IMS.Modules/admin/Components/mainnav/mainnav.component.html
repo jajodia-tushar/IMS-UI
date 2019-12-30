@@ -7,8 +7,18 @@
         </h5>
 
 
-        <div class="refreshIcon">
-          <i class="fa fa-refresh" (click)="onRefresh()" id="refresh" style="font-size:24px; color: #606a96;"></i>
+        <div class="refreshIcon" (click)="onRefresh()">
+          <p style="color: aliceblue;
+          position: absolute;
+          right: 0;
+          padding-right: 10px;
+          padding-top: 1px;">RAG Status</p>
+          <i class="fa fa-refresh" id="refresh" style="font-size: 20px;
+          color: #606a96;
+          position: absolute;
+          left: 8px;
+          top: 4px;"></i>
+
         </div>
       </div>
     </div>
@@ -21,6 +31,11 @@
 </div>
 
 <app-charts-component></app-charts-component>
-
-<app-store [numberOfItems]='10' class="store"></app-store>
-<app-recent-entries class="recent-entries"></app-recent-entries>
+<div class="container-stock-recent-entries">
+  <div class="column-store-entries">
+    <app-store [numberOfItems]='10' class="store"></app-store>
+  </div>
+  <div class="column-recent-entries">
+    <app-recent-entries class="recent-entries"></app-recent-entries>
+  </div>
+</div>

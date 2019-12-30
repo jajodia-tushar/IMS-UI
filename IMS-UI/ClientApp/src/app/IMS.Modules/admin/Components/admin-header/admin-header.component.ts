@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy, HostBinding } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { ChangeDetectorRef, OnDestroy } from "@angular/core";
 import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-data.service";
 import { User } from "src/app/IMS.Models/User/User";
+import { chainedInstruction } from "@angular/compiler/src/render3/view/util";
+import { elementAt } from "rxjs/operators";
 
 @Component({
   selector: "app-admin-header",
@@ -10,13 +12,33 @@ import { User } from "src/app/IMS.Models/User/User";
   styleUrls: ["./admin-header.component.css"]
 })
 export class AdminHeader implements OnDestroy {
+
   mobileQuery: MediaQueryList;
-  tabs = ["Dashboard", "Store", "Users", "Reports"];
 
-  fillerNav = Array.from({ length: 4 }, (_, i) => `${this.tabs[i]}`);
+  navBarItems = [{
+    tab: "Dashboard",
+    icon: "dashboard",
+    color: "#01d28e"
+  }, {
+    tab: "Store",
+    icon: "store_mall_directory",
+    color: "#ff7315"
+  },
+  {
+    tab: "Users",
+    icon: "person_pin",
+    color: "#46b5d1",
 
+  },
+  {
+    tab: "Reports",
+    icon: "bar_chart",
+    color: "#ffd800"
+
+  }]
   isVisible = false;
   isPersonVisible = false;
+  selectedIndexs: any;
 
   changeNotificationIcon() {
     this.isVisible = !this.isVisible;
@@ -29,13 +51,15 @@ export class AdminHeader implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+
 }

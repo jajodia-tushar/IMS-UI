@@ -44,6 +44,20 @@ export class LineChartComponent implements OnInit {
   plotDataOnChart(chart: Chart, data: ShelfWiseOrderCountResponse) {
     let backgroundColor: string[] = this.randomColorGenerator.getRandomColor(data.dateWiseShelfOrderCount[0].shelfOrderCountMappings.length);
     chart.data = this.convertDataModel(data, backgroundColor);
+    chart.options.scales.yAxes[0] = {
+      scaleLabel: {
+        display: true,
+        labelString: 'Quantity Consumed'
+      }
+
+    };
+
+    chart.options.scales.xAxes[0] = {
+      scaleLabel: {
+        display: true,
+        labelString: 'Day'
+      }
+    };
     chart.update();
   }
 
@@ -91,10 +105,6 @@ export class LineChartComponent implements OnInit {
       data: {},
       options: {
         responsive: true,
-        title: {
-          display: true,
-          text: ""
-        },
         tooltips: {
           mode: "index",
           intersect: false

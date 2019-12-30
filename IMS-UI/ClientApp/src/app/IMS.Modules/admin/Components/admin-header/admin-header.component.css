@@ -36,6 +36,22 @@
   display: block;
 } */
 
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
 .rightside {
   position: absolute;
   top: 10px;
@@ -54,7 +70,7 @@
   display: flex;
 } */
 
-.material-icons.md-light {
+/* .material-icons.md-light {
   color: rgba(255, 255, 255, 1);
 }
 .material-icons.md-light.md-inactive {
@@ -62,10 +78,10 @@
 }
 
 .example-is-mobile .example-toolbar {
-  position: fixed;
-  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-  z-index: 2;
-}
+  position: fixed; */
+/* Make sure the toolbar will stay on top of the content as it scrolls past. */
+/* z-index: 2;
+} */
 
 h1.example-app-name {
   margin-left: 8px;
@@ -169,4 +185,13 @@ button:active:focus,
 button.active:focus {
   outline: none !important;
   outline-style: none !important;
+}
+
+mat-nav-list a.active {
+  background-color: #262d4a;
+  color: #fff;
+}
+
+mat-nav-list a {
+  color: #606a96;
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '', component: AdminComponent, canActivate: [AdminRouteGuardService], data: { allowedRoles: ["Admin", "SuperAdmin"] },
     children: [
-      { path: '',  redirectTo: 'Dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       { path: 'Dashboard', component: MainnavComponent },
       { path: 'Store', component: StoreComponent },
       { path: 'Users', component: UserManagementComponent },

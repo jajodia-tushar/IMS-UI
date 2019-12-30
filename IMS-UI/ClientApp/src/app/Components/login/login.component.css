@@ -18,10 +18,10 @@
   width: 60%;
 }
 
-  .login-page__sign-up-section div {
-    height: 300px;
-    margin: 20% 0;
-  }
+.login-page__sign-up-section div {
+  height: 300px;
+  margin: 20% 0;
+}
 
 .sign-upp-section__logo-section {
   border-bottom-left-radius: 15px;
@@ -50,7 +50,9 @@
   border-radius: 5px;
   color: white;
   font-size: 1.1rem !important;
-  margin: 5% 20%;
+  height: 38px;
+  width: 218px;
+  margin-top: 20px;
 }
 
 img {

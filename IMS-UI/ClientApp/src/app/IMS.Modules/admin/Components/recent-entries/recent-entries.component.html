@@ -13,14 +13,15 @@
         </ng-container>
         <ng-container matColumnDef="expandedDetail">
           <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-            <div class="example-element-detail" [@detailExpand]="element == expandedElement && element.orderDetails.length>35 ? 'expanded' : 'collapsed'">
+            <div class="example-element-detail"
+              [@detailExpand]="element == expandedElement && element.orderDetails.length>35 ? 'expanded' : 'collapsed'">
               {{element.orderDetails}}
             </div>
           </td>
         </ng-container>
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element"> {{element.date | date:'MMM d' }},    {{element.time }} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date | date:'MMM d' }}, {{element.time }} </td>
         </ng-container>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
           [class.example-expanded-row]="expandedElement === element"
@@ -28,8 +29,8 @@
         </tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
       </table>
-      <div class="router-link">
-        <a [routerLink]="['/admin/reports/stockstatus']">View All</a>
+      <div class="viewAllRecentEntries" [routerLink]="['/admin/reports/stockstatus']">
+        <p style="font-size: small;">View All</p>
       </div>
     </div>
   </div>

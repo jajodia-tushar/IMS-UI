@@ -1,6 +1,7 @@
 ﻿using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Models.Vendor;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

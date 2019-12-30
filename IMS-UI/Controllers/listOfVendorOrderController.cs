@@ -41,9 +41,10 @@ namespace IMS_UI.Controllers
         }
 
         // PUT: api/listOfVendorOrder/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put([FromBody] string value)
         {
+
         }
 
         // DELETE: api/ApiWithActions/5

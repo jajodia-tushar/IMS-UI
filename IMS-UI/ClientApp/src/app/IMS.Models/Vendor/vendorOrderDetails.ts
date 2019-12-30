@@ -11,6 +11,6 @@ export class VendorOrderDetails {
   challanNumber: string;
   challanImageUrl: string;
   date: Date;
-  orderItemDetails: OrderItemDetail[];
+  orderItemDetails: OrderItemDetail[];                   
   finalAmount: number;
 }

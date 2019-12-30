@@ -31,13 +31,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
             client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
-    //        client.DefaultRequestHeaders.Authorization =
-    //new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOi" +
-    //"IyOSIsIlVzZXJuYW1lIjoic3VwZXJhZG1pbkAxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltc" +
-    //"y9yb2xlIjoiU3VwZXJBZG1pbiIs" +
-    //"IlJvbGVJZCI6IjQiLCJGaXJzdG5hbWUiOiJNYW5nZXNoIiwiTGFzdG5hbWUiOiJOYXVrYXJrYXIiLCJleHAiOjE1Nzc1MzI2NDAsImlzcyI6ImFwaS5" +
-    //"jb20iLCJhdWQiOiJjbGllbnQuY29tIn0.Vk1" +
-    //"T2ZDG0DdCKMCaQ-eSXNqUA0E-H-zQLPxC797C0TQ");
+    
             var response = await client.GetAsync(client.BaseAddress + EndPoint);
             return JsonConvert.DeserializeObject<ListofVendorOrderDetails>(
                 await response.Content.ReadAsStringAsync());

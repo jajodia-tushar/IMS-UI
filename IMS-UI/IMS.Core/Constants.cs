@@ -20,6 +20,8 @@ namespace IMS_UI.IMS.Core
             public const string ShelfProviderGetShelf = "api/Shelf/";
             public const string ShelfWiseOrderCountProvider = "api/reports/getshelfwiseordercount";
 
+            public const string LoginProviderLogout = "api/logout";
+
 
 
         }

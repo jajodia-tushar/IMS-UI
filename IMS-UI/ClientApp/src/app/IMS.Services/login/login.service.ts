@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginResponse } from 'src/app/IMS.Models/LoginResponse';
 import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
+import { Response } from 'src/app/IMS.Models/Response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class LoginService {
 
   getUser(){
     return this.http.get<UserResponse>('api/user').toPromise();
+  }
+
+  logOut() {
+    return this.http.delete<Response>('api/logout');
   }
 }

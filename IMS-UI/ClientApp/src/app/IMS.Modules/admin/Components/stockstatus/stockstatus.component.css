@@ -1,91 +1,99 @@
-.stretch-card > .card {
-  width: 100%;
-  min-width: 100%;
+.stretch-card>.card {
+    width: 100%;
+    min-width: 100%;
 }
+
 .card {
-  border: 0.5px solid transparent;
-  box-shadow: 5px 11px 23px -13px #191b28;
-  -webkit-box-shadow: 5px 11px 23px -13px #191b28;
-  -moz-box-shadow: 5px 11px 23px -13px #191b28;
-  -ms-box-shadow: 5px 11px 23px -13px #191b28;
+    border: 0.5px solid transparent;
+    box-shadow: 5px 11px 23px -13px #191b28;
+    -webkit-box-shadow: 5px 11px 23px -13px #191b28;
+    -moz-box-shadow: 5px 11px 23px -13px #191b28;
+    -ms-box-shadow: 5px 11px 23px -13px #191b28;
 }
+
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #222437;
-  background-clip: border-box;
-  border: 0 solid transparent;
-  border-radius: 0.625rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #1f2132;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0.625rem;
 }
+
 .card .card-body {
-  padding: 1.25rem 1.25rem;
+    padding: 1.25rem 1.25rem;
 }
+
 .card-body {
-  flex: 1 1 auto;
-  padding: 1.25rem;
-}
-.table td,
-.jsgrid .jsgrid-table td {
-  font-size: 0.875rem;
+    flex: 1 1 auto;
+    padding: 1.25rem;
 }
 
 .table td,
 .jsgrid .jsgrid-table td {
-  vertical-align: middle;
-  line-height: 1;
+    font-size: 0.875rem;
+}
+
+.table td,
+.jsgrid .jsgrid-table td {
+    vertical-align: middle;
+    line-height: 1;
 }
 
 table td,
 .jsgrid .jsgrid-table td {
-  padding: 0.8rem 0.9375rem;
-  vertical-align: top;
-  border-top: 1px solid rgba(46, 50, 74, 0.7);
+    padding: 0.8rem 0.9375rem;
+    vertical-align: top;
+    border-top: 1px solid rgba(46, 50, 74, 0.7);
 }
 
 .justify-content-between {
-  justify-content: space-between !important;
+    justify-content: space-between !important;
 }
+
 .flex-wrap {
-  flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
 }
 
 .page-link,
 .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
 .jsgrid .jsgrid-pager .jsgrid-pager-page a {
-  position: relative;
-  display: block;
-  padding: 0.4rem 0.55rem;
-  margin-left: -1px;
-  line-height: 1;
-  color: #42486a;
-  background-color: #282c43;
-  border: 1px solid #dee2e6;
+    position: relative;
+    display: block;
+    padding: 0.4rem 0.55rem;
+    margin-left: -1px;
+    line-height: 1;
+    color: #42486a;
+    background-color: #282c43;
+    border: 1px solid #dee2e6;
 }
 
 .mdi-check:before {
-  content: "\F12C";
+    content: "\F12C";
 }
+
 .mdi:before,
 .mdi-set {
-  display: inline-block;
-  font: normal normal normal 24px/1 "Material Design Icons";
-  font-size: inherit;
-  text-rendering: auto;
-  line-height: inherit;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .card .card-title {
-  color: #ffffff;
-  margin-bottom: 1rem;
-  text-transform: capitalize;
-  font-size: 0.875rem;
-  font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
+
 .flex-grow {
-  flex-grow: 1;
+    flex-grow: 1;
 }

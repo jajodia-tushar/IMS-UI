@@ -5,13 +5,17 @@ import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-
 import { User } from "src/app/IMS.Models/User/User";
 import { chainedInstruction } from "@angular/compiler/src/render3/view/util";
 import { elementAt } from "rxjs/operators";
+import { LoginService } from "src/app/IMS.Services/login/login.service";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+import { SnackbarComponent } from "src/app/IMS.Modules/shared/snackbar/snackbar.component";
 
 @Component({
   selector: "app-admin-header",
   templateUrl: "./admin-header.component.html",
   styleUrls: ["./admin-header.component.css"]
 })
-export class AdminHeader implements OnDestroy {
+export class AdminHeader implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
@@ -35,10 +39,18 @@ export class AdminHeader implements OnDestroy {
     icon: "bar_chart",
     color: "#ffd800"
 
-  }]
+    }]
+  
+  async ngOnInit() {
+    await this.centralizedRepo.getLoggedInUser();
+    this.name = this.centralizedRepo.getUser().firstname + " " +
+      this.centralizedRepo.getUser().lastname;
+  }
   isVisible = false;
   isPersonVisible = false;
   selectedIndexs: any;
+
+  name: string;
 
   changeNotificationIcon() {
     this.isVisible = !this.isVisible;
@@ -51,7 +63,9 @@ export class AdminHeader implements OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private centralizedRepo: CentralizedDataService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+    private centralizedRepo: CentralizedDataService, private loginService: LoginService,
+    private router: Router, private snackBar : MatSnackBar) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -61,5 +75,18 @@ export class AdminHeader implements OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-
+  logout() {
+    this.loginService.logOut().subscribe(
+      data => {
+        if (data.status == "Success") {
+          this.router.navigateByUrl("/login");
+        }
+        else {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            duration: 1000 * 2 , data : { message : "Something Went Wrong" }
+          });
+        }
+      }
+    )
+  }
 }

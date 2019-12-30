@@ -1,10 +1,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-
 <div class="container">
     <div>
-        <table mat-table [dataSource]="selectedItems">
+        <table mat-table [dataSource]="selectedItems" style="background: #222437;">
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
 
@@ -12,33 +10,39 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element;index as i"> {{i+1}} </td>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> No. </th>
+                <td mat-cell *matCellDef="let element;index as i"  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> {{i+1}} </td>
             </ng-container>
 
 
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.item.name}} </td>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> Name </th>
+                <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> {{element.item.name}} </td>
             </ng-container>
 
 
 
             <!-- Weight Column -->
             <ng-container matColumnDef="Quantity">
-                <th mat-header-cell *matHeaderCellDef> Quantity </th>
-                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> Quantity </th>
+                    <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}">
+                        <span class="stepper">
+                            <button class="minus" (click)="minus(element)">–</button>
+                            <input type="number" id="stepper" value="{{element.quantity}}" min="0" max="{{element.item.maxLimit}}" readonly>
+                            <button class="plus" (click)="plus(element)">+</button>
+                        </span>
+                    </td>
             </ng-container>
 
 
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="Symbol">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element" (click)="delete(element)">
-                    <mat-icon>delete</mat-icon>
+                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'right'}"></th>
+                <td mat-cell *matCellDef="let element" (click)="delete(element)"  [ngStyle]="{'color': 'white', 'text-align': 'right'}">
+                    <mat-icon style="cursor: pointer;">delete</mat-icon>
                 </td>
             </ng-container>
 
@@ -53,11 +57,11 @@
         <div class="action-buttons">
             <mat-dialog-actions>
                 <ng-container ngProjectAs="btn-close">
-                    <button mat-button style="margin-right:2px;background-color:white;" (click)="onCancel()">
+                    <button mat-button style="margin-right: 25px; background: linear-gradient(100.43deg, #a72b2b 0%, #ff0000 95.74%); color: #fff;" (click)="onCancel()">
           Clear Cart
           </button>
                 </ng-container>
-                <button mat-button style="    background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%);" (click)="onMakingOrder()" cdkFocusInitial>
+                <button mat-button style="color: #fff; background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%);" (click)="onMakingOrder()" cdkFocusInitial>
         <app-spinning-loader></app-spinning-loader>{{ButtonName}}
         </button>
             </mat-dialog-actions>

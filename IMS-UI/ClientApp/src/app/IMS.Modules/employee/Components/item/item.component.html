@@ -1,16 +1,11 @@
 <div (click)="itemClicked()">
-    <mat-card class="example-card">
-
-
-
-        <img mat-card-image src="assets/IMS.Images/itemIcons/{{item.id}}.png" alt="{{item.id}}">
-        <mat-card-content>
-            <p>
-                {{item.name}}
-            </p>
-        </mat-card-content>
-
-
-
+    <mat-card class="out-rect" style="margin-bottom: 20px;">
+        <div class="in-rect">
+            <img 
+                mat-card-image 
+                src="assets/IMS.Images/itemIcons/{{item.id}}.png" 
+                alt="{{item.id}}">
+        </div>
+        <mat-card-content class="item-text">{{item.name}}</mat-card-content>
     </mat-card>
 </div>

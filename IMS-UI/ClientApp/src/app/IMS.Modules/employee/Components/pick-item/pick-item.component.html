@@ -1,16 +1,27 @@
-<div>
-    <app-header [isUser]="false"></app-header>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="employee-header">
+    <div class="header-left">
+        <span class="icon company-logo">
+            <img src="../../../assets/IMS.Images/157595914143509549 (1).png" />
+        </span>
+    </div>
 </div>
 
 <div>
-    <div class="items-container">
-        <mat-card><b>Hello, {{name}}</b></mat-card>
-        <div class="flex-container">
-            <div class="item-list">
-                <app-items-list (onItemAdd)="onItemClicked($event)" [shelfItems]="shelfItems"></app-items-list>
+        <div class="field-area">
+            <div class="text-area">
+                <p>Hello, {{name}}</p>
+            </div>
+            <div class="container">
+                <input (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text" placeholder="Search for a item...">
+                <div class="search"></div>
+            </div>
+        </div>
+        <div class="flex-container" style="padding-top: 4%;">
+            <div class="item-list" [ngStyle]="addWidthStyle()">
+                <app-items-list (onItemAdd)="onItemClicked($event)" [shelfItems]="shelfItems | filter : searchText"></app-items-list>
             </div>
             <app-items-cart class="item-form" [selectedItems]="cartItems" (onCartItemDeleted)="onItemDeleted($event)">
             </app-items-cart>
         </div>
-    </div>>
 </div>

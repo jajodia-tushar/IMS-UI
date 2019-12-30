@@ -8,6 +8,7 @@ import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 
+
 @Component({
   selector: 'app-pick-item',
   templateUrl: './pick-item.component.html',
@@ -19,9 +20,16 @@ export class PickItemComponent implements OnInit {
   shelfItems: Item[] = [];
   employee: Employee;
   name : string;
+  searchText : string;
 
   constructor(private centralizedRepo: CentralizedDataService, private router: Router,
     private itemService: ItemService,private snackBar : MatSnackBar) { }
+
+
+  searchBox() {
+    console.log(this.searchText);
+  }
+   
 
   ngOnInit() {
     this.employee = this.centralizedRepo.getEmployee();
@@ -72,5 +80,13 @@ export class PickItemComponent implements OnInit {
     });
   }
 
+  addWidthStyle() {
+    console.log(this.cartItems);
+    let style = {
+      'width': (this.cartItems.length != 0) ? '50vw' : '100vw'
+    };
+    
+    return style;
+  }
 
 }

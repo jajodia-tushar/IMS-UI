@@ -15,5 +15,6 @@ RUN dotnet restore IMS-UI.sln --source https://api.nuget.org/v3/index.json  && \
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 as runtime
 WORKDIR /app
 COPY --from=build /app/publish ./
+COPY --from=build /app/IMS-UI/Resources ./Resources
 ENV ASPNETCORE_ENVIRONMENT=PRODUCTION
 CMD dotnet IMS-UI.dll

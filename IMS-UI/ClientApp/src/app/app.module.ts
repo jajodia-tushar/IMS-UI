@@ -27,12 +27,14 @@ import { ItemWiseDataService } from './IMS.Services/admin/item-wise-data.service
 import { RagStatusService } from './IMS.Services/admin/rag-status.service';
 import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
 import { RecentEntriesService } from './IMS.Services/admin/recent-entries.service';
+import { LoggingComponent } from './Components/logging/logging.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FloorComponent
+    FloorComponent,
+    LoggingComponent,
   ],
   imports: [
     SharedModule,

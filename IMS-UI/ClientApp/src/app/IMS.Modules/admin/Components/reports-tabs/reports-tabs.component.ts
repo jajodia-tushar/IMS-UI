@@ -20,6 +20,7 @@ export class ReportsTabsComponent implements OnInit {
 
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
+  dataToDisplaytemp: any[] = [];
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
     private ragStatusService: RagStatusService) {
@@ -56,12 +57,36 @@ export class ReportsTabsComponent implements OnInit {
     if (this.selectedTab == 0) {
       this.showRAGDataTable();
     }
+    else if (this.selectedTab == 1) {
+      this.showVendorDataTable();
+    }
+  }
+
+  showVendorDataTable() {
+    let data = this.reportsService.getVendorOrderReport();
+    data.forEach(
+      data => {
+        this.dataToDisplaytemp.push({
+          "vendorName": data.vendor.name,
+          "date": data.vendorOrderDetails.date.toDateString(),
+          "amount": data.vendorOrderDetails.finalAmount,
+          "orderId": data.vendorOrderDetails.orderId,
+          "innerData": data.vendorOrderDetails.orderItemDetails.map(
+            x => {
+              return {
+                "item": x.item.name,
+                "quantity": x.quantity
+              }
+            }),
+          "innerColumns" : ["item", "quantity"]
+          });
+        });
+        this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "orderId", "date","amount"]));
+        this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplaytemp));
+        console.log(this.dataToDisplay);
   }
 
   showRAGDataTable() {
-    setTimeout(() => {
-      this.hasExpandableRows = !this.hasExpandableRows;
-    }, 10000);
 
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
       .dataFromUser;
@@ -82,25 +107,7 @@ export class ReportsTabsComponent implements OnInit {
         }
         data.itemQuantityMappings.forEach(data => this.dataToDisplay.push({
           "item": data.item.name,
-          "quantity": data.quantity,
-          "customData": [
-            {
-              "data": data.item.name + "Tushar",
-              "sata" : data.quantity + 10
-            },
-            {
-              "data": data.item.name + "Tushar",
-              "sata" : data.quantity + 10
-            },
-            {
-              "data": data.item.name + "Tushar",
-              "sata" : data.quantity + 10
-            },
-            {
-              "data": data.item.name + "Tushar",
-              "sata" : data.quantity + 10
-            }
-          ]
+          "quantity": data.quantity
         }));
         this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
         console;

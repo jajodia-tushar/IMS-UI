@@ -93,3 +93,12 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description-attribution {
     opacity: 0.5;
 }
+
+.inner-table {
+    background-color: #262d4a;
+    border: 1px solid white;
+}
+
+td {
+    color: white;
+}

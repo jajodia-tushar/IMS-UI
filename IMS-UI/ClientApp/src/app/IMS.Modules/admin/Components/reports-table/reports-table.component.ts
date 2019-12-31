@@ -10,7 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
       state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> collapsed', animate('500ms ease')),
     ]),
   ],
 })
@@ -21,14 +21,11 @@ export class ReportsTableComponent implements OnInit {
   columnsToDisplay: string[];
   @Input()
   dataSource = [];
-  @Input()
-
-  innerColumns = ['data', 'sata'];
   
   ngOnInit() { }
 
   hasExpandableRows () {
-   return  (this.dataSource[0] != null && this.dataSource[0].customData != null)
+   return  (this.dataSource[0] != null && this.dataSource[0].innerData != null)
   }
 }
  

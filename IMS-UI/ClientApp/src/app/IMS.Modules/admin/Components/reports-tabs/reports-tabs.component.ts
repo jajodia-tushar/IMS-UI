@@ -12,6 +12,7 @@ export class ReportsTabsComponent implements OnInit {
 
   reportsSelectionData: reportsSelectionDataModel[] = [];
   selectedTab: number;
+  hasExpandableRows: boolean = true;
 
   locationCode: string;
   locationName: string;
@@ -58,6 +59,10 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   showRAGDataTable() {
+    setTimeout(() => {
+      this.hasExpandableRows = !this.hasExpandableRows;
+    }, 10000);
+
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
       .dataFromUser;
     let colourSelected = this.reportsSelectionData[0].reportsFilterOptions[1]
@@ -77,7 +82,25 @@ export class ReportsTabsComponent implements OnInit {
         }
         data.itemQuantityMappings.forEach(data => this.dataToDisplay.push({
           "item": data.item.name,
-          "quantity": data.quantity
+          "quantity": data.quantity,
+          "customData": [
+            {
+              "data": data.item.name + "Tushar",
+              "sata" : data.quantity + 10
+            },
+            {
+              "data": data.item.name + "Tushar",
+              "sata" : data.quantity + 10
+            },
+            {
+              "data": data.item.name + "Tushar",
+              "sata" : data.quantity + 10
+            },
+            {
+              "data": data.item.name + "Tushar",
+              "sata" : data.quantity + 10
+            }
+          ]
         }));
         this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
         console;

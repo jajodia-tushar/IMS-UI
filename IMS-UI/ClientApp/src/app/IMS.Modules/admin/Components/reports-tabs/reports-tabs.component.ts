@@ -76,7 +76,8 @@ export class ReportsTabsComponent implements OnInit {
     if (inputFormat == null || inputFormat == "")
       return "";
     let inputDate: Date = new Date(Date.parse(inputFormat));
-    return  `${inputDate.getFullYear()}${("0" + inputDate.getMonth() + 1).slice(-2)}${("0"+inputDate.getDate()).slice(-2)}`
+    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
+      .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
   }
 
   showVendorDataTable() {
@@ -85,15 +86,14 @@ export class ReportsTabsComponent implements OnInit {
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     let fromDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
-    console.log(toDate + fromDate);
 
-    this.vendorService.getVendorOrder("", "").subscribe(
+    this.vendorService.getVendorOrder(toDate, fromDate).subscribe(
       data => {
         data.listOfVendorOrders.forEach(
           data => {
             dataToDisplaytemp.push({
               "vendorName": data.vendor.name,
-              "date": data.vendorOrderDetails.date.slice(0,10),
+              "date": (data.vendorOrderDetails.date +"").slice(0,10),
               "amount": data.vendorOrderDetails.finalAmount,
               "innerData": data.vendorOrderDetails.orderItemDetails.map(
                 x => {

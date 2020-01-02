@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 import { ActivatedRoute } from "@angular/router";
 import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
+import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -18,12 +19,14 @@ export class ReportsTabsComponent implements OnInit {
   locationName: string;
   colour: string;
 
+  toDate: string;
+  fromDate: string;
+
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
-  dataToDisplaytemp: any[] = [];
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
-    private ragStatusService: RagStatusService) {
+    private ragStatusService: RagStatusService , private vendorService : VendorService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
@@ -32,6 +35,14 @@ export class ReportsTabsComponent implements OnInit {
     if (this.selectedTab == null) {
       this.selectedTab = 0;
     }
+
+    if (this.locationName == null || this.locationCode == null || this.colour == null) {
+      this.locationCode = "WH";
+      this.locationName = "Warehouse";
+      this.colour = "Red";
+    }
+
+
   }
 
   async getRAGReportDropDownList() {
@@ -42,14 +53,13 @@ export class ReportsTabsComponent implements OnInit {
   async ngOnInit() {
     await this.initializeEmptyData();
 
-    if (this.locationCode != null) {
-      this.searchButtonClicked();
-    }
+    this.searchButtonClicked();
   }
 
   tabChanged(event: Event) {
     this.columnToDisplay = [];
     this.dataToDisplay = [];
+    this.searchButtonClicked();
   }
 
   searchButtonClicked() {
@@ -62,28 +72,44 @@ export class ReportsTabsComponent implements OnInit {
     }
   }
 
+  changeDateFormat(inputFormat: string): string{
+    if (inputFormat == null || inputFormat == "")
+      return "";
+    let inputDate: Date = new Date(Date.parse(inputFormat));
+    return  `${inputDate.getFullYear()}${("0" + inputDate.getMonth() + 1).slice(-2)}${("0"+inputDate.getDate()).slice(-2)}`
+  }
+
   showVendorDataTable() {
-    let data = this.reportsService.getVendorOrderReport();
-    data.forEach(
+    let dataToDisplaytemp = []
+    let toDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    let fromDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
+    console.log(toDate + fromDate);
+
+    this.vendorService.getVendorOrder("", "").subscribe(
       data => {
-        this.dataToDisplaytemp.push({
-          "vendorName": data.vendor.name,
-          "date": data.vendorOrderDetails.date.toDateString(),
-          "amount": data.vendorOrderDetails.finalAmount,
-          "orderId": data.vendorOrderDetails.orderId,
-          "innerData": data.vendorOrderDetails.orderItemDetails.map(
-            x => {
-              return {
-                "item": x.item.name,
-                "quantity": x.quantity
-              }
-            }),
-          "innerColumns" : ["item", "quantity"]
-          });
-        });
-        this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "orderId", "date","amount"]));
-        this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplaytemp));
-        console.log(this.dataToDisplay);
+        data.listOfVendorOrders.forEach(
+          data => {
+            dataToDisplaytemp.push({
+              "vendorName": data.vendor.name,
+              "date": data.vendorOrderDetails.date.slice(0,10),
+              "amount": data.vendorOrderDetails.finalAmount,
+              "innerData": data.vendorOrderDetails.orderItemDetails.map(
+                x => {
+                  return {
+                    "item": x.item.name,
+                    "quantity": x.quantity,
+                    "rate" : x.item.rate
+                  }
+                }),
+              "innerColumns" : ["item", "quantity","rate"]
+              });
+            });
+            this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "date","amount"]));
+            this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+      }
+    );
   }
 
   showRAGDataTable() {
@@ -115,6 +141,12 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   async initializeEmptyData() {
+
+    let date = new Date();
+    this.toDate = date.toISOString();
+    date.setDate(date.getDay() - 6);
+    this.fromDate = date.toISOString();
+
     this.reportsSelectionData = [
       {
         reportName: "RAG",
@@ -142,23 +174,23 @@ export class ReportsTabsComponent implements OnInit {
           {
             placeHolderName: "VendorName",
             type: "dropDown",
-            dropDownOptions: ["Vendor 1", "Vendor 2", "Vendor 3"],
-            dropDownValues: ["Vendor 1", "Vendor 2", "Vendor 3"],
-            dataFromUser: ""
+            dropDownOptions: ["All Vendors"],
+            dropDownValues: ["0"],
+            dataFromUser: "0"
           },
           {
             placeHolderName: "FromDate",
             type: "datePicker",
             dropDownOptions: [],
             dropDownValues: [],
-            dataFromUser: ""
+            dataFromUser: this.fromDate
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
             dropDownValues: [],
-            dataFromUser: ""
+            dataFromUser: this.toDate
           }
         ],
         urlToRequest: ""
@@ -253,6 +285,21 @@ export class ReportsTabsComponent implements OnInit {
         this.reportsSelectionData[0].reportsFilterOptions[0].dropDownValues = data.ragStatusList.map(x => x.code);
       }
     );
+
+    await this.vendorService.getAllVendors().subscribe(
+      data => {
+        data.vendors.forEach(
+          vendor => {
+            this.reportsSelectionData[1].reportsFilterOptions[0].dropDownOptions.push(vendor.name);
+            this.reportsSelectionData[1].reportsFilterOptions[0].dropDownValues.push(vendor.id.toString());
+          }
+        )
+      }
+    )
+  }
+
+  isDisabled(index: number) : boolean {
+    return index >= 2;
   }
 }
 export class reportsSelectionDataModel {

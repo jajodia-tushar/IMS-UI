@@ -23,6 +23,10 @@ namespace IMS_UI.IMS.Core
 
             public const string LoginProviderLogout = "api/logout";
 
+            public const string VendorOrdersProvider = "api/Order/VendorOrders/PendingApprovals";
+
+           
+
 
 
         }

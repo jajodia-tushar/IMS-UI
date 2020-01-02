@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class VendorOrderResponse : Response
+    public class VendorOrdersList : Response
     {
-        public VendorOrder VendorOrder { get; set; }
+        public List<VendorOrder> ListOfVendorOrders { get; set; }
     }
 }

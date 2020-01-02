@@ -1,0 +1,20 @@
+.heading  {
+    overflow: hidden;
+    position: relative;
+    height: 40%;
+}
+
+.close-button  {
+   position: absolute;
+   top: 0;
+   right: 0;
+}
+
+.mat-tab-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.shelf  {
+  margin: 0 2% 2% 0 ;
+}

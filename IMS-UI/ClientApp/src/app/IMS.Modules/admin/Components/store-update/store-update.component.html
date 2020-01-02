@@ -1,0 +1,21 @@
+<div class="heading">
+    <p>Update Store</p>
+</div>
+
+<mat-tab-group>
+    <mat-tab *ngFor="let shelf of shelves" [label]="shelf.name">
+        <div mat-dialog-content>
+            <mat-form-field>
+                <input placeholder="Item Name" [value]="itemName" matInput disabled>
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+                <input placeholder="Quantity" matInput >
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-raised-button (click)="onUpdate()">Update</button>
+            <button mat-raised-button (click)="closeDialog()">Cancel</button>
+        </div>
+    </mat-tab>
+</mat-tab-group>

@@ -1,5 +1,6 @@
 import { Item } from "../Item/Item";
 import { Error } from "../Error";
+import { ElementRef } from "@angular/core";
 
 export class StockStatusResponse {
   stockStatusList: ItemStockStatus[];

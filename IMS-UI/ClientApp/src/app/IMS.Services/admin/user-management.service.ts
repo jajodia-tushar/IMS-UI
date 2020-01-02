@@ -40,6 +40,15 @@ export class UserManagementService {
     return this.http.get<RolesResponse>("api/roles").toPromise();
   }
 
+  validateUsername(username: string){
+    return this.http.get('api/validate-username/' + username).toPromise();
+  }
+
+  validateEmail(email: string){
+    return this.http.get('api/validate-username/' + email).toPromise();
+  }
+
+
   async setUserRoles(){
     let roles : Role[] = (<RolesResponse> await this.getAllRoles()).roles;
     this.roles = roles;

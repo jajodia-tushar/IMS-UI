@@ -9,6 +9,7 @@ import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
+import { UserValidators } from './UserValidator';
 
 @Component({
   selector: 'app-user-manage-form',
@@ -24,16 +25,17 @@ export class UserManageFormComponent implements OnInit{
       this.createUserForm = this.formBuilder.group({
         id : [ -1,[]],
         role : ["",[Validators.required]],
-        firstname : ["", [Validators.required, Validators.maxLength(16),this.cannotContainSpace]],
-        lastname : ["",[this.cannotContainSpace, Validators.maxLength(16)]],
-        username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15), this.cannotContainSpace]],
-        password : ["", [Validators.minLength(8),Validators.maxLength(16),this.cannotContainSpace,
-          this.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-          this.patternValidator(/\d/, {hasNumber: true}),
-          this.patternValidator(/[a-z]/, {hasSmallCase: true}),
-          this.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
+        firstname : ["", [Validators.required, Validators.maxLength(16),UserValidators.cannotContainSpace]],
+        lastname : ["",[UserValidators.cannotContainSpace, Validators.maxLength(16)]],
+        username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15),
+          UserValidators.cannotContainSpace],UserValidators.userNameTakenValidator],
+        password : ["", [Validators.minLength(8),Validators.maxLength(16),UserValidators.cannotContainSpace,
+          UserValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+          UserValidators.patternValidator(/\d/, {hasNumber: true}),
+          UserValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+          UserValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
         ]],
-        email : ["", [Validators.required, Validators.email]],
+        email : ["", [Validators.required, Validators.email], UserValidators.emailTakenValidator],
     })
   }
 
@@ -121,22 +123,6 @@ export class UserManageFormComponent implements OnInit{
       this.createNewUser();
     }
   }
-
-  cannotContainSpace(control: AbstractControl) : ValidationErrors | null {
-    if((control.value as string).trim().indexOf(' ') >= 0){
-        return {cannotContainSpace: true}
-    }
-    return null;
-}
-   patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
-    if (!control.value) {
-      return null;
-    }
-    const valid = regex.test(control.value);
-    return valid ? null : error;
-  };
-}
 
   cancelUpdate(){
     this.userEditted.emit(null);

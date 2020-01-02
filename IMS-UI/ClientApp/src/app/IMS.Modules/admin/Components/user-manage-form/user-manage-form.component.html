@@ -40,6 +40,9 @@
 <mat-error *ngIf="username.errors?.minlength">Min Length{{username.errors.minlength.requiredLength}}</mat-error>
 <mat-error *ngIf="username.errors?.maxlength">Max Length{{username.errors.maxlength.requiredLength}}</mat-error>
 <mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
+<mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
+<mat-error *ngIf="username.errors?.userNameNotAvailable">Username Already Taken</mat-error>
+<mat-hint *ngIf="username.pending">Checking for Uniqueness</mat-hint>
 </mat-form-field>
 
   <mat-form-field
@@ -64,7 +67,9 @@
       hideRequiredMarker="false"
       floatLabel="auto" >
     <input matInput placeholder="Email" formControlName="email" required>
-    <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
+    <mat-error *ngIf="email.emailNotAvailable">{{email.error}}</mat-error>
+    <!-- <mat-error *ngIf="email.invalid">Invalid Email</mat-error> -->
+    <mat-hint *ngIf="email.pending">Checking if Email exists.</mat-hint>
   </mat-form-field>
 </div>
 <br><br>

@@ -4,6 +4,7 @@ import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-g
 import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
 import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 import { Router } from "@angular/router";
+import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 
 
 @Component({
@@ -24,10 +25,10 @@ export class BarChartComponent implements OnInit {
 
   ngOnInit() {
     let currentDate: Date = new Date();
-    this.toDate = this.dateFormatter(currentDate);
+    this.toDate = DateUtils.dateFormatter(currentDate);
 
     currentDate.setDate(currentDate.getDate() - 6);
-    this.fromDate = this.dateFormatter(currentDate);
+    this.fromDate = DateUtils.dateFormatter(currentDate);
 
     this.getData().then((data) => {
       if (data.status == "Success") {
@@ -136,16 +137,12 @@ export class BarChartComponent implements OnInit {
     let currentDate: Date = new Date();
     if (data === "7") {
       currentDate.setDate(currentDate.getDate() - 6);
-      this.fromDate = this.dateFormatter(currentDate);
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     else if (data === "14") {
       currentDate.setDate(currentDate.getDate() - 13);
-      this.fromDate = this.dateFormatter(currentDate);
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     this.onRefresh();
-  }
-
-  dateFormatter(inputDate : Date){
-    return inputDate.toISOString().slice(0, 10).split("-").join("");
   }
 }

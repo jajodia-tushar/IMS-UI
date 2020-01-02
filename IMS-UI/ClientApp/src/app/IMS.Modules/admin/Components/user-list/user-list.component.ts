@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'role', 'actions'];
+  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'role.name', 'actions'];
   ELEMENT_DATA: User[];
   isSuperAdmin : boolean;
   dataSource
@@ -35,9 +35,8 @@ export class UserListComponent implements OnInit {
     if(this.centralizedRepo.getUser().role.id==4)
       this.isSuperAdmin = true;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.dataSource.sort = this.sort;
-    // this.dataSource.sortingDataAccessor = this.pathDataAccessor;
-    console.log(this.ELEMENT_DATA)
   }
 
   applyFilter(filterValue: string) {
@@ -49,6 +48,14 @@ export class UserListComponent implements OnInit {
     }
   }
 
+  sortingDataAccessor(item, property) {
+    if (property.includes('.')) {
+      return property.split('.')
+        .reduce((object, key) => object[key], item);
+    }
+    return item[property];
+  }
+
   openAddUserDialog() {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = null;
@@ -57,7 +64,6 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result==false){
-        console.log('Some error occurred in adding User')
         this.showErrorMessage("Create Failed or Cancelled",34)
       }
       else{
@@ -73,13 +79,13 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  editUserDetails(user){
+  editUserDetails(user:User){
     console.log(user);
 
     this.openUserEditDialog(user);
   }
 
-  openUserEditDialog(data) {
+  openUserEditDialog(data:User) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
@@ -87,7 +93,7 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result==false){
-        this.showErrorMessage("Some Error in Updating User",12);
+        this.showErrorMessage("User Update Cancelled or Failed",12);
       }
       else{
         this.editUserInTable(result);

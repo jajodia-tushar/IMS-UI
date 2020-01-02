@@ -7,9 +7,11 @@ table {
 .filter-input{
   margin-left : 1%;
   padding:5px; 
-  border:2px solid #ccc; 
+  border:2px solid #222437;; 
   -webkit-border-radius: 5px;
   border-radius: 5px;
+  background-color: #222437;
+  color : white;
 }
   
   th.mat-sort-header-sorted {
@@ -33,8 +35,8 @@ table {
     position: absolute;
     border-collapse: separate !important;
     border-radius: 8px;
-    background-color: #222437;
-    border: 3px solid rgb(231, 227, 227);
+    background-color: #222437; 
+    border: 8px solid #222437;
     min-height: 200px;
     min-height: 201px;
 
@@ -43,7 +45,6 @@ table {
   #add-user{
     position: absolute;
     right: 10px;
-    background-color: #606a96;
 }
 
 .mat-cell{
@@ -52,4 +53,16 @@ table {
 
 .mat-header-cell{  
   color : white;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: #fff !important;
+  /* opacity: 1 !important; */
+}
+
+#add-user{
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
 }

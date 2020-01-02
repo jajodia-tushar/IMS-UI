@@ -23,21 +23,21 @@ export class UserManageFormComponent implements OnInit{
 
       this.createUserForm = this.formBuilder.group({
         id : [ -1,[]],
-        username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15), this.cannotContainSpace]],
         role : ["",[Validators.required]],
-        email : ["", [Validators.required, Validators.email]],
         firstname : ["", [Validators.required, Validators.maxLength(16),this.cannotContainSpace]],
         lastname : ["",[this.cannotContainSpace, Validators.maxLength(16)]],
+        username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15), this.cannotContainSpace]],
         password : ["", [Validators.minLength(8),Validators.maxLength(16),this.cannotContainSpace,
           this.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
           this.patternValidator(/\d/, {hasNumber: true}),
           this.patternValidator(/[a-z]/, {hasSmallCase: true}),
           this.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
-        ]]
+        ]],
+        email : ["", [Validators.required, Validators.email]],
     })
   }
 
-  @Input() userDetails;
+  @Input() userDetails : User;
   @Output() userEditted : EventEmitter<UsersResponse> = new EventEmitter<UsersResponse>();
   @Output() userCreated : EventEmitter<UsersResponse> = new EventEmitter<UsersResponse>();
   isEditUserForm : boolean;
@@ -45,20 +45,19 @@ export class UserManageFormComponent implements OnInit{
   
   async ngOnInit(){
     if (this.roles==null || this.roles==undefined)
-      this.setUserRoles();
+       this.setUserRoles();
     if(this.centralizedDataRepo.getUser().role.id==4)
       this.isSuperAdmin = true;
     if(this.userDetails){
-      // delete this.userDetails.id;
-      console.log('onInit called')
       this.isEditUserForm = this.userDetails?true: false;
-      console.log(this.isEditUserForm);
 
     }
     
     
     if(this.isEditUserForm){
-      this.createUserForm.setValue(this.userDetails);
+      let userDetail = this.userDetails;
+      userDetail.password = "Dummy Password";
+      this.createUserForm.setValue(userDetail);
       this.createUserForm.get("username").disable();
       this.createUserForm.get("password").disable();
     }

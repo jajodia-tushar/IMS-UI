@@ -14,14 +14,4 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog() {
-    let dialogConfig = new MatDialogConfig();
-    dialogConfig.data = null;
-    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
 }

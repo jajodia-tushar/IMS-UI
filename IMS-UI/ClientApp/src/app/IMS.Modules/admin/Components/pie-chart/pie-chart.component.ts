@@ -26,10 +26,9 @@ export class PieChartComponent implements OnInit {
   ngOnInit() {
 
     let currentDate: Date = new Date();
-    this.toDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
-
-    currentDate.setDate(currentDate.getDate() - 6);
-    this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    this.toDate = this.dateFormatter(currentDate);
+    currentDate.setDate(currentDate.getDate() - 6)
+    this.fromDate = this.dateFormatter(currentDate);
 
     this.getData().then((data) => {
       if (data.status == "Success") {
@@ -112,12 +111,16 @@ export class PieChartComponent implements OnInit {
     let currentDate: Date = new Date();
     if (data === "7") {
       currentDate.setDate(currentDate.getDate() - 6);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = this.dateFormatter(currentDate);
     }
     else if (data === "14") {
       currentDate.setDate(currentDate.getDate() - 13);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = this.dateFormatter(currentDate);
     }
     this.onRefresh();
+  }
+
+  dateFormatter(inputDate : Date){
+    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1)).slice(-2)}${("0"+(inputDate.getDate())).slice(-2)}`;
   }
 }

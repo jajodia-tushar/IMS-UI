@@ -16,7 +16,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
@@ -63,8 +62,8 @@ const materialModules = [
   MatTabsModule,
   MatDatepickerModule,
   MatNativeDateModule,
-    MatSortModule,
-    MatRadioModule
+  MatSortModule,
+  MatRadioModule
 ]
 
 

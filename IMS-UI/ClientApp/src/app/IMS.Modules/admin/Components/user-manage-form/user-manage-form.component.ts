@@ -35,7 +35,7 @@ export class UserManageFormComponent implements OnInit{
           userValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
           userValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
         ]],
-        email : ["", [Validators.required, Validators.email], userValidators.emailTakenValidator.bind(this.userValidators)],
+        email : ["", [Validators.required, Validators.email], this.userValidators.emailTakenValidator.bind(this.userValidators)],
     })
   }
 

@@ -46,7 +46,7 @@ export class UserValidators{
       
 
     async emailTakenValidator(userEmailControl: AbstractControl) {
-      let response = await this.checkIfUserNameDoesNotExists(userEmailControl.value);
+      let response = await this.checkIfEmailDoesNotExists(userEmailControl.value);
         return new Promise(resolve => {
           setTimeout(() => {
             if (!response) {

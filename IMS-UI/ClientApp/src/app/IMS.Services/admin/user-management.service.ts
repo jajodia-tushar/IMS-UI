@@ -45,7 +45,7 @@ export class UserManagementService {
   }
 
   validateEmail(email: string){
-    return this.http.get('api/users/username?email=' + email).toPromise();
+    return this.http.get('api/users/email?email=' + email).toPromise();
   }
 
 

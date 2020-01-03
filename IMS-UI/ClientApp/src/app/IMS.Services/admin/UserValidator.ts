@@ -30,26 +30,30 @@ export class UserValidators{
     }
 
     async userNameTakenValidator(userNameControl: AbstractControl) {
+      let response = await this.checkIfUserNameDoesNotExists(userNameControl.value);
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-              if (!this.checkIfUserNameDoesNotExists(userNameControl.value)) {
+               if (!response) {
                 console.log("username exists and thrown error");
                 resolve({ userNameNotAvailable: true });
               } else {
                 console.log('did not throw error')
                 resolve(null);
               }
-            }, 5000);
+            }, 2000);
           });
     }
       
 
-    emailTakenValidator(userControl: AbstractControl) {
+    async emailTakenValidator(userEmailControl: AbstractControl) {
+      let response = await this.checkIfUserNameDoesNotExists(userEmailControl.value);
         return new Promise(resolve => {
           setTimeout(() => {
-            if (this.checkIfEmailExists(userControl.value)) {              
+            if (!response) {
+              console.log("email exists and thrown error");
               resolve({ emailNotAvailable: true });
             } else {
+              console.log('did not throw error')
               resolve(null);
             }
           }, 2000);
@@ -73,13 +77,16 @@ export class UserValidators{
       }
     }
 
-    async checkIfEmailExists(email : string){
+    async checkIfEmailDoesNotExists(email : string){
       let response = <Response> await this.userManagementService.validateEmail(email)
-      if(response.error==null){
-        return false;
-      }
-      else{
+      console.log(response);
+      if(response.status==="Success"){
+        console.log("Email Does not exists");
         return true;
+      }
+      else if(response.status==="Failure"){
+        console.log("Email exists");
+        return false;
       }
     }
 

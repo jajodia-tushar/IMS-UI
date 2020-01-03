@@ -110,5 +110,15 @@ namespace IMS_UI.IMS.Providers
                 return await ResultParser(response);
             }
         }
+
+        public async Task<Response> IsEmailNameUnique(string email)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/user/email?email=" + email);
+                return await ResultParser(response);
+            }
+        }
     }
 }

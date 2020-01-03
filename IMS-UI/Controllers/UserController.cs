@@ -28,6 +28,13 @@ namespace IMS_UI.Controllers
             return response;
         }
 
+        [HttpGet("email")]
+        public async Task<Response> CheckEmailIsUnique(string email)
+        {
+            var response = await _userProvider.IsEmailNameUnique(email);
+            return response;
+        }
+
         [HttpGet]
         public async Task<UsersResponse> GetAllUsers()
         {

@@ -41,11 +41,11 @@ export class UserManagementService {
   }
 
   validateUsername(username: string){
-    return this.http.get('api/validate-username/' + username).toPromise();
+    return this.http.get('api/users/username?username=' + username).toPromise();
   }
 
   validateEmail(email: string){
-    return this.http.get('api/validate-username/' + email).toPromise();
+    return this.http.get('api/users/username?email=' + email).toPromise();
   }
 
 

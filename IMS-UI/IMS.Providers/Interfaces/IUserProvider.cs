@@ -12,6 +12,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<UsersResponse> EditUser(User user);
         Task<UsersResponse> GetAllUsers();
         Task<Response> DeactivateUser(int userId, bool isHardDelete);
-
+        Task<Response> IsUserNameUnique(string username);
     }
 }

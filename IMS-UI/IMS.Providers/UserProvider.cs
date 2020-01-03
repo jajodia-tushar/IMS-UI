@@ -100,5 +100,15 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
+        public async Task<Response> IsUserNameUnique(string username)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+
+                var response = await http.GetAsync("api/user/username?username=" + username);
+                return await ResultParser(response);
+            }
+        }
     }
 }

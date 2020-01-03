@@ -42,7 +42,6 @@ export class RecentEntriesComponent implements OnInit {
         }
         this.recentEntriesData = JSON.parse(JSON.stringify(this.recentEntriesData));
         this.dataSource.data = this.recentEntriesData;
-        console.log(this.dataSource);
       },
       error => {
         console.log("error");

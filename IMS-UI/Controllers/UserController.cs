@@ -21,6 +21,13 @@ namespace IMS_UI.Controllers
             this._userProvider = userProvider;
         }
 
+        [HttpGet("username")]
+        public async Task<Response> CheckUsernameIsUnique(string username)
+        {
+            var response = await _userProvider.IsUserNameUnique(username);
+            return response;
+        }
+
         [HttpGet]
         public async Task<UsersResponse> GetAllUsers()
         {

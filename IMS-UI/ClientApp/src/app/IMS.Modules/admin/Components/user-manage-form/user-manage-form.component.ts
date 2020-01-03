@@ -9,7 +9,7 @@ import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
-import { UserValidators } from './UserValidator';
+import { UserValidators as userValidators } from '../../../../IMS.Services/admin/UserValidator';
 
 @Component({
   selector: 'app-user-manage-form',
@@ -20,22 +20,22 @@ export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
   constructor(private formBuilder: FormBuilder, private userManageService: UserManagementService,
-    private centralizedDataRepo: CentralizedDataService){
+    private centralizedDataRepo: CentralizedDataService, private userValidators: userValidators){
 
       this.createUserForm = this.formBuilder.group({
         id : [ -1,[]],
         role : ["",[Validators.required]],
-        firstname : ["", [Validators.required, Validators.maxLength(16),UserValidators.cannotContainSpace]],
-        lastname : ["",[UserValidators.cannotContainSpace, Validators.maxLength(16)]],
+        firstname : ["", [Validators.required, Validators.maxLength(16),userValidators.cannotContainSpace]],
+        lastname : ["",[userValidators.cannotContainSpace, Validators.maxLength(16)]],
         username : ["",[Validators.required, Validators.minLength(6), Validators.maxLength(15),
-          UserValidators.cannotContainSpace],UserValidators.userNameTakenValidator],
-        password : ["", [Validators.minLength(8),Validators.maxLength(16),UserValidators.cannotContainSpace,
-          UserValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
-          UserValidators.patternValidator(/\d/, {hasNumber: true}),
-          UserValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
-          UserValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
+          userValidators.cannotContainSpace],this.userValidators.userNameTakenValidator.bind(this.userValidators)],
+        password : ["", [Validators.minLength(8),Validators.maxLength(16),userValidators.cannotContainSpace,
+          this.userValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+          userValidators.patternValidator(/\d/, {hasNumber: true}),
+          userValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+          userValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
         ]],
-        email : ["", [Validators.required, Validators.email], UserValidators.emailTakenValidator],
+        email : ["", [Validators.required, Validators.email], userValidators.emailTakenValidator.bind(this.userValidators)],
     })
   }
 

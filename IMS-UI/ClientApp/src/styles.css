@@ -1,14 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+/* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
 body {
   height: 100vh;
-  background-color: #1c1e2f;
 }
 
-button:focus,
-button:active:focus,
-button.active:focus {
+button:focus, button:active:focus, button.active:focus {
   outline: none !important;
   outline-style: none !important;
 }

@@ -34,7 +34,6 @@ export class FloorComponent implements OnInit {
       this.shelfService.setShelf(this.selectedShelf);
       this.centralizedDataRepo.setShelf(this.selectedShelf);
       this.router.navigate(['Shelf']);
-      console.log(this.shelves);
       this.isFloorNotSelected = false;
       this.dialogRef.close(true);
     }

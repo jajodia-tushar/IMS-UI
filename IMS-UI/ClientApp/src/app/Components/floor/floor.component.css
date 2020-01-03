@@ -21,6 +21,7 @@
 }
 
 .card:hover {
+  cursor: pointer;
   -webkit-box-shadow: 
     0px 0px 30px #5e7af5, 
     inset 0px 0px 30px #5e7af5;

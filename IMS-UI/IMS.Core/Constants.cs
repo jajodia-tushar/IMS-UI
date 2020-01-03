@@ -19,11 +19,11 @@ namespace IMS_UI.IMS.Core
             public const string ShelfProviderShelfData = "api/inventory/";
             public const string ShelfProviderGetShelf = "api/Shelf/";
             public const string ShelfWiseOrderCountProvider = "api/reports/getshelfwiseordercount";
+            public const string reportsGetRAGReports = "api/Reports/GetItemsAvailability";
 
             public const string LoginProviderLogout = "api/logout";
 
-
-
+            public const string VendorOrdersProvider = "api/order/VendorOrders/";
         }
     }
 

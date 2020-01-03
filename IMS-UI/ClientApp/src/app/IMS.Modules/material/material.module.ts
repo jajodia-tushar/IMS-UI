@@ -4,16 +4,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule
+  MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, MatSortModule
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { MatNativeDateModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 
@@ -34,10 +35,7 @@ const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatPaginatorModule,
-  FormsModule,
   ReactiveFormsModule,
-  MatSnackBarModule,
-  CommonModule,
   MatAutocompleteModule,
   MatFormFieldModule,
   MatSelectModule,
@@ -57,7 +55,11 @@ const materialModules = [
   MatSnackBarModule,
   CommonModule,
   MatToolbarModule,
-  MatListModule
+  MatListModule,
+  MatTabsModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSortModule
 ]
 
 

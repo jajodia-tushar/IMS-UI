@@ -9,5 +9,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
     public interface IVendorOrderProvider
     {
         Task<VendorOrderResponse> postVendorOrder(VendorOrder vendorOrder);
+        Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate);
+        Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate);
     }
 }

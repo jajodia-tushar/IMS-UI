@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers;
 using IMS_UI.IMS.Providers.Interfaces;
@@ -16,11 +17,13 @@ namespace IMS_UI.Controllers
     {
         private VendorListProvider _VendorListProvider;
         private IVendorOrderProvider _VendorOrderProvider;
+        private SessionManager _sessionManager;
 
-        public VendorController(VendorListProvider provider,IVendorOrderProvider vendorOrderProvider)
+        public VendorController(VendorListProvider provider,IVendorOrderProvider vendorOrderProvider, SessionManager sessionManger)
         {
             _VendorOrderProvider = vendorOrderProvider;
             _VendorListProvider = provider;
+            _sessionManager = sessionManger;
         }
         // GET: api/Vendor
         [HttpGet]
@@ -40,6 +43,42 @@ namespace IMS_UI.Controllers
             }
 
         }
+
+        // GET: api/Vendor/5
+        [HttpGet("orders")]
+        public async Task<IActionResult> GetAllVendorOrders(string toDate, string fromDate)
+        {
+            var response = await _VendorOrderProvider.getAllVendorOrders(toDate,fromDate);
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet("orders/{vendorId}")]
+        public async Task<IActionResult> Get(string vendorId, string toDate, string fromDate)
+        {
+            var response = await _VendorOrderProvider.getParticularVendorOrder(vendorId,toDate, fromDate);
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
 
         // GET: api/Vendor/5
         [HttpGet("{id}", Name = "GetVendor")]

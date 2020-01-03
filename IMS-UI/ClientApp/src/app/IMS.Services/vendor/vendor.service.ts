@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { VendorResponse } from 'src/app/IMS.Models/Vendor/VendorResponse';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
+import { Observable } from 'rxjs';
+import { VendroOrderResponse } from 'src/app/IMS.Models/Vendor/VendroOrderResponse';
 
 
 
@@ -19,4 +21,20 @@ export class VendorService {
     return this.http.post<VendorOrder>("api/Vendor", vendorOrder);
   }
 
+  getVendorOrder(vendorId: string, toDate: string, fromDate: string): Observable<VendroOrderResponse>{
+    
+    let params = new HttpParams();
+    params = params.append("toDate",fromDate);
+    params = params.append("fromDate",toDate);
+    
+    if (vendorId == null || vendorId == "0" || vendorId == "") {
+      return this.http.get<VendroOrderResponse>("api/vendor/orders", { params });
+    }
+    else {
+      return this.http.get<VendroOrderResponse>("api/vendor/orders/"+vendorId, { params });
+    }
+
+  }
+
+  
 }

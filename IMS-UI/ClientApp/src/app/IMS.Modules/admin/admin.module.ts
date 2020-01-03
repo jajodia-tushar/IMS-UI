@@ -15,6 +15,9 @@ import { StoreComponent } from './Components/store/store.component';
 import { ReportsComponent } from './Components/reports/reports.component';
 import { UserManagementComponent } from './Components/user-management/user-management.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
+import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
+import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -31,10 +34,13 @@ import { DetailsPipe } from './Components/recent-entries/details.pipe';
     StoreComponent,
     ReportsComponent,
     UserManagementComponent,
-    DetailsPipe,],
+    ReportsTableComponent,
+    ReportsTabsComponent,
+    DetailsPipe],
   imports: [
     MaterialModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

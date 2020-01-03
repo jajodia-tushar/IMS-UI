@@ -24,14 +24,14 @@ export class PieChartComponent implements OnInit {
   fromDate: string;
 
 
-  ngOnInit() {
+  async ngOnInit() {
 
     let currentDate: Date = new Date();
     this.toDate = DateUtils.dateFormatter(currentDate);
     currentDate.setDate(currentDate.getDate() - 6)
     this.fromDate = DateUtils.dateFormatter(currentDate);
 
-    this.getData().then((data) => {
+    await this.getData().then((data) => {
       if (data.status == "Success") {
         this.createPieChart();
         this.plotDataOnChart(this.chart, data);

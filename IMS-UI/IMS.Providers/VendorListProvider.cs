@@ -45,7 +45,6 @@ namespace IMS_UI.IMS.Providers
                 throw e;
             }
         }
-
     }
 }
 

@@ -8,7 +8,7 @@
                         <mat-list-item class="mat-list-item" role="listitem" *ngFor="let reportsData of reportsData.reportsFilterOptions">
                             <ng-container *ngIf="reportsData.type == 'dropDown'">
                                 <mat-select id="{{ reportsData.placeHolderName }}" class="dropDownList" placeholder="{{ reportsData.placeHolderName }}" [(value)]="reportsData.dataFromUser" matNativeControl required>
-                                    <mat-option *ngFor="let item of reportsData.dropDownOptions;let i=index" value="{{reportsData.dropDownValues[i]}}">
+                                    <mat-option class="mat-option-dropDown" *ngFor="let item of reportsData.dropDownOptions;let i=index" value="{{reportsData.dropDownValues[i]}}">
                                         {{ item }}</mat-option>
                                 </mat-select>
                             </ng-container>

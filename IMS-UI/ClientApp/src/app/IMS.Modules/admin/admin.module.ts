@@ -17,6 +17,7 @@ import { UserManagementComponent } from './Components/user-management/user-manag
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.com
     DetailsPipe],
   imports: [
     MaterialModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

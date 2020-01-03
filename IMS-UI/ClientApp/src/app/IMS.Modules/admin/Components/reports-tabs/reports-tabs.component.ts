@@ -249,33 +249,33 @@ export class ReportsTabsComponent implements OnInit {
         ],
         urlToRequest: ""
       },
-      {
-        reportName: "Shelf",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "ShelfName",
-            type: "dropDown",
-            dropDownOptions: ["First Floor", "Sixth Floor"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
-      }
+      // {
+      //   reportName: "Shelf",
+      //   reportsFilterOptions: [
+      //     {
+      //       placeHolderName: "ShelfName",
+      //       type: "dropDown",
+      //       dropDownOptions: ["First Floor", "Sixth Floor"],
+      //       dropDownValues: [],
+      //       dataFromUser: ""
+      //     },
+      //     {
+      //       placeHolderName: "FromDate",
+      //       type: "datePicker",
+      //       dropDownOptions: [],
+      //       dropDownValues: [],
+      //       dataFromUser: ""
+      //     },
+      //     {
+      //       placeHolderName: "ToDate",
+      //       type: "datePicker",
+      //       dropDownOptions: [],
+      //       dropDownValues: [],
+      //       dataFromUser: ""
+      //     }
+      //   ],
+      //   urlToRequest: ""
+      // }
       
     ];
 

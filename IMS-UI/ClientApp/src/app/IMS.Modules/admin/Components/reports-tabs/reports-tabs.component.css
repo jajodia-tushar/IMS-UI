@@ -50,11 +50,16 @@ mat-list-item {
     white-space: nowrap;
 }
 
+::ng-deep .mat-select-placeholder {
+    color: white;
+}
+
 .dropDownList {
     width: 100%;
     border-radius: 4px;
     border: none;
-    background-color: white;
+    color: white;
+    background-color: #1c1e2f;
     height: 100%;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
 }
@@ -73,8 +78,34 @@ mat-list-item {
     width: 100%;
     padding: 3%;
     border-radius: 4px;
+    color: white;
     border: none;
-    background-color: white;
+    background-color: #1c1e2f;
     height: 100%;
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+}
+
+.mat-option-dropDown {
+    background-color: #1c1e2f;
+    color: white;
+}
+
+::ng-deep .mat-select-value {
+    color: white;
+}
+
+::ng-deep .mat-select-arrow {
+    color: white;
+}
+
+.not-empty-select.mat-selected {
+    color: green !important;
+}
+
+mat-option[aria-selected="true"] {
+    background: #262d4a !important
+}
+
+.mat-option:hover:not(.mat-option-disabled) {
+    background: rgb(39, 43, 60) !important
 }

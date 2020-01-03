@@ -3,6 +3,7 @@
     <div class="flex-container">
         <div class="container">
             <h4>Data</h4>
+            <h5 style="color: red; text-align: center;" *ngIf="!dataSource.length"> No records Found </h5>
             <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                     <th mat-header-cell *matHeaderCellDef> {{column}} </th>

@@ -91,26 +91,28 @@ export class ReportsTabsComponent implements OnInit {
     let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
     this.vendorService.getVendorOrder(vendorId,toDate, fromDate).subscribe(
       data => {
-        console.log(data);
-        data.vendorOrders.forEach(
-          data => {
-            dataToDisplaytemp.push({
-              "vendorName": data.vendor.name,
-              "date": (data.vendorOrderDetails.date +"").slice(0,10),
-              "amount": data.vendorOrderDetails.finalAmount,
-              "innerData": data.vendorOrderDetails.orderItemDetails.map(
-                x => {
-                  return {
-                    "item": x.item.name,
-                    "quantity": x.quantity,
-                    "rate" : x.item.rate
-                  }
-                }),
-              "innerColumns" : ["item", "quantity","rate"]
+        if (data.status == "Success") {
+          console.log(data);
+          data.vendorOrders.forEach(
+            data => {
+              dataToDisplaytemp.push({
+                "vendorName": data.vendor.name,
+                "date": (data.vendorOrderDetails.date + "").slice(0, 10),
+                "amount": data.vendorOrderDetails.finalAmount,
+                "innerData": data.vendorOrderDetails.orderItemDetails.map(
+                  x => {
+                    return {
+                      "item": x.item.name,
+                      "quantity": x.quantity,
+                      "rate": x.item.rate
+                    }
+                  }),
+                "innerColumns": ["item", "quantity", "rate"]
               });
             });
-            this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "date","amount"]));
-            this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "date", "amount"]));
+          this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+        }
       }
     );
   }

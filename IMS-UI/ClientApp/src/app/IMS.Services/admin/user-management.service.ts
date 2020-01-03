@@ -4,7 +4,6 @@ import { User } from 'src/app/IMS.Models/User/User';
 import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { Users } from 'src/app/IMS.Models/User/Users';
-import { DeleteResponse } from 'src/app/IMS.Models/User/DeleteResponse';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 import { BehaviorSubject } from 'rxjs';
 import {Response} from 'src/app/IMS.Models/Shared/Response'

@@ -5,6 +5,7 @@ import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-g
 import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
+import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 
 @Component({
   selector: "app-pie-chart",
@@ -26,10 +27,9 @@ export class PieChartComponent implements OnInit {
   ngOnInit() {
 
     let currentDate: Date = new Date();
-    this.toDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
-
-    currentDate.setDate(currentDate.getDate() - 6);
-    this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    this.toDate = DateUtils.dateFormatter(currentDate);
+    currentDate.setDate(currentDate.getDate() - 6)
+    this.fromDate = DateUtils.dateFormatter(currentDate);
 
     this.getData().then((data) => {
       if (data.status == "Success") {
@@ -112,11 +112,11 @@ export class PieChartComponent implements OnInit {
     let currentDate: Date = new Date();
     if (data === "7") {
       currentDate.setDate(currentDate.getDate() - 6);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     else if (data === "14") {
       currentDate.setDate(currentDate.getDate() - 13);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     this.onRefresh();
   }

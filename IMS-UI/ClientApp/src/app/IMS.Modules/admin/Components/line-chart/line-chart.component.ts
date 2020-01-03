@@ -5,6 +5,7 @@ import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseO
 import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
 import { ChartsComponentComponent } from "../charts-component/charts-component.component";
 import { Router } from "@angular/router";
+import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 @Component({
   selector: "app-line-chart",
   templateUrl: "./line-chart.component.html",
@@ -20,10 +21,10 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit() {
     let currentDate: Date = new Date();
-    this.toDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    this.toDate = DateUtils.dateFormatter(currentDate);
 
     currentDate.setDate(currentDate.getDate() - 6);
-    this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+    this.fromDate =DateUtils.dateFormatter(currentDate);
 
     this.getData().then((data) => {
       console.log(data);
@@ -134,12 +135,13 @@ export class LineChartComponent implements OnInit {
     let currentDate: Date = new Date();
     if (data === "7") {
       currentDate.setDate(currentDate.getDate() - 6);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     else if (data === "14") {
       currentDate.setDate(currentDate.getDate() - 13);
-      this.fromDate = `${currentDate.getFullYear()}${currentDate.getMonth() + 1}${currentDate.getDate()}`;
+      this.fromDate = DateUtils.dateFormatter(currentDate);
     }
     this.onRefresh();
   }
+
 }

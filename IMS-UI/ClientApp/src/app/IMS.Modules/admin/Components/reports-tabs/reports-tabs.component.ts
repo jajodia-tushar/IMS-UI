@@ -82,14 +82,17 @@ export class ReportsTabsComponent implements OnInit {
 
   showVendorDataTable() {
     let dataToDisplaytemp = []
+    this.dataToDisplay = [];
     let toDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     let fromDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
-
-    this.vendorService.getVendorOrder(toDate, fromDate).subscribe(
+      
+    let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
+    this.vendorService.getVendorOrder(vendorId,toDate, fromDate).subscribe(
       data => {
-        data.listOfVendorOrders.forEach(
+        console.log(data);
+        data.vendorOrders.forEach(
           data => {
             dataToDisplaytemp.push({
               "vendorName": data.vendor.name,

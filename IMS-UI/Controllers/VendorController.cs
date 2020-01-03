@@ -59,6 +59,23 @@ namespace IMS_UI.Controllers
             }
         }
 
+        [HttpGet("orders/{vendorId}")]
+        public async Task<IActionResult> Get(string vendorId, string toDate, string fromDate)
+        {
+            try
+            {
+                var response = await _VendorOrderProvider.getParticularVendorOrder(vendorId, toDate, fromDate);
+                if (response.Error == null)
+                    return Ok(response);
+                else
+                    return StatusCode(500);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+        }
+
 
         // GET: api/Vendor/5
         [HttpGet("{id}", Name = "GetVendor")]

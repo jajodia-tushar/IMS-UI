@@ -7,6 +7,6 @@ namespace IMS_UI.IMS.Models
 {
     public class VendorOrdersList : Response
     {
-        public List<VendorOrder> ListOfVendorOrders { get; set; }
+        public List<VendorOrder> VendorOrders { get; set; }
     }
 }

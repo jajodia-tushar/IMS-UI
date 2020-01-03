@@ -44,10 +44,51 @@ namespace IMS_UI.IMS.Providers
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                
+                new KeyValuePair<string, string>("isApproved", "true"),
                 new KeyValuePair<string, string>("pageNumber", "1"),
                 new KeyValuePair<string, string>("pageSize", "10"),
+                new KeyValuePair<string, string>("toDate", toDate),
+                new KeyValuePair<string, string>("fromDate", fromDate),
                 
+            }))
+            {
+                query = content.ReadAsStringAsync().Result;
+            }
+
+            uriBuilder.Query = query;
+
+            var response =
+                await client.GetAsync(uriBuilder.Uri);
+
+            return JsonConvert.DeserializeObject<VendorOrdersList>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.VendorOrdersProvider;
+
+            UriBuilder uriBuilder =
+                new UriBuilder(_IConfiguration["BASEURL"] + EndPoint + vendorId);
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _SessionManager.GetString("token"));
+
+            // client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            string query;
+            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("isApproved", "true"),
+                new KeyValuePair<string, string>("pageNumber", "1"),
+                new KeyValuePair<string, string>("pageSize", "10"),
+                new KeyValuePair<string, string>("toDate", toDate),
+                new KeyValuePair<string, string>("fromDate", fromDate),
+
             }))
             {
                 query = content.ReadAsStringAsync().Result;

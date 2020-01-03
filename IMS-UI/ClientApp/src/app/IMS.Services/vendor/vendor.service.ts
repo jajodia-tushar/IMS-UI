@@ -21,10 +21,20 @@ export class VendorService {
     return this.http.post<VendorOrder>("api/Vendor", vendorOrder);
   }
 
-  getVendorOrder(toDate :string, fromDate :string): Observable<VendroOrderResponse>{
+  getVendorOrder(vendorId: string, toDate: string, fromDate: string): Observable<VendroOrderResponse>{
+    
     let params = new HttpParams();
-    params = params.append("startDate",fromDate);
-    params = params.append("endDate",toDate);
-    return this.http.get<VendroOrderResponse>("api/vendor/orders", { params });
+    params = params.append("toDate",fromDate);
+    params = params.append("fromDate",toDate);
+    
+    if (vendorId == null || vendorId == "0" || vendorId == "") {
+      return this.http.get<VendroOrderResponse>("api/vendor/orders", { params });
+    }
+    else {
+      return this.http.get<VendroOrderResponse>("api/vendor/orders/"+vendorId, { params });
+    }
+
   }
+
+  
 }

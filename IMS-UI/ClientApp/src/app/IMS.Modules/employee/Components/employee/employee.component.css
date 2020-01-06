@@ -147,3 +147,8 @@ button {
     top: 30px;
     right: 30px;
 } 
+
+mat-icon{
+  color : white;
+  cursor: pointer;
+}

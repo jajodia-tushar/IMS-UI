@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
+import { LogoutComponent } from 'src/app/IMS.Modules/shared/logout/logout.component';
+import { LoginService } from 'src/app/IMS.Services/login/login.service';
 
 @Component({
   selector: 'app-employee',
@@ -10,7 +12,7 @@ import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service'
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private router : Router, private centralizedRepo : CentralizedDataService,private employeeService : EmployeeService){}
+  constructor(private router : Router, private centralizedRepo : CentralizedDataService,private employeeService : EmployeeService, private loginService : LoginService){}
     
     ShelfName : string;
     employeeID: string;
@@ -50,4 +52,14 @@ export class EmployeeComponent implements OnInit {
       }
     );
   } 
+
+  logout() {
+    if (confirm('Are you sure, you want to logout?')) {
+        this.loginService.logOut().subscribe(data => {
+          if (data.status == "Success") this.router.navigateByUrl("/login");
+        });
+    } else {
+
+    }
+  }
 }

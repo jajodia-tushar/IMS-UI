@@ -57,11 +57,11 @@
         <div class="action-buttons">
             <mat-dialog-actions>
                 <ng-container ngProjectAs="btn-close">
-                    <button mat-button style="margin-right: 25px; background: linear-gradient(100.43deg, #a72b2b 0%, #ff0000 95.74%); color: #fff;" (click)="onCancel()">
+                    <button mat-button style="margin-right: 10px; border:1px solid slategray; color: #fff;" (click)="onCancel()">
           Clear Cart
           </button>
                 </ng-container>
-                <button mat-button style="color: #fff; background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%);" (click)="onMakingOrder()" cdkFocusInitial>
+                <button mat-button style="color: #fff; border: 1px solid slateblue;" (click)="onMakingOrder()" cdkFocusInitial>
         <app-spinning-loader></app-spinning-loader>{{ButtonName}}
         </button>
             </mat-dialog-actions>

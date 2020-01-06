@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './item-add-dialog.component.html',
   styleUrls: ['./item-add-dialog.component.css']
 })
-export class UserAddDialogComponent implements OnInit {
+export class ItemAddDialogComponent implements OnInit {
   options: FormGroup;
   constructor() { }
 

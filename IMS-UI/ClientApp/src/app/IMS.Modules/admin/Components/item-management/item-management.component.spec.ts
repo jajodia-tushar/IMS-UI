@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ItemAddFormComponent } from './item-add-form.component';
 
-describe('UserAddFormComponent', () => {
-  let component: ItemAddFormComponent;
-  let fixture: ComponentFixture<ItemAddFormComponent>;
+import { ItemManagementComponent } from './item-management.component';
+
+describe('ItemManagementComponent', () => {
+  let component: ItemManagementComponent;
+  let fixture: ComponentFixture<ItemManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemAddFormComponent ]
+      declarations: [ ItemManagementComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemAddFormComponent);
+    fixture = TestBed.createComponent(ItemManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

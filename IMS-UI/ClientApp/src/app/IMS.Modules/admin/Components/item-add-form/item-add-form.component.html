@@ -1,5 +1,5 @@
-<div class="example-container">
-  <form class="example-container" [formGroup]="createUserForm" (ngSubmit)="createUser()">
+<div class="form-container">
+  <form class="form-container" [formGroup]="createItemForm" (ngSubmit)="createItem()">
     <div>
       <label>Role: </label>
       <mat-radio-group>
@@ -42,7 +42,7 @@
     </mat-form-field>
 
     <button mat-button type="submit">Submit</button>
-    <button mat-button type="cancel">Cancel</button>
+    <button mat-button type="reset">Cancel</button>
 
   </form>
 </div>

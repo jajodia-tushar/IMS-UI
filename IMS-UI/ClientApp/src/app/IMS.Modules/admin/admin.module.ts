@@ -22,6 +22,7 @@ import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-edit
 import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
+import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { ItemAddDialogComponent } from './Components/item-add-dialog/item-add-dialog.component';
 import { ItemAddFormComponent } from './Components/item-add-form/item-add-form.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
@@ -52,7 +53,7 @@ import { ImageDialogComponent } from './Components/image-dialog/image-dialog.com
       StoreUpdateComponent,
       InvoiceEditorComponent,
       NotificationsComponent,
-      ImageDialogComponent
+      ImageDialogComponent,
 
     ItemAddDialogComponent,
     ItemAddFormComponent,
@@ -63,6 +64,6 @@ import { ImageDialogComponent } from './Components/image-dialog/image-dialog.com
       AdminRoutingModule,
       SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, UserAddDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, UserAddDialogComponent, ItemAddDialogComponent]
 })
 export class AdminModule { }

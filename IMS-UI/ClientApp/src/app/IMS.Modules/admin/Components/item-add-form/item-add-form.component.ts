@@ -3,44 +3,54 @@ import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
-  selector: 'app-user-add-form',
-  templateUrl: './user-add-form.component.html',
-  styleUrls: ['./user-add-form.component.css']
+  selector: 'app-item-add-form',
+  templateUrl: './item-add-form.component.html',
+  styleUrls: ['./item-add-form.component.css']
 })
-export class UserAddFormComponent {
+export class ItemAddFormComponent {
   createUserForm : FormGroup
   constructor(formBuilder: FormBuilder){
     this.createUserForm = formBuilder.group({
-        userName : ['',[Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-        userMail : ["", [Validators.required, Validators.email]],
-        firstName : ["", [Validators.required, Validators.maxLength]],
-        lastName : ["",[]],
-        password : ["", [Validators.minLength(8),Validators.maxLength(16)]]
+      itemName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      maxLimit: ["", [Validators.required, Validators.maxLength(5)]],
+      rate : ["", [Validators.required, Validators.maxLength(5)]],
+      shelfRedLimit: ["", [Validators.required, Validators.maxLength(5)]],
+      shelfAmberLimit: ["", [Validators.required, Validators.maxLength(5)]],
+      warehouseRedLimit: ["", [Validators.required, Validators.maxLength(5)]],
+      warehouseAmberLimit: ["", [Validators.required, Validators.maxLength(5)]]
     })
   }
 
 
-  get userName(){
-    return this.createUserForm.get('userName');
+  get itemName(){
+    return this.createUserForm.get('itemName');
   }
 
-  get userMail(){
-    return this.createUserForm.get('userMail');
+  get maxLimit(){
+    return this.createUserForm.get('maxLimit');
   }
 
-  get firstName(){
-    return this.createUserForm.get('firstName');
+  get rate(){
+    return this.createUserForm.get('rate');
   }
 
-  get lastName(){
-    return this.createUserForm.get('lastName');
+  get shelfRedLimit(){
+    return this.createUserForm.get('shelfRedLimit');
   }
 
-  get password(){
-    return this.createUserForm.get('password');
+  get shelfAmberLimit(){
+    return this.createUserForm.get('shelfAmberLimit');
   }
 
-  createUser(){
+  get warehouseRedLimit() {
+    return this.createUserForm.get('shelfRedLimit');
+  }
+
+  get warehouseAmberLimit() {
+    return this.createUserForm.get('shelfRedLimit');
+  }
+
+  createItem(){
     let isValid = true//callService();
     if(!isValid){
       this.createUserForm.setErrors({

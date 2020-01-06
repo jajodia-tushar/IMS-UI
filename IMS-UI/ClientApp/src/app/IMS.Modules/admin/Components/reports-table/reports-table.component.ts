@@ -26,7 +26,7 @@ export class ReportsTableComponent implements OnInit {
   @Input()
   columnsToDisplay: string[];
   @Input()
-  dataSource = [];
+  data = [];
 
   @Input()
   pageInfo: PagingInfo;
@@ -35,29 +35,25 @@ export class ReportsTableComponent implements OnInit {
 
 @ViewChild(MatPaginator, {static: true}) set matPaginator(mp: MatPaginator) {
   this.paginator = mp;
-  // this.newDataSource.paginator = this.paginator;
   }
   
-  newDataSource: MatTableDataSource<any> = new MatTableDataSource([]);
+  dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   
   ngOnInit() { 
-    this.newDataSource.data = this.dataSource;
+    this.dataSource.data = this.data;
     this.pageInfo = new PagingInfo();
-    console.log(this.pageInfo); 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.newDataSource = new MatTableDataSource(this.dataSource);
-    // this.newDataSource.paginator = this.paginator;
-    console.log(this.pageInfo);
+    this.dataSource = new MatTableDataSource(this.data);
   }
 
   hasExpandableRows () {
-   return  (this.dataSource[0] != null && this.dataSource[0].innerData != null)
+   return  (this.data[0] != null && this.data[0].innerData != null)
   }
 
   showErrorMessage() {
-    return !this.dataSource.length;
+    return !this.data.length;
   }
 
   getNext(event) {

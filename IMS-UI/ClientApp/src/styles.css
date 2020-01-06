@@ -22,3 +22,8 @@ button:focus, button:active:focus, button.active:focus {
   text-align: center;
   /* background-color: rgb(153, 50, 50); */
 }
+
+.mat-snack-bar-container {
+  text-align: center;
+  background: white;
+}

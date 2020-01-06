@@ -67,8 +67,8 @@
       hideRequiredMarker="false"
       floatLabel="auto" >
     <input matInput placeholder="Email" formControlName="email" required>
-    <mat-error *ngIf="email.emailNotAvailable">Email Already Taken</mat-error>
-    <mat-error *ngIf="email.invalid">Invalid Email or Already Taken</mat-error>
+    <mat-error *ngIf="email.errors?.emailNotAvailable">Email Already Taken</mat-error>
+    <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
     <mat-hint *ngIf="email.pending">Checking if Email exists.</mat-hint>
   </mat-form-field>
 </div>

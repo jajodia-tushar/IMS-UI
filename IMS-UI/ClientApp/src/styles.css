@@ -3,7 +3,7 @@
 
 body {
   height: 100vh;
-  background-color:#eeeeee;
+  background-color: #1c1e2f;
 }
 
 button:focus, button:active:focus, button.active:focus {

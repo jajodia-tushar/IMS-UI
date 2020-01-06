@@ -74,9 +74,9 @@ p {
 }
 
 .employee-header {
-    overflow: hidden;
-    background: linear-gradient(100.43deg, hsla(216, 100%, 50%, 1) 0%, #3d23ff 95.74%);
-    height: 10%;
+  overflow: hidden;
+  background: #222437;
+  height: 10%;
 }
 
 #company-name {

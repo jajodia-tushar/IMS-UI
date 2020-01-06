@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AdminService } from 'src/app/IMS.Services/admin.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/IMS.Models/User/User';
@@ -7,13 +7,16 @@ import { OrderDetails } from 'src/app/IMS.Models/Vendor/OrderDetails';
 import { log } from 'util';
 import { FormControl, Validators } from '@angular/forms';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
+import { error } from 'selenium-webdriver';
+import { Router } from '@angular/router';
 
 
   
 @Component({
   selector: 'app-vendordetails',
   templateUrl: './vendordetails.component.html',
-  styleUrls: ['./vendordetails.component.css']
+  styleUrls: ['./vendordetails.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class VendordetailsComponent implements OnInit {
   public LoggedINClerk;
@@ -33,7 +36,7 @@ export class VendordetailsComponent implements OnInit {
   public SelectedVendor = null;
   public RecievedDate: Date;
 
-  constructor(private _adminService: AdminService, private _VendorService: VendorService,
+  constructor(private _adminService: AdminService, private _VendorService: VendorService,private router:Router,
     private http: HttpClient, private _CentralizedDataService: CentralizedDataService) { }
 
   onKey(value: string) {
@@ -62,12 +65,25 @@ export class VendordetailsComponent implements OnInit {
   async ngOnInit() {
     this._adminService.getAllAdmins().subscribe(
       data => {
-        this.Admins = data.users;
+        
+        if (data.status === "Success")
+          this.Admins = data.users;
+        else {
+          if (data.errorCode === 401) {
+            this.router.navigateByUrl("/login");
+          }
+        }
       }
     )
     this._VendorService.getAllVendors().subscribe(
       data => {
-        this.Vendors = data.vendors;
+        if (data.status === "Success")
+          this.Vendors = data.vendors;
+        else {
+          if (data.errorCode === 401) {
+            this.router.navigateByUrl("/login");
+          }
+        }
       }
     )  
     await this._CentralizedDataService.getLoggedInUser();

@@ -14,6 +14,7 @@ import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+declare var swal: any;
 interface FileUrl {
   locationUrl: string;
 }
@@ -98,10 +99,17 @@ export class OrderdetailsComponent implements OnInit {
   itemNames: string[] = []
   public Items: Item[];
   filteredItems: string[];
+  public dialog = false;
+  
   constructor(private _ItemService: ItemService, private _CentralizedDataService: CentralizedDataService, private router:Router,
     private snackBar: MatSnackBar, private http: HttpClient, private _VendorSerice: VendorService) { }
-
  
+ 
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(["/Clerk"]);
+  }
   uploadImage(file) {
     if (file.length === 0) {
       return;
@@ -159,9 +167,9 @@ export class OrderdetailsComponent implements OnInit {
       if (this.dataSourceItems[errorRowIndex].item.id == null)
         this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
       else if (!this.dataSourceItems[errorRowIndex].quantity)
-        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Is Not Filled");
+        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
       else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Should Be Greater Than 0");
+        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
     }   
   }
 
@@ -197,11 +205,7 @@ export class OrderdetailsComponent implements OnInit {
       this.renderTable();
     }
   }
-  reloadComponent() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(["/Clerk"]);
-  }
+  
     
   onSubmit() { 
     let errorRowIndex = this.rowValidation();
@@ -215,22 +219,25 @@ export class OrderdetailsComponent implements OnInit {
         this.vendorOrder.vendor = this.orderDetails.vendor;
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
-            this.showMessage(5,"Items Are Added")
             this.reloadComponent();
-
+            this.showMessage(5, "Order Is Placed");
+          },
+          error => {
+            this.showMessage(5, error.errorMessage);
           }
         )
+        
       }
       else {
         if (this.dataSourceItems.length == 0)
           this.showMessage(5, "No Items Are Added In Item Details ");
         else {
           if (this.dataSourceItems[errorRowIndex].item.id == null)
-            this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
+            this.showMessage(5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
           else if (!this.dataSourceItems[errorRowIndex].quantity)
-            this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Is Not Filled");
+            this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
           else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-            this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Should Be Greater Than 0")
+            this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
         }
       }
     }

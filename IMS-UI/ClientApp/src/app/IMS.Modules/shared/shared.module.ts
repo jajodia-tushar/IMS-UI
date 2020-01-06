@@ -6,10 +6,11 @@ import { LoaderInterceptor } from 'src/app/IMS.Services/IMS.Interceptor/loader.i
 import { MaterialModule } from '../material/material.module';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
-  declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent],
+  declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, LogoutComponent],
   imports: [
     MaterialModule
   ],

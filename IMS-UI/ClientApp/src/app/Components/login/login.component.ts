@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
               dialogConfig.autoFocus = true;
               // dialogConfig.width = "%";
               let dialogRef = this.dialog.open(FloorComponent, dialogConfig);
+              this.ButtonName = "LOGIN";
               // dialogRef.close(false);
             }
           }

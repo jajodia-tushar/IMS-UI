@@ -1,22 +1,27 @@
+<div class="logout" (click)="logout()"><mat-icon>power_settings_new</mat-icon></div>
+
 <div class="login-page">
-    <mat-card><b>{{ShelfName}}</b></mat-card>
-  <div class="login-page__sign-up-section">
-    <div class="sign-upp-section__logo-section">
-      <img src="assets/IMS.Images/ims_logo.png" alt="IMS Logo" />
+  <img id="image-container" src="../../../assets/IMS.Images/LoginPage.jpg">
+  <div class="card">
+    <div class="floor">
+      <img src="../../../assets/IMS.Images/floor_grey.png" alt="{{ShelfName}}">
     </div>
-    <div class="login-page__credential-section">
-      <div class="credential-section__form">
-        <form class="form-input">
-          <p class="invalid-user">{{errorMessage}}</p>
-          <mat-form-field floatPlaceholder="never" class="full-width">
-            <input type="text" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}" required />
-            <mat-placeholder>Enter Employee ID</mat-placeholder>
-          </mat-form-field>
-          <br /><br />
-          <mat-hint class="confirm-hint">Tap 'next' to verify your account with Employee ID</mat-hint>
-          <button (click)="employeeValidation()" mat-raised-button class="button-properties">{{buttonName}}</button>
-        </form>
-      </div>
-    </div>
+    <h6 class="title">
+      {{ShelfName}}
+    </h6>
+  </div>
+  <div class="input-box">
+    <p class="invalid-employee" *ngIf="errorMessage">Invalid Employee ID</p>
+
+    <form class="form-input">
+      <input type="text" maxlength="4" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}"
+        id="employee-id" placeholder="Enter Employee ID" required />
+
+      <br>
+
+      <button mat-raised-button class="button-properties" (click)="employeeValidation()">
+        <app-spinning-loader></app-spinning-loader>{{buttonName}}
+      </button>  
+    </form>
   </div>
 </div>

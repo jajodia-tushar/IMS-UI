@@ -15,7 +15,7 @@ import { LogoutComponent } from './logout/logout.component';
     MaterialModule
   ],
   providers : [],
-  exports : [SpinningLoaderComponent,SnackbarComponent,HeaderComponent],
+  exports : [SpinningLoaderComponent,SnackbarComponent,HeaderComponent,LogoutComponent],
   entryComponents : [SnackbarComponent]
 })
 export class SharedModule { }

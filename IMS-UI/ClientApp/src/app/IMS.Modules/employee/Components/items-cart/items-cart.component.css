@@ -75,7 +75,7 @@ th.mat-header-cell {
 }
 
 .stepper {
-    border: 1px solid #fff;
+    /* border: 1px solid #fff; */
     display: inline-block;
     overflow: visible;
     height: 2.1em;
@@ -101,5 +101,6 @@ th.mat-header-cell {
     padding: 0.2em !important;
     background: #222437;
     color: #fff;
-    border: none;
+    border: 1px solid slategrey;
+    border-radius: 100%;
 }

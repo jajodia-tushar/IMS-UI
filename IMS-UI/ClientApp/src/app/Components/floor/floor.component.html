@@ -1,7 +1,7 @@
 <div *ngIf="isFloorNotSelected" class="floor-image">
   <div class="cards">
     <h3 class="heading">Select a floor</h3>
-    <div 
+    <div
         class="card" 
         *ngFor="let shelf of shelves"
         (click)="onSubmitShelf(shelf)">

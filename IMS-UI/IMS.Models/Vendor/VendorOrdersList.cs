@@ -8,7 +8,6 @@ namespace IMS_UI.IMS.Models
 {
     public class VendorOrdersList : Response
     {
-        public List<ItemQuantityMapping> ItemQuantityMappings;
-        public PagingInfo pagingInfo { get; set; }
+        public List<VendorOrder> VendorOrders { get; set; }
     }
 }

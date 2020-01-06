@@ -169,11 +169,10 @@ input:-webkit-autofill:active {
 
 .form-input {
   position: absolute;
-
-  top: 75px;
-  left: 123px;
-  width: 44%;
-  height: 100%;
+    top: 75px;
+    left: 123px;
+    width: 48%;
+    height: 100%;
 }
 
 #user-id {
@@ -182,7 +181,7 @@ input:-webkit-autofill:active {
   height: 42px;
   color: black;
   font-size: small;
-  width: 216px;
+  width: 100%;
   padding-left: 10px;
   margin-bottom: 14px;
   border-radius: 3px;
@@ -196,7 +195,7 @@ input:-webkit-autofill:active {
   height: 42px;
   color: black;
   font-size: small;
-  width: 216px;
+  width: 100%;
   padding-left: 10px;
   margin-bottom: 14px;
   border-radius: 3px;

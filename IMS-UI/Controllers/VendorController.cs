@@ -94,10 +94,7 @@ namespace IMS_UI.Controllers
             try
             {
                 var response = await _VendorOrderProvider.postVendorOrder(vendorOrder);
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return StatusCode(500);
+                return Ok(response);
             }
             catch(Exception e)
             {

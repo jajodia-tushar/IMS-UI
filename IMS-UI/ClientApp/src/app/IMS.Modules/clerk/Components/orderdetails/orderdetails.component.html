@@ -24,7 +24,7 @@
             <th mat-header-cell *matHeaderCellDef> Quantity </th>
             <td mat-cell *matCellDef="let element">
               <mat-form-field appearance="outline" style="width:80%">
-                <input matInput #quantity="ngModel" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)">
+                <input matInput #quantity="ngModel" maxlength="3" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)">
                 <!--<mat-error *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
                   <strong *ngIf="quantity.errors.required">Quantity is mandatory</strong>
                 </mat-error>-->
@@ -38,12 +38,13 @@
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element" class="action-link">
               <div class="edit-delete-icon-center">
-                <button mat-icon-button (click)="DeleteRow(element)">
-                  <mat-icon class="icon">delete</mat-icon>
+                <button mat-icon-button class="delete-white-icon" (click)="DeleteRow(element)">
+                  <mat-icon class="delete-icon-size" >delete</mat-icon>
                 </button>
               </div>
             </td>
           </ng-container>
+          <mat-divider></mat-divider>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -167,9 +167,9 @@ export class OrderdetailsComponent implements OnInit {
       if (this.dataSourceItems[errorRowIndex].item.id == null)
         this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
       else if (!this.dataSourceItems[errorRowIndex].quantity)
-        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Is Not Filled");
+        this.showMessage(5, "Quantity of" + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
       else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-        this.showMessage(5,"Quantity In Row " + (errorRowIndex + 1) + " Should Be Greater Than 0");
+        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
     }   
   }
 

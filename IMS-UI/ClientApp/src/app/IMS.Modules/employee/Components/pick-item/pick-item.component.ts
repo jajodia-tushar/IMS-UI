@@ -7,7 +7,6 @@ import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { MatSnackBar } from '@angular/material';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
-import {showMessage} from 'src/app/IMS.Modules/shared/utils/snackbar'
 
 
 @Component({
@@ -68,25 +67,17 @@ export class PickItemComponent implements OnInit {
         cartItem.quantity += 1;
       }
       else {
-        showMessage(1,`You cannot add "${cartItem.item.name}" more than ${cartItem.item.maxLimit}`,"error",this.snackBar);
+        this.showMessage(1,`You cannot add "${cartItem.item.name}" more than ${cartItem.item.maxLimit}`);
       }
     }
     this.cartItems = JSON.parse(JSON.stringify(this.cartItems));
   }
 
-  // showMessage(time,message,type="message"){
-  //   let extraClasses;
-  //     if (type == 'error') {
-  //    extraClasses = ['snackbar-background-red'];
-  //  } else {
-  //    extraClasses = ['snackbar-background-green'];
-  //  }
-  //   this.snackBar.openFromComponent(SnackbarComponent, {
-  //     duration: 1000 * time ,
-  //     panelClass : extraClasses,
-  //     data : { message : message }
-  //   });
-  // }
+  showMessage(time,message){
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 1000 * time , data : { message : message }
+    });
+  }
 
   addWidthStyle() {
     let style = {

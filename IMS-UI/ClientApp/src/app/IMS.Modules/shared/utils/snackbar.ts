@@ -1,6 +1,7 @@
 import { SnackbarComponent } from "../snackbar/snackbar.component";
+import { MatSnackBar } from "@angular/material";
 
-export function showMessage(time,message,type="message",snackBar){
+export function showMessage(snackBar: MatSnackBar, time: number, message:string, type="message"){
     let extraClasses;
       if (type == 'error') {
      extraClasses = ['snackbar-background-red'];

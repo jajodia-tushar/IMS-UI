@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 
 @Component({
@@ -19,34 +20,36 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class ReportsTableComponent implements OnInit {
   constructor(private spinLoaderService : SpinLoaderService) { }
 
+  @Output()
+  paginatorClicked: EventEmitter<any> = new EventEmitter();
+
   @Input()
   columnsToDisplay: string[];
   @Input()
   dataSource = [];
 
+  @Input()
+  pageInfo: PagingInfo;
+
   paginator: MatPaginator  ;
 
 @ViewChild(MatPaginator, {static: true}) set matPaginator(mp: MatPaginator) {
   this.paginator = mp;
-  this.newDataSource.paginator = this.paginator;
+  // this.newDataSource.paginator = this.paginator;
   }
   
   newDataSource: MatTableDataSource<any> = new MatTableDataSource([]);
   
   ngOnInit() { 
     this.newDataSource.data = this.dataSource;
-    console.log(this.dataSource);
+    this.pageInfo = new PagingInfo();
+    console.log(this.pageInfo); 
   }
-
-  ngAfterViewInit() {
-    this.newDataSource.paginator = this.paginator
-}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.newDataSource = new MatTableDataSource(this.dataSource);
-    this.newDataSource.paginator = this.paginator;
-    console.log(this.dataSource);
-
+    // this.newDataSource.paginator = this.paginator;
+    console.log(this.pageInfo);
   }
 
   hasExpandableRows () {
@@ -55,6 +58,10 @@ export class ReportsTableComponent implements OnInit {
 
   showErrorMessage() {
     return !this.dataSource.length;
+  }
+
+  getNext(event) {
+    this.paginatorClicked.emit(event);
   }
 }
  

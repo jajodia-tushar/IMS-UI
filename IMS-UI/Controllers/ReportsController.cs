@@ -28,12 +28,14 @@ namespace IMS_UI.Controllers
         public async Task<IActionResult> GetRAGStatusReport(
             string locationName,
             string locationCode,
-            string colour
+            string colour,
+            string pageNumber,
+            string pageSize
         )
         {
             var response =
                 await _reportsProvider.GetRAGSTatusReport(
-                    locationName, locationCode, colour);
+                    locationName, locationCode, colour, pageNumber, pageSize);
             try
             {
                 if (response.Error != null && response.Error.ErrorCode == 401)

@@ -3,6 +3,7 @@ import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 import { ActivatedRoute } from "@angular/router";
 import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
+import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
 
 @Component({
   selector: "app-reports-tabs",
@@ -24,6 +25,11 @@ export class ReportsTabsComponent implements OnInit {
 
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
+
+
+  // ====================== Pagination Support================
+    pageInfo: PagingInfo;
+
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
     private ragStatusService: RagStatusService , private vendorService : VendorService) {
@@ -114,6 +120,8 @@ export class ReportsTabsComponent implements OnInit {
             });
           this.columnToDisplay = JSON.parse(JSON.stringify(["Invoice No","vendor Name", "date", "amount"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          this.pageInfo.totalResults = this.dataToDisplay.length;
+          this.pageInfo.pageSize = this.dataToDisplay.length;
         }
       }
       ,
@@ -122,6 +130,12 @@ export class ReportsTabsComponent implements OnInit {
         this.dataToDisplay = [];
       }
     );
+  }
+
+  paginatorClicked(event) {
+    this.pageInfo.pageNumber = event.pageIndex + 1;
+    this.pageInfo.pageSize = event.pageSize;
+    this.searchButtonClicked();
   }
 
   showRAGDataTable() {
@@ -135,7 +149,8 @@ export class ReportsTabsComponent implements OnInit {
       dropDownValues.indexOf(this.reportsSelectionData[0].reportsFilterOptions[0].dataFromUser)]
     
     this.reportsService
-      .getRAGReport(locationNameSelected, locationCodeSelected, colourSelected)
+      .getRAGReport(locationNameSelected, locationCodeSelected, colourSelected,
+        this.pageInfo.pageNumber, this.pageInfo.pageSize)
       .subscribe(data => {
         this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
         this.dataToDisplay = [];
@@ -148,7 +163,7 @@ export class ReportsTabsComponent implements OnInit {
           "quantity": data.quantity
         }));
         this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
-        console;
+        this.pageInfo = data.pagingInfo;
       },
       error => {
         this.columnToDisplay = [];
@@ -164,6 +179,11 @@ export class ReportsTabsComponent implements OnInit {
     this.toDate = date.toISOString();
     date.setDate(date.getDay() - 6);
     this.fromDate = date.toISOString();
+
+    this.pageInfo = new PagingInfo();
+    this.pageInfo.pageNumber = 1;
+    this.pageInfo.pageSize = 10;
+    this.pageInfo.totalResults = 0;
 
     this.reportsSelectionData = [
       {
@@ -267,34 +287,6 @@ export class ReportsTabsComponent implements OnInit {
         ],
         urlToRequest: ""
       },
-      // {
-      //   reportName: "Shelf",
-      //   reportsFilterOptions: [
-      //     {
-      //       placeHolderName: "ShelfName",
-      //       type: "dropDown",
-      //       dropDownOptions: ["First Floor", "Sixth Floor"],
-      //       dropDownValues: [],
-      //       dataFromUser: ""
-      //     },
-      //     {
-      //       placeHolderName: "FromDate",
-      //       type: "datePicker",
-      //       dropDownOptions: [],
-      //       dropDownValues: [],
-      //       dataFromUser: ""
-      //     },
-      //     {
-      //       placeHolderName: "ToDate",
-      //       type: "datePicker",
-      //       dropDownOptions: [],
-      //       dropDownValues: [],
-      //       dataFromUser: ""
-      //     }
-      //   ],
-      //   urlToRequest: ""
-      // }
-      
     ];
 
     await this.getRAGReportDropDownList().then(

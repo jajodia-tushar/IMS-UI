@@ -12,11 +12,15 @@ export class ReportsService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getRAGReport(locationName : string, locationCode : string, colour : string): Observable<ItemsAvailabilityResponse> {
+  getRAGReport(locationName: string, locationCode: string, colour: string, pageNumber: number
+    , pageSize: number): Observable<ItemsAvailabilityResponse> {
     let params = new HttpParams();
     params = params.append("locationName", locationName);
     params = params.append("locationCode", locationCode);
     params = params.append("colour", colour);
+    params = params.append("pageNumber", pageNumber.toString());
+    params = params.append("pageSize", pageSize.toString());
+
     return this.httpClient.get<ItemsAvailabilityResponse>("api/reports", {params: params});
   }
 

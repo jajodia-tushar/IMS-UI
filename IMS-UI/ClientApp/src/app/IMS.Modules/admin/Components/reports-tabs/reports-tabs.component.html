@@ -29,4 +29,4 @@
     </mat-tab>
 </mat-tab-group>
 
-<app-reports-table [columnsToDisplay]='columnToDisplay' [dataSource]='dataToDisplay'></app-reports-table>
+<app-reports-table [columnsToDisplay]='columnToDisplay' [dataSource]='dataToDisplay' (paginatorClicked)="paginatorClicked($event)" [pageInfo]="pageInfo"></app-reports-table>

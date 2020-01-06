@@ -32,9 +32,6 @@ export class LineChartComponent implements OnInit {
         this.createLineChart();
         this.plotDataOnChart(this.chart, data);
       }
-      else if (data.error.errorCode == 401) {
-        this.router.navigateByUrl("/login");
-      }
     });
   }
 
@@ -70,9 +67,6 @@ export class LineChartComponent implements OnInit {
       this.getData().then((data) => {
         if (data.status == "Success") {
           this.plotDataOnChart(this.chart, data);
-        }
-        else if (data.error.errorCode == 401) {
-          this.router.navigateByUrl("/login");
         }
       });
     }, 2000);

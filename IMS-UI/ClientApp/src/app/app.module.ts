@@ -28,6 +28,7 @@ import { RagStatusService } from './IMS.Services/admin/rag-status.service';
 import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
 import { RecentEntriesService } from './IMS.Services/admin/recent-entries.service';
 import { LoggingComponent } from './Components/logging/logging.component';
+import { LogoutInterceptor } from './IMS.Services/IMS.Interceptor/logout.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { LoggingComponent } from './Components/logging/logging.component';
     ItemWiseDataService,
     RagStatusService,
     RandomColorGeneratorService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LogoutInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [FloorComponent]

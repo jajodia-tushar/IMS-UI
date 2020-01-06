@@ -35,9 +35,6 @@ export class BarChartComponent implements OnInit {
         this.createBarChart();
         this.plotDataOnChart(this.chart, data);
       }
-      else if (data.error.errorCode == 401) {
-        this.router.navigateByUrl("/login");
-      }
     });
   }
 
@@ -123,9 +120,6 @@ export class BarChartComponent implements OnInit {
       this.getData().then((data) => {
         if (data.status == "Success") {
           this.plotDataOnChart(this.chart, data);
-        }
-        else if (data.error.errorCode == 401) {
-          this.router.navigateByUrl("/login");
         }
       });
     }, 2000);

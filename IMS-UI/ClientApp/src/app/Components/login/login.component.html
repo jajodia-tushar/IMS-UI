@@ -39,7 +39,6 @@
 
 </div> -->
 
-
 <div class="login-page">
   <img id="image-container" src="../../../assets/IMS.Images/LoginPage.jpg">
   <div class="text-block">
@@ -49,16 +48,15 @@
     <p class="invalid-user" *ngIf="error">Invalid username or password</p>
     <form class="form-input">
 
-      <!-- <mat-form-field floatPlaceholder="never" class="full-width"> -->
+
       <input type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" id="user-id"
         placeholder="Enter User ID" required />
 
-      <!-- </mat-form-field> -->
-      <!-- <mat-form-field floatPlaceholder="never" class="full-width" appearance="outline"> -->
+
       <input type="password" [(ngModel)]="Password" matInput [ngModelOptions]="{standalone: true}" id="u-password"
         placeholder="Password" required />
 
-      <!-- </mat-form-field> -->
+
       <br />
       <button mat-raised-button class="button-properties" (click)=Login()>
         <app-spinning-loader></app-spinning-loader>{{ButtonName}}

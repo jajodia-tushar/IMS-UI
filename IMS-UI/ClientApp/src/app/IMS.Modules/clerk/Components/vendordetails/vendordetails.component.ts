@@ -65,10 +65,14 @@ export class VendordetailsComponent implements OnInit {
   async ngOnInit() {
     this._adminService.getAllAdmins().subscribe(
       data => {
-        this.Admins = data.users;
-      },
-      error => {
-        console.log(error);
+        
+        if (data.status === "Success")
+          this.Admins = data.users;
+        else {
+          if (data.errorCode === 401) {
+            this.router.navigateByUrl("/login");
+          }
+        }
       }
     )
     this._VendorService.getAllVendors().subscribe(

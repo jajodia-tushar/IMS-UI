@@ -27,7 +27,6 @@ export class LineChartComponent implements OnInit {
     this.fromDate =DateUtils.dateFormatter(currentDate);
 
     this.getData().then((data) => {
-      console.log(data);
       if (data.status == "Success") {
         this.createLineChart();
         this.plotDataOnChart(this.chart, data);

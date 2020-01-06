@@ -167,7 +167,7 @@ export class OrderdetailsComponent implements OnInit {
       if (this.dataSourceItems[errorRowIndex].item.id == null)
         this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
       else if (!this.dataSourceItems[errorRowIndex].quantity)
-        this.showMessage(5, "Quantity of" + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
+        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
       else if (this.dataSourceItems[errorRowIndex].quantity == 0)
         this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
     }   
@@ -219,17 +219,14 @@ export class OrderdetailsComponent implements OnInit {
         this.vendorOrder.vendor = this.orderDetails.vendor;
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
-           this.reloadComponent();
+            this.reloadComponent();
+            this.showMessage(5, "Order Is Placed");
           },
           error => {
             this.showMessage(5, error.errorMessage);
           }
         )
-        swal({
-          title: "Good Job!",
-          text: "Your Order Is Placed",
-          type: "success"
-        })
+        
       }
       else {
         if (this.dataSourceItems.length == 0)

@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 
 @Component({
@@ -22,8 +23,31 @@ export class ReportsTableComponent implements OnInit {
   columnsToDisplay: string[];
   @Input()
   dataSource = [];
+
+  paginator: MatPaginator  ;
+
+@ViewChild(MatPaginator, {static: true}) set matPaginator(mp: MatPaginator) {
+  this.paginator = mp;
+  this.newDataSource.paginator = this.paginator;
+  }
   
-  ngOnInit() { }
+  newDataSource: MatTableDataSource<any> = new MatTableDataSource([]);
+  
+  ngOnInit() { 
+    this.newDataSource.data = this.dataSource;
+    console.log(this.dataSource);
+  }
+
+  ngAfterViewInit() {
+    this.newDataSource.paginator = this.paginator
+}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.newDataSource = new MatTableDataSource(this.dataSource);
+    this.newDataSource.paginator = this.paginator;
+    console.log(this.dataSource);
+
+  }
 
   hasExpandableRows () {
    return  (this.dataSource[0] != null && this.dataSource[0].innerData != null)

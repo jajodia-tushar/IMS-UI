@@ -31,7 +31,6 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient client = new HttpClient())
                 {
                     var content = new ObjectContent<TransferToShelvesRequest>(request, new JsonMediaTypeFormatter());
-                    var Json = JObject.Parse(JsonConvert.SerializeObject(request));
                     client.BaseAddress = new Uri(configuration["BASEURL"]);
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));

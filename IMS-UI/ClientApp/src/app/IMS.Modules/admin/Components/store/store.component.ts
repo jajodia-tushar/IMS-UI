@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 import { StoreResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { StoreUpdateComponent } from '../store-update/store-update.component';
+import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-store',
@@ -14,10 +15,12 @@ export class StoreComponent implements OnInit {
   columns: string[] = [];
   columnsToDisplay: string[] = [];
 
+  snackbarMessage: string = "";
+
   @Input()
   numberOfItems: string;
 
-  constructor(private storeService: StoreService, public dialog: MatDialog) { }
+  constructor(private storeService: StoreService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.storeService.getAdminStoreStatus().subscribe(
@@ -51,7 +54,7 @@ export class StoreComponent implements OnInit {
           }
           this.dataSource.push(object);
 
-          if(!this.numberOfItems)  {
+          if (!this.numberOfItems) {
             this.columnsToDisplay = this.columns.concat(['actions']);
           }
           else
@@ -65,7 +68,10 @@ export class StoreComponent implements OnInit {
   }
 
   editStore(item) {
-    console.log(item);
+    if(!this.canTransfer(item))  {
+      this.showMessage(3, "Cannot Transfer the item");
+    }
+    else  {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = "50%";
     dialogConfig.data = item;
@@ -75,7 +81,52 @@ export class StoreComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => {
-        console.log(result);  
+        if (result == null) {
+          dialogRef.close();
+        }
+        else {
+          console.log(item);
+          console.log(result);
+          if (result.status == "Failure") {
+            this.snackbarMessage = "Transfer Failed";
+            dialogRef.close();
+          }
+          else {
+            this.editItem(result);
+            this.snackbarMessage = "Transfer Successful";
+            dialogRef.close();
+          }
+          this.showMessage(3, this.snackbarMessage);
+        }
+      },
+      error => {
+        this.snackbarMessage = "Transfer Failed";
+        dialogRef.close();
+        this.showMessage(3, this.snackbarMessage);
       });
+    }
+  }
+
+  editItem(result) {
+    this.dataSource.forEach(element => {
+      if (element["Item Name"] == result.itemName) {
+        element[result.shelf] += result.quantity;
+        element["Warehouse"] -= result.quantity;
+      }
+    });
+  }
+
+  showMessage(time, message) {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 1000 * time, data: { message: message }
+    });
+  }
+
+
+  canTransfer(element)  {
+    if(element['Warehouse'] == 0 || element['Warehouse']=='-')
+      return false;
+    else
+      return true;
   }
 }

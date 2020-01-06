@@ -13,8 +13,32 @@
 .mat-tab-group {
     display: inline-flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .shelf  {
   margin: 0 2% 2% 0 ;
 }
+
+.dialog-form  {
+  overflow: hidden;
+}
+ 
+#mat-tab-content-0-0 > div  {
+  overflow: hidden;
+  height: auto;
+} 
+
+
+div.mat-dialog-action  {
+  margin: 0;
+  padding: 0;
+}
+
+
+#mat-tab-label-0-0 { 
+  margin: auto;
+} 
+#mat-tab-label-0-1 { 
+  margin: auto;
+} 

@@ -5,8 +5,4 @@ export class Item{
     isActive : boolean;
     imageUrl : string;
     rate : number;
-    shelvesRedLimit : number;
-    shelvesAmberLimit : number;
-    warehouseRedLimit :  number;
-    warehouseAmberLimit : number;
 }

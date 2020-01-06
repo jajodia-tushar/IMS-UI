@@ -11,7 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 
-const materialModules = [MatDialogModule, MatFormFieldModule, MatSelectModule, MatButtonModule, CommonModule,
+const materialModules = [MatDialogModule, MatFormFieldModule, 
+  MatSelectModule, 
+  MatButtonModule, 
+  CommonModule,
   MatCardModule,
   MatIconModule,
   MatInputModule,
@@ -21,8 +24,8 @@ const materialModules = [MatDialogModule, MatFormFieldModule, MatSelectModule, M
   MatFormFieldModule,
   MatDialogModule,
   MatSelectModule,
-  ReactiveFormsModule,
-  ]
+  ReactiveFormsModule
+];
 
 
 @NgModule({

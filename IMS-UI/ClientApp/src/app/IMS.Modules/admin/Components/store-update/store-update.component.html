@@ -2,20 +2,20 @@
     <p>Update Store</p>
 </div>
 
-<mat-tab-group>
+<mat-tab-group #tabGroup [selectedIndex]="1" class="dialog-form">
     <mat-tab *ngFor="let shelf of shelves" [label]="shelf.name">
         <div mat-dialog-content>
             <mat-form-field>
-                <input placeholder="Item Name" [value]="itemName" matInput disabled>
+                <input placeholder="Item Name" [(ngModel)]="itemName" matInput disabled>
             </mat-form-field>
             <br />
             <mat-form-field>
-                <input placeholder="Quantity" matInput >
+                <input placeholder="Quantity" [(ngModel)]="quantity" matInput >
             </mat-form-field>
         </div>
         <div mat-dialog-actions>
-            <button mat-raised-button (click)="onUpdate()">Update</button>
-            <button mat-raised-button (click)="closeDialog()">Cancel</button>
+            <button mat-raised-button (click)="onUpdate(shelf.name)">Update</button>
+            <button mat-raised-button (click)="close()">Cancel</button>
         </div>
     </mat-tab>
 </mat-tab-group>

@@ -18,7 +18,6 @@ import { UserManageDialogComponent } from './Components/user-manage-dialog/user-
 import { UserListComponent } from './Components/user-list/user-list.component';
 import { UserManageFormComponent } from './Components/user-manage-form/user-manage-form.component';
 import { DeactivateDialogComponent } from './Components/deactivate-dialog/deactivate-dialog.component';
-import { EmployeeListComponent } from './Components/employee-list/employee-list.component';
 import { DetailsPipe } from './Components/recent-entries/details.pipe';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
@@ -45,7 +44,6 @@ import { SharedModule } from '../shared/shared.module';
     UserManageFormComponent,
     UserListComponent,
     DeactivateDialogComponent,
-    EmployeeListComponent,
     DetailsPipe
     ],
   imports: [

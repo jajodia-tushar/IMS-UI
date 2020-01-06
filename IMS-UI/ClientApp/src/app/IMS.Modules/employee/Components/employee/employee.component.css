@@ -141,3 +141,9 @@ button {
     inset 0px 0px 30px #5e7af5;
   background: #5e7af5;
 }
+
+.logout {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+} 

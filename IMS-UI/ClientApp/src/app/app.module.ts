@@ -35,6 +35,7 @@ import { DatePipe } from '@angular/common';
     LoginComponent,
     FloorComponent,
     LoggingComponent,
+    ThemingExampleComponent,
   ],
   imports: [
     SharedModule,

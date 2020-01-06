@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
 })
 export class ReportsTableComponent implements OnInit {
-  constructor() { }
+  constructor(private spinLoaderService : SpinLoaderService) { }
 
   @Input()
   columnsToDisplay: string[];
@@ -26,6 +27,10 @@ export class ReportsTableComponent implements OnInit {
 
   hasExpandableRows () {
    return  (this.dataSource[0] != null && this.dataSource[0].innerData != null)
+  }
+
+  showErrorMessage() {
+    return !this.dataSource.length;
   }
 }
  

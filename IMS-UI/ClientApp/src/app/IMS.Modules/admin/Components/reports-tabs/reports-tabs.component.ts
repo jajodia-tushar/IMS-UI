@@ -83,6 +83,7 @@ export class ReportsTabsComponent implements OnInit {
   showVendorDataTable() {
     let dataToDisplaytemp = []
     this.dataToDisplay = [];
+    this.columnToDisplay = [];
     let toDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     let fromDate =
@@ -96,7 +97,8 @@ export class ReportsTabsComponent implements OnInit {
           data.vendorOrders.forEach(
             data => {
               dataToDisplaytemp.push({
-                "vendorName": data.vendor.name,
+                "Invoice No" : data.vendorOrderDetails.invoiceNumber,
+                "vendor Name": data.vendor.name,
                 "date": (data.vendorOrderDetails.date + "").slice(0, 10),
                 "amount": data.vendorOrderDetails.finalAmount,
                 "innerData": data.vendorOrderDetails.orderItemDetails.map(
@@ -104,15 +106,20 @@ export class ReportsTabsComponent implements OnInit {
                     return {
                       "item": x.item.name,
                       "quantity": x.quantity,
-                      "rate": x.item.rate
+                      "price": x.totalPrice
                     }
                   }),
-                "innerColumns": ["item", "quantity", "rate"]
+                "innerColumns": ["item", "quantity", "price"]
               });
             });
-          this.columnToDisplay = JSON.parse(JSON.stringify(["vendorName", "date", "amount"]));
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Invoice No","vendor Name", "date", "amount"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
         }
+      }
+      ,
+      error => {
+        this.columnToDisplay = [];
+        this.dataToDisplay = [];
       }
     );
   }
@@ -142,7 +149,13 @@ export class ReportsTabsComponent implements OnInit {
         }));
         this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
         console;
-      });
+      },
+      error => {
+        this.columnToDisplay = [];
+        this.dataToDisplay = [];
+      }
+      
+    );
   }
 
   async initializeEmptyData() {

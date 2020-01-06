@@ -10,7 +10,7 @@ export class SpinLoaderService {
 
   isLoading = new Subject<boolean>();
   
-    show() {
+  show() {
         this.isLoading.next(true);
     }
     hide() {

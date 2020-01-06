@@ -34,10 +34,8 @@ export class UserValidators{
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                if (!response) {
-                console.log("username exists and thrown error");
                 resolve({ userNameNotAvailable: true });
               } else {
-                console.log('did not throw error')
                 resolve(null);
               }
             }, 2000);
@@ -50,10 +48,8 @@ export class UserValidators{
         return new Promise(resolve => {
           setTimeout(() => {
             if (!response) {
-              console.log("email exists and thrown error");
               resolve({ emailNotAvailable: true });
             } else {
-              console.log('did not throw error')
               resolve(null);
             }
           }, 2000);
@@ -66,26 +62,20 @@ export class UserValidators{
 
     async checkIfUserNameDoesNotExists(username : string){
       let response = <Response> await this.userManagementService.validateUsername(username)
-      console.log(response);
       if(response.status==="Success"){
-        console.log("username Does not exists");
         return true;
       }
       else if(response.status==="Failure"){
-        console.log("username exists");
         return false;
       }
     }
 
     async checkIfEmailDoesNotExists(email : string){
       let response = <Response> await this.userManagementService.validateEmail(email)
-      console.log(response);
       if(response.status==="Success"){
-        console.log("Email Does not exists");
         return true;
       }
       else if(response.status==="Failure"){
-        console.log("Email exists");
         return false;
       }
     }

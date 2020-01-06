@@ -62,6 +62,19 @@ export class UserManageFormComponent implements OnInit{
       this.createUserForm.setValue(userDetail);
       this.createUserForm.get("username").disable();
       this.createUserForm.get("password").disable();
+      this.createUserForm.get("email").clearAsyncValidators();
+      this.createUserForm.get("email").valueChanges.subscribe(
+        (email : string)=>{
+          if(email==this.userDetails.email){
+            this.createUserForm.get("email").clearAsyncValidators();
+          }
+          else{
+            this.createUserForm.get("email").setAsyncValidators(
+              this.userValidators.emailTakenValidator.bind(this.userValidators)
+            )
+          }
+        }
+      );
     }
     if(!this.isSuperAdmin && this.isEditUserForm){
       this.createUserForm.get("role").disable();

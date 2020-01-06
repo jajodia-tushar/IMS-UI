@@ -80,7 +80,6 @@ export class UserListComponent implements OnInit {
   }
 
   editUserDetails(user:User){
-    console.log(user);
 
     this.openUserEditDialog(user);
   }

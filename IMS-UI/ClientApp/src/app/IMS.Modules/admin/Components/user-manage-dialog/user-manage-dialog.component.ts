@@ -13,15 +13,12 @@ export class UserManageDialogComponent implements OnInit {
   userData : User;
   constructor(private dialogRef: MatDialogRef<UserManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) { 
     this.userData = data;
-    console.log(data)
   }
 
   ngOnInit() {
   }
 
   notifyTableUserEditted(usersResponse:UsersResponse){
-      console.log("inside dialog");
-      console.log(usersResponse);
       if(usersResponse==null){
         this.dialogRef.close(false);
       }

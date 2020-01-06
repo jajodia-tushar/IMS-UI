@@ -120,8 +120,6 @@ export class ReportsTabsComponent implements OnInit {
             });
           this.columnToDisplay = JSON.parse(JSON.stringify(["Invoice No","vendor Name", "date", "amount"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
-          this.pageInfo.totalResults = this.dataToDisplay.length;
-          this.pageInfo.pageSize = this.dataToDisplay.length;
         }
       }
       ,

@@ -1,4 +1,4 @@
-<div class="login-page">
+<!-- <div class="login-page">
     <mat-card><b>{{ShelfName}}</b></mat-card>
   <div class="login-page__sign-up-section">
     <div class="sign-upp-section__logo-section">
@@ -18,5 +18,31 @@
         </form>
       </div>
     </div>
+  </div>
+</div> -->
+
+<div class="login-page">
+  <img id="image-container" src="../../../assets/IMS.Images/LoginPage.jpg">
+  <div class="card">
+    <div class="floor">
+      <img src="../../../assets/IMS.Images/floor_grey.png" alt="{{ShelfName}}">
+    </div>
+    <h6 class="title">
+      {{ShelfName}}
+    </h6>
+  </div>
+  <div class="input-box">
+    <p class="invalid-employee" *ngIf="errorMessage">Invalid Employee ID</p>
+
+    <form class="form-input">
+      <input type="text" maxlength="4" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}"
+        id="employee-id" placeholder="Enter Employee ID" required />
+
+      <br>
+
+      <button mat-raised-button class="button-properties" (click)="employeeValidation()">
+        <app-spinning-loader></app-spinning-loader>{{buttonName}}
+      </button>  
+    </form>
   </div>
 </div>

@@ -29,6 +29,7 @@ export class EmployeeComponent implements OnInit {
 
   employeeValidation() {
     this.errorMessage = "";
+    this.buttonName = "";
     if(this.employeeID == null || this.employeeID == ""){
       this.errorMessage = "Enter Employee Id";
       return;

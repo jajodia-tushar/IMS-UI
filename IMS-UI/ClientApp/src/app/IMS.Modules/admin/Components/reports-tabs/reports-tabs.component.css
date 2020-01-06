@@ -42,12 +42,14 @@ mat-list-item {
 ::ng-deep .mat-select-value {
     display: table-cell;
     max-width: 0;
-    padding: 3%;
     width: 100%;
     overflow: hidden;
-    padding: 2%;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.mat-tab-label {
+    width: 50% !important
 }
 
 ::ng-deep .mat-select-placeholder {
@@ -56,6 +58,7 @@ mat-list-item {
 
 .dropDownList {
     width: 100%;
+    padding: 3%;
     border-radius: 4px;
     border: none;
     color: white;

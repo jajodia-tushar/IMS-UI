@@ -2,8 +2,8 @@
 <div class="items-container">
     <div class="flex-container">
         <div class="container">
-            <h4>Data</h4>
-            <h5 style="color: red; text-align: center;" *ngIf="!dataSource.length"> No records Found </h5>
+            <h5 style="color: red; text-align: center;" *ngIf="showErrorMessage()"> No records Found </h5>
+            <app-spinning-loader></app-spinning-loader>
             <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
@@ -39,11 +39,13 @@
                     <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"></tr>
                 </ng-container>
 
-                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-                </mat-paginator>
-
 
             </table>
+            <ng-container *ngIf="!hasExpandableRows()">
+                <mat-paginator class="paginator" [length]="pageInfo.totalResults" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="getNext($event)">
+                </mat-paginator>
+            </ng-container>
+
         </div>
     </div>
 </div>

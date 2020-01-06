@@ -101,3 +101,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 td {
     color: white;
 }
+
+.paginator {
+    background-color: #222437 !important;
+    color: white;
+}

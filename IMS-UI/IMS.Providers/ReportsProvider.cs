@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
         }
 
         public async Task<ItemsAvailabilityResponse> GetRAGSTatusReport(
-            string locationName,string locationCode,string colour)
+            string locationName,string locationCode,string colour,string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -44,7 +44,9 @@ namespace IMS_UI.IMS.Providers
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("locationName", locationName),
                 new KeyValuePair<string, string>("locationCode", locationCode),
-                new KeyValuePair<string, string>("colour", colour)
+                new KeyValuePair<string, string>("colour", colour),
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize)
             }))
             {
                 query = content.ReadAsStringAsync().Result;

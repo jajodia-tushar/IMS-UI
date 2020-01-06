@@ -1,5 +1,5 @@
 <mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedTab">
-    <mat-tab *ngFor="let reportsData of reportsSelectionData; let i = index" label="{{ reportsData.reportName }}" [disabled]="isDisabled(i)">
+    <mat-tab mat-stretch-tabs *ngFor="let reportsData of reportsSelectionData; let i = index" label="{{ reportsData.reportName }}" [disabled]="isDisabled(i)">
         <!-- <app-reports-filter [reportsFilterDataList]="reportsData.reportsFilterOptions"></app-reports-filter> -->
         <mat-card>
             <div class="dropdownBoxes">
@@ -20,7 +20,7 @@
                         </mat-list-item>
 
                         <button mat-raised-button (click)="searchButtonClicked()" color="primary" style="outline: none;">
-                            Go
+                            GO
                         </button>
                     </mat-nav-list>
                 </div>
@@ -29,4 +29,4 @@
     </mat-tab>
 </mat-tab-group>
 
-<app-reports-table [columnsToDisplay]='columnToDisplay' [dataSource]='dataToDisplay'></app-reports-table>
+<app-reports-table [columnsToDisplay]='columnToDisplay' [data]='dataToDisplay' (paginatorClicked)="paginatorClicked($event)" [pageInfo]="pageInfo"></app-reports-table>

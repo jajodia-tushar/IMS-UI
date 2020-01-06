@@ -12,7 +12,7 @@ import { HttpParams } from "@angular/common/http";
   styleUrls: ["./rag-status.component.css"]
 })
 export class RagStatusComponent implements OnInit {
-  constructor(private router : Router) { }
+  constructor(private router: Router) { }
 
   chart: Chart;
   backgroundColor: string[] = ["#da2d2d", "#ff971d", "#c3f584"];
@@ -21,7 +21,7 @@ export class RagStatusComponent implements OnInit {
   @Input()
   ragData: RAGDataModel;
 
-  generateRagChart(ragData: RAGDataModel,router : Router) {
+  generateRagChart(ragData: RAGDataModel, router: Router) {
     this.chart = new Chart(ragData.name, {
       type: "doughnut",
       data: {
@@ -53,16 +53,16 @@ export class RagStatusComponent implements OnInit {
             }
           ]
         },
-        onClick: (data, item) => {
+        onClick: (data, item: any) => {
           let index = item[0]._index;
-          
+
           let selectedTab = 0;
           let colour = ragData.colourCountMappings[index].colour;
           let locationName = ragData.name;
           let locationCode = ragData.code;
-          
+
           let queryParams = {
-            locationCode,locationName,colour,selectedTab
+            locationCode, locationName, colour, selectedTab
           }
           router.navigate(['/Admin/Reports'], { queryParams });
         }
@@ -70,13 +70,13 @@ export class RagStatusComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 
   ngAfterViewInit() {
     if (this.ragData != null) {
       console.log(this.ragData);
-      this.generateRagChart(this.ragData,this.router);
+      this.generateRagChart(this.ragData, this.router);
     }
 
   }

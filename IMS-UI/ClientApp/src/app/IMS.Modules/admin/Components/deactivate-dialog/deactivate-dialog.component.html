@@ -3,10 +3,10 @@
 </h1>
 
 <div mat-dialog-content>
-  <p>Do you Want to Deactivate {{user.firstname}}'s account.</p>
+  <p>Do you Want to Deactivate {{user.firstname}}'s account?</p>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onDismiss()">No</button>
+<div mat-dialog-actions class="action-buttons">
   <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+  <button mat-button (click)="onDismiss()">No</button>
 </div>

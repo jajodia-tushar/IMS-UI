@@ -53,8 +53,8 @@ export class UserManagementService {
     this.roles = roles;
   }
 
-  async getAllRolesFromService(){
-    if(this.roles!=null || this.roles!= undefined)
+  async getAllRolesFromService(hard:boolean= false){
+    if((this.roles!=null || this.roles!= undefined) && !hard)
       return this.roles;
     else{
       await this.setUserRoles()

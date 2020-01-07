@@ -1,11 +1,11 @@
 
   <form class="form-container" [formGroup]="createUserForm" (ngSubmit)="submitForm()">
-   
-      <label class="one-row">Role :  
-      <mat-error *ngIf="role.invalid">Select Role</mat-error></label>
+   <div class="one-row">
+      <label class="roles-radio">Role :</label>
       <mat-radio-group formControlName="role" style="display: flex;justify-content: space-between;" >
         <mat-radio-button *ngFor="let roleOption of roles" [value]="roleOption" [checked]="role.value.name== roleOption.name">{{roleOption.name}}</mat-radio-button>
       </mat-radio-group>
+    </div>
  
 
   <mat-form-field

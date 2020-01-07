@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { User } from 'src/app/IMS.Models/User/User';
@@ -10,6 +10,7 @@ import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialo
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { MatSnackBar } from '@angular/material';
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 
 @Component({
   selector: 'app-user-list',
@@ -37,7 +38,9 @@ export class UserListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.dataSource.sort = this.sort;
+    let roles = await this.userManagementService.getAllRolesFromService(true);
   }
+
 
   applyFilter(filterValue: string) {
     // this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -64,16 +67,16 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result==false){
-        this.showErrorMessage("Create Failed or Cancelled",1)
+        showMessage(this.snackBar,2,"Create Failed or Cancelled",'warn');
       }
       else{
         if(this.isSuperAdmin){
           this.ELEMENT_DATA.push(<User>result);
           this.dataSource.data = this.ELEMENT_DATA;
-          this.showSuccessMessage("User Was Created Successfully",1);
+          showMessage(this.snackBar,2,"User Was Created Successfully",'success');
         }
         else{
-          this.showSuccessMessage("User was Created and is up for Review By SuperAdmin",1)
+          showMessage(this.snackBar,2,"User was Created and is up for Review By SuperAdmin",'success');
         }
       }        
     });
@@ -92,7 +95,7 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result==false){
-        this.showErrorMessage("User Update Cancelled or Failed",1);
+        showMessage(this.snackBar,2,"User Update Cancelled or Failed",'warn');
       }
       else{
         this.editUserInTable(result);
@@ -101,7 +104,6 @@ export class UserListComponent implements OnInit {
   }
 
   deactivateUser(user){
-    console.log(user);
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     // dialogConfig.disableClose = true;
@@ -110,10 +112,10 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result==true){
         this.removeUserFromTableById(user.id);
-        this.showSuccessMessage("User Account Was Deactivated Successfully",1)
+        showMessage(this.snackBar,2,"User Account Was Deactivated Successfully",'success');
       }
       else {
-        this.showErrorMessage("Deactivating User cancelled",1)
+        showMessage(this.snackBar,2,"Deactivating User cancelled or failed",'warn');
       }
     });
 
@@ -136,19 +138,7 @@ export class UserListComponent implements OnInit {
       }
    }
     this.dataSource.data = this.ELEMENT_DATA;
-    this.showSuccessMessage("User Details Updated Successfully",1)
-  }
-
-  showErrorMessage(message: string, timeInSeconds){
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000 * timeInSeconds , data : { message : message }
-    });
-  }
-
-  showSuccessMessage(message: string, timeInSeconds){
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000 * timeInSeconds , data : { message : message }
-    });
+    showMessage(this.snackBar,2,"User Details Updated Successfully",'success');
   }
 
   async setUsers(){

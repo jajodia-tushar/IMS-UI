@@ -17,8 +17,9 @@ export class StoreUpdateComponent implements OnInit {
   public itemName: string;
   shelves = [];
   selectedFloor: string;
-  public quantity: string = '';
+  public quantity: string;
   itemsList: Item[] = [];
+  error: boolean = false;
 
   transferRequest: TransferRequest = new TransferRequest();
 
@@ -38,20 +39,18 @@ export class StoreUpdateComponent implements OnInit {
         console.log(error);
       });
 
-      this.itemService.getAllItems().subscribe(
-        data => {
-          console.log(data);
-          
-          data.items.forEach(element =>{
-            this.itemsList.push(element);
-          });
-        },
-        error => {
-          console.log(error);
+    this.itemService.getAllItems().subscribe(
+      data => {
+        data.items.forEach(element => {
+          this.itemsList.push(element);
         });
+      },
+      error => {
+        console.log(error);
+      });
   }
 
-  close()  {
+  close() {
     this.dialogRef.close();
   }
 
@@ -60,50 +59,54 @@ export class StoreUpdateComponent implements OnInit {
   }
 
   onUpdate(shelfName) {
-    let shelf: ShelfID = new ShelfID();
-    this.shelves.forEach(element => {
-      if(element.name == shelfName)  {
-        shelf.id = element.id;
-      }
-    });
-    let item: ItemID = new ItemID();
-    this.itemsList.forEach(element => {
-      if(element.name == this.itemName)  {
-        item.id = element.id;
-      }
-    }); 
-
-    let itemMapping: CartItemID = new CartItemID();
-    itemMapping.item = item;
-    itemMapping.quantity = parseInt(this.quantity);
-
-    let request: ShelvesItemsQuantityList = new ShelvesItemsQuantityList();
-    request.shelf = shelf;
-    request.itemQuantityMapping = [];
-    request.itemQuantityMapping.push(itemMapping);
-
-    this.transferRequest.shelvesItemsQuantityList = [];
-    this.transferRequest.shelvesItemsQuantityList.push(request);
-
-    this.transferService.transferToShelf(this.transferRequest).subscribe(
-      data => {
-        console.log(data);
-        let transferResponse: TransferResponse = new TransferResponse(); 
-        transferResponse.itemName = this.itemName;
-        transferResponse.quantity = parseInt(this.quantity);
-        transferResponse.shelf = shelfName;
-        transferResponse.status = data.status;
-        this.dialogRef.close(transferResponse);
-      },
-      error => {
-        this.closeDialog(false);
+    if (!parseInt(this.quantity)) {
+      this.error = true;
+    }
+    else {
+      let shelf: ShelfID = new ShelfID();
+      this.shelves.forEach(element => {
+        if (element.name == shelfName) {
+          shelf.id = element.id;
+        }
       });
-  }
+      let item: ItemID = new ItemID();
+      this.itemsList.forEach(element => {
+        if (element.name == this.itemName) {
+          item.id = element.id;
+        }
+      });
 
+      let itemMapping: CartItemID = new CartItemID();
+      itemMapping.item = item;
+      itemMapping.quantity = parseInt(this.quantity);
+
+      let request: ShelvesItemsQuantityList = new ShelvesItemsQuantityList();
+      request.shelf = shelf;
+      request.itemQuantityMapping = [];
+      request.itemQuantityMapping.push(itemMapping);
+
+      this.transferRequest.shelvesItemsQuantityList = [];
+      this.transferRequest.shelvesItemsQuantityList.push(request);
+
+      this.transferService.transferToShelf(this.transferRequest).subscribe(
+        data => {
+          console.log(data);
+          let transferResponse: TransferResponse = new TransferResponse();
+          transferResponse.itemName = this.itemName;
+          transferResponse.quantity = parseInt(this.quantity);
+          transferResponse.shelf = shelfName;
+          transferResponse.status = data.status;
+          this.dialogRef.close(transferResponse);
+        },
+        error => {
+          this.closeDialog(false);
+        });
+      }
+  }
 }
 
 
-export class TransferResponse   {
+export class TransferResponse {
   itemName: string;
   quantity: number;
   shelf: string;

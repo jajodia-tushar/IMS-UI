@@ -50,6 +50,12 @@ tr.example-detail-row {
 }
 
 
+th {
+    color: #9597ab;
+    font-size: medium;
+    text-transform: uppercase;
+}
+
 .example-element-row :hover {
     color: white;
 }
@@ -97,4 +103,19 @@ th.mat-header-cell:last-of-type {
 
 .mat-icon-button[disabled] {
     color: gray !important
+}
+
+
+.mat-paginator  {
+    background-color: #1f2132;
+    color: beige;
+    font-size: medium;
+}
+
+::ng-deep #mat-select-0 > div > div.mat-select-value {
+    color: beige;
+}
+
+::ng-deep #mat-select-0 > div > div.mat-select-arrow-wrapper > div.mat-select-arrow  {
+    color: beige;
 }

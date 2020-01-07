@@ -21,18 +21,33 @@ namespace IMS_UI.IMS.Providers
             this.configuration = configuration;
             this.sessionManager = sessionManager;
         }
-        public async Task<StockStatusResponse> GetStockStatus()
+        public async Task<StockStatusResponse> GetStockStatus(string pageNumber, string pageSize, string itemName)
         {
             try
             {
                 using (HttpClient _client = new HttpClient())
                 {
-                    _client.BaseAddress = new Uri(configuration["BASEURL"]);
+                    UriBuilder uriBuilder =
+                        new UriBuilder(configuration["BASEURL"] + "api/Reports/GetStockStatus");
+
+                    //_client.BaseAddress = new Uri(configuration["BASEURL"]);
                     _client.DefaultRequestHeaders.Accept.Add(
                        new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
-                    var response = await _client.GetAsync("api/Reports/GetStockStatus");
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]
+                    {
+                        new KeyValuePair<string, string>("pageNumber", pageNumber),
+                        new KeyValuePair<string, string>("pageSize", pageSize),
+                        new KeyValuePair<string, string>("itemName", null)
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+
+                    uriBuilder.Query = query;
+                    var response = await _client.GetAsync(uriBuilder.Uri);
                     return JsonConvert.DeserializeObject<StockStatusResponse>(
                        await response.Content.ReadAsStringAsync());
                 }

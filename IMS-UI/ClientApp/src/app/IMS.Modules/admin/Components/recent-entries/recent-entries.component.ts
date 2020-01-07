@@ -53,8 +53,7 @@ export class RecentEntriesComponent implements OnInit {
     let employeeId = recentOrder.employee.id;
     let employeeName = recentOrder.employee.firstname;
     let totalItemsTaken = recentOrder.employeeOrder.employeeItemsQuantityList.length;
-    response.employeeDetails = employeeName + '-' + employeeId
-      + ' Picked ' + totalItemsTaken + ' items';
+    response.employeeDetails = employeeName + ' Picked ' + totalItemsTaken + ' items';
   }
   extractResponseDetails(recentOrder: RecentEntry, response: CustomRecentEntriesResponse): void {
     response.orderDetails = '';

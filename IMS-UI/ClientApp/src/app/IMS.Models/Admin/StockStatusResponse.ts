@@ -1,11 +1,17 @@
 import { Item } from "../Item/Item";
 import { Error } from "../Error";
-import { ElementRef } from "@angular/core";
 
 export class StockStatusResponse {
   stockStatusList: ItemStockStatus[];
+  pagingInfo: PagingInformation;
   status: string;
   error: Error;
+}
+
+export class PagingInformation  {
+  pageNumber: number;
+  pageSize: number;
+  totalResults: number;
 }
 
 export class ItemStockStatus  {
@@ -15,7 +21,7 @@ export class ItemStockStatus  {
 
 export class StockStatus {
   quantity: number;
-  storeName: string;
+  location: string;
   color: string;
 }
 

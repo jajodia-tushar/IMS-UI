@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
   MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, 
-  MatRadioModule, MatTabsModule 
+  MatRadioModule 
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';

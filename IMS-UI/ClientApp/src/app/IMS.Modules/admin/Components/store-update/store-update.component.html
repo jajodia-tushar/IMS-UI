@@ -8,14 +8,13 @@
             <mat-form-field>
                 <input placeholder="Item Name" [(ngModel)]="itemName" matInput disabled>
             </mat-form-field>
-            <br />
+            <br>
+            <p class="invalid" *ngIf="error">Quantity entered is Invalid</p>
             <mat-form-field>
-                <input placeholder="Quantity" [(ngModel)]="quantity" matInput >
+                <input placeholder="Quantity" [(ngModel)]="quantity" matInput>
             </mat-form-field>
         </div>
-        <div mat-dialog-actions>
-            <button mat-raised-button (click)="onUpdate(shelf.name)">Update</button>
-            <button mat-raised-button (click)="close()">Cancel</button>
-        </div>
+        <button mat-raised-button (click)="onUpdate(shelf.name)">Update</button>
+        <button mat-raised-button (click)="close()">Cancel</button>
     </mat-tab>
 </mat-tab-group>

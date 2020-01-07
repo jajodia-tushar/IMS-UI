@@ -42,15 +42,11 @@ export class StoreComponent implements OnInit {
   }
 
   pageChange(event) {
-    console.log(event);
     
     this.storeService.getAdminStoreStatus(event.pageIndex+1, event.pageSize).subscribe(
       data => {
-        console.log(data);
         this.pageSize = data.pagingInfo.pageSize.toString();
         this.pageLength = data.pagingInfo.totalResults.toString();      
-        console.log(data.pagingInfo);
-         console.log(this.pageInfo);
          
         this.getStoreData(data);
       },
@@ -74,7 +70,6 @@ export class StoreComponent implements OnInit {
 
     this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
       data => {
-        console.log(data);
         this.pageInfo = new PagingInformation();
         this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
         this.pageInfo.pageSize = data.pagingInfo.pageSize;
@@ -82,14 +77,8 @@ export class StoreComponent implements OnInit {
 
         this.pageLength = data.pagingInfo.totalResults.toString();
         this.pageSize = data.pagingInfo.pageSize.toString();
-
-        console.log(data.pagingInfo);
-        console.log(this.pageInfo);
          
         this.getStoreData(data);
-      },
-      error => {
-        console.log(error);
       });
   }
 

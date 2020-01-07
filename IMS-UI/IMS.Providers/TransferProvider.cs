@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +31,7 @@ namespace IMS_UI.IMS.Providers
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    var EndPoint = Constants.APIEndpoints.TransferProvider;
                     var content = new ObjectContent<TransferToShelvesRequest>(request, new JsonMediaTypeFormatter());
                     client.BaseAddress = new Uri(configuration["BASEURL"]);
                     client.DefaultRequestHeaders.Accept.Add(
@@ -37,7 +39,7 @@ namespace IMS_UI.IMS.Providers
                     client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
                     HttpMethod method = new HttpMethod("PATCH");
-                    var httpRequest = new HttpRequestMessage(method, client.BaseAddress + "api/transfer/transferToShelves") {
+                    var httpRequest = new HttpRequestMessage(method, client.BaseAddress + EndPoint) {
                         Content = content
                     };
                     var response = await client.SendAsync(httpRequest);

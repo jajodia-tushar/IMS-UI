@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -27,8 +28,9 @@ namespace IMS_UI.IMS.Providers
             {
                 using (HttpClient _client = new HttpClient())
                 {
+                    var EndPoint = Constants.APIEndpoints.StockProvider;
                     UriBuilder uriBuilder =
-                        new UriBuilder(configuration["BASEURL"] + "api/Reports/GetStockStatus");
+                        new UriBuilder(configuration["BASEURL"] + EndPoint);
 
                     //_client.BaseAddress = new Uri(configuration["BASEURL"]);
                     _client.DefaultRequestHeaders.Accept.Add(

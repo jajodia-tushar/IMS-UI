@@ -29,6 +29,7 @@ export class ReportsTabsComponent implements OnInit {
 
   // ====================== Pagination Support================
     pageInfo: PagingInfo;
+    errorMessage: string;
 
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
@@ -90,6 +91,7 @@ export class ReportsTabsComponent implements OnInit {
     let dataToDisplaytemp = []
     this.dataToDisplay = [];
     this.columnToDisplay = [];
+    this.errorMessage = JSON.parse(JSON.stringify(""));
     let toDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     let fromDate =
@@ -120,12 +122,19 @@ export class ReportsTabsComponent implements OnInit {
             });
           this.columnToDisplay = JSON.parse(JSON.stringify(["Invoice No","vendor Name", "date", "amount"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          if (this.dataToDisplay.length == 0) {
+            this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+          }
+        }
+        else {
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
       }
       ,
       error => {
         this.columnToDisplay = [];
         this.dataToDisplay = [];
+        this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
       }
     );
   }
@@ -137,7 +146,7 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   showRAGDataTable() {
-
+    this.errorMessage = JSON.parse(JSON.stringify(""));
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
       .dataFromUser;
     let colourSelected = this.reportsSelectionData[0].reportsFilterOptions[1]
@@ -154,6 +163,7 @@ export class ReportsTabsComponent implements OnInit {
         this.dataToDisplay = [];
         if (data.status == "Failure") {
           this.dataToDisplay = JSON.parse(JSON.stringify([]));
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
           return;
         }
         data.itemQuantityMappings.forEach(data => this.dataToDisplay.push({
@@ -162,10 +172,15 @@ export class ReportsTabsComponent implements OnInit {
         }));
         this.dataToDisplay = JSON.parse(JSON.stringify(this.dataToDisplay));
         this.pageInfo = data.pagingInfo;
+
+        if (this.dataToDisplay.length == 0) {
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+        }
       },
       error => {
         this.columnToDisplay = [];
         this.dataToDisplay = [];
+        this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
       }
       
     );

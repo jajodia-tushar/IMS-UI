@@ -22,6 +22,8 @@ export class ReportsTableComponent implements OnInit {
 
   @Output()
   paginatorClicked: EventEmitter<any> = new EventEmitter();
+  @Input()
+  errorMessage: string;
 
   @Input()
   columnsToDisplay: string[];

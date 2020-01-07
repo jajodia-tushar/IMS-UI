@@ -45,13 +45,14 @@ import { StoreUpdateComponent } from './Components/store-update/store-update.com
     UserManageFormComponent,
     UserListComponent,
     DeactivateDialogComponent,
-    DetailsPipe
+    DetailsPipe,
+    StoreUpdateComponent
     ],
   imports: [
     MaterialModule,
       AdminRoutingModule,
       SharedModule
   ],
-  entryComponents : [UserManageDialogComponent, DeactivateDialogComponent]
+  entryComponents : [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent]
 })
 export class AdminModule { }

@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
   MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, 
-  MatRadioModule 
+  MatRadioModule, MatSortModule
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -18,8 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatRadioModule } from '@angular/material/radio';
 
 const materialModules = [
   MatDividerModule,
@@ -64,7 +62,7 @@ const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSortModule,
-  MatRadioModule
+  MatRadioModule,
   MatListModule 
 ]
 

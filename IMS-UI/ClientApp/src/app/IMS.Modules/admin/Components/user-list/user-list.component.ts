@@ -64,16 +64,16 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result==false){
-        this.showErrorMessage("Create Failed or Cancelled",34)
+        this.showErrorMessage("Create Failed or Cancelled",1)
       }
       else{
         if(this.isSuperAdmin){
           this.ELEMENT_DATA.push(<User>result);
           this.dataSource.data = this.ELEMENT_DATA;
-          this.showSuccessMessage("User Was Created Successfully",12);
+          this.showSuccessMessage("User Was Created Successfully",1);
         }
         else{
-          this.showSuccessMessage("User was Created and is up for Review By SuperAdmin",21)
+          this.showSuccessMessage("User was Created and is up for Review By SuperAdmin",1)
         }
       }        
     });
@@ -92,7 +92,7 @@ export class UserListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result==false){
-        this.showErrorMessage("User Update Cancelled or Failed",12);
+        this.showErrorMessage("User Update Cancelled or Failed",1);
       }
       else{
         this.editUserInTable(result);
@@ -110,10 +110,10 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result==true){
         this.removeUserFromTableById(user.id);
-        this.showSuccessMessage("User Account Was Deactivated Successfully",12)
+        this.showSuccessMessage("User Account Was Deactivated Successfully",1)
       }
       else {
-        this.showErrorMessage("Error in Deacting User",10)
+        this.showErrorMessage("Deactivating User cancelled",1)
       }
     });
 
@@ -136,7 +136,7 @@ export class UserListComponent implements OnInit {
       }
    }
     this.dataSource.data = this.ELEMENT_DATA;
-    this.showSuccessMessage("User Was Updated Successfully",12)
+    this.showSuccessMessage("User Details Updated Successfully",1)
   }
 
   showErrorMessage(message: string, timeInSeconds){

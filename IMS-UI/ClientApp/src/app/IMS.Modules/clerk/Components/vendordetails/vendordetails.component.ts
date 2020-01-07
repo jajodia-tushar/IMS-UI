@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 export class VendordetailsComponent implements OnInit {
   public LoggedINClerk;
   VendorControl = new FormControl('', [Validators.required]);
-  DateControl = new FormControl('', [Validators.required]);
+  
   maxDate = new Date();
   public orderDetails: OrderDetails = {
     challanNumber: "",

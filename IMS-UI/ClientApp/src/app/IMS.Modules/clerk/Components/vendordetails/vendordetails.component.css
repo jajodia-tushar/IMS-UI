@@ -39,10 +39,17 @@
 .mat-form-field-label {
     color: #f5f5f5;
 }
+.mat-input-element::placeholder {
+  color: slategrey;
+}
+
 
 .mat-focused .mat-form-field-ripple {
-    /*change color of underline when focused*/
-    background-color: #f5f5f5 !important;
+  /*change color of underline when focused*/
+  background-color: #f5f5f5 !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: .6em 0 !important;
 }
 
 input.mat-input-element {

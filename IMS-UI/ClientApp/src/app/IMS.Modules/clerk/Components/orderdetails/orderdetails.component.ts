@@ -14,7 +14,6 @@ import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-declare var swal: any;
 interface FileUrl {
   locationUrl: string;
 }
@@ -39,6 +38,8 @@ export class OrderdetailsComponent implements OnInit {
     'Copy',
     'Paste'
   ];
+  public buttonName="Submit"
+  public canLoad = false;
   displayedColumns: string[] = ['ItemName', 'Quantity', 'action'];
   ItemControl = new FormControl('', [Validators.required]);
   public selectedFile = null;
@@ -160,7 +161,7 @@ export class OrderdetailsComponent implements OnInit {
         quantity: 0,
         totalPrice: 0
       };
-      this.dataSourceItems.push(itemData);
+      this.dataSourceItems.unshift(itemData);
       this.renderTable();
     }
     else {
@@ -207,7 +208,9 @@ export class OrderdetailsComponent implements OnInit {
   }
   
     
-  onSubmit() { 
+  onSubmit() {
+    this.canLoad = true;
+    this.buttonName = " ";
     let errorRowIndex = this.rowValidation();
     if (this.orderDetails) {
       if (errorRowIndex=== -1 && this.dataSourceItems.length > 0) {
@@ -229,6 +232,8 @@ export class OrderdetailsComponent implements OnInit {
         
       }
       else {
+        this.canLoad = false;
+        this.buttonName = "Submit";
         if (this.dataSourceItems.length == 0)
           this.showMessage(5, "No Items Are Added In Item Details ");
         else {
@@ -242,6 +247,8 @@ export class OrderdetailsComponent implements OnInit {
       }
     }
     else {
+      this.canLoad = false;
+      this.buttonName = "Submit";
       this.showMessage(5, "Some Fields In Invoice Are Empty");
     }
   }

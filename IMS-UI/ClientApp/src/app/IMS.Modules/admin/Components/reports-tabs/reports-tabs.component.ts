@@ -219,14 +219,16 @@ export class ReportsTabsComponent implements OnInit {
             type: "datePicker",
             dropDownOptions: [],
             dropDownValues: [],
-            dataFromUser: this.fromDate
+            dataFromUser: this.fromDate,
+            endDate: new Date()
           },
           {
             placeHolderName: "ToDate",
             type: "datePicker",
             dropDownOptions: [],
             dropDownValues: [],
-            dataFromUser: this.toDate
+            dataFromUser: this.toDate,
+            endDate: new Date()
           }
         ],
         urlToRequest: ""
@@ -324,4 +326,5 @@ export class reportsFilterOption {
   dropDownOptions: string[];
   dropDownValues: string[];
   dataFromUser: string;
+  endDate?: Date;
 }

@@ -19,10 +19,9 @@ button:focus, button:active:focus, button.active:focus {
 }
 
 .snackbar-message{
-  background-color: rgb(153, 50, 50);
+  background-color:grey;
 }
 
 .mat-snack-bar-container {
   text-align: center;
-  background-color:white;
 }

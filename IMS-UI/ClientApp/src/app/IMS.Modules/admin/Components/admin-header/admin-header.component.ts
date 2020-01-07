@@ -43,7 +43,7 @@ export class AdminHeader implements OnDestroy, OnInit {
     {
       tab: "Notifications",
       icon: "notifications_active",
-      color: "#ffd800"
+      color: "#ff1111"
     }]
   
   async ngOnInit() {

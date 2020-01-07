@@ -25,7 +25,7 @@ export class RevisableTableComponent implements OnInit {
   }
   @Input() ItemList;
  
-  //@Output() griddataChange: EventEmitter<any> = new EventEmitter();
+  
   @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
   @Output() ChangedFinalAmount: EventEmitter<any> = new EventEmitter<any>();
 
@@ -71,7 +71,7 @@ export class RevisableTableComponent implements OnInit {
  
 
   changeprice(row,event){
-     console.log(row);
+     
     row.totalPrice = +(<HTMLInputElement>event.target).value;
     
      this.renderTable();
@@ -96,13 +96,7 @@ export class RevisableTableComponent implements OnInit {
     this.renderTable();
    }
 
-   selectedOption(row,event){
-     
-     row.item.name=event.value;
-     this.renderTable();
-     
-     
-   }
+
 
  
 getTotalCost(){
@@ -154,6 +148,7 @@ getTotalCost(){
   } 
 
 
- rateControl = new FormControl("", [Validators.max(100), Validators.min(1)])
+ quantityControl = new FormControl("", [Validators.max(100), Validators.min(1)])
+ priceControl = new FormControl("", [Validators.max(100), Validators.min(1)])
 }
 

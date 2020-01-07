@@ -8,15 +8,12 @@ mat-card {
     margin-right: 0%;
     margin-left: 0%;
     bottom: 0%;
-   
     border-radius: 6px;
-   
-    position: sticky;
 }
+
 :host ::ng-deep .revisable-table {
   width: 100%;
   border-radius: 10px;
-  position: absolute;
   margin-top: 28px;
   margin-left: 0px;
   margin-left: 0px;
@@ -61,6 +58,7 @@ mat-card {
 .mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
   color: springgreen;
   border: 1px solid springgreen;
+  margin-left: 15px;
 }
 .upload-submit-button-position {
   /* float: right !important; */
@@ -105,7 +103,8 @@ mat-card {
 
 .table-vendor-details{
   position: relative;
-    height: 400px;
+    /* height: 400px; */
+    min-height: 290px;
     background-color:#222437;
     border-radius: 9px;
     width: 100%;
@@ -129,4 +128,18 @@ mat-card {
   height: 50vh !important;
   top: 30%;
   left: 6%;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+.ViewReceipt{
+border: 1px solid slateblue;
+    color: white;
+    background-color: #222437;
+}
+
+
+::ng-deep .cdk-overlay-dark-backdrop {
+  background: rgba(28, 30, 47, 0.8);
 }

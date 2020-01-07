@@ -20,7 +20,7 @@ export class DataTableComponent implements OnInit {
 
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
-    //console.log(this.datasource.data);
+    
   }
   @Input() columnHeader;
 
@@ -34,9 +34,9 @@ export class DataTableComponent implements OnInit {
 
   }
   transformDate(row) {
-    //console.log(row.vendorOrderDetails.date)
+    
     this.date = this.datepipe.transform(row.vendorOrderDetails.date, 'dd/MM/yyyy');
-    //console.log(this.date);
+    
     return this.date;
   }
   ClickedRow(row)

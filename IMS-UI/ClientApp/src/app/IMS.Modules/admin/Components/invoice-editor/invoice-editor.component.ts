@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { MatTableDataSource, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
@@ -15,6 +15,7 @@ import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
 import { HttpClient } from '@angular/common/http';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
+import { Router } from '@angular/router';
 
 interface FileUrl {
   locationUrl: string;
@@ -44,7 +45,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrders;
-  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, 
+  constructor(private router : Router, public vendorOrderdetailsService: VendorOrderdetailsService, 
     private _ItemService: ItemService, 
     public _orderDetailsApproveService: OrderDetailsApproveService, 
     private snackBar: MatSnackBar,
@@ -52,6 +53,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     private dialog : MatDialog) { }
   @Input() TableData;
   public vendorOrder: VendorOrder
+  @Output() reloadPendingApproval: EventEmitter<any> = new EventEmitter<any>();
   
   ngOnInit() {
     
@@ -71,7 +73,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.TableData.currentValue);
     let data = changes.TableData.currentValue
     this.ClerkName = data.vendorOrderDetails.recievedBy;
     this.AdminName = data.vendorOrderDetails.submittedTo;
@@ -83,6 +84,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.VendorName = data.vendor.name;
     this.VendorOrderdetails = data.vendorOrderDetails;
     this.itemquantityprice = data.vendorOrderDetails.orderItemDetails;
+
   }
 
 
@@ -121,8 +123,15 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       data: this.ChallanImageUrl
     },);
   }
+
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(["/Admin/Notifications"]);
+
+  }
   approve() {
-    
+    this.reloadPendingApproval.emit(0);
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
     this.VendorOrderdetails.challanNumber = this.ChallanNo;
     this.VendorOrderdetails.finalAmount = this.FinalAmount;
@@ -131,11 +140,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
     this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-  console.log(this.vendorDetails);
     this._orderDetailsApproveService.changeOrderDetails(this.vendorDetails).subscribe(
       data => {
-        console.log(data);
         if (data.status == "Success") {
+          this.reloadComponent();
           this.showMessage(5, "Order Approved");
         }
         else {

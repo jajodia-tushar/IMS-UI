@@ -1,19 +1,15 @@
-<table mat-table [dataSource]="datasource" class="mat-elevation-z8 revisable-table" > 
+<table mat-table [dataSource]="datasource" class="revisable-table" > 
 
     <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
     
     <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">{{ column.header }}
-        <div *ngIf="column.columnDef == 'actions'">
-        
-        </div>
-    </mat-header-cell>
-    <mat-cell *cdkCellDef="let row" style="text-align:center; color:white">
-    
        
+    </mat-header-cell>
+    <mat-cell *cdkCellDef="let row" style="text-align:left; color:white">
            <div *ngIf="column.columnDef == 'itemName'">
             <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size" > 
-            <mat-select  (selectionChange)="selectedOption(row,$event)" placeholder= "{{ column.cell(row) }}">
-                <mat-option  *ngFor="let item of ItemList" value="item.name">
+            <mat-select  [(ngModel)]="row.item" placeholder= "{{ column.cell(row) }}">
+                <mat-option  *ngFor="let item of ItemList" [value]="item">
                     {{item.name}}
                 </mat-option>
             </mat-select>  
@@ -22,7 +18,7 @@
            <div *ngIf="column.columnDef == 'Quantity'">
              <form>
                <mat-form-field>
-                 <input matInput type="number" min="1" autocomplete="off" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
+                 <input matInput  min="1" maxlength="3" autocomplete="off" [formControl]="quantityControl" value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
                  <mat-error>Please enter a value greater than 0 </mat-error>
                </mat-form-field>
                </form>
@@ -31,7 +27,7 @@
            <div *ngIf="column.columnDef == 'Price'">
             <form >
               <mat-form-field>
-                <input matInput type="number" autocomplete="off" min="1" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
+                <input matInput autocomplete="off" min="1" [formControl]="priceControl" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
                 <mat-error>Please enter a value greater than 0 </mat-error>
               </mat-form-field>
               </form>

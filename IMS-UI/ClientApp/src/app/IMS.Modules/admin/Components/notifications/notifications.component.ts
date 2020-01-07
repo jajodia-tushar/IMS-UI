@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
@@ -18,26 +18,25 @@ export class NotificationsComponent implements OnInit {
   public isClickedOn;
   
   ngOnInit() {
-
     this.vendorOrderdetailsService.VendorOrderDetails().subscribe(
-
       data => {
         this.vendorsOrdersDetails = data.vendorOrders;
      
       }
     );
-
     this.columns = this.vendorOrderdetailsService.getColumnFordataTable();
   }
+
   Tabledata(data) {
     this.row = data;
   }
 
   getClickedStatus(value){
-    console.log(this.selectedTab);
     this.isClickedOn = value;
     if (this.isClickedOn === 1) {
       this.changeTab();
+    } else {
+      this.selectedTab -= 1;
     }
   }
 

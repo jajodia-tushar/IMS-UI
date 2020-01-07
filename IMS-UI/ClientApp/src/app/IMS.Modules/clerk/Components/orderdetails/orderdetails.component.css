@@ -1,142 +1,162 @@
-
 .card-size {
-  height: 450px;
-  margin-top: 2%;
-  margin-left: 4%;
-  width: 100%;
-}
-.empty-items-display p {
-  font-size: large;
-  color: #f5f5f5;
-}
-.empty-items-display {
-  height: 300px;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 300px;
+    height: 450px;
+    margin-top: 2%;
+    margin-left: 4%;
+    width: 100%;
+    background-color: #1f2132;
 }
 
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
-  border-bottom-color:#f5f5f5 !important;
+.empty-items-display p {
+    font-size: large;
+    color: #f5f5f5;
 }
+
+.empty-items-display {
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 300px;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+    border-bottom-color: #f5f5f5 !important;
+}
+
 .mat-table {
-  width: 100%;
-  background-color: #1f2132;
+    width: 100%;
+    background-color: #1f2132;
 }
+
 .delete-white-icon {
-  color: white;
+    color: white;
 }
+
 ::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
-  padding: 10px !important;
-  margin-bottom: 5px;
+    padding: 10px !important;
+    margin-bottom: 5px;
 }
 
 .mat-header-cell {
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  color: #f5f5f5 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #f5f5f5 !important;
 }
 
 .mat-form-field {
-  padding-bottom: 0px !important;
-  padding-top: 10px !important;
-  margin-bottom: 1px !important;
+    padding-bottom: 0px !important;
+    padding-top: 10px !important;
+    margin-bottom: 1px !important;
 }
-.delete-icon-size{
-  font-size:30px !important;
+
+.delete-icon-size {
+    font-size: 30px !important;
 }
+
 .input_fileupload--hidden {
-  display: none;
+    display: none;
 }
-.content-size{
-  margin-top:3%;
+
+.content-size {
+    margin-top: 3%;
 }
+
 .table-height {
-  min-height: 300px;
-  max-height:300px;
-  overflow-y: scroll;
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 
 .table-height::-webkit-scrollbar {
-  width: 10px !important
+    width: 10px !important
 }
-  .table-height::-webkit-scrollbar {
+
+.table-height::-webkit-scrollbar {
     width: 10px;
-  }
+}
+
 
 /* Track */
-  .table-height::-webkit-scrollbar-track {
+
+.table-height::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
+}
+
 
 /* Handle */
-  .table-height::-webkit-scrollbar-thumb {
+
+.table-height::-webkit-scrollbar-thumb {
     background: #888;
-  }
-
-  /* Handle on hover */
-    .table-height::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
+}
 
 
+/* Handle on hover */
+
+.table-height::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 .upload-icon-size {
-  font-size: 22px !important;
+    font-size: 22px !important;
 }
+
 .mat-icon-button {
-  float: right !important;
-}
-.edit-delete-icon-center{
-  align-content:center
+    float: right !important;
 }
 
-.mat-button{
-  font-size:16px !important;
+.edit-delete-icon-center {
+    align-content: center
 }
 
+.mat-button {
+    font-size: 16px !important;
+}
 
 .upload-submit-button-position {
-  float: right !important;
-  /*margin: 2% 1%;*/
-  padding-top:2%;
-  margin-bottom:5%;
-  margin-right:-5%;
+    float: right !important;
+    /*margin: 2% 1%;*/
+    padding-top: 2%;
+    margin-bottom: 5%;
+    margin-right: -5%;
 }
+
 .upload-button {
-  background: black !important;
-  color: white !important;
-  margin-right: 12px;
-  /*padding-left: 7px;*/
-  padding: 0px 9px 0px 4px;
-  /*float: right !important;
-  margin-top: 2%;*/
-}
-.submit-button {
-  background: black !important;
-  color: white !important;
-  /*float: right !important;
+    background: black !important;
+    color: white !important;
+    margin-right: 12px;
+    /*padding-left: 7px;*/
+    padding: 0px 9px 0px 4px;
+    /*float: right !important;
   margin-top: 2%;*/
 }
 
-.mat-column-ItemName{
-  width: 50% !important;
+.submit-button {
+    background: black !important;
+    color: white !important;
+    /*float: right !important;
+  margin-top: 2%;*/
 }
-.add-row{
-  margin-top:4%;
-  float:right;
+
+.mat-column-ItemName {
+    width: 50% !important;
+}
+
+.add-row {
+    margin-top: 4%;
+    float: right;
 }
 
 .mat-column-Quantity {
-  width: 40% !important;
+    width: 40% !important;
 }
 
-.mat-column-action{
-  width: 10% !important;
+.mat-column-action {
+    width: 10% !important;
 }
 
 ::ng-deep .mat-column-ItemName div.mat-form-field-infix,
 ::ng-deep .mat-column-Quantity div.mat-form-field-infix,
-::ng-deep .mat-column-action div.mat-form-field-infix{
-  width: 33% !important;
+::ng-deep .mat-column-action div.mat-form-field-infix {
+    width: 33% !important;
 }

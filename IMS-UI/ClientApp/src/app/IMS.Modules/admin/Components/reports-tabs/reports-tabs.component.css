@@ -8,10 +8,11 @@
     min-width: 190px;
 }
 
-mat-card {
+:host ::ng-deep .mat-card {
     padding: 50px;
     margin: 20px;
     background-color: rgb(34, 36, 55);
+    /* height: auto; */
 }
 
 .dropdownBoxes {
@@ -76,7 +77,7 @@ mat-list-item {
     margin-left: 16px;
 }
 
-::ng-deep input.mat-input-element {
+.report-page-input-field {
     margin-top: -.0625em;
     width: 100%;
     padding: 3%;

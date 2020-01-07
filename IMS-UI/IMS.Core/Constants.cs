@@ -24,6 +24,11 @@ namespace IMS_UI.IMS.Core
             public const string LoginProviderLogout = "api/logout";
 
             public const string VendorOrdersProvider = "api/order/VendorOrders/";
+
+            public const string StockProvider = "api/Reports/GetStockStatus";
+
+            public const string TransferProvider = "api/transfer/transferToShelves";
+
         }
     }
 

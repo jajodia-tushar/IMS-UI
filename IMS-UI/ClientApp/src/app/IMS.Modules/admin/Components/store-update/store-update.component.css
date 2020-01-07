@@ -1,0 +1,35 @@
+.heading  {
+    overflow: hidden;
+    position: relative;
+    height: 40%;
+}
+
+.mat-tab-group {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dialog-form  {
+  overflow: hidden;
+}
+
+::ng-deep .mat-tab-label  {
+  margin: auto;
+}
+
+::ng-deep .mat-dialog-content {
+  margin: 0;
+  padding: 0;
+  max-height: 65vh;
+  overflow: auto;
+}
+
+.mat-raised-button  {
+  margin: 1%;
+}
+
+.invalid  {
+  color: red;
+  
+}

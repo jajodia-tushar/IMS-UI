@@ -1,12 +1,10 @@
 .items-container {
-    /* margin: 0px 20px 10px 20px; */
     background-color: #1f2132;
     border-radius: 8px;
     overflow: auto;
     position: relative;
     color: white;
     height: 100%;
-    /* top: 20px; */
 }
 
 *:focus {
@@ -25,7 +23,6 @@
 }
 
 .flex-container>div {
-    /* margin: 10px; */
     text-align: left;
 }
 
@@ -44,26 +41,25 @@
 
 tr.example-detail-row {
     background-color: #1f2132;
+    cursor: none;
     height: 0;
 }
 
 .example-element-row td {
     color: beige;
-    /* font-size: medium; */
 }
 
-tr.example-element-row:not(.example-expanded-row):hover {
-    background: #484f71;
-    color: white;
+
+th {
+    color: #9597ab;
+    font-size: medium;
+    text-transform: uppercase;
 }
 
 .example-element-row :hover {
     color: white;
 }
 
-tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-}
 
 .example-element-row td {
     border-bottom-width: 0;
@@ -76,7 +72,6 @@ table {
 }
 
 .viewAllStoreEntries {
-    /* text-align: right; */
     position: absolute;
     right: 24px;
     top: 10px;
@@ -103,4 +98,24 @@ td.mat-cell:last-of-type,
 td.mat-footer-cell:last-of-type,
 th.mat-header-cell:last-of-type {
     padding-right: 0px;
+}
+
+
+.mat-icon-button[disabled] {
+    color: gray !important
+}
+
+
+.mat-paginator  {
+    background-color: #1f2132;
+    color: beige;
+    font-size: medium;
+}
+
+::ng-deep #mat-select-0 > div > div.mat-select-value {
+    color: beige;
+}
+
+::ng-deep #mat-select-0 > div > div.mat-select-arrow-wrapper > div.mat-select-arrow  {
+    color: beige;
 }

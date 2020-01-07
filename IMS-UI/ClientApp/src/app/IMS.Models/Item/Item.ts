@@ -1,11 +1,8 @@
-export class Item {
-  id: number;
-  name: string;
-  maxLimit: number;
-  isActive: boolean;
-  imageUrl: string;
-  rate: number;
+export class Item{
+    id : number;
+    name : string;
+    maxLimit : number;
+    isActive : boolean;
+    imageUrl : string;
+    rate : number;
 }
-
-
-  

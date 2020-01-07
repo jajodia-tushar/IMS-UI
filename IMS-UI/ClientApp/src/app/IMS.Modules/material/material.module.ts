@@ -4,8 +4,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {
-    MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule,
-    MatCheckboxModule, MatSort, MatSortModule
+  MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
+  MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, 
+  MatRadioModule, MatSortModule
 } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -17,8 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatRadioModule } from '@angular/material/radio';
 
 const materialModules = [
   MatDividerModule,
@@ -63,7 +62,8 @@ const materialModules = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatSortModule,
-  MatRadioModule
+  MatRadioModule,
+  MatListModule 
 ]
 
 

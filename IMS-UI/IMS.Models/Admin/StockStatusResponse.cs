@@ -8,5 +8,6 @@ namespace IMS_UI.IMS.Models.Admin
     public class StockStatusResponse : Response
     {
         public List<ItemStockStatus> StockStatusList { get; set; }
+        public PagingInfo PagingInfo { get; set; }
     }
 }

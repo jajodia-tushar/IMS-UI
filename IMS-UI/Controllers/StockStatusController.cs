@@ -20,9 +20,17 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<StockStatusResponse> GetAdminStockStatus()
+        public async Task<StockStatusResponse> Get(string pageNumber, string pageSize)
+       {
+            string itemName = null;
+            var response = await stockProvider.GetStockStatus(pageNumber, pageSize, itemName);
+            return response;
+        }
+
+        [HttpGet("/filtering")]
+        public async Task<StockStatusResponse> GetAdminStockStatus(string pageNumber, string pageSize, string itemName)
         {
-            var response = await stockProvider.GetStockStatus();
+            var response = await stockProvider.GetStockStatus(pageNumber, pageSize, itemName);
             return response;
         }
     }

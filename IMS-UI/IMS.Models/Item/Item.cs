@@ -7,6 +7,7 @@ namespace IMS_UI.IMS.Models
 {
     public class Item
     {
+
         public int Id { get; set; }
         public string Name { get; set; }
         public int MaxLimit { get; set; }

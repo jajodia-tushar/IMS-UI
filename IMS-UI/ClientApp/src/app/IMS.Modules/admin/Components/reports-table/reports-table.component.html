@@ -2,7 +2,7 @@
 <div class="items-container">
     <div class="flex-container">
         <div class="container">
-            <h5 style="color: red; text-align: center;" *ngIf="showErrorMessage()"> No records Found </h5>
+            <h5 style="color: red; text-align: center;"> {{errorMessage}} </h5>
             <app-spinning-loader></app-spinning-loader>
             <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
@@ -41,7 +41,7 @@
 
 
             </table>
-            <ng-container *ngIf="!hasExpandableRows()">
+            <ng-container *ngIf="showPaginator()">
                 <mat-paginator class="paginator" [length]="pageInfo.totalResults" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="getNext($event)">
                 </mat-paginator>
             </ng-container>

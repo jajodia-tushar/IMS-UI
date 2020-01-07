@@ -39,6 +39,7 @@ th {
     color: #9597ab;
     font-size: large;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 table {
@@ -100,6 +101,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 td {
     color: white;
+    cursor: pointer;
 }
 
 .paginator {

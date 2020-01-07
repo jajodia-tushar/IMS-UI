@@ -26,15 +26,12 @@
         <span>
           <div class="ui inline dropdown">
             <div class="text dropbtn">
-              <img class="ui avatar image" src="assets/IMS.Images/elliot.jpg" [matMenuTriggerFor]="menu">
+              <img class="ui avatar image" src="../../../../../assets/employee.png" [matMenuTriggerFor]="menu">
               <p class="name">{{name}}</p>
 
               <div class="matMenuItems">
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
-                    <mat-icon>notifications_on</mat-icon>
-                    <span>Notifications</span>
-                  </button>
+
 
                   <button (click)='logout()' mat-menu-item>
                     <mat-icon>power_settings_new</mat-icon>

@@ -42,7 +42,7 @@
 <div class="login-page">
   <img id="image-container" src="../../../assets/IMS.Images/LoginPage.jpg">
   <div class="text-block">
-    <p style="font-size: smaller;">Tavisva IMS</p>
+    <p style="font-size: smaller;">Tavisca IMS</p>
   </div>
   <div class="user-id-input-box">
     <p class="invalid-user" *ngIf="error">Invalid username or password</p>
@@ -50,7 +50,7 @@
 
 
       <input type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" id="user-id"
-        placeholder="Enter User ID" required />
+        placeholder="Enter Username" required />
 
 
       <input type="password" [(ngModel)]="Password" matInput [ngModelOptions]="{standalone: true}" id="u-password"

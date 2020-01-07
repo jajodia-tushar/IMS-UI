@@ -39,6 +39,7 @@ th {
     color: #9597ab;
     font-size: large;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 table {

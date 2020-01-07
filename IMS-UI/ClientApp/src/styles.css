@@ -11,14 +11,18 @@ button:focus, button:active:focus, button.active:focus {
   outline-style: none !important;
 }
 
-.snackbar-background-red{
+.snackbar-warn{
   background-color: rgb(153, 50, 50);
 }
-.snackbar-background-green{
+.snackbar-success{
   background-color: rgb(29, 102, 29);
+}
+
+.snackbar-message{
+  background-color: rgb(153, 50, 50);
 }
 
 .mat-snack-bar-container {
   text-align: center;
-  background-color: rgb(153, 50, 50);
+  background-color:white;
 }

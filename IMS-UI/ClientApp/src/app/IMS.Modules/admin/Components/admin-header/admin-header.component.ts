@@ -39,6 +39,11 @@ export class AdminHeader implements OnDestroy, OnInit {
     icon: "bar_chart",
     color: "#ffd800"
 
+    },
+    {
+      tab: "Notifications",
+      icon: "notifications_active",
+      color: "#ffd800"
     }]
   
   async ngOnInit() {

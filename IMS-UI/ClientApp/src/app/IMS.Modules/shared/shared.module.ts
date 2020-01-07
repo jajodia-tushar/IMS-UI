@@ -8,15 +8,16 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { HeaderComponent } from './header/header.component';
 import { RevisableTableComponent } from './data-table/revisable-table/revisable-table.component';
 import { LogoutComponent } from './logout/logout.component';
+import { DataTableComponent } from './data-table/data-table/data-table.component';
 
 
 @NgModule({
-    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent],
+    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent],
   imports: [
     MaterialModule
   ],
   providers : [],
-    exports: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent,LogoutComponent],
+    exports: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent],
   entryComponents : [SnackbarComponent]
 })
 export class SharedModule { }

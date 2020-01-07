@@ -36,10 +36,11 @@ export const COLUMN_DATA = [
    { columnDef: 'actions', header: 'Actions' },
   ];
 
-  //export const COLUMN_DATA2 = [
-  //  { columnDef: 'itemName', header: 'Item Name', cell: (element: any) => `${element.item.name}` },
-  //  { columnDef: 'Quantity', header: 'quantity', cell: (element: any) => `${element.quantity}` },
-  
-
-  // { columnDef: 'actions', header: 'Actions' },
-  //];
+  export const COLUMN_DATA2 = [
+    { columnDef: 'orderId', header: 'OrderId', cell: (element: any) => `${element.vendorOrderDetails.orderId}` },
+    { columnDef: 'InvoiceNo', header: 'InvoiceNumber', cell: (element: any) => `${element.vendorOrderDetails.invoiceNumber}` },
+    { columnDef: 'VendorName', header: 'VendorName', cell: (element: any) => `${element.vendor.name}` },
+    { columnDef: 'amount', header: 'OrderAmount', cell: (element: any) => `${element.vendorOrderDetails.finalAmount}` },
+    { columnDef: 'date', header: 'OrderDate', cell: (element: any) => `${element.vendorOrderDetails.date}` },
+ 
+  ];

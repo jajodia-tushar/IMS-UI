@@ -24,6 +24,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
+import { NotificationsComponent } from './Components/notifications/notifications.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { StoreUpdateComponent } from './Components/store-update/store-update.com
     DeactivateDialogComponent,
     DetailsPipe,
       StoreUpdateComponent,
-      InvoiceEditorComponent
+      InvoiceEditorComponent,
+      NotificationsComponent
     ],
   imports: [
     MaterialModule,

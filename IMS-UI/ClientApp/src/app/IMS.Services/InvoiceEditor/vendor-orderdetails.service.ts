@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Root } from 'src/app/IMS.Models/Vendor/Root';
-import { COLUMN_DATA } from 'src/app/IMS.Models/Vendor/Mock';
+import { COLUMN_DATA, COLUMN_DATA2 } from 'src/app/IMS.Models/Vendor/Mock';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -17,6 +17,10 @@ export class VendorOrderdetailsService {
 
   getColumn(){
     return COLUMN_DATA;
+  }
+
+  getColumnFordataTable() {
+    return COLUMN_DATA2;
   }
  
   //getclerkOrderData(){

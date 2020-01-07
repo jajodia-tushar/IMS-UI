@@ -1,0 +1,4 @@
+:host ::ng-deep .data-table {
+  width: 80%;
+  margin: 10% auto;
+}

@@ -12,6 +12,13 @@ import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPr
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
+import { HttpClient } from '@angular/common/http';
+import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
+
+interface FileUrl {
+  locationUrl: string;
+}
+
 
 @Component({
   selector: 'app-invoice-editor',
@@ -34,9 +41,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrders;
-  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, private _ItemService: ItemService, public _orderDetailsApproveService: OrderDetailsApproveService, private snackBar: MatSnackBar) { }
+  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, private _ItemService: ItemService, public _orderDetailsApproveService: OrderDetailsApproveService, private snackBar: MatSnackBar,private http: HttpClient) { }
   @Input() TableData;
-  
+  public vendorOrder: VendorOrder
   
   ngOnInit() {
     
@@ -80,6 +87,22 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.snackBar.openFromComponent(SnackbarComponent, {
       duration: 1000 * time, data: { message: message }
     });
+  }
+
+  uploadImage(file) {
+    if (file.length === 0) {
+      return;
+    }
+    let fileToUpload = <File>file[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
+      data => {
+        this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
+        this.showMessage(5, "image is uploaded");
+      }
+    );
+
   }
  
   approve() {

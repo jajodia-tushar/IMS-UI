@@ -1,32 +1,4 @@
-//export const itemquantityprice:any={
-//    data: [
-//        {
-//            "item": {
-//                "id": 1,
-//                "name": "Black Marker",
-//                "maxLimit": 5,
-//                "isActive": true,
-//                "imageUrl": "abcdef",
-//                "rate": 0.0
-//            },
-//            "quantity": 2,
-//            "totalPrice": 5.0
-//        },
-//        {
-//            "item": {
-//                "id": 2,
-//                "name": "Fevikvik",
-//                "maxLimit": 4,
-//                "isActive": true,
-//                "imageUrl": "ssdsdsddsdsd",
-//                "rate": 0.0
-//            },
-//            "quantity": 2,
-//            "totalPrice": 3.0
-//        }
-//    ]
 
-//}
 
 export const COLUMN_DATA = [
     { columnDef: 'itemName', header: 'Item Name', cell: (element: any) => `${element.item.name}` },
@@ -37,10 +9,10 @@ export const COLUMN_DATA = [
   ];
 
   export const COLUMN_DATA2 = [
-    { columnDef: 'orderId', header: 'OrderId', cell: (element: any) => `${element.vendorOrderDetails.orderId}` },
-    { columnDef: 'InvoiceNo', header: 'InvoiceNumber', cell: (element: any) => `${element.vendorOrderDetails.invoiceNumber}` },
-    { columnDef: 'VendorName', header: 'VendorName', cell: (element: any) => `${element.vendor.name}` },
-    { columnDef: 'amount', header: 'OrderAmount', cell: (element: any) => `${element.vendorOrderDetails.finalAmount}` },
-    { columnDef: 'date', header: 'OrderDate', cell: (element: any) => `${element.vendorOrderDetails.date}` },
+    { columnDef: 'orderId', header: 'Order ID', cell: (element: any) => `${element.vendorOrderDetails.orderId}` },
+    { columnDef: 'ChallanNo', header: 'Challan Number', cell: (element: any) => `${element.vendorOrderDetails.challanNumber}` },
+    { columnDef: 'VendorName', header: 'Vendor Name', cell: (element: any) => `${element.vendor.name}` },
+    { columnDef: 'amount', header: 'Order Amount', cell: (element: any) => `${element.vendorOrderDetails.finalAmount}` },
+    { columnDef: 'date', header: 'Order Date', cell: (element: any) => `${element.vendorOrderDetails.date}` },
  
   ];

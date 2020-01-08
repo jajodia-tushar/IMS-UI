@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
 
 import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPriceMapping';
@@ -45,15 +46,12 @@ export class RevisableTableComponent implements OnInit {
   ];
 
    deletedata(row:any){
-     //console.log(row);
+     
     let index = this.datasource.data.indexOf(row);
-    //console.log(index);
-    //console.log(this.datasource.data);
-    //console.log(this.datasource);
+   
     if (index != -1) {
       this.datasource.data.splice(index, 1);
-      //console.log(this.datasource.data);
-      //console.log(this.datasource);
+      
       this.renderTable();
       
     }
@@ -89,33 +87,29 @@ export class RevisableTableComponent implements OnInit {
  
    AddRow(){
      let datasoucelength=this.datasource.data.length;
-     //console.log(datasoucelength);
+    
     this.datasource.data[datasoucelength]={
         item: { id: null, name: "", maxLimit: 0, isActive: false, imageUrl: "", rate: 0},
-           quantity: 0,
-           totalPrice:0
+           quantity: 1,
+           totalPrice:1
          };
     this.renderTable();
    }
 
    selectedOption(row,event){
-      //console.log(row);
-      //console.log(row.item);
-      //console.log(row.item.name);
-      //console.log(event.value);
+     
      row.item.name=event.value;
      this.renderTable();
      
      
    }
 
-
-
+ 
 getTotalCost(){
   
  
    this.totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-  //console.log(this.totalcost);
+  
   this.ChangedFinalAmount.emit(this.totalcost);
   return this.totalcost;
   }
@@ -126,6 +120,8 @@ getTotalCost(){
     return this.datasource.data.map(t => t.quantity).reduce((acc, value) => acc + value, 0);
     
   }
+
+   
 
   allowOnlyDigits(e: KeyboardEvent) {
     if (
@@ -149,7 +145,7 @@ getTotalCost(){
   }
   ngOnInit() {
     this.displayedColumns= this.columnHeader.map(c => c.columnDef)
-    //console.log(this.datasource.data);
+   
   }
 
   ngAfterViewInit(){  
@@ -158,5 +154,6 @@ getTotalCost(){
   } 
 
 
+ rateControl = new FormControl("", [Validators.max(100), Validators.min(1)])
 }
 

@@ -16,6 +16,8 @@ export class DataTableComponent implements OnInit {
   public date;
   constructor(public datepipe: DatePipe) { }
 
+  
+
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
     //console.log(this.datasource.data);
@@ -23,7 +25,7 @@ export class DataTableComponent implements OnInit {
   @Input() columnHeader;
 
   @Output() TableData: EventEmitter<any> = new EventEmitter<any>();
-  
+  @Output() isClickedOn: EventEmitter<any> = new EventEmitter<any>();
   ngOnInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef)
   }
@@ -40,7 +42,7 @@ export class DataTableComponent implements OnInit {
   ClickedRow(row)
   {
     this.TableData.emit(row);
-    
+    this.isClickedOn.emit(1);
   }
  
 }

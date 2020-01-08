@@ -1,8 +1,10 @@
-<mat-tab-group  dynamicHeight>
-  <mat-tab label="Pending Approvals"><app-data-table [columnHeader]=columns [griddata]="vendorsOrdersDetails" (TableData)="Tabledata($event)" (RowIsClicked)="RenderTheTable($event)"></app-data-table>
+<mat-tab-group [(selectedIndex)]="selectedTab"  dynamicHeight mat-align-tabs="center">
+  <mat-tab label="Pending Approvals"><app-data-table [columnHeader]=columns [griddata]="vendorsOrdersDetails" (TableData)="Tabledata($event)" (isClickedOn)="getClickedStatus($event)"></app-data-table>
   </mat-tab>
-  <mat-tab label="Something">
-    <app-invoice-editor [TableData]="row" ></app-invoice-editor>
-  </mat-tab>
+  <ng-container *ngIf="isClickedOn === 1">
+    <mat-tab label="Order Details">
+      <app-invoice-editor [TableData]="row" ></app-invoice-editor>
+    </mat-tab>
+  </ng-container>
 </mat-tab-group>
  

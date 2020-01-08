@@ -13,6 +13,9 @@ export class NotificationsComponent implements OnInit {
   vendorsOrdersDetails: VendorOrders[];
   constructor( public vendorOrderdetailsService: VendorOrderdetailsService) { }
   public row;
+
+  selectedTab : number = 0;
+  public isClickedOn;
   
   ngOnInit() {
 
@@ -29,5 +32,17 @@ export class NotificationsComponent implements OnInit {
   Tabledata(data) {
     this.row = data;
   }
-  
+
+  getClickedStatus(value){
+    console.log(this.selectedTab);
+    this.isClickedOn = value;
+    if (this.isClickedOn === 1) {
+      this.changeTab();
+    }
+  }
+
+  changeTab() {
+    this.selectedTab +=1;
+    if (this.selectedTab >= 2) this.selectedTab = 0;
+  }
 }

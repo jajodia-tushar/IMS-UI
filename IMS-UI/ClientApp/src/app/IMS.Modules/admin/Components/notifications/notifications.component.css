@@ -1,4 +1,10 @@
 :host ::ng-deep .data-table {
   width: 80%;
   margin: 10% auto;
+  background-color: #222437;
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  color: white;
+  font-size: initial;
 }

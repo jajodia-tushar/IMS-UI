@@ -10,9 +10,13 @@ mat-card {
   bottom: 5%;
   position:sticky;
 }
-:host ::ng-deep .data-table {
-  width: 80%;
-  margin:10% auto;
+:host ::ng-deep .revisable-table {
+  width: 96%;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 38px;
+    margin-left: 21px;
+    background-color: #222437;
 }
 .margin{
   margin: 0.5% ;
@@ -24,4 +28,46 @@ mat-card {
   padding: 8px 16px;
   cursor: pointer;
   border-color:#3f51b5;
+}
+.input_fileupload--hidden {
+  display: none;
+}
+
+.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
+  color: springgreen;
+  border: 1px solid springgreen;
+}
+.upload-submit-button-position {
+  /* float: right !important; */
+  /*margin: 2% 1%
+  ;*/
+  position: absolute;
+  /* padding-top: 2%; */
+  right: 24px;
+  top: 227px;
+}
+.upload-button {
+  background: black !important;
+  color: white !important;
+  margin-right: 12px;
+  /*padding-left: 7px;*/
+  padding: 0px 9px 0px 4px;
+  /*float: right !important;
+  margin-top: 2%;*/
+}
+.submit-button {
+  background: black !important;
+  color: white !important;
+  /*float: right !important;
+  margin-top: 2%;*/
+}
+
+
+.table-vendor-details{
+  position: relative;
+    height: 400px;
+    background-color:none;
+    border-radius: 9px;
+    width: 100%;
+    top: 50px;
 }

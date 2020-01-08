@@ -126,14 +126,6 @@ mat-card {
   margin-left: auto;
 }
 
-::ng-deep .mat-dialog-container {
-  position: relative;
-  width: 40vw !important;
-  height: 50vh !important;
-  top: 30%;
-  left: 6%;
-}
-
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   color: white;
 }

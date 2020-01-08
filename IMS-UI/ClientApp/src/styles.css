@@ -52,3 +52,8 @@ button:focus, button:active:focus, button.active:focus {
   background-color: #222437;
   color: aliceblue;
 }
+
+.dialog-notification-image mat-dialog-container {
+  top: 30%;
+  left: 6%;
+}

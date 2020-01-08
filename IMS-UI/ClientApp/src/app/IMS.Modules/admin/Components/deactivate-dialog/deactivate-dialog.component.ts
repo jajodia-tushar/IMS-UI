@@ -32,12 +32,11 @@ export class DeactivateDialogComponent implements OnInit {
     else{
       this.dialogRef.close(false)
     }
-    showMessage(this.snackBar,2,"User Deactivated Successfully", 'success');
     this.dialogRef.close(true);
   }
 
   onDismiss(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close("cancelled");
   }
 
 }

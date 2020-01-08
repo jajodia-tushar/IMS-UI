@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Root } from 'src/app/IMS.Models/Vendor/Root';
 import { DatePipe } from '@angular/common';
@@ -18,12 +18,12 @@ export class DataTableComponent implements OnInit {
 
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
-    console.log(this.datasource.data);
+    //console.log(this.datasource.data);
   }
   @Input() columnHeader;
 
-
-
+  @Output() TableData: EventEmitter<any> = new EventEmitter<any>();
+  
   ngOnInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef)
   }
@@ -32,14 +32,15 @@ export class DataTableComponent implements OnInit {
 
   }
   transformDate(row) {
-    console.log(row.vendorOrderDetails.date)
+    //console.log(row.vendorOrderDetails.date)
     this.date = this.datepipe.transform(row.vendorOrderDetails.date, 'dd/MM/yyyy');
-    console.log(this.date);
+    //console.log(this.date);
     return this.date;
   }
   ClickedRow(row)
   {
-    console.log(row);
+    this.TableData.emit(row);
+    
   }
  
 }

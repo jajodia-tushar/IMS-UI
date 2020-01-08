@@ -22,14 +22,14 @@
            <div *ngIf="column.columnDef == 'Quantity'">
             <form class="example-form">
                 <mat-form-field class="example-full-width">
-                  <input matInput value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)">
+                  <input matInput value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)"  (keydown)="allowOnlyDigits($event)">
                 </mat-form-field>
               </form>
            </div>
            <div *ngIf="column.columnDef == 'Price'">
             <form class="example-form">
                 <mat-form-field class="example-full-width">
-                  <input matInput value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)">
+                  <input matInput value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
                 </mat-form-field>
               </form>
             </div>

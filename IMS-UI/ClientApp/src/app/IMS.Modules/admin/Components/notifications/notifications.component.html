@@ -1,1 +1,8 @@
-    <app-data-table [columnHeader]=columns [griddata]="vendorsOrdersDetails"></app-data-table>
+<mat-tab-group  dynamicHeight>
+  <mat-tab label="Pending Approvals"><app-data-table [columnHeader]=columns [griddata]="vendorsOrdersDetails" (TableData)="Tabledata($event)" (RowIsClicked)="RenderTheTable($event)"></app-data-table>
+  </mat-tab>
+  <mat-tab label="Something">
+    <app-invoice-editor [TableData]="row" ></app-invoice-editor>
+  </mat-tab>
+</mat-tab-group>
+ 

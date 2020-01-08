@@ -60,6 +60,7 @@ export class UserListComponent implements OnInit {
   openAddUserDialog() {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = null;
+    dialogConfig.panelClass = 'custom-modalbox';
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
 

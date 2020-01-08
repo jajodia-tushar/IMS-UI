@@ -8,28 +8,6 @@
   .name{
     display: flex;
   }
-  
-/*  .form-container > * {
-    width: 100%;
-  }
-  
-  .form-container form {
-    margin-bottom: 20px;
-  }
-  
-  .form-container form > * {
-    margin: 5px 0;
-  }
-  
-  .form-container .mat-radio-button {
-    margin: 0 12px;
-  }
-
-  .mat-focused .mat-form-field-label {
-    color: red !important;
-} */
-
-
 
 body {
   background: #456;
@@ -56,21 +34,6 @@ body {
 }
 
 
-/* ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: #ff884d !important;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #ff884d;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
-  color: #ff884d;
-}
-::ng-deep .mat-form-field.mat-focused .mat-input-element {
-  color: #ff884d;
-} */
-
-
-
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
   color: red;
 }
@@ -83,7 +46,6 @@ body {
 ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
   background-color: white;
 }
-
 
 .one-row mat-form-field{
   width: 90%;
@@ -126,11 +88,6 @@ body {
   border: 0.5px solid slategray; 
   border-radius: 4px; color: slategray;
 }
-
-/* .mat-button-toggle-checked {
-  background-color: mat-color($accent);
-  color: mat-color($accent, default-contrast);
-} */
 
 .mat-button.mat-accent[disabled], .mat-button.mat-primary[disabled], .mat-button.mat-warn[disabled], .mat-button[disabled][disabled], .mat-icon-button.mat-accent[disabled], .mat-icon-button.mat-primary[disabled], .mat-icon-button.mat-warn[disabled], .mat-icon-button[disabled][disabled], .mat-stroked-button.mat-accent[disabled], .mat-stroked-button.mat-primary[disabled], .mat-stroked-button.mat-warn[disabled], .mat-stroked-button[disabled][disabled] {
   color: slategray;

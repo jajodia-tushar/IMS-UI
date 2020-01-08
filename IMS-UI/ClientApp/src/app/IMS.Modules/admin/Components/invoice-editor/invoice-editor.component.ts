@@ -135,7 +135,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       data=>{
         if (data.status == "Success") {
           console.log(data.status);
-          showMessage(this.snackBar, 2, "Order Rejacted", "success");
+          showMessage(this.snackBar, 2, "Order Rejected", "success");
           this.reloadComponent();
         }
         else {

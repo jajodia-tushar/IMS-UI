@@ -25,6 +25,7 @@ import { ReportsTableComponent } from './Components/reports-table/reports-table.
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
+import { ImageDialogComponent } from './Components/image-dialog/image-dialog.component';
 
 
 @NgModule({
@@ -50,13 +51,14 @@ import { NotificationsComponent } from './Components/notifications/notifications
     DetailsPipe,
       StoreUpdateComponent,
       InvoiceEditorComponent,
-      NotificationsComponent
+      NotificationsComponent,
+      ImageDialogComponent
     ],
   imports: [
     MaterialModule,
       AdminRoutingModule,
       SharedModule
   ],
-  entryComponents : [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent]
 })
 export class AdminModule { }

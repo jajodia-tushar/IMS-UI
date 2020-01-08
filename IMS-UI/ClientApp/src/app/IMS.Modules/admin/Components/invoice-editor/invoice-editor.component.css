@@ -5,21 +5,46 @@
 
 mat-card {
   top: 5%;
-  margin-right: 5%;
-  margin-left: 5%;
-  bottom: 5%;
-  position:sticky;
+    margin-right: 0%;
+    margin-left: 0%;
+    bottom: 0%;
+   
+    border-radius: 6px;
+   
+    position: sticky;
 }
 :host ::ng-deep .revisable-table {
-  width: 96%;
-    border-radius: 10px;
-    position: absolute;
-    margin-top: 38px;
-    margin-left: 21px;
-    background-color: #222437;
+  width: 100%;
+  border-radius: 10px;
+  position: absolute;
+  margin-top: 28px;
+  margin-left: 0px;
+  margin-left: 0px;
+  background-color: #222437;
+}
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+  
+  color: white;
+  
+  text-align: center;
+  margin: 0;
+  bottom: 17px;
+  border: 0.5px solid slategray;
+ 
+}
+
+.vendor-details{
+  height: 100%;
+  width: 100%;
+  background-color: #1c1e2f;
 }
 .margin{
   margin: 0.5% ;
+}
+
+:host ::ng-deep .mat-card-header-text {
+  margin: 0 0px;
 }
 
 .border {
@@ -61,13 +86,47 @@ mat-card {
   /*float: right !important;
   margin-top: 2%;*/
 }
+.mat-divider.mat-divider-inset {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+::ng-deep .mat-divider {
+  display: block;
+  margin: 0;
+  border-top-width: 0.5px;
+  border-top-style: solid;
+  position: relative;
+  top: 23px;
+  background-color: white;
+}
+
 
 
 .table-vendor-details{
   position: relative;
     height: 400px;
-    background-color:none;
+    background-color:#222437;
     border-radius: 9px;
     width: 100%;
     top: 50px;
+}
+.mat-input-element:disabled {
+  color: white;
+}
+
+.container {
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 0px;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+::ng-deep .mat-dialog-container {
+  position: relative;
+  width: 40vw !important;
+  height: 50vh !important;
+  top: 30%;
+  left: 6%;
 }

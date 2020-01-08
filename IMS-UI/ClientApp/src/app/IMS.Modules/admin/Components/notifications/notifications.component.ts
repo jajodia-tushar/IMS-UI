@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
-
+import {MatDialog, MatDialogConfig} from "@angular/material";
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -11,7 +11,7 @@ import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
 export class NotificationsComponent implements OnInit {
   public columns;
   vendorsOrdersDetails: VendorOrders[];
-  constructor( public vendorOrderdetailsService: VendorOrderdetailsService) { }
+  constructor( public vendorOrderdetailsService: VendorOrderdetailsService,private dialog: MatDialog) { }
   public row;
 
   selectedTab : number = 0;
@@ -45,4 +45,13 @@ export class NotificationsComponent implements OnInit {
     this.selectedTab +=1;
     if (this.selectedTab >= 2) this.selectedTab = 0;
   }
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(NotificationsComponent, dialogConfig);
+}
 }

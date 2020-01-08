@@ -2,7 +2,7 @@
 
 export const COLUMN_DATA = [
     { columnDef: 'itemName', header: 'Item Name', cell: (element: any) => `${element.item.name}` },
-    { columnDef: 'Quantity', header: 'quantity', cell: (element: any) => `${element.quantity}` },
+    { columnDef: 'Quantity', header: 'Quantity', cell: (element: any) => `${element.quantity}` },
     { columnDef: 'Price', header: 'Price', cell: (element: any) => `${element.totalPrice}` },
 
    { columnDef: 'actions', header: 'Actions' },

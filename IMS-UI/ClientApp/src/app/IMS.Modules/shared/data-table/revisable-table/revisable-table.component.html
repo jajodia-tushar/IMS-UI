@@ -22,7 +22,7 @@
            <div *ngIf="column.columnDef == 'Quantity'">
              <form>
                <mat-form-field>
-                 <input matInput type="number" min="1" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
+                 <input matInput type="number" min="1" autocomplete="off" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
                  <mat-error>Please enter a value greater than 0 </mat-error>
                </mat-form-field>
                </form>
@@ -31,7 +31,7 @@
            <div *ngIf="column.columnDef == 'Price'">
             <form >
               <mat-form-field>
-                <input matInput type="number" min="1" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
+                <input matInput type="number" autocomplete="off" min="1" [formControl]="rateControl" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
                 <mat-error>Please enter a value greater than 0 </mat-error>
               </mat-form-field>
               </form>

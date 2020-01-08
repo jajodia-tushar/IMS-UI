@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
@@ -14,6 +14,7 @@ import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
 import { HttpClient } from '@angular/common/http';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 
 interface FileUrl {
   locationUrl: string;
@@ -35,13 +36,20 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   public isApprove;
   public columns;
   public FinalAmount;
+  public InvoiceImageUrl;
+  public ChallanImageUrl;
   itemquantityprice: ItemQuantityPriceMapping[];
  // data: MatTableDataSource<OrderItemDetail>;
   public Items: Item[];
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrders;
-  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, private _ItemService: ItemService, public _orderDetailsApproveService: OrderDetailsApproveService, private snackBar: MatSnackBar,private http: HttpClient) { }
+  constructor(public vendorOrderdetailsService: VendorOrderdetailsService, 
+    private _ItemService: ItemService, 
+    public _orderDetailsApproveService: OrderDetailsApproveService, 
+    private snackBar: MatSnackBar,
+    private http: HttpClient,
+    private dialog : MatDialog) { }
   @Input() TableData;
   public vendorOrder: VendorOrder
   
@@ -68,8 +76,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.ClerkName = data.vendorOrderDetails.recievedBy;
     this.AdminName = data.vendorOrderDetails.submittedTo;
     this.ChallanNo = data.vendorOrderDetails.challanNumber;
-    this.InvoiceNo = data.vendorOrderDetails.invoiceNumber;
+    // this.InvoiceNo = data.vendorOrderDetails.invoiceNumber;
     this.OrderID = data.vendorOrderDetails.orderId;
+    this.ChallanImageUrl=data.vendorOrderDetails.challanImageUrl;
     this.Vendor = data.vendor;
     this.VendorName = data.vendor.name;
     this.VendorOrderdetails = data.vendorOrderDetails;
@@ -98,13 +107,20 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     formData.append('file', fileToUpload, fileToUpload.name);
     this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
       data => {
-        this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
+        this.InvoiceImageUrl= this.vendorOrder.vendorOrderDetails.invoiceImageUrl = data.locationUrl;
         this.showMessage(5, "image is uploaded");
       }
     );
 
   }
- 
+  openDialog(){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    let dialogRef = this.dialog.open(ImageDialogComponent,{
+      data: this.ChallanImageUrl
+    },);
+  }
   approve() {
     
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
@@ -112,8 +128,10 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.VendorOrderdetails.finalAmount = this.FinalAmount;
     this.VendorOrderdetails.orderItemDetails = this.itemquantityprice;
     this.VendorOrderdetails.isApproved = true;
+    this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
+    this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
     this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-  
+  console.log(this.vendorDetails);
     this._orderDetailsApproveService.changeOrderDetails(this.vendorDetails).subscribe(
       data => {
         console.log(data);

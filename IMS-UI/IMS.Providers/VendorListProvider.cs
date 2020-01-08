@@ -27,13 +27,24 @@ namespace IMS_UI.IMS.Providers
             {
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_IConfiguration["BASEURL"]);
+                    UriBuilder uriBuilder = new UriBuilder(_IConfiguration["BASEURL"] + path);
+                    
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _SessionManager.GetString("token");
                     http.DefaultRequestHeaders.Authorization =
                                 new AuthenticationHeaderValue("Bearer", token);
-                    var response = await http.GetAsync(path);
+
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                        new KeyValuePair<string, string>("pageNumber", "1"),
+                        new KeyValuePair<string, string>("pagesize", int.MaxValue.ToString())
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+                    uriBuilder.Query = query;
+                    var response = await http.GetAsync(uriBuilder.Uri);
                     VendorResponse apiVendorListResponse = new VendorResponse();
                     var result = await response.Content.ReadAsStringAsync();
                     apiVendorListResponse = JsonConvert.DeserializeObject<VendorResponse>(result);

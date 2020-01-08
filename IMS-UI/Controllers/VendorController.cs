@@ -31,7 +31,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _VendorListProvider.ApiGetCaller("/api/vendor");
+                var response = await _VendorListProvider.ApiGetCaller("api/vendor");
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

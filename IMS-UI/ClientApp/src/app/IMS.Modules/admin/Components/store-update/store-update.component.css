@@ -1,35 +1,128 @@
-.heading  {
-    overflow: hidden;
-    position: relative;
-    height: 40%;
+.heading {
+  overflow: hidden;
+  position: relative;
+  
 }
 
 .mat-tab-group {
-    display: inline-flex;
-    flex-direction: column;
-    width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.dialog-form  {
+.dialog-form {
   overflow: hidden;
 }
 
-::ng-deep .mat-tab-label  {
+::ng-deep .mat-tab-label {
+  padding: 0;
+  color: white;
   margin: auto;
 }
 
-::ng-deep .mat-dialog-content {
+:host ::ng-deep .mat-dialog-content {
   margin: 0;
+  margin-top: 12px;
   padding: 0;
   max-height: 65vh;
   overflow: auto;
 }
 
-.mat-raised-button  {
+.mat-raised-button {
   margin: 1%;
+  color: white;
+  border: 0.5px solid grey;
+  background-color: transparent;
 }
 
-.invalid  {
+.invalid {
   color: red;
-  
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  opacity: 1 !important;
+  background-color: #606a9E;
+}
+
+::ng-deep .mat-ink-bar {
+  display: none;
+}
+
+::ng-deep .mat-dialog-container {
+  background-color: #222437;
+  color: aliceblue;
+}
+
+.mat-raised-button:not(:disabled) {
+  color: white;
+  border: 0.5px solid grey;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: white !important;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label .mat-form-field-required-marker {
+  color: white;
+}
+
+::ng-deep .mat-form-field .mat-form-field-ripple {
+  background-color: white;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label .mat-input {
+  color: white;
+}
+
+.mat-form-field .mat-input-element {
+  color: white;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+.mat-raised-button[disabled] {
+  color: slategray;
+  border: 0.5px solid slategray;
+}
+
+.position-of-buttons  {
+  position: absolute;
+    bottom: 1px;
+    right: 0;
+    display: flex;
+}
+
+:host ::ng-deep .mat-tab-header-pagination-chevron {
+  border-style: solid;
+  border-width: 2px 2px 0 0;
+  content: '';
+  height: 8px;
+  border-color: aliceblue;
+  width: 8px;
+}
+
+:host ::ng-deep .mat-tab-body.mat-tab-body-active {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 171px;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+
+
+::ng-deep .mat-dialog-container {
+  display: block;
+  padding: 24px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
 }

@@ -2,19 +2,21 @@
     <p>Update Store</p>
 </div>
 
-<mat-tab-group #tabGroup [selectedIndex]="1" class="dialog-form">
+<mat-tab-group #tabGroup class="dialog-form" [disableRipple]="true">
     <mat-tab *ngFor="let shelf of shelves" [label]="shelf.name">
         <div mat-dialog-content>
             <mat-form-field>
                 <input placeholder="Item Name" [(ngModel)]="itemName" matInput disabled>
             </mat-form-field>
-            <br>
-            <p class="invalid" *ngIf="error">Quantity entered is Invalid</p>
             <mat-form-field>
-                <input placeholder="Quantity" [(ngModel)]="quantity" matInput>
+                <input placeholder="Quantity" [(ngModel)]="quantity" matInput maxlength="3"  (keydown)="allowOnlyDigits($event)">
+                <!-- <mat-error class="invalid" *ngIf="error">Quantity entered is Invalid</mat-error> -->
             </mat-form-field>
+            <div class="position-of-buttons">
+                <button mat-raised-button (click)="close()">Cancel</button>
+                <button mat-raised-button [disabled]="!quantity" (click)="onUpdate(shelf.name)">Update</button>
+            </div>
         </div>
-        <button mat-raised-button (click)="onUpdate(shelf.name)">Update</button>
-        <button mat-raised-button (click)="close()">Cancel</button>
+
     </mat-tab>
 </mat-tab-group>

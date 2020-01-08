@@ -26,16 +26,15 @@
     text-align: left;
 }
 
-.container {
-    margin-right: 0px;
-    border-radius: 7px;
-    position: relative;
-    min-width: 290px;
-    margin-top: 10px;
-    height: 100%;
+.table-container {
+   position: relative;
+   top: 5%;
+   width: 96%;
+   height: 90%;
+   margin: 10px 0 0 24px;
 }
 
-.container>h4 {
+.table-container > h4 {
     margin-top: inherit;
 }
 
@@ -119,3 +118,4 @@ th.mat-header-cell:last-of-type {
 ::ng-deep #mat-select-0 > div > div.mat-select-arrow-wrapper > div.mat-select-arrow  {
     color: beige;
 }
+

@@ -4,6 +4,8 @@ import { StoreResponse, PagingInformation } from 'src/app/IMS.Models/Admin/Stock
 import { MatDialogConfig, MatDialog, MatDialogRef, MatSnackBar, PageEvent, MatTableDataSource, MatPaginator } from '@angular/material';
 import { StoreUpdateComponent } from '../store-update/store-update.component';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
+import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
+import { pairs } from 'rxjs';
 
 @Component({
   selector: 'app-store',
@@ -27,27 +29,27 @@ export class StoreComponent implements OnInit {
     this.paginator = mp;
   }
 
-  pageLength : string;
-  pageSize : string;
+  pageLength: string;
+  pageSize: string;
 
   @Output()
   paginatorClicked: EventEmitter<any> = new EventEmitter();
-  
+
   @Input()
   numberOfItems: string;
   pageInfo: PagingInformation = new PagingInformation();
-  
-  constructor(private storeService: StoreService, public dialog: MatDialog, private snackBar: MatSnackBar) { 
-    
+
+  constructor(private storeService: StoreService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+
   }
 
   pageChange(event) {
-    
-    this.storeService.getAdminStoreStatus(event.pageIndex+1, event.pageSize).subscribe(
+
+    this.storeService.getAdminStoreStatus(event.pageIndex + 1, event.pageSize).subscribe(
       data => {
         this.pageSize = data.pagingInfo.pageSize.toString();
-        this.pageLength = data.pagingInfo.totalResults.toString();      
-         
+        this.pageLength = data.pagingInfo.totalResults.toString();
+
         this.getStoreData(data);
       },
       error => {
@@ -66,7 +68,6 @@ export class StoreComponent implements OnInit {
     this.pageLength = "0";
     this.pageSize = "10";
     console.log(this.dataSource);
-    
 
     this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
       data => {
@@ -77,68 +78,74 @@ export class StoreComponent implements OnInit {
 
         this.pageLength = data.pagingInfo.totalResults.toString();
         this.pageSize = data.pagingInfo.pageSize.toString();
-         
+
         this.getStoreData(data);
       });
   }
 
 
-
   editStore(item) {
-    if (!this.canTransfer(item)) {
-      this.showMessage(3, "Cannot Transfer the item");
-    }
-    else {
-      let dialogConfig = new MatDialogConfig();
-      dialogConfig.width = "50%";
-      dialogConfig.data = item;
-      dialogConfig.autoFocus = true;
-      console.log(dialogConfig.data);
-      let dialogRef = this.dialog.open(StoreUpdateComponent, dialogConfig);
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "40%";
+    dialogConfig.height = "auto";
+    dialogConfig.data = item;
+    dialogConfig.autoFocus = true;
+    console.log(dialogConfig.data);
+    let dialogRef = this.dialog.open(StoreUpdateComponent, dialogConfig);
 
-      dialogRef.afterClosed().subscribe(
-        result => {
-          if (result == null) {
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result == null) {
+          dialogRef.close();
+        }
+        else {
+          if (result.status == "Failure") {
+            this.snackbarMessage = "Transfer Failed";
+            showMessage(this.snackBar, 2, this.snackbarMessage, "message");
             dialogRef.close();
           }
           else {
-            if (result.status == "Failure") {
-              this.snackbarMessage = "Transfer Failed";
-              dialogRef.close();
-            }
-            else {
-              this.editItem(result);
-              this.snackbarMessage = "Transfer Successful";
-              dialogRef.close();
-            }
-            this.showMessage(3, this.snackbarMessage);
+            this.editItem(result);
+            this.snackbarMessage = "Transfer Successful";
+            showMessage(this.snackBar, 2, this.snackbarMessage, "success");
+            dialogRef.close();
           }
-        },
-        error => {
-          this.snackbarMessage = "Transfer Failed";
-          dialogRef.close();
-          this.showMessage(3, this.snackbarMessage);
-        });
-    }
+        }
+      },
+      error => {
+        this.snackbarMessage = "Transfer Failed";
+        dialogRef.close();
+        showMessage(this.snackBar, 2, this.snackbarMessage, "warn");
+      });
   }
 
   editItem(result) {
-    this.dataSource.forEach(element => {
-      if (element["Item Name"] == result.itemName) {
-        if (element[result.shelf] == '-')
-          element[result.shelf] = result.quantity;
-        else
-          element[result.shelf] += result.quantity;
-        element["Warehouse"] -= result.quantity;
-      }
-    });
+
+    this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
+      data => {
+        this.pageInfo = new PagingInformation();
+        this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
+        this.pageInfo.pageSize = data.pagingInfo.pageSize;
+        this.pageInfo.totalResults = data.pagingInfo.totalResults;
+
+        this.pageLength = data.pagingInfo.totalResults.toString();
+        this.pageSize = data.pagingInfo.pageSize.toString();
+
+        this.getStoreData(data);
+      });
+
+
+    // this.dataSource.forEach(element => {
+    //   if (element["Item Name"] == result.itemName) {
+    //     if (element[result.shelf] == '-')
+    //       element[result.shelf] = result.quantity;
+    //     else
+    //       element[result.shelf] += result.quantity;
+    //     element["Warehouse"] -= result.quantity;
+    //   }
+    // });
   }
 
-  showMessage(time, message) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000 * time, data: { message: message }
-    });
-  }
 
 
   canTransfer(element) {

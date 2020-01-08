@@ -1,75 +1,78 @@
-<mat-card class="card-size">
-  <mat-card-title>Items Details</mat-card-title>
-  <mat-divider></mat-divider>
-  <mat-card-content class="content-size">
-    <div class="orderdetails">
-      
-      <div class="table-height" *ngIf="dataSourceItems.length !== 0">
-        <table mat-table [dataSource]="datasource">
-          <ng-container matColumnDef="ItemName">
-            <th mat-header-cell *matHeaderCellDef> Item Name </th>
-            <td mat-cell *matCellDef="let element">
-              <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
-                <mat-select [(ngModel)]="element.item">
-                  <mat-option *ngFor="let Item of Items" [value]="Item" [disabled]="isItemAlreadySelected(Item)">
-                    {{Item.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td>
-          </ng-container>
+<div style="width:100%">
+  <mat-card class="card-size">
+    <mat-card-title>Items Details</mat-card-title>
+    <mat-divider class="divider-position"></mat-divider>
+    <mat-card-content class="content-size">
+      <div class="orderdetails">
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="Quantity">
-            <th mat-header-cell *matHeaderCellDef> Quantity </th>
-            <td mat-cell *matCellDef="let element">
-              <mat-form-field appearance="outline" style="width:80%">
-                <input matInput #quantity="ngModel" maxlength="3" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)">
-              </mat-form-field>
+        <div class="table-height" *ngIf="dataSourceItems.length !== 0">
+          <table mat-table class="table-size" [dataSource]="datasource">
+            <ng-container matColumnDef="ItemName">
+              <th mat-header-cell *matHeaderCellDef> Item Name </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-form-field appearance="outline" class="form-field-size">
+                  <mat-select [(ngModel)]="element.item">
+                    <mat-option *ngFor="let Item of Items" [value]="Item" [disabled]="isItemAlreadySelected(Item)">
+                      {{Item.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+            </ng-container>
 
-                        </td>
-                    </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="Quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element">
+                <mat-form-field appearance="outline" class="form-field-size">
+                  <input matInput #quantity="ngModel" maxlength="3" [(ngModel)]="element.quantity" (keydown)="allowOnlyDigits($event)">
+                </mat-form-field>
 
-                    <!-- Action Column -->
-                    <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef> Action </th>
-                        <td mat-cell *matCellDef="let element" class="action-link">
-                            <div class="edit-delete-icon-center">
-                                <button mat-icon-button class="delete-white-icon" (click)="DeleteRow(element)">
-                  <mat-icon class="delete-icon-size" >delete</mat-icon>
-                </button>
-                            </div>
-                        </td>
-                    </ng-container>
-                    <mat-divider></mat-divider>
+              </td>
+            </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-            </div>
-            <div *ngIf="dataSourceItems.length === 0" class="empty-items-display">
-                <p>No Items are added</p>
-            </div>
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element" class="action-link">
+                <div class="edit-delete-icon-center">
+                  <button mat-icon-button class="delete-white-icon" (click)="DeleteRow(element)">
+                    <mat-icon class="delete-icon-size">delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+            <mat-divider></mat-divider>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </div>
-        <div>
-
-            <div class="add-row">
-                <button mat-raised-button class="Add-icon" (click)="AddRow()">
-          <mat-icon class="icon">add</mat-icon>Add
-        </button>
-            </div>
+        <div *ngIf="dataSourceItems.length === 0" class="empty-items-display">
+          <p>No Items are added</p>
         </div>
+      </div>
+      <div>
+
+        <div class="add-row">
+          <button mat-raised-button class="Add-icon" (click)="AddRow()">
+            <mat-icon class="icon">add</mat-icon>Add
+          </button>
+        </div>
+      </div>
 
     </mat-card-content>
 
-</mat-card>
-<div class="upload-submit-button-position">
+  </mat-card>
+  <div class="upload-submit-button-position">
     <input type="file" #file id="fileUpload" class="input_fileupload--hidden" (change)="uploadImage(file.files)">
     <button mat-raised-button class="upload-button" (click)="file.click()">
-    <mat-icon class="upload-icon-size">file_upload</mat-icon>Upload
-  </button>
-  <button mat-raised-button class="submit-button" (click)="onSubmit()"><app-spinning-loader></app-spinning-loader>{{buttonName}}</button>
+      <mat-icon class="upload-icon-size">file_upload</mat-icon>Upload
+    </button>
+    <button mat-raised-button class="submit-button" (click)="onSubmit()"><app-spinning-loader></app-spinning-loader>{{buttonName}}</button>
+  </div>
 </div>
+
 
 
 

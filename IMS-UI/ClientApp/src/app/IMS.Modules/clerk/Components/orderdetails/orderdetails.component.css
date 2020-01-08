@@ -5,34 +5,34 @@
     width: 100%;
     background-color: #1f2132;
 }
-
+.card-size mat-card-title {
+  color: #f5f5f5 !important;
+}
 .empty-items-display p {
-    font-size: large;
-    color: #f5f5f5;
+  font-size: large;
+  color: #f5f5f5;
+}
+::ng-deep .form-field-size{
+  margin-top:5% !important;
+  width:80%;
 }
 
 .empty-items-display {
-    height: 300px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 300px;
+  height: 300px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 300px;
 }
 .Add-icon{
   margin-top:0%;
 }
-
-.mat-button {
-  width: 76.53px;
-  height: 36px;
-}
-
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+.table-size td.mat-cell, .table-size th.mat-header-cell {
   border-bottom-color: #f5f5f5 !important;
 }
 
-.mat-table {
-    width: 100%;
-    background-color: #1f2132;
+ .table-size {
+  width: 100% ;
+  background-color: #1f2132;
 }
 
 .delete-white-icon {
@@ -50,11 +50,7 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     color: #f5f5f5 !important;
 }
 
-.mat-form-field {
-    padding-bottom: 0px !important;
-    padding-top: 10px !important;
-    margin-bottom: 1px !important;
-}
+
 
 .delete-icon-size {
     font-size: 30px !important;
@@ -121,9 +117,6 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     align-content: center
 }
 
-.mat-button {
-    font-size: 16px !important;
-}
 
 .upload-submit-button-position {
   float: right !important;
@@ -131,18 +124,19 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
   padding-top: 2%;
   margin-bottom: 5%;
   margin-right: 8%;
+ 
 }
 
 .upload-button {
   background: inherit !important;
   color: white !important;
+  font-size: 16px !important;
   margin-right: 12px;
   /*padding-left: 7px;*/
   padding: 0px 9px 0px 4px;
   min-height: 36px !important;
   min-width: 76.53px !important;
   position: relative;
-  
   /*float: right !important;
   margin-top: 2%;*/
 }
@@ -150,6 +144,7 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 .submit-button {
   background: inherit !important;
   color: white !important;
+
   min-height: 36px !important;
   min-width: 76.53px !important;
   position: absolute;

@@ -13,6 +13,7 @@ import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
 
 interface FileUrl {
   locationUrl: string;
@@ -121,16 +122,10 @@ export class OrderdetailsComponent implements OnInit {
     this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
       data => {
         this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
-        this.showMessage(5, "image is uploaded");
+        showMessage(this.snackBar,5, "image is uploaded","success");
       }
     );
 
-  }
-
-  showMessage(time, message) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000 * time, data: { message: message }
-    });
   }
 
   isItemAlreadySelected(item: Item) {
@@ -166,11 +161,11 @@ export class OrderdetailsComponent implements OnInit {
     }
     else {
       if (this.dataSourceItems[errorRowIndex].item.id == null)
-        this.showMessage(5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
+        showMessage(this.snackBar,5,"Item In Row " + (errorRowIndex + 1) + " Is Not Selected","warn");
       else if (!this.dataSourceItems[errorRowIndex].quantity)
-        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
+        showMessage(this.snackBar,5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled","warn");
       else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-        this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
+        showMessage(this.snackBar,5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0","warn");
     }   
   }
 
@@ -223,10 +218,10 @@ export class OrderdetailsComponent implements OnInit {
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
             this.reloadComponent();
-            this.showMessage(5, "Order Is Placed");
+            showMessage(this.snackBar, 5, "Order Is Placed","success");
           },
           error => {
-            this.showMessage(5, error.errorMessage);
+            showMessage(this.snackBar,5, error.errorMessage,"warn");
           }
         )
         
@@ -235,21 +230,21 @@ export class OrderdetailsComponent implements OnInit {
         this.canLoad = false;
         this.buttonName = "Submit";
         if (this.dataSourceItems.length == 0)
-          this.showMessage(5, "No Items Are Added In Item Details ");
+          showMessage(this.snackBar,5, "No Items Are Added In Item Details ","warn");
         else {
           if (this.dataSourceItems[errorRowIndex].item.id == null)
-            this.showMessage(5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected");
+            showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
           else if (!this.dataSourceItems[errorRowIndex].quantity)
-            this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled");
+            showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled", "warn");
           else if (this.dataSourceItems[errorRowIndex].quantity == 0)
-            this.showMessage(5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0");
+            showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Should Be Greater Than 0", "warn");
         }
       }
     }
     else {
       this.canLoad = false;
       this.buttonName = "Submit";
-      this.showMessage(5, "Some Fields In Invoice Are Empty");
+      showMessage(this.snackBar,5, "Some Fields In Invoice Are Empty","warn");
     }
   }
   ngDoCheck() {

@@ -141,3 +141,12 @@ body {
   color: white;
   border: 0.5px solid aquamarine;
 }
+
+:host ::ng-deep .mat-radio-label-content{
+  padding-left: 1px; 
+    padding-right: 8px;
+}
+
+.roles-radio{
+  margin-right: 10px;
+}

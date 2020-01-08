@@ -20,26 +20,26 @@ export class UserManageDialogComponent implements OnInit {
 
   notifyTableUserEditted(usersResponse:UsersResponse){
       if(usersResponse==null){
-        this.dialogRef.close(false);
+        this.dialogRef.close("cancelled");
       }
       else if(usersResponse.error==null){
         this.dialogRef.close(usersResponse.users[0]);
       }
-      // else if(usersResponse!=null){
-      //   this.dialogRef.close(false);
-      // }
+      else if(usersResponse.error!=null){
+        this.dialogRef.close(false);
+      }
   }
 
   notifyTableUserCreated(usersResponse:UsersResponse){
     if(usersResponse==null){
-      this.dialogRef.close(false);
+      this.dialogRef.close("cancelled");
     }
     else if(usersResponse.error==null){
       this.dialogRef.close(usersResponse.users[0]);
     }
-    // else if(usersResponse!=null){
-    //   this.dialogRef.close(false);
-    // }
+    else if(usersResponse.error!=null){
+      this.dialogRef.close(false);
+    }
 }
 
 }

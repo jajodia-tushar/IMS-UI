@@ -67,7 +67,7 @@ export class UserListComponent implements OnInit {
       if(result==false){
         showMessage(this.snackBar,2,"User Creation Failed",'warn');
       }
-      else if(result==null){
+      else if(result=="cancelled"){
         //don't show any message.
       }
       else if('username' in result){
@@ -101,11 +101,11 @@ export class UserListComponent implements OnInit {
       if(result==false){
         showMessage(this.snackBar,2,"User Updation Failed",'warn');
       }
+      else if(result=="cancelled"){
+        //don't show any message.
+      }
       else if('username' in result){
         this.editUserInTable(result);
-      }
-      else if(result==null){
-        //don't show any message.
       }
 
     });

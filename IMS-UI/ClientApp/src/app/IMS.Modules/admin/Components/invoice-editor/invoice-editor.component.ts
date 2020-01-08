@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { Router } from '@angular/router';
+import { OrderDetailsRejectService } from 'src/app/IMS.Services/InvoiceEditor/order-details-reject.service';
 
 interface FileUrl {
   locationUrl: string;
@@ -50,7 +51,8 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     public _orderDetailsApproveService: OrderDetailsApproveService, 
     private snackBar: MatSnackBar,
     private http: HttpClient,
-    private dialog : MatDialog) { }
+    private dialog : MatDialog, 
+     private orderDetailsRejectService:OrderDetailsRejectService) { }
   @Input() TableData;
   public vendorOrder: VendorOrder
   @Output() reloadPendingApproval: EventEmitter<any> = new EventEmitter<any>();
@@ -130,6 +132,21 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.router.navigate(["/Admin/Notifications"]);
 
   }
+  Reject(){
+    console.log(this.OrderID);
+    this.orderDetailsRejectService.rejectOrder(this.OrderID).subscribe(
+      data=>{
+        if (data.status == "Success") {
+          console.log(data.status);
+          this.showMessage(5, "Order Rejected");
+          this.reloadComponent();
+        }
+        else {
+          this.showMessage(5, "Some error occured");
+        }
+      },
+    );
+  }
   approve() {
     this.reloadPendingApproval.emit(0);
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
@@ -143,8 +160,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this._orderDetailsApproveService.changeOrderDetails(this.vendorDetails).subscribe(
       data => {
         if (data.status == "Success") {
-          this.reloadComponent();
+         
           this.showMessage(5, "Order Approved");
+          this.reloadComponent();
         }
         else {
           this.showMessage(5, "Some error occured");

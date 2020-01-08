@@ -16,10 +16,12 @@ namespace IMS_UI.Controllers
     public class VendorOrderEditController : ControllerBase
     {
         IVendorOrderApprovalProvider _VendorOrderApprovalProvider;
+        IVendorOrderRejectProvider _VendorOrderRejectProvider;
 
-       public VendorOrderEditController(IVendorOrderApprovalProvider VendorOrderApprovalProvider)
+        public VendorOrderEditController(IVendorOrderApprovalProvider VendorOrderApprovalProvider, IVendorOrderRejectProvider VendorOrderRejectProvider)
         {
             this._VendorOrderApprovalProvider = VendorOrderApprovalProvider;
+            this._VendorOrderRejectProvider = VendorOrderRejectProvider;
         }
         [HttpPut]
         public async Task<Response> Put([FromBody] VendorOrder vendorOrder )
@@ -29,9 +31,14 @@ namespace IMS_UI.Controllers
         }
       
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [HttpDelete("{OrderId}")]
+       
+            public async Task<Response> Delete(int OrderId)
+            {
+                var response = await _VendorOrderRejectProvider.Reject(OrderId);
+                return response;
+            }
+
+        
     }
 }

@@ -72,7 +72,7 @@ export class AdminHeader implements OnDestroy, OnInit {
   constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     private centralizedRepo: CentralizedDataService, private loginService: LoginService,
     private router: Router, private snackBar: MatSnackBar) {
-    this.mobileQuery = media.matchMedia("(max-width: 600px)");
+    this.mobileQuery = media.matchMedia("(max-width: 400px)");
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }

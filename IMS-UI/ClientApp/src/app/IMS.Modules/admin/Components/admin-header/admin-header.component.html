@@ -1,26 +1,14 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
+<div class="example-container">
+  <mat-toolbar color="primary">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <img src="../../../../../assets/IMS.Images/157595914143509549 (1).png" style="height: 48px; margin-top: 8px;">
     <div class="rightside">
-      <!-- <div class="notification-section">
-        <button class="notfication" [style.display]="isVisible ? 'block' : 'none'" (click)="changeNotificationIcon()">
-          <i class="material-icons md-light">
-            notifications
-          </i>
-        </button>
 
-        <button class="notfication" [style.display]="!isVisible ? 'block' : 'none'" (click)="changeNotificationIcon()">
-          <i class="material-icons md-light">
-            notifications_active
-          </i>
-        </button>
-      </div> -->
       <div class="logout-section">
 
         <span>
@@ -39,10 +27,7 @@
                   </button>
                 </mat-menu>
               </div>
-              <!-- <div class="dropdown-content">
-            <a href="#">Logout</a>
-            <a href="#">Account Settings</a>
-          </div> -->
+
             </div>
           </div>
         </span>
@@ -51,8 +36,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav
-      style="transform: none;visibility: visible;min-width: 12%;min-height:calc(100vh - 59px); top: 56px;bottom: 0px; width: 13%;background-color: #222437;overflow: hidden;"
+    <mat-sidenav style="min-width: 12%; top: 56px;bottom: 0px; width: 13%;background-color: #222437;overflow: hidden;"
       #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true">
       <mat-nav-list>
         <a mat-list-item *ngFor="let nav of navBarItems;" [routerLink]="[nav.tab]" routerLinkActive="active">
@@ -69,7 +53,6 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <!-- <app-mainnav></app-mainnav> -->
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

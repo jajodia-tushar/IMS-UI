@@ -10,6 +10,9 @@
 
 :host ::ng-deep .mat-drawer-inner-container {
   background-color: #222437;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .dropdown-content a {
@@ -18,7 +21,7 @@
   text-decoration: none;
   display: block;
 }
-*/ .example-is-mobile .example-toolbar {
+.example-is-mobile .example-toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2;

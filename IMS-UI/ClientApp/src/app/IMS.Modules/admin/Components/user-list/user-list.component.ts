@@ -60,7 +60,7 @@ export class UserListComponent implements OnInit {
   openAddUserDialog() {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = null;
-    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.panelClass = 'dialog-user-manage';
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
 
@@ -95,6 +95,7 @@ export class UserListComponent implements OnInit {
   openUserEditDialog(data:User) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
+    dialogConfig.panelClass = 'dialog-user-manage';
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
@@ -115,6 +116,7 @@ export class UserListComponent implements OnInit {
   deactivateUser(user){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
+    dialogConfig.panelClass = 'dialog-user-manage'
     // dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(DeactivateDialogComponent, dialogConfig);
 

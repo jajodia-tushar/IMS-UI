@@ -89,6 +89,7 @@ export class StoreComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = "40%";
     dialogConfig.height = "auto";
+    dialogConfig.panelClass = 'dialog-edit-store';
     dialogConfig.data = item;
     dialogConfig.autoFocus = true;
     console.log(dialogConfig.data);

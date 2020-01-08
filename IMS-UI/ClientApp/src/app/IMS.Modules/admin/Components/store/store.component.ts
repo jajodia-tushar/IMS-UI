@@ -5,6 +5,7 @@ import { MatDialogConfig, MatDialog, MatDialogRef, MatSnackBar, PageEvent, MatTa
 import { StoreUpdateComponent } from '../store-update/store-update.component';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
+import { pairs } from 'rxjs';
 
 @Component({
   selector: 'app-store',
@@ -68,7 +69,6 @@ export class StoreComponent implements OnInit {
     this.pageSize = "10";
     console.log(this.dataSource);
 
-
     this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
       data => {
         this.pageInfo = new PagingInformation();
@@ -120,6 +120,7 @@ export class StoreComponent implements OnInit {
   }
 
   editItem(result) {
+
     this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
       data => {
         this.pageInfo = new PagingInformation();

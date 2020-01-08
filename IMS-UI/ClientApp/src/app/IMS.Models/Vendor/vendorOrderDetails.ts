@@ -1,5 +1,4 @@
 import { OrderItemDetail } from "./OrderItemDetail";
-import { ItemQuantityPriceMapping } from "../Item/ItemQuantityPriceMapping";
 
 export class VendorOrderDetails {
   orderId: number;
@@ -12,6 +11,6 @@ export class VendorOrderDetails {
   challanNumber: string;
   challanImageUrl: string;
   date: Date;
-  orderItemDetails: ItemQuantityPriceMapping[];                   
+  orderItemDetails: OrderItemDetail[];
   finalAmount: number;
 }

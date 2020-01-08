@@ -32,12 +32,12 @@ namespace IMS_UI.Controllers
             try
             {
                 var response = await _VendorListProvider.ApiGetCaller("/api/vendor");
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return StatusCode(500);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch (Exception e)
+            catch
             {
                 return StatusCode(500);
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,54 +16,114 @@ namespace IMS_UI.Controllers
     public class UserController : Controller
     {
         private IUserProvider _userProvider;
+        private SessionManager sessionManager;
 
-        public UserController(IUserProvider userProvider)
+        public UserController(IUserProvider userProvider, SessionManager sessionManager)
         {
+            this.sessionManager = sessionManager;
             this._userProvider = userProvider;
         }
 
         [HttpGet("username")]
-        public async Task<Response> CheckUsernameIsUnique(string username)
+        public async Task<IActionResult> CheckUsernameIsUnique(string username)
         {
-            var response = await _userProvider.IsUserNameUnique(username);
-            return response;
+            try
+            {
+                var response = await _userProvider.IsUserNameUnique(username);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("email")]
-        public async Task<Response> CheckEmailIsUnique(string email)
+        public async Task<IActionResult> CheckEmailIsUnique(string email)
         {
-            var response = await _userProvider.IsEmailNameUnique(email);
-            return response;
+            try
+            {
+                var response = await _userProvider.IsEmailNameUnique(email);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet]
-        public async Task<UsersResponse> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
-            var response = await _userProvider.GetAllUsers();
-            return response;
+            try
+            {
+                var response = await _userProvider.GetAllUsers();
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] User user)
         {
-            var response = await _userProvider.AddUser(user);
-            if (response != null)
+            try
+            {
+                var response = await _userProvider.AddUser(user);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
                 return Ok(response);
-            return BadRequest(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPut]
-        public async Task<UsersResponse> EditUserDetails([FromBody] User user)
+        public async Task<IActionResult> EditUserDetails([FromBody] User user)
         {
-            var response = await _userProvider.EditUser(user);
-            return response;
+            try
+            {
+                var response = await _userProvider.EditUser(user);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpDelete("{userId}")]
-        public async Task<Response> DeactivateUser(int userId, bool isHardDelete)
+        public async Task<IActionResult> DeactivateUser(int userId, bool isHardDelete)
         {
-            var response = await _userProvider.DeactivateUser(userId, isHardDelete);
-            return response;
+            try
+            {
+                var response = await _userProvider.DeactivateUser(userId, isHardDelete);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -14,16 +15,28 @@ namespace IMS_UI.Controllers
     public class RolesController : ControllerBase
     {
         IRolesProvider _rolesProvider;
+        SessionManager sessionManager;
 
-        public RolesController(IRolesProvider rolesProvider)
+        public RolesController(IRolesProvider rolesProvider, SessionManager sessionManager)
         {
             this._rolesProvider = rolesProvider;
+            this.sessionManager = sessionManager;
         }
         [HttpGet]
-        public async Task<RolesResponse> GetAllAllowedRoles()
+        public async Task<IActionResult> GetAllAllowedRoles()
         {
+            try
+            {
             var response = await this._rolesProvider.GetAllRoles();
-            return response;
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

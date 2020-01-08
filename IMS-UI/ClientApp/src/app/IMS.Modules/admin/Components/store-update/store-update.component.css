@@ -47,10 +47,10 @@
   display: none;
 }
 
-::ng-deep .mat-dialog-container {
+/* ::ng-deep .mat-dialog-container {
   background-color: #222437;
   color: aliceblue;
-}
+} */
 
 .mat-raised-button:not(:disabled) {
   color: white;

@@ -25,3 +25,30 @@ button:focus, button:active:focus, button.active:focus {
 .mat-snack-bar-container {
   text-align: center;
 }
+
+.dialog-user-manage mat-dialog-container {
+  background-color: #222437;
+  color: aliceblue;
+}
+
+.dialog-floor-select mat-dialog-container {
+  display: block;
+  margin: -13% ;
+  padding-left: 25% ;
+  padding-top: 9% ;
+  padding-bottom: 5% ;
+  border-radius: 4px ;
+  box-sizing: border-box ;
+  overflow: auto ;
+  outline: 0 ;
+  min-width: 100vw ;
+  min-height: 100vh ;
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12) ;
+  background: #1c1e2f ;
+  color: rgba(0,0,0,.87) ;
+}
+
+.dialog-edit-store mat-dialog-container{
+  background-color: #222437;
+  color: aliceblue;
+}

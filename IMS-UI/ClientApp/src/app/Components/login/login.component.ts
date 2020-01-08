@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
             if (!this.isPopedUp) {
               let dialogConfig = new MatDialogConfig();
               dialogConfig.disableClose = false;
+              dialogConfig.panelClass = 'dialog-floor-select';
               dialogConfig.autoFocus = true;
               // dialogConfig.width = "%";
               let dialogRef = this.dialog.open(FloorComponent, dialogConfig);

@@ -28,12 +28,13 @@ namespace IMS_UI.Controllers
         {
             var response =await _shelfProvider.ApiGetCaller("/api/Shelf");
             try {
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return NotFound("no floors to display");
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch (Exception){
+            catch
+            {
                 return StatusCode(500);
             }
         }
@@ -45,12 +46,13 @@ namespace IMS_UI.Controllers
             var response = await _shelfProvider.ApiGetCaller("/api/Shelf/"+id);
             try
             {
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return NotFound("no floors to display");
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch (Exception){
+            catch
+            {
                 return StatusCode(500);
             }
         }
@@ -69,11 +71,20 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet("inventory/{shelfId}")]
-        public async Task<ShelfDataResponse> GetShelfData(string shelfId)
+        public async Task<IActionResult> GetShelfData(string shelfId)
         {
-
+            try
+            {
             var response = await _shelfProvider.GetShelfData(shelfId);
-            return response;
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         // POST: api/Shelf

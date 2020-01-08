@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,11 @@ namespace IMS_UI.Controllers
     public class RAGStatusController : ControllerBase
     {
         private RAGStatusProvider rAGStatusProvider;
-        public RAGStatusController(RAGStatusProvider rAGStatusProvider)
+        private SessionManager sessionManager;
+        public RAGStatusController(RAGStatusProvider rAGStatusProvider,SessionManager sessionManager)
         {
             this.rAGStatusProvider = rAGStatusProvider;
+            this.sessionManager = sessionManager;
         }
 
 
@@ -24,12 +27,12 @@ namespace IMS_UI.Controllers
             var response = await rAGStatusProvider.GetList();
             try
             {
-                if (response.Error == null)
-                    return Ok(response);
-                else
-                    return NotFound("No RAG Status Found");
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
             }
-            catch (Exception)
+            catch
             {
                 return StatusCode(500);
             }

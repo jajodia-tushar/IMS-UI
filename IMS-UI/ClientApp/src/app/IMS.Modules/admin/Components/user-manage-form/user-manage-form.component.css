@@ -150,3 +150,18 @@ body {
 .roles-radio{
   margin-right: 10px;
 }
+
+.position-of-buttons .submit-update{
+  height: 37px;
+  position: absolute;
+  min-height: 37px;
+  min-width: 75px;
+  right: 72px;
+}
+
+.cancel{
+  height: 40px;
+  position: relative;
+  min-height: 39px;
+  min-width: 30px;
+}

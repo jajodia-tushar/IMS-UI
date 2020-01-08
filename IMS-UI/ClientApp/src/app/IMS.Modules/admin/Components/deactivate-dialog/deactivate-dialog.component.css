@@ -6,3 +6,7 @@
     background-color: #222437;
     color: aliceblue;
 }
+
+.action-buttons .mat-raised-button{
+    min-height: 30px;
+}

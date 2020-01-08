@@ -19,6 +19,8 @@ import { UserValidators as userValidators } from '../../../../IMS.Services/admin
 export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
+  updateButtonText : string = "Update";
+  submitButtonText : string = "Submit";
   constructor(private formBuilder: FormBuilder, private userManageService: UserManagementService,
     private centralizedDataRepo: CentralizedDataService, private userValidators: userValidators){
 
@@ -135,6 +137,7 @@ export class UserManageFormComponent implements OnInit{
     else{
       this.createNewUser();
     }
+    this.submitButtonText = this.updateButtonText = "";
   }
 
   cancelUpdate(){

@@ -8,12 +8,14 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
             <p>{{element.employeeDetails | details}}</p>
-            <div>{{element.orderDetails | details }}</div>
+            <div *ngIf="((element != expandedElement) || (element.orderDetails.length < 30))">
+              {{element.orderDetails | details }}</div>
           </td>
         </ng-container>
         <ng-container matColumnDef="expandedDetail">
           <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-            <div class="example-element-detail" [@detailExpand]="element == expandedElement && element.orderDetails.length>30 ? 'expanded' : 'collapsed'">
+            <div class="example-element-detail"
+              [@detailExpand]="element == expandedElement && element.orderDetails.length>30 ? 'expanded' : 'collapsed'">
               {{element.orderDetails}}
             </div>
           </td>

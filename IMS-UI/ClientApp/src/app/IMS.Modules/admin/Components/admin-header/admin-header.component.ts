@@ -19,6 +19,7 @@ export class AdminHeader implements OnDestroy, OnInit {
 
   mobileQuery: MediaQueryList;
 
+
   navBarItems = [{
     tab: "Dashboard",
     icon: "dashboard",
@@ -70,7 +71,7 @@ export class AdminHeader implements OnDestroy, OnInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     private centralizedRepo: CentralizedDataService, private loginService: LoginService,
-    private router: Router, private snackBar : MatSnackBar) {
+    private router: Router, private snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -78,6 +79,10 @@ export class AdminHeader implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  onToolbarMenuToggle() {
+    console.log("ontoolbartoggled");
   }
 
   logout() {
@@ -88,7 +93,7 @@ export class AdminHeader implements OnDestroy, OnInit {
         }
         else {
           this.snackBar.openFromComponent(SnackbarComponent, {
-            duration: 1000 * 2 , data : { message : "Something Went Wrong" }
+            duration: 1000 * 2, data: { message: "Something Went Wrong" }
           });
         }
       }

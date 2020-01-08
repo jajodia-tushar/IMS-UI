@@ -24,7 +24,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<ListofVendorOrderDetails> getorderdetails()
         {
             HttpClient client = new HttpClient();
-            var EndPoint = "api/order/VendorOrders/PendingApprovals?pagenumber=1&pagesize=10";
+            var EndPoint = "api/order/VendorOrders/?pagenumber=1&isApproved=false&pagesize=10";
             client.DefaultRequestHeaders.Accept.
                Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var token = _SessionManager.GetString("token");

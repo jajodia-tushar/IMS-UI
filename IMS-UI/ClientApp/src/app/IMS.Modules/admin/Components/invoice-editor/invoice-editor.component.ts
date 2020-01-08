@@ -11,9 +11,8 @@ import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/vendorOrderDetails
 import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPriceMapping';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';
-import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
-import { HttpClient } from '@angular/common/http';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
+import { HttpClient } from '@angular/common/http';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { Router } from '@angular/router';
 import { OrderDetailsRejectService } from 'src/app/IMS.Services/InvoiceEditor/order-details-reject.service';
@@ -45,7 +44,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   public Items: Item[];
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
-  vendorDetails: VendorOrders;
+  vendorDetails: VendorOrder;
   constructor(private router : Router, public vendorOrderdetailsService: VendorOrderdetailsService, 
     private _ItemService: ItemService, 
     public _orderDetailsApproveService: OrderDetailsApproveService, 

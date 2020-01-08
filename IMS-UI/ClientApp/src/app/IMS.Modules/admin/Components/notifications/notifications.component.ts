@@ -1,7 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
-import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
+import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 @Component({
   selector: 'app-notifications',
@@ -10,7 +10,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material";
 })
 export class NotificationsComponent implements OnInit {
   public columns;
-  vendorsOrdersDetails: VendorOrders[];
+  vendorsOrdersDetails: VendorOrder[];
   constructor( public vendorOrderdetailsService: VendorOrderdetailsService,private dialog: MatDialog) { }
   public row;
 

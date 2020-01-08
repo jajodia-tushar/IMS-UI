@@ -8,6 +8,7 @@ namespace IMS_UI.IMS.Models.Admin
 {
     public class ListofVendorOrderDetails : Response
     {
-        public List<VendorOrder> ListOfVendorOrders { get; set; }
+        public List<VendorOrder> VendorOrders { get; set; }
+        public PagingInfo PagingInfo { get; set; }
     }
 }

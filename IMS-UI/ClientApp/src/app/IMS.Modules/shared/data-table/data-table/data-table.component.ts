@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Root } from 'src/app/IMS.Models/Vendor/Root';
 import { DatePipe } from '@angular/common';
-import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
+import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 
 @Component({
   selector: 'app-data-table',
@@ -12,7 +12,7 @@ import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
 export class DataTableComponent implements OnInit {
 
   displayedColumns;
-  public datasource = new MatTableDataSource<VendorOrders>();
+  public datasource = new MatTableDataSource<VendorOrder>();
   public date;
   constructor(public datepipe: DatePipe) { }
 

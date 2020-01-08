@@ -1,4 +1,5 @@
 ﻿using IMS_UI.IMS.Models.Shared;
+using IMS_UI.IMS.Models.Vendor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

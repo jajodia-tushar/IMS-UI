@@ -1,0 +1,10 @@
+<mat-tab-group [(selectedIndex)]="selectedTab"  dynamicHeight mat-align-tabs="center">
+  <mat-tab label="Pending Approvals"><app-data-table [columnHeader]=columns [(griddata)]="vendorsOrdersDetails" (TableData)="Tabledata($event)" (isClickedOn)="getClickedStatus($event)"></app-data-table>
+  </mat-tab>
+  <ng-container *ngIf="isClickedOn === 1">
+    <mat-tab label="Order Details">
+      <app-invoice-editor [TableData]="row" (reloadPendingApproval)="getClickedStatus($event)" ></app-invoice-editor>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>
+ 

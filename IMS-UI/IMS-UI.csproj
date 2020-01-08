@@ -30,9 +30,29 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\IMS.Models\Employee.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Item\ItemResponse.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\item.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\ListOfVendorOrder.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\OrderItemDetail.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\Root.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\vendor.ts" />
+    <None Remove="ClientApp\src\app\IMS.Models\Vendor\vendorOrderDetails.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Employee.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Item\ItemResponse.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\ListOfVendorOrder.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\OrderItemDetail.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\Root.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\vendor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\vendorOrderDetails.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\IMS.Modules\shared\data-table\" />
+    <Folder Include="ClientApp\src\app\IMS.Services\InvoiceEditor\" />
     <Folder Include="Resources\Images\" />
   </ItemGroup>
 

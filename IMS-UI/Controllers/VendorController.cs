@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Models.Vendor;
 using IMS_UI.IMS.Providers;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;

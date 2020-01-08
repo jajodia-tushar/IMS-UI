@@ -29,7 +29,7 @@ import { RandomColorGeneratorService } from './IMS.Services/random-color-generat
 import { RecentEntriesService } from './IMS.Services/admin/recent-entries.service';
 import { LoggingComponent } from './Components/logging/logging.component';
 import { LogoutInterceptor } from './IMS.Services/IMS.Interceptor/logout.interceptor';
-
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +48,7 @@ import { LogoutInterceptor } from './IMS.Services/IMS.Interceptor/logout.interce
 
   ],
   providers: [
+    DatePipe,
     RecentEntriesService,
     LoginService,
     LoginGuard,

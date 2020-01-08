@@ -131,6 +131,7 @@ button {
   display: flex;
   font-weight: 200;
   font-family: roboto;
+  cursor: default;
 }
 
 button:focus,

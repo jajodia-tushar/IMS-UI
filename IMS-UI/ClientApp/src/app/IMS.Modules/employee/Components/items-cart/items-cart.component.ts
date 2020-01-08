@@ -9,6 +9,8 @@ import { MatSnackBar, getMatInputUnsupportedTypeError } from '@angular/material'
 import { EmployeeOrderResponse } from 'src/app/IMS.Models/Employee/EmployeeOrderResponse';
 import { publishLast } from 'rxjs/operators';
 
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+
 @Component({
   selector: 'app-items-cart',
   templateUrl: './items-cart.component.html',
@@ -20,11 +22,9 @@ ButtonName = 'Submit';
 isSubmitted : boolean = false;
 
 constructor(private employeeOrderService: EmployeeOrderService,private centralizedRepo : CentralizedDataService,
-  private router: Router, private snackBar: MatSnackBar) {
+  private router: Router, private snackBar: MatSnackBar) {}
 
- }
-
- durationInSeconds = 5;
+durationInSeconds = 5;
 
 @Input() 
 selectedItems: CartItem[];
@@ -50,25 +50,16 @@ onMakingOrder() {
   this.employeeOrderService.postOrderData(employeeOrderData)
   .subscribe(employeeOrderRes  => {
     if(employeeOrderRes.status == "Success"){
-      this.showMessage(2,"Please Collect The Items");
+      showMessage(this.snackBar, 2,"Please Collect The Items", "success");
       this.router.navigateByUrl('/Shelf');
-    
     }
     else{
       this.isSubmitted = false;
       this.ButtonName="Submit"
-      this.showMessage(3,"Something Went Wrong");
-    
+      showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
     }
   });
   // this.ButtonName="Try Again";
-
-}
-
-showMessage(time,message){
-  this.snackBar.openFromComponent(SnackbarComponent, {
-    duration: 1000 * time , data : { message : message }
-  });
 }
 
 prepareOrderData() {
@@ -113,7 +104,7 @@ plus(element) {
       if (element.quantity < obj.item.maxLimit) {
         obj.quantity++;
       } else {
-        this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
+        showMessage(this.snackBar, 2, `You cannot add more than ${obj.item.maxLimit} "${obj.item.name}"`, "warn");
       }
     }
   });
@@ -126,7 +117,7 @@ minus(element) {
         obj.quantity--; 
         if (obj.quantity == 0) {
           this.delete(element);
-          this.showMessage(1, `"${obj.item.name}" is removed from your cart`);
+          showMessage(this.snackBar, 2, `"${obj.item.name}" is removed from your cart`, "message");
         }
       } /* else {
         this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);

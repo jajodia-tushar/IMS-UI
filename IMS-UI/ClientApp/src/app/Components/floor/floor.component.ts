@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';

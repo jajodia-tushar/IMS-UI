@@ -14,7 +14,7 @@
                             </ng-container>
 
                             <ng-container *ngIf="reportsData.type == 'datePicker'">
-                                <input matInput [matDatepicker]="picker" [(ngModel)]="reportsData.dataFromUser" [max]="reportsData.endDate" [min]="reportsData.startDate" (click)="picker.open()" placeholder="{{ reportsData.placeHolderName }}">
+                                <input class="report-page-input-field" matInput [matDatepicker]="picker" [(ngModel)]="reportsData.dataFromUser" [max]="reportsData.endDate" [min]="reportsData.startDate" (click)="picker.open()" placeholder="{{ reportsData.placeHolderName }}">
                                 <mat-datepicker #picker></mat-datepicker>
                             </ng-container>
                         </mat-list-item>

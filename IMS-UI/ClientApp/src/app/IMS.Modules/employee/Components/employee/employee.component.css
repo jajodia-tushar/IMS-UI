@@ -1,154 +1,151 @@
 button {
-  /* background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%); */
-  background: #606a96;
-  position: absolute;
-  display: block;
-  height: 42px;
-  top: 110px;
-  border-radius: 4px;
-  border-style: none;
-  border-color: none;
-  text-align: justify;
-  width: 206px;
+    /* background: linear-gradient(100.43deg, #0094ff 0%, #3d23ff 95.74%); */
+    background: #606a96;
+    position: absolute;
+    display: block;
+    height: 42px;
+    top: 110px;
+    border-radius: 4px;
+    border-style: none;
+    border-color: none;
+    text-align: justify;
+    width: 206px;
 }
 
 .mat-raised-button {
-  box-sizing: border-box;
-  position: relative;
-  width: 216px;
-  top: -22px;
-  left: 0px;
-  text-align: center;
-  margin: 0;
-  min-width: 64px;
-  line-height: 36px;
-  padding: 0 84px;
-  border-radius: 4px;
-  color: white;
-  overflow: visible;
+    box-sizing: border-box;
+    position: relative;
+    width: 216px;
+    top: -22px;
+    left: 0px;
+    text-align: center;
+    margin: 0;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 84px;
+    border-radius: 4px;
+    color: white;
+    overflow: visible;
 }
 
 .form-input {
-  position: absolute;
-  top: 64%;
-  left: 30%;
-  width: 42%;
-  height: 100%;
+    position: absolute;
+    top: 64%;
+    left: 30%;
+    width: 42%;
+    height: 100%;
 }
 
 .invalid-employee {
-  color: red;
-  font-size: medium;
-  position: absolute;
-  top: 54%;
-  left: 36%;
-  padding: 10px;
+    color: red;
+    font-size: medium;
+    position: absolute;
+    top: 54%;
+    left: 36%;
+    padding: 10px;
 }
 
 .login-page {
-  position: fixed;
-  top: 45%;
-  left: 46%;
-  width: 32em;
-  height: 28em;
-  margin-top: -12em; /*set to a negative number 1/2 of your height*/
-  margin-left: -14em; /*set to a negative number 1/2 of your width*/
-  text-align: center;
-  /* border: 4px solid white; */
+    position: fixed;
+    top: 45%;
+    left: 46%;
+    width: 32em;
+    height: 28em;
+    margin-top: -12em;
+    /*set to a negative number 1/2 of your height*/
+    margin-left: -14em;
+    /*set to a negative number 1/2 of your width*/
+    text-align: center;
+    /* border: 4px solid white; */
 }
 
 #image-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* border: 1px solid red; */
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid red; */
 }
 
 .form-input {
-  position: absolute;
-  top: 63%;
-  left: 31%;
-  width: 42%;
-  height: 100%;
+    position: absolute;
+    top: 63%;
+    left: 31%;
+    width: 42%;
+    height: 100%;
 }
 
 #employee-id {
-  display: block;
-  padding: 0px;
-  height: 42px;
-  color: black;
-  font-size: small;
-  width: 100%;
-  padding-left: 10px;
-  margin-bottom: 14px;
-  border-radius: 3px;
-  border-style: none;
-  border-color: none;
-  text-align: justify;
+    background-color: white;
+    display: block;
+    padding: 0px;
+    height: 42px;
+    color: black;
+    font-size: small;
+    width: 100%;
+    padding-left: 10px;
+    margin-bottom: 14px;
+    border-radius: 3px;
+    border-style: none;
+    border-color: none;
+    text-align: justify;
 }
 
-
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
-  margin: -0.75em 0;
+    margin: -0.75em 0;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  color: white;
+    color: white;
 }
+
+
 /* Font color */
+
 ::ng-deep input.mat-input-element {
-  color: white;
+    color: white;
 }
 
 ::ng-deep .mat-form-field-placeholder {
-  color: white;
+    color: white;
 }
 
 ::ng-deep .mat-focused .mat-form-field-placeholder {
-  color: white;
+    color: white;
 }
 
 .title {
-  color: aliceblue;
-  text-align: center;
+    color: aliceblue;
+    text-align: center;
 }
 
 .card {
-  position: absolute;
-  background: #2B2F4C;
-  display: inline-block;
-  width: 100px;
-  height: 133px;
-  border: 2px solid #5e7af5;
-  margin: 2%;
-  top: 19%;
-  left: 40%;
-  box-sizing: border-box;
-  border-radius: 16px;
-  -webkit-box-shadow: 
-    0px 0px 30px #5e7af5, 
-    inset 0px 0px 30px #5e7af5;
-  -moz-box-shadow: 
-    0px 0px 30px #5e7af5, 
-    inset 0px 0px 30px #5e7af5;
-  -o-box-shadow: 
-    0px 0px 30px #5e7af5, 
-    inset 0px 0px 30px #5e7af5;
-  box-shadow: 
-    0px 0px 30px #5e7af5, 
-    inset 0px 0px 30px #5e7af5;
-  background: #5e7af5;
+    position: absolute;
+    background: #2B2F4C;
+    display: inline-block;
+    width: 100px;
+    height: 133px;
+    border: 2px solid #5e7af5;
+    margin: 2%;
+    top: 19%;
+    left: 40%;
+    box-sizing: border-box;
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+    -moz-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+    -o-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+    box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+    background: #5e7af5;
 }
 
 .logout {
     position: absolute;
     top: 30px;
     right: 30px;
-} 
+}
 
-mat-icon{
-  color : white;
-  cursor: pointer;
+mat-icon {
+    color: white;
+    cursor: pointer;
 }

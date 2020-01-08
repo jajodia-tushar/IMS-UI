@@ -17,6 +17,7 @@ import { publishLast } from 'rxjs/operators';
 export class ItemsCartComponent implements OnInit {displayedColumns: string[] = ['position', 'name', 'Quantity', 'Symbol'];
 
 ButtonName = 'Submit';
+isSubmitted : boolean = false;
 
 constructor(private employeeOrderService: EmployeeOrderService,private centralizedRepo : CentralizedDataService,
   private router: Router, private snackBar: MatSnackBar) {
@@ -40,17 +41,21 @@ onCancel() {
 }
 
 onMakingOrder() {
+  if(this.isSubmitted == true){
+    return;
+  }
+  
+  this.isSubmitted = true;
   let employeeOrderData: EmployeeOrderData = this.prepareOrderData();
   this.employeeOrderService.postOrderData(employeeOrderData)
   .subscribe(employeeOrderRes  => {
     if(employeeOrderRes.status == "Success"){
-
       this.showMessage(2,"Please Collect The Items");
       this.router.navigateByUrl('/Shelf');
     
     }
     else{
-      
+      this.isSubmitted = false;
       this.ButtonName="Submit"
       this.showMessage(3,"Something Went Wrong");
     

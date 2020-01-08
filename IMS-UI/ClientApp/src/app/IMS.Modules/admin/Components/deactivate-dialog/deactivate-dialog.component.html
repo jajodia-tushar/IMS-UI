@@ -4,11 +4,14 @@
 </h1>
 
 <div mat-dialog-content>
-  <p>Do you Want to Deactivate {{user.firstname}}'s account?</p>
+  <p>Do you Want to Delete {{user.firstname}}'s account?</p>
 </div>
 
 <div mat-dialog-actions class="action-buttons">
-  <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">{{confirmButtonText}}
+    <app-spinning-loader></app-spinning-loader>
+
+  </button>
   <button mat-button (click)="onDismiss()">No</button>
 </div>
 

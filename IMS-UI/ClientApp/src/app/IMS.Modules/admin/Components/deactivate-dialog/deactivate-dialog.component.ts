@@ -6,6 +6,7 @@ import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {Response} from 'src/app/IMS.Models/Shared/Response'
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 })
 export class DeactivateDialogComponent implements OnInit {
   user: User;
+  confirmButtonText : string = "Yes";
   constructor(private dialogRef: MatDialogRef<DeactivateDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
               private userManageService : UserManagementService,
               private snackBar : MatSnackBar) { 
@@ -25,6 +27,7 @@ export class DeactivateDialogComponent implements OnInit {
   }
 
   async onConfirm() {
+    this.confirmButtonText = ""
     let response = <Response>await this.userManageService.deactivate(this.user.id,false);
     if(response.error==null){
       this.dialogRef.close(true);

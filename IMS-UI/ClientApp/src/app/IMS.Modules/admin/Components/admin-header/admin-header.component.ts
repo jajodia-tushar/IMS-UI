@@ -81,9 +81,6 @@ export class AdminHeader implements OnDestroy, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  onToolbarMenuToggle() {
-    console.log("ontoolbartoggled");
-  }
 
   logout() {
     this.loginService.logOut().subscribe(

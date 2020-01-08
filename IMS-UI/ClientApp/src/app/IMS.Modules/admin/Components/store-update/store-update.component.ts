@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Optional } from '@angular/core';
+import { Component, OnInit, Inject, Optional, ViewEncapsulation } from '@angular/core';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StoreResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
@@ -12,6 +12,8 @@ import { Status } from 'src/app/IMS.Models/Status';
   selector: 'app-store-update',
   templateUrl: './store-update.component.html',
   styleUrls: ['./store-update.component.css']
+  
+
 })
 export class StoreUpdateComponent implements OnInit {
   public itemName: string;
@@ -42,6 +44,8 @@ export class StoreUpdateComponent implements OnInit {
     this.itemName = datas['Item Name'];
   }
 
+  notANumber: boolean = false;
+
   
   allowOnlyDigits(e: KeyboardEvent) {
     if (
@@ -60,6 +64,7 @@ export class StoreUpdateComponent implements OnInit {
     }
     // Ensure that it is a number and stop the keypress
     if (e.key === ' ' || isNaN(Number(e.key))) {
+      this.notANumber = true;
       return false;
     }
   }

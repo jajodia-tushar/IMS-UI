@@ -15,7 +15,8 @@ export class RevisableTableComponent implements OnInit {
  
   @Input() columnHeader;
   @Input() show;
-    aloo: any;
+  aloo: any;
+   public totalcost;
   @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
   }
@@ -23,6 +24,7 @@ export class RevisableTableComponent implements OnInit {
  
   //@Output() griddataChange: EventEmitter<any> = new EventEmitter();
   @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
+  @Output() ChangedFinalAmount: EventEmitter<any> = new EventEmitter<any>();
 
 
   
@@ -62,7 +64,8 @@ export class RevisableTableComponent implements OnInit {
 
   changeprice(row,event){
      console.log(row);
-     row.totalPrice=  +(<HTMLInputElement>event.target).value;
+    row.totalPrice = +(<HTMLInputElement>event.target).value;
+    
      this.renderTable();
      
    }
@@ -99,11 +102,12 @@ export class RevisableTableComponent implements OnInit {
 
 
 getTotalCost(){
-  let totalcost;
+  
  
-   totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-  console.log(totalcost);
-  return totalcost;
+   this.totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
+  console.log(this.totalcost);
+  this.ChangedFinalAmount.emit(this.totalcost);
+  return this.totalcost;
   }
 
 

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Root } from 'src/app/IMS.Models/Vendor/Root';
-import { ListOfVendorOrder } from 'src/app/IMS.Models/Vendor/ListOfVendorOrder';
+import { DatePipe } from '@angular/common';
+import { VendorOrders } from 'src/app/IMS.Models/Vendor/VendorOrders';
 
 @Component({
   selector: 'app-data-table',
@@ -11,13 +12,17 @@ import { ListOfVendorOrder } from 'src/app/IMS.Models/Vendor/ListOfVendorOrder';
 export class DataTableComponent implements OnInit {
 
   displayedColumns;
-  public datasource = new MatTableDataSource<ListOfVendorOrder>();
-  constructor() { }
+  public datasource = new MatTableDataSource<VendorOrders>();
+  public date;
+  constructor(public datepipe: DatePipe) { }
+
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
     console.log(this.datasource.data);
   }
   @Input() columnHeader;
+
+
 
   ngOnInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef)
@@ -26,4 +31,15 @@ export class DataTableComponent implements OnInit {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef);
 
   }
+  transformDate(row) {
+    console.log(row.vendorOrderDetails.date)
+    this.date = this.datepipe.transform(row.vendorOrderDetails.date, 'dd/MM/yyyy');
+    console.log(this.date);
+    return this.date;
+  }
+  ClickedRow(row)
+  {
+    console.log(row);
+  }
+ 
 }

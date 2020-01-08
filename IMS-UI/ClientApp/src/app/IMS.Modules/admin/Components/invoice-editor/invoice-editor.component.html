@@ -104,7 +104,7 @@
 
     </mat-card>
 
-    <app-revisable-table [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items" (selectedEditRow)="edit($event)"></app-revisable-table>
+    <app-revisable-table [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items" (selectedEditRow)="edit($event)" (ChangedFinalAmount)="finalPriceChange($event)"></app-revisable-table>
     <button mat-button color="accent" (click)="approve()">Accent</button>
   </div>
 

@@ -34,12 +34,13 @@ export class EmployeeComponent implements OnInit {
     this.buttonName = "";
     if(this.employeeID == null || this.employeeID == ""){
       this.errorMessage = "Enter Employee Id";
+      this.buttonName = "NEXT";
       return;
     }
     this.employeeService.employeeIdValidation(this.employeeID).subscribe(
       employeeResponse => {
         if (employeeResponse.employee == null || employeeResponse.employee.isActive == false){
-            this.errorMessage = "Invalid Employee Id"
+            this.errorMessage = "Invalid Employee Id";
             this.buttonName = "Try Again";
         }
         else{
@@ -55,6 +56,7 @@ export class EmployeeComponent implements OnInit {
 
   logout() {
     if (confirm('Are you sure, you want to logout?')) {
+      this.buttonName = "";
         this.loginService.logOut().subscribe(data => {
           if (data.status == "Success") this.router.navigateByUrl("/login");
         });

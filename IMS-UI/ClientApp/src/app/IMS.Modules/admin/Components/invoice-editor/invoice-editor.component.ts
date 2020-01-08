@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { Router } from '@angular/router';
 import { OrderDetailsRejectService } from 'src/app/IMS.Services/InvoiceEditor/order-details-reject.service';
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 
 interface FileUrl {
   locationUrl: string;
@@ -78,7 +79,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.ClerkName = data.vendorOrderDetails.recievedBy;
     this.AdminName = data.vendorOrderDetails.submittedTo;
     this.ChallanNo = data.vendorOrderDetails.challanNumber;
-    // this.InvoiceNo = data.vendorOrderDetails.invoiceNumber;
     this.OrderID = data.vendorOrderDetails.orderId;
     this.ChallanImageUrl=data.vendorOrderDetails.challanImageUrl;
     this.Vendor = data.vendor;
@@ -95,11 +95,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
    
     this.FinalAmount = amount;
   }
-  showMessage(time, message) {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 1000 * time, data: { message: message }
-    });
-  }
 
   uploadImage(file) {
     if (file.length === 0) {
@@ -111,18 +106,21 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
       data => {
         this.InvoiceImageUrl= this.vendorOrder.vendorOrderDetails.invoiceImageUrl = data.locationUrl;
-        this.showMessage(5, "image is uploaded");
       }
     );
 
   }
   openDialog(){
+    if(this.ChallanImageUrl==""){
+      showMessage(this.snackBar, 2, "Sorry, No Image Found","warn");
+      return;
+    }
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    let dialogRef = this.dialog.open(ImageDialogComponent,{
-      data: this.ChallanImageUrl
-    },);
+    dialogConfig.data = this.ChallanImageUrl;
+    dialogConfig.panelClass = "dialog-notification-image";
+    let dialogRef = this.dialog.open(ImageDialogComponent,dialogConfig);
   }
 
   reloadComponent() {
@@ -137,11 +135,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       data=>{
         if (data.status == "Success") {
           console.log(data.status);
-          this.showMessage(5, "Order Rejected");
+          showMessage(this.snackBar, 2, "Order Rejacted", "success");
           this.reloadComponent();
         }
         else {
-          this.showMessage(5, "Some error occured");
+          showMessage(this.snackBar, 2, "Something went wrong!", "warn");
         }
       },
     );
@@ -160,11 +158,11 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       data => {
         if (data.status == "Success") {
          
-          this.showMessage(5, "Order Approved");
+          showMessage(this.snackBar, 2, "Order Approved", "success");
           this.reloadComponent();
         }
         else {
-          this.showMessage(5, "Some error occured");
+          showMessage(this.snackBar, 2, "Something went wrong!", "warn");
         }
       },
     );

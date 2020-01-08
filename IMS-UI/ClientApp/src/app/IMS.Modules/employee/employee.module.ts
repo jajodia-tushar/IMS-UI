@@ -10,10 +10,11 @@ import { SharedModule } from '../shared/shared.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import { FilterPipe} from './Components/pick-item/filter.pipe';
+import { OrderSuccessComponent } from './Components/order-success/order-success.component';
 
 
 @NgModule({
-  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe],
+  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe, OrderSuccessComponent],
   imports: [
     SharedModule,
     MaterialModule,
@@ -22,6 +23,7 @@ import { FilterPipe} from './Components/pick-item/filter.pipe';
   ], 
   exports: [
     FilterPipe
-  ]
+  ],
+  entryComponents : [OrderSuccessComponent]
 })
 export class EmployeeModule { }

@@ -5,11 +5,12 @@ import { CartItem } from 'src/app/IMS.Models/CartItem';
 import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
 import { EmployeeOrderData } from 'src/app/IMS.Models/Employee/EmployeeOrderData';
 import { SnackbarComponent } from '../../../shared/snackbar/snackbar.component';
-import { MatSnackBar, getMatInputUnsupportedTypeError } from '@angular/material';
+import { MatSnackBar, getMatInputUnsupportedTypeError, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { EmployeeOrderResponse } from 'src/app/IMS.Models/Employee/EmployeeOrderResponse';
 import { publishLast } from 'rxjs/operators';
 
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { OrderSuccessComponent } from '../order-success/order-success.component';
 
 @Component({
   selector: 'app-items-cart',
@@ -20,9 +21,13 @@ export class ItemsCartComponent implements OnInit {displayedColumns: string[] = 
 
 ButtonName = 'Submit';
 isSubmitted : boolean = false;
-
-constructor(private employeeOrderService: EmployeeOrderService,private centralizedRepo : CentralizedDataService,
-  private router: Router, private snackBar: MatSnackBar) {}
+isPoppedUp : boolean = false;
+dialogRef : MatDialogRef<OrderSuccessComponent>;
+constructor(private employeeOrderService: EmployeeOrderService,
+  private centralizedRepo : CentralizedDataService,
+  private router: Router, 
+  private snackBar: MatSnackBar,
+  private dialog : MatDialog) {}
 
 durationInSeconds = 5;
 
@@ -50,8 +55,19 @@ onMakingOrder() {
   this.employeeOrderService.postOrderData(employeeOrderData)
   .subscribe(employeeOrderRes  => {
     if(employeeOrderRes.status == "Success"){
-      showMessage(this.snackBar, 2,"Please Collect The Items", "success");
-      this.router.navigateByUrl('/Shelf');
+      if (!this.isPoppedUp) {
+        let dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.panelClass = 'dialog-order-success';
+        dialogConfig.autoFocus = true;
+        let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
+
+        setTimeout(() => {
+          dialogRef.close();
+          this.router.navigateByUrl('/Shelf');
+        }, 5000);
+      }
+      // showMessage(this.snackBar, 2,"Please Collect The Items", "success");
     }
     else{
       this.isSubmitted = false;

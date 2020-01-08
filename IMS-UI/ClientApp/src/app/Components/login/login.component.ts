@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   private role: string;
   public error: boolean = false;
 
-  constructor(private loginService: LoginService, private router: Router,
+  constructor(private loginService: LoginService, 
+    private router: Router,
     private dialog: MatDialog) { }
 
   Login() {

@@ -1,5 +1,5 @@
 import { Vendor } from "./vendor";
-import { VendorOrderDetails } from "./vendorOrderDetails";
+import { VendorOrderDetails } from "./VendorOrderDetails";
 
  export class ListOfVendorOrder {
         vendor: Vendor;

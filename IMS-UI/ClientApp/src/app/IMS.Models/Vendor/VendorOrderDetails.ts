@@ -7,7 +7,7 @@ export class VendorOrderDetails {
   recievedBy: string;
   submittedTo: string;
   taxableAmount: number;
-  invoiceNumber: string;
+  invoiceNumber: string;  
   invoiceImageUrl: string;
   challanNumber: string;
   challanImageUrl: string;

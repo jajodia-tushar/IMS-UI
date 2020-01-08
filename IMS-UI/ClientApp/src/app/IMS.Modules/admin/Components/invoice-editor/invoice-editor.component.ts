@@ -7,7 +7,7 @@ import { Item } from 'src/app/IMS.Models/Item/Item';
 import { OrderDetailsApproveService } from 'src/app/IMS.Services/InvoiceEditor/order-details-approve.service';
 import { ListOfVendorOrder } from 'src/app/IMS.Models/Vendor/ListOfVendorOrder';
 import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
-import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/vendorOrderDetails';
+import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/VendorOrderDetails';
 import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPriceMapping';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { dashCaseToCamelCase } from '@angular/compiler/src/util';

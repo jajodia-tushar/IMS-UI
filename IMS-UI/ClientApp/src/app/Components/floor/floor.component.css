@@ -157,20 +157,3 @@
 :host ::ng-deep .cdk-overlay-dark-backdrop {
     background: rgb(28, 30, 47);
 }
-
-::ng-deep .mat-dialog-container {
-    display: block;
-    margin: -13% !important;
-    padding-left: 25% !important;
-    padding-top: 9% !important;
-    padding-bottom: 5% !important;
-    border-radius: 4px !important;
-    box-sizing: border-box !important;
-    overflow: auto !important;
-    outline: 0 !important;
-    min-width: 100vw !important;
-    min-height: 100vh !important;
-    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12) !important;
-    background: #1c1e2f !important;
-    color: rgba(0,0,0,.87) !important;
-}

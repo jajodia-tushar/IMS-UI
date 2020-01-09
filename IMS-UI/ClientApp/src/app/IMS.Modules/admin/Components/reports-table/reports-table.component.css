@@ -109,6 +109,9 @@ td {
     color: white;
 }
 
+.container {
+    min-width: 100%;
+}
 .container{
     min-width: 100%;
 }

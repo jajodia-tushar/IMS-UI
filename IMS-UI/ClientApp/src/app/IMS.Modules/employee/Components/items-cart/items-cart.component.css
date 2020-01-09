@@ -64,6 +64,10 @@ th.mat-header-cell {
         max-width: 833px;
         margin-top: 37px;
     }
+
+    .clear-button {
+        margin-left: -110px;
+    }
 }
 
 

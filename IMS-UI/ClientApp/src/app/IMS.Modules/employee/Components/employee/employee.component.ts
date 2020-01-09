@@ -4,6 +4,7 @@ import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-
 import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
 import { LogoutComponent } from 'src/app/IMS.Modules/shared/logout/logout.component';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +13,11 @@ import { LoginService } from 'src/app/IMS.Services/login/login.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private router : Router, private centralizedRepo : CentralizedDataService,private employeeService : EmployeeService, private loginService : LoginService){}
+  constructor(private router : Router, 
+    private centralizedRepo : CentralizedDataService,
+    private employeeService : EmployeeService, 
+    private loginService : LoginService,
+    private locationStrategy : LocationStrategy){}
     
     ShelfName : string;
     employeeID: string;
@@ -27,6 +32,14 @@ export class EmployeeComponent implements OnInit {
     else{
       this.ShelfName = this.centralizedRepo.getShelf().name;
     }
+    this.preventBackButton();
+  }
+
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.locationStrategy.onPopState(() => {
+      history.pushState(null, null, location.href);
+    })
   }
 
   employeeValidation() {

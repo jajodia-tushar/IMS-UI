@@ -15,14 +15,13 @@ button {
 .mat-raised-button {
     box-sizing: border-box;
     position: relative;
-    width: 216px;
-    top: -22px;
+    width: 189px;
+    top: -28px;
     left: 0px;
     text-align: center;
     margin: 0;
     min-width: 64px;
     line-height: 36px;
-    padding: 0 84px;
     border-radius: 4px;
     color: white;
     overflow: visible;
@@ -40,17 +39,17 @@ button {
     color: red;
     font-size: medium;
     position: absolute;
-    top: 54%;
-    left: 36%;
+    top: 198px;
+    left: 150px;
     padding: 10px;
 }
 
 .login-page {
     position: fixed;
-    top: 45%;
-    left: 48%;
-    width: 32em;
-    height: 28em;
+    top: 50%;
+    left: 50%;
+    width: 28em;
+    height: 24em;
     margin-top: -12em;
     /*set to a negative number 1/2 of your height*/
     margin-left: -14em;
@@ -128,8 +127,8 @@ button {
     height: 133px;
     border: 2px solid #5e7af5;
     margin: 2%;
-    top: 19%;
-    left: 40%;
+    top: 55px;
+    left: 172px;
     box-sizing: border-box;
     border-radius: 16px;
     -webkit-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;

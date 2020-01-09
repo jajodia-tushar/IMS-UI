@@ -53,6 +53,14 @@ button:focus, button:active:focus, button.active:focus {
   color: aliceblue;
 }
 
+.dialog-order-success mat-dialog-container { 
+  background-color: #222437;
+  color: aliceblue;
+}
+
+.dialog-order-success cdk-overlay-dark-backdrop {
+  background: rgba(0,0,0,0.94);
+}
 .dialog-notification-image mat-dialog-container {
   top: 30%;
   left: 6%;

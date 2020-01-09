@@ -5,9 +5,12 @@ import { CartItem } from 'src/app/IMS.Models/CartItem';
 import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
 import { EmployeeOrderData } from 'src/app/IMS.Models/Employee/EmployeeOrderData';
 import { SnackbarComponent } from '../../../shared/snackbar/snackbar.component';
-import { MatSnackBar, getMatInputUnsupportedTypeError } from '@angular/material';
+import { MatSnackBar, getMatInputUnsupportedTypeError, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { EmployeeOrderResponse } from 'src/app/IMS.Models/Employee/EmployeeOrderResponse';
 import { publishLast } from 'rxjs/operators';
+
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { OrderSuccessComponent } from '../order-success/order-success.component';
 
 @Component({
   selector: 'app-items-cart',
@@ -17,13 +20,16 @@ import { publishLast } from 'rxjs/operators';
 export class ItemsCartComponent implements OnInit {displayedColumns: string[] = ['position', 'name', 'Quantity', 'Symbol'];
 
 ButtonName = 'Submit';
+isSubmitted : boolean = false;
+isPoppedUp : boolean = false;
+dialogRef : MatDialogRef<OrderSuccessComponent>;
+constructor(private employeeOrderService: EmployeeOrderService,
+  private centralizedRepo : CentralizedDataService,
+  private router: Router, 
+  private snackBar: MatSnackBar,
+  private dialog : MatDialog) {}
 
-constructor(private employeeOrderService: EmployeeOrderService,private centralizedRepo : CentralizedDataService,
-  private router: Router, private snackBar: MatSnackBar) {
-
- }
-
- durationInSeconds = 5;
+durationInSeconds = 5;
 
 @Input() 
 selectedItems: CartItem[];
@@ -40,30 +46,36 @@ onCancel() {
 }
 
 onMakingOrder() {
+  if(this.isSubmitted == true){
+    return;
+  }
+  
+  this.isSubmitted = true;
   let employeeOrderData: EmployeeOrderData = this.prepareOrderData();
   this.employeeOrderService.postOrderData(employeeOrderData)
   .subscribe(employeeOrderRes  => {
     if(employeeOrderRes.status == "Success"){
+      if (!this.isPoppedUp) {
+        let dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.panelClass = 'dialog-order-success';
+        dialogConfig.autoFocus = true;
+        let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
 
-      this.showMessage(2,"Please Collect The Items");
-      this.router.navigateByUrl('/Shelf');
-    
+        setTimeout(() => {
+          dialogRef.close();
+          this.router.navigateByUrl('/Shelf');
+        }, 5000);
+      }
+      // showMessage(this.snackBar, 2,"Please Collect The Items", "success");
     }
     else{
-      
+      this.isSubmitted = false;
       this.ButtonName="Submit"
-      this.showMessage(3,"Something Went Wrong");
-    
+      showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
     }
   });
   // this.ButtonName="Try Again";
-
-}
-
-showMessage(time,message){
-  this.snackBar.openFromComponent(SnackbarComponent, {
-    duration: 1000 * time , data : { message : message }
-  });
 }
 
 prepareOrderData() {
@@ -108,7 +120,7 @@ plus(element) {
       if (element.quantity < obj.item.maxLimit) {
         obj.quantity++;
       } else {
-        this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
+        showMessage(this.snackBar, 2, `You cannot add more than ${obj.item.maxLimit} "${obj.item.name}"`, "warn");
       }
     }
   });
@@ -121,7 +133,7 @@ minus(element) {
         obj.quantity--; 
         if (obj.quantity == 0) {
           this.delete(element);
-          this.showMessage(1, `"${obj.item.name}" is removed from your cart`);
+          showMessage(this.snackBar, 2, `"${obj.item.name}" is removed from your cart`, "message");
         }
       } /* else {
         this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);

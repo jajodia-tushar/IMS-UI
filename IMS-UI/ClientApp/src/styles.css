@@ -1,25 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 body {
   height: 100vh;
   background-color: #1c1e2f;
 }
 
-button:focus, button:active:focus, button.active:focus {
+button:focus,
+button:active:focus,
+button.active:focus {
   outline: none !important;
   outline-style: none !important;
 }
 
-.snackbar-warn{
-  background-color: rgb(153, 50, 50);
+.snackbar-warn {
+  background-color: #da2d2d;
+  color: white;
 }
-.snackbar-success{
-  background-color: rgb(29, 102, 29);
+.snackbar-success {
+  background-color: #50d890;
+  color: #1c1e2f;
 }
 
-.snackbar-message{
-  background-color:grey;
+.snackbar-message {
+  background-color: slategray;
+  color: white;
 }
 
 .mat-snack-bar-container {
@@ -35,12 +40,12 @@ button:focus, button:active:focus, button.active:focus {
   border-radius: 4px;
 }
 
-.dialog-edit-store mat-dialog-container{
+.dialog-edit-store mat-dialog-container {
   background-color: #222437;
   color: aliceblue;
 }
 
-.dialog-order-success mat-dialog-container { 
+.dialog-order-success mat-dialog-container {
   background-color: #222437;
   color: aliceblue;
   border-radius: 4px;

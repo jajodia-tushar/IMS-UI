@@ -52,7 +52,8 @@ export class VendordetailsComponent implements OnInit {
     this.isDataToBeSend();
   }
   SelectedDate() {
-    this.orderDetails.date = this.RecievedDate;
+    let utcDate = Date.UTC(this.RecievedDate.getFullYear(), this.RecievedDate.getMonth(), this.RecievedDate.getDate());
+    this.orderDetails.date = new Date(utcDate);    
     this.isDataToBeSend();
   }
   isDataToBeSend() {

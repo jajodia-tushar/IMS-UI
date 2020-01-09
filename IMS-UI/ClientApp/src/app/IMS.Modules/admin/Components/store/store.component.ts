@@ -123,29 +123,15 @@ export class StoreComponent implements OnInit {
 
   editItem(result) {
 
-    this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
-      data => {
-        this.pageInfo = new PagingInformation();
-        this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
-        this.pageInfo.pageSize = data.pagingInfo.pageSize;
-        this.pageInfo.totalResults = data.pagingInfo.totalResults;
-
-        this.pageLength = data.pagingInfo.totalResults.toString();
-        this.pageSize = data.pagingInfo.pageSize.toString();
-
-        this.getStoreData(data);
-      });
-
-
-    // this.dataSource.forEach(element => {
-    //   if (element["Item Name"] == result.itemName) {
-    //     if (element[result.shelf] == '-')
-    //       element[result.shelf] = result.quantity;
-    //     else
-    //       element[result.shelf] += result.quantity;
-    //     element["Warehouse"] -= result.quantity;
-    //   }
-    // });
+    this.dataSource.forEach(element => {
+      if (element["Item Name"] == result.itemName) {
+        if (element[result.shelf] == '-')
+          element[result.shelf] = result.quantity;
+        else
+          element[result.shelf] += result.quantity;
+        element["Warehouse"] -= result.quantity;
+      }
+    });
   }
 
 

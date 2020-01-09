@@ -61,8 +61,12 @@ th.mat-header-cell {
 
 @media (min-width: 1800px) {
     .container {
-        max-width: 880px;
+        max-width: 833px;
         margin-top: 37px;
+    }
+
+    .clear-button {
+        margin-left: -110px;
     }
 }
 

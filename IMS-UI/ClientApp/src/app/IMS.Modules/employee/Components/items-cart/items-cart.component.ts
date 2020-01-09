@@ -11,13 +11,16 @@ import { publishLast } from 'rxjs/operators';
 
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-items-cart',
   templateUrl: './items-cart.component.html',
   styleUrls: ['./items-cart.component.css']
 })
-export class ItemsCartComponent implements OnInit {displayedColumns: string[] = ['position', 'name', 'Quantity', 'Symbol'];
+export class ItemsCartComponent implements OnInit { 
+
+  displayedColumns: string[] = ['position', 'name', 'Quantity', 'Symbol'];
 
 ButtonName = 'Submit';
 isSubmitted : boolean = false;
@@ -27,7 +30,15 @@ constructor(private employeeOrderService: EmployeeOrderService,
   private centralizedRepo : CentralizedDataService,
   private router: Router, 
   private snackBar: MatSnackBar,
-  private dialog : MatDialog) {}
+  private dialog : MatDialog, 
+  private location : PlatformLocation) {
+
+    location.onPopState(() => { 
+        if(this.selectedItems.length !== 0 && confirm('Your cart items will be deleted if you continue.')) {
+          this.onCancel();
+        }
+    })
+  }
 
 durationInSeconds = 5;
 
@@ -41,8 +52,10 @@ ngOnInit() {
 
 }
 onCancel() {
-  this.selectedItems = [];
-  this.onCartItemDeleted.emit([]);
+  if (!this.isSubmitted) {
+    this.selectedItems = [];
+    this.onCartItemDeleted.emit([]);
+  }
 }
 
 onMakingOrder() {
@@ -57,7 +70,7 @@ onMakingOrder() {
     if(employeeOrderRes.status == "Success"){
       if (!this.isPoppedUp) {
         let dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = false;
+        dialogConfig.disableClose = true;
         dialogConfig.panelClass = 'dialog-order-success';
         dialogConfig.autoFocus = true;
         let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
@@ -108,38 +121,44 @@ ngOnChanges(changes: SimpleChanges): void {
 }
 
 delete(element) {
-  this.selectedItems = JSON.parse(JSON.stringify(this.selectedItems.filter(obj => {
-    return obj != element;
-  })));
-  this.onCartItemDeleted.emit(this.selectedItems);
+  if (!this.isSubmitted) {
+    this.selectedItems = JSON.parse(JSON.stringify(this.selectedItems.filter(obj => {
+      return obj != element;
+    })));
+    this.onCartItemDeleted.emit(this.selectedItems);
+  }
 }
 
 plus(element) {
-  this.selectedItems.forEach(obj => {
-    if (obj == element) {
-      if (element.quantity < obj.item.maxLimit) {
-        obj.quantity++;
-      } else {
-        showMessage(this.snackBar, 2, `You cannot add more than ${obj.item.maxLimit} "${obj.item.name}"`, "warn");
+  if (!this.isSubmitted) {
+    this.selectedItems.forEach(obj => {
+      if (obj == element) {
+        if (element.quantity < obj.item.maxLimit) {
+          obj.quantity++;
+        } else {
+          showMessage(this.snackBar, 2, `You cannot add more than ${obj.item.maxLimit} "${obj.item.name}"`, "warn");
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 minus(element) {
-  this.selectedItems.forEach(obj => {
-    if (obj == element) {
-      if (element.quantity > 0) {
-        obj.quantity--; 
-        if (obj.quantity == 0) {
-          this.delete(element);
-          showMessage(this.snackBar, 2, `"${obj.item.name}" is removed from your cart`, "message");
-        }
-      } /* else {
-        this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
-      } */
-    }
-  });
+  if (!this.isSubmitted) {
+    this.selectedItems.forEach(obj => {
+      if (obj == element) {
+        if (element.quantity > 0) {
+          obj.quantity--; 
+          if (obj.quantity == 0) {
+            this.delete(element);
+            showMessage(this.snackBar, 2, `"${obj.item.name}" is removed from your cart`, "message");
+          }
+        } /* else {
+          this.showMessage(1, `You cannot add "${obj.item.name}" more than ${obj.item.maxLimit}`);
+        } */
+      }
+    });
+  }
 }
 
 }

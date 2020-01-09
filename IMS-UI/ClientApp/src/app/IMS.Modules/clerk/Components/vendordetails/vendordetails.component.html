@@ -5,7 +5,7 @@
         <div class="fields-size">
             <mat-form-field class="field-position" appearance="outline">
                 <mat-label>Challan Number</mat-label>
-                <input matInput class="input-value-color" #challan placeholder="E.g 234567  " (keyup)="onKey(challan.value)">
+                <input matInput autocomplete="off" class="input-value-color" #challan placeholder="E.g 234567  " (keyup)="onKey(challan.value)">
             </mat-form-field>
             <mat-form-field class="field-position" appearance="outline">
                 <mat-label>Vendor Name</mat-label>
@@ -30,7 +30,7 @@
             </mat-form-field>
             <mat-form-field class="field-position" appearance="outline">
                 <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="picker" [max]="maxDate" (click)="picker.open() " onkeydown="return false" [(ngModel)]="RecievedDate" (dateChange)="SelectedDate()" >
+                <input matInput autocomplete="off" [matDatepicker]="picker" [max]="maxDate" (click)="picker.open() " onkeydown="return false" [(ngModel)]="RecievedDate" (dateChange)="SelectedDate()" >
                 <mat-datepicker-toggle class="date" matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 

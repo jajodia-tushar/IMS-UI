@@ -39,6 +39,8 @@ export class OrderdetailsComponent implements OnInit {
     'Copy',
     'Paste'
   ];
+
+  imageUploaded: boolean = false;
   public buttonName="Submit"
   public canLoad = false;
   displayedColumns: string[] = ['ItemName', 'Quantity', 'action'];
@@ -122,7 +124,8 @@ export class OrderdetailsComponent implements OnInit {
     this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
       data => {
         this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
-        showMessage(this.snackBar,5, "image is uploaded","success");
+        // showMessage(this.snackBar,5, "image is uploaded","success");
+        this.imageUploaded = true; 
       }
     );
 

@@ -14,16 +14,11 @@ table {
   color : white;
 }
   
-  th.mat-sort-header-sorted {
-    color: black;
-  }
-
   .mat-form-field {
     font-size: 14px;
     width: 30%;
     
   }
-
 
   .mat-input-flex.mat-form-field-flex{
     border: 1px solid black;
@@ -52,7 +47,8 @@ table {
 }
 
 .mat-header-cell{  
-  color : white;
+  color : #9597ab;
+  font-size: medium;
 }
 
 ::ng-deep .mat-sort-header-arrow {

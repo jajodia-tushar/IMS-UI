@@ -32,7 +32,7 @@
 
 .example-element-row td {
     color: white;
-    font-size: medium;
+    font-size: 14px;
 }
 
 th {
@@ -107,4 +107,8 @@ td {
 .paginator {
     background-color: #222437 !important;
     color: white;
+}
+
+.container{
+    min-width: 100%;
 }

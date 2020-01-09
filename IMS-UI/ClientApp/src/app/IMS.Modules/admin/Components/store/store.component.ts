@@ -6,6 +6,9 @@ import { StoreUpdateComponent } from '../store-update/store-update.component';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
 import { pairs } from 'rxjs';
+import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
+import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
+import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
 
 @Component({
   selector: 'app-store',
@@ -40,7 +43,8 @@ export class StoreComponent implements OnInit {
   numberOfItems: string;
   pageInfo: PagingInformation = new PagingInformation();
 
-  constructor(private storeService: StoreService, public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private storeService: StoreService, public dialog: MatDialog,
+    private snackBar: MatSnackBar, private shelfService: ShelfService) {
 
   }
 
@@ -52,15 +56,12 @@ export class StoreComponent implements OnInit {
         this.pageLength = data.pagingInfo.totalResults.toString();
 
         this.getStoreData(data);
-      },
-      error => {
-        console.log(error);
       });
   }
 
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.dataSource = [];
     this.pageInfo = new PagingInformation();
     this.pageInfo.pageSize = 10;
@@ -68,22 +69,29 @@ export class StoreComponent implements OnInit {
     this.pageInfo.totalResults = 100;
     this.pageLength = "0";
     this.pageSize = "10";
-    console.log(this.dataSource);
 
-    this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
-      data => {
-        this.pageInfo = new PagingInformation();
-        this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
-        this.pageInfo.pageSize = data.pagingInfo.pageSize;
-        this.pageInfo.totalResults = data.pagingInfo.totalResults;
+    this.columns.push("Item Name");
+    this.columns.push("Warehouse");
 
-        this.pageLength = data.pagingInfo.totalResults.toString();
-        this.pageSize = data.pagingInfo.pageSize.toString();
+    let shelfList: ShelfListResponse =  await this.shelfService.getAllShelves().toPromise();
 
-        this.getStoreData(data);
-      });
+    shelfList.shelves.forEach(shelf => {
+      this.columns.push(shelf.name);
+    })
+
+    this.columns = this.columns.slice(0, 2).concat(this.columns.slice(2, this.columns.length).sort());
+
+
+    this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(data => {
+      this.pageInfo = new PagingInformation();
+      this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
+      this.pageInfo.pageSize = data.pagingInfo.pageSize;
+      this.pageInfo.totalResults = data.pagingInfo.totalResults;
+      this.pageLength = data.pagingInfo.totalResults.toString();
+      this.pageSize = data.pagingInfo.pageSize.toString();
+      this.getStoreData(data);
+    });
   }
-
 
   editStore(item) {
     let dialogConfig = new MatDialogConfig();
@@ -92,7 +100,6 @@ export class StoreComponent implements OnInit {
     dialogConfig.panelClass = 'dialog-edit-store';
     dialogConfig.data = item;
     dialogConfig.autoFocus = true;
-    console.log(dialogConfig.data);
     let dialogRef = this.dialog.open(StoreUpdateComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
@@ -144,28 +151,8 @@ export class StoreComponent implements OnInit {
   }
 
   getStoreData(data) {
-    this.columns = [];
-    this.columnsToDisplay = [];
     this.dataSource = [];
     try {
-      this.columns.push("Item Name");
-      this.columns.push("Warehouse");
-      if (data.stockStatusList == null)
-        throw new Error("Internal server error");
-      this.pageInfo = data.pageInfo;
-      data.stockStatusList.forEach(element => {
-        let stockColourQuantity = element.storeStatus;
-        if (stockColourQuantity != null) {
-          stockColourQuantity.forEach(child => {
-            if (!this.columns.includes(child.location)) {
-              this.columns.push(child.location);
-              console.log(child.location);
-            }
-          });
-        }
-      });
-      console.log(this.columns);
-
       data.stockStatusList.forEach(element => {
         let object = new StoreResponse();
         this.columns.forEach(child => {

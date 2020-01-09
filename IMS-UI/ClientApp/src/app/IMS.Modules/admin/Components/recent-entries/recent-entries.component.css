@@ -1,6 +1,6 @@
 .items-container {
     /* margin: 0px 20px 10px 20px; */
-    background-color: #1f2132;
+    background-color: #222437;
     border-radius: 8px;
     overflow: auto;
     position: relative;
@@ -34,7 +34,7 @@
 }
 
 tr.example-detail-row {
-    background-color: #1f2132;
+    background-color: #222437;
     height: 0;
 }
 
@@ -74,7 +74,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 table {
-    background-color: #1f2132;
+    background-color: #222437;
     width: 100%;
 }
 
@@ -142,3 +142,14 @@ th.mat-header-cell:last-of-type {
 *:focus {
     outline: none;
 }
+
+.items-container {
+    /* margin: 0px 20px 10px 20px; */
+    top: 20px;
+    background-color: #222437;
+    border-radius: 8px;
+    overflow: auto;
+    position: relative;
+    color: white;
+    overflow: hidden;
+  }

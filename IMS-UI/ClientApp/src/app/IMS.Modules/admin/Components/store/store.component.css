@@ -1,11 +1,11 @@
-.items-container {
+/* .items-container {
   background-color: #1f2132;
   border-radius: 8px;
   overflow: auto;
   position: relative;
   color: white;
   height: 100%;
-}
+} */
 
 *:focus {
   outline: none;
@@ -39,7 +39,7 @@
 }
 
 tr.example-detail-row {
-  background-color: #1f2132;
+  background-color: #222437;
   cursor: none;
   height: 0;
 }
@@ -64,7 +64,7 @@ th {
 }
 
 table {
-  background-color: #1f2132;
+  background-color: #222437;
   width: 100%;
 }
 
@@ -102,9 +102,8 @@ th.mat-header-cell:last-of-type {
 }
 
 .mat-paginator {
-  background-color: #1f2132;
+  background-color: #222437;
   color: white;
-  font-size: medium;
 }
 
 ::ng-deep #mat-select-0 > div > div.mat-select-value {
@@ -116,5 +115,38 @@ th.mat-header-cell:last-of-type {
   > div
   > div.mat-select-arrow-wrapper
   > div.mat-select-arrow {
+  color: white;
+}
+
+.items-container {
+  margin: 0px 20px 10px 10px;
+  top: 20px;
+  background-color: #222437;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+  color: white;
+  overflow: hidden;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container>div {
+  margin: 10px;
+  text-align: left;
+}
+
+.container {
+  margin-right: 3%;
+  border-radius: 7px;
+  overflow: auto;
+  min-width: 290px;
+}
+
+.paginator {
+  background-color: #222437 !important;
   color: white;
 }

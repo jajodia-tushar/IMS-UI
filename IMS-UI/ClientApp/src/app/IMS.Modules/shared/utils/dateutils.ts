@@ -1,5 +1,5 @@
 export class DateUtils{
    static dateFormatter(inputDate : Date){
-        return inputDate.toISOString().slice(0, 10).split("-").join("");
+        return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1)).slice(-2)}${("0"+inputDate.getDate()).slice(-2)}`;
       }
 }

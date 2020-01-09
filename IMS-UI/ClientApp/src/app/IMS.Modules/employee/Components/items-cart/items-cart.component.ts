@@ -11,7 +11,7 @@ import { publishLast } from 'rxjs/operators';
 
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
-import { PlatformLocation } from '@angular/common';
+import { PlatformLocation, LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-items-cart',
@@ -30,15 +30,7 @@ constructor(private employeeOrderService: EmployeeOrderService,
   private centralizedRepo : CentralizedDataService,
   private router: Router, 
   private snackBar: MatSnackBar,
-  private dialog : MatDialog, 
-  private location : PlatformLocation) {
-
-    location.onPopState(() => { 
-        if(this.selectedItems.length !== 0 && confirm('Your cart items will be deleted if you continue.')) {
-          this.onCancel();
-        }
-    })
-  }
+  private dialog : MatDialog) { }
 
 durationInSeconds = 5;
 

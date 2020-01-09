@@ -122,6 +122,7 @@ ngOnChanges(changes: SimpleChanges): void {
 
 delete(element) {
   if (!this.isSubmitted) {
+    showMessage(this.snackBar, 2, `"${element.item.name}" is removed from your cart`, "message");
     this.selectedItems = JSON.parse(JSON.stringify(this.selectedItems.filter(obj => {
       return obj != element;
     })));

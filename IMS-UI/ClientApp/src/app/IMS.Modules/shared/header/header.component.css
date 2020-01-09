@@ -1,7 +1,7 @@
 .employee-header {
     overflow: hidden;
-    background-color: #2b2828;
-    height: 10%;
+    background: #222437;
+    height: 60px;
 }
 
 #company-name {
@@ -73,11 +73,7 @@ p {
     color: #fdfdfd;
 }
 
-.employee-header {
-  overflow: hidden;
-  background: #222437;
-  height: 10%;
-}
+
 
 #company-name {
     margin: 5px;
@@ -106,9 +102,12 @@ p {
 }
 
 .icon img {
-    height: 61px;
-    width: 136px;
-    margin: -18px 0px 17px 10px;
+    height: 52px;
+    top: -24px;
+    right: 32px;
+    position: relative;
+    width: 100px;
+   
 }
 
 .employee-details {

@@ -2,7 +2,8 @@
   <div class="flex-container">
     <div class="table-container">
       <h4 class="font-weight-bold" style="color: white;" >Store</h4>
-        <app-spinning-loader ></app-spinning-loader>
+       
+        <app-spinning-loader *ngIf="!numberOfItems"></app-spinning-loader>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource">
         <ng-container *ngFor="let column of columns" [matColumnDef]="column">
           <th mat-header-cell *matHeaderCellDef>{{column}}</th>

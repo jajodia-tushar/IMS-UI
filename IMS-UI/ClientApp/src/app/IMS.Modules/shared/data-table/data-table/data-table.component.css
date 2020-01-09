@@ -1,3 +1,117 @@
 .mat-row:hover {
   cursor: pointer;
 }
+.items-container {
+  margin: 0px 20px 10px 20px;
+  top: 20px;
+  background-color: #222437;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+  color: white;
+  overflow: hidden;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > div {
+  margin: 10px;
+  text-align: left;
+}
+
+.container {
+  margin-right: 3%;
+  border-radius: 7px;
+  overflow: auto;
+  min-width: 290px;
+}
+
+.container > h4 {
+  margin-top: inherit;
+}
+
+.example-element-row td {
+  color: white;
+  font-size: medium;
+}
+
+th {
+  color: #9597ab;
+  font-size: large;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+table {
+  background-color: #222437;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #777;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.inner-table {
+  background-color: #262d4a;
+}
+
+td {
+  color: white;
+  cursor: pointer;
+}
+
+.paginator {
+  background-color: #222437 !important;
+  color: white;
+}
+
+.container {
+  min-width: 100%;
+}

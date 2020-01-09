@@ -1,10 +1,17 @@
-:host ::ng-deep .data-table {
-  width: 80%;
-  margin: 10% auto;
-  background-color: #222437;
+:host ::ng-deep .mat-tab-label .mat-tab-label-content {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  color: white;
+  height: 65px;
+  min-width: 190px;
 }
 
-::ng-deep .mat-tab-label .mat-tab-label-content {
-  color: white;
-  font-size: initial;
+.mat-tab-label {
+  width: 50% !important;
+}
+
+:host {
+  min-width: 100%;
 }

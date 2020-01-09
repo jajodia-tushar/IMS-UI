@@ -1,19 +1,22 @@
+<div class="items-container">
+  <div class="flex-container">
+    <div class="container">
+      <table mat-table [dataSource]="datasource" class="data-table">
+        <div class="table-row">
+          <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
+            <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">
+              {{ column.header }}
+            </mat-header-cell>
+            <mat-cell *cdkCellDef="let row" style="text-align:center; color:white">
 
- 
-<table mat-table [dataSource]="datasource" class="mat-elevation-z8 data-table">
-  <div class="table-row">
-    <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
-      <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">
-        {{ column.header }}
-      </mat-header-cell>
-      <mat-cell *cdkCellDef="let row" style="text-align:center; color:white">
-
-        <div *ngIf="column.columnDef !== 'date'">{{ column.cell(row) }}</div>
-        <div *ngIf="column.columnDef == 'date'"> {{ transformDate(row)}} </div>
-      </mat-cell>
-    </ng-container>
+              <div *ngIf="column.columnDef !== 'date'">{{ column.cell(row) }}</div>
+              <div *ngIf="column.columnDef == 'date'"> {{ transformDate(row)}} </div>
+            </mat-cell>
+          </ng-container>
+        </div>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="ClickedRow(row)"></mat-row>
+      </table>
+    </div>
   </div>
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="ClickedRow(row)"></mat-row>
-</table>
-
+</div>

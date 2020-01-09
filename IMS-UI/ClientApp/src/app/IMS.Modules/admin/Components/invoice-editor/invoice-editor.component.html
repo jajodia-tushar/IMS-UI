@@ -1,181 +1,121 @@
-<div class="container"
-    fxLayout="column"
-    fxLayout.xs="column"
-    fxLayoutAlign="center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    >
-  <div class="vendor-details">
-    <mat-card style="background-color:#222437;">
-      <mat-card-header style="color:white;">
-
-        <div class="container"
-             fxLayout
-             fxLayout.xs="column"
-             fxLayoutGap="20px"
-             fxLayoutGap.xs="0">
-          <mat-card-title>Invoice</mat-card-title>
-          <div class="margin">Order ID:{{OrderID}}</div>
-        </div>
-
-      </mat-card-header>
-      <mat-divider [inset]="true"></mat-divider>
-      <mat-card-content style="margin-top: 10px; color: white;">
-        <div class="container"
-             fxLayout
-             fxLayout.xs="column"
-             fxLayoutAlign="center"
-             fxLayoutGap="20px"
-             fxLayoutGap.xs="0">
-
-          <div class="container"
-               fxLayout="column"
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="2px"
-               fxFlex="20%">
-
-            <div>Challan Number</div>
-
-            <!-- <div class="border">{{ChallanNo}}</div> -->
-             <div>
-              <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput value="{{ChallanNo}}" disabled="true">
-                </mat-form-field>
-              </form>
-             </div>
-
-         </div>
-
-          <div class="container"
-               fxLayout="column"
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="2px"
-               fxFlex="20%">
-
-            <div>Invoice Number</div>
-
-            <div>
-               <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <input matInput [(ngModel)]="InvoiceNo" [ngModelOptions]="{standalone: true}" autocomplete="off" value="{{InvoiceNo}}">
-              </mat-form-field>
-            </form>
-          </div>
+<div class="items-container">
+  <div class="flex-container">
+    <div class="container">
+      <div class="vendor-details">
+        <mat-card style="background-color:#222437;">
+          <mat-card-header style="color:white;">
 
 
-          </div>
-          <div class="container"
-               fxLayout="column"
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="2px"
-               fxFlex="20%">
+            <mat-card-title>Invoice</mat-card-title>
 
-            <div>Received By</div>
-
-            <div>
-              <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput value="{{ClerkName}}" disabled="true">
-                </mat-form-field>
-              </form>
-               </div>
+            <div style="position: relative; left: 16px;top: 4px;">Order ID:{{OrderID}}</div>
 
 
-          </div>
-          <div class="container"
-               fxLayout="column"
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="2px"
-               fxFlex="20%">
+          </mat-card-header>
+          <mat-divider [inset]="true"></mat-divider>
+          <mat-card-content style="margin-top: 10px; color: white;">
+            <div class="form-label-inclosing-class">
 
-            <div>Submitted To</div>
+              <div class="form-labels-input">
 
-            <div>
-              <form class="example-form">
-              <mat-form-field class="example-full-width">
-                <input matInput value="{{ AdminName}}" disabled="true">
-              </mat-form-field>
-            </form>
-          </div>
+                <div>Challan Number</div>
+                <div>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput value="{{ChallanNo}}" disabled="true">
+                    </mat-form-field>
+                  </form>
+                </div>
 
+              </div>
+
+              <div class="form-labels-input">
+
+                <div>Invoice Number</div>
+
+                <div>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label style="color: slategray;">Invoice Number</mat-label>
+                      <input matInput [(ngModel)]="InvoiceNo" [ngModelOptions]="{standalone: true}" autocomplete="off"
+                        style="color: white;" placeholder="Invoice Number" value="{{InvoiceNo}}">
+
+                    </mat-form-field>
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="form-labels-input">
+
+                <div>Received By</div>
+
+                <div>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput value="{{ClerkName}}" disabled="true">
+                    </mat-form-field>
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="form-labels-input">
+
+                <div>Submitted To</div>
+
+                <div>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput value="{{ AdminName}}" disabled="true">
+                    </mat-form-field>
+                  </form>
+                </div>
+
+
+              </div>
+              <div class="form-labels-input">
+
+                <div>Vendor Name</div>
+
+                <div>
+                  <form class="example-form">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <input matInput value="{{VendorName}}" disabled="true">
+                    </mat-form-field>
+                  </form>
+                </div>
+
+
+              </div>
+            </div>
+          </mat-card-content>
+          <div class="action-container">
+            <mat-card-actions>
+              <button mat-button class="ViewReceipt" (click)="openDialog()">View Receipt</button>
+              <div class="approvals-button" style="float: right;">
+                <button mat-button color="accent" (click)="approve()">Approve</button>
+                <button mat-button class="rejectButton" (click)="Reject()">Reject</button>
+              </div>
+
+            </mat-card-actions>
 
           </div>
-          <div class="container"
-               fxLayout="column"
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="2px"
-               fxFlex="20%">
 
-            <div>Vendor Name</div>
+        </mat-card>
 
-            <div>
-              <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput value="{{VendorName}}" disabled="true">
-                </mat-form-field>
-              </form></div>
+        <mat-card style="background-color:#222437; margin-top: 30px;">
+          <mat-card-header style="color:white;">
+            <mat-card-title>Item Details</mat-card-title>
+          </mat-card-header>
+          <mat-divider [inset]="true"></mat-divider>
+          <mat-card-content>
+            <app-revisable-table [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items"
+              (ChangedFinalAmount)="finalPriceChange($event)">
+            </app-revisable-table>
+          </mat-card-content>
 
-
-          </div>
-        </div>
-      </mat-card-content>
-      <div class="container"
-    fxLayout
-    fxLayout.xs="column"
-    fxLayoutAlign="space-between"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="2px"
-    >
-      <mat-card-actions>
-        <button mat-button class="ViewReceipt" (click)="openDialog()">View Recipt</button>
-      </mat-card-actions>
-      <mat-card-actions>        
-        <button mat-button color="accent" (click)="approve()">Approve</button>
-        <button mat-button class="rejectButton" (click)="Reject()">Reject</button>
-      </mat-card-actions>
-     </div>
-
-    </mat-card> 
-   
-      <!-- <div class="table-vendor-details">
-        <p style="color: white;
-        font-size: large;
-        position: relative;
-        top: 16px;
-        left: 20px;margin-top: 0;
-    margin-bottom: 0rem;">Item Details</p>
-<mat-divider [inset]="true"></mat-divider> -->
-<mat-card style="background-color:#222437; margin-top: 30px;">
-  <mat-card-header style="color:white;">  
-      <mat-card-title>Item Details</mat-card-title>
-  </mat-card-header>
-  <mat-divider [inset]="true"></mat-divider>
-  <mat-card-content>
-          <app-revisable-table [columnHeader]=columns 
-            [(griddata)]="itemquantityprice" [ItemList]="Items"  
-            (ChangedFinalAmount)="finalPriceChange($event)">
-          </app-revisable-table>
-        </mat-card-content>
-          <!-- <div class="upload-submit-button-position"> -->
-            <!-- <input type="file" #file id="fileUpload" class="input_fileupload--hidden" (change)="uploadImage(file.files)"> -->
-            <!-- <button mat-raised-button class="upload-button" (click)="file.click()">
-              <mat-icon class="upload-icon-size">file_upload</mat-icon>Upload
-            </button> -->
-            <!-- <button mat-button color="accent" (click)="approve()">Approve</button> -->
-          <!-- </div> -->
-      <!-- </div> -->
-    </mat-card>
-</div>
-
-
+        </mat-card>
+      </div>
+    </div>
+  </div>

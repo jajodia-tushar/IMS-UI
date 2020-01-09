@@ -3,45 +3,35 @@
   position: static;
 }
 
-mat-card {
-  top: 5%;
-    margin-right: 0%;
-    margin-left: 0%;
-    bottom: 0%;
-    border-radius: 6px;
-}
-.rejectButton{
+.rejectButton {
   color: red !important;
   border: 1px solid red !important;
   margin-left: 15px;
 }
-:host ::ng-deep .revisable-table {
+/* :host ::ng-deep .revisable-table {
   width: 100%;
   border-radius: 10px;
-  margin-top: 28px;
+  margin-top: 0px;
   margin-left: 0px;
   margin-left: 0px;
   background-color: #222437;
-}
-
-.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
-  
+} */
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
   color: white;
-  
+
   text-align: center;
   margin: 0;
   bottom: 17px;
   border: 0.5px solid slategray;
- 
 }
 
-.vendor-details{
+.vendor-details {
   height: 100%;
   width: 100%;
   background-color: #1c1e2f;
-}
-.margin{
-  margin: 0.5% ;
 }
 
 :host ::ng-deep .mat-card-header-text {
@@ -53,13 +43,15 @@ mat-card {
   border-radius: 0.25rem !important;
   padding: 8px 16px;
   cursor: pointer;
-  border-color:#3f51b5;
+  border-color: #3f51b5;
 }
 .input_fileupload--hidden {
   display: none;
 }
 
-.mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
+.mat-button.mat-accent,
+.mat-icon-button.mat-accent,
+.mat-stroked-button.mat-accent {
   color: springgreen;
   border: 1px solid springgreen;
   margin-left: 15px;
@@ -93,7 +85,7 @@ mat-card {
   margin-right: 20px;
 }
 
-::ng-deep .mat-divider {
+:host ::ng-deep .mat-divider {
   display: block;
   margin: 0;
   border-top-width: 0.5px;
@@ -103,16 +95,14 @@ mat-card {
   background-color: white;
 }
 
-
-
-.table-vendor-details{
+.table-vendor-details {
   position: relative;
-    /* height: 400px; */
-    min-height: 290px;
-    background-color:#222437;
-    border-radius: 9px;
-    width: 100%;
-    top: 50px;
+  /* height: 400px; */
+  min-height: 290px;
+  background-color: #222437;
+  border-radius: 9px;
+  width: 100%;
+  top: 50px;
 }
 .mat-input-element:disabled {
   color: white;
@@ -120,22 +110,82 @@ mat-card {
 
 .container {
   width: 100%;
-  padding-right: 16px;
-  padding-left: 0px;
-  margin-right: 0;
-  margin-left: auto;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   color: white;
 }
-.ViewReceipt{
-border: 1px solid slateblue;
-    color: white;
-    background-color: #222437;
+.ViewReceipt {
+  border: 1px solid slateblue;
+  color: white;
+  background-color: #222437;
 }
 
-
-::ng-deep .cdk-overlay-dark-backdrop {
+:host ::ng-deep .cdk-overlay-dark-backdrop {
   background: rgba(28, 30, 47, 0.8);
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > div {
+  margin: 10px;
+  text-align: left;
+}
+
+.container {
+  margin-right: 3%;
+  border-radius: 7px;
+  overflow: auto;
+  min-width: 290px;
+}
+
+.container {
+  min-width: 100%;
+}
+
+.form-label-inclosing-class {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-labels-input {
+  margin-top: 10px;
+}
+
+.action-container {
+  display: flex;
+  position: relative;
+  height: 40px;
+}
+
+.mat-card-actions {
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  display: block;
+  position: relative;
+  flex: auto;
+  min-width: 0;
+  width: 166px;
+}
+
+.mat-form-field {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-form-field-flex {
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 90%;
 }

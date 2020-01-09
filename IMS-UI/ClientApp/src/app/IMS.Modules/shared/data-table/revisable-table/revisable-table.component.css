@@ -1,25 +1,47 @@
-::ng-deep .mat-select-placeholder {
-    color: white;
+:host ::ng-deep .mat-select-placeholder {
+  color: white;
 }
-::ng-deep .mat-select-value-text {
-    color: white;
+:host ::ng-deep .mat-select-value-text {
+  color: white;
 }
 
-.Add-icon{
-    border: 1px solid slateblue;
-    color: white;
-    background-color: #222437;
+.Add-icon {
+  border: 1px solid slateblue;
+  color: white;
+  background-color: #222437;
 }
 
 .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 22px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+.revisable-table {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-left: 0px;
+  background-color: #222437;
+}
+
+:host ::ng-deep mat-cell:first-of-type,
+mat-footer-cell:first-of-type,
+mat-header-cell:first-of-type {
+  padding-left: 2px;
+}
+
+:host ::ng-deep .mat-cell,
+.mat-footer-cell {
+  font-size: 12px;
+}
+
+:host ::ng-deep .mat-select-arrow {
+  color: slateblue;
 }

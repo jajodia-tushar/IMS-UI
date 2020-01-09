@@ -220,7 +220,7 @@ export class ReportsTabsComponent implements OnInit {
         urlToRequest: ""
       },
       {
-        reportName: "Vendor",
+        reportName: "Vendor Orders",
         reportsFilterOptions: [
           {
             placeHolderName: "VendorName",

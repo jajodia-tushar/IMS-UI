@@ -1,11 +1,11 @@
-.items-container {
+/* .items-container {
   background-color: #1f2132;
   border-radius: 8px;
   overflow: auto;
   position: relative;
   color: white;
   height: 100%;
-}
+} */
 
 *:focus {
   outline: none;
@@ -13,7 +13,7 @@
 
 .mat-cell,
 .mat-footer-cell {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .flex-container {
@@ -39,13 +39,13 @@
 }
 
 tr.example-detail-row {
-  background-color: #1f2132;
+  background-color: #222437;
   cursor: none;
   height: 0;
 }
 
 .example-element-row td {
-  color: beige;
+  color: white;
 }
 
 th {
@@ -64,7 +64,7 @@ th {
 }
 
 table {
-  background-color: #1f2132;
+  background-color: #222437;
   width: 100%;
 }
 
@@ -97,18 +97,17 @@ th.mat-header-cell:last-of-type {
   padding-right: 0px;
 }
 
-.mat-icon-button[disabled] {
+.mat-icon-button[disabled]{
   color: gray !important;
 }
 
 .mat-paginator {
-  background-color: #1f2132;
-  color: beige;
-  font-size: medium;
+  background-color: #222437;
+  color: white;
 }
 
 ::ng-deep #mat-select-0 > div > div.mat-select-value {
-  color: beige;
+  color: white;
 }
 
 ::ng-deep
@@ -116,5 +115,38 @@ th.mat-header-cell:last-of-type {
   > div
   > div.mat-select-arrow-wrapper
   > div.mat-select-arrow {
-  color: beige;
+  color: white;
+}
+
+.items-container {
+  margin: 0px 20px 10px 10px;
+  top: 20px;
+  background-color: #222437;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+  color: white;
+  overflow: hidden;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container>div {
+  margin: 10px;
+  text-align: left;
+}
+
+.container {
+  margin-right: 3%;
+  border-radius: 7px;
+  overflow: auto;
+  min-width: 290px;
+}
+
+.paginator {
+  background-color: #222437 !important;
+  color: white;
 }

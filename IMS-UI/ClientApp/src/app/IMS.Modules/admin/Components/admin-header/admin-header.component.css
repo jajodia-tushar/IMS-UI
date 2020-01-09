@@ -8,25 +8,11 @@
   right: 0;
 }
 
-/* .dropdown-content a:hover {background-color: #f1f1f1}
-
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+:host ::ng-deep .mat-drawer-inner-container {
+  background-color: #222437;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .dropdown-content a {
@@ -34,8 +20,7 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-} */
-
+}
 .example-is-mobile .example-toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
@@ -59,38 +44,8 @@ h1.example-app-name {
   display: flex;
 }
 
-/* .logout-section {
-  position: absolute;
-  right: 1%;
-} */
-/* 
-.notification-section {
-  position: absolute;
-  right: 30%;
-  display: flex;
-} */
-
-/* .material-icons.md-light {
-  color: rgba(255, 255, 255, 1);
-}
-.material-icons.md-light.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.example-is-mobile .example-toolbar {
-  position: fixed; */
-/* Make sure the toolbar will stay on top of the content as it scrolls past. */
-/* z-index: 2;
-} */
-
 h1.example-app-name {
   margin-left: 8px;
-}
-
-.example-sidenav-container {
-  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
-       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-  flex: 1;
 }
 
 .example-is-mobile .example-sidenav-container {
@@ -136,12 +91,9 @@ button {
   color: #fff;
 }
 
-.mat-drawer-inner-container {
-  background-color: #222437;
-}
-
 .mat-drawer-content {
   background-color: #1c1e2f;
+  overflow: auto;
 }
 
 button {
@@ -179,6 +131,7 @@ button {
   display: flex;
   font-weight: 200;
   font-family: roboto;
+  cursor: default;
 }
 
 button:focus,

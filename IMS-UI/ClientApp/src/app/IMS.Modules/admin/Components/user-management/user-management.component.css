@@ -1,29 +1,22 @@
-.container-class{
-    width: 100%;
-    height: 80%;
-   /* background-color: rgb(212, 41, 41);*/
-    position: relative;
-    margin: 30px;
-    color : white;
-  }
+.user-details {
+  width: 97%;
+  height: 80%;
 
-h5{
-    margin :20px;
-    color: white;
+  position: relative;
+  margin: 30px;
+  color: white;
 }
-  /* button{
-      position: absolute;
-      right: 10px;
-      background-color: #606a96;
-  } */
 
-.table-container{
-    position: relative;
-    /*background-color: greenyellow;*/
-    top: 5%;
-    /* margin-top: 22px; */
-    /* margin: 10px; */
-    width: 96%;
-    height: 90%;
- 
+h5 {
+  margin: 20px;
+  color: white;
+}
+
+.table-container {
+  position: relative;
+
+  top: 5%;
+
+  width: 96%;
+  height: 90%;
 }

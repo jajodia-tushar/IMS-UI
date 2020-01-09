@@ -1,6 +1,5 @@
 <button id="add-user" mat-button (click)="openAddUserDialog()">Add User</button>
 <input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-<app-spinning-loader></app-spinning-loader>
 <table mat-table [dataSource]="dataSource" matSort>
   
   <!-- Username Column -->

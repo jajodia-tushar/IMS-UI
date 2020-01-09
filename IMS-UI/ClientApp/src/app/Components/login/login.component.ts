@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           if (this.role == 'Shelf') {
             if (!this.isPopedUp) {
               let dialogConfig = new MatDialogConfig();
-              dialogConfig.disableClose = false;
+              dialogConfig.disableClose = true;
               dialogConfig.panelClass = 'dialog-floor-select';
               dialogConfig.autoFocus = true;
               // dialogConfig.width = "%";

@@ -63,7 +63,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .example-element-detail {
-    color: beige;
+    color: white;
     overflow: hidden;
     display: flex;
     /* border-bottom: 1px solid #606a96; */
@@ -96,7 +96,7 @@ table {
 }
 
 .example-element-row td {
-    color: beige;
+    color: white;
     line-height: 0px;
     border-bottom-width: 0px;
     padding-left: 0px;

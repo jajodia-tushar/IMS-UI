@@ -2,11 +2,13 @@
     float: right;
 }
 
-/* ::ng-deep .mat-dialog-container {
-    background-color: #222437;
-    color: aliceblue;
-} */
-
 .action-buttons .mat-raised-button{
     min-height: 30px;
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
+    color : white;
+    background-color: #1c1e2f;
 }
+

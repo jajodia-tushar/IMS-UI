@@ -45,7 +45,7 @@ tr.example-detail-row {
 }
 
 .example-element-row td {
-  color: beige;
+  color: white;
 }
 
 th {
@@ -97,18 +97,18 @@ th.mat-header-cell:last-of-type {
   padding-right: 0px;
 }
 
-.mat-icon-button[disabled] {
+.mat-icon-button[disabled]{
   color: gray !important;
 }
 
 .mat-paginator {
   background-color: #1f2132;
-  color: beige;
+  color: white;
   font-size: medium;
 }
 
 ::ng-deep #mat-select-0 > div > div.mat-select-value {
-  color: beige;
+  color: white;
 }
 
 ::ng-deep
@@ -116,5 +116,5 @@ th.mat-header-cell:last-of-type {
   > div
   > div.mat-select-arrow-wrapper
   > div.mat-select-arrow {
-  color: beige;
+  color: white;
 }

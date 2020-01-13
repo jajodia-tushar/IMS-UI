@@ -98,7 +98,7 @@ export class ReportsTabsComponent implements OnInit {
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
       
     let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
-    this.vendorService.getVendorOrder(vendorId,toDate, fromDate).subscribe(
+    this.vendorService.getVendorOrder(vendorId,toDate, fromDate,"true",this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data => {
         if (data.status == "Success") {
           console.log(data);
@@ -129,6 +129,7 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
+        this.pageInfo = data.pagingInfo;
       }
       ,
       error => {
@@ -138,13 +139,6 @@ export class ReportsTabsComponent implements OnInit {
       }
     );
   }
-
-  paginatorClicked(event) {
-    this.pageInfo.pageNumber = event.pageIndex + 1;
-    this.pageInfo.pageSize = event.pageSize;
-    this.searchButtonClicked();
-  }
-
   showRAGDataTable() {
     this.errorMessage = JSON.parse(JSON.stringify(""));
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
@@ -185,6 +179,12 @@ export class ReportsTabsComponent implements OnInit {
       
     );
   }
+  paginatorClicked(event) {
+    this.pageInfo.pageNumber = event.pageIndex + 1;
+    this.pageInfo.pageSize = event.pageSize;
+    this.searchButtonClicked();
+  }
+
 
   async initializeEmptyData() {
 

@@ -49,14 +49,6 @@ export class ReportsTableComponent implements OnInit {
    return  (this.dataSource[0] != null && this.dataSource[0].innerData != null)
   }
 
-  showPaginator(){
-    if (this.dataSource.length == 0) {
-      return false;
-    }
-
-    return !(this.dataSource[0] != null && this.dataSource[0].innerData != null)
-  }
-
   showErrorMessage() {
     return !this.dataSource.length;
   }

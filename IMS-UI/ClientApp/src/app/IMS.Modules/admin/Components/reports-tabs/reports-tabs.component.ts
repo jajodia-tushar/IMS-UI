@@ -198,111 +198,24 @@ export class ReportsTabsComponent implements OnInit {
     this.pageInfo.pageSize = 10;
     this.pageInfo.totalResults = 0;
 
-    this.reportsSelectionData = [
-      {
-        reportName: "RAG",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Shelf",
-            type: "dropDown",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.locationCode
-          },
-          {
-            placeHolderName: "Color",
-            type: "dropDown",
-            dropDownOptions: ["Red", "Amber", "Green"],
-            dropDownValues: ["Red", "Amber", "Green"],
-            dataFromUser: this.colour
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Vendor Orders",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "VendorName",
-            type: "dropDown",
-            dropDownOptions: ["All Vendors"],
-            dropDownValues: ["0"],
-            dataFromUser: "0"
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.fromDate,
-            endDate: new Date()
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.toDate,
-            endDate: new Date()
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Employee",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Employee Id",
-            type: "dropDown",
-            dropDownOptions: ["1", "2", "3"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Item",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Item Name",
-            type: "dropDown",
-            dropDownOptions: ["Pen", "Pencil", "Notebook"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
-      },
-    ];
+    let reportsPageConfigFile = require("src/assets/JSON/reportsPageConfig.json");
+    this.reportsSelectionData = reportsPageConfigFile as reportsSelectionDataModel[];
+
+    this.reportsSelectionData.forEach(
+      item =>{
+        if(item.reportName =="RAG"){
+          item.reportsFilterOptions[0].dataFromUser = this.locationCode;
+          item.reportsFilterOptions[1].dataFromUser = this.colour; 
+        }
+
+        if(item.reportName == "Vendor Orders"){
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[2].endDate = new Date();
+          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+      }
+    )
 
     await this.getRAGReportDropDownList().then(
       data => {

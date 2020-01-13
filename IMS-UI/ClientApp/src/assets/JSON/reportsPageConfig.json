@@ -1,0 +1,120 @@
+[{
+        "reportName": "RAG",
+        "reportsFilterOptions": [{
+                "placeHolderName": "Shelf",
+                "type": "dropDown",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            },
+            {
+                "placeHolderName": "Color",
+                "type": "dropDown",
+                "dropDownOptions": [
+                    "Red",
+                    "Amber",
+                    "Green"
+                ],
+                "dropDownValues": [
+                    "Red",
+                    "Amber",
+                    "Green"
+                ],
+                "dataFromUser": ""
+            }
+        ],
+        "urlToRequest": ""
+    },
+    {
+        "reportName": "Vendor Orders",
+        "reportsFilterOptions": [{
+                "placeHolderName": "VendorName",
+                "type": "dropDown",
+                "dropDownOptions": [
+                    "All Vendors"
+                ],
+                "dropDownValues": [
+                    "0"
+                ],
+                "dataFromUser": "0"
+            },
+            {
+                "placeHolderName": "FromDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": "",
+                "endDate": ""
+            },
+            {
+                "placeHolderName": "ToDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": "",
+                "endDate": ""
+            }
+        ],
+        "urlToRequest": ""
+    },
+    {
+        "reportName": "Employee",
+        "reportsFilterOptions": [{
+                "placeHolderName": "Employee Id",
+                "type": "dropDown",
+                "dropDownOptions": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            },
+            {
+                "placeHolderName": "FromDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            },
+            {
+                "placeHolderName": "ToDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            }
+        ],
+        "urlToRequest": ""
+    },
+    {
+        "reportName": "Item",
+        "reportsFilterOptions": [{
+                "placeHolderName": "Item Name",
+                "type": "dropDown",
+                "dropDownOptions": [
+                    "Pen",
+                    "Pencil",
+                    "Notebook"
+                ],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            },
+            {
+                "placeHolderName": "FromDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            },
+            {
+                "placeHolderName": "ToDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": ""
+            }
+        ],
+        "urlToRequest": ""
+    }
+]

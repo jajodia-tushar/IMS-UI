@@ -51,14 +51,11 @@ import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-
     UserListComponent,
     DeactivateDialogComponent,
     DetailsPipe,
-      StoreUpdateComponent,
-      InvoiceEditorComponent,
-      NotificationsComponent,
-      ImageDialogComponent,
-
-    ItemAddDialogComponent,
+    StoreUpdateComponent,
+    InvoiceEditorComponent,
+    NotificationsComponent,
+    ImageDialogComponent,
     ItemAddFormComponent,
-    DetailsPipe
     ItemManagementComponent,
     ItemListComponent,
     ItemManageDialogComponent
@@ -68,6 +65,6 @@ import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-
       AdminRoutingModule,
       SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, UserAddDialogComponent, ItemAddDialogComponent, ItemManageDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent]
 })
 export class AdminModule { }

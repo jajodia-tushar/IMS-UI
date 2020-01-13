@@ -47,9 +47,9 @@ namespace IMS_UI.Controllers
 
         // GET: api/Vendor/5
         [HttpGet("orders")]
-        public async Task<IActionResult> GetAllVendorOrders(string toDate, string fromDate)
+        public async Task<IActionResult> GetAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
-            var response = await _VendorOrderProvider.getAllVendorOrders(toDate,fromDate);
+            var response = await _VendorOrderProvider.getAllVendorOrders(toDate,fromDate,approved,pageNumber,pageSize);
             try
             {
                 if (response.Error != null && response.Error.ErrorCode == 401)
@@ -64,9 +64,9 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet("orders/{vendorId}")]
-        public async Task<IActionResult> Get(string vendorId, string toDate, string fromDate)
+        public async Task<IActionResult> Get(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
-            var response = await _VendorOrderProvider.getParticularVendorOrder(vendorId,toDate, fromDate);
+            var response = await _VendorOrderProvider.getParticularVendorOrder(vendorId,toDate, fromDate, approved, pageNumber, pageSize);
             try
             {
                 if (response.Error != null && response.Error.ErrorCode == 401)

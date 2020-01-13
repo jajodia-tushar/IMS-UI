@@ -10,5 +10,6 @@ namespace IMS_UI.IMS.Models
     public class VendorOrdersList : Response
     {
         public List<VendorOrder> VendorOrders { get; set; }
+        public PagingInfo pagingInfo { get; set; }
     }
 }

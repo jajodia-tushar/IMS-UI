@@ -57,7 +57,6 @@ const materialModules = [
   MatCardModule,
   MatIconModule,
   MatSidenavModule,
-  MatGridListModule,
   MatTableModule,
   MatPaginatorModule,
   MatSnackBarModule,

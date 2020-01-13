@@ -23,11 +23,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
-import { ItemAddDialogComponent } from './Components/item-add-dialog/item-add-dialog.component';
 import { ItemAddFormComponent } from './Components/item-add-form/item-add-form.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ImageDialogComponent } from './Components/image-dialog/image-dialog.component';
+import { ItemListComponent } from './Components/item-list/item-list.component';
+import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-manage-dialog.component';
 
 
 @NgModule({
@@ -58,12 +59,15 @@ import { ImageDialogComponent } from './Components/image-dialog/image-dialog.com
     ItemAddDialogComponent,
     ItemAddFormComponent,
     DetailsPipe
+    ItemManagementComponent,
+    ItemListComponent,
+    ItemManageDialogComponent
   ],
   imports: [
     MaterialModule,
       AdminRoutingModule,
       SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, UserAddDialogComponent, ItemAddDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, UserAddDialogComponent, ItemAddDialogComponent, ItemManageDialogComponent]
 })
 export class AdminModule { }

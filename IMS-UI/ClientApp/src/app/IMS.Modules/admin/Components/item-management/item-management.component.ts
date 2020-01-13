@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ItemAddDialogComponent } from '../item-add-dialog/item-add-dialog.component';
+import { ItemManageDialogComponent } from '../item-manage-dialog/item-manage-dialog.component';
 
 @Component({
   selector: 'app-item-management',
@@ -15,7 +15,7 @@ export class ItemManagementComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ItemAddDialogComponent);
+    const dialogRef = this.dialog.open(ItemManageDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

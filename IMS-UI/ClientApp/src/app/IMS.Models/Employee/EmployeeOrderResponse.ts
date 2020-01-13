@@ -1,5 +1,7 @@
+import { EmployeeOrder } from "./EmployeeOrder";
+
 export class EmployeeOrderResponse{
-        employeeOrder: any;
+        employeeOrder: EmployeeOrder;
         status: string;
         error: Error;
 }

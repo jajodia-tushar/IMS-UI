@@ -8,7 +8,10 @@
     color: white;
     overflow: hidden;
 }
-
+.error  {
+    color: red; 
+    text-align: center;
+}
 .flex-container {
     display: flex;
     flex-wrap: nowrap;
@@ -23,7 +26,7 @@
     margin-right: 3%;
     border-radius: 7px;
     overflow: auto;
-    min-width: 290px;
+    min-width: 100%;
 }
 
 .container>h4 {
@@ -44,10 +47,6 @@ th {
 
 table {
     background-color: #222437;
-    width: 100%;
-}
-
-table {
     width: 100%;
 }
 
@@ -107,11 +106,4 @@ td {
 .paginator {
     background-color: #222437 !important;
     color: white;
-}
-
-.container {
-    min-width: 100%;
-}
-.container{
-    min-width: 100%;
 }

@@ -47,12 +47,6 @@
     display: none;
 }
 
-
-/* ::ng-deep .mat-dialog-container {
-  background-color: #222437;
-  color: aliceblue;
-} */
-
 .mat-raised-button:not(:disabled) {
     color: white;
     border: 0.5px solid grey;
@@ -141,6 +135,6 @@ input.mat-input-element {
     color: #f5f5f5 !important;
 }
 
-.mat-form-field-appearance-outline .mat-hint {
+:ost ::ng-deep .mat-form-field-appearance-outline .mat-hint {
     color: #808e9c;
 }

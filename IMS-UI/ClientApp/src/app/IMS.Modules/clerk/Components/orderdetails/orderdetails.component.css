@@ -15,6 +15,12 @@
   color: #f5f5f5;
 }
 
+
+.divider-position {
+  padding-left: 4%;
+  background-color: #f5f5f5;
+}
+
 :host ::ng-deep .form-field-size{
   margin-top:5% !important;
   width:80%;

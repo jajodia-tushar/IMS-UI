@@ -141,11 +141,11 @@ button.active:focus {
   outline-style: none !important;
 }
 
-mat-nav-list a.active {
+.nav-list a.active {
   background-color: #262d4a;
   color: #fff;
 }
 
-mat-nav-list a {
+.nav-list a {
   color: #606a96;
 }

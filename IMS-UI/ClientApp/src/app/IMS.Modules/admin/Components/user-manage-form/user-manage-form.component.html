@@ -1,88 +1,78 @@
+<form class="form-container" [formGroup]="createUserForm" (ngSubmit)="submitForm()" autocomplete="off">
+  <div class="one-row">
+    <label class="roles-radio">Role :</label>
+    <mat-radio-group formControlName="role" class="roles-radio-group">
+      <mat-radio-button *ngFor="let roleOption of roles" [value]="roleOption"
+        [checked]="role.value.name== roleOption.name">{{roleOption.name}}</mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-  <form class="form-container" [formGroup]="createUserForm" (ngSubmit)="submitForm()" autocomplete="off">
-   <div class="one-row">
-      <label class="roles-radio">Role :</label>
-      <mat-radio-group formControlName="role" style="display: flex;justify-content: space-between;" >
-        <mat-radio-button *ngFor="let roleOption of roles" [value]="roleOption" [checked]="role.value.name== roleOption.name">{{roleOption.name}}</mat-radio-button>
-      </mat-radio-group>
-    </div>
- 
-
-  <mat-form-field
-      hidden="true">
+  <mat-form-field hidden="true">
     <input matInput formControlName="id" placeholder="id" type="number">
   </mat-form-field>
 
-
-
-    
   <div class="one-row">
-  <mat-form-field
-      floatLabel="auto">
-    <input matInput placeholder="First Name" formControlName="firstname" required>
-    <mat-error *ngIf="firstname.errors?.cannotContainSpace">First Name can not contain space.</mat-error>
-    <mat-error *ngIf="firstname.errors?.maxlength">Max Length{{firstname.errors.maxlength.requiredLength}}</mat-error>
-  </mat-form-field>
-  
-  <mat-form-field
-      hideRequiredMarker="true"
-      floatLabel="auto">
-    <input matInput placeholder="Last Name" formControlName="lastname">
-    <mat-error *ngIf="lastname.errors?.cannotContainSpace">Last Name can not contain space.</mat-error>
-    <mat-error *ngIf="lastname.errors?.maxlength">Max Length{{lastname.errors.maxlength.requiredLength}}</mat-error>
-  </mat-form-field>
-</div>
-  
-<div class="one-row">
-  <mat-form-field
-  floatLabel="auto">
-<input matInput formControlName="username" placeholder="UserName" required >
-<mat-error *ngIf="username.errors?.minlength">Min Length{{username.errors.minlength.requiredLength}}</mat-error>
-<mat-error *ngIf="username.errors?.maxlength">Max Length{{username.errors.maxlength.requiredLength}}</mat-error>
-<mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
-<mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
-<mat-error *ngIf="username.errors?.userNameNotAvailable">Username Already Taken</mat-error>
-<mat-hint *ngIf="username.pending">Checking for Uniqueness</mat-hint>
-</mat-form-field>
+    <mat-form-field class="one-row-input" floatLabel="auto">
+      <input matInput placeholder="First Name" formControlName="firstname" required>
+      <mat-error *ngIf="firstname.errors?.cannotContainSpace">First Name can not contain space.</mat-error>
+      <mat-error *ngIf="firstname.errors?.maxlength">Max Length{{firstname.errors.maxlength.requiredLength}}</mat-error>
+    </mat-form-field>
 
-  <mat-form-field
-      hideRequiredMarker="false"
-      floatLabel="auto">
-    <input matInput placeholder="Password" formControlName="password" required type="password">
-    <mat-hint align="end">Password must contain numeric, special and small and capital alphabets.</mat-hint>
-    <mat-error *ngIf="password.errors?.minlength">Min Length{{password.errors.minlength.requiredLength}}</mat-error>
-    <mat-error *ngIf="password.errors?.cannotContainSpace">Password can not contain space.</mat-error>
-    <mat-error *ngIf="password.errors?.maxlength">Max Length{{password.errors.maxlength.requiredLength}}</mat-error>
-    <mat-error *ngIf="password.errors?.hasCapitalCase">Must Contain At Least 1 Capital Case!</mat-error>
-    <mat-error *ngIf="password.errors?.hasNumber">Must Contain At Least 1 Number!</mat-error>
-    <mat-error *ngIf="password.errors?.hasSmallCase">Must Contain At Least 1 Small Case!</mat-error>
-    <mat-error *ngIf="password.errors?.hasSpecialCharacters">Must Contain At Least 1 Special Character!</mat-error>
-  </mat-form-field>
-</div>
+    <mat-form-field class="one-row-input" hideRequiredMarker="true" floatLabel="auto">
+      <input matInput placeholder="Last Name" formControlName="lastname">
+      <mat-error *ngIf="lastname.errors?.cannotContainSpace">Last Name can not contain space.</mat-error>
+      <mat-error *ngIf="lastname.errors?.maxlength">Max Length{{lastname.errors.maxlength.requiredLength}}</mat-error>
+    </mat-form-field>
+  </div>
 
-<div class="one-row">
-  
+  <div class="one-row">
+    <mat-form-field class="one-row-input" floatLabel="auto">
+      <input matInput formControlName="username" placeholder="UserName" required>
+      <mat-error *ngIf="username.errors?.minlength">Min Length{{username.errors.minlength.requiredLength}}</mat-error>
+      <mat-error *ngIf="username.errors?.maxlength">Max Length{{username.errors.maxlength.requiredLength}}</mat-error>
+      <mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
+      <mat-error *ngIf="username.errors?.cannotContainSpace">Username can not contain space.</mat-error>
+      <mat-error *ngIf="username.errors?.userNameNotAvailable">Username Already Taken</mat-error>
+      <mat-hint *ngIf="username.pending">Checking for Uniqueness</mat-hint>
+    </mat-form-field>
 
-  <mat-form-field
-      hideRequiredMarker="false"
-      floatLabel="auto" >
-    <input matInput placeholder="Email" formControlName="email" required>
-    <mat-error *ngIf="email.errors?.emailNotAvailable">Email Already Taken</mat-error>
-    <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
-    <mat-hint *ngIf="email.pending">Checking if Email exists.</mat-hint>
-  </mat-form-field>
-</div>
-<br><br>
+    <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
+      <input matInput placeholder="Password" formControlName="password" required type="password">
+      <mat-hint align="end">Password must contain numeric, special and small and capital alphabets.</mat-hint>
+      <mat-error *ngIf="password.errors?.minlength">Min Length{{password.errors.minlength.requiredLength}}</mat-error>
+      <mat-error *ngIf="password.errors?.cannotContainSpace">Password can not contain space.</mat-error>
+      <mat-error *ngIf="password.errors?.maxlength">Max Length{{password.errors.maxlength.requiredLength}}</mat-error>
+      <mat-error *ngIf="password.errors?.hasCapitalCase">Must Contain At Least 1 Capital Case!</mat-error>
+      <mat-error *ngIf="password.errors?.hasNumber">Must Contain At Least 1 Number!</mat-error>
+      <mat-error *ngIf="password.errors?.hasSmallCase">Must Contain At Least 1 Small Case!</mat-error>
+      <mat-error *ngIf="password.errors?.hasSpecialCharacters">Must Contain At Least 1 Special Character!</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="one-row">
+
+    <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
+      <input matInput placeholder="Email" formControlName="email" required>
+      <mat-error *ngIf="email.errors?.emailNotAvailable">Email Already Taken</mat-error>
+      <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
+      <mat-hint *ngIf="email.pending">Checking if Email exists.</mat-hint>
+    </mat-form-field>
+  </div>
+  <br><br>
   <div class="action-buttons one-row">
     <div class="position-of-buttons">
-  <button *ngIf="isEditUserForm==null" [disabled]="!createUserForm.valid" mat-button type="submit" class="submit-update" >
-    {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
-</button>
-  <button *ngIf="isEditUserForm==true" [disabled]="!createUserForm.valid" mat-button type="submit" class="submit-update">
-    {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
-  </button>
-  <button *ngIf="isEditUserForm==null" mat-button type="button" (click)="cancelCreate()" class="cancel">Cancel</button>
-  <button *ngIf="isEditUserForm==true" mat-button type="button" (click)="cancelUpdate()" class="cancel">Cancel</button>
-</div>
-</div>
-    </form>
+      <button *ngIf="isEditUserForm==null" [disabled]="!createUserForm.valid" mat-button type="submit"
+        class="submit-update">
+        {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
+      </button>
+      <button *ngIf="isEditUserForm==true" [disabled]="!createUserForm.valid" mat-button type="submit"
+        class="submit-update">
+        {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
+      </button>
+      <button *ngIf="isEditUserForm==null" mat-button type="button" (click)="cancelCreate()"
+        class="cancel">Cancel</button>
+      <button *ngIf="isEditUserForm==true" mat-button type="button" (click)="cancelUpdate()"
+        class="cancel">Cancel</button>
+    </div>
+  </div>
+</form>

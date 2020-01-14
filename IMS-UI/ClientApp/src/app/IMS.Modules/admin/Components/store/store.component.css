@@ -1,14 +1,9 @@
-/* .items-container {
-  background-color: #1f2132;
-  border-radius: 8px;
-  overflow: auto;
-  position: relative;
-  color: white;
-  height: 100%;
-} */
-
 *:focus {
   outline: none;
+}
+
+.font-weight-bold  {
+  color: white;
 }
 
 .mat-cell,
@@ -19,10 +14,10 @@
 .flex-container {
   display: flex;
   flex-wrap: nowrap;
-  position: relative;
 }
 
 .flex-container > div {
+  margin: 10px;
   text-align: left;
 }
 
@@ -106,15 +101,11 @@ th.mat-header-cell:last-of-type {
   color: white;
 }
 
-::ng-deep #mat-select-0 > div > div.mat-select-value {
+:host ::ng-deep #mat-select-0 > div > div.mat-select-value {
   color: white;
 }
 
-::ng-deep
-  #mat-select-0
-  > div
-  > div.mat-select-arrow-wrapper
-  > div.mat-select-arrow {
+:host ::ng-deep #mat-select-0 > div > div.mat-select-arrow-wrapper > div.mat-select-arrow {
   color: white;
 }
 
@@ -127,26 +118,4 @@ th.mat-header-cell:last-of-type {
   position: relative;
   color: white;
   overflow: hidden;
-}
-
-.flex-container {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.flex-container>div {
-  margin: 10px;
-  text-align: left;
-}
-
-.container {
-  margin-right: 3%;
-  border-radius: 7px;
-  overflow: auto;
-  min-width: 290px;
-}
-
-.paginator {
-  background-color: #222437 !important;
-  color: white;
 }

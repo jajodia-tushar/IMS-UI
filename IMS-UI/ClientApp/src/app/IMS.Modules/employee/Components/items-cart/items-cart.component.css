@@ -8,50 +8,31 @@
     background-color: #222437;
     margin-right: 3%;
     border-radius: 7px;
-    /* border: 3px solid #d9d1d1; */
     overflow: auto;
-    max-width: 660px;;
+    max-width: 660px;
     margin-top: 6%;
 }
 
 table {
     table-layout: fixed;
     width: 100%;
+    background: #222437;
 }
 
-.actionButton {
-    position: absolute;
-    bottom: 8%;
-    right: 10%;
+.table-text-left  {
+    color: white;
+    text-align: left;
 }
 
-.mat-button,
-.mat-flat-button,
-.mat-icon-button,
-.mat-stroked-button {
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
     overflow: hidden;
 }
 
-td.mat-cell,
-td.mat-footer-cell,
-th.mat-header-cell {
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     padding: 0;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: beige;
-}
-
-.actionButton {
-    position: absolute;
-    bottom: 8%;
-    right: 10%;
-}
-
-.mat-button,
-.mat-flat-button,
-.mat-icon-button,
-.mat-stroked-button {
-    overflow: hidden;
 }
 
 .action-buttons {
@@ -59,32 +40,40 @@ th.mat-header-cell {
     padding: 30px;
 }
 
-@media (min-width: 1800px) {
-    .container {
-        max-width: 833px;
-        margin-top: 37px;
-    }
+.clear-button  {
+    position:absolute;
+    margin-left: -110px; 
+    border:1px solid slategray; 
+    color: #fff; 
+    min-width: 90px; 
+    min-height: 40px;
+}
 
-    .clear-button {
-        margin-left: -110px;
-    }
+.order-button  {
+    position: relative; 
+    color: #fff; 
+    border: 1px solid slateblue; 
+    min-width: 90px; 
+    min-height: 40px;
+}
+
+.table-button  {
+    color: white;
+    text-align: center;
 }
 
 
 /* Stepper Styling */
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type="number"]::-webkit-inner-spin-button, [type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   height: auto;
 }
 
 .stepper {
-    /* border: 1px solid #fff; */
     display: inline-block;
     overflow: visible;
     height: 2.1em;
-    background: #222437;
     padding: 1px;
 }
 
@@ -98,14 +87,26 @@ th.mat-header-cell {
 }
 
 .stepper button {
-    width: 1.4em;
-    font-weight: 300;
     height: 100%;
     line-height: 0.1em;
     font-size: 1.4em;
-    padding: 0.2em !important;
+    padding: 0.4em;
     background: #222437;
     color: #fff;
     border: 1px solid slategrey;
     border-radius: 100%;
+}
+
+
+
+
+
+@media (min-width: 1800px) {
+    .container {
+        max-width: 833px;
+        margin-top: 37px;
+    }
+    .clear-button {
+        margin-left: -110px;
+    }
 }

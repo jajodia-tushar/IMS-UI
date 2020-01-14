@@ -2,72 +2,56 @@
 
 <div class="container">
     <div>
-        <table mat-table [dataSource]="selectedItems" style="background: #222437;">
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-
-
-
+        <table mat-table [dataSource]="selectedItems">
             <!-- Position Column -->
             <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> No. </th>
-                <td mat-cell *matCellDef="let element;index as i"  [ngStyle]="{'color': 'white', 'text-align': 'left'}"> {{i+1}} </td>
+                <th mat-header-cell *matHeaderCellDef class="table-text-left"> No. </th>
+                <td mat-cell *matCellDef="let element;index as i" class="table-text-left">
+                    {{i+1}} </td>
             </ng-container>
-
-
-
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white'}"> Name </th>
-                <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white'}"> {{element.item.name}} </td>
+                <th mat-header-cell *matHeaderCellDef class="table-text-left"> Name </th>
+                <td mat-cell *matCellDef="let element" class="table-text-left"> {{element.item.name}} </td>
             </ng-container>
-
-
-
             <!-- Weight Column -->
             <ng-container matColumnDef="Quantity">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'center'}"> Quantity </th>
-                    <td mat-cell *matCellDef="let element"  [ngStyle]="{'color': 'white', 'text-align': 'center'}">
-                        <span class="stepper">
-                            <button class="minus" (click)="minus(element)">–</button>
-                            <input type="number" id="stepper" value="{{element.quantity}}" min="0" max="{{element.item.maxLimit}}" readonly>
-                            <button class="plus" (click)="plus(element)">+</button>
-                        </span>
-                    </td>
+                <th mat-header-cell *matHeaderCellDef class="table-text-left"> Quantity
+                </th>
+                <td mat-cell *matCellDef="let element" class="table-text-left">
+                    <span class="stepper">
+                        <button class="minus" (click)="minus(element)">–</button>
+                        <input type="number" id="stepper" value="{{element.quantity}}" min="0"
+                            max="{{element.item.maxLimit}}" readonly>
+                        <button class="plus" (click)="plus(element)">+</button>
+                    </span>
+                </td>
             </ng-container>
-
-
-
             <!-- Symbol Column -->
             <ng-container matColumnDef="Symbol">
-                <th mat-header-cell *matHeaderCellDef  [ngStyle]="{'color': 'white', 'text-align': 'right'}"></th>
-                <td mat-cell *matCellDef="let element" (click)="delete(element)"  [ngStyle]="{'color': 'white', 'text-align': 'right'}">
+                <th mat-header-cell *matHeaderCellDef class="table-button"></th>
+                <td mat-cell *matCellDef="let element" (click)="delete(element)" class="table-button">
                     <mat-icon style="cursor: pointer;">delete</mat-icon>
                 </td>
             </ng-container>
-
-
-
+            
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-
-
         <div class="action-buttons">
             <mat-dialog-actions>
                 <ng-container ngProjectAs="btn-close">
-                    <button mat-button class="clear-button" style="position:absolute;margin-left: -110px; border:1px solid slategray; color: #fff; min-width: 90px; min-height: 40px;" (click)="onCancel()">
-          Clear Cart
-          </button>
+                    <button mat-button class="clear-button"
+                        (click)="onCancel()">
+                        Clear Cart
+                    </button>
                 </ng-container>
-                <button mat-button style="position: relative; color: #fff; border: 1px solid slateblue; min-width: 90px; min-height: 40px;" (click)="onMakingOrder()" cdkFocusInitial>
-        <app-spinning-loader></app-spinning-loader>{{ButtonName}}
-        </button>
+                <button mat-button class="order-button"
+                    (click)="onMakingOrder()" cdkFocusInitial>
+                    <app-spinning-loader></app-spinning-loader>{{ButtonName}}
+                </button>
             </mat-dialog-actions>
         </div>
-
-
-
     </div>
 </div>

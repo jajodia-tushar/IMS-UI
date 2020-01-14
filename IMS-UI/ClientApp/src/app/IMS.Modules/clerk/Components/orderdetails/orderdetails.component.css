@@ -5,14 +5,17 @@
     width: 100%;
     background-color: #1f2132;
 }
-.card-size mat-card-title {
+
+.card-title {
   color: #f5f5f5 !important;
 }
+
 .empty-items-display p {
   font-size: large;
   color: #f5f5f5;
 }
-::ng-deep .form-field-size{
+
+:host ::ng-deep .form-field-size{
   margin-top:5% !important;
   width:80%;
 }
@@ -23,10 +26,12 @@
   vertical-align: middle;
   line-height: 300px;
 }
+
 .Add-icon{
   margin-top:0%;
 }
-.table-size td.mat-cell, .table-size th.mat-header-cell {
+
+.table-text {
   border-bottom-color: #f5f5f5 !important;
 }
 
@@ -39,7 +44,7 @@
     color: white;
 }
 
-::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 10px !important;
     margin-bottom: 5px;
 }
@@ -49,8 +54,6 @@
     font-weight: 500 !important;
     color: #f5f5f5 !important;
 }
-
-
 
 .delete-icon-size {
     font-size: 30px !important;
@@ -78,20 +81,17 @@
     width: 10px;
 }
 
-
 /* Track */
 
 .table-height::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
-
 /* Handle */
 
 .table-height::-webkit-scrollbar-thumb {
     background: #888;
 }
-
 
 /* Handle on hover */
 
@@ -169,8 +169,8 @@
     width: 10% !important;
 }
 
-::ng-deep .mat-column-ItemName div.mat-form-field-infix,
-::ng-deep .mat-column-Quantity div.mat-form-field-infix,
-::ng-deep .mat-column-action div.mat-form-field-infix {
+:host ::ng-deep .mat-column-ItemName div.mat-form-field-infix,
+:host ::ng-deep .mat-column-Quantity div.mat-form-field-infix,
+:host ::ng-deep .mat-column-action div.mat-form-field-infix {
     width: 33% !important;
 }

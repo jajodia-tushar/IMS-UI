@@ -101,11 +101,11 @@ th.mat-header-cell:last-of-type {
   color: white;
 }
 
-:host ::ng-deep #mat-select-0 > div > div.mat-select-value {
+:host ::ng-deep .mat-select-value {
   color: white;
 }
 
-:host ::ng-deep #mat-select-0 > div > div.mat-select-arrow-wrapper > div.mat-select-arrow {
+:host ::ng-deep .mat-select-arrow {
   color: white;
 }
 

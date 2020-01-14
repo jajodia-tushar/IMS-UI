@@ -50,11 +50,18 @@
     color: white;
 }
 
-:host ::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 10px !important;
-    margin-bottom: 5px;
+:host ::ng-deep .mat-select-value  {
+  color: white;
 }
 
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #f5f5f5;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 10px!important;
+  margin-bottom: 5px;
+}
 .mat-header-cell {
     font-size: 16px !important;
     font-weight: 500 !important;
@@ -77,10 +84,6 @@
     min-height: 300px;
     max-height: 300px;
     overflow-y: scroll;
-}
-
-.table-height::-webkit-scrollbar {
-    width: 10px !important
 }
 
 .table-height::-webkit-scrollbar {
@@ -150,7 +153,6 @@
 .submit-button {
   background: inherit !important;
   color: white !important;
-
   min-height: 36px !important;
   min-width: 76.53px !important;
   position: absolute;
@@ -178,5 +180,6 @@
 :host ::ng-deep .mat-column-ItemName div.mat-form-field-infix,
 :host ::ng-deep .mat-column-Quantity div.mat-form-field-infix,
 :host ::ng-deep .mat-column-action div.mat-form-field-infix {
-    width: 33% !important;
+  color: white;
+  width: 33% !important;
 }

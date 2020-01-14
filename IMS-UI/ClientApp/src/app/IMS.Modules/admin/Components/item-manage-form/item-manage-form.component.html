@@ -1,0 +1,41 @@
+<div class="form-container">
+    <form class="form-container" [formGroup]="createItemForm" (ngSubmit)="submitForm()">
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="itemName" placeholder="Item Name" required>
+            <mat-error *ngIf="itemName.invalid">Invalid Item Name</mat-error>
+            <mat-error *ngIf="itemName.errors?.minlength">Length{{itemName.errors.minlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="maxLimit" placeholder="Maximum Limit" required>
+            <mat-error *ngIf="maxLimit.invalid">Invalid maximum limit</mat-error>
+            <mat-error *ngIf="maxLimit.errors?.maxlength">Length{{maxLimit.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="rate" placeholder="Rate" required>
+            <mat-error *ngIf="rate.invalid">Invalid Rate</mat-error>
+            <mat-error *ngIf="rate.errors?.maxlength">Length{{rate.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="shelfRedLimit" placeholder="Shelfs Red Limit" required>
+            <mat-error *ngIf="shelfRedLimit.invalid">Invalid Shelfs Red limit</mat-error>
+            <mat-error *ngIf="shelfRedLimit.errors?.maxlength">Length{{shelfRedLimit.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="shelfAmberLimit" placeholder="Shelfs Amber Limit" required>
+            <mat-error *ngIf="shelfAmberLimit.invalid">Invalid Shelfs Amber limit</mat-error>
+            <mat-error *ngIf="shelfAmberLimit.errors?.maxlength">Length{{shelfAmberLimit.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="warehouseRedLimit" placeholder="Warehouse Red Limit" required>
+            <mat-error *ngIf="warehouseRedLimit.invalid">Invalid Warehouses Red limit</mat-error>
+            <mat-error *ngIf="warehouseRedLimit.errors?.maxlength">Length{{warehouseRedLimit.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="warehouseAmberLimit" placeholder="Warehouse Amber Limit" required>
+            <mat-error *ngIf="warehouseAmberLimit.invalid">Invalid Warehouse Amber limit</mat-error>
+            <mat-error *ngIf="warehouseAmberLimit.errors?.maxlength">Length{{warehouseAmberLimit.errors.maxlength.requiredLength}}</mat-error>
+        </mat-form-field>
+        <button *ngIf="isEditItemForm==null" mat-button type="submit">Submit</button>
+        <button *ngIf="isEditItemForm==true" mat-button type="submit">Update</button>
+    </form>
+</div>

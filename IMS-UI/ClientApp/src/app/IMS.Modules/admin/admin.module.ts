@@ -23,12 +23,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
-import { ItemAddFormComponent } from './Components/item-add-form/item-add-form.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ImageDialogComponent } from './Components/image-dialog/image-dialog.component';
 import { ItemListComponent } from './Components/item-list/item-list.component';
 import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-manage-dialog.component';
+import { ItemManageFormComponent } from './Components/item-manage-form/item-manage-form.component';
+import { ItemDeactivateDialogComponent } from './Components/item-deactivate-dialog/item-deactivate-dialog.component';
 
 
 @NgModule({
@@ -55,16 +56,17 @@ import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-
     InvoiceEditorComponent,
     NotificationsComponent,
     ImageDialogComponent,
-    ItemAddFormComponent,
     ItemManagementComponent,
     ItemListComponent,
-    ItemManageDialogComponent
+    ItemManageDialogComponent,
+    ItemManageFormComponent,
+    ItemDeactivateDialogComponent
   ],
   imports: [
     MaterialModule,
       AdminRoutingModule,
       SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent]
 })
 export class AdminModule { }

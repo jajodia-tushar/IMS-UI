@@ -14,6 +14,6 @@ export class ItemService {
     return this.http.get<ShelfData>("api/shelf/inventory/" + ShelfId);
   }
   getAllItems() {
-    return this.http.get<ItemResponse>("/api/Item");
+    return this.http.get<ItemResponse>("api/Item");
   }
 }

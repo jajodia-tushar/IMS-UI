@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { ItemManagementComponent } from '../item-management/item-management.component';
@@ -6,11 +6,11 @@ import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemManagementService } from 'src/app/IMS.Services/admin/item-management.service';
 
 @Component({
-  selector: 'app-item-add-form',
-  templateUrl: './item-add-form.component.html',
-  styleUrls: ['./item-add-form.component.css']
+  selector: 'app-item-manage-form',
+  templateUrl: './item-manage-form.component.html',
+  styleUrls: ['./item-manage-form.component.css']
 })
-export class ItemAddFormComponent {
+export class ItemManageFormComponent {
   createItemForm: FormGroup
   constructor(formBuilder: FormBuilder, private itemManageService: ItemManagementService) {
     this.createItemForm = formBuilder.group({
@@ -24,41 +24,37 @@ export class ItemAddFormComponent {
     })
   }
 
+  @Input() itemDetails;
+  isEditItemForm: Boolean;
 
-  get itemName(){
-    return this.createItemForm.get('itemName');
+  ngOnInit() {
+      if (this.itemDetails) {
+        this.isEditItemForm=this.itemDetails?true:false;
+        this.createItemForm.setValue(this.itemDetails);
+      }
   }
 
-  get maxLimit(){
-    return this.createItemForm.get('maxLimit');
+  submitForm(){
+    //create user or update existing user based on editUserForm variable
+    if(this.isEditItemForm){
+      this.editItemDetails();
+    }
+    else{
+      this.createNewItem();
+    }
   }
 
-  get rate(){
-    return this.createItemForm.get('rate');
+  editItemDetails(){
+    let item: Item = <Item>this.createItemForm.getRawValue();
+    this.itemManageService.editItem(item);
+    console.log(item);
   }
 
-  get shelfRedLimit(){
-    return this.createItemForm.get('shelfRedLimit');
-  }
-
-  get shelfAmberLimit(){
-    return this.createItemForm.get('shelfAmberLimit');
-  }
-
-  get warehouseRedLimit() {
-    return this.createItemForm.get('shelfRedLimit');
-  }
-
-  get warehouseAmberLimit() {
-    return this.createItemForm.get('shelfRedLimit');
-  }
-
-  createItem() {
+  createNewItem(){
     let item: Item = <Item>this.createItemForm.getRawValue();
     console.log(item);
-    //let response = this.itemManageService.createItem(item);
     let response = true;
-    if (!response) {
+    if(!response){
       this.createItemForm.setErrors({
       })
     }

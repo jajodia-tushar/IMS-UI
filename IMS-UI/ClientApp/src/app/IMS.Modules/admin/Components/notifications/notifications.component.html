@@ -1,5 +1,22 @@
 <mat-tab-group [(selectedIndex)]="selectedTab" dynamicHeight>
   <mat-tab mat-stretch-tabs label="Pending Approvals">
+    <mat-card>
+      <mat-card-content>
+        <mat-nav-list class="list-horizontal" role="list" >
+          <mat-list-item  class="mat-list-item" role="listitem">
+            <input class="pendingApproval-page-input-field" matInput [matDatepicker]="picker1" [(ngModel)]="fromDate"(click)="picker1.open()" placeholder="{{fromDate}}" autocomplete="off">
+            <mat-datepicker #picker1></mat-datepicker>
+
+            <input class="pendingApproval-page-input-field" matInput [matDatepicker]="picker2" [(ngModel)]="toDate"(click)="picker2.open()" placeholder="{{toDate}}" autocomplete="off">
+            <mat-datepicker #picker2></mat-datepicker>
+            <button class="submit-button" (click)="chooseDate()"  style="outline: none;">
+              GO
+          </button>
+          </mat-list-item>
+         
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
     <app-data-table [columnHeader]=columns [(griddata)]="vendorsOrdersDetails" (TableData)="Tabledata($event)"
       (isClickedOn)="getClickedStatus($event)"></app-data-table>
   </mat-tab>

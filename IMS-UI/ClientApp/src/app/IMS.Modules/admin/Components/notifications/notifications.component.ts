@@ -13,18 +13,53 @@ export class NotificationsComponent implements OnInit {
   vendorsOrdersDetails: VendorOrder[];
   constructor( public vendorOrderdetailsService: VendorOrderdetailsService,private dialog: MatDialog) { }
   public row;
-
+ fromDate:string;
+  toDate:string;
   selectedTab : number = 0;
   public isClickedOn;
   
   ngOnInit() {
-    this.vendorOrderdetailsService.VendorOrderDetails().subscribe(
+    this.initializeDate();
+    this.pendingApprovalData();
+  }
+ 
+  initializeDate(){
+  let date = new Date();
+  this.toDate = date.toISOString();
+  this.toDate=this.changeDateFormat(this.toDate);
+  date.setDate(date.getDay() - 6);
+  this.fromDate = date.toISOString();
+  this.fromDate=this.changeDateFormat(this.fromDate);
+  console.log(this.fromDate);
+  console.log(this.toDate);
+ 
+  }
+
+  pendingApprovalData(){
+    this.vendorOrderdetailsService.VendorOrderDetails(this.fromDate,this.toDate).subscribe(
       data => {
         this.vendorsOrdersDetails = data.vendorOrders;
-     
+     console.log(this.toDate);
       }
     );
     this.columns = this.vendorOrderdetailsService.getColumnFordataTable();
+    let date = new Date();
+    this.toDate = date.toISOString();
+    this.fromDate = date.toISOString();
+  }
+  
+  chooseDate(){
+    this.toDate=this.changeDateFormat(this.toDate);
+    this.fromDate=this.changeDateFormat(this.fromDate);
+    console.log(this.fromDate);
+    console.log(this.toDate)
+    this.pendingApprovalData();
+  }
+
+  changeDateFormat(date:string){
+    let inputDate: Date = new Date(Date.parse(date));
+    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
+      .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
   }
 
   Tabledata(data) {

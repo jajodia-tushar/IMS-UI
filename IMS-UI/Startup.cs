@@ -49,9 +49,9 @@ namespace IMS_UI
             services.AddSingleton<ItemWiseAnalysisProvider>();
             services.AddSingleton<StockProvider>();
             services.AddSingleton<IItemListProvider, ItemListProvider>();
-            services.AddSingleton<VendorOrderListProvider>();
             services.AddSingleton<IVendorOrderApprovalProvider, VendorOrderApprovalProvider>();
             services.AddSingleton<IVendorOrderRejectProvider, VendorOrderRejectProvider>();
+            services.AddSingleton<IPendingVendorOrdersProvider, VendorOrderListProvider>();
 
             services.AddSingleton<TransferProvider>();
            

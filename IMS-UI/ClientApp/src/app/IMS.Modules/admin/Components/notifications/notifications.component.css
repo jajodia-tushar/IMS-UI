@@ -15,3 +15,53 @@
 :host {
   min-width: 100%;
 }
+
+.pendingApproval-page-input-field {
+  margin-top: -.0625em;
+  width: 100%;
+  padding: 3%;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  background-color: #1c1e2f;
+  margin: 10px;
+  height: 100%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  color: white;
+  height: 65px;
+  min-width: 190px;
+}
+
+:host ::ng-deep .mat-card {
+  padding: 50px;
+  margin: 20px;
+  background-color: rgb(34, 36, 55);
+  /* height: auto; */
+}
+
+.mat-fab.mat-primary,
+.mat-flat-button.mat-primary,
+.mat-mini-fab.mat-primary,
+.mat-raised-button.mat-primary {
+    background-color: #333748;
+    height: 45px;
+    margin-left: 16px;
+}
+
+.submit-button{
+    min-height: 45px;
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
+    color : white;
+    background-color: #1c1e2f;
+}
+

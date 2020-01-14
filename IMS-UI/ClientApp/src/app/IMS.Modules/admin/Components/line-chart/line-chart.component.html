@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="card">
+<mat-card class="chart-card">
+    <!-- <mat-card-header> -->
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
             <i class="fa fa-refresh" (click)="onRefresh()" id="refreshLine"></i>
@@ -14,12 +15,13 @@
                 </mat-menu>
             </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <h3 class="font-weight-normal text-black">Floor Wise Analysis</h3>
+        <div class="d-flex flex-column justify-content-center align-items-center" >
+            <h3>Floor Wise Analysis</h3>
         </div>
     </div>
-    <div class="chart-container">
+    <!-- </mat-card-header> -->
+    <mat-card-content class="canvas-container">
         <canvas id="line-chart" class="chartjs-render-monitor">
         </canvas>
-    </div>
-</div>
+    </mat-card-content>
+</mat-card>

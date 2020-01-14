@@ -69,29 +69,6 @@ h3 {
   flex-grow: 1;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 1rem;
-  color: #606a96;
-  text-align: left;
-  list-style: none;
-  background-color: #222437;
-  background-clip: padding-box;
-}
-
-.material-icons {
-  font-size: 28px;
-  color: #606a96;
-}
-
 button:focus,
 button:active:focus,
 button.active:focus {

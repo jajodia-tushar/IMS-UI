@@ -9,7 +9,7 @@ namespace IMS_UI.IMS.Core
     {
         public static class APIEndpoints
         {
-            public const string EmployeeProvider = "api/employee/";
+            public const string EmployeeProvider = "api/Employee/";
             public const string FrequentlyUsedItemProvider = "api/reports/getmostconsumeditems";
             public const string ItemWiseAnalysisProvider = "api/reports/getitemconsumption";
             public const string LoginProvider = "api/Login";

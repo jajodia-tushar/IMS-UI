@@ -7,16 +7,45 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 
 namespace IMS_UI.IMS.Providers
 {
     public class EmployeeProvider : IEmployeeProvider
     {
         private IConfiguration _iconfiguration;
-        public EmployeeProvider(IConfiguration configuration)
+        SessionManager sessionManager;
+        public EmployeeProvider(IConfiguration configuration, SessionManager sessionManager)
         {
             _iconfiguration = configuration;
+            this.sessionManager = sessionManager;
         }
+
+        public async Task<EmployeesResponse> GetAllEmployee()
+        {
+            try
+            {
+                var endPoint = Constants.APIEndpoints.EmployeeProvider;
+                using (HttpClient _client = new HttpClient())
+                {
+                    _client.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+                    _client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    _client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
+                    var response = await _client.GetAsync(endPoint);
+                    return JsonConvert.DeserializeObject<EmployeesResponse>(
+                        await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+ 
         public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
             HttpClient client = new HttpClient();

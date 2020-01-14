@@ -7,24 +7,44 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
+using IMS_UI.IMS.Core.Infra;
 
 namespace IMS_UI.Controllers
 {
-    [Route("orders")]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmployeeOrderController : ControllerBase
     {
-        private IOrderProvider _orderProvider;
-        public EmployeeOrderController(IOrderProvider orderProvider)
+        private IEmployeeOrderProvider _employeeOrderProvider;
+        private SessionManager _sessionManager;
+
+        public EmployeeOrderController(IEmployeeOrderProvider orderProvider, SessionManager sessionManager)
         {
-            _orderProvider = orderProvider;
+            _employeeOrderProvider = orderProvider;
+            _sessionManager = sessionManager;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize)
+        {
+            try
+            {
+                var response = await _employeeOrderProvider.getEmployeeOrders(toDate,fromDate,pageNumber, pageSize);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
 
         [HttpPost]
         public async Task<EmployeeOrderResponse> PostOrder(EmployeeOrder placeEmployeeOrderRequest)
         {
-            var response = await _orderProvider.PostOrders(placeEmployeeOrderRequest);
+            var response = await _employeeOrderProvider.PostOrders(placeEmployeeOrderRequest);
             return response;
         }
     }

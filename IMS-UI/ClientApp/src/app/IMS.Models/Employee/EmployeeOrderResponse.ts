@@ -1,7 +1,7 @@
-import { EmployeeOrder } from "./EmployeeOrder";
+import { EmployeeOrderMapping } from "./EmployeeOrderMapping";
 
 export class EmployeeOrderResponse{
-        employeeOrder: EmployeeOrder;
+        employeeOrder: EmployeeOrderMapping;
         status: string;
         error: Error;
 }

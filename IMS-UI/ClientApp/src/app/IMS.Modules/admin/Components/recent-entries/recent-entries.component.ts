@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
-import { RecentEntry } from 'src/app/IMS.Models/Admin/RecentEntriesResponse';
 import { RecentEntriesService } from 'src/app/IMS.Services/admin/recent-entries.service';
+import { EmployeeOrderMapping } from 'src/app/IMS.Models/Employee/EmployeeOrderMapping';
 
 @Component({
   selector: 'app-recent-entries',
@@ -20,7 +20,7 @@ export class RecentEntriesComponent implements OnInit {
  
   recentEntriesData: CustomRecentEntriesResponse[] = [];
   dataSource = new MatTableDataSource<CustomRecentEntriesResponse>(this.recentEntriesData);
-  recentOrdersList: RecentEntry[];
+  recentOrdersList: EmployeeOrderMapping[];
   columnsToDisplay = ['employeeDetails', 'date'];
   expandedElement: CustomRecentEntriesResponse | null;
 
@@ -49,13 +49,13 @@ export class RecentEntriesComponent implements OnInit {
         console.log("error");
       });
   }
-  extractEmployeeDetails(recentOrder: RecentEntry, response: CustomRecentEntriesResponse): void {
+  extractEmployeeDetails(recentOrder: EmployeeOrderMapping, response: CustomRecentEntriesResponse): void {
     let employeeId = recentOrder.employee.id;
     let employeeName = recentOrder.employee.firstname;
     let totalItemsTaken = recentOrder.employeeOrder.employeeItemsQuantityList.length;
     response.employeeDetails = employeeName + ' Picked ' + totalItemsTaken + ' items';
   }
-  extractResponseDetails(recentOrder: RecentEntry, response: CustomRecentEntriesResponse): void {
+  extractResponseDetails(recentOrder: EmployeeOrderMapping, response: CustomRecentEntriesResponse): void {
     response.orderDetails = '';
     let itemsQuantityList = recentOrder.employeeOrder.employeeItemsQuantityList;
     for (let i = 0; i < itemsQuantityList.length; i++) {

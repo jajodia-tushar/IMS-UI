@@ -24,8 +24,8 @@ export class VendorService {
   getVendorOrder(vendorId: string, toDate: string, fromDate: string, approved : string, pageNumber : number, pageSize : number): Observable<VendroOrderResponse>{
     
     let params = new HttpParams();
-    params = params.append("toDate",fromDate);
-    params = params.append("fromDate",toDate);
+    params = params.append("toDate",toDate);
+    params = params.append("fromDate",fromDate);
     params = params.append("approved",approved);
     params = params.append("pageNumber",pageNumber.toString());
     params = params.append("pageSize",pageSize.toString());

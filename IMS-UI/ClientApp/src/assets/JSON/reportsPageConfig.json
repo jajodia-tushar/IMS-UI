@@ -58,7 +58,7 @@
         "urlToRequest": ""
     },
     {
-        "reportName": "Employee",
+        "reportName": "Employee Orders",
         "reportsFilterOptions": [{
                 "placeHolderName": "Employee Id",
                 "type": "dropDown",
@@ -75,14 +75,16 @@
                 "type": "datePicker",
                 "dropDownOptions": [],
                 "dropDownValues": [],
-                "dataFromUser": ""
+                "dataFromUser": "",
+                "endDate": ""
             },
             {
                 "placeHolderName": "ToDate",
                 "type": "datePicker",
                 "dropDownOptions": [],
                 "dropDownValues": [],
-                "dataFromUser": ""
+                "dataFromUser": "",
+                "endDate": ""
             }
         ],
         "urlToRequest": ""
@@ -105,14 +107,16 @@
                 "type": "datePicker",
                 "dropDownOptions": [],
                 "dropDownValues": [],
-                "dataFromUser": ""
+                "dataFromUser": "",
+                "endDate": ""
             },
             {
                 "placeHolderName": "ToDate",
                 "type": "datePicker",
                 "dropDownOptions": [],
                 "dropDownValues": [],
-                "dataFromUser": ""
+                "dataFromUser": "",
+                "endDate": ""
             }
         ],
         "urlToRequest": ""

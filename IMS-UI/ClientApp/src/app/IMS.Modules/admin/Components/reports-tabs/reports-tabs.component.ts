@@ -4,6 +4,8 @@ import { ActivatedRoute } from "@angular/router";
 import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
+import { RecentEntriesService } from "src/app/IMS.Services/admin/recent-entries.service";
+import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -33,7 +35,8 @@ export class ReportsTabsComponent implements OnInit {
 
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
-    private ragStatusService: RagStatusService , private vendorService : VendorService) {
+    private ragStatusService: RagStatusService , private vendorService : VendorService,
+    private employeeOrderService : EmployeeOrderService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
@@ -77,6 +80,9 @@ export class ReportsTabsComponent implements OnInit {
     else if (this.selectedTab == 1) {
       this.showVendorDataTable();
     }
+    else if(this.selectedTab == 2){
+      this.showEmployeeOrdersTable();
+    }
   }
 
   changeDateFormat(inputFormat: string): string{
@@ -87,14 +93,66 @@ export class ReportsTabsComponent implements OnInit {
       .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
   }
 
+  showEmployeeOrdersTable(){
+    let dataToDisplaytemp = []
+    this.dataToDisplay = [];
+    this.columnToDisplay = [];
+    this.errorMessage = JSON.parse(JSON.stringify(""));
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
+      
+    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
+      data => {
+        if (data.status == "Success") {
+          console.log(data);
+          data.employeeRecentOrders.forEach(
+            data => {
+              dataToDisplaytemp.push({
+                "Emp Id" : data.employee.id,
+                "Name": data.employee.firstname,
+                "Shelf" : data.employeeOrder.shelf.name,
+                "Time": data.employeeOrder.date,
+                "Total Quantity": data.employeeOrder.employeeItemsQuantityList.length.toString(),
+                "innerData": data.employeeOrder.employeeItemsQuantityList.map(
+                  x => {
+                    return {
+                      "item": x.item.name,
+                      "quantity": x.quantity,
+                    }
+                  }),
+                "innerColumns": ["item", "quantity"]
+              });
+            });
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Emp Id","Name", "Shelf", "Time","Total Quantity"]));
+          this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          if (this.dataToDisplay.length == 0) {
+            this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+          }
+        }
+        else {
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+        }
+      }
+      ,
+      error => {
+        this.columnToDisplay = [];
+        this.dataToDisplay = [];
+        this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+      }
+    );
+    
+  }
+
   showVendorDataTable() {
     let dataToDisplaytemp = []
     this.dataToDisplay = [];
     this.columnToDisplay = [];
     this.errorMessage = JSON.parse(JSON.stringify(""));
-    let toDate = this.changeDateFormat(
+    let fromDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
-    let fromDate =
+    let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
       
     let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
@@ -234,10 +292,6 @@ export class ReportsTabsComponent implements OnInit {
         )
       }
     )
-  }
-
-  isDisabled(index: number) : boolean {
-    return index >= 2;
   }
 }
 export class reportsSelectionDataModel {

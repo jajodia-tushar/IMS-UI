@@ -70,8 +70,8 @@ $my-custom-accent-color: (
 
 @include mat-core();
 //$default: 500, $lighter: 100, $darker: 700
-$my-custom-primary: mat-palette($my-custom-primary-color);
-$my-custom-accent: mat-palette($my-custom-accent-color, 100, 500, A100);
+$my-custom-primary: mat-palette($mat-blue);
+$my-custom-accent: mat-palette($mat-pink, 100, 500, A100);
 $my-custom-warn: mat-palette($mat-red);
 $my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent);
 
@@ -96,16 +96,36 @@ $my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent);
 
 //colors for text and icons. (Foreground)
 $my-foreground: my-mat-dark-theme-foreground(mat-color($mat-blue, 700));
-// $my-app-theme-custom: map-merge($my-custom-theme, (foreground: $my-foreground));
+// $my-custom-theme: map-merge($my-custom-theme, (foreground: $my-foreground));
 
 // Set custom background color
 // $custom-background-color: #ffffff;
-$custom-background-color: map_get($mat-purple, 50);
+$custom-background-color: map_get($my-custom-accent-color, 500);
+$custom-background-card-color: map_get($my-custom-primary-color, 500);
 
-// Insert custom background color
-// $background: map-get($my-app-theme-custom, background);
+$my-custom-background : (
+  status-bar: black,
+  app-bar:    #222437, // used by mat-toolbar
+  background: #1C1E2F, // mostly
+  hover:      rgba(white, 0.04), //
+  card:       #222437,// table, 
+  dialog:     #222437,
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+// // Insert custom background color
+// $background: map-get($my-custom-theme, background);
+// $background-card : map-get($my-custom-theme, card);
 // $background: map_merge($background, (background: $custom-background-color));
-// $theme: map-merge($my-app-theme-custom, (background: $background));
+// $background: map_merge($background, (card: $custom-background-card-color));
+$my-custom-theme: map-merge($my-custom-theme, (background: $my-custom-background));
 
 
 

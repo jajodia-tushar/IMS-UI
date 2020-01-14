@@ -20,6 +20,7 @@ import {MatNativeDateModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -68,6 +69,7 @@ const materialModules = [
     MatDividerModule,
     CdkTableModule,
     FlexLayoutModule,
+    MatCheckboxModule
 ]
 
 

@@ -1,27 +1,29 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="card">
 
-    <div class="card-body">
-        <div class="d-flex align-items-start justify-content-between">
-            <i class="fa fa-refresh" (click)="onRefresh()" id="refreshBar"></i>
-            <div class="dropdown">
-                <button mat-button [matMenuTriggerFor]="beforeMenu">
-                    <mat-icon>more_horiz</mat-icon>
-                </button>
-                <mat-menu #beforeMenu="matMenu" xPosition="before" class="menu">
-                    <button mat-menu-item (click)="dateChange($event)" value="7">7 days ago</button>
-                    <button mat-menu-item (click)="dateChange($event)" value="14">14 days ago</button>
-                </mat-menu>
+<mat-card class="example-card">
+    <!-- <mat-card-header> -->
+        <div class="card-body">
+            <div class="d-flex align-items-start justify-content-between">
+                <i class="fa fa-refresh" (click)="onRefresh()" id="refreshBar"
+                    style="font-size:24px; color: #606a96;cursor: pointer;"></i>
+                <div class="dropdown">
+                    <button mat-button [matMenuTriggerFor]="beforeMenu">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                    <mat-menu #beforeMenu="matMenu" xPosition="before" style="background-color: #606a96;margin-top: 6px;">
+                        <button mat-menu-item (click)="dateChange($event)" value="7">7 days ago</button>
+                        <button mat-menu-item (click)="dateChange($event)" value="14">14 days ago</button>
+                    </mat-menu>
+                </div>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <h3>Per Day Consumption</h3>
             </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <h3 class="font-weight-normal text-black">Per Day Consumption</h3>
-            <div class="d-flex align-items-baseline flex-wrap justify-content-center">
-            </div>
-        </div>
-    </div>
-    <div class="chart-container">
+    <!-- </mat-card-header> -->
+    
+    <mat-card-content class="canvas-container">
         <canvas id="bar-chart" class="chartjs-render-monitor"></canvas>
-    </div>
-</div>
+    </mat-card-content>
+  </mat-card>

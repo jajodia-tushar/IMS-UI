@@ -52,3 +52,7 @@ button:focus, button:active:focus, button.active:focus {
   top: 30%;
   left: 6%;
 }
+
+h1, h2, h3, h4, h4, h6{
+  color: white;
+}

@@ -2,7 +2,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="example-container">
-  <mat-toolbar color="primary">
+  <mat-toolbar>
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -36,7 +36,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav style="min-width: 12%; top: 56px;bottom: 0px; width: 13%;background-color: #222437;overflow: hidden;"
+    <mat-sidenav style="min-width: 12%; top: 56px;bottom: 0px; width: 13%;overflow: hidden;"
       #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true">
       <mat-nav-list class="nav-list">
         <a mat-list-item *ngFor="let nav of navBarItems;" [routerLink]="[nav.tab]" routerLinkActive="active">

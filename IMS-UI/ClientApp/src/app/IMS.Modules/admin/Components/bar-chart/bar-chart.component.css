@@ -69,23 +69,6 @@ h3 {
   flex-grow: 1;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 1rem;
-  color: #606a96;
-  text-align: left;
-  list-style: none;
-  background-color: #222437;
-  background-clip: padding-box;
-}
 
 .material-icons {
   font-size: 28px;
@@ -99,13 +82,7 @@ button.active:focus {
   outline-style: none !important;
 }
 
-canvas {
-  padding: 0;
-  margin: 0px auto;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+
 
 .chartjs-size-monitor,
 .chartjs-size-monitor-expand,
@@ -120,6 +97,20 @@ canvas {
   pointer-events: none;
   visibility: hidden;
   z-index: -1;
+}
+
+:host .mat-card {
+  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+  display: block;
+  position: relative;
+  padding: 0px;
+  border-radius: 4px;
+}
+
+.canvas-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 #refreshBar  {

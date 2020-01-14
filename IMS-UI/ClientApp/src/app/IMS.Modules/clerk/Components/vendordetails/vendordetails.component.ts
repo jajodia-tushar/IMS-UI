@@ -9,6 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { error } from 'selenium-webdriver';
 import { Router } from '@angular/router';
+import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 
 
   
@@ -35,7 +36,7 @@ export class VendordetailsComponent implements OnInit {
   public SelectedVendor = null;
   public RecievedDate: Date;
 
-  constructor(private _adminService: AdminService, private _VendorService: VendorService,private router:Router,
+  constructor(private userService: UserManagementService, private _VendorService: VendorService,private router:Router,
     private http: HttpClient, private _CentralizedDataService: CentralizedDataService) { }
 
   onKey(value: string) {
@@ -63,7 +64,7 @@ export class VendordetailsComponent implements OnInit {
     }
   }
   async ngOnInit() {
-    this._adminService.getAllAdmins().subscribe(
+    this.userService.getAllAdmins().subscribe(
       data => {
         
         if (data.status === "Success")

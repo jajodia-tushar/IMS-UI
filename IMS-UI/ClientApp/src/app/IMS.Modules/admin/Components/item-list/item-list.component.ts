@@ -25,8 +25,8 @@ export class ItemListComponent implements OnInit {
   async ngOnInit() {
     await this.setItems();
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    //this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
-    //this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
+    this.dataSource.sort = this.sort;
     console.log(this.ELEMENT_DATA)
   }
 
@@ -39,13 +39,13 @@ export class ItemListComponent implements OnInit {
     }
   }
 
-  // sortingDataAccessor(item, property) {
-  //   if (property.includes('.')) {
-  //     return property.split('.')
-  //       .reduce((object, key) => object[key], item);
-  //   }
-  //   return item[property];
-  // }
+  sortingDataAccessor(item, property) {
+    if (property.includes('.')) {
+      return property.split('.')
+        .reduce((object, key) => object[key], item);
+    }
+    return item[property];
+  }
 
   editItemDetails(user) {
     console.log(user);

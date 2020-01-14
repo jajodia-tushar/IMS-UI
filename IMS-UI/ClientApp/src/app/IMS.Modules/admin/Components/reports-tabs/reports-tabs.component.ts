@@ -4,7 +4,6 @@ import { ActivatedRoute } from "@angular/router";
 import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
-import { RecentEntriesService } from "src/app/IMS.Services/admin/recent-entries.service";
 import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
 
 @Component({

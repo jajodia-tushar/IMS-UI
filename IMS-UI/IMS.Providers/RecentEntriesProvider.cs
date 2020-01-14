@@ -22,7 +22,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<EmployeeRecentOrderResponse> GetRecentEntries()
+        public async Task<EmployeeOrdersResponse> GetRecentEntries()
         {
            try
             {
@@ -35,7 +35,7 @@ namespace IMS_UI.IMS.Providers
                     _client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
                     var response = await _client.GetAsync(endPoint);
-                    return JsonConvert.DeserializeObject<EmployeeRecentOrderResponse>(
+                    return JsonConvert.DeserializeObject<EmployeeOrdersResponse>(
                         await response.Content.ReadAsStringAsync());
                 }
             }

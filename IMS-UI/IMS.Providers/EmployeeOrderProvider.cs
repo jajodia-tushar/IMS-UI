@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<EmployeeRecentOrderResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize)
+        public async Task<EmployeeOrdersResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace IMS_UI.IMS.Providers
                     uriBuilder.Query = query;
 
                     var response = await _client.GetAsync(uriBuilder.Uri);
-                    return JsonConvert.DeserializeObject<EmployeeRecentOrderResponse>(
+                    return JsonConvert.DeserializeObject<EmployeeOrdersResponse>(
                         await response.Content.ReadAsStringAsync());
                 }
             }

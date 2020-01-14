@@ -22,4 +22,8 @@ export class EmployeeOrderService {
     params = params.append("pageSize",pageSize.toString());
     return this.http.get<RecentEntriesResponse>("api/employeeorder",{params});
   }
+
+  getRecentEntries() : Observable<RecentEntriesResponse>{
+    return this.http.get<RecentEntriesResponse>("api/employeeorder");
+  }
 }

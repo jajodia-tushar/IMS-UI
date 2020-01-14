@@ -90,7 +90,7 @@
         "urlToRequest": ""
     },
     {
-        "reportName": "Item",
+        "reportName": "Item Consumption",
         "reportsFilterOptions": [{
                 "placeHolderName": "Item Name",
                 "type": "dropDown",

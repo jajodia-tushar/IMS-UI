@@ -3,6 +3,8 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 import { MatTableDataSource } from '@angular/material';
 import { RecentEntriesService } from 'src/app/IMS.Services/admin/recent-entries.service';
 import { EmployeeOrderMapping } from 'src/app/IMS.Models/Employee/EmployeeOrderMapping';
+import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
+import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
 
 @Component({
   selector: 'app-recent-entries',
@@ -24,10 +26,10 @@ export class RecentEntriesComponent implements OnInit {
   columnsToDisplay = ['employeeDetails', 'date'];
   expandedElement: CustomRecentEntriesResponse | null;
 
-  constructor(private _recentEntryService: RecentEntriesService) { }
+  constructor(private employeeOrderService: EmployeeOrderService) { }
 
   ngOnInit() {
-    return this._recentEntryService.getRecentEntries().subscribe(
+    return this.employeeOrderService.getRecentEntries().subscribe(
       data => {
         this.recentOrdersList = data.employeeRecentOrders;
         for (let i = 0; i < this.recentOrdersList.length; i++) {

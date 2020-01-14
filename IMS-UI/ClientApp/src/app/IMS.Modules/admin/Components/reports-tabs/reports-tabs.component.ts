@@ -67,8 +67,8 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   tabChanged(event: Event) {
-    this.columnToDisplay = [];
-    this.dataToDisplay = [];
+    this.refreshColumnsAndTables();
+    this.initializePaging();
     this.searchButtonClicked();
   }
 
@@ -94,9 +94,7 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   showEmployeeOrdersTable(){
-    let dataToDisplaytemp = []
-    this.dataToDisplay = [];
-    this.columnToDisplay = [];
+    this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
     let fromDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
@@ -106,6 +104,7 @@ export class ReportsTabsComponent implements OnInit {
     this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data => {
         if (data.status == "Success") {
+          let dataToDisplaytemp = []
           console.log(data);
           data.employeeRecentOrders.forEach(
             data => {
@@ -114,7 +113,7 @@ export class ReportsTabsComponent implements OnInit {
                 "Name": data.employee.firstname,
                 "Shelf" : data.employeeOrder.shelf.name,
                 "Time": data.employeeOrder.date,
-                "Total Quantity": data.employeeOrder.employeeItemsQuantityList.length.toString(),
+                "Number of Items": data.employeeOrder.employeeItemsQuantityList.length.toString(),
                 "innerData": data.employeeOrder.employeeItemsQuantityList.map(
                   x => {
                     return {
@@ -125,7 +124,7 @@ export class ReportsTabsComponent implements OnInit {
                 "innerColumns": ["item", "quantity"]
               });
             });
-          this.columnToDisplay = JSON.parse(JSON.stringify(["Emp Id","Name", "Shelf", "Time","Total Quantity"]));
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Emp Id","Name", "Shelf", "Time","Number of Items"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
           if (this.dataToDisplay.length == 0) {
             this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
@@ -134,6 +133,7 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
+        this.pageInfo = data.pagingInfo;
       }
       ,
       error => {
@@ -145,20 +145,20 @@ export class ReportsTabsComponent implements OnInit {
     
   }
 
+  
+
   showVendorDataTable() {
-    let dataToDisplaytemp = []
-    this.dataToDisplay = [];
-    this.columnToDisplay = [];
+    this.refreshColumnsAndTables()
     this.errorMessage = JSON.parse(JSON.stringify(""));
     let fromDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
-      
     let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
     this.vendorService.getVendorOrder(vendorId,toDate, fromDate,"true",this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data => {
         if (data.status == "Success") {
+          let dataToDisplaytemp = []
           console.log(data);
           data.vendorOrders.forEach(
             data => {
@@ -198,6 +198,7 @@ export class ReportsTabsComponent implements OnInit {
     );
   }
   showRAGDataTable() {
+    this.refreshColumnsAndTables();
     this.errorMessage = JSON.parse(JSON.stringify(""));
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
       .dataFromUser;
@@ -212,7 +213,6 @@ export class ReportsTabsComponent implements OnInit {
         this.pageInfo.pageNumber, this.pageInfo.pageSize)
       .subscribe(data => {
         this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
-        this.dataToDisplay = [];
         if (data.status == "Failure") {
           this.dataToDisplay = JSON.parse(JSON.stringify([]));
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
@@ -251,10 +251,7 @@ export class ReportsTabsComponent implements OnInit {
     date.setDate(date.getDay() - 6);
     this.fromDate = date.toISOString();
 
-    this.pageInfo = new PagingInfo();
-    this.pageInfo.pageNumber = 1;
-    this.pageInfo.pageSize = 10;
-    this.pageInfo.totalResults = 0;
+    this.initializePaging()
 
     let reportsPageConfigFile = require("src/assets/JSON/reportsPageConfig.json");
     this.reportsSelectionData = reportsPageConfigFile as reportsSelectionDataModel[];
@@ -272,6 +269,14 @@ export class ReportsTabsComponent implements OnInit {
           item.reportsFilterOptions[1].dataFromUser = this.fromDate;
           item.reportsFilterOptions[2].dataFromUser = this.toDate;
         }
+
+        if(item.reportName == "Employee Orders"){
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[2].endDate = new Date();
+          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+
       }
     )
 
@@ -292,6 +297,19 @@ export class ReportsTabsComponent implements OnInit {
         )
       }
     )
+  }
+
+  initializePaging(){
+    if(this.pageInfo == null)
+      this.pageInfo = new PagingInfo();
+    this.pageInfo.pageNumber = 1;
+    this.pageInfo.pageSize = 10;
+    this.pageInfo.totalResults = 0;
+  }
+
+  refreshColumnsAndTables(){
+    this.columnToDisplay = [];
+    this.dataToDisplay = [];
   }
 }
 export class reportsSelectionDataModel {

@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
             _iconfiguration = configuration;
             _SessionManager = sessionManager;
         }
-        public async Task<ListofVendorOrderDetails> GetVendorPendingApprovals(string fromDate, string toDate)
+        public async Task<ListofVendorOrderDetails> GetVendorPendingApprovals()
         {
             HttpClient client = new HttpClient();
 
@@ -45,8 +45,7 @@ namespace IMS_UI.IMS.Providers
                 new KeyValuePair<string, string>("isApproved", "false"),
                 new KeyValuePair<string, string>("pageNumber", "1"),
                 new KeyValuePair<string, string>("pageSize", "10"),
-                  new KeyValuePair<string, string>("fromDate", fromDate),
-                new KeyValuePair<string, string>("toDate", toDate),
+               
               
 
             }))

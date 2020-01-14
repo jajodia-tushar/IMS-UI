@@ -43,9 +43,9 @@ namespace IMS_UI.Controllers
             }
 
         [HttpGet("orders")]
-        public async Task<ListofVendorOrderDetails> Get(string fromDate, string toDate)
+        public async Task<ListofVendorOrderDetails> Get()
         {
-            var response = await _VendorPendingApprovaList.GetVendorPendingApprovals(fromDate, toDate);
+            var response = await _VendorPendingApprovaList.GetVendorPendingApprovals();
             return response;
         }
 

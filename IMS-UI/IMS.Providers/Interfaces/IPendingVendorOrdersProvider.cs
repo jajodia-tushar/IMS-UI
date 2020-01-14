@@ -9,6 +9,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface IPendingVendorOrdersProvider
     {
-        Task<ListofVendorOrderDetails> GetVendorPendingApprovals(string fromDate, string toDate);
+        Task<ListofVendorOrderDetails> GetVendorPendingApprovals();
     }
 }

@@ -11,11 +11,9 @@ export class VendorOrderdetailsService {
 
   constructor(private http: HttpClient) { }
 
-  VendorOrderDetails(fromDate: string, toDate: string): Observable<any>  {
-    let params = new HttpParams();
-    params = params.append("toDate",toDate);
-    params = params.append("fromDate",fromDate);
-    return this.http.get<Root>("api/vendorOrderEdit/orders",{ params })
+  VendorOrderDetails(): Observable<any>  {
+   
+    return this.http.get<Root>("api/vendorOrderEdit/orders")
   }
 
   getColumn(){

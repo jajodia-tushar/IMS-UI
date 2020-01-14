@@ -1,5 +1,7 @@
+import { EmployeeOrderMapping } from "./EmployeeOrderMapping";
+
 export class EmployeeOrderResponse{
-        employeeOrder: any;
+        employeeOrder: EmployeeOrderMapping;
         status: string;
         error: Error;
 }

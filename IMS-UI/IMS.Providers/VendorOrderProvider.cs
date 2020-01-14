@@ -26,7 +26,7 @@ namespace IMS_UI.IMS.Providers
             _IConfiguration = config;
         }
 
-        public async Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate)
+        public async Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -45,12 +45,12 @@ namespace IMS_UI.IMS.Providers
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                new KeyValuePair<string, string>("isApproved", "true"),
-                new KeyValuePair<string, string>("pageNumber", "1"),
-                new KeyValuePair<string, string>("pageSize", "10"),
+                new KeyValuePair<string, string>("isApproved", approved),
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize),
                 new KeyValuePair<string, string>("toDate", toDate),
                 new KeyValuePair<string, string>("fromDate", fromDate),
-                
+
             }))
             {
                 query = content.ReadAsStringAsync().Result;
@@ -65,7 +65,7 @@ namespace IMS_UI.IMS.Providers
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate)
+        public async Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -84,9 +84,9 @@ namespace IMS_UI.IMS.Providers
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                new KeyValuePair<string, string>("isApproved", "true"),
-                new KeyValuePair<string, string>("pageNumber", "1"),
-                new KeyValuePair<string, string>("pageSize", "10"),
+                new KeyValuePair<string, string>("isApproved", approved),
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize),
                 new KeyValuePair<string, string>("toDate", toDate),
                 new KeyValuePair<string, string>("fromDate", fromDate),
 

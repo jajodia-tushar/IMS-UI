@@ -36,7 +36,7 @@ namespace IMS_UI
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<SessionManager>();
             services.AddSingleton<ILoginProvider, LoginProvider>();
-            services.AddSingleton<IOrderProvider, OrderProvider>();
+            services.AddSingleton<IEmployeeOrderProvider, EmployeeOrderProvider>();
             services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
             services.AddSingleton<IShelfProvider, ShelfProvider>();
             services.AddSingleton<ILogsProvider, LogsProvider>();
@@ -48,7 +48,6 @@ namespace IMS_UI
             services.AddSingleton<ShelfWiseOrderCountProvider>();
             services.AddSingleton<ItemWiseAnalysisProvider>();
             services.AddSingleton<StockProvider>();
-            services.AddSingleton<RecentEntriesProvider>();
             services.AddSingleton<IItemListProvider, ItemListProvider>();
             services.AddSingleton<VendorOrderListProvider>();
             services.AddSingleton<IVendorOrderApprovalProvider, VendorOrderApprovalProvider>();
@@ -62,7 +61,7 @@ namespace IMS_UI
             services.AddSingleton<IAdminListProvider,AdminListProvider>();
             services.AddSingleton<IItemListProvider,ItemListProvider>();
             services.AddSingleton<VendorListProvider>();
-            services.AddSingleton<OrderProvider>();
+            services.AddSingleton<EmployeeOrderProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

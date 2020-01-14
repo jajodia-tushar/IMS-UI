@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Providers.Interfaces
 {
-    public interface IOrderProvider
+    public interface IEmployeeOrderProvider
     {
         Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest);
+        Task<EmployeeOrdersResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize);
     }
 }

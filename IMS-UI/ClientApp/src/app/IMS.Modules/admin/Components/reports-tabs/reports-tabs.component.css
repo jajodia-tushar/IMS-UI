@@ -40,7 +40,7 @@ mat-list-item {
     padding: 0;
 }
 
-::ng-deep .mat-select-value {
+:host ::ng-deep .mat-select-value {
     display: table-cell;
     max-width: 0;
     width: 100%;
@@ -77,16 +77,15 @@ mat-list-item {
     margin-left: 16px;
 }
 
-.submit-button{
+.submit-button {
     min-height: 30px;
     border: 0.5px solid;
     border-radius: 5px;
     padding: 1px 10px;
     border-color: #42e6a4;
-    color : white;
+    color: white;
     background-color: #1c1e2f;
 }
-
 
 .report-page-input-field {
     margin-top: -.0625em;

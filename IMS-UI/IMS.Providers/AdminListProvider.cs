@@ -35,9 +35,8 @@ namespace IMS_UI.IMS.Providers
                     http.DefaultRequestHeaders.Authorization =
                                 new AuthenticationHeaderValue("Bearer", token);
                     var response = await http.GetAsync(path);
-                    AdminListResponse apiAdminListResponse = new AdminListResponse();
                     var result = await response.Content.ReadAsStringAsync();
-                    apiAdminListResponse = JsonConvert.DeserializeObject<AdminListResponse>(result);
+                     var apiAdminListResponse = JsonConvert.DeserializeObject<AdminListResponse>(result);
                     return apiAdminListResponse;
                 }
             }

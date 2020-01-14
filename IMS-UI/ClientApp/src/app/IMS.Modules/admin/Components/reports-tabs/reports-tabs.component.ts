@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
+import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -33,7 +34,8 @@ export class ReportsTabsComponent implements OnInit {
 
 
   constructor(private reportsService: ReportsService, private route: ActivatedRoute,
-    private ragStatusService: RagStatusService , private vendorService : VendorService) {
+    private ragStatusService: RagStatusService , private vendorService : VendorService,
+    private employeeOrderService : EmployeeOrderService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
@@ -64,8 +66,8 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   tabChanged(event: Event) {
-    this.columnToDisplay = [];
-    this.dataToDisplay = [];
+    this.refreshColumnsAndTables();
+    this.initializePaging();
     this.searchButtonClicked();
   }
 
@@ -77,6 +79,9 @@ export class ReportsTabsComponent implements OnInit {
     else if (this.selectedTab == 1) {
       this.showVendorDataTable();
     }
+    else if(this.selectedTab == 2){
+      this.showEmployeeOrdersTable();
+    }
   }
 
   changeDateFormat(inputFormat: string): string{
@@ -87,20 +92,72 @@ export class ReportsTabsComponent implements OnInit {
       .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
   }
 
-  showVendorDataTable() {
-    let dataToDisplaytemp = []
-    this.dataToDisplay = [];
-    this.columnToDisplay = [];
+  showEmployeeOrdersTable(){
+    this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
-    let toDate = this.changeDateFormat(
+    let fromDate = this.changeDateFormat(
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
-    let fromDate =
+    let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
       
-    let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
-    this.vendorService.getVendorOrder(vendorId,toDate, fromDate).subscribe(
+    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data => {
         if (data.status == "Success") {
+          let dataToDisplaytemp = []
+          console.log(data);
+          data.employeeRecentOrders.forEach(
+            data => {
+              dataToDisplaytemp.push({
+                "Emp Id" : data.employee.id,
+                "Name": data.employee.firstname,
+                "Shelf" : data.employeeOrder.shelf.name,
+                "Time": data.employeeOrder.date,
+                "Number of Items": data.employeeOrder.employeeItemsQuantityList.length.toString(),
+                "innerData": data.employeeOrder.employeeItemsQuantityList.map(
+                  x => {
+                    return {
+                      "item": x.item.name,
+                      "quantity": x.quantity,
+                    }
+                  }),
+                "innerColumns": ["item", "quantity"]
+              });
+            });
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Emp Id","Name", "Shelf", "Time","Number of Items"]));
+          this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          if (this.dataToDisplay.length == 0) {
+            this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+          }
+        }
+        else {
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+        }
+        this.pageInfo = data.pagingInfo;
+      }
+      ,
+      error => {
+        this.columnToDisplay = [];
+        this.dataToDisplay = [];
+        this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+      }
+    );
+    
+  }
+
+  
+
+  showVendorDataTable() {
+    this.refreshColumnsAndTables()
+    this.errorMessage = JSON.parse(JSON.stringify(""));
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
+    let vendorId: string = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
+    this.vendorService.getVendorOrder(vendorId,toDate, fromDate,"true",this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
+      data => {
+        if (data.status == "Success") {
+          let dataToDisplaytemp = []
           console.log(data);
           data.vendorOrders.forEach(
             data => {
@@ -129,6 +186,7 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
+        this.pageInfo = data.pagingInfo;
       }
       ,
       error => {
@@ -138,14 +196,8 @@ export class ReportsTabsComponent implements OnInit {
       }
     );
   }
-
-  paginatorClicked(event) {
-    this.pageInfo.pageNumber = event.pageIndex + 1;
-    this.pageInfo.pageSize = event.pageSize;
-    this.searchButtonClicked();
-  }
-
   showRAGDataTable() {
+    this.refreshColumnsAndTables();
     this.errorMessage = JSON.parse(JSON.stringify(""));
     let locationCodeSelected = this.reportsSelectionData[0].reportsFilterOptions[0]
       .dataFromUser;
@@ -160,7 +212,6 @@ export class ReportsTabsComponent implements OnInit {
         this.pageInfo.pageNumber, this.pageInfo.pageSize)
       .subscribe(data => {
         this.columnToDisplay = JSON.parse(JSON.stringify(["item", "quantity"]));
-        this.dataToDisplay = [];
         if (data.status == "Failure") {
           this.dataToDisplay = JSON.parse(JSON.stringify([]));
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
@@ -185,6 +236,12 @@ export class ReportsTabsComponent implements OnInit {
       
     );
   }
+  paginatorClicked(event) {
+    this.pageInfo.pageNumber = event.pageIndex + 1;
+    this.pageInfo.pageSize = event.pageSize;
+    this.searchButtonClicked();
+  }
+
 
   async initializeEmptyData() {
 
@@ -193,116 +250,34 @@ export class ReportsTabsComponent implements OnInit {
     date.setDate(date.getDay() - 6);
     this.fromDate = date.toISOString();
 
-    this.pageInfo = new PagingInfo();
-    this.pageInfo.pageNumber = 1;
-    this.pageInfo.pageSize = 10;
-    this.pageInfo.totalResults = 0;
+    this.initializePaging()
 
-    this.reportsSelectionData = [
-      {
-        reportName: "RAG",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Shelf",
-            type: "dropDown",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.locationCode
-          },
-          {
-            placeHolderName: "Color",
-            type: "dropDown",
-            dropDownOptions: ["Red", "Amber", "Green"],
-            dropDownValues: ["Red", "Amber", "Green"],
-            dataFromUser: this.colour
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Vendor Orders",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "VendorName",
-            type: "dropDown",
-            dropDownOptions: ["All Vendors"],
-            dropDownValues: ["0"],
-            dataFromUser: "0"
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.fromDate,
-            endDate: new Date()
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: this.toDate,
-            endDate: new Date()
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Employee",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Employee Id",
-            type: "dropDown",
-            dropDownOptions: ["1", "2", "3"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
-      },
-      {
-        reportName: "Item",
-        reportsFilterOptions: [
-          {
-            placeHolderName: "Item Name",
-            type: "dropDown",
-            dropDownOptions: ["Pen", "Pencil", "Notebook"],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "FromDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          },
-          {
-            placeHolderName: "ToDate",
-            type: "datePicker",
-            dropDownOptions: [],
-            dropDownValues: [],
-            dataFromUser: ""
-          }
-        ],
-        urlToRequest: ""
-      },
-    ];
+    let reportsPageConfigFile = require("src/assets/JSON/reportsPageConfig.json");
+    this.reportsSelectionData = reportsPageConfigFile as reportsSelectionDataModel[];
+
+    this.reportsSelectionData.forEach(
+      item =>{
+        if(item.reportName =="RAG"){
+          item.reportsFilterOptions[0].dataFromUser = this.locationCode;
+          item.reportsFilterOptions[1].dataFromUser = this.colour; 
+        }
+
+        if(item.reportName == "Vendor Orders"){
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[2].endDate = new Date();
+          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+
+        if(item.reportName == "Employee Orders"){
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[2].endDate = new Date();
+          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+
+      }
+    )
 
     await this.getRAGReportDropDownList().then(
       data => {
@@ -323,8 +298,17 @@ export class ReportsTabsComponent implements OnInit {
     )
   }
 
-  isDisabled(index: number) : boolean {
-    return index >= 2;
+  initializePaging(){
+    if(this.pageInfo == null)
+      this.pageInfo = new PagingInfo();
+    this.pageInfo.pageNumber = 1;
+    this.pageInfo.pageSize = 10;
+    this.pageInfo.totalResults = 0;
+  }
+
+  refreshColumnsAndTables(){
+    this.columnToDisplay = [];
+    this.dataToDisplay = [];
   }
 }
 export class reportsSelectionDataModel {

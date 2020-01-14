@@ -14,7 +14,7 @@ import { AdminListResponse } from 'src/app/IMS.Models/User/AdminListResponse';
 })
 export class UserManagementService {
   getAllAdmins() : Observable<AdminListResponse> {
-    return this.http.get<AdminListResponse>("api/Admin");
+    return this.http.get<AdminListResponse>("api/users/Admin");
   }
 
   private roles;

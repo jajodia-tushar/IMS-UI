@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AdminService } from 'src/app/IMS.Services/admin.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/IMS.Models/User/User';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';

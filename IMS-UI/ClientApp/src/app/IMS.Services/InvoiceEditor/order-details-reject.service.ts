@@ -12,6 +12,6 @@ export class OrderDetailsRejectService {
   constructor(private http: HttpClient) { }
   
     rejectOrder(OrderID: number): Observable<Response>{
-    return this.http.delete<Response>("api/vendorOrderEdit/" + OrderID);
+    return this.http.delete<Response>("api/vendor/orders/" + OrderID);
   }
 }

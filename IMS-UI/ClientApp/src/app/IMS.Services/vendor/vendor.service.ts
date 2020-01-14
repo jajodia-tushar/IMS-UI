@@ -12,6 +12,17 @@ import { VendroOrderResponse } from 'src/app/IMS.Models/Vendor/VendroOrderRespon
 })
 export class VendorService {
 
+  
+  getUnApprovedOrders() {
+    let params = new HttpParams();
+    params = params.append("toDate","");
+    params = params.append("fromDate","");
+    params = params.append("approved","false");
+    params = params.append("pageNumber","");
+    params = params.append("pageSize","");
+    return this.http.get<VendroOrderResponse>("api/vendor/orders", { params });
+  }
+
   constructor(public http: HttpClient) { }
 
   getAllVendors() {

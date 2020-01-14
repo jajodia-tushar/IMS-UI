@@ -13,6 +13,6 @@ export class OrderDetailsApproveService {
 
 
   changeOrderDetails(vendorDetails): Observable<Response>  {
-   return this.http.put<Response>("api/vendorOrderEdit", vendorDetails);
+   return this.http.put<Response>("api/vendor/orders/", vendorDetails);
   }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import {MatDialog, MatDialogConfig} from "@angular/material";
+import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 @Component({
   selector: 'app-notifications',
@@ -21,6 +22,12 @@ export class NotificationsComponent implements OnInit {
   public isClickedOn;
   
   ngOnInit() {
+    this.vendorService.getUnApprovedOrders().subscribe(
+      data => {
+        this.vendorsOrdersDetails = data.vendorOrders;
+     
+      }
+    );
     this.GetDataforPendingApprovals();
     this.columns = this.vendorOrderdetailsService.getColumnFordataTable();
   }

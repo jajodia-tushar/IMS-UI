@@ -63,13 +63,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
 
     this._ItemService.getAllItems().subscribe(
       data => {
-        
-
         this.Items = data.items;
       }
     )
-   
-  
   }
 
   

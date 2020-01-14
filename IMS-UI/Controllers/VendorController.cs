@@ -114,5 +114,22 @@ namespace IMS_UI.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpPut("orders")]
+        public async Task<Response> Put([FromBody] VendorOrder vendorOrder)
+        {
+            var response = await _VendorOrderProvider.vendorOrderApproval(vendorOrder);
+            return response;
+        }
+
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("orders/{OrderId}")]
+
+        public async Task<Response> DeleteVendorOrder(int OrderId)
+        {
+            var response = await _VendorOrderProvider.vendorOrderReject(OrderId);
+            return response;
+        }
+
     }
 }

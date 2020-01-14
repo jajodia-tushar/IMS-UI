@@ -132,5 +132,43 @@ namespace IMS_UI.IMS.Providers
                 throw e;
             }
         }
+
+        public async Task<Response> vendorOrderApproval(VendorOrder vendorOrder)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = "api/order/VendorOrders/PendingApprovals";
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var token = _SessionManager.GetString("token");
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", token);
+            client.BaseAddress = new Uri(_IConfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(vendorOrder);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+            var byteData = new ByteArrayContent(buffer);
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PutAsync(client.BaseAddress + EndPoint, byteData);
+            return JsonConvert.DeserializeObject<Response>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<Response> vendorOrderReject(int OrderID)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = "api/order/vendororder/";
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var token = _SessionManager.GetString("token");
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", token);
+            client.BaseAddress = new Uri(_IConfiguration["BaseURL"]);
+
+            var response = await client.DeleteAsync(client.BaseAddress + EndPoint + OrderID);
+            return JsonConvert.DeserializeObject<Response>(
+                await response.Content.ReadAsStringAsync());
+        }
     }
 }

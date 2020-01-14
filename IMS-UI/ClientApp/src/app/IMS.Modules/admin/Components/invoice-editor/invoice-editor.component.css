@@ -61,7 +61,6 @@
 .vendor-details {
   height: 100%;
   width: 100%;
-  background-color: #1c1e2f;
 }
 
 :host ::ng-deep .mat-card-header-text {
@@ -119,7 +118,6 @@
 .table-vendor-details {
   position: relative;
   min-height: 290px;
-  background-color: #222437;
   border-radius: 9px;
   width: 100%;
   top: 50px;
@@ -138,7 +136,6 @@
 .ViewReceipt {
   border: 1px solid slateblue;
   color: white;
-  background-color: #222437;
 }
 
 :host ::ng-deep .cdk-overlay-dark-backdrop {

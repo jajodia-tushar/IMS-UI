@@ -13,43 +13,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-:host ::ng-deep .mat-form-field .mat-input-element {
-  color: white;
-}
-
-:host ::ng-deep .mat-form-field .mat-form-field-label {
-  color: white !important;
-}
-
-:host ::ng-deep .mat-form-field .mat-form-field-underline {
-  background-color: slategray;
-}
-
-:host ::ng-deep .mat-form-field .mat-form-field-ripple {
-  background-color: white;
-}
-
-:host ::ng-deep .mat-form-field .mat-form-field-required-marker {
-  color: white;
-}
-
-:host ::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
-  color: red;
-}
-
-:host ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
-  color: white !important;
-}
-
-:host ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
-  color: white;
-}
-
-:host ::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
-  background-color: white;
-}
-
-.one-row-input {
+.one-row mat-form-field{
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -81,14 +45,11 @@ body {
   color: #808e9c;
 }
 
-:host ::ng-deep .mat-radio-outer-circle {
-  border-color: slategray;
-}
 
 :host ::ng-deep .mat-button-toggle {
-  border: 0.5px solid slategray;
-  border-radius: 4px;
-  color: slategray;
+    border: 0.5px solid slategray;
+    border-radius: 4px;
+    color: slategray;
 }
 
 .mat-button.mat-accent[disabled], .mat-button.mat-primary[disabled], .mat-button.mat-warn[disabled], .mat-button[disabled][disabled], .mat-icon-button.mat-accent[disabled], .mat-icon-button.mat-primary[disabled], .mat-icon-button.mat-warn[disabled], .mat-icon-button[disabled][disabled], .mat-stroked-button.mat-accent[disabled], .mat-stroked-button.mat-primary[disabled], .mat-stroked-button.mat-warn[disabled], .mat-stroked-button[disabled][disabled] {

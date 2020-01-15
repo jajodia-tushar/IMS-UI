@@ -145,7 +145,9 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     );
   }
   approve() {
-    this.reloadPendingApproval.emit(0);
+   
+    if (this.InvoiceNo!=null) {
+      this.reloadPendingApproval.emit(0);
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
     this.VendorOrderdetails.challanNumber = this.ChallanNo;
     this.VendorOrderdetails.finalAmount = this.FinalAmount;
@@ -167,6 +169,12 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
       },
     );
   }
+  else {
+    showMessage(this.snackBar, 2, "Please fill the InvoiceNo first", "warn");
+  }
+}
+
+  
   }
 
 

@@ -68,6 +68,7 @@ export class DataTableComponent implements OnInit {
   }
   ClickedRow(row)
   {
+    console.log(row);
     this.TableData.emit(row);
     this.isClickedOn.emit(1);
   }

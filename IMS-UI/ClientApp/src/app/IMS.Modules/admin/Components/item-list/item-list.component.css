@@ -13,10 +13,6 @@ table {
     color: white;
 }
 
-th.mat-sort-header-sorted {
-    color: black;
-}
-
 .mat-form-field {
     font-size: 14px;
     width: 30%;
@@ -36,7 +32,7 @@ table {
     min-height: 201px;
 }
 
-#add-user {
+#add-item {
     position: absolute;
     right: 10px;
 }
@@ -53,4 +49,11 @@ table {
 ::ng-deep .mat-sort-header-arrow {
     color: #fff !important;
     /* opacity: 1 !important; */
+}
+
+#add-item {
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
 }

@@ -1,8 +1,1 @@
-<h1>Item</h1>
-<div class="container">
-    <div class="table-container">
-        Users
-        <button mat-button (click)="openDialog()">Add Item</button>
-        <app-item-list></app-item-list>
-    </div>
-</div>
+<app-item-manage-form [itemDetails]="uitemData" (itemCreated)="notifyTableItemCreated($event)" (itemEditted)="notifyTableItemEditted($event)"></app-item-manage-form>

@@ -1,62 +1,114 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { ItemManagementComponent } from '../item-management/item-management.component';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemManagementService } from 'src/app/IMS.Services/admin/item-management.service';
+import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
 
 @Component({
   selector: 'app-item-manage-form',
   templateUrl: './item-manage-form.component.html',
   styleUrls: ['./item-manage-form.component.css']
 })
-export class ItemManageFormComponent {
+export class ItemManageFormComponent implements OnInit{
   createItemForm: FormGroup
+  updateButtonText: string = "Update";
+  submitButtonText: string = "Submit";
   constructor(formBuilder: FormBuilder, private itemManageService: ItemManagementService) {
     this.createItemForm = formBuilder.group({
-      itemName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      maxLimit: ["", [Validators.required, Validators.maxLength(5)]],
-      rate : ["", [Validators.required, Validators.maxLength(5)]],
-      shelfRedLimit: ["", [Validators.required, Validators.maxLength(5)]],
-      shelfAmberLimit: ["", [Validators.required, Validators.maxLength(5)]],
-      warehouseRedLimit: ["", [Validators.required, Validators.maxLength(5)]],
-      warehouseAmberLimit: ["", [Validators.required, Validators.maxLength(5)]]
+      id: [-1, []],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      maxLimit: [null, [Validators.required]],
+      isActive: [true, []],
+      imageUrl: ["", [Validators.required, Validators.minLength(2)]],
+      rate: [null, [Validators.required]],
+      shelfRedLimit: [null, [Validators.required]],
+      shelfAmberLimit: [null, [Validators.required]],
+      warehouseRedLimit: [null, [Validators.required]],
+      warehouseAmberLimit: [null, [Validators.required]]
     })
   }
 
-  @Input() itemDetails;
+  @Input() itemDetails: Item;
+  @Output() itemEditted: EventEmitter<ItemsResponse> = new EventEmitter<ItemsResponse>();
+  @Output() itemCreated: EventEmitter<ItemsResponse> = new EventEmitter<ItemsResponse>();
   isEditItemForm: Boolean;
 
-  ngOnInit() {
-      if (this.itemDetails) {
-        this.isEditItemForm=this.itemDetails?true:false;
-        this.createItemForm.setValue(this.itemDetails);
-      }
+  async ngOnInit() {
+    if (this.itemDetails) {
+      this.isEditItemForm = this.itemDetails ? true : false;
+      //this.createItemForm.setValue(this.itemDetails);
+    }
+    if (this.isEditItemForm) {
+      let itemDetail = this.itemDetails;
+      this.createItemForm.setValue(itemDetail);
+    }
   }
 
-  submitForm(){
-    //create user or update existing user based on editUserForm variable
-    if(this.isEditItemForm){
+  async editItemDetails() {
+    let item: Item = <Item>this.createItemForm.getRawValue();
+    let edittedItem: ItemsResponse = <ItemsResponse>await this.itemManageService.editItem(item);
+    this.itemEditted.emit(edittedItem);
+    console.log(item);
+  }
+
+  async createNewItem() {
+    let item: Item = <Item>this.createItemForm.getRawValue();
+    console.log(item)
+    let createdItem: ItemsResponse = <ItemsResponse>await this.itemManageService.createItem(item);
+    this.itemCreated.emit(createdItem);
+  }
+
+  get name() {
+    return this.createItemForm.get('name');
+  }
+
+  get maxLimit() {
+    return this.createItemForm.get('maxLimit');
+  }
+
+  get imageUrl() {
+    return this.createItemForm.get('imageUrl');
+  }
+
+  get rate() {
+    return this.createItemForm.get('rate');
+  }
+
+  get shelfRedLimit() {
+    return this.createItemForm.get('shelfRedLimit');
+  }
+
+  get shelfAmberLimit() {
+    return this.createItemForm.get('shelfAmberLimit');
+  }
+
+  get warehouseRedLimit() {
+    return this.createItemForm.get('warehouseRedLimit');
+  }
+
+  get warehouseAmberLimit() {
+    return this.createItemForm.get('warehouseAmberLimit');
+  }
+
+  submitForm() {
+    //create item or update existing user based on editUserForm variable
+    if (this.isEditItemForm) {
       this.editItemDetails();
     }
-    else{
+    else {
       this.createNewItem();
     }
+    this.submitButtonText = this.updateButtonText = "";
   }
 
-  editItemDetails(){
-    let item: Item = <Item>this.createItemForm.getRawValue();
-    this.itemManageService.editItem(item);
-    console.log(item);
+  cancelUpdate() {
+    this.itemEditted.emit(null);
   }
 
-  createNewItem(){
-    let item: Item = <Item>this.createItemForm.getRawValue();
-    console.log(item);
-    let response = true;
-    if(!response){
-      this.createItemForm.setErrors({
-      })
-    }
+  cancelCreate() {
+    this.itemCreated.emit(null);
   }
+
 }

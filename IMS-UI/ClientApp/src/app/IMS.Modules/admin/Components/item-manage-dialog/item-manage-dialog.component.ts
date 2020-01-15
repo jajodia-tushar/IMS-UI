@@ -1,6 +1,8 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Item } from 'src/app/IMS.Models/Item/Item';
+import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
 
 
 @Component({
@@ -10,9 +12,33 @@ import { Item } from 'src/app/IMS.Models/Item/Item';
 })
 export class ItemManageDialogComponent implements OnInit {
   itemData: Item;
-  constructor(@Inject(MAT_DIALOG_DATA) data) {
+  constructor(private dialogRef: MatDialogRef<ItemManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.itemData = data;
     console.log(data)
   }
   ngOnInit() { }
+
+  notifyTableItemEditted(itemsResponse: ItemsResponse) {
+    if (itemsResponse == null) {
+      this.dialogRef.close("cancelled");
+    }
+    else if (itemsResponse.error == null) {
+      this.dialogRef.close(itemsResponse.items[0]);
+    }
+    else if (itemsResponse.error != null) {
+      this.dialogRef.close(false);
+    }
+  }
+
+  notifyTableItemCreated(itemsResponse: ItemsResponse) {
+    if (itemsResponse == null) {
+      this.dialogRef.close("cancelled");
+    }
+    else if (itemsResponse.error == null) {
+      this.dialogRef.close(itemsResponse.items[0]);
+    }
+    else if (itemsResponse.error != null) {
+      this.dialogRef.close(false);
+    }
+  }
 }

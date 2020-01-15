@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 body {
   height: 100vh;
 }
@@ -11,41 +12,47 @@ button:focus, button:active:focus, button.active:focus {
 }
 
 .snackbar-warn {
-  background-color: #da2d2d;
-  color: white;
+    background-color: #da2d2d;
+    color: white;
 }
+
 .snackbar-success {
-  background-color: #50d890;
-  color: #1c1e2f;
+    background-color: #50d890;
+    color: #1c1e2f;
 }
 
 .snackbar-message {
-  background-color: slategray;
-  color: white;
+    background-color: slategray;
+    color: white;
 }
 
 .mat-snack-bar-container {
-  text-align: center;
+    text-align: center;
 }
 
 .dialog-user-manage mat-dialog-container {
-  background-color: #222437;
-  color: aliceblue;
+    background-color: #222437;
+    color: aliceblue;
 }
 
 .dialog-floor-select mat-dialog-container {
-  border-radius: 4px;
+    border-radius: 4px;
+}
+
+.dialog-item-manage mat-dialog-container {
+    background-color: #222437;
+    color: aliceblue;
 }
 
 .dialog-edit-store mat-dialog-container {
-  background-color: #222437;
-  color: aliceblue;
+    background-color: #222437;
+    color: aliceblue;
 }
 
 .dialog-order-success mat-dialog-container {
-  background-color: #222437;
-  color: aliceblue;
-  border-radius: 4px;
+    background-color: #222437;
+    color: aliceblue;
+    border-radius: 4px;
 }
 
 .dialog-notification-image mat-dialog-container {

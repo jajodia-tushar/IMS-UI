@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
             _iconfiguration = configuration;
             _SessionManager = sessionManager;
         }
-        public async Task<ListofVendorOrderDetails> GetVendorPendingApprovals()
+        public async Task<ListofVendorOrderDetails> GetVendorPendingApprovals(string pageNo, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -43,8 +43,8 @@ namespace IMS_UI.IMS.Providers
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("isApproved", "false"),
-                new KeyValuePair<string, string>("pageNumber", "1"),
-                new KeyValuePair<string, string>("pageSize", "10"),
+                new KeyValuePair<string, string>("pageNumber", pageNo),
+                new KeyValuePair<string, string>("pageSize", pageSize),
                
               
 

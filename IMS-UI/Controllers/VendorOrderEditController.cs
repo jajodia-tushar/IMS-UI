@@ -43,9 +43,9 @@ namespace IMS_UI.Controllers
             }
 
         [HttpGet("orders")]
-        public async Task<ListofVendorOrderDetails> Get()
+        public async Task<ListofVendorOrderDetails> Get(string pageNo, string pageSize)
         {
-            var response = await _VendorPendingApprovaList.GetVendorPendingApprovals();
+            var response = await _VendorPendingApprovaList.GetVendorPendingApprovals(pageNo,pageSize);
             return response;
         }
 

@@ -11,9 +11,11 @@ export class VendorOrderdetailsService {
 
   constructor(private http: HttpClient) { }
 
-  VendorOrderDetails(): Observable<any>  {
-   
-    return this.http.get<Root>("api/vendorOrderEdit/orders")
+  VendorOrderDetails(pageNo:string,pageSize:string): Observable<any>  {
+    let params = new HttpParams();
+    params = params.append("pageNo",pageNo);
+    params = params.append("pageSize",pageSize);
+    return this.http.get<Root>("api/vendorOrderEdit/orders", { params })
   }
 
   getColumn(){

@@ -1,7 +1,7 @@
 <mat-tab-group [(selectedIndex)]="selectedTab" dynamicHeight>
   <mat-tab mat-stretch-tabs label="Pending Approvals">
-    <app-data-table [columnHeader]=columns [(griddata)]="vendorsOrdersDetails" (TableData)="Tabledata($event)"
-      (isClickedOn)="getClickedStatus($event)"></app-data-table>
+    <app-data-table [columnHeader]=columns [(griddata)]="vendorsOrdersDetails" [(pageInfo)]="pageInfo" (TableData)="Tabledata($event)"
+      (isClickedOn)="getClickedStatus($event)" (pageischanged)="getpageInfo($event)"></app-data-table>
   </mat-tab>
   <ng-container *ngIf="isClickedOn === 1">
     <mat-tab label="Order Details">

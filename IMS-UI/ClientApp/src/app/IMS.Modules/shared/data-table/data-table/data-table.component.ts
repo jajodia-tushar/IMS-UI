@@ -24,13 +24,11 @@ export class DataTableComponent implements OnInit {
     this.paginator = mp;
   }
    @Input() set pageInfo(data){
-     console.log(data.totalResults);
+    
      this.pageLength=data.totalResults;
      this.pageSize=data.pageSize;
      this.pageNo=data.pageNumber;
-     console.log(this.pageLength);
-    console.log(this.pageSize);
-     console.log(this.pageNo);
+    
    } 
 
   @Input() set griddata(data) {
@@ -57,18 +55,12 @@ export class DataTableComponent implements OnInit {
   }
 
   pageChange($event){
-    // console.log($event);
-    // console.log($event.pageIndex);
-    // this.pageNo=$event.pageIndex;
-    // this.pageSize=$event.pageSize;
-    // console.log(this.pageLength);
-    // console.log(this.pageSize);
-    //  console.log(this.pageNo);
+    
     this.pageischanged.emit($event);
   }
   ClickedRow(row)
   {
-    console.log(row);
+    
     this.TableData.emit(row);
     this.isClickedOn.emit(1);
   }

@@ -107,5 +107,30 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
+        // GET : api/reports/shelfwiseordercount
+        [HttpGet("shelfwiseordercount")]
+        public async Task<IActionResult> GetOrderCount(
+            string FromDate,
+            string ToDate
+        )
+        {
+            var response =
+                await _reportsProvider.GetShelfWiseData(
+                    FromDate,
+                    ToDate
+                );
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

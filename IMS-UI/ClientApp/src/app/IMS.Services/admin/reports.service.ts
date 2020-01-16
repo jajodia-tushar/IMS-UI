@@ -6,6 +6,7 @@ import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { dataFromAPI } from 'src/app/IMS.Modules/admin/Components/mainnav/mainnav.component';
 import { FrequentlyUsedItemModel } from 'src/app/IMS.Models/Admin/FrequentlyUsedItemModel';
 import { ItemWiseAnalysisResponse } from 'src/app/IMS.Models/Item/ItemWiseAnalysisResponse';
+import { ShelfWiseOrderCountResponse } from 'src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,15 @@ export class ReportsService {
     params = params.append("endDate", endDate);
 
     return this.httpClient.get<ItemWiseAnalysisResponse>("api/reports/itemwiseanalysis", { params: params });
+  }
+
+  getShelfWiseData(fromDate : string, toDate : string): Observable<ShelfWiseOrderCountResponse> {
+
+    let params = new HttpParams();
+    params = params.append("FromDate", fromDate);
+    params = params.append("ToDate", toDate);
+
+    return this.httpClient.get<ShelfWiseOrderCountResponse>("api/reports/shelfwiseordercount", {params: params});
   }
 
   getVendorOrderReport() : VendorOrder[] {

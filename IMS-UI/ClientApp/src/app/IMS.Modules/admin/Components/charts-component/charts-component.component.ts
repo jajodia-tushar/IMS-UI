@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
-import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
 import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
 
 @Component({
@@ -11,7 +10,6 @@ import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseO
 export class ChartsComponentComponent implements OnInit {
 
   constructor(
-    private shelfWiseDataService: ShelfWiseDataService
   ) {
     Chart.defaults.global.defaultFontColor = "#fff";
   }

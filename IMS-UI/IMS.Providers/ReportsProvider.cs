@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core;
+﻿using IMS.Contracts;
+using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Providers.Interfaces;
@@ -140,6 +141,44 @@ namespace IMS_UI.IMS.Providers
 
 
             return JsonConvert.DeserializeObject<DateItemConsumptionResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<ShelfWiseOrderCountResponse> GetShelfWiseData(
+            string fromDate,
+            string toDate
+        )
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.ShelfWiseOrderCountProvider;
+
+            UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+            // client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            string query;
+            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("FromDate", fromDate),
+                new KeyValuePair<string, string>("ToDate", toDate)
+            }))
+            {
+                query = content.ReadAsStringAsync().Result;
+            }
+
+            uriBuilder.Query = query;
+
+            var response =
+                await client.GetAsync(uriBuilder.Uri);
+
+            return JsonConvert.DeserializeObject<ShelfWiseOrderCountResponse>(
                 await response.Content.ReadAsStringAsync());
         }
     }

@@ -18,4 +18,17 @@ export class EmployeeService {
     return this.http.get<EmployeeResponse>("employee/validate/" + EmployeeID);
   }
 
+  validateEmail(email: string) {
+    return this.http.get('api/employee/email?email=' + email).toPromise();
+  }
+
+  createEmployee(employee: Employee): Promise<EmployeesResponse> {
+    return this.http.post<EmployeesResponse>("api/employee", employee).toPromise();
+  }
+
+  editEmployee(employee: Employee): Promise<EmployeesResponse> {
+    return this.http.put<EmployeesResponse>("api/employee", employee).toPromise();
+  }
+
+
 }

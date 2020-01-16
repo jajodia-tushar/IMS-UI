@@ -25,7 +25,7 @@ namespace IMS_UI.IMS.Providers
             _iconfiguration = configuration;
             _sessionManager = sessionManager;
         }
-        public async Task<UsersResponse> AddUser(User user)
+        public async Task<EmployeesResponse> AddUser(User user)
         {
             using (HttpClient http = new HttpClient())
             {
@@ -36,7 +36,7 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<UsersResponse> EditUser(User user)
+        public async Task<EmployeesResponse> EditUser(User user)
         {
             using (HttpClient http = new HttpClient())
             {
@@ -51,21 +51,21 @@ namespace IMS_UI.IMS.Providers
 
         private async Task<Response> ResultParser(HttpResponseMessage response)
         {
-            Response apiResponse = new UsersResponse();
+            Response apiResponse = new EmployeesResponse();
             var result = await response.Content.ReadAsStringAsync();
             apiResponse = JsonConvert.DeserializeObject<Response>(result);
             return apiResponse;
         }
 
-        private async Task<UsersResponse> UsersResultParser(HttpResponseMessage response)
+        private async Task<EmployeesResponse> UsersResultParser(HttpResponseMessage response)
         {
-            UsersResponse apiParsedResponse = new UsersResponse();
+            EmployeesResponse apiParsedResponse = new EmployeesResponse();
             var result = await response.Content.ReadAsStringAsync();
-            apiParsedResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
+            apiParsedResponse = JsonConvert.DeserializeObject<EmployeesResponse>(result);
             return apiParsedResponse;
         }
 
-        public async Task<UsersResponse> GetAllUsers()
+        public async Task<EmployeesResponse> GetAllUsers()
         {
             using (HttpClient http = new HttpClient())
             {

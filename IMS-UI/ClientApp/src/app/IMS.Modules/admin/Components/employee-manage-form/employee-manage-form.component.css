@@ -1,0 +1,131 @@
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.name {
+  display: flex;
+}
+
+body {
+  background: #456;
+  font-family: "Open Sans", sans-serif;
+}
+
+::ng-deep .mat-form-field .mat-input-element {
+  color: white;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: white !important;
+}
+::ng-deep .mat-form-field .mat-form-field-underline {
+  background-color: slategray;
+}
+::ng-deep .mat-form-field .mat-form-field-ripple {
+  background-color: white;
+}
+::ng-deep .mat-form-field .mat-form-field-required-marker {
+  color: white;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-input-element {
+  color: red;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: white !important;
+}
+::ng-deep
+  .mat-form-field.mat-form-field-invalid
+  .mat-form-field-label
+  .mat-form-field-required-marker {
+  color: white;
+}
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {
+  background-color: white;
+}
+
+.one-row mat-form-field {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px;
+}
+.one-row {
+  display: flex;
+}
+.action-buttons {
+  position: relative;
+}
+
+.position-of-buttons {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+}
+
+::ng-deep .mat-form-field-subscript-wrapper {
+  font-size: 58%;
+  margin-top: 0.66667em;
+  top: calc(100% - 1.79167em);
+}
+
+.mat-form-field-appearance-legacy .mat-hint {
+  color: #808e9c;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  border-color: slategray;
+}
+.mat-button-toggle {
+  border: 0.5px solid slategray;
+  border-radius: 4px;
+  color: slategray;
+}
+
+.mat-button.mat-accent[disabled],
+.mat-button.mat-primary[disabled],
+.mat-button.mat-warn[disabled],
+.mat-button[disabled][disabled],
+.mat-icon-button.mat-accent[disabled],
+.mat-icon-button.mat-primary[disabled],
+.mat-icon-button.mat-warn[disabled],
+.mat-icon-button[disabled][disabled],
+.mat-stroked-button.mat-accent[disabled],
+.mat-stroked-button.mat-primary[disabled],
+.mat-stroked-button.mat-warn[disabled],
+.mat-stroked-button[disabled][disabled] {
+  color: slategray;
+  border: 0.5px solid slategray;
+}
+
+[type="submit"]:not(:disabled) {
+  color: white;
+  border: 0.5px solid aquamarine;
+}
+
+:host ::ng-deep .mat-radio-label-content {
+  padding-left: 1px;
+  padding-right: 8px;
+}
+
+.roles-radio {
+  margin-right: 10px;
+}
+
+.position-of-buttons .submit-update {
+  height: 37px;
+  position: absolute;
+  min-height: 37px;
+  min-width: 75px;
+  right: 72px;
+}
+
+.cancel {
+  height: 40px;
+  position: relative;
+  min-height: 39px;
+  min-width: 30px;
+}

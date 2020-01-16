@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
+using Newtonsoft.Json.Linq;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -21,30 +22,86 @@ namespace IMS_UI.IMS.Providers
             this.sessionManager = sessionManager;
         }
 
-        public async Task<EmployeesResponse> GetAllEmployee()
-        {
-            try
-            {
-                var endPoint = Constants.APIEndpoints.EmployeeProvider;
-                using (HttpClient _client = new HttpClient())
-                {
-                    _client.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
-                    _client.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/json"));
-                    _client.DefaultRequestHeaders.Authorization =
-                        new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
-                    var response = await _client.GetAsync(endPoint);
-                    return JsonConvert.DeserializeObject<EmployeesResponse>(
-                        await response.Content.ReadAsStringAsync());
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
 
+
+        public async Task<EmployeesResponse> AddEmployee(Employee employee)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                JObject employeeJson = JsonMaker(employee);
+                var response = await http.PostAsJsonAsync("api/employee", employeeJson);
+                return await EmployeeResultParser(response);
+            }
         }
 
+        public async Task<EmployeesResponse> EditEmployee(Employee employee)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                JObject employeeJson = JsonMaker(employee);
+                var response = await http.PutAsJsonAsync("api/employee", employeeJson);
+                return await EmployeeResultParser(response);
+            }
+        }
+
+
+
+        private async Task<Response> ResultParser(HttpResponseMessage response)
+        {
+            Response apiResponse = new EmployeesResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiResponse = JsonConvert.DeserializeObject<Response>(result);
+            return apiResponse;
+        }
+
+        private async Task<EmployeesResponse> EmployeeResultParser(HttpResponseMessage response)
+        {
+            EmployeesResponse apiParsedResponse = new EmployeesResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiParsedResponse = JsonConvert.DeserializeObject<EmployeesResponse>(result);
+            return apiParsedResponse;
+        }
+
+        public async Task<EmployeesResponse> GetAllEmployee()
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/employee");
+                return await EmployeeResultParser(response);
+            }
+        }
+
+        private JObject JsonMaker(Employee employee)
+        {
+            string jsonString = JsonConvert.SerializeObject(employee);
+            JObject Json = JObject.Parse(jsonString);
+            return Json;
+        }
+
+        private void prepareClient(HttpClient http)
+        {
+            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
+        }
+
+        public async Task<Response> DeactivateEmployee(int employeeId, bool isHardDelete)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+
+                var response = await http.DeleteAsync("api/employee/" + employeeId.ToString() + "?isHardDelete=" + "False");
+                return await ResultParser(response);
+            }
+        }
+
+
+        
  
         public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
@@ -57,5 +114,7 @@ namespace IMS_UI.IMS.Providers
             return JsonConvert.DeserializeObject<EmployeeResponse>(
                 await response.Content.ReadAsStringAsync());
         }
+
+   
     }
 }

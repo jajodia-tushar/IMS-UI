@@ -10,5 +10,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
     {
         Task<EmployeeResponse> ValidateEmployee(string employeeId);
         Task<EmployeesResponse> GetAllEmployee();
+        Task<EmployeesResponse> AddEmployee(Employee employee);
+        Task<EmployeesResponse> EditEmployee(Employee employee);
     }
 }

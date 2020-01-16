@@ -36,6 +36,11 @@ button.active:focus {
     color: aliceblue;
 }
 
+.dialog-employee-manage mat-dialog-container {
+  background-color: #222437;
+  color: aliceblue;
+}
+
 .dialog-floor-select mat-dialog-container {
     border-radius: 4px;
 }

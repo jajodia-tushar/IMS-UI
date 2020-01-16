@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core.Infra;
+using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,40 @@ namespace IMS_UI.Controllers
             try
             {
                 var response = await _employeeProviderProvider.GetAllEmployee();
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmployeeDetails([FromBody] Employee employee)
+        {
+            try
+            {
+                var response = await _employeeProviderProvider.AddEmployee(employee);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditEmployeeDetails([FromBody] Employee employee)
+        {
+            try
+            {
+                var response = await _employeeProviderProvider.EditEmployee(employee);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 

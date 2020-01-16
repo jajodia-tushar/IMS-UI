@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-   
-    public class EmployeesResponse : Response
+    public class EmployeesResponse:Response
     {
-        public Employee[] Employees;
+        public List<Employee> Employees { get; set; }
     }
 }

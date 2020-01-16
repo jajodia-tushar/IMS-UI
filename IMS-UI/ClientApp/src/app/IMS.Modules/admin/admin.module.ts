@@ -70,12 +70,17 @@ import { EmployeeManageFormComponent } from './Components/employee-manage-form/e
       EmployeeListComponent,
       EmployeeManageDialogComponent,
       EmployeeManageFormComponent
-    ],
+    
+    EmployeeManagementComponent,
+    EmployeeListComponent,
+    EmployeeManageDialogComponent,
+    EmployeeManageFormComponent
+  ],
   imports: [
     MaterialModule,
-      AdminRoutingModule,
-      SharedModule
+    AdminRoutingModule,
+    SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent]
 })
 export class AdminModule { }

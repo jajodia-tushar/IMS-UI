@@ -8,9 +8,9 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface IUserProvider
     {
-        Task<UsersResponse> AddUser(User user);
-        Task<UsersResponse> EditUser(User user);
-        Task<UsersResponse> GetAllUsers();
+        Task<EmployeesResponse> AddUser(User user);
+        Task<EmployeesResponse> EditUser(User user);
+        Task<EmployeesResponse> GetAllUsers();
         Task<Response> DeactivateUser(int userId, bool isHardDelete);
         Task<Response> IsUserNameUnique(string username);
         Task<Response> IsEmailNameUnique(string email);

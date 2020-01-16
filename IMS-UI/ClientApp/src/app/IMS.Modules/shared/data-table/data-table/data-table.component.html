@@ -17,6 +17,10 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="ClickedRow(row)"></mat-row>
       </table>
+      <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)">
+
+      </mat-paginator>
+
     </div>
   </div>
 </div>

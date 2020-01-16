@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Models.Vendor;
 using IMS_UI.IMS.Providers;
 using IMS_UI.IMS.Providers.Interfaces;
@@ -17,11 +18,13 @@ namespace IMS_UI.Controllers
     {
         IVendorOrderApprovalProvider _VendorOrderApprovalProvider;
         IVendorOrderRejectProvider _VendorOrderRejectProvider;
+        IPendingVendorOrdersProvider _VendorPendingApprovaList;
 
-        public VendorOrderEditController(IVendorOrderApprovalProvider VendorOrderApprovalProvider, IVendorOrderRejectProvider VendorOrderRejectProvider)
+        public VendorOrderEditController(IVendorOrderApprovalProvider VendorOrderApprovalProvider, IVendorOrderRejectProvider VendorOrderRejectProvider, IPendingVendorOrdersProvider VendorPendingApprovaList)
         {
             this._VendorOrderApprovalProvider = VendorOrderApprovalProvider;
             this._VendorOrderRejectProvider = VendorOrderRejectProvider;
+            this._VendorPendingApprovaList = VendorPendingApprovaList;
         }
         [HttpPut]
         public async Task<Response> Put([FromBody] VendorOrder vendorOrder )
@@ -39,6 +42,14 @@ namespace IMS_UI.Controllers
                 return response;
             }
 
-        
+        [HttpGet("orders")]
+        public async Task<ListofVendorOrderDetails> Get(string pageNo, string pageSize)
+        {
+            var response = await _VendorPendingApprovaList.GetVendorPendingApprovals(pageNo,pageSize);
+            return response;
+        }
+
+
+
     }
 }

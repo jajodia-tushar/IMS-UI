@@ -115,3 +115,17 @@ td {
 .container {
   min-width: 100%;
 }
+
+.mat-paginator {
+  background-color: #222437;
+  color: white !important;
+}
+
+.paginator {
+  background-color: #222437 !important;
+  color: white !important;
+}
+
+.mat-select-value {
+  color: white;
+}

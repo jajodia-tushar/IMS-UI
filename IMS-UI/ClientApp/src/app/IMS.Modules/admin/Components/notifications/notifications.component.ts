@@ -3,6 +3,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import {MatDialog, MatDialogConfig} from "@angular/material";
+import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -11,19 +12,16 @@ import {MatDialog, MatDialogConfig} from "@angular/material";
 export class NotificationsComponent implements OnInit {
   public columns;
   vendorsOrdersDetails: VendorOrder[];
+  pageInfo:PagingInfo;
   constructor( public vendorOrderdetailsService: VendorOrderdetailsService,private dialog: MatDialog) { }
   public row;
-
+  public pageSize="10";
+  public pageNo="1";
   selectedTab : number = 0;
   public isClickedOn;
   
   ngOnInit() {
-    this.vendorOrderdetailsService.VendorOrderDetails().subscribe(
-      data => {
-        this.vendorsOrdersDetails = data.vendorOrders;
-     
-      }
-    );
+    this.GetDataforPendingApprovals();
     this.columns = this.vendorOrderdetailsService.getColumnFordataTable();
   }
 
@@ -38,6 +36,22 @@ export class NotificationsComponent implements OnInit {
     } else {
       this.selectedTab -= 1;
     }
+  }
+
+  GetDataforPendingApprovals(){
+    this.vendorOrderdetailsService.VendorOrderDetails(this.pageNo, this.pageSize).subscribe(
+      data => {
+        this.vendorsOrdersDetails = data.vendorOrders;
+        this.pageInfo=data.pagingInfo;
+        
+      }
+    );
+  }
+
+  getpageInfo(value){
+    this.pageNo=value.pageIndex+1;
+    this.pageSize=value.pageSize;
+   this.GetDataforPendingApprovals();
   }
 
   changeTab() {

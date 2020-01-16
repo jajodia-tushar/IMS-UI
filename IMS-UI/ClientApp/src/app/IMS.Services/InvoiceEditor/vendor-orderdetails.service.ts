@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Root } from 'src/app/IMS.Models/Vendor/Root';
 import { COLUMN_DATA, COLUMN_DATA2 } from 'src/app/IMS.Models/Vendor/Mock';
 import { Observable, of } from 'rxjs';
@@ -11,8 +11,11 @@ export class VendorOrderdetailsService {
 
   constructor(private http: HttpClient) { }
 
-  VendorOrderDetails(): Observable<any>  {
-    return this.http.get<Root>("api/listOfvendororderDetails")
+  VendorOrderDetails(pageNo:string,pageSize:string): Observable<any>  {
+    let params = new HttpParams();
+    params = params.append("pageNo",pageNo);
+    params = params.append("pageSize",pageSize);
+    return this.http.get<Root>("api/vendorOrderEdit/orders", { params })
   }
 
   getColumn(){

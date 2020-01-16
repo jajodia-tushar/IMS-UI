@@ -9,11 +9,11 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface IVendorProvider
     {
-        Task<VendorOrderResponse> postVendorOrder(VendorOrder vendorOrder);
-        Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize);
-        Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize);
-        Task<Response> vendorOrderApproval(VendorOrder vendorOrder);
-        Task<Response> vendorOrderReject(int orderId);
+        Task<VendorOrderResponse> PostVendorOrder(VendorOrder vendorOrder);
+        Task<VendorOrdersResponse> GetAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize);
+        Task<VendorOrdersResponse> GetParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize);
+        Task<Response> VendorOrderApproval(VendorOrder vendorOrder);
+        Task<Response> VendorOrderReject(int orderId);
 
         Task<VendorResponse> GetAllVendors();
     }

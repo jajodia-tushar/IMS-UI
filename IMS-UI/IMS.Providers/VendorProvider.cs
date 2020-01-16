@@ -63,7 +63,7 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
+        public async Task<VendorOrdersResponse> GetAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -98,11 +98,11 @@ namespace IMS_UI.IMS.Providers
             var response =
                 await client.GetAsync(uriBuilder.Uri);
 
-            return JsonConvert.DeserializeObject<VendorOrdersList>(
+            return JsonConvert.DeserializeObject<VendorOrdersResponse>(
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<VendorOrdersList> getParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
+        public async Task<VendorOrdersResponse> GetParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
@@ -137,11 +137,11 @@ namespace IMS_UI.IMS.Providers
             var response =
                 await client.GetAsync(uriBuilder.Uri);
 
-            return JsonConvert.DeserializeObject<VendorOrdersList>(
+            return JsonConvert.DeserializeObject<VendorOrdersResponse>(
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<VendorOrderResponse> postVendorOrder(VendorOrder vendorOrder)
+        public async Task<VendorOrderResponse> PostVendorOrder(VendorOrder vendorOrder)
         {
             try
             {
@@ -170,7 +170,7 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<Response> vendorOrderApproval(VendorOrder vendorOrder)
+        public async Task<Response> VendorOrderApproval(VendorOrder vendorOrder)
         {
             HttpClient client = new HttpClient();
             var EndPoint = "api/order/VendorOrders/PendingApprovals";
@@ -191,7 +191,7 @@ namespace IMS_UI.IMS.Providers
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<Response> vendorOrderReject(int OrderID)
+        public async Task<Response> VendorOrderReject(int OrderID)
         {
             HttpClient client = new HttpClient();
             var EndPoint = "api/order/vendororder/";

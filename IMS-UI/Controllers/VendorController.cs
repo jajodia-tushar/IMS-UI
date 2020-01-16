@@ -16,12 +16,12 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class VendorController : ControllerBase
     {
-        private IVendorProvider _VendorOrderProvider;
+        private IVendorProvider _vendorProvider;
         private SessionManager _sessionManager;
 
         public VendorController(IVendorProvider vendorOrderProvider, SessionManager sessionManger)
         {
-            _VendorOrderProvider = vendorOrderProvider;
+            _vendorProvider = vendorOrderProvider;
             _sessionManager = sessionManger;
         }
         // GET: api/Vendor
@@ -30,7 +30,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _VendorOrderProvider.GetAllVendors();
+                var response = await _vendorProvider.GetAllVendors();
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 
@@ -42,12 +42,13 @@ namespace IMS_UI.Controllers
             }
 
         }
+        
 
-        // GET: api/Vendor/5
+        // GET: api/Vendor/orders
         [HttpGet("orders")]
         public async Task<IActionResult> GetAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
-            var response = await _VendorOrderProvider.getAllVendorOrders(toDate,fromDate,approved,pageNumber,pageSize);
+            var response = await _vendorProvider.GetAllVendorOrders(toDate,fromDate,approved,pageNumber,pageSize);
             try
             {
                 if (response.Error != null && response.Error.ErrorCode == 401)
@@ -61,72 +62,77 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpGet("orders/{vendorId}")]
-        public async Task<IActionResult> Get(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
-        {
-            var response = await _VendorOrderProvider.getParticularVendorOrder(vendorId,toDate, fromDate, approved, pageNumber, pageSize);
-            try
-            {
-                if (response.Error != null && response.Error.ErrorCode == 401)
-                    _sessionManager.ClearSession();
-
-                return Ok(response);
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
-
-
-        // GET: api/Vendor/5
-        [HttpGet("{id}", Name = "GetVendor")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Vendor
-        [HttpPost]
+        // POST: api/Vendor/orders
+        [HttpPost("orders")]
         public async Task<IActionResult> Post([FromBody] VendorOrder vendorOrder)
         {
             try
             {
-                var response = await _VendorOrderProvider.postVendorOrder(vendorOrder);
+                var response = await _vendorProvider.PostVendorOrder(vendorOrder);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
                 return Ok(response);
             }
-            catch(Exception e)
+            catch
             {
                 return StatusCode(500);
             }
         }
 
-        // PUT: api/Vendor/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // GET: api/Vendor/orders/5
+        [HttpGet("orders/{vendorId}")]
+        public async Task<IActionResult> GetParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
-        }
+            try
+            {
+                var response = await _vendorProvider.GetParticularVendorOrder(vendorId, toDate, fromDate, approved, pageNumber, pageSize);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
-
+   
+        // PUT api/Vendor/orders
         [HttpPut("orders")]
-        public async Task<Response> Put([FromBody] VendorOrder vendorOrder)
+        public async Task<IActionResult> Put([FromBody] VendorOrder vendorOrder)
         {
-            var response = await _VendorOrderProvider.vendorOrderApproval(vendorOrder);
-            return response;
+            try
+            {
+            var response = await _vendorProvider.VendorOrderApproval(vendorOrder);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Vendor/orders/6
         [HttpDelete("orders/{OrderId}")]
 
-        public async Task<Response> DeleteVendorOrder(int OrderId)
+        public async Task<IActionResult> DeleteVendorOrder(int OrderId)
         {
-            var response = await _VendorOrderProvider.vendorOrderReject(OrderId);
-            return response;
+            try
+            {
+            var response = await _vendorProvider.VendorOrderReject(OrderId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
     }

@@ -54,7 +54,7 @@ namespace IMS_UI
            
             services.AddSingleton<ReportsProvider>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();
-            services.AddSingleton<IVendorOrderProvider, VendorOrderProvider>();
+            services.AddSingleton<IVendorProvider, VendorProvider>();
             services.AddSingleton<IItemListProvider,ItemListProvider>();
             services.AddSingleton<EmployeeOrderProvider>();
 

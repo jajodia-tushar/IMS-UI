@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IMS_UI.IMS.Models
 {
-    public class VendorOrdersList : Response
+    public class VendorOrdersResponse : Response
     {
         public List<VendorOrder> VendorOrders { get; set; }
         public PagingInfo pagingInfo { get; set; }

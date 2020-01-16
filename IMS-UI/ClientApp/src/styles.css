@@ -1,14 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files *
 /* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 body {
-  height: 100vh;
+    height: 100vh;
 }
 
-button:focus, button:active:focus, button.active:focus {
-  outline: none !important;
-  outline-style: none !important;
+button:focus,
+button:active:focus,
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
 }
 
 .snackbar-warn {
@@ -56,10 +57,15 @@ button:focus, button:active:focus, button.active:focus {
 }
 
 .dialog-notification-image mat-dialog-container {
-  top: 30%;
-  left: 6%;
+    top: 30%;
+    left: 6%;
 }
 
-h1, h2, h3, h4, h4, h6{
-  color: white;
+h1,
+h2,
+h3,
+h4,
+h4,
+h6 {
+    color: white;
 }

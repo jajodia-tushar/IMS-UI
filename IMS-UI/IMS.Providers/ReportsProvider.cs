@@ -181,5 +181,24 @@ namespace IMS_UI.IMS.Providers
             return JsonConvert.DeserializeObject<ShelfWiseOrderCountResponse>(
                 await response.Content.ReadAsStringAsync());
         }
+
+        public async Task<RAGStatusResponse> GetRAGStatusList()
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.RAGStatusProvider;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var response = await client.GetAsync(client.BaseAddress + EndPoint);
+
+            return JsonConvert.DeserializeObject<RAGStatusResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
     }
 }

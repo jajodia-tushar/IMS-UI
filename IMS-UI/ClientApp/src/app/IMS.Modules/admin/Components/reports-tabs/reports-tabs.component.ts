@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 import { ActivatedRoute } from "@angular/router";
-import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
 import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
@@ -33,8 +32,10 @@ export class ReportsTabsComponent implements OnInit {
     errorMessage: string;
 
 
-  constructor(private reportsService: ReportsService, private route: ActivatedRoute,
-    private ragStatusService: RagStatusService , private vendorService : VendorService,
+  constructor(
+    private reportsService: ReportsService, 
+    private route: ActivatedRoute,
+    private vendorService : VendorService,
     private employeeOrderService : EmployeeOrderService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
@@ -55,7 +56,7 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   async getRAGReportDropDownList() {
-    return await this.ragStatusService.getRAGStatusData().toPromise();
+    return await this.reportsService.getRAGStatusData().toPromise();
   }
   
 

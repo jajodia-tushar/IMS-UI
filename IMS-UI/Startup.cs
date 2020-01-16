@@ -44,7 +44,6 @@ namespace IMS_UI
             services.AddSingleton<IReportProvider, ReportsProvider>();
             services.AddSingleton<IRolesProvider, RolesProvider>();
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddSingleton<RAGStatusProvider>();
             services.AddSingleton<StockProvider>();
             services.AddSingleton<ShelfWiseOrderCountProvider>();
             services.AddSingleton<ItemWiseAnalysisProvider>();

@@ -132,5 +132,23 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
+        // GET : api/reports/ragstatus
+        [HttpGet("ragstatus")]
+        public async Task<IActionResult> GetRAGStatusData()
+        {
+            var response = await _reportsProvider.GetRAGStatusList();
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

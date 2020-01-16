@@ -7,6 +7,7 @@ import { dataFromAPI } from 'src/app/IMS.Modules/admin/Components/mainnav/mainna
 import { FrequentlyUsedItemModel } from 'src/app/IMS.Models/Admin/FrequentlyUsedItemModel';
 import { ItemWiseAnalysisResponse } from 'src/app/IMS.Models/Item/ItemWiseAnalysisResponse';
 import { ShelfWiseOrderCountResponse } from 'src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse';
+import { RAGStatusResponse } from 'src/app/IMS.Models/Admin/RAGStatusResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,10 @@ export class ReportsService {
     params = params.append("ToDate", toDate);
 
     return this.httpClient.get<ShelfWiseOrderCountResponse>("api/reports/shelfwiseordercount", {params: params});
+  }
+
+  getRAGStatusData() {
+    return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
   }
 
   getVendorOrderReport() : VendorOrder[] {

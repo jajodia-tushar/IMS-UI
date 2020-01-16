@@ -1,11 +1,11 @@
 .card-body {
-  flex: 1 1 auto;
-  padding: 1.25rem 1.25rem;
+    flex: 1 1 auto;
+    padding: 1.25rem 1.25rem;
 }
 
 .justify-content-center,
 .email-wrapper .mail-view .message-body .attachments-sections ul li .thumb {
-  justify-content: center !important;
+    justify-content: center !important;
 }
 
 .flex-column,
@@ -13,62 +13,53 @@
 .nav-tabs.nav-tabs-vertical-custom,
 .nav-pills.nav-pills-vertical,
 .email-wrapper .mail-sidebar .menu-bar .profile-list-item a .user {
-  flex-direction: column !important;
+    flex-direction: column !important;
 }
 
-
 .chartjs-render-monitor {
-  animation: chartjs-render-animation 1ms;
+    animation: chartjs-render-animation 1ms;
 }
 
 .grid-margin {
-  margin-bottom: 1.875rem;
+    margin-bottom: 1.875rem;
 }
 
 h3 {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 .material-icons {
-  font-size: 28px;
-  color: #606a96;
+    font-size: 28px;
+    color: #606a96;
 }
 
 button:focus,
 button:active:focus,
 button.active:focus {
-  outline: none !important;
-  outline-style: none !important;
+    outline: none !important;
+    outline-style: none !important;
 }
 
 :host .mat-card {
-  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
-  padding: 0px;
-  width: 100%;
-  height: 100%;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    padding: 0px;
+    width: 100%;
+    height: 100%;
 }
 
-.canvas-container{
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-canvas {
-  padding: 0;
-  margin: 0px auto;
-  display: block;
-  width: 100%;
-  height: 100%;
+.canvas-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
-#refreshLine  {
-  font-size:24px;
-  color: #606a96;
-  cursor: pointer;
-}  
-
-.menu  {
-  background-color: #606a96;
-  margin-top: 6px;
+#refreshLine {
+    font-size: 24px;
+    color: #606a96;
+    cursor: pointer;
 }
 
+.menu {
+    background-color: #606a96;
+    margin-top: 6px;
+}

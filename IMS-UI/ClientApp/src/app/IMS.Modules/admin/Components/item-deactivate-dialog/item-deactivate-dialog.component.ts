@@ -26,7 +26,7 @@ export class ItemDeactivateDialogComponent implements OnInit {
   async onConfirm() {
     this.confirmButtonText = ""
     //this.item.isActive=false;
-    let response = <ItemsResponse>await this.itemManageService.deactivate(this.item.id,false);
+    let response = <ItemsResponse>await this.itemManageService.deactivate(this.item.id,"false");
     if (response.error == null) {
       this.dialogRef.close(true);
     }

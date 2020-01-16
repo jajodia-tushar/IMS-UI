@@ -14,7 +14,7 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 })
 export class ItemListComponent implements OnInit {
 
-  displayedColumns: string[] = ['itemName', 'maxLimit', 'rate', 'shelfRedLimit', 'shelfAmberLimit', 'warehouseRedLimit', 'warehouseAmberLimit', 'actions'];
+  displayedColumns: string[] = ['name', 'maxLimit', 'rate', 'shelvesRedLimit', 'shelvesAmberLimit', 'warehouseRedLimit', 'warehouseAmberLimit', 'actions'];
   ELEMENT_DATA: Item[];
   dataSource
 
@@ -32,7 +32,6 @@ export class ItemListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.dataSource.filterPredicate = (data: any, filter) => {
       const dataStr = JSON.stringify(data).toLowerCase();
@@ -46,42 +45,6 @@ export class ItemListComponent implements OnInit {
         .reduce((object, key) => object[key], item);
     }
     return item[property];
-  }
-
-  editItemDetails(item) {
-    this.openDialog(item);
-  }
-
-  openItemEditDialog(data:Item) {
-    let dialogConfig = new MatDialogConfig();
-    dialogConfig.data = data;
-    dialogConfig.panelClass = 'dialog-item-manage';
-    dialogConfig.disableClose = true;
-    const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result==false){
-        showMessage(this.snackBar,2,"Item Updation Failed",'warn');
-      }
-      else if(result=="cancelled"){
-        //don't show any message.
-      }
-      else if('itemName' in result){
-        this.editItemInTable(result);
-      }
-
-    });
-  }
-
-  openDialog(data) {
-    let dialogConfig = new MatDialogConfig();
-    dialogConfig.data = data;
-    // dialogConfig.disableClose = true;
-    const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   openAddItemDialog() {
@@ -98,7 +61,7 @@ export class ItemListComponent implements OnInit {
       else if (result == "cancelled") {
         //don't show any message.
       }
-      else if ('itemName' in result) {
+      else if ('name' in result) {
         this.ELEMENT_DATA.push(<Item>result);
         this.dataSource.data = this.ELEMENT_DATA;
         showMessage(this.snackBar, 2, "Item Was Created Successfully", 'success');
@@ -109,7 +72,44 @@ export class ItemListComponent implements OnInit {
     });
   }
 
-  deactivateUser(item){
+  editItemDetails(item:Item) {
+    this.openItemEditDialog(item);
+  }
+
+  openItemEditDialog(data:Item) {
+    let dialogConfig = new MatDialogConfig();
+    //console.log(data)
+    dialogConfig.data = data;
+    dialogConfig.panelClass = 'dialog-item-manage';
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result==false){
+        showMessage(this.snackBar,2,"Item Updation Failed",'warn');
+      }
+      else if(result=="cancelled"){
+        //don't show any message.
+      }
+      else if('name' in result){
+        this.editItemInTable(result);
+      }
+
+    });
+  }
+
+  // openDialog(data) {
+  //   let dialogConfig = new MatDialogConfig();
+  //   dialogConfig.data = data;
+  //   // dialogConfig.disableClose = true;
+  //   const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
+
+  deactivateItem(item){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = item;
     dialogConfig.panelClass = 'dialog-item-manage'

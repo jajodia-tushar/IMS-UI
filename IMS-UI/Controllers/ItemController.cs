@@ -79,7 +79,7 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> EditItemDetails([FromBody] Item item)
         {
             try

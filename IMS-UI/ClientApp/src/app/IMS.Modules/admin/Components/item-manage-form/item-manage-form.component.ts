@@ -23,8 +23,8 @@ export class ItemManageFormComponent implements OnInit{
       isActive: [true, []],
       imageUrl: ["", [Validators.required, Validators.minLength(2)]],
       rate: [null, [Validators.required]],
-      shelfRedLimit: [null, [Validators.required]],
-      shelfAmberLimit: [null, [Validators.required]],
+      shelvesRedLimit: [null, [Validators.required]],
+      shelvesAmberLimit: [null, [Validators.required]],
       warehouseRedLimit: [null, [Validators.required]],
       warehouseAmberLimit: [null, [Validators.required]]
     })
@@ -76,12 +76,12 @@ export class ItemManageFormComponent implements OnInit{
     return this.createItemForm.get('rate');
   }
 
-  get shelfRedLimit() {
-    return this.createItemForm.get('shelfRedLimit');
+  get shelvesRedLimit() {
+    return this.createItemForm.get('shelvesRedLimit');
   }
 
-  get shelfAmberLimit() {
-    return this.createItemForm.get('shelfAmberLimit');
+  get shelvesAmberLimit() {
+    return this.createItemForm.get('shelvesAmberLimit');
   }
 
   get warehouseRedLimit() {

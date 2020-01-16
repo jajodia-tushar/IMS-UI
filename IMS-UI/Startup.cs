@@ -50,8 +50,8 @@ namespace IMS_UI
             services.AddSingleton<IStoreProvider, StoreProvider>();
             services.AddSingleton<StoreProvider>();
             services.AddSingleton<IItemListProvider, ItemListProvider>();
-
-            services.AddSingleton<TransferProvider>();
+            services.AddSingleton<IVendorOrderApprovalProvider, VendorOrderApprovalProvider>();
+            services.AddSingleton<IVendorOrderRejectProvider, VendorOrderRejectProvider>();
            
             services.AddSingleton<ReportsProvider>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();

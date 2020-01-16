@@ -40,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Employee.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Item\ItemResponse.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\item.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\IMS.Models\Vendor\ListOfVendorOrder.ts" />

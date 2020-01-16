@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<StockStatusResponse> GetStockStatus(string pageNumber, string pageSize, string itemName)
+        public async Task<StockStatusResponse> GetStoreStatus(string pageNumber, string pageSize, string itemName)
         {
             try
             {
@@ -60,9 +61,33 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public Task<Response> TransferToShelf(TransferToShelvesRequest request)
+        public async Task<Response> TransferToShelf(TransferToShelvesRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (HttpClient _client = new HttpClient())
+                {
+                    var EndPoint = Constants.APIEndpoints.TransferProvider;
+                    var content = new ObjectContent<TransferToShelvesRequest>(request, new JsonMediaTypeFormatter());
+                    _client.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+                    _client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    _client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+                    HttpMethod method = new HttpMethod("PATCH");
+                    var httpRequest = new HttpRequestMessage(method, _client.BaseAddress + EndPoint)
+                    {
+                        Content = content
+                    };
+                    var response = await _client.SendAsync(httpRequest);
+                    return JsonConvert.DeserializeObject<Response>(
+                        await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

@@ -11,6 +11,6 @@ export class TransferService {
   constructor(private http: HttpClient) { }
 
   transferToShelf(transferRequest: TransferRequest) {
-    return this.http.patch<Response>("api/transfer", transferRequest);
+    return this.http.patch<Response>("api/store", transferRequest);
   }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core.Infra;
+using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,6 +47,23 @@ namespace IMS_UI.Controllers
             try
             {
                 var response = await _storeProvider.GetStockStatus(pageNumber, pageSize, itemName);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> TransferToShelf(TransferToShelvesRequest request)
+        {
+            try
+            {
+                var response = await _storeProvider.TransferToShelf(request);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

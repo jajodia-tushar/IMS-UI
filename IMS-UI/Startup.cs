@@ -47,14 +47,14 @@ namespace IMS_UI
             services.AddSingleton<RAGStatusProvider>();
             services.AddSingleton<ShelfWiseOrderCountProvider>();
             services.AddSingleton<ItemWiseAnalysisProvider>();
-            services.AddSingleton<StockProvider>();
+            services.AddSingleton<IStoreProvider, StoreProvider>();
+            services.AddSingleton<StoreProvider>();
             services.AddSingleton<IItemListProvider, ItemListProvider>();
-
-            services.AddSingleton<TransferProvider>();
            
             services.AddSingleton<ReportsProvider>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();
             services.AddSingleton<IVendorProvider, VendorProvider>();
+            services.AddSingleton<VendorProvider>();
             services.AddSingleton<IItemListProvider,ItemListProvider>();
             services.AddSingleton<EmployeeOrderProvider>();
 
@@ -65,7 +65,6 @@ namespace IMS_UI
             });
 
             services.AddSingleton<EmployeeProvider>();
-            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

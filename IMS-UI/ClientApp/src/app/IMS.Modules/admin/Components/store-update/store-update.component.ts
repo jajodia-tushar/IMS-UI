@@ -2,11 +2,11 @@ import { Component, OnInit, Inject, Optional, ViewEncapsulation } from '@angular
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StoreResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
-import { TransferService } from 'src/app/IMS.Services/Shelf/transfer.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { TransferRequest, ShelfID, ItemID, CartItemID, ShelvesItemsQuantityList } from 'src/app/IMS.Models/Shelf/TransferRequest';
 import { Status } from 'src/app/IMS.Models/Status';
+import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 
 @Component({
   selector: 'app-store-update',
@@ -40,7 +40,7 @@ export class StoreUpdateComponent implements OnInit {
     'Paste'
   ];
   constructor(private shelfService: ShelfService, public dialogRef: MatDialogRef<StoreUpdateComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public datas: StoreResponse, private transferService: TransferService, private itemService: ItemService) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public datas: StoreResponse, private storeService: StoreService, private itemService: ItemService) {
     this.itemName = datas['Item Name'];
   }
 
@@ -128,7 +128,7 @@ export class StoreUpdateComponent implements OnInit {
       this.transferRequest.shelvesItemsQuantityList = [];
       this.transferRequest.shelvesItemsQuantityList.push(request);
 
-      this.transferService.transferToShelf(this.transferRequest).subscribe(
+      this.storeService.transferToShelf(this.transferRequest).subscribe(
         data => {
           console.log(data);
           let transferResponse: TransferResponse = new TransferResponse();

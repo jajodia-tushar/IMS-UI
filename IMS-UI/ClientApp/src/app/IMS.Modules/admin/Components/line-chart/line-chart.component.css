@@ -1,27 +1,6 @@
-.card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #1f2132;
-  background-clip: border-box;
-  border: 0 solid transparent;
-  border-radius: 0.625rem;
-  border: 0.5px solid transparent;
-  box-shadow: 5px 11px 23px -13px #191b28;
-  -webkit-box-shadow: 5px 11px 23px -13px #191b28;
-  -moz-box-shadow: 5px 11px 23px -13px #191b28;
-  -ms-box-shadow: 5px 11px 23px -13px #191b28;
-}
-.card .card-body {
-  padding: 1.25rem 1.25rem;
-}
-
 .card-body {
   flex: 1 1 auto;
+  padding: 1.25rem 1.25rem;
 }
 
 .justify-content-center,
@@ -37,12 +16,6 @@
   flex-direction: column !important;
 }
 
-.chart-container {
-  position: relative;
-  margin: 0px auto;
-  height: 100%;
-  width: 100%;
-}
 
 .chartjs-render-monitor {
   animation: chartjs-render-animation 1ms;
@@ -53,38 +26,7 @@
 }
 
 h3 {
-  color: white;
   font-size: 1.2rem;
-}
-
-.col-md-4 {
-  flex: 0 0 33.333333%;
-  max-width: 30.333333%;
-}
-.content-wrapper {
-  background: #1c1e2f;
-  padding: 1.1rem 2.5rem 2.5rem;
-  width: 100%;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 1rem;
-  color: #606a96;
-  text-align: left;
-  list-style: none;
-  background-color: #222437;
-  background-clip: padding-box;
 }
 
 .material-icons {
@@ -99,6 +41,18 @@ button.active:focus {
   outline-style: none !important;
 }
 
+:host .mat-card {
+  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-container{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
 canvas {
   padding: 0;
   margin: 0px auto;
@@ -107,24 +61,14 @@ canvas {
   height: 100%;
 }
 
-.chartjs-size-monitor,
-.chartjs-size-monitor-expand,
-.chartjs-size-monitor-shrink {
-  position: absolute;
-  direction: ltr;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  pointer-events: none;
-  visibility: hidden;
-  z-index: -1;
-}
-
 #refreshLine  {
-  font-size:24px; 
-  margin-top: 6px; 
+  font-size:24px;
   color: #606a96;
   cursor: pointer;
+}  
+
+.menu  {
+  background-color: #606a96;
+  margin-top: 6px;
 }
+

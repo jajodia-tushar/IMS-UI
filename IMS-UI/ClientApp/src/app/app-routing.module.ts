@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { LoginComponent } from './Components/login/login.component';
 import { LoggingComponent } from './Components/logging/logging.component';
+import { ThemingExampleComponent } from './Components/theming-example/theming-example.component';
 
 const routes: Routes = [
   { path: '', redirectTo : 'login' , pathMatch : 'full'},

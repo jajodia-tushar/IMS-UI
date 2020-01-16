@@ -4,7 +4,6 @@
 .items-container {
   margin: 0px 20px 10px 20px;
   top: 20px;
-  background-color: #222437;
   border-radius: 8px;
   overflow: auto;
   position: relative;
@@ -108,7 +107,6 @@ td {
 }
 
 .paginator {
-  background-color: #222437 !important;
   color: white;
 }
 

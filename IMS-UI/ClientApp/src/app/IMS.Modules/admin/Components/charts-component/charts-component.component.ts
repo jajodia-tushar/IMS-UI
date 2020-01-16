@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
-import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
 import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
 import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";

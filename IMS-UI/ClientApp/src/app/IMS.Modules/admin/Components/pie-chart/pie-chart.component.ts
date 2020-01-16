@@ -2,10 +2,10 @@ import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
-import { FrequentlyUsedItemService } from "src/app/IMS.Services/admin/frequently-used-item.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
+import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
 @Component({
   selector: "app-pie-chart",
@@ -15,7 +15,7 @@ import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 export class PieChartComponent implements OnInit {
   constructor(
     private randomColorGeneratorService: RandomColorGeneratorService,
-    private frequentlyUsedItemService: FrequentlyUsedItemService,
+    private reportsService: ReportsService,
     private router: Router
   ) { }
 
@@ -40,7 +40,7 @@ export class PieChartComponent implements OnInit {
   }
 
   getData(): Promise<FrequentlyUsedItemModel> {
-    return this.frequentlyUsedItemService.getFrequentlyUsedItemData(this.fromDate, this.toDate, "5").toPromise();
+    return this.reportsService.getFrequentlyUsedItemData(this.fromDate, this.toDate, "5").toPromise();
   }
 
   plotDataOnChart(chart: Chart, data: FrequentlyUsedItemModel) {

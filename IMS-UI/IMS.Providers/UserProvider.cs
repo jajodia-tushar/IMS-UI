@@ -122,7 +122,7 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<AdminListResponse> getAllAdmins()
+        public async Task<UsersResponse> getAllAdmins()
         {
             try
             {
@@ -132,7 +132,7 @@ namespace IMS_UI.IMS.Providers
                     prepareClient(http);
                     var response = await http.GetAsync(path);
                     var result = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<AdminListResponse>(result);
+                    return JsonConvert.DeserializeObject<UsersResponse>(result);
                 }
             }
             catch (Exception e)

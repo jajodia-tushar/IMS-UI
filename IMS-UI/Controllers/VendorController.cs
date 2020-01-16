@@ -16,10 +16,10 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class VendorController : ControllerBase
     {
-        private IVendorOrderProvider _VendorOrderProvider;
+        private IVendorProvider _VendorOrderProvider;
         private SessionManager _sessionManager;
 
-        public VendorController(IVendorOrderProvider vendorOrderProvider, SessionManager sessionManger)
+        public VendorController(IVendorProvider vendorOrderProvider, SessionManager sessionManger)
         {
             _VendorOrderProvider = vendorOrderProvider;
             _sessionManager = sessionManger;

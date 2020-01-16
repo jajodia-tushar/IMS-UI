@@ -79,7 +79,7 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpPatch]
+        [HttpPut]
         public async Task<IActionResult> EditItemDetails([FromBody] Item item)
         {
             try
@@ -96,7 +96,7 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpDelete("{itemId}")]
+        [HttpDelete]
         public async Task<IActionResult> DeactivateItem(int itemId, bool isHardDelete)
         {
             try

@@ -46,7 +46,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-                var response = await http.DeleteAsync("api/item/" + itemId.ToString() + "?isHardDelete=" + "False");
+                var response = await http.DeleteAsync("api/item" +"?id="+ itemId + "&isHardDelete=" + isHardDelete);
                 return await ResultParser(response);
             }
         }

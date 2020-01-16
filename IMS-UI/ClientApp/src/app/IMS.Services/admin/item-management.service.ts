@@ -1,6 +1,6 @@
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
 
 @Injectable({
@@ -10,8 +10,12 @@ export class ItemManagementService {
 
   constructor(private http: HttpClient) { }
 
-  deactivate(item: any) {
-    return this.http.delete<Item>("api/Item", item).toPromise();
+  deactivate(itemId: any,isHardDelete:string) : Promise<ItemsResponse>{
+    //let header= new HttpHeaders().set('Content-Type','application/json; charset=utf8');
+    let params = new HttpParams();
+    params = params.append("itemId",itemId);
+    params = params.append("isHardDelete",isHardDelete);
+    return this.http.delete<ItemsResponse>("api/Item",{params}).toPromise();
   }
 
   createItem(item: Item): Promise<ItemsResponse> {
@@ -19,7 +23,7 @@ export class ItemManagementService {
   }
 
   editItem(item: Item): Promise<ItemsResponse> {
-    return this.http.patch<ItemsResponse>("api/Item", item).toPromise();
+    return this.http.put<ItemsResponse>("api/Item", item).toPromise();
   }
 
   getAllItems() {

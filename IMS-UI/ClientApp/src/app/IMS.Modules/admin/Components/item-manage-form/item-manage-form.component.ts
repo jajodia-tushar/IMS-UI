@@ -42,6 +42,7 @@ export class ItemManageFormComponent implements OnInit{
     }
     if (this.isEditItemForm) {
       let itemDetail = this.itemDetails;
+      console.log(itemDetail)
       this.createItemForm.setValue(itemDetail);
     }
   }

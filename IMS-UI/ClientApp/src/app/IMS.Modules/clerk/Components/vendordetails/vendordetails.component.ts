@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { AdminService } from 'src/app/IMS.Services/admin.service';
-import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/IMS.Models/User/User';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { OrderDetails } from 'src/app/IMS.Models/Vendor/OrderDetails';
-import { log } from 'util';
 import { FormControl, Validators } from '@angular/forms';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
-import { error } from 'selenium-webdriver';
 import { Router } from '@angular/router';
+import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 
 
   
@@ -35,8 +31,8 @@ export class VendordetailsComponent implements OnInit {
   public SelectedVendor = null;
   public RecievedDate: Date;
 
-  constructor(private _adminService: AdminService, private _VendorService: VendorService,private router:Router,
-    private http: HttpClient, private _CentralizedDataService: CentralizedDataService) { }
+  constructor(private userService: UserManagementService, private _VendorService: VendorService,private router:Router,
+    private _CentralizedDataService: CentralizedDataService) { }
 
   onKey(value: string) {
     this.orderDetails.challanNumber = value;
@@ -63,7 +59,7 @@ export class VendordetailsComponent implements OnInit {
     }
   }
   async ngOnInit() {
-    this._adminService.getAllAdmins().subscribe(
+    this.userService.getAllAdmins().subscribe(
       data => {
         
         if (data.status === "Success")

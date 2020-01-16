@@ -1,4 +1,5 @@
-﻿using IMS_UI.IMS.Core.Infra;
+﻿using IMS_UI.IMS.Core;
+using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -118,6 +119,25 @@ namespace IMS_UI.IMS.Providers
                 prepareClient(http);
                 var response = await http.GetAsync("api/user/email?email=" + email);
                 return await ResultParser(response);
+            }
+        }
+
+        public async Task<UsersResponse> getAllAdmins()
+        {
+            try
+            {
+                string path = Constants.APIEndpoints.getAllAdmins;
+                using (HttpClient http = new HttpClient())
+                {
+                    prepareClient(http);
+                    var response = await http.GetAsync(path);
+                    var result = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<UsersResponse>(result);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

@@ -28,6 +28,8 @@ namespace IMS_UI.IMS.Core
             public const string StockProvider = "api/Reports/GetStockStatus";
 
             public const string TransferProvider = "api/transfer/transferToShelves";
+            public const string getAllAdmins = "api/User/Role/admin";
+            public const string getAllVendors = "api/vendor";
 
         }
     }

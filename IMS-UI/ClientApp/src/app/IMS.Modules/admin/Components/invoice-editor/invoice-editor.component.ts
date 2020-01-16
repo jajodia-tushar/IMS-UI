@@ -1,22 +1,15 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
-import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
-import { MatTableDataSource, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
-import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
+import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
-import { OrderDetailsApproveService } from 'src/app/IMS.Services/InvoiceEditor/order-details-approve.service';
-import { ListOfVendorOrder } from 'src/app/IMS.Models/Vendor/ListOfVendorOrder';
 import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
 import { VendorOrderDetails } from 'src/app/IMS.Models/Vendor/VendorOrderDetails';
 import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPriceMapping';
-import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
-import { dashCaseToCamelCase } from '@angular/compiler/src/util';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { HttpClient } from '@angular/common/http';
-import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 import { Router } from '@angular/router';
-import { OrderDetailsRejectService } from 'src/app/IMS.Services/InvoiceEditor/order-details-reject.service';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 
 interface FileUrl {
   locationUrl: string;
@@ -46,30 +39,24 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrder;
-  constructor(private router : Router, public vendorOrderdetailsService: VendorOrderdetailsService, 
+  constructor(private router : Router, public vendorService: VendorService, 
     private _ItemService: ItemService, 
-    public _orderDetailsApproveService: OrderDetailsApproveService, 
     private snackBar: MatSnackBar,
     private http: HttpClient,
-    private dialog : MatDialog, 
-     private orderDetailsRejectService:OrderDetailsRejectService) { }
+    private dialog : MatDialog) { }
   @Input() TableData;
   public vendorOrder: VendorOrder
   @Output() reloadPendingApproval: EventEmitter<any> = new EventEmitter<any>();
   
   ngOnInit() {
     
-    this.columns = this.vendorOrderdetailsService.getColumn();
+    this.columns = this.vendorService.getColumn();
 
     this._ItemService.getAllItems().subscribe(
       data => {
-        
-
         this.Items = data.items;
       }
     )
-   
-  
   }
 
   
@@ -120,7 +107,6 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.ChallanImageUrl;
     dialogConfig.panelClass = "dialog-notification-image";
-    let dialogRef = this.dialog.open(ImageDialogComponent,dialogConfig);
   }
 
   reloadComponent() {
@@ -130,8 +116,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
 
   }
   Reject(){
-    console.log(this.OrderID);
-    this.orderDetailsRejectService.rejectOrder(this.OrderID).subscribe(
+    this.vendorService.rejectOrder(this.OrderID).subscribe(
       data=>{
         if (data.status == "Success") {
           console.log(data.status);
@@ -156,7 +141,7 @@ export class InvoiceEditorComponent implements OnInit, OnChanges {
     this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
     this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
     this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-    this._orderDetailsApproveService.changeOrderDetails(this.vendorDetails).subscribe(
+    this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
       data => {
         if (data.status == "Success") {
          

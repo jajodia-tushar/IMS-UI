@@ -5,13 +5,17 @@ import { Role } from 'src/app/IMS.Models/User/Role';
 import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { Users } from 'src/app/IMS.Models/User/Users';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {Response} from 'src/app/IMS.Models/Shared/Response'
+import { AdminListResponse } from 'src/app/IMS.Models/User/AdminListResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
+  getAllAdmins() : Observable<AdminListResponse> {
+    return this.http.get<AdminListResponse>("api/users/Admin");
+  }
 
   private roles;
   

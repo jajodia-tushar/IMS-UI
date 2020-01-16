@@ -14,5 +14,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<Response> DeactivateUser(int userId, bool isHardDelete);
         Task<Response> IsUserNameUnique(string username);
         Task<Response> IsEmailNameUnique(string email);
+        Task<UsersResponse> getAllAdmins();
     }
 }

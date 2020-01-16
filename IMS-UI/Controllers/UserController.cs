@@ -125,5 +125,23 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet("{Admin}")]
+        public async Task<IActionResult> GetAllAdmins()
+        {
+            try
+            {
+                var response = await  _userProvider.getAllAdmins();
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
+        }
     }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
-import { MatTableDataSource,MatPaginator } from '@angular/material';
-import { Root } from 'src/app/IMS.Models/Vendor/Root';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 
@@ -11,25 +10,26 @@ import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 })
 export class DataTableComponent implements OnInit {
 
+  datasource = new MatTableDataSource<VendorOrder>();
+  paginator: MatPaginator;
+  
   displayedColumns;
-  public datasource = new MatTableDataSource<VendorOrder>();
-  public date;
+  date;
   pageLength:number;
   pageSize:number;
   pageSizeOptions:number[]=[5, 10, 15, 20];
+  pageNumber:number;
+  
   constructor(public datepipe: DatePipe) { }
-  paginator: MatPaginator;
-  pageNo:number;
+
   @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
   }
    @Input() set pageInfo(data){
-    
      this.pageLength=data.totalResults;
      this.pageSize=data.pageSize;
-     this.pageNo=data.pageNumber;
-    
-   } 
+     this.pageNumber=data.pageNumber;
+   }
 
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
@@ -40,27 +40,25 @@ export class DataTableComponent implements OnInit {
   @Output() TableData: EventEmitter<any> = new EventEmitter<any>();
   @Output() isClickedOn: EventEmitter<any> = new EventEmitter<any>();
   @Output() pageischanged: EventEmitter<any> = new EventEmitter<any> ();
+
   ngOnInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef)
   }
+
   ngAfterViewInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef);
 
   }
   transformDate(row) {
-    
     this.date = this.datepipe.transform(row.vendorOrderDetails.date, 'dd/MM/yyyy');
-    
     return this.date;
   }
 
   pageChange($event){
-    
     this.pageischanged.emit($event);
   }
-  ClickedRow(row)
-  {
-    
+
+  ClickedRow(row){  
     this.TableData.emit(row);
     this.isClickedOn.emit(1);
   }

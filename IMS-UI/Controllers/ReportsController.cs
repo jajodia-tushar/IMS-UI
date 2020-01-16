@@ -8,6 +8,7 @@ using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Providers;
+using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -20,11 +21,11 @@ namespace IMS_UI.Controllers
     public class ReportsController : ControllerBase
     {
 
-        private ReportsProvider _reportsProvider;
+        private IReportProvider _reportsProvider;
         private SessionManager _sessionManager;
 
         public ReportsController(
-            ReportsProvider reportsProvider, 
+            IReportProvider reportsProvider, 
             SessionManager sessionManager
             )
         {

@@ -40,8 +40,6 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
 
-            // client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
-
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("locationName", locationName),
@@ -82,8 +80,6 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
 
-            //client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
-
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("startDate", fromDate),
@@ -111,7 +107,6 @@ namespace IMS_UI.IMS.Providers
         {
             HttpClient client = new HttpClient();
 
-            // CAN CHANGE LATER
             var EndPoint = Constants.APIEndpoints.ItemWiseAnalysisProvider;
 
             UriBuilder uriBuilder =
@@ -161,8 +156,6 @@ namespace IMS_UI.IMS.Providers
 
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
-
-            // client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{

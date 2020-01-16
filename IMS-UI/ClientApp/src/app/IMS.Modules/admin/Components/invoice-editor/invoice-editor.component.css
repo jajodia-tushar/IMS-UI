@@ -37,6 +37,7 @@
 
 .approvals-button  {
   float: right;
+  justify-content: space-between;
 }
 
 .rejectButton {

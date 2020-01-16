@@ -122,7 +122,7 @@ canvas {
   z-index: -1;
 }
 
-#refreshBar  {
+#refreshLine  {
   font-size:24px; 
   margin-top: 6px; 
   color: #606a96;

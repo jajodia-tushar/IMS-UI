@@ -43,5 +43,5 @@ mat-header-cell:first-of-type {
 }
 
 :host ::ng-deep .mat-select-arrow {
-  color: slateblue;
+  color: white;
 }

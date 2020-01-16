@@ -183,3 +183,7 @@
   color: white;
   width: 33% !important;
 }
+
+:host ::ng-deep .mat-select-arrow  {
+  color: white;
+}

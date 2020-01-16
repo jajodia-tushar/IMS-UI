@@ -39,19 +39,6 @@
   border-radius: 4px;
 }
 
-/* .stretch-card {
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-} */
-
-/* .flex {
-  display: flex;
-  position: fixed;
-  right: 42px;
-  top: 91px;
-} */
-
 .rowDashBoardAndRefreshIcon {
   display: contents;
   position: relative;
@@ -62,6 +49,7 @@
   width: 55%;
   padding: 10px;
 }
+
 .column-recent-entries {
   float: left;
   width: 45%;
@@ -70,14 +58,30 @@
 
 .container-stock-recent-entries {
   width: 100%;
-  /* height: 100%;
-  padding-right: 0px;
-  padding-left: 0px;
-  margin-right: 0px;
-  margin-left: 0px;
-  margin-top: 20px; */
 }
+
+.font-weight-bold {
+  color: white;
+}
+
+#rag {
+  color: aliceblue;
+  position: absolute;
+  right: 0;
+  padding-right: 10px;
+  padding-top: 1px;
+}
+
+#refresh {
+  font-size: 20px;
+  color: #606a96;
+  position: absolute;
+  left: 8px;
+  top: 4px;
+}
+
 /* Clear floats after the columns */
+
 .container-stock-recent-entries:after {
   content: "";
   display: table;
@@ -85,6 +89,7 @@
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 1000px) {
   .column-recent-entries {
     width: 100%;

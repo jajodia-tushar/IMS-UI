@@ -3,19 +3,49 @@
   position: static;
 }
 
+.invoice-card  {
+  background-color:#222437;
+}
+
+.items-card  {
+  background-color:#222437; 
+  margin-top: 30px;
+}
+
+.invoice-card-header  {
+  color:white;
+}
+
+.invoice-card-content  {
+  margin-top: 10px;
+  color: white;
+}
+
+.order-id  {
+  position: relative; 
+  left: 16px;
+  top: 4px;
+}
+
+.input-label  {
+  color: slategray;
+}
+
+#invoice  {
+  color: white;
+}
+
+.approvals-button  {
+  float: right;
+  justify-content: space-between;
+}
+
 .rejectButton {
   color: red !important;
   border: 1px solid red !important;
   margin-left: 15px;
 }
-/* :host ::ng-deep .revisable-table {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-left: 0px;
-  background-color: #222437;
-} */
+
 .mat-button,
 .mat-flat-button,
 .mat-icon-button,
@@ -57,11 +87,7 @@
   margin-left: 15px;
 }
 .upload-submit-button-position {
-  /* float: right !important; */
-  /*margin: 2% 1%
-  ;*/
   position: absolute;
-  /* padding-top: 2%; */
   right: 24px;
   top: 227px;
 }
@@ -69,16 +95,11 @@
   background: black !important;
   color: white !important;
   margin-right: 12px;
-  /*padding-left: 7px;*/
   padding: 0px 9px 0px 4px;
-  /*float: right !important;
-  margin-top: 2%;*/
 }
 .submit-button {
   background: black !important;
   color: white !important;
-  /*float: right !important;
-  margin-top: 2%;*/
 }
 .mat-divider.mat-divider-inset {
   margin-left: 20px;
@@ -97,7 +118,6 @@
 
 .table-vendor-details {
   position: relative;
-  /* height: 400px; */
   min-height: 290px;
   background-color: #222437;
   border-radius: 9px;
@@ -139,10 +159,6 @@
   margin-right: 3%;
   border-radius: 7px;
   overflow: auto;
-  min-width: 290px;
-}
-
-.container {
   min-width: 100%;
 }
 

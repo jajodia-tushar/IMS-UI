@@ -6,7 +6,6 @@ import { AdminHeader } from './Components/admin-header/admin-header.component';
 import { MainnavComponent } from './Components/mainnav/mainnav.component';
 import { RagStatusComponent } from './Components/rag-status/rag-status.component';
 import { ChartsComponentComponent } from './Components/charts-component/charts-component.component';
-import { StockstatusComponent } from './Components/stockstatus/stockstatus.component';
 import { RecentEntriesComponent } from './Components/recent-entries/recent-entries.component';
 import { PieChartComponent } from './Components/pie-chart/pie-chart.component';
 import { BarChartComponent } from './Components/bar-chart/bar-chart.component';
@@ -34,7 +33,6 @@ import { ImageDialogComponent } from './Components/image-dialog/image-dialog.com
     MainnavComponent,
     RagStatusComponent,
     ChartsComponentComponent,
-    StockstatusComponent,
     RecentEntriesComponent,
     PieChartComponent,
     BarChartComponent,

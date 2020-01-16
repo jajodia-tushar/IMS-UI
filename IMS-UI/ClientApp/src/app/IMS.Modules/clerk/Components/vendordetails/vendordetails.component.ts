@@ -15,8 +15,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-vendordetails',
   templateUrl: './vendordetails.component.html',
-  styleUrls: ['./vendordetails.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./vendordetails.component.css']
 })
 export class VendordetailsComponent implements OnInit {
   public LoggedINClerk;

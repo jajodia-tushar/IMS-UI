@@ -1,9 +1,8 @@
 <div class="items-container">
   <div class="flex-container">
     <div class="table-container">
-      <h4 class="font-weight-bold" style="color: white;" >Store</h4>
-       
-        <app-spinning-loader *ngIf="!numberOfItems"></app-spinning-loader>
+      <h4 class="font-weight-bold">Store</h4>
+      <app-spinning-loader *ngIf="!numberOfItems"></app-spinning-loader>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource">
         <ng-container *ngFor="let column of columns" [matColumnDef]="column">
           <th mat-header-cell *matHeaderCellDef>{{column}}</th>
@@ -18,17 +17,13 @@
             </button>
           </td>
         </ng-container>
-
-
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;" class="example-element-row"></tr>
       </table>
 
-
       <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
         (page)="pageChange($event)" *ngIf="!numberOfItems">
       </mat-paginator>
-
     </div>
 
     <div class="viewAllStoreEntries" routerLink='../Store' *ngIf="numberOfItems">

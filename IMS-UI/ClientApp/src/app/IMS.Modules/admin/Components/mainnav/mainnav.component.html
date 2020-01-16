@@ -2,30 +2,16 @@
   <div class="col-md-12 grid-margin">
     <div class="d-flex justify-content-between flex-wrap">
       <div class="rowDashBoardAndRefreshIcon">
-        <h5 class="font-weight-bold" style="color: white;">
-          Dashboard
-        </h5>
-
-
+        <h5 class="font-weight-bold">Dashboard</h5>
         <div class="refreshIcon" (click)="onRefresh()">
-          <p style="color: aliceblue;
-          position: absolute;
-          right: 0;
-          padding-right: 10px;
-          padding-top: 1px;">RAG Status</p>
-          <i class="fa fa-refresh" id="refresh" style="font-size: 20px;
-          color: #606a96;
-          position: absolute;
-          left: 8px;
-          top: 4px;"></i>
-
+          <p id="rag">RAG Status</p>
+          <i class="fa fa-refresh" id="refresh"></i>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="row-rag">
-
   <app-rag-status class="col-md-4 grid-margin stretch-card" *ngFor="let ragData of ragDatas" [ragData]="ragData">
   </app-rag-status>
 </div>

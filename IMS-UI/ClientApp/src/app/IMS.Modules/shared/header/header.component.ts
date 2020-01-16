@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     if(this.isUser){
       this.name = this.centralizedRepo.getUser().firstname + 
       this.centralizedRepo.getUser().lastname;
-      this.email = this.centralizedRepo.getUser().email;
+      this.email = this.centralizedRepo.getUser().email;    
     }
   }
 

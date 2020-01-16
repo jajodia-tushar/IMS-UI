@@ -1,4 +1,4 @@
-::ng-deep .mat-tab-label .mat-tab-label-content {
+:host ::ng-deep .mat-tab-label .mat-tab-label-content {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -19,11 +19,11 @@
     position: relative;
 }
 
-mat-nav-list.list-horizontal {
+.list-horizontal {
     padding: 0;
 }
 
-mat-list-item {
+.list-item {
     display: inline-block;
 }
 
@@ -47,13 +47,14 @@ mat-list-item {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: white;
 }
 
 .mat-tab-label {
     width: 50% !important
 }
 
-::ng-deep .mat-select-placeholder {
+:host ::ng-deep .mat-select-placeholder {
     color: white;
 }
 
@@ -104,11 +105,7 @@ mat-list-item {
     color: white;
 }
 
-::ng-deep .mat-select-value {
-    color: white;
-}
-
-::ng-deep .mat-select-arrow {
+:host ::ng-deep .mat-select-arrow {
     color: white;
 }
 
@@ -116,7 +113,7 @@ mat-list-item {
     color: green !important;
 }
 
-mat-option[aria-selected="true"] {
+.mat-option-dropDown[aria-selected="true"] {
     background: #262d4a !important
 }
 

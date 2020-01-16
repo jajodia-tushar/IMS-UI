@@ -14,18 +14,18 @@ import { Response } from 'src/app/IMS.Models/Shared/Response';
 })
 export class VendorService {
 
+  constructor(public http: HttpClient) { }
   
-  getUnApprovedOrders() {
+  getUnApprovedOrders(pageNumber : number, pageSize : number) {
     let params = new HttpParams();
     params = params.append("toDate","");
     params = params.append("fromDate","");
     params = params.append("approved","false");
-    params = params.append("pageNumber","");
-    params = params.append("pageSize","");
+    params = params.append("pageNumber",pageNumber.toString());
+    params = params.append("pageSize",pageSize.toString());
     return this.http.get<VendorOrderResponse>("api/vendor/orders", { params });
   }
 
-  constructor(public http: HttpClient) { }
 
   getAllVendors() {
     return this.http.get<VendorResponse>("api/Vendor");

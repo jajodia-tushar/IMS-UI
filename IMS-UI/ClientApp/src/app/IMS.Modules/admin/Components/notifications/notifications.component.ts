@@ -9,25 +9,19 @@ import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
-  public columns;
   vendorsOrdersDetails: VendorOrder[];
+  columns;
+
   pageInfo:PagingInfo;
-  constructor( public vendorOrderdetailsService: VendorOrderdetailsService,private dialog: MatDialog) { }
-  public row;
-  public pageSize="10";
-  public pageNo="1";
+  constructor( public vendorService: VendorService,private dialog: MatDialog) { }
+  row;
   selectedTab : number = 0;
-  public isClickedOn;
+  isClickedOn;
   
   ngOnInit() {
-    this.vendorService.getUnApprovedOrders().subscribe(
-      data => {
-        this.vendorsOrdersDetails = data.vendorOrders;
-     
-      }
-    );
+    this.initializePagination();
     this.GetDataforPendingApprovals();
-    this.columns = this.vendorOrderdetailsService.getColumnFordataTable();
+    this.columns = this.vendorService.getColumnFordataTable();
   }
 
   Tabledata(data) {
@@ -43,33 +37,37 @@ export class NotificationsComponent implements OnInit {
     }
   }
 
+  initializePagination(){
+    this.pageInfo = new PagingInfo();
+    this.pageInfo.pageNumber = 1;
+    this.pageInfo.pageSize = 10;
+    this.pageInfo.totalResults = 0;
+  }
+
   GetDataforPendingApprovals(){
-    this.vendorOrderdetailsService.VendorOrderDetails(this.pageNo, this.pageSize).subscribe(
+    this.vendorService.getUnApprovedOrders(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
       data => {
         this.vendorsOrdersDetails = data.vendorOrders;
         this.pageInfo=data.pagingInfo;
-        
       }
     );
   }
 
-  getpageInfo(value){
-    this.pageNo=value.pageIndex+1;
-    this.pageSize=value.pageSize;
-   this.GetDataforPendingApprovals();
+  getpageInfo(event){
+    this.pageInfo.pageNumber = event.pageIndex + 1;
+    this.pageInfo.pageSize = event.pageSize;
+    this.GetDataforPendingApprovals();
   }
 
   changeTab() {
-    this.selectedTab +=1;
+    this.selectedTab += 1;
     if (this.selectedTab >= 2) this.selectedTab = 0;
   }
+
   openDialog() {
-
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
     this.dialog.open(NotificationsComponent, dialogConfig);
-}
+  }
 }

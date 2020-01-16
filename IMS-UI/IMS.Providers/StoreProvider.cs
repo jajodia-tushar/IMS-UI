@@ -26,7 +26,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<StockStatusResponse> GetStoreStatus(string pageNumber, string pageSize, string itemName)
+        public async Task<StockStatusResponse> GetStoreStatus(string pageNumber, string pageSize)
         {
             try
             {
@@ -34,7 +34,8 @@ namespace IMS_UI.IMS.Providers
                 {
                     var EndPoint = Constants.APIEndpoints.StockProvider;
                     UriBuilder uriBuilder =
-                        new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);                    _client.DefaultRequestHeaders.Accept.Add(
+                        new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+                    _client.DefaultRequestHeaders.Accept.Add(
                        new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));

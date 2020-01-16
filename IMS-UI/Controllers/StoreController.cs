@@ -24,12 +24,11 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string pageNumber, string pageSize)
+        public async Task<IActionResult> GetStoreStatus(string pageNumber, string pageSize)
         {
             try
             {
-                string itemName = null;
-                var response = await _storeProvider.GetStoreStatus(pageNumber, pageSize, itemName);
+                var response = await _storeProvider.GetStoreStatus(pageNumber, pageSize);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 
@@ -41,22 +40,6 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpGet("/filtering")]
-        public async Task<IActionResult> GetAdminStockStatus(string pageNumber, string pageSize, string itemName)
-        {
-            try
-            {
-                var response = await _storeProvider.GetStoreStatus(pageNumber, pageSize, itemName);
-                if (response.Error != null && response.Error.ErrorCode == 401)
-                    _sessionManager.ClearSession();
-
-                return Ok(response);
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
 
         [HttpPatch]
         public async Task<IActionResult> TransferToShelf(TransferToShelvesRequest request)

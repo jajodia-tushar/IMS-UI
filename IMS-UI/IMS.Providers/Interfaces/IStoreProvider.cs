@@ -9,7 +9,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface IStoreProvider
     {
-        Task<StockStatusResponse> GetStoreStatus(string pageNumber, string pageSize, string itemName);
+        Task<StockStatusResponse> GetStoreStatus(string pageNumber, string pageSize);
         Task<Response> TransferToShelf(TransferToShelvesRequest request);
     }
 }

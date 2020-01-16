@@ -10,5 +10,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
     {
         Task<FrequentlyUsedItem> GetFrequentlyUsedItemList(string fromDate, string toDate, string itemCount);
 
+        Task<DateItemConsumptionResponse> GetItemWiseAnalysis(string startDate, string endDate);
     }
 }

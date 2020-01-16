@@ -2,9 +2,9 @@ import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
-import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 import { Router } from "@angular/router";
 import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
+import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
 
 @Component({
@@ -14,7 +14,7 @@ import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 })
 export class BarChartComponent implements OnInit {
   constructor(private randomColorGenerator: RandomColorGeneratorService,
-    private itemWiseDataService: ItemWiseDataService,
+    private reportsService: ReportsService,
     private router: Router) {
 
   }
@@ -88,7 +88,7 @@ export class BarChartComponent implements OnInit {
 
   getData(): Promise<ItemWiseAnalysisResponse> {
     // This can change according to The API of Varsha
-    return this.itemWiseDataService.getItemWiseTotalData(this.fromDate, this.toDate).toPromise();
+    return this.reportsService.getItemWiseTotalData(this.fromDate, this.toDate).toPromise();
   }
 
 

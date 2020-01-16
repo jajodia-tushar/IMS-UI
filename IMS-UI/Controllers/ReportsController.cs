@@ -85,6 +85,27 @@ namespace IMS_UI.Controllers
             }
         }
 
-        
+        // GET : api/reports/itemwiseanalysis
+        [HttpGet("itemwiseanalysis")]
+        public async Task<IActionResult> GetItemWiseAnalysis(
+            string startDate,
+            string endDate
+        )
+        {
+            var response =
+                await _reportsProvider.GetItemWiseAnalysis(startDate, endDate);
+
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

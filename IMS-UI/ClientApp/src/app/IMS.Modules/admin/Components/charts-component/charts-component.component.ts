@@ -1,10 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
-import { ItemWiseDataService } from "src/app/IMS.Services/admin/item-wise-data.service";
 import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
-import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
-import { ItemWiseAnalysisResponse } from "src/app/IMS.Models/Item/ItemWiseAnalysisResponse";
 
 @Component({
   selector: "app-charts-component",

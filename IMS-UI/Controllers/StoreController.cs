@@ -29,7 +29,7 @@ namespace IMS_UI.Controllers
             try
             {
                 string itemName = null;
-                var response = await _storeProvider.GetStockStatus(pageNumber, pageSize, itemName);
+                var response = await _storeProvider.GetStoreStatus(pageNumber, pageSize, itemName);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 
@@ -46,7 +46,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _storeProvider.GetStockStatus(pageNumber, pageSize, itemName);
+                var response = await _storeProvider.GetStoreStatus(pageNumber, pageSize, itemName);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

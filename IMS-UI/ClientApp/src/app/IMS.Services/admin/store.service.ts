@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StockStatusResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
+import { TransferRequest } from 'src/app/IMS.Models/Shelf/TransferRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class StoreService {
       params = params.append("itemName", itemName);
       return this._http.get<StockStatusResponse>("api/Store/filtering", {params});
     }
+  }
+
+  transferToShelf(transferRequest: TransferRequest) {
+    return this._http.patch<Response>("api/store", transferRequest);
   }
 
   constructor(private _http: HttpClient) { }

@@ -24,7 +24,7 @@ namespace IMS_UI.IMS.Providers
 
 
 
-        public async Task<UsersResponse> AddEmployee(Employee employee)
+        public async Task<EmployeesResponse> AddEmployee(Employee employee)
         {
             using (HttpClient http = new HttpClient())
             {
@@ -35,7 +35,7 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<UsersResponse> EditEmployee(Employee employee)
+        public async Task<EmployeesResponse> EditEmployee(Employee employee)
         {
             using (HttpClient http = new HttpClient())
             {
@@ -50,21 +50,21 @@ namespace IMS_UI.IMS.Providers
 
         private async Task<Response> ResultParser(HttpResponseMessage response)
         {
-            Response apiResponse = new UsersResponse();
+            Response apiResponse = new EmployeesResponse();
             var result = await response.Content.ReadAsStringAsync();
             apiResponse = JsonConvert.DeserializeObject<Response>(result);
             return apiResponse;
         }
 
-        private async Task<UsersResponse> EmployeeResultParser(HttpResponseMessage response)
+        private async Task<EmployeesResponse> EmployeeResultParser(HttpResponseMessage response)
         {
-            UsersResponse apiParsedResponse = new UsersResponse();
+            EmployeesResponse apiParsedResponse = new EmployeesResponse();
             var result = await response.Content.ReadAsStringAsync();
-            apiParsedResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
+            apiParsedResponse = JsonConvert.DeserializeObject<EmployeesResponse>(result);
             return apiParsedResponse;
         }
 
-        public async Task<UsersResponse> GetAllEmployee()
+        public async Task<EmployeesResponse> GetAllEmployee()
         {
             using (HttpClient http = new HttpClient())
             {

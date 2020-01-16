@@ -13,10 +13,10 @@ export class StoreService {
     params = params.append("pageSize", pageSize.toString());
 
     if(itemName == null || itemName == "")
-      return this._http.get<StockStatusResponse>('stockStatus', {params});
+      return this._http.get<StockStatusResponse>('api/Store', {params});
     else  {
       params = params.append("itemName", itemName);
-      return this._http.get<StockStatusResponse>("stockStatus/filtering", {params});
+      return this._http.get<StockStatusResponse>("api/Store/filtering", {params});
     }
   }
 

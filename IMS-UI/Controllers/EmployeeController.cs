@@ -14,12 +14,12 @@ namespace IMS_UI.Controllers
     public class EmployeeController : Controller
     {
 
-        private IEmployeeProvider _employeeProviderProvider;
+        private IEmployeeProvider _employeeProvider;
         private SessionManager sessionManager;
 
         public EmployeeController(IEmployeeProvider _employeeProviderProvider, SessionManager sessionManager)
         {
-            this._employeeProviderProvider = _employeeProviderProvider;
+            this._employeeProvider = _employeeProviderProvider;
             this.sessionManager = sessionManager;
                 
         }
@@ -29,7 +29,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _employeeProviderProvider.GetAllEmployee();
+                var response = await _employeeProvider.GetAllEmployee();
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 
@@ -46,7 +46,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _employeeProviderProvider.AddEmployee(employee);
+                var response = await _employeeProvider.AddEmployee(employee);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 
@@ -63,7 +63,24 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _employeeProviderProvider.EditEmployee(employee);
+                var response = await _employeeProvider.EditEmployee(employee);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpDelete("{employeeId}")]
+        public async Task<IActionResult> DeactivateUser(int employeeId, bool isHardDelete)
+        {
+            try
+            {
+                var response = await _employeeProvider.DeactivateEmployee(employeeId, isHardDelete);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 

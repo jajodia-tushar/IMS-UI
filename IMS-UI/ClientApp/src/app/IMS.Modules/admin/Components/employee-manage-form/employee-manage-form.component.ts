@@ -75,7 +75,7 @@ export class EmployeeManageFormComponent implements OnInit {
   }
 
   submitForm() {
-    //create user or update existing user based on editUserForm variable
+    //create employee or update existing employee based on editEmployeeForm variable
     if (this.isEditEmployeeForm) {
       this.editEmployeeDetails();
     }

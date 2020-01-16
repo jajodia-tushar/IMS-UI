@@ -5,6 +5,8 @@ import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service'
 import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
+import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -71,6 +73,7 @@ export class EmployeeListComponent implements OnInit {
     console.log(data)
     const dialogRef = this.dialog.open(EmployeeManageDialogComponent, dialogConfig);
 
+
     dialogRef.afterClosed().subscribe(result => {
       if (result == false) {
         showMessage(this.snackBar, 2, "Employee Updation Failed", "warn");
@@ -78,17 +81,19 @@ export class EmployeeListComponent implements OnInit {
       else if (result == "cancelled") {
 
       }
-      else if (data instanceof Employee) { this.editEmployeeIntable(result); }
+      else if ('firstname' in result) { this.editEmployeeIntable(result); }
     })
   }
   editEmployeeIntable(employee) {
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+
       if (this.ELEMENT_DATA[index].id == employee.id) {
         this.ELEMENT_DATA[index] = employee;
         break;
       }
     }
-    this.dataSource = this.ELEMENT_DATA;
+
+    this.dataSource.data = this.ELEMENT_DATA;
     showMessage(this.snackBar, 2, "Employee Details Updated Successfully", "success")
   }
 
@@ -97,4 +102,33 @@ export class EmployeeListComponent implements OnInit {
     this.ELEMENT_DATA = employeelist;
   }
 
+  deactivateEmployee(employee) {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = employee;
+    dialogConfig.panelClass = "dialog-employee-manage";
+    const dialogRef = this.dialog.open(DeactivateDialogcomponentEmployeeComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.deleteEmployeeById(employee.id);
+        showMessage(this.snackBar, 2, "Employee was deleted Successfully", "success");
+      }
+      if (result == false) {
+        showMessage(this.snackBar, 2, "Deleting Employee Failed", "warn");
+      }
+    });
+  }
+  deleteEmployeeById(employeeId) {
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id === employeeId.id) {
+        this.ELEMENT_DATA.splice(index, 1);
+        break;
+      }
+
+    }
+    this.dataSource.data = this.ELEMENT_DATA;
+  }
+
+
 }
+

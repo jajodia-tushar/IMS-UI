@@ -12,5 +12,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<EmployeesResponse> GetAllEmployee();
         Task<EmployeesResponse> AddEmployee(Employee employee);
         Task<EmployeesResponse> EditEmployee(Employee employee);
+
+        Task<Response> DeactivateEmployee(int employeeId, bool isHardDelete);
     }
 }

@@ -34,6 +34,7 @@ import { EmployeeManagementComponent } from './Components/employee-management/em
 import { EmployeeListComponent } from './Components/employee-list/employee-list.component';
 import { EmployeeManageDialogComponent } from './Components/employee-manage-dialog/employee-manage-dialog.component';
 import { EmployeeManageFormComponent } from './Components/employee-manage-form/employee-manage-form.component';
+import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { EmployeeManageFormComponent } from './Components/employee-manage-form/e
     EmployeeManagementComponent,
     EmployeeListComponent,
     EmployeeManageDialogComponent,
-    EmployeeManageFormComponent
+    EmployeeManageFormComponent,
+    DeactivateDialogcomponentEmployeeComponent
   ],
   imports: [
     MaterialModule,

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EmployeeResponse } from '../../IMS.Models/Employee/EmployeeResponse';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
+import { Response } from 'src/app/IMS.Models/Shared/Response';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class EmployeeService {
 
   editEmployee(employee: Employee): Promise<EmployeesResponse> {
     return this.http.put<EmployeesResponse>("api/employee", employee).toPromise();
+  }
+
+  deactivateEmployee(employeeId: any, isHardDelete: boolean): Promise<Response> {
+    return this.http.delete<Response>("api/employee" + employeeId + "?isHardDelete=" + isHardDelete).toPromise();
   }
 
 

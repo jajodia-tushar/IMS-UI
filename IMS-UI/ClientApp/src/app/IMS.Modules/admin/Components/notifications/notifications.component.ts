@@ -1,6 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
-
-import { VendorOrderdetailsService } from 'src/app/IMS.Services/InvoiceEditor/vendor-orderdetails.service';
+import { Component, OnInit } from '@angular/core';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';

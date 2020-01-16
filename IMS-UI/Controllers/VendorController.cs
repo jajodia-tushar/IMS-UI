@@ -16,14 +16,12 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class VendorController : ControllerBase
     {
-        private VendorListProvider _VendorListProvider;
         private IVendorOrderProvider _VendorOrderProvider;
         private SessionManager _sessionManager;
 
-        public VendorController(VendorListProvider provider,IVendorOrderProvider vendorOrderProvider, SessionManager sessionManger)
+        public VendorController(IVendorOrderProvider vendorOrderProvider, SessionManager sessionManger)
         {
             _VendorOrderProvider = vendorOrderProvider;
-            _VendorListProvider = provider;
             _sessionManager = sessionManger;
         }
         // GET: api/Vendor
@@ -32,7 +30,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _VendorListProvider.ApiGetCaller("api/vendor");
+                var response = await _VendorOrderProvider.GetAllVendors();
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

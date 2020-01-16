@@ -26,6 +26,43 @@ namespace IMS_UI.IMS.Providers
             _IConfiguration = config;
         }
 
+        public async Task<VendorResponse> GetAllVendors()
+        {
+            try
+            {
+                using (HttpClient http = new HttpClient())
+                {
+                    string path = Constants.APIEndpoints.getAllVendors;
+                    UriBuilder uriBuilder = new UriBuilder(_IConfiguration["BASEURL"] + path);
+
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _SessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                        new KeyValuePair<string, string>("pageNumber", "1"),
+                        new KeyValuePair<string, string>("pagesize", int.MaxValue.ToString())
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+                    uriBuilder.Query = query;
+                    var response = await http.GetAsync(uriBuilder.Uri);
+                    VendorResponse apiVendorListResponse = new VendorResponse();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiVendorListResponse = JsonConvert.DeserializeObject<VendorResponse>(result);
+                    return apiVendorListResponse;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<VendorOrdersList> getAllVendorOrders(string toDate, string fromDate, string approved, string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();

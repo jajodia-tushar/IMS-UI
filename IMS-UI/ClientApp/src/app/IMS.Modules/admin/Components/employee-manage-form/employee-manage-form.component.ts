@@ -12,28 +12,40 @@ import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-
   styleUrls: ['./employee-manage-form.component.css']
 })
 export class EmployeeManageFormComponent implements OnInit {
-
-
   createEmployeeForm: FormGroup;
   updateButtonText: string = "Update";
   submitButtonText: string = "Submit";
+  constructor(private formBuilder: FormBuilder, private employeeServive: EmployeeService, private employeeValidators: EmployeeValidatorsService, centeralizedDataService: CentralizedDataService) {
+
+    this.createEmployeeForm = formBuilder.group({
+      id: [-1, []],
+      firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
+      lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
+      email: ["", [Validators.required, Validators.email]],
+      contactNumber: ["", []],
+      temporaryCardNumber: ["", []],
+      accessCardNumber: ["", []],
+      isActive: [true, []]
+    })
+  }
+
   @Input() employeeDetails: Employee;
   @Output() employeeEditted: EventEmitter<EmployeesResponse> = new EventEmitter<EmployeesResponse>();
   @Output() employeeCreated: EventEmitter<EmployeesResponse> = new EventEmitter<EmployeesResponse>();
   isEditEmployeeForm: boolean;
 
-  constructor(private formBuilder: FormBuilder, private employeeServive: EmployeeService, private employeeValidators: EmployeeValidatorsService, centeralizedDataService: CentralizedDataService) {
+  async ngOnInit() {
+    if (this.employeeDetails) {
+      this.isEditEmployeeForm = this.employeeDetails ? true : false;
 
-    this.createEmployeeForm = this.formBuilder.group({
-      id: [8888, []],
-      firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
-      lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
-      email: ["", [Validators.required, Validators.email]],
-
-
-    })
+    }
+    if (this.isEditEmployeeForm) {
+      console.log("inside iseditedEmployeeform")
+      let employeeDetail = this.employeeDetails;
+      console.log(employeeDetail);
+      this.createEmployeeForm.setValue(employeeDetail);
+    }
   }
-
   get id() {
     return this.createEmployeeForm.get('id');
   }
@@ -49,9 +61,11 @@ export class EmployeeManageFormComponent implements OnInit {
     return this.createEmployeeForm.get('email');
   }
   async editEmployeeDetails() {
+    console.log("call on edit eemployee")
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
     let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeServive.editEmployee(employee);
     this.employeeEditted.emit(edittedEmployee);
+    console.log(employee);
   }
 
   async createNewEmployee() {
@@ -83,10 +97,6 @@ export class EmployeeManageFormComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    if (this.employeeDetails) {
-      this.isEditEmployeeForm = this.employeeDetails ? true : false;
-    }
-  }
+
 
 }

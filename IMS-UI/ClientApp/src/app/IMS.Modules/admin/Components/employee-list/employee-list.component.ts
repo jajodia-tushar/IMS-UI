@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
-import { EmployeeResponse } from 'src/app/IMS.Models/Employee/EmployeeResponse';
 import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
@@ -14,11 +13,11 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 })
 export class EmployeeListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'isActive', 'mobileNumber', 'tCardNo', 'actions'];
+  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'contactNumber', 'temporaryCardNumber', 'isActive', 'actions'];
   ELEMENT_DATA: Employee[];
 
   dataSource
-
+  @Input() event: Employee;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private employeeService: EmployeeService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
@@ -59,11 +58,43 @@ export class EmployeeListComponent implements OnInit {
     );
   }
 
+  editEmployee(employee: Employee) {
+
+    this.openEditEmployeeDialog(employee);
+
+  }
+  openEditEmployeeDialog(data: Employee) {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = data;
+    dialogConfig.panelClass = "dialog-employee-manage";
+    dialogConfig.disableClose = true;
+    console.log(data)
+    const dialogRef = this.dialog.open(EmployeeManageDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == false) {
+        showMessage(this.snackBar, 2, "Employee Updation Failed", "warn");
+      }
+      else if (result == "cancelled") {
+
+      }
+      else if (data instanceof Employee) { this.editEmployeeIntable(result); }
+    })
+  }
+  editEmployeeIntable(employee) {
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id == employee.id) {
+        this.ELEMENT_DATA[index] = employee;
+        break;
+      }
+    }
+    this.dataSource = this.ELEMENT_DATA;
+    showMessage(this.snackBar, 2, "Employee Details Updated Successfully", "success")
+  }
 
   async setEmployees() {
-    let employeesResponse: EmployeesResponse = await this.employeeService.getAllEmployees().toPromise();
-    let listOfEmployees = employeesResponse.employees;
-    this.ELEMENT_DATA = listOfEmployees;
+    let employeelist: Employee[] = (<EmployeesResponse>await this.employeeService.getAllEmployees()).employees;
+    this.ELEMENT_DATA = employeelist;
   }
 
 }

@@ -9,10 +9,13 @@ import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse
   styleUrls: ['./employee-manage-dialog.component.css']
 })
 export class EmployeeManageDialogComponent implements OnInit {
-
   employeeData: Employee;
   constructor(private dialogRef: MatDialogRef<EmployeeManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.employeeData = data;
+    console.log(data)
+  }
+
+  ngOnInit() {
   }
 
   notifyTableEmployeeEditted(employeesResponse: EmployeesResponse) {
@@ -39,7 +42,5 @@ export class EmployeeManageDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
 
 }

@@ -9,8 +9,8 @@ import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse
   providedIn: 'root'
 })
 export class EmployeeService {
-  getAllEmployees(): Observable<EmployeesResponse> {
-    return this.http.get<EmployeesResponse>("api/employee");
+  getAllEmployees() {
+    return this.http.get<EmployeesResponse>("api/employee").toPromise();
   }
   constructor(private http: HttpClient) { }
 

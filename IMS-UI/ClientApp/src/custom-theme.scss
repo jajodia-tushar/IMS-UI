@@ -1,107 +1,12 @@
 @import '~@angular/material/theming';
-//colors most widely used across all screens and components.
-$my-custom-primary-color: (
-  50: #E4E5E7,
-  100 : #BDBDC3,
-  200 : #91929B,
-  300 : #646673,
-  400 : #434555,
-  500 : #222437,
-  600 : #1E2031,
-  700 : #191B2A,
-  800 : #141623,
-  900 : #0C0D16,
-  A100 : #5971FF,
-  A200 : #2645FF,
-  A400 : #0023F2,
-  A700 : #001FD9,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #ffffff,
-    A700 : #ffffff,
-  )
-);
- 
-// colors used for the floating action button and interactive elements.
-$my-custom-accent-color: (
-  50 : #E4E4E6,
-  100 : #BBBCC1,
-  200 : #8E8F97,
-  300 : #60626D,
-  400 : #3E404E,
-  500 : #1C1E2F,
-  600 : #191A2A,
-  700 : #141623,
-  800 : #11121D,
-  900 : #090A12,
-  A100 : #5656FF,
-  A200 : #2323FF,
-  A400 : #0000EF,
-  A700 : #0000D5,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #ffffff,
-    A700 : #ffffff,
-  )
-);
 
 
 @include mat-core();
 //$default: 500, $lighter: 100, $darker: 700
 $my-custom-primary: mat-palette($mat-blue);
-$my-custom-accent: mat-palette($mat-pink, 100, 500, A100);
-$my-custom-warn: mat-palette($mat-red);
+$my-custom-accent: mat-palette($mat-amber, 100, 500, A100);
 $my-custom-theme: mat-dark-theme($my-custom-primary, $my-custom-accent);
 
-@function my-mat-dark-theme-foreground($color) {
-  @return (
-      base:              $color,
-      divider:           rgba($color, 0.38),
-      dividers:          rgba($color, 0.38),
-      disabled:          rgba($color, 0.38),
-      disabled-button:   rgba($color, 0.38),
-      disabled-text:     rgba($color, 0.38),
-      hint-text:         rgba($color, 0.38),
-      secondary-text:    rgba($color, 0.54),
-      icon:              rgba($color, 0.54),
-      icons:             rgba($color, 0.54),
-      text:              rgba($color, 0.87),
-      slider-off:        rgba($color, 0.26),
-      slider-off-active: rgba($color, 0.38),
-      slider-min :       rgba($color, 0.39)
-  );
-};
-
-//colors for text and icons. (Foreground)
-$my-foreground: my-mat-dark-theme-foreground(mat-color($mat-blue, 700));
-// $my-custom-theme: map-merge($my-custom-theme, (foreground: $my-foreground));
-
-// Set custom background color
-// $custom-background-color: #ffffff;
-$custom-background-color: map_get($my-custom-accent-color, 500);
-$custom-background-card-color: map_get($my-custom-primary-color, 500);
 
 $my-custom-background : (
   status-bar: black,
@@ -120,15 +25,5 @@ $my-custom-background : (
   disabled-list-option: black,
 );
 
-// // Insert custom background color
-// $background: map-get($my-custom-theme, background);
-// $background-card : map-get($my-custom-theme, card);
-// $background: map_merge($background, (background: $custom-background-color));
-// $background: map_merge($background, (card: $custom-background-card-color));
 $my-custom-theme: map-merge($my-custom-theme, (background: $my-custom-background));
-
-
-
-
-
 @include angular-material-theme($my-custom-theme);

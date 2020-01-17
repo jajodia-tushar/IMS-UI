@@ -40,7 +40,7 @@ export class UserManagementService {
   }
   
   getAllRoles() : Promise<RolesResponse>{
-    return this.http.get<RolesResponse>("api/roles").toPromise();
+    return this.http.get<RolesResponse>("api/users/roles").toPromise();
   }
 
   validateUsername(username: string){

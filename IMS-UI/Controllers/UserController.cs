@@ -143,5 +143,22 @@ namespace IMS_UI.Controllers
             }
 
         }
+
+        [HttpGet("roles")]
+        public async Task<IActionResult> GetAllAllowedRoles()
+        {
+            try
+            {
+                var response = await this._userProvider.GetAllRoles();
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

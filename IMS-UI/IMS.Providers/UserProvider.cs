@@ -140,5 +140,17 @@ namespace IMS_UI.IMS.Providers
                 throw e;
             }
         }
+
+        public async Task<RolesResponse> GetAllRoles()
+        {
+            string path = Constants.APIEndpoints.getAllRoles;
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync(path);
+                var result = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RolesResponse>(result);
+            }
+        }
     }
 }

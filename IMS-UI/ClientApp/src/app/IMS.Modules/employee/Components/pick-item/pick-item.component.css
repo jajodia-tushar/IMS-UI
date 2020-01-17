@@ -5,6 +5,7 @@
     background: #222437;
     height: 62px
 }
+
 .employee-header span {
     float: left;
     color: #ffc04e;
@@ -15,7 +16,7 @@
     opacity: 0.9;
     margin-top: 21px;
     margin-left: 24px;
- }
+}
 
 .company-logo {
     font-size: 25px;
@@ -30,7 +31,6 @@
     margin-left: -15%;
 }
 
-
 /* Field Area */
 
 .field-area {
@@ -39,7 +39,7 @@
     top: 24px;
 }
 
-.bulkRequest  {
+.bulkRequest {
     color: white;
     border: 1px solid slateblue;
     box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
@@ -47,7 +47,6 @@
 
 .text-area {
     font-size: x-large;
-    
 }
 
 .text-area p {
@@ -56,13 +55,12 @@
     left: 48px;
 }
 
-.field-area div:last-child  {
+.field-area div:last-child {
     margin-left: auto;
     margin-right: 18px;
 }
 
 #search {
- 
     background: rgb(224, 225, 232);
     border-radius: 20px;
     padding: 8px;
@@ -75,10 +73,9 @@
     box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
 }
 
-.input-box{
+.input-box {
     position: relative;
 }
-
 
 .items-container[_ngcontent-axn-c5] {
     display: flex;
@@ -89,12 +86,10 @@
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
 }
 
-
 .flex-item-container {
     display: flex;
     background-color: #1c1e2f;
     width: 100%;
-    
 }
 
 .flex-item-container>div {
@@ -102,39 +97,17 @@
     text-align: center;
 }
 
-
 .item-form {
     margin: 10px;
     margin-right: 20px;
 }
 
-.item-list  {
+.item-list {
     width: 94vw;
 }
 
-
-
-
-
-/* @media (min-width: 576px) {
-    .text-area {
-        flex-direction: column;
-    }
-} */
-/* 
-@media (min-width: 1800px) {
-    .container-1 {
-        width: 300px;
-        height: 100px;
-        flex-direction: row;
-        padding-left: 20px;
-    }
+.search-icon {
+    position: absolute;
+    left: 239px;
+    top: 7px;
 }
-
-@media (min-width: 576px) {
-    .container-1 {
-        width: 300px;
-        height: 100px;
-        flex-direction: column;
-    }
-} */

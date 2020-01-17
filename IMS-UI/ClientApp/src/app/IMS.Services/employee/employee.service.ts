@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EmployeeResponse } from '../../IMS.Models/Employee/EmployeeResponse';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
@@ -31,8 +31,12 @@ export class EmployeeService {
     return this.http.put<EmployeesResponse>("api/employee", employee).toPromise();
   }
 
-  deactivateEmployee(employeeId: any, isHardDelete: boolean): Promise<Response> {
-    return this.http.delete<Response>("api/employee" + employeeId + "?isHardDelete=" + isHardDelete).toPromise();
+  deactivateEmployee(id: any, isHardDelete: string): Promise<Response> {
+    let params = new HttpParams();
+    params = params.append("id", id);
+    params = params.append("isHardDelete", isHardDelete);
+
+    return this.http.delete<Response>("api/employee", { params }).toPromise();
   }
 
 

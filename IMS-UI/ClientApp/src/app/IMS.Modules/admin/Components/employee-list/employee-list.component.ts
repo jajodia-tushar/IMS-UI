@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
-import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
 import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
 import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
 import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
+import { PagingInformation } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 
 @Component({
   selector: 'app-employee-list',
@@ -15,10 +16,12 @@ import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialog
 })
 export class EmployeeListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'contactNumber', 'temporaryCardNumber', 'isActive', 'actions'];
+  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'contactNumber', 'temporaryCardNumber', 'accessCardNumber', 'actions'];
   ELEMENT_DATA: Employee[];
 
   dataSource
+
+
   @Input() event: Employee;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -30,6 +33,8 @@ export class EmployeeListComponent implements OnInit {
     console.log(this.dataSource)
     this.dataSource.sort = this.sort;
   }
+
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -53,7 +58,9 @@ export class EmployeeListComponent implements OnInit {
       else if (result == "cancelled") {
         //don't show any message.
       }
-      else {
+      else if ('firstname' in result) {
+        this.ELEMENT_DATA.push(<Employee>result);
+        this.dataSource.data = this.ELEMENT_DATA;
         showMessage(this.snackBar, 2, "Employee was Created", 'success');
       }
     }
@@ -110,7 +117,7 @@ export class EmployeeListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        this.deleteEmployeeById(employee.id);
+        this.deleteEmployeeFromTableById(employee.id);
         showMessage(this.snackBar, 2, "Employee was deleted Successfully", "success");
       }
       if (result == false) {
@@ -118,9 +125,9 @@ export class EmployeeListComponent implements OnInit {
       }
     });
   }
-  deleteEmployeeById(employeeId) {
+  deleteEmployeeFromTableById(id) {
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
-      if (this.ELEMENT_DATA[index].id === employeeId.id) {
+      if (this.ELEMENT_DATA[index].id === id) {
         this.ELEMENT_DATA.splice(index, 1);
         break;
       }

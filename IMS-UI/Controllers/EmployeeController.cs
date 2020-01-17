@@ -75,12 +75,12 @@ namespace IMS_UI.Controllers
             }
         }
 
-        [HttpDelete("{employeeId}")]
-        public async Task<IActionResult> DeactivateUser(int employeeId, bool isHardDelete)
+        [HttpDelete]
+        public async Task<IActionResult> DeactivateUser(int id, bool isHardDelete)
         {
             try
             {
-                var response = await _employeeProvider.DeactivateEmployee(employeeId, isHardDelete);
+                var response = await _employeeProvider.DeactivateEmployee(id, isHardDelete);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 

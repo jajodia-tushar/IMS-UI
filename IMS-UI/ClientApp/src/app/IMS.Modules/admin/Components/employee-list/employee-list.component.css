@@ -54,3 +54,25 @@ table {
   color: #fff !important;
   /* opacity: 1 !important; */
 }
+
+:host td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 0px;
+  border-bottom-style: solid;
+}
+
+:host td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding-left: 16px;
+  border-bottom-width: 0px;
+  border-bottom-style: solid;
+}
+
+:host td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 16px;
+}

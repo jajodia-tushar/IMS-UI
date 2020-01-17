@@ -22,7 +22,7 @@ export class DeactivateDialogcomponentEmployeeComponent implements OnInit {
 
   async onConfirm() {
     this.confirmButtonText = ""
-    let response = <Response>await this.employeeService.deactivateEmployee(this.employee.id, false);
+    let response = <Response>await this.employeeService.deactivateEmployee(this.employee.id, "false");
     if (response.error == null) {
       this.dialogRef.close(true);
     }

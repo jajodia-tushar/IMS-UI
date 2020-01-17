@@ -1,22 +1,37 @@
 <form class="form-container" [formGroup]="createEmployeeForm" (ngSubmit)="submitForm()" autocomplete="off">
 
 
-    <mat-form-field hidden="true">
-        <input matInput formControlName="id" placeholder="id" type="number">
-    </mat-form-field>
+
     <div class="one-row">
+        <mat-form-field>
+            <input matInput formControlName="id" placeholder="Id" type="number">
+        </mat-form-field>
         <mat-form-field floatLabel="auto">
             <input matInput placeholder="First Name" formControlName="firstname" required>
             <mat-error *ngIf="firstname.errors?.cannotContainSpace">First Name can not contain space.</mat-error>
             <mat-error *ngIf="firstname.errors?.maxlength">Max Length{{firstname.errors.maxlength.requiredLength}}
             </mat-error>
         </mat-form-field>
-
+    </div>
+    <div class="one-row">
         <mat-form-field hideRequiredMarker="true" floatLabel="auto">
             <input matInput placeholder="Last Name" formControlName="lastname">
             <mat-error *ngIf="lastname.errors?.cannotContainSpace">Last Name can not contain space.</mat-error>
             <mat-error *ngIf="lastname.errors?.maxlength">Max Length{{lastname.errors.maxlength.requiredLength}}
             </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="id" placeholder="Mobile No" type="number">
+        </mat-form-field>
+    </div>
+    <div class="one-row">
+        <mat-form-field>
+            <input matInput formControlName="temporaryCardNumber" placeholder="Temporary Card No" type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="accessCardNumber" placeholder="Access Card No" type="number">
         </mat-form-field>
     </div>
 

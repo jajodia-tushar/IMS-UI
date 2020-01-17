@@ -89,13 +89,12 @@ namespace IMS_UI.IMS.Providers
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
         }
 
-        public async Task<Response> DeactivateEmployee(int employeeId, bool isHardDelete)
+        public async Task<Response> DeactivateEmployee(int id, bool isHardDelete)
         {
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-
-                var response = await http.DeleteAsync("api/employee/" + employeeId.ToString() + "?isHardDelete=" + "False");
+                var response = await http.DeleteAsync("api/employee?" + id.ToString() + "&isHardDelete=" + isHardDelete.ToString());
                 return await ResultParser(response);
             }
         }

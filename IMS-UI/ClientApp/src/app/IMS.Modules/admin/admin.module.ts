@@ -83,6 +83,6 @@ import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactiv
     AdminRoutingModule,
     SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
 })
 export class AdminModule { }

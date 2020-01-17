@@ -1,7 +1,9 @@
-<button id="add-employee" mat-button (click)="openAddEmployeeDialog()">Add Employee</button>
 <mat-form-field appearance="outline">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
+<button id="add-employee" mat-button (click)="openAddEmployeeDialog()">Add Employee</button>
+
+
 
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -29,24 +31,32 @@
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
-        <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="temporaryCardNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Temporary Card No </th>
-        <td mat-cell *matCellDef="let element"> {{element.temporaryCardNumber}} </td>
-    </ng-container>
-
-    <!-- Role Column -->
     <ng-container matColumnDef="contactNumber">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile Number </th>
         <td mat-cell *matCellDef="let element"> {{element.contactNumber}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="temporaryCardNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> TCard No </th>
+        <td mat-cell *matCellDef="let element"> {{element.temporaryCardNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accessCardNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> AccessCard No </th>
+        <td mat-cell *matCellDef="let element"> {{element.accessCardNumber}} </td>
+    </ng-container>
+    <!-- <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+        <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+    </ng-container> -->
+
+
+
+
+
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Action</th>
+        <th mat-header-cell *matHeaderCellDef> Actions</th>
         <td mat-cell *matCellDef="let element">
             <button mat-icon-button (click)="editEmployee(element)">
                 <mat-icon>edit</mat-icon>

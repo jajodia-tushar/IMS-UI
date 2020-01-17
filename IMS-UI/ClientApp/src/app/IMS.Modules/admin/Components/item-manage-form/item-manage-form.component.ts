@@ -1,9 +1,9 @@
+import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { ItemManagementComponent } from '../item-management/item-management.component';
 import { Item } from 'src/app/IMS.Models/Item/Item';
-import { ItemManagementService } from 'src/app/IMS.Services/admin/item-management.service';
 import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
 
 @Component({
@@ -15,7 +15,7 @@ export class ItemManageFormComponent implements OnInit{
   createItemForm: FormGroup
   updateButtonText: string = "Update";
   submitButtonText: string = "Submit";
-  constructor(formBuilder: FormBuilder, private itemManageService: ItemManagementService) {
+  constructor(formBuilder: FormBuilder, private itemService: ItemService) {
     this.createItemForm = formBuilder.group({
       id: [-1, []],
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
@@ -49,7 +49,7 @@ export class ItemManageFormComponent implements OnInit{
 
   async editItemDetails() {
     let item: Item = <Item>this.createItemForm.getRawValue();
-    let edittedItem: ItemsResponse = <ItemsResponse>await this.itemManageService.editItem(item);
+    let edittedItem: ItemsResponse = <ItemsResponse>await this.itemService.editItem(item);
     this.itemEditted.emit(edittedItem);
     console.log(item);
   }
@@ -57,7 +57,7 @@ export class ItemManageFormComponent implements OnInit{
   async createNewItem() {
     let item: Item = <Item>this.createItemForm.getRawValue();
     console.log(item)
-    let createdItem: ItemsResponse = <ItemsResponse>await this.itemManageService.createItem(item);
+    let createdItem: ItemsResponse = <ItemsResponse>await this.itemService.createItem(item);
     this.itemCreated.emit(createdItem);
   }
 

@@ -1,7 +1,7 @@
+import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { ItemsResponse } from './../../../../IMS.Models/Item/ItemsResponse';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
-import { ItemManagementService } from 'src/app/IMS.Services/admin/item-management.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemManageDialogComponent } from '../item-manage-dialog/item-manage-dialog.component';
 import { ItemDeactivateDialogComponent } from '../item-deactivate-dialog/item-deactivate-dialog.component';
@@ -21,7 +21,7 @@ export class ItemListComponent implements OnInit {
   @Input() event: Item;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private itemManagementService: ItemManagementService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private itemService: ItemService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     await this.setItems();
@@ -98,17 +98,6 @@ export class ItemListComponent implements OnInit {
     });
   }
 
-  // openDialog(data) {
-  //   let dialogConfig = new MatDialogConfig();
-  //   dialogConfig.data = data;
-  //   // dialogConfig.disableClose = true;
-  //   const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log(`Dialog result: ${result}`);
-  //   });
-  // }
-
   deactivateItem(item){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = item;
@@ -151,7 +140,7 @@ export class ItemListComponent implements OnInit {
   }
 
   async setItems() {
-    let itemlist: Item[] = (<ItemsResponse>await this.itemManagementService.getAllItems()).items;
+    let itemlist: Item[] = (<ItemsResponse>await this.itemService.getAllItem()).items;
     //console.log("=======");
     //console.log(itemlist);
     this.ELEMENT_DATA = itemlist;

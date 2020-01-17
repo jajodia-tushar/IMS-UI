@@ -57,3 +57,9 @@ table {
     padding: 1px 10px;
     border-color: #42e6a4;
 }
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+    padding-bottom: 7px;
+}

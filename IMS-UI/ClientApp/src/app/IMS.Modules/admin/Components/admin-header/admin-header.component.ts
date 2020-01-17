@@ -42,6 +42,12 @@ export class AdminHeader implements OnDestroy, OnInit {
 
     },
     {
+      tab: "Items",
+      icon: "bar_chart",
+      color: "#ffd802"
+  
+      },
+    {
       tab: "Notifications",
       icon: "notifications_active",
       color: "#ff1111"

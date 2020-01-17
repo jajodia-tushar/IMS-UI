@@ -45,11 +45,11 @@ namespace IMS_UI
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSingleton<IStoreProvider, StoreProvider>();
             services.AddSingleton<StoreProvider>();
-            services.AddSingleton<IItemListProvider, ItemListProvider>();
+            services.AddSingleton<IItemListProvider,ItemListProvider>();
             services.AddSingleton<ReportsProvider>();
             services.AddSingleton<IFileStorage, FileSystemStorage>();
             services.AddSingleton<IVendorProvider, VendorProvider>();
-            services.AddSingleton<IItemListProvider,ItemListProvider>();
+            services.AddSingleton<IItemProvider,ItemProvider>();
             services.AddSingleton<EmployeeOrderProvider>();
 
             // In production, the Angular files will be served from this directory

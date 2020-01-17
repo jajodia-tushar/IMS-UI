@@ -15,42 +15,24 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private IItemListProvider _ItemListProvider;
+        //private IItemListProvider _ItemListProvider;
         private IItemProvider _ItemProvider;
         private SessionManager sessionManager;
         
 
-        public ItemController(IItemListProvider provider,IItemProvider itemProvider,SessionManager sessionManager)
+        public ItemController(IItemProvider itemProvider,SessionManager sessionManager)
         {
-            _ItemListProvider = provider;
+            //_ItemListProvider = provider;
             this.sessionManager = sessionManager;
             _ItemProvider = itemProvider;
         }
         // GET: api/Item
-        [HttpGet]
-        public async Task<IActionResult> GetAllItems()
-        {
-            try
-            {
-                var response = await _ItemListProvider.ApiGetCaller("/api/Item");
-                if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
-
-                return Ok(response);
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-
-        }
-
         //[HttpGet]
         //public async Task<IActionResult> GetAllItems()
         //{
         //    try
         //    {
-        //        var response = await _itemProvider.GetAllItems();
+        //        var response = await _ItemListProvider.ApiGetCaller("/api/Item");
         //        if (response.Error != null && response.Error.ErrorCode == 401)
         //            sessionManager.ClearSession();
 
@@ -60,7 +42,25 @@ namespace IMS_UI.Controllers
         //    {
         //        return StatusCode(500);
         //    }
+
         //}
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllItems()
+        {
+            try
+            {
+                var response = await _ItemProvider.GetAllItems();
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddItem([FromBody] Item item)

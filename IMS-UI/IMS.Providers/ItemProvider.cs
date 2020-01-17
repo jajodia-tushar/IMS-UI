@@ -23,6 +23,15 @@ namespace IMS_UI.IMS.Providers
             _iconfiguration = configuration;
             _sessionManager = sessionManager;
         }
+        public async Task<ItemsResponse> GetAllItems()
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/item");
+                return await ItemsResultParser(response);
+            }
+        }
         public async Task<ItemResponse> AddItem(Item item)
         {
             using (HttpClient http = new HttpClient())
@@ -76,9 +85,12 @@ namespace IMS_UI.IMS.Providers
             return Json;
         }
 
-        public Task<ItemsResponse> GetAllItems()
+        private async Task<ItemsResponse> ItemsResultParser(HttpResponseMessage response)
         {
-            throw new NotImplementedException();
+           ItemsResponse apiParsedResponse = new ItemsResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiParsedResponse = JsonConvert.DeserializeObject<ItemsResponse>(result);
+            return apiParsedResponse;
         }
     }
 }

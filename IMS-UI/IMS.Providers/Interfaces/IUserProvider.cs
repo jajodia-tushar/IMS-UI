@@ -15,5 +15,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<Response> IsUserNameUnique(string username);
         Task<Response> IsEmailNameUnique(string email);
         Task<UsersResponse> getAllAdmins();
+        Task<RolesResponse> GetAllRoles();
     }
 }

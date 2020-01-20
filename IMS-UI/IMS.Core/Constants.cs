@@ -30,6 +30,7 @@ namespace IMS_UI.IMS.Core
             public const string StoreTransferProvider = "api/transfer/transferToShelves";
             public const string getAllAdmins = "api/User/Role/admin";
             public const string getAllVendors = "api/vendor";
+            public const string getAllRoles= "api/roles";
 
         }
     }

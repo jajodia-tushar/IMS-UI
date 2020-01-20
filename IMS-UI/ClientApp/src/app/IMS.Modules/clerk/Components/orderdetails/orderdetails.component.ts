@@ -104,6 +104,7 @@ export class OrderdetailsComponent implements OnInit {
   public Items: Item[];
   filteredItems: string[];
   public dialog = false;
+  public fileToUpload: File;
   
   constructor(private _ItemService: ItemService, private _CentralizedDataService: CentralizedDataService, private router:Router,
     private snackBar: MatSnackBar, private http: HttpClient, private _VendorSerice: VendorService) { }
@@ -115,19 +116,19 @@ export class OrderdetailsComponent implements OnInit {
     this.router.navigate(["/Clerk"]);
   }
   uploadImage(file) {
+    var _validFileTypes = ["image/jpg", "image/jpeg", "image/bmp", "image/png"]
     if (file.length === 0) {
       return;
     }
-    let fileToUpload = <File>file[0];
-    const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
-    this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
-      data => {
-        this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
-        // showMessage(this.snackBar,5, "image is uploaded","success");
-        this.imageUploaded = true; 
-      }
-    );
+    if (_validFileTypes.indexOf(file[0].type) !== -1) {
+      this.fileToUpload = <File>file[0];
+      showMessage(this.snackBar, 5, "you have selected " + this.fileToUpload.name, "success");
+
+    }
+    else {
+      this.fileToUpload = null
+      showMessage(this.snackBar, 5, "only images are allowed", "warn");
+    }
 
   }
 
@@ -218,6 +219,17 @@ export class OrderdetailsComponent implements OnInit {
         this.vendorOrder.vendorOrderDetails.recievedBy = this.orderDetails.receivedBy;
         this.vendorOrder.vendorOrderDetails.submittedTo = this.orderDetails.submitedTo;
         this.vendorOrder.vendor = this.orderDetails.vendor;
+        if (this.fileToUpload) {
+          const formData = new FormData();
+          formData.append('file', this.fileToUpload, this.fileToUpload.name);
+          this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
+            data => {
+              this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
+              // showMessage(this.snackBar,5, "image is uploaded","success");
+              this.imageUploaded = true;
+            }
+          );
+        }
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
             this.reloadComponent();

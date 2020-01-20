@@ -5,7 +5,7 @@
 <form class="form-container" autocomplete="off" (ngSubmit)="Send()">
     <div class="one-row">
         <mat-form-field class="one-row-input" floatLabel="auto">
-            <input required matInput autocomplete="off" [matDatepicker]="picker" (click)="picker.open()"
+            <input required matInput autocomplete="off" [min]="minDate" [matDatepicker]="picker" (click)="picker.open()"
                 placeholder="Reqirement Date" onKeyDown="return false">
             <mat-datepicker-toggle class="date" matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>

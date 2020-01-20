@@ -10,6 +10,8 @@ import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 export class BulkRequestComponent implements OnInit {
   hasRequestedItems: boolean = false;
 
+  minDate: Date = new Date();
+
   employeeID: string;
   constructor(public dialogRef: MatDialogRef<BulkRequestComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public datas: Employee) {

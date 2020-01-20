@@ -1,1 +1,40 @@
-<p>bulk-request works!</p>
+<div class="heading">
+    <p>Send Request</p>
+</div>
+
+<form class="form-container" autocomplete="off" (ngSubmit)="Send()">
+    <div class="one-row">
+        <mat-form-field class="one-row-input" floatLabel="auto">
+            <input required matInput autocomplete="off" [matDatepicker]="picker" (click)="picker.open()"
+                placeholder="Reqirement Date" onKeyDown="return false">
+            <mat-datepicker-toggle class="date" matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="one-row-input" floatLabel="auto">
+            <input matInput placeholder="Requirement Reeason" type="text" maxlength="100" required>
+        </mat-form-field>
+    </div>
+
+    <div class="one-row">
+        <p *ngIf="!hasRequestedItems">No Items Added</p>
+    </div>
+
+    <div class="one-row">
+        <div class="add-row">
+            <button mat-raised-button class="Add-icon" (click)="AddRow()">
+                <mat-icon class="icon">add</mat-icon>Add
+            </button>
+        </div>
+    </div>
+
+
+    <div class="action-buttons one-row">
+        <div class="position-of-buttons">
+            <button mat-button type="submit" class="submit-update">
+                Submit<app-spinning-loader></app-spinning-loader>
+            </button>
+            <button mat-button type="button" class="cancel" (click)="CancelRequest()">Cancel</button>
+        </div>
+    </div>
+
+</form>

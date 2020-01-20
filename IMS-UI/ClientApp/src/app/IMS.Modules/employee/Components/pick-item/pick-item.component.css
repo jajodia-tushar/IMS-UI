@@ -111,3 +111,11 @@
     left: 239px;
     top: 7px;
 }
+
+
+.logout-button {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    height: 60px;
+}

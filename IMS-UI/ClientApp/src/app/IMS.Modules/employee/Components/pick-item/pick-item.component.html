@@ -6,6 +6,10 @@
             <img src="../../../assets/IMS.Images/157595914143509549 (1).png" />
         </span>
     </div>
+
+    <div class="logout-button">
+        <button mat-button class="bulkRequest" (click)="bulkRequest()">Bulk Request</button>
+    </div>
 </div>
 
 <div class="pick-item-container">
@@ -18,8 +22,6 @@
             <input id="search" (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text"
                 placeholder="Search for an item..." >
             <i class="material-icons search-icon">search</i>    
-
-            <button mat-button class="bulkRequest" (click)="bulkRequest()">Bulk Request</button>
         </div>
         </div>
 

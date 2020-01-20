@@ -2,17 +2,18 @@ import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
-import { ShelfWiseDataService } from "src/app/IMS.Services/admin/shelf-wise-data.service";
 import { ChartsComponentComponent } from "../charts-component/charts-component.component";
 import { Router } from "@angular/router";
 import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
+import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 @Component({
   selector: "app-line-chart",
   templateUrl: "./line-chart.component.html",
   styleUrls: ["./line-chart.component.css"]
 })
 export class LineChartComponent implements OnInit {
-  constructor(private randomColorGenerator: RandomColorGeneratorService, private shelfWiseDataService: ShelfWiseDataService,
+  constructor(private randomColorGenerator: RandomColorGeneratorService, 
+    private reportsService: ReportsService,
     private router: Router) { }
   chart: Chart;
   toDate: string;
@@ -35,7 +36,7 @@ export class LineChartComponent implements OnInit {
   }
 
   getData(): Promise<ShelfWiseOrderCountResponse> {
-    return this.shelfWiseDataService.getShelfWiseData(this.fromDate, this.toDate).toPromise();
+    return this.reportsService.getShelfWiseData(this.fromDate, this.toDate).toPromise();
   }
 
   plotDataOnChart(chart: Chart, data: ShelfWiseOrderCountResponse) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Shelf } from "src/app/IMS.Models/Shelf/Shelf";
-import { RagStatusService } from "src/app/IMS.Services/admin/rag-status.service";
 import { RAGDataModel } from "src/app/IMS.Models/Admin/RAGDataModel";
+import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
 @Component({
   selector: "app-mainnav",
@@ -9,7 +9,7 @@ import { RAGDataModel } from "src/app/IMS.Models/Admin/RAGDataModel";
   styleUrls: ["./mainnav.component.css"]
 })
 export class MainnavComponent implements OnInit {
-  constructor(private ragStatusService: RagStatusService) { }
+  constructor(private reportsService: ReportsService) { }
   ragDatas: RAGDataModel[];
 
   onRefresh() {
@@ -18,14 +18,14 @@ export class MainnavComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove("fa-spin");
 
-      this.ragStatusService.getRAGStatusData().subscribe(data => {
+      this.reportsService.getRAGStatusData().subscribe(data => {
         this.ragDatas = JSON.parse(JSON.stringify(data.ragStatusList));
       });
     }, 2000);
   }
 
   ngAfterViewInit() {
-    this.ragStatusService.getRAGStatusData().subscribe(data => {
+    this.reportsService.getRAGStatusData().subscribe(data => {
       this.ragDatas = JSON.parse(JSON.stringify(data.ragStatusList));
     });
   }

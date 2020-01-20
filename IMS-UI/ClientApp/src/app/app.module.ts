@@ -23,12 +23,11 @@ import { ShelfService } from './IMS.Services/Shelf/shelf.service';
 import { ClerkRouteGuardService } from './IMS.Services/Route/clerk-route-guard.service';
 import { EmployeeRouteGuardService } from './IMS.Services/Route/employee-route-guard.service';
 import { AdminRouteGuardService } from './IMS.Services/Route/admin-route-guard.service';
-import { ItemWiseDataService } from './IMS.Services/admin/item-wise-data.service';
-import { RagStatusService } from './IMS.Services/admin/rag-status.service';
 import { RandomColorGeneratorService } from './IMS.Services/random-color-generator.service';
 import { LoggingComponent } from './Components/logging/logging.component';
 import { LogoutInterceptor } from './IMS.Services/IMS.Interceptor/logout.interceptor';
 import { DatePipe } from '@angular/common';
+import { ReportsService } from './IMS.Services/admin/reports.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +57,7 @@ import { DatePipe } from '@angular/common';
     EmployeeService,
     EmployeeOrderService,
     ItemService,
-    ItemWiseDataService,
-    RagStatusService,
+    ReportsService,
     RandomColorGeneratorService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LogoutInterceptor, multi: true }

@@ -18,7 +18,7 @@ export class EmployeeManageFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private employeeServive: EmployeeService, private employeeValidators: EmployeeValidatorsService, centeralizedDataService: CentralizedDataService) {
 
     this.createEmployeeForm = formBuilder.group({
-      id: [-1, []],
+      id: [, []],
       firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
       lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
       email: ["", [Validators.required, Validators.email]],

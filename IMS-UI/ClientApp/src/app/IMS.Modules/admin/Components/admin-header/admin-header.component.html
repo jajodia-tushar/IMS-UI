@@ -36,8 +36,8 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav style="min-width: 12%; top: 56px;bottom: 0px; width: 13%;overflow: hidden;"
-      #snav [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true">
+    <mat-sidenav style="min-width: 12%; top: 56px;bottom: 0px; width: 13%;overflow: hidden;" #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'" opened="true">
       <mat-nav-list class="nav-list">
         <a mat-list-item *ngFor="let nav of navBarItems;" [routerLink]="[nav.tab]" routerLinkActive="active">
 

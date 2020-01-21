@@ -1,6 +1,26 @@
-table {
-    width: 100%;
-    margin-top: 10px;
+.mat-column-rate {
+    width: 5% !important;
+}
+
+
+/* .mat-column-maxLimit {
+    width: 5% !important;
+} */
+
+.mat-column-shelvesAmberLimit {
+    width: 11% !important;
+}
+
+.mat-column-shelvesRedLimit {
+    width: 11% !important;
+}
+
+.mat-column-warehouseRedLimit {
+    width: 10% !important;
+}
+
+.mat-column-warehouseAmberLimit {
+    width: 10% !important;
 }
 
 .filter-input {
@@ -23,13 +43,14 @@ table {
 }
 
 table {
-    position: absolute;
     border-collapse: separate !important;
     border-radius: 8px;
     background-color: #222437;
     border: 8px solid #222437;
     min-height: 200px;
-    min-height: 201px;
+    width: 100%;
+    margin-top: 10px;
+    /* table-layout: fixed; */
 }
 
 #add-item {

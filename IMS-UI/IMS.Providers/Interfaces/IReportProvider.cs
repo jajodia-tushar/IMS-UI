@@ -18,5 +18,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<ShelfWiseOrderCountResponse> GetShelfWiseData(string fromDate, string toDate);
 
         Task<RAGStatusResponse> GetRAGStatusList();
+        Task<DateWiseItemsConsumption> GetItemConsumptionReports(string fromDate, string toDate, string pageNumber, string pageSize, string itemId);
     }
 }

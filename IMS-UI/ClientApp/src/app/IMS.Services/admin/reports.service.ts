@@ -59,15 +59,10 @@ export class ReportsService {
     return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
   }
 
-  getItemConsumptionReport() : Observable<ItemConsumptionDataResponse>{
+  getItemConsumptionReport(fromDate : string, toDate : string, ) : Observable<ItemConsumptionDataResponse>{
     let params = new HttpParams();
-    params = params.append("fromDate", "20190101");
-    params = params.append("toDate", "20200202");
-    params = params.append("pageNumber", "01");
-    params = params.append("pageSize", "10");
-    params = params.append("itemId", "-1");
+    params = params.append("fromDate", fromDate);
+    params = params.append("toDate", toDate);
     return this.httpClient.get<ItemConsumptionDataResponse>("api/reports/itemConsumptionReports",{params});
   }
-
-  // fromDate : string, toDate : string, pageNumber : string, pageSize : string, itemId : string
 }

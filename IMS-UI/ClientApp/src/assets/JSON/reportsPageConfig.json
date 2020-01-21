@@ -90,19 +90,8 @@
         "urlToRequest": ""
     },
     {
-        "reportName": "Item Consumption",
+        "reportName": "Per Day Consumption",
         "reportsFilterOptions": [{
-                "placeHolderName": "Item Name",
-                "type": "dropDown",
-                "dropDownOptions": [
-                    "Pen",
-                    "Pencil",
-                    "Notebook"
-                ],
-                "dropDownValues": [],
-                "dataFromUser": ""
-            },
-            {
                 "placeHolderName": "FromDate",
                 "type": "datePicker",
                 "dropDownOptions": [],

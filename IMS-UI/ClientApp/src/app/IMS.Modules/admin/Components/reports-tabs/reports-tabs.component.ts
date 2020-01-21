@@ -88,7 +88,13 @@ export class ReportsTabsComponent implements OnInit {
     }
   }
   showItemConsumptionTable() {
-    this.reportsService.getItemConsumptionReport().subscribe(
+    this.refreshColumnsAndTables();    
+    this.errorMessage = JSON.parse(JSON.stringify(""));
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    this.reportsService.getItemConsumptionReport(fromDate,toDate).subscribe(
       data =>{
         if (data.status == "Success") {
           let dataToDisplaytemp = []
@@ -117,7 +123,6 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
-        this.pageInfo = data.pagingInfo;
       });
   }
 
@@ -311,6 +316,13 @@ export class ReportsTabsComponent implements OnInit {
           item.reportsFilterOptions[2].endDate = new Date();
           item.reportsFilterOptions[1].dataFromUser = this.fromDate;
           item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+
+        if(item.reportName == "Per Day Consumption"){
+          item.reportsFilterOptions[0].endDate = new Date();
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[0].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[1].dataFromUser = this.toDate;
         }
 
       }

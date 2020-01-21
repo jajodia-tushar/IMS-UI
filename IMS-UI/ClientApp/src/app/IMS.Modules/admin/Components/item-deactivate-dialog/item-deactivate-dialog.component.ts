@@ -11,16 +11,13 @@ import { ItemService } from 'src/app/IMS.Services/item/item.service';
   templateUrl: './item-deactivate-dialog.component.html',
   styleUrls: ['./item-deactivate-dialog.component.css']
 })
-export class ItemDeactivateDialogComponent implements OnInit {
+export class ItemDeactivateDialogComponent {
   item: Item;
   confirmButtonText: string = "Yes";
   constructor(private dialogRef: MatDialogRef<DeactivateDialogComponent>, @Inject(MAT_DIALOG_DATA) data,
     private itemService: ItemService,
     private snackBar: MatSnackBar) {
     this.item = data;
-  }
-
-  ngOnInit() {
   }
 
   async onConfirm() {

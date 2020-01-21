@@ -1,3 +1,4 @@
+import { HumanizePipe } from './utils/humanize.pipe';
 import { NgModule } from '@angular/core';
 import { SpinningLoaderComponent } from './spinning-loader/spinning-loader.component';
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
@@ -12,12 +13,12 @@ import { DataTableComponent } from './data-table/data-table/data-table.component
 
 
 @NgModule({
-    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent],
+    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent, HumanizePipe],
   imports: [
     MaterialModule
   ],
   providers : [],
-    exports: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent],
+    exports: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent, HumanizePipe],
   entryComponents : [SnackbarComponent]
 })
 export class SharedModule { }

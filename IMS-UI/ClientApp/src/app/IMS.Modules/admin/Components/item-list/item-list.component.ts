@@ -72,6 +72,11 @@ export class ItemListComponent implements OnInit {
     });
   }
 
+  numberOfColumns(){
+    //console.log(this.displayedColumns.length)
+    return (this.displayedColumns.length - 1);
+  }
+
   editItemDetails(item:Item) {
     this.openItemEditDialog(item);
   }

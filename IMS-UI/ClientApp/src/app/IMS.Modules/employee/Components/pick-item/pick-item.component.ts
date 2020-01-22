@@ -86,7 +86,7 @@ export class PickItemComponent implements OnInit {
 
   bulkRequest()  {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "40%";
+    dialogConfig.width = "auto";
     dialogConfig.height = "auto";
     dialogConfig.panelClass = 'dialog-bulk-request';
     dialogConfig.data = this.employee.id;

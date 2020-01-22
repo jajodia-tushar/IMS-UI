@@ -2,21 +2,74 @@
     <p>Send Request</p>
 </div>
 
-<form class="form-container" autocomplete="off" (ngSubmit)="Send()">
+
+<form class="form-container" autocomplete="off">
+    <div class="input-container">
     <div class="one-row">
         <mat-form-field class="one-row-input" floatLabel="auto">
-            <input required matInput autocomplete="off" [min]="minDate" [matDatepicker]="picker" (click)="picker.open()"
-                placeholder="Reqirement Date" onKeyDown="return false">
+            <input required [(ngModel)]="date" [ngModelOptions]="{standalone: true}"  matInput autocomplete="off" [min]="minDate"  [matDatepicker]="picker" (click)="picker.open()"
+                placeholder="Reqirement Date" onKeyDown="return false" >
             <mat-datepicker-toggle class="date" matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="one-row-input" floatLabel="auto">
-            <input matInput placeholder="Requirement Reeason" type="text" maxlength="100" required>
+            <input matInput [(ngModel)]="reason" [ngModelOptions]="{standalone: true}" placeholder="Requirement Reeason" type="text" maxlength="100" required>
         </mat-form-field>
     </div>
+</div>
 
     <div class="one-row">
-        <p *ngIf="!hasRequestedItems">No Items Added</p>
+        <p *ngIf="dataSourceItems.length == 0">No Items Added</p>
+    </div>
+
+    <div class="one-row table-height" *ngIf="dataSourceItems.length !== 0">
+        <table mat-table class="table-size" [dataSource]="dataSource">
+            <ng-container matColumnDef="itemName">
+                <th class="table-text" mat-header-cell *matHeaderCellDef> Item Name </th>
+                <td class="table-text" mat-cell *matCellDef="let element">
+                    <mat-form-field appearance="outline" class="form-field-size">
+                        <mat-select [(ngModel)]="element.itemName" [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let Item of Items" [value]="Item"
+                                [disabled]="isItemAlreadySelected(Item)">
+                                {{Item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </ng-container>
+<!-- 
+            <ng-container matColumnDef="availableQuantity">
+                <th class="table-text" mat-header-cell *matHeaderCellDef>Available Quantity </th>
+                <td class="table-text" mat-cell *matCellDef="let element">
+                    <mat-form-field appearance="outline" class="form-field-size">
+                        <input matInput readonly [ngModelOptions]="{standalone: true}" [(ngModel)]="element.availableQuantity">
+                    </mat-form-field>
+                </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="requestQuantity">
+                <th class="table-text" mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td class="table-text" mat-cell *matCellDef="let element">
+                    <mat-form-field appearance="outline" class="form-field-size">
+                        <input matInput maxlength="3" [ngModelOptions]="{standalone: true}" [(ngModel)]="element.requestQuantity"
+                            (keydown)="allowOnlyDigits($event)">
+                    </mat-form-field>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th class="table-text" mat-header-cell *matHeaderCellDef> Action </th>
+                <td class="table-text" mat-cell *matCellDef="let element" class="action-link">
+                    <div class="edit-delete-icon-center">
+                        <button mat-icon-button class="delete-white-icon" (click)="DeleteRow(element)">
+                            <mat-icon class="delete-icon-size">delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
 
     <div class="one-row">
@@ -25,16 +78,16 @@
                 <mat-icon class="icon">add</mat-icon>Add
             </button>
         </div>
-    </div>
+   
 
-
-    <div class="action-buttons one-row">
+    <div class="action-buttons">
         <div class="position-of-buttons">
-            <button mat-button type="submit" class="submit-update">
+            <button mat-button type="submit" class="submit-update" (click)="Send()">
                 Submit<app-spinning-loader></app-spinning-loader>
             </button>
             <button mat-button type="button" class="cancel" (click)="CancelRequest()">Cancel</button>
         </div>
     </div>
+</div>
 
 </form>

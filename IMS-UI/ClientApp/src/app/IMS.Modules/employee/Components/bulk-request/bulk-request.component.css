@@ -3,6 +3,16 @@
     position: relative;
 }
 
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.one-row {
+    display: flex;
+}
+
 .one-row mat-form-field {
     width: 90%;
     display: flex;
@@ -11,21 +21,68 @@
     margin: 10px;
 }
 
-.one-row {
+.input-container{
     display: flex;
 }
+.date {
+    color: #f5f5f5;
+}
+
+.table-height {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.table-height::-webkit-scrollbar {
+    display: none;
+    width: 10px;
+}
+
+/* Track */
+.table-height::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.table-height::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.table-height::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.table-size {
+    /* width: 100%; */
+    background-color: #1f2132;
+}
+
+.table-text {
+    border-bottom-color: #f5f5f5 !important;
+}
+
+.edit-delete-icon-center {
+    align-content: center
+}
+
+.delete-white-icon {
+    color: white;
+}
+
+.delete-icon-size {
+    font-size: 30px !important;
+}
+
 
 .Add-icon {
     margin-top: 0%;
 }
 
-.add-row {
-    margin-top: 4%;
-    float: right;
-}
-
 .action-buttons {
-    align-self: flex-end;
+    margin-left: auto;
+    
 }
 
 .position-of-buttons .submit-update {
@@ -47,18 +104,7 @@
     border: 1px solid slategrey;
 }
 
-.date {
-    color: #f5f5f5;
-}
-
-.form-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-
 [type=submit]:not(:disabled) {
     color: white;
     border: 0.5px solid aquamarine;
-  }
+}

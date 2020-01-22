@@ -6,11 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatInputModule, MatRippleModule, MatMenuModule, MatCardModule, MatSidenavModule,
   MatGridListModule, MatTableModule, MatPaginatorModule, MatIconModule, MatSnackBar, MatSnackBarModule, 
-  MatRadioModule, MatSortModule
+  MatRadioModule, MatSortModule, MatDividerModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatDividerModule } from '@angular/material/divider';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -54,7 +53,6 @@ const materialModules = [
   MatCardModule,
   MatIconModule,
   MatSidenavModule,
-  MatGridListModule,
   MatTableModule,
   MatPaginatorModule,
   MatSnackBarModule,

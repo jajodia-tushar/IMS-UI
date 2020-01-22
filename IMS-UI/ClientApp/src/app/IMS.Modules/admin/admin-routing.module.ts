@@ -8,6 +8,7 @@ import { UserManagementComponent } from './Components/user-management/user-manag
 import { ReportsComponent } from './Components/reports/reports.component';
 import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-editor.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
+import { ItemManagementComponent } from './Components/item-management/item-management.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: 'Users', component: UserManagementComponent },
       { path: 'Reports', component: ReportsComponent },
       { path: 'Notifications', component: NotificationsComponent },
-      { path: 'EditInvoice', component: InvoiceEditorComponent }
+      { path: 'EditInvoice', component: InvoiceEditorComponent },
+      { path: 'Items', component: ItemManagementComponent }
     ]
   }
 ];

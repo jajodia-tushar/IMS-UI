@@ -22,9 +22,14 @@ import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-edit
 import { SharedModule } from '../shared/shared.module';
 import { ReportsTableComponent } from './Components/reports-table/reports-table.component';
 import { ReportsTabsComponent } from './Components/reports-tabs/reports-tabs.component';
+import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { StoreUpdateComponent } from './Components/store-update/store-update.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ImageDialogComponent } from './Components/image-dialog/image-dialog.component';
+import { ItemListComponent } from './Components/item-list/item-list.component';
+import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-manage-dialog.component';
+import { ItemManageFormComponent } from './Components/item-manage-form/item-manage-form.component';
+import { ItemDeactivateDialogComponent } from './Components/item-deactivate-dialog/item-deactivate-dialog.component';
 
 
 @NgModule({
@@ -47,16 +52,21 @@ import { ImageDialogComponent } from './Components/image-dialog/image-dialog.com
     UserListComponent,
     DeactivateDialogComponent,
     DetailsPipe,
-      StoreUpdateComponent,
-      InvoiceEditorComponent,
-      NotificationsComponent,
-      ImageDialogComponent
-    ],
+    StoreUpdateComponent,
+    InvoiceEditorComponent,
+    NotificationsComponent,
+    ImageDialogComponent,
+    ItemManagementComponent,
+    ItemListComponent,
+    ItemManageDialogComponent,
+    ItemManageFormComponent,
+    ItemDeactivateDialogComponent
+  ],
   imports: [
     MaterialModule,
       AdminRoutingModule,
       SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent]
+    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent]
 })
 export class AdminModule { }

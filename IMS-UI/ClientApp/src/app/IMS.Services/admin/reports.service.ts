@@ -8,6 +8,7 @@ import { FrequentlyUsedItemModel } from 'src/app/IMS.Models/Admin/FrequentlyUsed
 import { ItemWiseAnalysisResponse } from 'src/app/IMS.Models/Item/ItemWiseAnalysisResponse';
 import { ShelfWiseOrderCountResponse } from 'src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse';
 import { RAGStatusResponse } from 'src/app/IMS.Models/Admin/RAGStatusResponse';
+import { ItemConsumptionDataResponse } from 'src/app/IMS.Models/Admin/ItemConsumptionDataResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,12 @@ export class ReportsService {
 
   getRAGStatusData() {
     return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
+  }
+
+  getItemConsumptionReport(fromDate : string, toDate : string, ) : Observable<ItemConsumptionDataResponse>{
+    let params = new HttpParams();
+    params = params.append("fromDate", fromDate);
+    params = params.append("toDate", toDate);
+    return this.httpClient.get<ItemConsumptionDataResponse>("api/reports/itemConsumptionReports",{params});
   }
 }

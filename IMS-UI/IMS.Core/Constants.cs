@@ -31,6 +31,7 @@ namespace IMS_UI.IMS.Core
             public const string getAllAdmins = "api/User/Role/admin";
             public const string getAllVendors = "api/vendor";
             public const string getAllRoles= "api/roles";
+            public const string GetItemConsumptionReports= "api/reports/GetItemConsumptionReports";
 
         }
     }

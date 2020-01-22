@@ -48,7 +48,7 @@ export class VendorService {
     if (vendorId == null || vendorId == "0" || vendorId == "") {
       return this.http.get<VendorOrderResponse>("api/vendor/orders", { params });
     }
-    else {
+    else {  
       return this.http.get<VendorOrderResponse>("api/vendor/orders/"+vendorId, { params });
     }
 

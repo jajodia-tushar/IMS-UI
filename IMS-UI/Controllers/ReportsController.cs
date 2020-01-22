@@ -109,6 +109,28 @@ namespace IMS_UI.Controllers
             }
         }
 
+        [HttpGet("itemConsumptionReports")]
+        public async Task<IActionResult> GetItemConsumptionReports(
+            string fromDate,
+            string toDate
+        )
+        {
+            var response =
+                await _reportsProvider.GetItemConsumptionReports(fromDate, toDate);
+
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
         // GET : api/reports/shelfwiseordercount
         [HttpGet("shelfwiseordercount")]
         public async Task<IActionResult> GetOrderCount(

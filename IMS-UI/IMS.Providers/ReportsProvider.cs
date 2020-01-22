@@ -193,5 +193,39 @@ namespace IMS_UI.IMS.Providers
             return JsonConvert.DeserializeObject<RAGStatusResponse>(
                 await response.Content.ReadAsStringAsync());
         }
+
+        public async Task<DateWiseItemsConsumption> GetItemConsumptionReports(string fromDate, string toDate)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.GetItemConsumptionReports;
+
+            UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
+
+            client.DefaultRequestHeaders.Accept.
+                Add(item: new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+            string query;
+            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("fromDate", fromDate),
+                new KeyValuePair<string, string>("toDate", toDate)
+            }))
+            {
+                query = content.ReadAsStringAsync().Result;
+            }
+
+            uriBuilder.Query = query;
+
+            var response =
+                await
+                    client.GetAsync(uriBuilder.Uri);
+
+            return JsonConvert.DeserializeObject<DateWiseItemsConsumption>(
+                await response.Content.ReadAsStringAsync());
+        }
     }
 }

@@ -83,6 +83,47 @@ export class ReportsTabsComponent implements OnInit {
     else if(this.selectedTab == 2){
       this.showEmployeeOrdersTable();
     }
+    else if(this.selectedTab == 3){
+      this.showItemConsumptionTable();
+    }
+  }
+  showItemConsumptionTable() {
+    this.refreshColumnsAndTables();    
+    this.errorMessage = JSON.parse(JSON.stringify(""));
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    this.reportsService.getItemConsumptionReport(fromDate,toDate).subscribe(
+      data =>{
+        if (data.status == "Success") {
+          let dataToDisplaytemp = []
+          console.log(data);
+          data.dateItemMapping.forEach(
+            data => {
+              dataToDisplaytemp.push({
+                "Date" : data.date,
+                "Total Quantity" : data.itemQuantityMappings.map( x => x.quantity).reduce((a,b)=> a+b),
+                "innerData": data.itemQuantityMappings.map(
+                  x => {
+                    return {
+                      "Item": x.item.name,
+                      "quantity": x.quantity,
+                    }
+                  }),
+                "innerColumns": ["Item", "quantity"]
+              });
+            });
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Date","Total Quantity"]));
+          this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+          if (this.dataToDisplay.length == 0) {
+            this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+          }
+        }
+        else {
+          this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+        }
+      });
   }
 
   changeDateFormat(inputFormat: string): string{
@@ -275,6 +316,13 @@ export class ReportsTabsComponent implements OnInit {
           item.reportsFilterOptions[2].endDate = new Date();
           item.reportsFilterOptions[1].dataFromUser = this.fromDate;
           item.reportsFilterOptions[2].dataFromUser = this.toDate;
+        }
+
+        if(item.reportName == "Per Day Consumption"){
+          item.reportsFilterOptions[0].endDate = new Date();
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[0].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[1].dataFromUser = this.toDate;
         }
 
       }

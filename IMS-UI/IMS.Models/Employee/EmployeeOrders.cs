@@ -5,6 +5,6 @@ namespace IMS_UI.IMS.Models
     public class EmployeeOrders
     {
         public Employee Employee { get; set; }
-        public EmployeeOrderDetails EmployeeOrder { get; set; }
+        public EmployeeOrderDetails EmployeeOrderDetails { get; set; }
     }
 }

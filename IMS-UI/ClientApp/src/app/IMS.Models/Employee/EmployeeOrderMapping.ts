@@ -4,7 +4,7 @@ import { CartItem } from "../CartItem";
 
 export class EmployeeOrderMapping{
     employee : Employee;
-    employeeOrder : EmployeeOrderDetails 
+    employeeOrderDetails : EmployeeOrderDetails 
 }
 
 export class EmployeeOrderDetails {

@@ -30,7 +30,7 @@ export class RecentEntriesComponent implements OnInit {
   ngOnInit() {
     return this.employeeOrderService.getRecentEntries().subscribe(
       data => {
-        this.recentOrdersList = data.employeeRecentOrders;
+        this.recentOrdersList = data.employeeOrders;
         for (let i = 0; i < this.recentOrdersList.length; i++) {
           let recentOrder = this.recentOrdersList[i];
           let response = new CustomRecentEntriesResponse;
@@ -38,9 +38,9 @@ export class RecentEntriesComponent implements OnInit {
           this.extractResponseDetails(recentOrder, response);
           console.log(response.orderDetails);
 
-          response.date = recentOrder.employeeOrder.date;
+          response.date = recentOrder.employeeOrderDetails.date;
           response.date = response.date.split('T')[0].substring(5);
-          response.time = recentOrder.employeeOrder.date.split('T')[1].substr(0, 5);
+          response.time = recentOrder.employeeOrderDetails.date.split('T')[1].substr(0, 5);
           this.recentEntriesData.push(response);
         }
         this.recentEntriesData = JSON.parse(JSON.stringify(this.recentEntriesData));
@@ -53,12 +53,12 @@ export class RecentEntriesComponent implements OnInit {
   extractEmployeeDetails(recentOrder: EmployeeOrderMapping, response: CustomRecentEntriesResponse): void {
     let employeeId = recentOrder.employee.id;
     let employeeName = recentOrder.employee.firstname;
-    let totalItemsTaken = recentOrder.employeeOrder.employeeItemsQuantityList.length;
+    let totalItemsTaken = recentOrder.employeeOrderDetails.employeeItemsQuantityList.length;
     response.employeeDetails = employeeName + ' Picked ' + totalItemsTaken + ' items';
   }
   extractResponseDetails(recentOrder: EmployeeOrderMapping, response: CustomRecentEntriesResponse): void {
     response.orderDetails = '';
-    let itemsQuantityList = recentOrder.employeeOrder.employeeItemsQuantityList;
+    let itemsQuantityList = recentOrder.employeeOrderDetails.employeeItemsQuantityList;
     for (let i = 0; i < itemsQuantityList.length; i++) {
       response.orderDetails += itemsQuantityList[i].item.name + '-' + itemsQuantityList[i].quantity;
       if (i + 1 != itemsQuantityList.length)

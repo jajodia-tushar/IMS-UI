@@ -147,15 +147,15 @@ export class ReportsTabsComponent implements OnInit {
         if (data.status == "Success") {
           let dataToDisplaytemp = []
           console.log(data);
-          data.employeeRecentOrders.forEach(
+          data.employeeOrders.forEach(
             data => {
               dataToDisplaytemp.push({
                 "Emp Id" : data.employee.id,
                 "Name": data.employee.firstname,
-                "Shelf" : data.employeeOrder.shelf.name,
-                "Time": data.employeeOrder.date,
-                "Number of Items": data.employeeOrder.employeeItemsQuantityList.length.toString(),
-                "innerData": data.employeeOrder.employeeItemsQuantityList.map(
+                "Shelf" : data.employeeOrderDetails.shelf.name,
+                "Time": data.employeeOrderDetails.date,
+                "Number of Items": data.employeeOrderDetails.employeeItemsQuantityList.length.toString(),
+                "innerData": data.employeeOrderDetails.employeeItemsQuantityList.map(
                   x => {
                     return {
                       "item": x.item.name,

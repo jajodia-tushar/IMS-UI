@@ -8,7 +8,7 @@ namespace IMS_UI.IMS.Models
 {
     public class EmployeeOrdersResponse : Response
     { 
-        public List<EmployeeOrders> EmployeeRecentOrders { get; set; }
+        public List<EmployeeOrders> EmployeeOrders { get; set; }
         public PagingInfo pagingInfo { get; set; }
     }
 }

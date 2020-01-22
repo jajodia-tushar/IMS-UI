@@ -24,6 +24,9 @@ export class EmployeeOrderService {
   }
 
   getRecentEntries() : Observable<EmployeeOrdersResponse>{
-    return this.http.get<EmployeeOrdersResponse>("api/employeeorder");
+    let params = new HttpParams();
+    params = params.append("pageNumber","1");
+    params = params.append("pageSize","11");
+    return this.http.get<EmployeeOrdersResponse>("api/employeeorder", {params});
   }
 }

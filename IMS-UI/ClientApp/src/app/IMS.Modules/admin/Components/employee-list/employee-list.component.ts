@@ -8,6 +8,7 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
 import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
 import { PagingInformation } from 'src/app/IMS.Models/Admin/StockStatusResponse';
+import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 @Component({
   selector: 'app-employee-list',
@@ -19,8 +20,20 @@ export class EmployeeListComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'contactNumber', 'temporaryCardNumber', 'accessCardNumber', 'actions'];
   ELEMENT_DATA: Employee[];
 
-  dataSource
+  dataSource: MatTableDataSource<any>;
 
+  pageSizeOptions: number[] = [5, 10, 15, 20];
+  // pageEvent: PageEvent;
+
+  paginator: MatPaginator;
+
+  @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+  }
+  pagingInfo: PagingInfo = new PagingInfo();
+
+  @Output()
+  paginatorClicked: EventEmitter<any> = new EventEmitter();
 
   @Input() event: Employee;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -28,10 +41,12 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService: EmployeeService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
+    this.pagingInfo.pageNumber = 1;
+    this.pagingInfo.pageSize = 10;
+    this.pagingInfo.totalResults = 0;
     await this.setEmployees();
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     console.log(this.dataSource)
-    this.dataSource.sort = this.sort;
+
   }
 
 
@@ -105,10 +120,23 @@ export class EmployeeListComponent implements OnInit {
   }
 
   async setEmployees() {
-    let employeelist: Employee[] = (<EmployeesResponse>await this.employeeService.getAllEmployees()).employees;
-    this.ELEMENT_DATA = employeelist;
+    let employeelist: Employee[] = (<EmployeesResponse>await this.employeeService.getAllEmployees(this.pagingInfo.pageNumber, this.pagingInfo.pageSize)).employees;
+    console.log(employeelist);
+    this.dataSource = new MatTableDataSource(employeelist);
   }
 
+
+  async pageChange(event) {
+
+    console.log(event);
+
+    let employeesResponse: EmployeesResponse = await this.employeeService.getAllEmployees(event.pageIndex + 1, event.pageSize);
+    this.dataSource.data = employeesResponse.employees;
+
+    this.pagingInfo.pageSize = employeesResponse.pagingInfo.pageSize;
+    this.pagingInfo.totalResults = employeesResponse.pagingInfo.totalResults;
+
+  }
   deactivateEmployee(employee) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = employee;

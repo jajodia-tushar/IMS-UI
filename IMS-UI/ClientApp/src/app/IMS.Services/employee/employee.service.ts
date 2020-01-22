@@ -10,8 +10,11 @@ import { Response } from 'src/app/IMS.Models/Shared/Response';
   providedIn: 'root'
 })
 export class EmployeeService {
-  getAllEmployees() {
-    return this.http.get<EmployeesResponse>("api/employee").toPromise();
+  getAllEmployees(pageNumber: number, pageSize: number) {
+    let params = new HttpParams();
+    params = params.append("pageNumber", pageNumber.toString());
+    params = params.append("pageSize", pageSize.toString());
+    return this.http.get<EmployeesResponse>("api/employee", { params }).toPromise();
   }
   constructor(private http: HttpClient) { }
 

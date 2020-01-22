@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -64,13 +65,32 @@ namespace IMS_UI.IMS.Providers
             return apiParsedResponse;
         }
 
-        public async Task<EmployeesResponse> GetAllEmployee()
+        public async Task<EmployeesResponse> GetAllEmployee(string pageNumber, string pageSize)
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
-                var response = await http.GetAsync("api/employee");
-                return await EmployeeResultParser(response);
+                try
+                {
+                    using (HttpClient _client = new HttpClient())
+                    {
+                        var EndPoint = Constants.APIEndpoints.EmployeeProvider;
+                        UriBuilder uriBuilder =
+                            new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+                        _client.DefaultRequestHeaders.Accept.Add(
+                           new MediaTypeWithQualityHeaderValue("application/json"));
+                        _client.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
+
+                            string query = $"?pageNumber={int.Parse(pageNumber)}&pageSize={int.Parse(pageSize)}";
+                            var response = await _client.GetAsync(uriBuilder.Uri+query);
+                        return JsonConvert.DeserializeObject<EmployeesResponse>(
+                           await response.Content.ReadAsStringAsync());
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
         }
 

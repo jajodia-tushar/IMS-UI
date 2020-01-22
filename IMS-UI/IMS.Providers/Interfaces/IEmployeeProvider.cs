@@ -9,7 +9,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
     public interface IEmployeeProvider
     {
         Task<EmployeeResponse> ValidateEmployee(string employeeId);
-        Task<EmployeesResponse> GetAllEmployee();
+        Task<EmployeesResponse> GetAllEmployee(string pageNumber, string pageSize);
         Task<EmployeesResponse> AddEmployee(Employee employee);
         Task<EmployeesResponse> EditEmployee(Employee employee);
 

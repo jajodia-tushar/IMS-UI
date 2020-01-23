@@ -27,7 +27,7 @@ namespace IMS_UI.IMS.Providers
         {
             try
             {
-                var endPoint = Constants.APIEndpoints.RecentEntriesProvider;
+                var endPoint = Constants.APIEndpoints.EmployeeOrder;
                 UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BASEURL"] + endPoint);
                 using (HttpClient _client = new HttpClient())
@@ -64,7 +64,7 @@ namespace IMS_UI.IMS.Providers
         public async Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest)
         {
             HttpClient client = new HttpClient();
-            var EndPoint = Constants.APIEndpoints.OrderProvider;
+            var EndPoint = Constants.APIEndpoints.EmployeeOrder;
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

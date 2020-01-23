@@ -30,10 +30,15 @@ namespace IMS_UI.IMS.Core
             public const string getAllAdmins = "api/User/Role/admin";
             public const string getAllVendors = "api/vendor";
             public const string getAllRoles= "api/roles";
+<<<<<<< HEAD
             public const string PerDayConsumptionReports= "api/reports/GetItemConsumptionReports";
             public const string ItemConsumptionReports= "api/Reports/GetDateWiseItemConsumptionDetails";
             public const string particularVendorOrder = "api/Order/Vendors/";
             public const string PlaceEmployeeBulkOrder = "a[i/orders/EmployeeBulkOrders";
+=======
+            public const string GetItemConsumptionReports= "api/reports/GetItemConsumptionReports";
+            public const string PlaceEmployeeBulkOrder = "api/order/EmployeeBulkOrders";
+>>>>>>> Fixed endpoint, renamed variables
         }
     }
 

@@ -73,10 +73,11 @@ export class BulkRequestComponent implements OnInit {
     this.bulkRequest.employeeBulkOrderDetails = new EmployeeBulkOrderDetails();
     this.bulkRequest.employeeBulkOrderDetails.createdOn = this.today;
     this.bulkRequest.employeeBulkOrderDetails.requirementDate = this.date;
-    this.bulkRequest.employeeBulkOrderDetails.reasonFoRequirement = this.reason;
-    this.bulkRequest.employeeBulkOrderDetails.iitemsQuantityList = [];
+    this.bulkRequest.employeeBulkOrderDetails.reasonForRequirement = this.reason;
+    this.bulkRequest.employeeBulkOrderDetails.bulkOrderRequestStatus = "Pending";
+    this.bulkRequest.employeeBulkOrderDetails.itemsQuantityList = [];
     this.dataSourceItems.forEach(x => {
-      this.bulkRequest.employeeBulkOrderDetails.iitemsQuantityList.push(x)
+      this.bulkRequest.employeeBulkOrderDetails.itemsQuantityList.push(x)
     });
     console.log(this.bulkRequest);
     this.bulkRequestService.placeOrder(this.bulkRequest).subscribe(

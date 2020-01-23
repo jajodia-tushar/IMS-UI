@@ -11,8 +11,8 @@ export class EmployeeBulkOrderDetails  {
     createdOn: Date;
     requirementDate: Date;
     bulkOrderRequestStatus: string;
-    reasonFoRequirement: string;
-    iitemsQuantityList: BulkOrderItemQuantityMapping[];
+    reasonForRequirement: string;
+    itemsQuantityList: BulkOrderItemQuantityMapping[];
 }
 
 export class BulkOrderItemQuantityMapping  {

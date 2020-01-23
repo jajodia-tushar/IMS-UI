@@ -89,7 +89,7 @@ export class PickItemComponent implements OnInit {
     dialogConfig.width = "auto";
     dialogConfig.height = "auto";
     dialogConfig.panelClass = 'dialog-bulk-request';
-    dialogConfig.data = this.employee.id;
+    dialogConfig.data = this.employee;
     dialogConfig.autoFocus = true;
     let dialogRef = this.dialog.open(BulkRequestComponent, dialogConfig);
 

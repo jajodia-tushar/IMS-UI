@@ -50,7 +50,7 @@ namespace IMS_UI.Controllers
 
         [HttpPost("bulk")]
         public async Task<IActionResult> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder)
-        {
+            {
             try
             {
                 var response = await _employeeOrderProvider.PostBulkOrder(employeeBulkOrder);

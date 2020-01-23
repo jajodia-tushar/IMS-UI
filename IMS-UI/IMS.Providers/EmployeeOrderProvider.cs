@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<EmployeeOrdersResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize)
+        public async Task<EmployeeOrdersResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId)
         {
             try
             {
@@ -40,8 +40,9 @@ namespace IMS_UI.IMS.Providers
                     using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("pageNumber", pageNumber),
                 new KeyValuePair<string, string>("pageSize", pageSize),
-                new KeyValuePair<string, string>("toDate", toDate),
-                new KeyValuePair<string, string>("fromDate", fromDate),
+                new KeyValuePair<string, string>("endDate", toDate),
+                new KeyValuePair<string, string>("employeeId", employeeId),
+                new KeyValuePair<string, string>("startDate", fromDate),
 
             }))
                     {

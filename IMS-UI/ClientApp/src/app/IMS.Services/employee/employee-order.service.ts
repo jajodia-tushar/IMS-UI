@@ -13,13 +13,15 @@ export class EmployeeOrderService {
     return this.http.post<any>("api/employeeOrder",body);
   }
 
-  getOrders(fromDate : string, toDate : string, pageNumber : number, pageSize : number ) 
+  getOrders(fromDate : string, toDate : string, pageNumber : number, pageSize : number, employeeId : string) 
   : Observable<EmployeeOrdersResponse>{
     let params = new HttpParams();
     params = params.append("toDate",toDate);
     params = params.append("fromDate",fromDate);
     params = params.append("pageNumber",pageNumber.toString());
     params = params.append("pageSize",pageSize.toString());
+    params = params.append("employeeId",employeeId);
+
     return this.http.get<EmployeeOrdersResponse>("api/employeeorder",{params});
   }
 

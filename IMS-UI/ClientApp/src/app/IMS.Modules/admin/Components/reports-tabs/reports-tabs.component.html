@@ -14,8 +14,12 @@
                             </ng-container>
 
                             <ng-container *ngIf="reportsData.type == 'datePicker'">
-                                <input class="report-page-input-field" matInput [matDatepicker]="picker" [(ngModel)]="reportsData.dataFromUser" [max]="reportsData.endDate" (click)="picker.open()" placeholder="{{ reportsData.placeHolderName }}">
+                                <input class="report-page-input-field" autocomplete="off" matInput [matDatepicker]="picker" [(ngModel)]="reportsData.dataFromUser" [max]="reportsData.endDate" (click)="picker.open()" placeholder="{{ reportsData.placeHolderName }}">
                                 <mat-datepicker #picker></mat-datepicker>
+                            </ng-container>
+
+                            <ng-container *ngIf="reportsData.type == 'input'">
+                                <input class="report-page-input-field" autocomplete="off" [(ngModel)]="reportsData.dataFromUser" placeholder="{{ reportsData.placeHolderName }}">
                             </ng-container>
                         </mat-list-item>
 

@@ -142,7 +142,8 @@ export class ReportsTabsComponent implements OnInit {
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
       
-    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
+    let employeeId = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
+    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize,employeeId).subscribe(
       data => {
         if (data.status == "Success") {
           let dataToDisplaytemp = []

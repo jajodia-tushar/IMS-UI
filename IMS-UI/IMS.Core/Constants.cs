@@ -33,6 +33,7 @@ namespace IMS_UI.IMS.Core
             public const string PerDayConsumptionReports= "api/reports/GetItemConsumptionReports";
             public const string ItemConsumptionReports= "api/Reports/GetDateWiseItemConsumptionDetails";
             public const string particularVendorOrder = "api/Order/Vendors/";
+            public const string PlaceEmployeeBulkOrder = "a[i/orders/EmployeeBulkOrders";
         }
     }
 

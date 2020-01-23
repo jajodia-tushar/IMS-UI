@@ -62,6 +62,25 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
+        public async Task<EmployeeBulkOrdersResponse> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.PlaceEmployeeBulkOrder;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(employeeBulkOrder);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+            var byteData = new ByteArrayContent(buffer);
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
+            return JsonConvert.DeserializeObject<EmployeeBulkOrdersResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
         public async Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest)
         {
             HttpClient client = new HttpClient();

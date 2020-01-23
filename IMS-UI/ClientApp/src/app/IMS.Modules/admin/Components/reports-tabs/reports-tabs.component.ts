@@ -154,7 +154,8 @@ export class ReportsTabsComponent implements OnInit {
                 "Emp Id" : data.employee.id,
                 "Name": data.employee.firstname,
                 "Shelf" : data.employeeOrderDetails.shelf.name,
-                "Time": data.employeeOrderDetails.date,
+                "Time": new Date(data.employeeOrderDetails.date).toDateString() + " " + 
+                new Date(data.employeeOrderDetails.date).toLocaleTimeString(),
                 "Number of Items": data.employeeOrderDetails.employeeItemsQuantityList.length.toString(),
                 "innerData": data.employeeOrderDetails.employeeItemsQuantityList.map(
                   x => {

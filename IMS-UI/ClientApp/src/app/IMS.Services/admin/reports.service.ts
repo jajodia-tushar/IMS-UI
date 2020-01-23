@@ -9,6 +9,9 @@ import { ItemWiseAnalysisResponse } from 'src/app/IMS.Models/Item/ItemWiseAnalys
 import { ShelfWiseOrderCountResponse } from 'src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse';
 import { RAGStatusResponse } from 'src/app/IMS.Models/Admin/RAGStatusResponse';
 import { ItemConsumptionDataResponse } from 'src/app/IMS.Models/Admin/ItemConsumptionDataResponse';
+import { ItemConsumptionDetailsResponse, DateItemConsumptions, DateWiseItemConsumptionDetails } from 'src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse';
+import { Item } from 'src/app/IMS.Models/Item/Item';
+import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -59,10 +62,66 @@ export class ReportsService {
     return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
   }
 
-  getItemConsumptionReport(fromDate : string, toDate : string, ) : Observable<ItemConsumptionDataResponse>{
+  getPerDayConsumption(fromDate : string, toDate : string, ) : Observable<ItemConsumptionDataResponse>{
     let params = new HttpParams();
     params = params.append("fromDate", fromDate);
     params = params.append("toDate", toDate);
     return this.httpClient.get<ItemConsumptionDataResponse>("api/reports/itemConsumptionReports",{params});
+  }
+
+  getItemConsumptionDetailedReport(fromDate : string, toDate : string, 
+    pageNumber : number, pageSize : number) : ItemConsumptionDetailsResponse{
+    let i : Item = new Item();
+    i.id = 1;
+    i.name = "Pen";
+
+    let dateItemConsumptions : DateItemConsumptions[] = [];
+    dateItemConsumptions.push(
+      {
+      date : "20200101",
+      itemsConsumptionCount : 10
+      },
+      {
+        date : "20200102",
+        itemsConsumptionCount : 10
+      }
+       ,
+      {
+        date : "20200103",
+        itemsConsumptionCount : 10
+      },
+      {
+        date : "20200104",
+        itemsConsumptionCount : 10
+      }
+    );
+
+    let dateWiseItemConsumptionDetails : DateWiseItemConsumptionDetails[] = [];
+    dateWiseItemConsumptionDetails.push({
+      item : i,
+      dateItemConsumption : dateItemConsumptions
+    },
+    {
+      item : i,
+      dateItemConsumption : dateItemConsumptions
+    },
+    {
+      item : i,
+      dateItemConsumption : dateItemConsumptions
+    },
+    {
+      item : i,
+      dateItemConsumption : dateItemConsumptions
+    })
+
+    let result : ItemConsumptionDetailsResponse =  new ItemConsumptionDetailsResponse();
+    result.dateWiseItemConsumptionDetails = dateWiseItemConsumptionDetails;
+    result.pagingInfo = new PagingInfo();
+    result.pagingInfo.pageNumber = 1;
+    result.pagingInfo.pageSize = 10;
+    result.pagingInfo.totalResults = 10;
+    result.status = "Success";
+
+    return result;
   }
 }

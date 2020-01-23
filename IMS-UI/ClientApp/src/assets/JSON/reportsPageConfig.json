@@ -103,5 +103,26 @@
             }
         ],
         "urlToRequest": ""
+    },
+    {
+        "reportName": "Item Consumption",
+        "reportsFilterOptions": [{
+                "placeHolderName": "FromDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": "",
+                "endDate": ""
+            },
+            {
+                "placeHolderName": "ToDate",
+                "type": "datePicker",
+                "dropDownOptions": [],
+                "dropDownValues": [],
+                "dataFromUser": "",
+                "endDate": ""
+            }
+        ],
+        "urlToRequest": ""
     }
 ]

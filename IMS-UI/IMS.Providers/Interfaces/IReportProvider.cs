@@ -19,5 +19,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
 
         Task<RAGStatusResponse> GetRAGStatusList();
         Task<DateWiseItemsConsumption> GetItemConsumptionReports(string fromDate, string toDate);
+        Task<ItemConsumptionDetailsResponse> GetItemConsumptionDetailReports(string fromDate, string toDate, string pageNumber, string pageSize);
     }
 }

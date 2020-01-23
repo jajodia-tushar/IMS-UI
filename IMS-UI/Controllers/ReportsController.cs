@@ -173,5 +173,22 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet("ItemConsumptionDetailReports")]
+        public async Task<IActionResult> GetItemConsumptionDetailReports(string fromDate, string toDate,string pageNumber, string pageSize)
+        {
+            var response = await _reportsProvider.GetItemConsumptionDetailReports(fromDate,  toDate,  pageNumber,  pageSize);
+            try
+            {
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

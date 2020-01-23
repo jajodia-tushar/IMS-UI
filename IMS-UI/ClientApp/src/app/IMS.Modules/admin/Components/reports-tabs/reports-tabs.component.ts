@@ -146,7 +146,7 @@ export class ReportsTabsComponent implements OnInit {
           data.dateItemMapping.forEach(
             data => {
               dataToDisplaytemp.push({
-                "Date" : data.date,
+                "Date" : new Date(data.date).toDateString(),
                 "Total Quantity" : data.itemQuantityMappings.map( x => x.quantity).reduce((a,b)=> a+b),
                 "innerData": data.itemQuantityMappings.map(
                   x => {

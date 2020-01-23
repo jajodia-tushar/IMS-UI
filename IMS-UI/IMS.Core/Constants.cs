@@ -32,6 +32,9 @@ namespace IMS_UI.IMS.Core
             public const string getAllRoles= "api/roles";
             public const string PerDayConsumptionReports= "api/reports/GetItemConsumptionReports";
             public const string ItemConsumptionReports= "api/Reports/GetDateWiseItemConsumptionDetails";
+
+            public const string NotificationProvider = "api/notification";
+
             public const string GetItemConsumptionReports= "api/reports/GetItemConsumptionReports";
             public const string PlaceEmployeeBulkOrder = "api/order/EmployeeBulkOrders";
             public const string particularVendorOrder = "api/Order/Vendors/";

@@ -3,29 +3,40 @@ import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+import { NotificationService } from 'src/app/IMS.Services/notification/notification.service';
+import { Notification } from 'src/app/IMS.Models/Notification/Notification';
+
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
-  vendorsOrdersDetails: VendorOrder[];
+  notificationsDetail: Notification[];
+
   columns;
 
   pageInfo:PagingInfo;
-  constructor( public vendorService: VendorService,private dialog: MatDialog) { }
+  constructor(private notificationService: NotificationService, private dialog: MatDialog) { }
   row;
   selectedTab : number = 0;
   isClickedOn;
   
   ngOnInit() {
-    this.initializePagination();
-    this.GetDataforPendingApprovals();
-    this.columns = this.vendorService.getColumnFordataTable();
+    this.getAllNotifications();
+    // this.initializePagination();
+    this.columns = this.notificationService.getColumnFordataTable();
   }
 
   Tabledata(data) {
     this.row = data;
+  }
+
+  getAllNotifications() {
+    this.notificationService.getAllNotifications().subscribe(data => {
+      this.notificationsDetail = data.notifications;
+    });
   }
 
   getClickedStatus(value){
@@ -44,20 +55,20 @@ export class NotificationsComponent implements OnInit {
     this.pageInfo.totalResults = 0;
   }
 
-  GetDataforPendingApprovals(){
-    this.vendorService.getUnApprovedOrders(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
-      data => {
-        this.vendorsOrdersDetails = data.vendorOrders;
-        this.pageInfo=data.pagingInfo;
-      }
-    );
-  }
+  // GetDataforPendingApprovals(){
+  //   this.vendorService.getUnApprovedOrders(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
+  //     data => {
+  //       this.vendorsOrdersDetails = data.vendorOrders;
+  //       this.pageInfo=data.pagingInfo;
+  //     }
+  //   );
+  // }
 
-  getpageInfo(event){
-    this.pageInfo.pageNumber = event.pageIndex + 1;
-    this.pageInfo.pageSize = event.pageSize;
-    this.GetDataforPendingApprovals();
-  }
+  // getpageInfo(event){
+  //   this.pageInfo.pageNumber = event.pageIndex + 1;
+  //   this.pageInfo.pageSize = event.pageSize;
+  //   this.GetDataforPendingApprovals();
+  // }
 
   changeTab() {
     this.selectedTab += 1;

@@ -21,9 +21,21 @@ const routes: Routes = [
       { path: 'Users', component: UserManagementComponent },
       { path: 'Employee', component: EmployeeManagementComponent },
       { path: 'Reports', component: ReportsComponent },
-      { path: 'Notifications', component: NotificationsComponent },
-      { path: 'EditInvoice', component: InvoiceEditorComponent },
-      { path: 'Items', component: ItemManagementComponent }
+      { path: 'Items', component: ItemManagementComponent },
+      { 
+        path: 'Notifications',
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            component: NotificationsComponent
+          },
+          {
+            path: 'VendorOrder/:id',
+            component: InvoiceEditorComponent
+          }
+        ]
+      }
     ]
   }
 ];

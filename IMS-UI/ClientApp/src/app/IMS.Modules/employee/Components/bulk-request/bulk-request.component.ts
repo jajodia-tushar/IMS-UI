@@ -5,11 +5,8 @@ import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { Router } from '@angular/router';
-import { ItemQuantityMapping } from 'src/app/IMS.Models/Item/ItemQuantityMapping';
-import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { BulkRequest, BulkOrderItemQuantityMapping, EmployeeBulkOrderDetails } from 'src/app/IMS.Models/Employee/BulkRequest';
-import { readSync } from 'fs';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
 
 @Component({
@@ -60,50 +57,63 @@ export class BulkRequestComponent implements OnInit {
     this.renderTable();
   }
 
-  reloadComponent()  {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
-  }
-
-  Send() {
+  createRequest()  {
     this.bulkRequest.employee = new Employee();
     this.bulkRequest.employee.id = this.employeeID;
+
     this.bulkRequest.employeeBulkOrderDetails = new EmployeeBulkOrderDetails();
-    this.bulkRequest.employeeBulkOrderDetails.createdOn = this.today;
-    this.bulkRequest.employeeBulkOrderDetails.requirementDate = this.date;
+
+    let utcDate = Date.UTC(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+    this.bulkRequest.employeeBulkOrderDetails.createdOn = new Date(utcDate);
+
+    utcDate = Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate());
+    this.bulkRequest.employeeBulkOrderDetails.requirementDate = new Date(utcDate);
+
     this.bulkRequest.employeeBulkOrderDetails.reasonForRequirement = this.reason;
     this.bulkRequest.employeeBulkOrderDetails.bulkOrderRequestStatus = "Pending";
     this.bulkRequest.employeeBulkOrderDetails.itemsQuantityList = [];
     this.dataSourceItems.forEach(x => {
       this.bulkRequest.employeeBulkOrderDetails.itemsQuantityList.push(x)
     });
-    this.bulkRequestService.placeOrder(this.bulkRequest).subscribe(
-      data => {
-        if(data.status == "Success")  {
-            let dialogConfig = new MatDialogConfig();
-            dialogConfig.disableClose = true;
-            dialogConfig.panelClass = 'dialog-order-success';
-            dialogConfig.autoFocus = true;
-            let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
-            setTimeout(() => {
-              dialogRef.close();
-              this.router.navigateByUrl('/Shelf');
-            }, 5000);
-        }
-        else
-          showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
-        console.log(data);
-        this.dialogRef.close();
-      }
-    );
+  }
+
+  Send() {
+    let errorRowIndex = this.rowValidation();
+    if(errorRowIndex === -1)  {
+      this.createRequest();
+    
+      this.bulkRequestService.placeOrder(this.bulkRequest).subscribe(
+        data => {
+          if(data.status == "Success")  {
+              let dialogConfig = new MatDialogConfig();
+              dialogConfig.disableClose = true;
+              dialogConfig.panelClass = 'dialog-order-success';
+              dialogConfig.autoFocus = true;
+              let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
+              setTimeout(() => {
+                dialogRef.close();
+                this.router.navigateByUrl('/Shelf');
+              }, 5000);
+          }
+          else
+            showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
+          this.dialogRef.close();
+        });
+    }
+    else  {
+      if (this.dataSourceItems[errorRowIndex].item.name == "")
+        showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
+      else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)
+        showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " should be greater than 0", "warn");
+    }
+   
   }
 
   CancelRequest() {
-    console.log("Request canceled");
     this.dialogRef.close();
   }
 
   AddRow() {
-    let lastIndex = this.dataSourceItems.length - 1;
     let errorRowIndex = this.rowValidation();
     if (errorRowIndex === -1) {
       let itemData: BulkOrderItemQuantityMapping = {
@@ -114,11 +124,11 @@ export class BulkRequestComponent implements OnInit {
       this.dataSourceItems.unshift(itemData);
       this.renderTable();
     }
-    else {
-      if (this.dataSourceItems[errorRowIndex].item.name == null)
+    else {      
+      if (this.dataSourceItems[errorRowIndex].item.name == "")
         showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
       else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)
-        showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " Is Not Filled", "warn");
+        showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " should be greater than 0", "warn");
     }
   }
 
@@ -166,13 +176,4 @@ export class BulkRequestComponent implements OnInit {
       return false;
     }
   }
-
-  changeDateFormat(inputFormat: string): string{
-    if (inputFormat == null || inputFormat == "")
-      return "";
-    let inputDate: Date = new Date(Date.parse(inputFormat));
-    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
-      .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
-  }
-
 }

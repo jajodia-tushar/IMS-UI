@@ -58,10 +58,12 @@ export class ReportsService {
     return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
   }
 
-  getPerDayConsumption(fromDate : string, toDate : string, ) : Observable<PerDayConsumptionResponse>{
+  getPerDayConsumption(fromDate : string, toDate : string,pageNumber : number, pageSize : number ) : Observable<PerDayConsumptionResponse>{
     let params = new HttpParams();
     params = params.append("fromDate", fromDate);
     params = params.append("toDate", toDate);
+    params = params.append("pageNumber", pageNumber.toString());
+    params = params.append("pageSize", pageSize.toString());
     return this.httpClient.get<PerDayConsumptionResponse>("api/reports/itemConsumptionReports",{params});
   }
 

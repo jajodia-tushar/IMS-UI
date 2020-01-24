@@ -112,11 +112,11 @@ namespace IMS_UI.Controllers
         [HttpGet("itemConsumptionReports")]
         public async Task<IActionResult> GetItemConsumptionReports(
             string fromDate,
-            string toDate
+            string toDate, string pageNumber, string pageSize
         )
         {
             var response =
-                await _reportsProvider.GetItemConsumptionReports(fromDate, toDate);
+                await _reportsProvider.GetItemConsumptionReports(fromDate, toDate, pageNumber,pageSize);
 
             try
             {

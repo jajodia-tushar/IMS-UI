@@ -4,4 +4,5 @@ import { PagingInfo } from "../Shared/PagingInfo";
 
 export class PerDayConsumptionResponse extends Response {
     dateItemMapping : DateWithItemQuantityMapping[];
+    pagingInfo : PagingInfo;
 }

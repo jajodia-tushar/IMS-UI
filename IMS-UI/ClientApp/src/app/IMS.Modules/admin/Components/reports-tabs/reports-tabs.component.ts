@@ -138,7 +138,7 @@ export class ReportsTabsComponent implements OnInit {
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
-    this.reportsService.getPerDayConsumption(fromDate,toDate).subscribe(
+    this.reportsService.getPerDayConsumption(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data =>{
         if (data.status == "Success") {
           let dataToDisplaytemp = []
@@ -167,6 +167,7 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
+        this.pageInfo = data.pagingInfo;
       });
   }
   showEmployeeOrdersTable(){

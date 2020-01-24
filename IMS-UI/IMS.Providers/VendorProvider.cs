@@ -106,7 +106,7 @@ namespace IMS_UI.IMS.Providers
         {
             HttpClient client = new HttpClient();
 
-            var EndPoint = Constants.APIEndpoints.VendorOrdersProvider;
+            var EndPoint = Constants.APIEndpoints.particularVendorOrder;
 
             UriBuilder uriBuilder =
                 new UriBuilder(_iConfiguration["BASEURL"] + EndPoint + vendorId);
@@ -116,8 +116,6 @@ namespace IMS_UI.IMS.Providers
 
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
-
-            // client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
 
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{

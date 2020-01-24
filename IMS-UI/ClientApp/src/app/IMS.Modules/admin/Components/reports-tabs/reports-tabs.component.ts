@@ -140,7 +140,6 @@ export class ReportsTabsComponent implements OnInit {
       data =>{
         if (data.status == "Success") {
           let dataToDisplaytemp = []
-          console.log(data);
           data.dateItemMapping.forEach(
             data => {
               dataToDisplaytemp.push({
@@ -181,7 +180,6 @@ export class ReportsTabsComponent implements OnInit {
       data => {
         if (data.status == "Success") {
           let dataToDisplaytemp = []
-          console.log(data);
           data.employeeOrders.forEach(
             data => {
               dataToDisplaytemp.push({
@@ -233,7 +231,6 @@ export class ReportsTabsComponent implements OnInit {
       data => {
         if (data.status == "Success") {
           let dataToDisplaytemp = []
-          console.log(data);
           data.vendorOrders.forEach(
             data => {
               dataToDisplaytemp.push({

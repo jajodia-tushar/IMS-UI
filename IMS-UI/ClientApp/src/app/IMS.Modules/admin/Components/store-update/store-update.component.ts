@@ -130,7 +130,6 @@ export class StoreUpdateComponent implements OnInit {
 
       this.storeService.transferToShelf(this.transferRequest).subscribe(
         data => {
-          console.log(data);
           let transferResponse: TransferResponse = new TransferResponse();
           transferResponse.itemName = this.itemName;
           transferResponse.quantity = parseInt(this.quantity);

@@ -36,7 +36,6 @@ export class RecentEntriesComponent implements OnInit {
           let response = new CustomRecentEntriesResponse;
           this.extractEmployeeDetails(recentOrder, response);
           this.extractResponseDetails(recentOrder, response);
-          console.log(response.orderDetails);
 
           response.date = recentOrder.employeeOrderDetails.date;
           response.date = response.date.split('T')[0].substring(5);

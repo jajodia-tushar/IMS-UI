@@ -23,7 +23,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<EmployeeOrdersResponse> getEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId)
+        public async Task<EmployeeOrdersResponse> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId)
         {
             try
             {

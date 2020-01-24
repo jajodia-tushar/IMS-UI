@@ -29,7 +29,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _employeeOrderProvider.getEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
+                var response = await _employeeOrderProvider.GetEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

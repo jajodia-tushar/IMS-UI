@@ -51,8 +51,6 @@ export class ReportsTabsComponent implements OnInit {
       this.locationName = "Warehouse";
       this.colour = "Red";
     }
-
-
   }
 
   async getRAGReportDropDownList() {
@@ -68,11 +66,11 @@ export class ReportsTabsComponent implements OnInit {
 
   tabChanged(event: Event) {
     this.refreshColumnsAndTables();
-    this.initializePaging();
     this.searchButtonClicked();
   }
 
   searchButtonClicked() {
+    this.initializePaging();
     
     if (this.selectedTab == 0) {
       this.showRAGDataTable();

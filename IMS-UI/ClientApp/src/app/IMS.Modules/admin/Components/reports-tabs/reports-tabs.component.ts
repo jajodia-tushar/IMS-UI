@@ -84,9 +84,13 @@ export class ReportsTabsComponent implements OnInit {
       this.showEmployeeOrdersTable();
     }
     else if(this.selectedTab == 3){
+      this.showPerDayConsumption();
+    }
+    else if(this.selectedTab == 4){
       this.showItemConsumptionTable();
     }
   }
+
   showItemConsumptionTable() {
     this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
@@ -94,7 +98,47 @@ export class ReportsTabsComponent implements OnInit {
       this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
-    this.reportsService.getItemConsumptionReport(fromDate,toDate).subscribe(
+    
+    this.reportsService.getItemConsumptionDetailedReport(fromDate,toDate,this.pageInfo.pageNumber,
+      this.pageInfo.pageSize).subscribe(
+        data => {
+          if (data.status == "Success") {
+            let dataToDisplaytemp = []
+            data.dateWiseItemConsumptionDetails.forEach(
+              data => {
+                dataToDisplaytemp.push({
+                  "Item Name" : data.item.name,
+                  "Quantity Consumed" : data.dateItemConsumptions.map( x => x.itemsConsumptionCount).reduce((a,b)=> a+b),
+                  "innerData": data.dateItemConsumptions.map(
+                    x => {
+                      return {
+                        "Date": new Date(x.date).toDateString(),
+                        "Quantity": x.itemsConsumptionCount,
+                      }
+                    }),
+                  "innerColumns": ["Date","Quantity"]
+                });
+              });
+            this.columnToDisplay = JSON.parse(JSON.stringify(["Item Name", "Quantity Consumed"]));
+            this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+            if (this.dataToDisplay.length == 0) {
+              this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+            }
+          }
+          else {
+            this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+          }
+          this.pageInfo = data.pagingInfo;
+        });
+  }
+  showPerDayConsumption() {
+    this.refreshColumnsAndTables();    
+    this.errorMessage = JSON.parse(JSON.stringify(""));
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
+    this.reportsService.getPerDayConsumption(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data =>{
         if (data.status == "Success") {
           let dataToDisplaytemp = []
@@ -102,7 +146,7 @@ export class ReportsTabsComponent implements OnInit {
           data.dateItemMapping.forEach(
             data => {
               dataToDisplaytemp.push({
-                "Date" : data.date,
+                "Date" : new Date(data.date).toDateString(),
                 "Total Quantity" : data.itemQuantityMappings.map( x => x.quantity).reduce((a,b)=> a+b),
                 "innerData": data.itemQuantityMappings.map(
                   x => {
@@ -123,17 +167,9 @@ export class ReportsTabsComponent implements OnInit {
         else {
           this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
         }
+        this.pageInfo = data.pagingInfo;
       });
   }
-
-  changeDateFormat(inputFormat: string): string{
-    if (inputFormat == null || inputFormat == "")
-      return "";
-    let inputDate: Date = new Date(Date.parse(inputFormat));
-    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
-      .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
-  }
-
   showEmployeeOrdersTable(){
     this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
@@ -187,9 +223,6 @@ export class ReportsTabsComponent implements OnInit {
     );
     
   }
-
-  
-
   showVendorDataTable() {
     this.refreshColumnsAndTables()
     this.errorMessage = JSON.parse(JSON.stringify(""));
@@ -206,6 +239,7 @@ export class ReportsTabsComponent implements OnInit {
           data.vendorOrders.forEach(
             data => {
               dataToDisplaytemp.push({
+                "Order Id" : data.vendorOrderDetails.orderId,
                 "Invoice No" : data.vendorOrderDetails.invoiceNumber,
                 "vendor Name": data.vendor.name,
                 "date": (data.vendorOrderDetails.date + "").slice(0, 10),
@@ -221,7 +255,7 @@ export class ReportsTabsComponent implements OnInit {
                 "innerColumns": ["item", "quantity", "price"]
               });
             });
-          this.columnToDisplay = JSON.parse(JSON.stringify(["Invoice No","vendor Name", "date", "amount"]));
+          this.columnToDisplay = JSON.parse(JSON.stringify(["Order Id","Invoice No","vendor Name", "date", "amount"]));
           this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
           if (this.dataToDisplay.length == 0) {
             this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
@@ -280,6 +314,16 @@ export class ReportsTabsComponent implements OnInit {
       
     );
   }
+
+  changeDateFormat(inputFormat: string): string{
+    if (inputFormat == null || inputFormat == "")
+      return "";
+    let inputDate: Date = new Date(Date.parse(inputFormat));
+    return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
+      .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
+  }
+
+
   paginatorClicked(event) {
     this.pageInfo.pageNumber = event.pageIndex + 1;
     this.pageInfo.pageSize = event.pageSize;
@@ -291,7 +335,7 @@ export class ReportsTabsComponent implements OnInit {
 
     let date = new Date();
     this.toDate = date.toISOString();
-    date.setDate(date.getDay() - 6);
+    date.setDate(date.getDate() - 6);
     this.fromDate = date.toISOString();
 
     this.initializePaging()
@@ -321,6 +365,13 @@ export class ReportsTabsComponent implements OnInit {
         }
 
         if(item.reportName == "Per Day Consumption"){
+          item.reportsFilterOptions[0].endDate = new Date();
+          item.reportsFilterOptions[1].endDate = new Date();
+          item.reportsFilterOptions[0].dataFromUser = this.fromDate;
+          item.reportsFilterOptions[1].dataFromUser = this.toDate;
+        }
+
+        if(item.reportName == "Item Consumption"){
           item.reportsFilterOptions[0].endDate = new Date();
           item.reportsFilterOptions[1].endDate = new Date();
           item.reportsFilterOptions[0].dataFromUser = this.fromDate;

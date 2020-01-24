@@ -8,5 +8,7 @@ namespace IMS_UI.IMS.Models.Admin
     public class DateWiseItemsConsumption : Response
     {
         public List<DateItemsMapping> DateItemMapping { get; set; }
+
+        public PagingInfo pagingInfo { get; set; }
     }
 }

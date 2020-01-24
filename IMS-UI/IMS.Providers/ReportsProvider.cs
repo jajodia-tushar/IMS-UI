@@ -194,11 +194,11 @@ namespace IMS_UI.IMS.Providers
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<DateWiseItemsConsumption> GetItemConsumptionReports(string fromDate, string toDate)
+        public async Task<DateWiseItemsConsumption> GetItemConsumptionReports(string fromDate, string toDate,string pageNumber, string pageSize)
         {
             HttpClient client = new HttpClient();
 
-            var EndPoint = Constants.APIEndpoints.GetItemConsumptionReports;
+            var EndPoint = Constants.APIEndpoints.PerDayConsumptionReports;
 
             UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
@@ -212,7 +212,9 @@ namespace IMS_UI.IMS.Providers
             string query;
             using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
                 new KeyValuePair<string, string>("fromDate", fromDate),
-                new KeyValuePair<string, string>("toDate", toDate)
+                new KeyValuePair<string, string>("toDate", toDate),
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize)
             }))
             {
                 query = content.ReadAsStringAsync().Result;
@@ -225,6 +227,42 @@ namespace IMS_UI.IMS.Providers
                     client.GetAsync(uriBuilder.Uri);
 
             return JsonConvert.DeserializeObject<DateWiseItemsConsumption>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<ItemConsumptionDetailsResponse> GetItemConsumptionDetailReports(string fromDate, string toDate, string pageNumber, string pageSize)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.ItemConsumptionReports;
+
+            UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
+
+            client.DefaultRequestHeaders.Accept.
+                Add(item: new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+            string query;
+            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("startDate", fromDate),
+                new KeyValuePair<string, string>("endDate", toDate),
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize)
+            }))
+            {
+                query = content.ReadAsStringAsync().Result;
+            }
+
+            uriBuilder.Query = query;
+
+            var response =
+                await
+                    client.GetAsync(uriBuilder.Uri);
+
+            return JsonConvert.DeserializeObject<ItemConsumptionDetailsResponse>(
                 await response.Content.ReadAsStringAsync());
         }
     }

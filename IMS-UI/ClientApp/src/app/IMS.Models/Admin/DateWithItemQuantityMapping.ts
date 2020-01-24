@@ -1,6 +1,6 @@
 import { CartItem } from "../CartItem";
 
-export class DataMapping{
+export class DateWithItemQuantityMapping{
     date : string;
     itemQuantityMappings : CartItem[];
 }

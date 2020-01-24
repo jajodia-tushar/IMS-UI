@@ -1,7 +1,7 @@
 import { Response } from "../Shared/Response";
-import { DataMapping } from "./DataMapping";
+import { DateWithItemQuantityMapping } from "./DateWithItemQuantityMapping";
 import { PagingInfo } from "../Shared/PagingInfo";
 
 export class PerDayConsumptionResponse extends Response {
-    dateItemMapping : DataMapping[];
+    dateItemMapping : DateWithItemQuantityMapping[];
 }

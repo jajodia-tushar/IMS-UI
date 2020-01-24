@@ -140,7 +140,6 @@ export class EmployeeListComponent implements OnInit {
 
     let employeesResponse: EmployeesResponse = await this.employeeService.getAllEmployees(event.pageIndex + 1, event.pageSize);
     this.dataSource.data = employeesResponse.employees;
-
     this.pagingInfo.pageSize = employeesResponse.pagingInfo.pageSize;
     this.pagingInfo.totalResults = employeesResponse.pagingInfo.totalResults;
 
@@ -162,6 +161,9 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   deleteEmployeeFromTableById(id) {
+    console.log(this.ELEMENT_DATA);
+    this.ELEMENT_DATA = this.dataSource.data;
+    console.log(this.ELEMENT_DATA);
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === id) {
         this.ELEMENT_DATA.splice(index, 1);

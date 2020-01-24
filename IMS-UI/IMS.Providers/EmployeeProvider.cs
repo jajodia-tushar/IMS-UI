@@ -109,7 +109,7 @@ namespace IMS_UI.IMS.Providers
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
         }
 
-        public async Task<Response> DeactivateEmployee(int id, bool isHardDelete)
+        public async Task<Response> DeactivateEmployee(string id, bool isHardDelete)
         {
             using (HttpClient http = new HttpClient())
             {

@@ -76,7 +76,7 @@ namespace IMS_UI.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeactivateUser(int id, bool isHardDelete)
+        public async Task<IActionResult> DeactivateUser(string id, bool isHardDelete)
         {
             try
             {

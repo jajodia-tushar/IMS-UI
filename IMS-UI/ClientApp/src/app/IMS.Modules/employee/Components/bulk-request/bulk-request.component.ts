@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { BulkRequest, BulkOrderItemQuantityMapping, EmployeeBulkOrderDetails } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
+import { OrderMessage } from 'src/app/IMS.Models/Shared/OrderMeesage';
 
 @Component({
   selector: 'app-bulk-request',
@@ -26,6 +27,8 @@ export class BulkRequestComponent implements OnInit {
   Items: Item[] = [];
   date: Date;
   reason: string;
+
+  orderMessage: OrderMessage = new OrderMessage;
 
   bulkRequest: BulkRequest = new BulkRequest();
 
@@ -55,6 +58,11 @@ export class BulkRequestComponent implements OnInit {
       }
     )
     this.renderTable();
+
+    this.orderMessage.imageUrl = "";
+    this.orderMessage.greetingText = "Request Sent";
+    this.orderMessage.message = "Your request has been sent and is waiting for approval";
+    this.orderMessage.notification = "You will be notified once your order is approved"
   }
 
   createRequest()  {
@@ -89,6 +97,7 @@ export class BulkRequestComponent implements OnInit {
               dialogConfig.disableClose = true;
               dialogConfig.panelClass = 'dialog-order-success';
               dialogConfig.autoFocus = true;
+              dialogConfig.data = this.orderMessage;
               let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
               setTimeout(() => {
                 dialogRef.close();

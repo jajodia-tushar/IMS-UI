@@ -1,14 +1,14 @@
 <div class="container">
     <div class="image-container">
-        <img src="../../../../../assets/accept.svg">
+        <img src={{orderMessage.imageUrl}}>
     </div>
     <div class="greeting-text">
-        <h1>Success!</h1>
+        <h1>{{orderMessage.greetingText}}</h1> 
     </div>
     <div class="sub-text">
-        <h5>Your order is placed,</h5>
+        <h5>{{orderMessage.message}}</h5>  
     </div>
     <div class="sub-text">
-        <h6>You can now collect the items.</h6>
+        <h6>{{orderMessage.notification}}</h6> 
     </div>
 </div>

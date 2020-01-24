@@ -41,10 +41,12 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService: EmployeeService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
+    this.pagingInfo = new PagingInfo();
     this.pagingInfo.pageNumber = 1;
     this.pagingInfo.pageSize = 10;
-    this.pagingInfo.totalResults = 0;
+    this.pagingInfo.totalResults = 100;
     await this.setEmployees();
+    console.log(this.pagingInfo.totalResults);
     console.log(this.dataSource)
 
   }
@@ -107,6 +109,7 @@ export class EmployeeListComponent implements OnInit {
     })
   }
   editEmployeeIntable(employee) {
+    console.log(employee)
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
 
       if (this.ELEMENT_DATA[index].id == employee.id) {
@@ -116,13 +119,18 @@ export class EmployeeListComponent implements OnInit {
     }
 
     this.dataSource.data = this.ELEMENT_DATA;
+    console.log(this.dataSource.data);
+
     showMessage(this.snackBar, 2, "Employee Details Updated Successfully", "success")
   }
 
   async setEmployees() {
-    let employeelist: Employee[] = (<EmployeesResponse>await this.employeeService.getAllEmployees(this.pagingInfo.pageNumber, this.pagingInfo.pageSize)).employees;
-    console.log(employeelist);
+    let employeeResponse: EmployeesResponse = (<EmployeesResponse>await this.employeeService.getAllEmployees(this.pagingInfo.pageNumber, this.pagingInfo.pageSize));
+    let employeelist = employeeResponse.employees;
+    console.log(employeeResponse);
     this.dataSource = new MatTableDataSource(employeelist);
+    this.ELEMENT_DATA = employeelist;
+    this.pagingInfo.totalResults = employeeResponse.pagingInfo.totalResults;
   }
 
 

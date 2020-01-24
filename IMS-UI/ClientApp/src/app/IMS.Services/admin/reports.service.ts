@@ -2,16 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { ItemsAvailabilityResponse } from 'src/app/IMS.Models/Admin/ItemsAvailabilityResponse';
 import { Observable } from 'rxjs';
-import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
-import { dataFromAPI } from 'src/app/IMS.Modules/admin/Components/mainnav/mainnav.component';
 import { FrequentlyUsedItemModel } from 'src/app/IMS.Models/Admin/FrequentlyUsedItemModel';
 import { ItemWiseAnalysisResponse } from 'src/app/IMS.Models/Item/ItemWiseAnalysisResponse';
 import { ShelfWiseOrderCountResponse } from 'src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse';
 import { RAGStatusResponse } from 'src/app/IMS.Models/Admin/RAGStatusResponse';
-import { ItemConsumptionDataResponse } from 'src/app/IMS.Models/Admin/ItemConsumptionDataResponse';
-import { ItemConsumptionDetailsResponse, DateItemConsumptions, DateWiseItemConsumptionDetails } from 'src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse';
-import { Item } from 'src/app/IMS.Models/Item/Item';
-import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+import { ItemConsumptionDetailsResponse } from 'src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse';
+import { PerDayConsumptionResponse } from 'src/app/IMS.Models/Admin/PerDayConsumptionResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -62,11 +58,11 @@ export class ReportsService {
     return this.httpClient.get<RAGStatusResponse>("api/reports/ragstatus/");
   }
 
-  getPerDayConsumption(fromDate : string, toDate : string, ) : Observable<ItemConsumptionDataResponse>{
+  getPerDayConsumption(fromDate : string, toDate : string, ) : Observable<PerDayConsumptionResponse>{
     let params = new HttpParams();
     params = params.append("fromDate", fromDate);
     params = params.append("toDate", toDate);
-    return this.httpClient.get<ItemConsumptionDataResponse>("api/reports/itemConsumptionReports",{params});
+    return this.httpClient.get<PerDayConsumptionResponse>("api/reports/itemConsumptionReports",{params});
   }
 
   getItemConsumptionDetailedReport(fromDate : string, toDate : string, 

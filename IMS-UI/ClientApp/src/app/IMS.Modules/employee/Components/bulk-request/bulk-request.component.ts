@@ -1,5 +1,5 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
@@ -10,6 +10,7 @@ import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { BulkRequest, BulkOrderItemQuantityMapping, EmployeeBulkOrderDetails } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { readSync } from 'fs';
+import { OrderSuccessComponent } from '../order-success/order-success.component';
 
 @Component({
   selector: 'app-bulk-request',
@@ -36,6 +37,7 @@ export class BulkRequestComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<BulkRequestComponent>, 
     private snackBar: MatSnackBar, private router: Router,
+    private dialog: MatDialog,
     @Optional() @Inject(MAT_DIALOG_DATA) public datas: Employee, 
     private itemService: ItemService, private bulkRequestService: BulkRequestService) {
     this.employeeID = datas.id;
@@ -63,11 +65,6 @@ export class BulkRequestComponent implements OnInit {
   }
 
   Send() {
-    console.log("request sent");
-    console.log(this.today);
-    console.log(this.date);
-    console.log(this.reason);
-    console.log(this.dataSourceItems);
     this.bulkRequest.employee = new Employee();
     this.bulkRequest.employee.id = this.employeeID;
     this.bulkRequest.employeeBulkOrderDetails = new EmployeeBulkOrderDetails();
@@ -79,9 +76,21 @@ export class BulkRequestComponent implements OnInit {
     this.dataSourceItems.forEach(x => {
       this.bulkRequest.employeeBulkOrderDetails.itemsQuantityList.push(x)
     });
-    console.log(this.bulkRequest);
     this.bulkRequestService.placeOrder(this.bulkRequest).subscribe(
       data => {
+        if(data.status == "Success")  {
+            let dialogConfig = new MatDialogConfig();
+            dialogConfig.disableClose = true;
+            dialogConfig.panelClass = 'dialog-order-success';
+            dialogConfig.autoFocus = true;
+            let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
+            setTimeout(() => {
+              dialogRef.close();
+              this.router.navigateByUrl('/Shelf');
+            }, 5000);
+        }
+        else
+          showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
         console.log(data);
         this.dialogRef.close();
       }

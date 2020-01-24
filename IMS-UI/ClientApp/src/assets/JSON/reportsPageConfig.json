@@ -61,13 +61,7 @@
         "reportName": "Employee Orders",
         "reportsFilterOptions": [{
                 "placeHolderName": "Employee Id",
-                "type": "dropDown",
-                "dropDownOptions": [
-                    "1",
-                    "2",
-                    "3"
-                ],
-                "dropDownValues": [],
+                "type": "input",
                 "dataFromUser": ""
             },
             {

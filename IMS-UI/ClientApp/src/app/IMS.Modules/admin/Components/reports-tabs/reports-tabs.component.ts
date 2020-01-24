@@ -142,7 +142,8 @@ export class ReportsTabsComponent implements OnInit {
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[2].dataFromUser);
       
-    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
+    let employeeId = this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser;
+    this.employeeOrderService.getOrders(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize,employeeId).subscribe(
       data => {
         if (data.status == "Success") {
           let dataToDisplaytemp = []
@@ -153,7 +154,8 @@ export class ReportsTabsComponent implements OnInit {
                 "Emp Id" : data.employee.id,
                 "Name": data.employee.firstname,
                 "Shelf" : data.employeeOrderDetails.shelf.name,
-                "Time": data.employeeOrderDetails.date,
+                "Time": new Date(data.employeeOrderDetails.date).toDateString() + " " + 
+                new Date(data.employeeOrderDetails.date).toLocaleTimeString(),
                 "Number of Items": data.employeeOrderDetails.employeeItemsQuantityList.length.toString(),
                 "innerData": data.employeeOrderDetails.employeeItemsQuantityList.map(
                   x => {

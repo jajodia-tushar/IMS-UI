@@ -25,11 +25,11 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize)
+        public async Task<IActionResult> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize,string employeeId)
         {
             try
             {
-                var response = await _employeeOrderProvider.getEmployeeOrders(toDate,fromDate,pageNumber, pageSize);
+                var response = await _employeeOrderProvider.getEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

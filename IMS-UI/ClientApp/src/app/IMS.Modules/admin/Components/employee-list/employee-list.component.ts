@@ -21,10 +21,12 @@ export class EmployeeListComponent implements OnInit {
   ELEMENT_DATA: Employee[];
 
   dataSource: MatTableDataSource<any>;
+  filter = "";
 
   pageSizeOptions: number[] = [5, 10, 15, 20];
   // pageEvent: PageEvent;
 
+  employeesResponse: EmployeesResponse;
   paginator: MatPaginator;
 
   @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
@@ -53,12 +55,28 @@ export class EmployeeListComponent implements OnInit {
 
 
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.dataSource.filterPredicate = (data: any, filter) => {
-      const dataStr = JSON.stringify(data).toLowerCase();
-      return dataStr.indexOf(filter) != -1;
-    }
+  async applyFilter(filterValue: string) {
+    let employeesResponse = <EmployeesResponse>await this.employeeService.getAllEmployees
+      (this.pagingInfo.pageNumber, this.pagingInfo.pageSize, filterValue)
+      .then(
+        data => {
+          this.dataSource.data = data.employees;
+          this.filter = filterValue;
+          console.log(data);
+
+          if (data.status == "Failure") {
+            this.pagingInfo.pageSize = 0;
+            this.pagingInfo.totalResults = 0;
+            this.paginator.pageIndex = 0;
+          }
+          else {
+            this.pagingInfo.pageSize = data.pagingInfo.pageSize;
+            this.pagingInfo.totalResults = data.pagingInfo.totalResults;
+            this.paginator.pageIndex = 0;
+          }
+
+        })
+
   }
 
   openAddEmployeeDialog() {
@@ -127,7 +145,8 @@ export class EmployeeListComponent implements OnInit {
   async setEmployees() {
     let employeeResponse: EmployeesResponse = (<EmployeesResponse>await this.employeeService.getAllEmployees(this.pagingInfo.pageNumber, this.pagingInfo.pageSize));
     let employeelist = employeeResponse.employees;
-    console.log(employeeResponse);
+
+
     this.dataSource = new MatTableDataSource(employeelist);
     this.ELEMENT_DATA = employeelist;
     this.pagingInfo.totalResults = employeeResponse.pagingInfo.totalResults;
@@ -138,10 +157,11 @@ export class EmployeeListComponent implements OnInit {
 
     console.log(event);
 
-    let employeesResponse: EmployeesResponse = await this.employeeService.getAllEmployees(event.pageIndex + 1, event.pageSize);
+    let employeesResponse: EmployeesResponse = await this.employeeService.getAllEmployees(event.pageIndex + 1, event.pageSize, this.filter);
     this.dataSource.data = employeesResponse.employees;
     this.pagingInfo.pageSize = employeesResponse.pagingInfo.pageSize;
     this.pagingInfo.totalResults = employeesResponse.pagingInfo.totalResults;
+
 
   }
   deactivateEmployee(employee) {
@@ -161,9 +181,9 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   deleteEmployeeFromTableById(id) {
-    console.log(this.ELEMENT_DATA);
-    this.ELEMENT_DATA = this.dataSource.data;
-    console.log(this.ELEMENT_DATA);
+    // console.log(this.ELEMENT_DATA);
+    // this.ELEMENT_DATA = this.dataSource.data;
+    // console.log(this.ELEMENT_DATA);
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === id) {
         this.ELEMENT_DATA.splice(index, 1);

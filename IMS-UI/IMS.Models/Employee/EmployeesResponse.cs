@@ -11,5 +11,7 @@ namespace IMS_UI.IMS.Models
         public List<Employee> Employees { get; set; }
         public PagingInfo PagingInfo { get; set; }
 
+        public string filter { get; set; }
+
     }
 }

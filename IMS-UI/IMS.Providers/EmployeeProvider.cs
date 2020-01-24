@@ -65,7 +65,7 @@ namespace IMS_UI.IMS.Providers
             return apiParsedResponse;
         }
 
-        public async Task<EmployeesResponse> GetAllEmployee(string pageNumber, string pageSize)
+        public async Task<EmployeesResponse> GetAllEmployee(string filter,string pageNumber, string pageSize)
         {
             using (HttpClient http = new HttpClient())
             {
@@ -80,8 +80,15 @@ namespace IMS_UI.IMS.Providers
                            new MediaTypeWithQualityHeaderValue("application/json"));
                         _client.DefaultRequestHeaders.Authorization =
                             new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
-
-                            string query = $"?pageNumber={int.Parse(pageNumber)}&pageSize={int.Parse(pageSize)}";
+                        string query;
+                        if (filter == "undefined")
+                        {
+                            query = $"?pageNumber={int.Parse(pageNumber)}&pageSize={int.Parse(pageSize)}";
+                        }
+                        else
+                        {
+                            query = $"?filter={filter}&pageNumber={int.Parse(pageNumber)}&pageSize={int.Parse(pageSize)}";
+                        }
                             var response = await _client.GetAsync(uriBuilder.Uri+query);
                         return JsonConvert.DeserializeObject<EmployeesResponse>(
                            await response.Content.ReadAsStringAsync());

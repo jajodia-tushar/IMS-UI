@@ -25,11 +25,11 @@ namespace IMS_UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEmoloyee(string pageNumber, string pageSize)
+        public async Task<IActionResult> GetAllEmoloyee(string filter ,string pageNumber, string pageSize)
         {
             try
             {
-                var response = await _employeeProvider.GetAllEmployee(pageNumber,pageSize);
+                var response = await _employeeProvider.GetAllEmployee(filter,pageNumber,pageSize);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 

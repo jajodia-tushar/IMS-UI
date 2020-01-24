@@ -9,7 +9,7 @@ export class ItemConsumptionDetailsResponse extends Response{
 
 export class DateWiseItemConsumptionDetails {
     item : Item;
-    dateItemConsumption : DateItemConsumptions[];
+    dateItemConsumptions : DateItemConsumptions[];
 }
 
 export class DateItemConsumptions{

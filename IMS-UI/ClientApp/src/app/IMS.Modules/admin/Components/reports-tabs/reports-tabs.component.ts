@@ -91,7 +91,6 @@ export class ReportsTabsComponent implements OnInit {
     }
   }
 
-
   showItemConsumptionTable() {
     this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
@@ -100,21 +99,20 @@ export class ReportsTabsComponent implements OnInit {
     let toDate =
       this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].dataFromUser);
     
-    let data = this.reportsService.getItemConsumptionDetailedReport(fromDate,toDate,this.pageInfo.pageNumber,
-      this.pageInfo.pageSize)
-      console.log(data);
+    this.reportsService.getItemConsumptionDetailedReport(fromDate,toDate,this.pageInfo.pageNumber,
+      this.pageInfo.pageSize).subscribe(
+        data => {
           if (data.status == "Success") {
             let dataToDisplaytemp = []
-            console.log(data);
             data.dateWiseItemConsumptionDetails.forEach(
               data => {
                 dataToDisplaytemp.push({
                   "Item Name" : data.item.name,
-                  "Quantity Consumed" : data.dateItemConsumption.map( x => x.itemsConsumptionCount).reduce((a,b)=> a+b),
-                  "innerData": data.dateItemConsumption.map(
+                  "Quantity Consumed" : data.dateItemConsumptions.map( x => x.itemsConsumptionCount).reduce((a,b)=> a+b),
+                  "innerData": data.dateItemConsumptions.map(
                     x => {
                       return {
-                        "Date": x.date,
+                        "Date": new Date(x.date).toDateString(),
                         "Quantity": x.itemsConsumptionCount,
                       }
                     }),
@@ -130,6 +128,8 @@ export class ReportsTabsComponent implements OnInit {
           else {
             this.errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
           }
+          this.pageInfo = data.pagingInfo;
+        });
   }
   showPerDayConsumption() {
     this.refreshColumnsAndTables();    
@@ -169,7 +169,6 @@ export class ReportsTabsComponent implements OnInit {
         }
       });
   }
-
   showEmployeeOrdersTable(){
     this.refreshColumnsAndTables();    
     this.errorMessage = JSON.parse(JSON.stringify(""));
@@ -223,9 +222,6 @@ export class ReportsTabsComponent implements OnInit {
     );
     
   }
-
-  
-
   showVendorDataTable() {
     this.refreshColumnsAndTables()
     this.errorMessage = JSON.parse(JSON.stringify(""));

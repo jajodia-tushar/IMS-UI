@@ -70,58 +70,15 @@ export class ReportsService {
   }
 
   getItemConsumptionDetailedReport(fromDate : string, toDate : string, 
-    pageNumber : number, pageSize : number) : ItemConsumptionDetailsResponse{
-    let i : Item = new Item();
-    i.id = 1;
-    i.name = "Pen";
+    pageNumber : number, pageSize : number) : Observable<ItemConsumptionDetailsResponse>{
 
-    let dateItemConsumptions : DateItemConsumptions[] = [];
-    dateItemConsumptions.push(
-      {
-      date : "20200101",
-      itemsConsumptionCount : 10
-      },
-      {
-        date : "20200102",
-        itemsConsumptionCount : 10
-      }
-       ,
-      {
-        date : "20200103",
-        itemsConsumptionCount : 10
-      },
-      {
-        date : "20200104",
-        itemsConsumptionCount : 10
-      }
-    );
+    let params = new HttpParams();
 
-    let dateWiseItemConsumptionDetails : DateWiseItemConsumptionDetails[] = [];
-    dateWiseItemConsumptionDetails.push({
-      item : i,
-      dateItemConsumption : dateItemConsumptions
-    },
-    {
-      item : i,
-      dateItemConsumption : dateItemConsumptions
-    },
-    {
-      item : i,
-      dateItemConsumption : dateItemConsumptions
-    },
-    {
-      item : i,
-      dateItemConsumption : dateItemConsumptions
-    })
-
-    let result : ItemConsumptionDetailsResponse =  new ItemConsumptionDetailsResponse();
-    result.dateWiseItemConsumptionDetails = dateWiseItemConsumptionDetails;
-    result.pagingInfo = new PagingInfo();
-    result.pagingInfo.pageNumber = 1;
-    result.pagingInfo.pageSize = 10;
-    result.pagingInfo.totalResults = 10;
-    result.status = "Success";
-
-    return result;
+    params = params.append("fromDate", fromDate);
+    params = params.append("toDate", toDate);
+    params = params.append("pageNumber", pageNumber.toString());
+    params = params.append("pageSize", pageSize.toString());
+    return this.httpClient.
+    get<ItemConsumptionDetailsResponse>("api/reports/ItemConsumptionDetailReports",{params});
   }
 }

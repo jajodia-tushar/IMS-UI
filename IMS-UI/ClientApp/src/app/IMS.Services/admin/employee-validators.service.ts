@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EmployeeService } from '../employee/employee.service';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Response } from "src/app/IMS.Models/Response";
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,16 @@ export class EmployeeValidatorsService {
       return { cannotContainSpace: true }
     }
     return null;
+  }
+
+  patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (!control.value) {
+        return null;
+      }
+      const valid = regex.test(control.value);
+      return valid ? null : error;
+    };
   }
 
   async employeeEmailTakenValidator(userEmailControl: AbstractControl) {

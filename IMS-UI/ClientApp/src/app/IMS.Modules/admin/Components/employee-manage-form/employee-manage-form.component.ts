@@ -22,7 +22,7 @@ export class EmployeeManageFormComponent implements OnInit {
       firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
       lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
       email: ["", [Validators.required, Validators.email], [this.employeeValidators.employeeEmailTakenValidator.bind(this.employeeValidators)]],
-      contactNumber: ["", [Validators.minLength(10)]],
+      contactNumber: ["", [Validators.maxLength(12)]],
       temporaryCardNumber: ["", []],
       accessCardNumber: ["", []],
       isActive: [true, []]

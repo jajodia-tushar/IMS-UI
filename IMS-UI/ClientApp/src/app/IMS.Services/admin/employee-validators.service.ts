@@ -16,19 +16,43 @@ export class EmployeeValidatorsService {
     return null;
   }
 
-  // async emailTakenValidator(userEmailControl: AbstractControl) {
-  //   let response = await this.checkIfEmailDoesNotExists(userEmailControl.value);
-  //   return new Promise(resolve => {
-  //     setTimeout(() => {
-  //       if (!response) {
-  //         resolve({ emailNotAvailable: true });
-  //       } else {
-  //         resolve(null);
-  //       }
-  //     }, 2000);
-  //   });
+  async employeeEmailTakenValidator(userEmailControl: AbstractControl) {
+    let response = await this.checkIfEmailDoesNotExists(userEmailControl.value);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (!response) {
+          resolve({ emailNotAvailable: true });
+        } else {
+          resolve(null);
+        }
+      }, 2000);
+    });
 
-  // }
+  }
+  async employeeIdTakenValidator(id: AbstractControl) {
+    let response = await this.checkIfIdExistsOrNot(id.value);
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (!response) {
+          resolve({ employeeIdNotAvailable: true });
+        } else {
+          resolve(null);
+        }
+      }, 2000);
+    });
+
+  }
+
+  async checkIfIdExistsOrNot(id: string) {
+    let response = <Response>await this.employeeService.checkIdAlreadyExists(id)
+    if (response.status === "Success") {
+      return true;
+    }
+    else if (response.status === "Failure") {
+      return false;
+    }
+  }
 
   async checkIfEmailDoesNotExists(email: string) {
     let response = <Response>await this.employeeService.validateEmail(email)

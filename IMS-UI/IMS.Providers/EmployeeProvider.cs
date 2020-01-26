@@ -141,6 +141,25 @@ namespace IMS_UI.IMS.Providers
                 await response.Content.ReadAsStringAsync());
         }
 
+        public async Task<Response> IsUniqueEmployeeId(string employeeId)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
 
+                var response = await http.GetAsync("api/employee/IdExists?employeeId=" + employeeId);
+                return await ResultParser(response);
+            }
+        }
+
+        public async Task<Response> IsUniqueEmployeeEmail(string email)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                prepareClient(http);
+                var response = await http.GetAsync("api/employee/email?email=" + email);
+                return await ResultParser(response);
+            }
+        }
     }
 }

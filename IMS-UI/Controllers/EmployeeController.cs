@@ -41,6 +41,44 @@ namespace IMS_UI.Controllers
             }
         }
 
+        [HttpGet("IdExists")]
+        public async Task<IActionResult> IsUniqueEmployeeId(string employeeId)
+        {
+            try
+            {
+                var response = await _employeeProvider.IsUniqueEmployeeId(employeeId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
+        }
+
+        [HttpGet("email")]
+        public async Task<IActionResult> IsUniqueEmployeeEmail(string email)
+        {
+            try
+            {
+                var response = await _employeeProvider.IsUniqueEmployeeEmail(email);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
+        }
+
+
+
         [HttpPost]
         public async Task<IActionResult> AddEmployeeDetails([FromBody] Employee employee)
         {

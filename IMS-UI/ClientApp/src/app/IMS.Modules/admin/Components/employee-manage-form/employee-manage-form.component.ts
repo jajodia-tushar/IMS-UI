@@ -15,13 +15,13 @@ export class EmployeeManageFormComponent implements OnInit {
   createEmployeeForm: FormGroup;
   updateButtonText: string = "Update";
   submitButtonText: string = "Submit";
-  constructor(private formBuilder: FormBuilder, private employeeServive: EmployeeService, private employeeValidators: EmployeeValidatorsService, centeralizedDataService: CentralizedDataService) {
+  constructor(private formBuilder: FormBuilder, private employeeService: EmployeeService, private employeeValidators: EmployeeValidatorsService, centeralizedDataService: CentralizedDataService) {
 
     this.createEmployeeForm = formBuilder.group({
-      id: [, []],
+      id: [, [Validators.required], [this.employeeValidators.employeeIdTakenValidator.bind(this.employeeValidators)]],
       firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
       lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
-      email: ["", [Validators.required, Validators.email]],
+      email: ["", [Validators.required, Validators.email], [this.employeeValidators.employeeEmailTakenValidator.bind(this.employeeValidators)]],
       contactNumber: ["", [Validators.minLength(10)]],
       temporaryCardNumber: ["", []],
       accessCardNumber: ["", []],
@@ -34,6 +34,7 @@ export class EmployeeManageFormComponent implements OnInit {
   @Output() employeeCreated: EventEmitter<EmployeesResponse> = new EventEmitter<EmployeesResponse>();
   isEditEmployeeForm: boolean;
 
+
   async ngOnInit() {
     if (this.employeeDetails) {
       this.isEditEmployeeForm = this.employeeDetails ? true : false;
@@ -44,6 +45,7 @@ export class EmployeeManageFormComponent implements OnInit {
       let employeeDetail = this.employeeDetails;
       console.log(employeeDetail);
       this.createEmployeeForm.setValue(employeeDetail);
+      this.createEmployeeForm.get("id").disable();
     }
   }
   get id() {
@@ -63,14 +65,14 @@ export class EmployeeManageFormComponent implements OnInit {
   async editEmployeeDetails() {
     console.log("call on edit eemployee")
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
-    let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeServive.editEmployee(employee);
+    let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.editEmployee(employee);
     this.employeeEditted.emit(edittedEmployee);
     console.log(employee);
   }
 
   async createNewEmployee() {
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
-    let createdEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeServive.createEmployee(employee);
+    let createdEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.createEmployee(employee);
     this.employeeCreated.emit(createdEmployee);
   }
 

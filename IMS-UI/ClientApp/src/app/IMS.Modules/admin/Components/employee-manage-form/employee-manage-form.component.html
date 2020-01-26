@@ -4,7 +4,9 @@
 
     <div class="one-row">
         <mat-form-field>
-            <input matInput formControlName="id" placeholder="Id" type="number">
+            <input matInput formControlName="id" placeholder="Id">
+            <mat-error *ngIf="id.errors?.employeeIdNotAvailable">Employee ID Already Taken</mat-error>
+            <mat-hint *ngIf="id.pending">Checking for Uniqueness</mat-hint>
         </mat-form-field>
         <mat-form-field floatLabel="auto">
             <input matInput placeholder="First Name" formControlName="firstname" required>

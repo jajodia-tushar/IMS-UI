@@ -43,5 +43,9 @@ export class EmployeeService {
     return this.http.delete<Response>("api/employee", { params }).toPromise();
   }
 
+  checkIdAlreadyExists(id: string) {
+    return this.http.get('api/employee/IdExists?employeeId=' + id).toPromise()
+  }
+
 
 }

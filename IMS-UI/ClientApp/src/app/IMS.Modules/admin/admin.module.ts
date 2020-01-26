@@ -65,13 +65,7 @@ import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactiv
     ItemListComponent,
     ItemManageDialogComponent,
     ItemManageFormComponent,
-    ItemDeactivateDialogComponent
-
-      EmployeeManagementComponent,
-      EmployeeListComponent,
-      EmployeeManageDialogComponent,
-      EmployeeManageFormComponent
-    
+    ItemDeactivateDialogComponent,
     EmployeeManagementComponent,
     EmployeeListComponent,
     EmployeeManageDialogComponent,
@@ -83,6 +77,6 @@ import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactiv
     AdminRoutingModule,
     SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
+  entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
 })
 export class AdminModule { }

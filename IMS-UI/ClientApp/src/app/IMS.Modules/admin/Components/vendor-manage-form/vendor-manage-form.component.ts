@@ -51,8 +51,10 @@ export class VendorManageFormComponent implements OnInit {
     this.vendorEditted.emit(editedVendor);
   }
   async onConfirm() {
+    this.confirmButtonText = "";
     let deletedResponse: Response = <Response>await this._vendorService.deactivateVendor(this.vendorDetails.id, false);
     this.vendorDeleted.emit(deletedResponse);
+    
   }
   
 

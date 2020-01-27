@@ -56,7 +56,8 @@
 }
 
   .action-buttons-yes .mat-raised-button {
-    min-height: 30px;
+    min-height: 39px;
+    min-width:64px;
     border: 0.5px solid;
     border-radius: 5px;
     padding: 1px 10px;

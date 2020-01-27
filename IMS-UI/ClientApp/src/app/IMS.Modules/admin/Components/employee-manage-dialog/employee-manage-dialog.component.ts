@@ -12,7 +12,7 @@ export class EmployeeManageDialogComponent implements OnInit {
   employeeData: Employee;
   constructor(private dialogRef: MatDialogRef<EmployeeManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.employeeData = data;
-    console.log(data)
+
   }
 
   ngOnInit() {

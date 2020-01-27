@@ -24,7 +24,9 @@ export class EmployeeService {
   }
 
   validateEmail(email: string) {
-    return this.http.get('api/employee/email?email=' + email).toPromise();
+    let params = new HttpParams();
+    params = params.append("email", email);
+    return this.http.get('api/employee/email', { params }).toPromise();
   }
 
   createEmployee(employee: Employee): Promise<EmployeesResponse> {
@@ -43,8 +45,10 @@ export class EmployeeService {
     return this.http.delete<Response>("api/employee", { params }).toPromise();
   }
 
-  checkIdAlreadyExists(id: string) {
-    return this.http.get('api/employee/IdExists?employeeId=' + id).toPromise()
+  checkIdAlreadyExists(employeeId: string) {
+    let params = new HttpParams();
+    params = params.append("id", employeeId);
+    return this.http.get('api/employee/IdExists', { params }).toPromise();
   }
 
 

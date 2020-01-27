@@ -18,7 +18,7 @@ table {
   width: 30%;
 }
 
-.mat-input-flex.mat-form-field-flex {
+:host ::ng-deep .mat-input-flex.mat-form-field-flex {
   border: 1px solid black;
 }
 

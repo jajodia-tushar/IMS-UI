@@ -41,9 +41,7 @@ export class EmployeeManageFormComponent implements OnInit {
 
     }
     if (this.isEditEmployeeForm) {
-      console.log("inside iseditedEmployeeform")
       let employeeDetail = this.employeeDetails;
-      console.log(employeeDetail);
       this.createEmployeeForm.setValue(employeeDetail);
       this.createEmployeeForm.get("id").disable();
     }
@@ -63,11 +61,11 @@ export class EmployeeManageFormComponent implements OnInit {
     return this.createEmployeeForm.get('email');
   }
   async editEmployeeDetails() {
-    console.log("call on edit eemployee")
+
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
     let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.editEmployee(employee);
     this.employeeEditted.emit(edittedEmployee);
-    console.log(employee);
+
   }
 
   async createNewEmployee() {

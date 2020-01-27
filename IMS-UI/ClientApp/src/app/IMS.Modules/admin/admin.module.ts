@@ -74,8 +74,7 @@ import { VendorManageFormComponent } from './Components/vendor-manage-form/vendo
     EmployeeListComponent,
     EmployeeManageDialogComponent,
     EmployeeManageFormComponent,
-    DeactivateDialogcomponentEmployeeComponent
-  ],
+    DeactivateDialogcomponentEmployeeComponent,
       StoreUpdateComponent,
       InvoiceEditorComponent,
       NotificationsComponent,
@@ -91,7 +90,6 @@ import { VendorManageFormComponent } from './Components/vendor-manage-form/vendo
     AdminRoutingModule,
     SharedModule
   ],
-  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent]
-  entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
+  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
 })
 export class AdminModule { }

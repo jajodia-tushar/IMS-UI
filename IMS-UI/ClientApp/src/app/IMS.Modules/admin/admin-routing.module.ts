@@ -40,8 +40,7 @@ const routes: Routes = [
       }
       { path: 'Notifications', component: NotificationsComponent },
       { path: 'EditInvoice', component: InvoiceEditorComponent },
-      { path: 'Vendors', component: VendorManagementComponent }
-     
+      { path: 'Vendors', component: VendorManagementComponent },
       { path: 'Items', component: ItemManagementComponent }
     ]
   }

@@ -1,8 +1,6 @@
 import { Employee } from './Employee';
-import {Error} from '../Error';
+import { Response } from '../Shared/Response';
 
-export class EmployeeResponse {
+export class EmployeeResponse extends Response {
   employee: Employee;
-  error: Error;
-  status: String;
 }

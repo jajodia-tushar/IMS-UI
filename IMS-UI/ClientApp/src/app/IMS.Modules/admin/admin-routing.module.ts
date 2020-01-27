@@ -9,6 +9,7 @@ import { ReportsComponent } from './Components/reports/reports.component';
 import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-editor.component';
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
+import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'Dashboard', component: MainnavComponent },
       { path: 'Store', component: StoreComponent },
       { path: 'Users', component: UserManagementComponent },
+      { path: 'Employee', component: EmployeeManagementComponent },
       { path: 'Reports', component: ReportsComponent },
       { path: 'Notifications', component: NotificationsComponent },
       { path: 'EditInvoice', component: InvoiceEditorComponent },

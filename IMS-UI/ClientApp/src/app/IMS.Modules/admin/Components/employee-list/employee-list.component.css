@@ -1,0 +1,95 @@
+table {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.filter-input {
+  margin-left: 1%;
+  padding: 5px;
+  border: 2px solid #222437;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #222437;
+  color: white;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 30%;
+}
+
+:host ::ng-deep .mat-input-flex.mat-form-field-flex {
+  border: 1px solid black;
+}
+
+table {
+  position: absolute;
+  border-collapse: separate !important;
+  border-radius: 8px;
+  background-color: #222437;
+  border: 8px solid #222437;
+  min-height: 200px;
+  min-height: 201px;
+}
+
+.mat-cell {
+  color: white;
+}
+
+.mat-header-cell {
+  color: #9597ab;
+  font-size: medium;
+}
+
+#add-employee {
+  position: absolute;
+  right: 10px;
+  border: 0.5px solid;
+  border-radius: 5px;
+  padding: 1px 10px;
+  border-color: #42e6a4;
+}
+
+:host ::ng-deep .mat-sort-header-arrow {
+  color: #fff !important;
+  /* opacity: 1 !important; */
+}
+
+:host td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 0px;
+  border-bottom-style: solid;
+}
+
+:host td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding-left: 16px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+:host td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 16px;
+}
+
+.filtering-section {
+  display: flex;
+}
+.employee-table {
+  height: 100%;
+}
+
+.table-paginator {
+  background-color: brown;
+}
+
+.mat-paginator {
+  display: block;
+  position: absolute;
+  top: -52px;
+}

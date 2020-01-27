@@ -9,5 +9,12 @@ namespace IMS_UI.IMS.Providers.Interfaces
     public interface IEmployeeProvider
     {
         Task<EmployeeResponse> ValidateEmployee(string employeeId);
+        Task<EmployeesResponse> GetAllEmployee(string filter,string pageNumber, string pageSize);
+        Task<EmployeesResponse> AddEmployee(Employee employee);
+        Task<EmployeesResponse> EditEmployee(Employee employee);
+
+        Task<Response> DeactivateEmployee(string employeeId, bool isHardDelete);
+        Task<Response> IsUniqueEmployeeEmail(string email);
+        Task<Response> IsUniqueEmployeeId(string employeeId);
     }
 }

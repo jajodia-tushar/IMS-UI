@@ -35,24 +35,31 @@ export class AdminHeader implements OnDestroy, OnInit {
     color: "#46b5d1",
 
   },
+
+  {
+    tab: "Employee",
+    icon: "person",
+    color: "#faf5e4",
+
+  },
+  {
+    tab: "Items",
+    icon: "local_grocery_store",
+    color: "#a278b5"
+
+  },
   {
     tab: "Reports",
     icon: "bar_chart",
     color: "#ffd800"
 
-    },
-    {
-      tab: "Items",
-      icon: "bar_chart",
-      color: "#ffd802"
-  
-      },
-    {
-      tab: "Notifications",
-      icon: "notifications_active",
-      color: "#ff1111"
-    }]
-  
+  },
+  {
+    tab: "Notifications",
+    icon: "notifications_active",
+    color: "#ff1111"
+  }]
+
   async ngOnInit() {
     await this.centralizedRepo.getLoggedInUser();
     this.name = this.centralizedRepo.getUser().firstname + " " +

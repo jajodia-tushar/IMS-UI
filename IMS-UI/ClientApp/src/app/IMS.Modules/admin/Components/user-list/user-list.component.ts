@@ -19,20 +19,20 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'role.name', 'actions'];
   ELEMENT_DATA: User[];
-  isSuperAdmin : boolean;
+  isSuperAdmin: boolean;
   dataSource
 
-  @Input() event:User;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  
-  constructor(private userManagementService:UserManagementService,
+  @Input() event: User;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor(private userManagementService: UserManagementService,
     public dialog: MatDialog,
     private centralizedRepo: CentralizedDataService,
     private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     await this.setUsers();
-    if(this.centralizedRepo.getUser().role.id==4)
+    if (this.centralizedRepo.getUser().role.id == 4)
       this.isSuperAdmin = true;
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
@@ -44,8 +44,8 @@ export class UserListComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.dataSource.filterPredicate = (data: any, filter) => {
-      const dataStr =JSON.stringify(data).toLowerCase();
-      return dataStr.indexOf(filter) != -1; 
+      const dataStr = JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filter) != -1;
     }
   }
 
@@ -62,37 +62,37 @@ export class UserListComponent implements OnInit {
     dialogConfig.data = null;
     dialogConfig.panelClass = 'dialog-user-manage';
     dialogConfig.disableClose = true;
-    const dialogRef = this.dialog.open(UserManageDialogComponent,dialogConfig);
+    const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result==false){
-        showMessage(this.snackBar,2,"User Creation Failed",'warn');
+      if (result == false) {
+        showMessage(this.snackBar, 2, "User Creation Failed", 'warn');
       }
-      else if(result=="cancelled"){
+      else if (result == "cancelled") {
         //don't show any message.
       }
-      else if('username' in result){
-          if(this.isSuperAdmin){
-            this.ELEMENT_DATA.push(<User>result);
-            this.dataSource.data = this.ELEMENT_DATA;
-            showMessage(this.snackBar,2,"User Was Created Successfully",'success');
-          }
-          else{
-            showMessage(this.snackBar,2,"User was Created and is up for Review By SuperAdmin",'success');
-          }
+      else if ('username' in result) {
+        if (this.isSuperAdmin) {
+          this.ELEMENT_DATA.push(<User>result);
+          this.dataSource.data = this.ELEMENT_DATA;
+          showMessage(this.snackBar, 2, "User Was Created Successfully", 'success');
+        }
+        else {
+          showMessage(this.snackBar, 2, "User was Created and is up for Review By SuperAdmin", 'success');
+        }
       }
-      else{
+      else {
         console.log('inside else block of user creation dialog')
       }
     });
   }
 
-  editUserDetails(user:User){
+  editUserDetails(user: User) {
 
     this.openUserEditDialog(user);
   }
 
-  openUserEditDialog(data:User) {
+  openUserEditDialog(data: User) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     dialogConfig.panelClass = 'dialog-user-manage';
@@ -100,20 +100,20 @@ export class UserListComponent implements OnInit {
     const dialogRef = this.dialog.open(UserManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result==false){
-        showMessage(this.snackBar,2,"User Updation Failed",'warn');
+      if (result == false) {
+        showMessage(this.snackBar, 2, "User Updation Failed", 'warn');
       }
-      else if(result=="cancelled"){
+      else if (result == "cancelled") {
         //don't show any message.
       }
-      else if('username' in result){
+      else if ('username' in result) {
         this.editUserInTable(result);
       }
 
     });
   }
 
-  deactivateUser(user){
+  deactivateUser(user) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     dialogConfig.panelClass = 'dialog-user-manage'
@@ -121,44 +121,45 @@ export class UserListComponent implements OnInit {
     const dialogRef = this.dialog.open(DeactivateDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result==true){
+      if (result == true) {
         this.removeUserFromTableById(user.id);
-        showMessage(this.snackBar,2,"User Account was Deleted Successfully",'success');
+        showMessage(this.snackBar, 2, "User Account was Deleted Successfully", 'success');
       }
-      else if(result==false){
-        showMessage(this.snackBar,2,"Deleting User failed",'warn');
+      else if (result == false) {
+        showMessage(this.snackBar, 2, "Deleting User failed", 'warn');
       }
-      else if(result=="cancelled"){
+      else if (result == "cancelled") {
         //don't show any message.
       }
     });
 
-  } 
-
-  removeUserFromTableById(id){
-    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
-      if ( this.ELEMENT_DATA[index].id === id) {
-        this.ELEMENT_DATA.splice(index, 1); 
-      }
-   }
-    this.dataSource.data = this.ELEMENT_DATA;  
   }
 
-  editUserInTable(user){
-    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
-      if ( this.ELEMENT_DATA[index].id === user.id) {
+  removeUserFromTableById(id) {
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id === id) {
+        this.ELEMENT_DATA.splice(index, 1);
+        break;
+      }
+    }
+    this.dataSource.data = this.ELEMENT_DATA;
+  }
+
+  editUserInTable(user) {
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id === user.id) {
         this.ELEMENT_DATA[index] = user;
         break;
       }
-   }
+    }
     this.dataSource.data = this.ELEMENT_DATA;
-    showMessage(this.snackBar,2,"User Details Updated Successfully",'success');
+    showMessage(this.snackBar, 2, "User Details Updated Successfully", 'success');
   }
 
-  async setUsers(){
-    let users : User[] =  (<Users>await this.userManagementService.getAllUsers()).users;
+  async setUsers() {
+    let users: User[] = (<Users>await this.userManagementService.getAllUsers()).users;
     this.ELEMENT_DATA = users;
   }
 
-  
+
 }

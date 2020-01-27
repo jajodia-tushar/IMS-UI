@@ -3,9 +3,9 @@ export class Employee {
   firstname: string;
   lastname: string;
   email: string;
-  mobileNumber?: any;
-  tCardNo?: any;
-  accessCardNo?: any;
+  contactNumber?: any;
+  temporaryCardNumber?: any;
+  accessCardNumber?: any;
   isActive: boolean;
 }
 

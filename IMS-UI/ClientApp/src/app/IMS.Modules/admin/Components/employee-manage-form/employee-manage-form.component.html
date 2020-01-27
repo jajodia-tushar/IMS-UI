@@ -1,0 +1,72 @@
+<form class="form-container" [formGroup]="createEmployeeForm" (ngSubmit)="submitForm()" autocomplete="off">
+
+
+
+    <div class="one-row">
+        <mat-form-field>
+            <input matInput formControlName="id" placeholder="Id">
+            <mat-error *ngIf="id.errors?.employeeIdNotAvailable">Employee ID Already Taken</mat-error>
+            <mat-hint *ngIf="id.pending">Checking for Uniqueness</mat-hint>
+        </mat-form-field>
+        <mat-form-field floatLabel="auto">
+            <input matInput placeholder="First Name" formControlName="firstname" required>
+            <mat-error *ngIf="firstname.errors?.cannotContainSpace">First Name can not contain space.</mat-error>
+            <mat-error *ngIf="firstname.errors?.maxlength">Max Length{{firstname.errors.maxlength.requiredLength}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="one-row">
+        <mat-form-field hideRequiredMarker="true" floatLabel="auto">
+            <input matInput placeholder="Last Name" formControlName="lastname">
+            <mat-error *ngIf="lastname.errors?.cannotContainSpace">Last Name can not contain space.</mat-error>
+            <mat-error *ngIf="lastname.errors?.maxlength">Max Length{{lastname.errors.maxlength.requiredLength}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="contactNumber" placeholder="Mobile No">
+            <!-- <mat-error *ngIf="contactNumber.errors?.maxlength">Max
+                Length{{contactNumber.errors.maxlength.requiredLength}}</mat-error> -->
+            <mat-hint>Must be of 10 digit</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="one-row">
+        <mat-form-field>
+            <input matInput formControlName="temporaryCardNumber" placeholder="Temporary Card No" type="text">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput formControlName="accessCardNumber" placeholder="Access Card No" type="number">
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="one-row">
+
+
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput placeholder="Email" formControlName="email" required>
+            <mat-error *ngIf="email.errors?.emailNotAvailable">Email Already Taken</mat-error>
+            <mat-error *ngIf="email.invalid">Invalid Email</mat-error>
+            <mat-hint *ngIf="email.pending">Checking if Email exists.</mat-hint>
+        </mat-form-field>
+    </div>
+    <br><br>
+    <div class="action-buttons one-row">
+        <div class="position-of-buttons">
+            <button *ngIf="isEditEmployeeForm==null" [disabled]="!createEmployeeForm.valid" mat-button type="submit"
+                class="submit-update">
+                {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
+            </button>
+            <button *ngIf="isEditEmployeeForm==true" [disabled]="!createEmployeeForm.valid" mat-button type="submit"
+                class="submit-update">
+                {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
+            </button>
+            <button *ngIf="isEditEmployeeForm==null" mat-button type="button" (click)="cancelCreate()"
+                class="cancel">Cancel</button>
+            <button *ngIf="isEditEmployeeForm==true" mat-button type="button" (click)="cancelUpdate()"
+                class="cancel">Cancel</button>
+        </div>
+    </div>
+</form>

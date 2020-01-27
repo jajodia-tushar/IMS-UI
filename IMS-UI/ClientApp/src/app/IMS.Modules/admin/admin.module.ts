@@ -30,6 +30,11 @@ import { ItemListComponent } from './Components/item-list/item-list.component';
 import { ItemManageDialogComponent } from './Components/item-manage-dialog/item-manage-dialog.component';
 import { ItemManageFormComponent } from './Components/item-manage-form/item-manage-form.component';
 import { ItemDeactivateDialogComponent } from './Components/item-deactivate-dialog/item-deactivate-dialog.component';
+import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
+import { EmployeeListComponent } from './Components/employee-list/employee-list.component';
+import { EmployeeManageDialogComponent } from './Components/employee-manage-dialog/employee-manage-dialog.component';
+import { EmployeeManageFormComponent } from './Components/employee-manage-form/employee-manage-form.component';
+import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
 
 
 @NgModule({
@@ -60,13 +65,18 @@ import { ItemDeactivateDialogComponent } from './Components/item-deactivate-dial
     ItemListComponent,
     ItemManageDialogComponent,
     ItemManageFormComponent,
-    ItemDeactivateDialogComponent
+    ItemDeactivateDialogComponent,
+    EmployeeManagementComponent,
+    EmployeeListComponent,
+    EmployeeManageDialogComponent,
+    EmployeeManageFormComponent,
+    DeactivateDialogcomponentEmployeeComponent
   ],
   imports: [
     MaterialModule,
-      AdminRoutingModule,
-      SharedModule
+    AdminRoutingModule,
+    SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent]
+  entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
 })
 export class AdminModule { }

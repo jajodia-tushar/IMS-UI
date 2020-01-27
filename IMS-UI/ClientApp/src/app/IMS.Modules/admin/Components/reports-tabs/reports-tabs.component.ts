@@ -60,12 +60,10 @@ export class ReportsTabsComponent implements OnInit {
 
   async ngOnInit() {
     await this.initializeEmptyData();
-
     this.searchButtonClicked();
   }
 
   tabChanged(event: Event) {
-    this.refreshColumnsAndTables();
     this.searchButtonClicked();
   }
 
@@ -326,35 +324,15 @@ export class ReportsTabsComponent implements OnInit {
           item.reportsFilterOptions[0].dataFromUser = this.locationCode;
           item.reportsFilterOptions[1].dataFromUser = this.colour; 
         }
-
-        if(item.reportName == "Vendor Orders"){
-          item.reportsFilterOptions[1].endDate = new Date();
-          item.reportsFilterOptions[2].endDate = new Date();
-          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
-          item.reportsFilterOptions[2].dataFromUser = this.toDate;
-        }
-
-        if(item.reportName == "Employee Orders"){
-          item.reportsFilterOptions[1].endDate = new Date();
-          item.reportsFilterOptions[2].endDate = new Date();
-          item.reportsFilterOptions[1].dataFromUser = this.fromDate;
-          item.reportsFilterOptions[2].dataFromUser = this.toDate;
-        }
-
-        if(item.reportName == "Per Day Consumption"){
-          item.reportsFilterOptions[0].endDate = new Date();
-          item.reportsFilterOptions[1].endDate = new Date();
-          item.reportsFilterOptions[0].dataFromUser = this.fromDate;
-          item.reportsFilterOptions[1].dataFromUser = this.toDate;
-        }
-
-        if(item.reportName == "Item Consumption"){
-          item.reportsFilterOptions[0].endDate = new Date();
-          item.reportsFilterOptions[1].endDate = new Date();
-          item.reportsFilterOptions[0].dataFromUser = this.fromDate;
-          item.reportsFilterOptions[1].dataFromUser = this.toDate;
-        }
-
+        item.reportsFilterOptions.forEach(
+          element =>{
+            if(element.placeHolderName == "FromDate")
+              element.dataFromUser = this.fromDate;
+            
+            if(element.placeHolderName == "ToDate"){
+              element.dataFromUser = this.toDate;
+            }
+          });
       }
     )
 

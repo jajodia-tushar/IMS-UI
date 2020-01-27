@@ -28,7 +28,6 @@ export class ItemListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.dataSource.sort = this.sort;
-    //console.log(this.ELEMENT_DATA)
   }
 
   applyFilter(filterValue: string) {

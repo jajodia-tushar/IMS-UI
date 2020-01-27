@@ -75,7 +75,6 @@ export class RagStatusComponent implements OnInit {
 
   ngAfterViewInit() {
     if (this.ragData != null) {
-      console.log(this.ragData);
       this.generateRagChart(this.ragData, this.router);
     }
 

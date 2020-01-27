@@ -93,8 +93,6 @@ export class BarChartComponent implements OnInit {
 
 
   convertDataModel(itemwiseAnalysisData: ItemWiseAnalysisResponse) {
-    console.log(itemwiseAnalysisData);
-    console.log(this.randomColorGenerator.getRandomColor(itemwiseAnalysisData.itemConsumptions.length))
     return {
       labels: itemwiseAnalysisData.itemConsumptions.map((data, index, array) => {
 

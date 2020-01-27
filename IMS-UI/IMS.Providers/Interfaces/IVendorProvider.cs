@@ -16,5 +16,9 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<Response> VendorOrderReject(int orderId);
         Task<VendorResponse> GetAllVendors();
         Task<VendorOrderResponse> GetVendorOrderByOrderId(int OrderId);
+
+        Task<VendorResponse> AddVendor(Vendor vendor);
+        Task<VendorResponse> EditVendor(Vendor vendor);
+        Task<Response> DeactivateVendor(int vendorId, bool isHardDelete);
     }
 }

@@ -1,0 +1,66 @@
+.one-row{
+  margin:5px 0px;
+}
+.one-row-input{
+  margin:0px 10px;
+}
+.address-position {
+  width: 96%;
+  margin-left: 10px
+}
+.address-size{
+  min-height:75px;
+}
+.table-header {
+  color: #9597ab;
+  font-size: medium;
+}
+
+.mat-button.mat-accent[disabled], .mat-button.mat-primary[disabled], .mat-button.mat-warn[disabled], .mat-button[disabled][disabled], .mat-icon-button.mat-accent[disabled], .mat-icon-button.mat-primary[disabled], .mat-icon-button.mat-warn[disabled], .mat-icon-button[disabled][disabled], .mat-stroked-button.mat-accent[disabled], .mat-stroked-button.mat-primary[disabled], .mat-stroked-button.mat-warn[disabled], .mat-stroked-button[disabled][disabled] {
+  color: slategray;
+  border: 0.5px solid slategray;
+}
+
+[type=submit]:not(:disabled) {
+  color: white;
+  border: 0.5px solid aquamarine;
+}
+.action-buttons {
+  position: relative;
+  margin-top:15%;
+}
+
+.position-of-buttons {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+}
+
+  .position-of-buttons .submit-update {
+    height: 37px;
+    position: absolute;
+    min-height: 37px;
+    min-width: 75px;
+    right: 72px;
+  }
+  
+
+.cancel {
+  height: 40px;
+  position: relative;
+  min-height: 39px;
+  min-width: 30px;
+}
+.action-buttons-yes {
+  float: right;
+}
+
+  .action-buttons-yes .mat-raised-button {
+    min-height: 30px;
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
+    color: white;
+    background-color: #1c1e2f;
+  }

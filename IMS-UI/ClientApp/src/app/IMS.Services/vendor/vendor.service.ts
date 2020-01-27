@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { VendorResponse } from 'src/app/IMS.Models/Vendor/VendorResponse';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { Observable } from 'rxjs';
 import { VendorOrderResponse } from 'src/app/IMS.Models/Vendor/VendorOrderResponse';
 import { COLUMN_DATA, COLUMN_DATA2 } from 'src/app/IMS.Models/Vendor/Mock';
 import { Response } from 'src/app/IMS.Models/Shared/Response';
+import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
 import { SingleVendorOrderResponse } from 'src/app/IMS.Models/Vendor/SingleVendorOrderResponse';
 
 
@@ -27,6 +28,17 @@ export class VendorService {
     return this.http.get<VendorOrderResponse>("api/vendor/orders", { params });
   }
 
+  createVendor(vendor: Vendor): Promise<VendorResponse> {
+    return this.http.post<VendorResponse>("api/Vendor", vendor).toPromise()
+  }
+  EditVendor(vendor: Vendor): Promise<VendorResponse> {
+    console.log(vendor)
+    return this.http.put<VendorResponse>("api/Vendor", vendor).toPromise()
+  }
+  deactivateVendor(vendorId: any, isHardDelete: boolean): Promise<Response> {
+
+    return this.http.delete<Response>("api/Vendor/" + vendorId + "?isHardDelete=" + isHardDelete).toPromise();
+  }
 
   getAllVendors() {
     return this.http.get<VendorResponse>("api/Vendor");

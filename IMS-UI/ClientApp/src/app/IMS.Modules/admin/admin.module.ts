@@ -37,6 +37,8 @@ import { EmployeeManageFormComponent } from './Components/employee-manage-form/e
 import { DeactivateDialogcomponentEmployeeComponent } from './Components/deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
 import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
 import { VendorListComponent } from './Components/vendor-list/vendor-list.component';
+import { VendorManageDialogComponent } from './Components/vendor-manage-dialog/vendor-manage-dialog.component';
+import { VendorManageFormComponent } from './Components/vendor-manage-form/vendor-manage-form.component';
 
 
 @NgModule({
@@ -79,13 +81,17 @@ import { VendorListComponent } from './Components/vendor-list/vendor-list.compon
       NotificationsComponent,
       ImageDialogComponent,
       VendorManagementComponent,
-      VendorListComponent
+      VendorListComponent,
+      VendorManageDialogComponent,
+      VendorManageFormComponent,
+     
     ],
   imports: [
     MaterialModule,
     AdminRoutingModule,
     SharedModule
   ],
+  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent]
   entryComponents: [UserManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
 })
 export class AdminModule { }

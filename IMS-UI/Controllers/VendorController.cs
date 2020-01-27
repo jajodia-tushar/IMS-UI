@@ -43,6 +43,54 @@ namespace IMS_UI.Controllers
 
         }
         
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody]Vendor vendor)
+        {
+            try
+            {
+                var response = await _vendorProvider.AddVendor(vendor);
+                if(response.Error != null && response.Error.ErrorCode==401 )
+                    _sessionManager.ClearSession();
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] Vendor vendor)
+        {
+            try
+            {
+                var response = await _vendorProvider.EditVendor(vendor);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpDelete("{vendorId}")]
+        public async Task<IActionResult> DeactivateVendor(int vendorId, bool isHardDelete)
+        {
+            try
+            {
+                var response = await _vendorProvider.DeactivateVendor(vendorId, isHardDelete);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
 
         // GET: api/Vendor/orders
         [HttpGet("orders")]

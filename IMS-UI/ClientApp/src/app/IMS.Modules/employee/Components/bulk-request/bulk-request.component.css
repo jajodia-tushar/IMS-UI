@@ -73,6 +73,9 @@
 
 .Add-icon {
     margin-top: 0%;
+    color: #f5f5f5;
+    background-color: inherit;
+    border: 1px solid slategrey;
 }
 
 .action-buttons {   
@@ -90,12 +93,6 @@
     position: relative;
     min-height: 39px;
     min-width: 30px;
-}
-
-.mat-raised-button {
-    color: #f5f5f5;
-    background-color: inherit;
-    border: 1px solid slategrey;
 }
 
 [type=submit]:not(:disabled) {

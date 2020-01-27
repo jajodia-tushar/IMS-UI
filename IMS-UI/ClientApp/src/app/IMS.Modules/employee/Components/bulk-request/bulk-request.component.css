@@ -34,8 +34,8 @@
 .table-height {
     min-height: 300px;
     max-height: 300px;
-    overflow-y: scroll;
     flex-shrink: 1;
+    margin-bottom: 10px;
 }
 
 .table-height::-webkit-scrollbar {
@@ -43,25 +43,13 @@
     width: 10px;
 }
 
-/* Track */
 .table-height::-webkit-scrollbar-track {
     background: #f1f1f1;
-}
-
-/* Handle */
-.table-height::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-/* Handle on hover */
-.table-height::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 5% 0;
 }
-
 
 .table-size {
     background-color: #1f2132;
@@ -82,7 +70,6 @@
 .delete-icon-size {
     font-size: 28px !important;
 }
-
 
 .Add-icon {
     margin-top: 0%;
@@ -116,20 +103,19 @@
     border: 0.5px solid aquamarine;
 }
 
-:host ::ng-deep .mat-column-itemName  {
-    width: 20% !important;
-}
-
-:host ::ng-deep .mat-column-requestQuantity  {
-    width: 20% !important;
-}
-
-:host ::ng-deep .mat-column-action  {
-    width: 10% !important;
+:host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 20px;
 }
 
 
+@media(min-height: 400px)  {
+    .table-height  {
+        overflow-y: scroll;
+    }
+}
 
-:host ::ng-deep .mat-column-ItemName div.mat-form-field-infix  {
-    width: 33% !important;
+@media(max-width: 700px)  {
+    .table-height  {
+        width: fit-content;
+    }
 }

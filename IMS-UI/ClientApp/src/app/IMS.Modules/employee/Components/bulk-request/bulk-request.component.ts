@@ -27,6 +27,7 @@ export class BulkRequestComponent implements OnInit {
   Items: Item[] = [];
   date: Date;
   reason: string;
+  buttonName: string="Submit";
 
   orderMessage: OrderMessage = new OrderMessage;
 
@@ -86,6 +87,7 @@ export class BulkRequestComponent implements OnInit {
   }
 
   Send() {
+    this.buttonName="";
     let errorRowIndex = this.rowValidation();
     if(errorRowIndex === -1)  {
       this.createRequest();
@@ -110,6 +112,7 @@ export class BulkRequestComponent implements OnInit {
         });
     }
     else  {
+      this.buttonName="Submit";
       if (this.dataSourceItems[errorRowIndex].item.name == "")
         showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
       else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)

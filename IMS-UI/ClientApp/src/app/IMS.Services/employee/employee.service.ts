@@ -47,7 +47,7 @@ export class EmployeeService {
 
   checkIdAlreadyExists(employeeId: string) {
     let params = new HttpParams();
-    params = params.append("id", employeeId);
+    params = params.append("employeeId", employeeId);
     return this.http.get('api/employee/IdExists', { params }).toPromise();
   }
 

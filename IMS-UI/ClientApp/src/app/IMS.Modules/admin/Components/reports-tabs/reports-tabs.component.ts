@@ -333,8 +333,7 @@ export class ReportsTabsComponent implements OnInit {
               element.dataFromUser = this.toDate;
             }
           });
-      }
-    )
+      });
 
     await this.getRAGReportDropDownList().then(
       data => {

@@ -60,7 +60,7 @@ export class BulkRequestComponent implements OnInit {
     )
     this.renderTable();
 
-    this.orderMessage.imageUrl = "";
+    this.orderMessage.imageUrl = "../../../../../assets/accept.svg";
     this.orderMessage.greetingText = "Request Sent";
     this.orderMessage.message = "Your request has been sent and is waiting for approval";
     this.orderMessage.notification = "You will be notified once your order is approved"

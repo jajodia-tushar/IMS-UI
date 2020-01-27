@@ -44,6 +44,19 @@ export class BulkRequestComponent implements OnInit {
     this.employeeID = datas.id;
   }
 
+  validForm()  {
+    let errorRowIndex = this.rowValidation();
+    if(this.date == null || this.reason == null)
+      return false;
+    if(this.dataSourceItems.length == 0)
+      return false;
+    if(errorRowIndex == -1)
+      return true;
+    if(errorRowIndex < this.dataSourceItems.length)
+      return false;
+    return true;
+  }
+
   DeleteRow(row_obj) {
     let index = this.dataSourceItems.indexOf(row_obj);
     if (index != -1) {
@@ -180,10 +193,8 @@ export class BulkRequestComponent implements OnInit {
       (e.key === 'v' && e.metaKey === true) || // Allow: Cmd+V (Mac)
       (e.key === 'x' && e.metaKey === true)  // Allow: Cmd+X (Mac)
     ) {
-      // let it happen, don't do anything
       return;
     }
-    // Ensure that it is a number and stop the keypress
     if (e.key === ' ' || isNaN(Number(e.key))) {
       return false;
     }

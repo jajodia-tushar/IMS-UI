@@ -14,7 +14,7 @@
             </mat-form-field>
             <mat-form-field class="one-row-input" floatLabel="auto">
                 <input matInput [(ngModel)]="reason" [ngModelOptions]="{standalone: true}"
-                    placeholder="Requirement Reeason" type="text" maxlength="100" required>
+                    placeholder="Requirement Reason" type="text" maxlength="100" required>
             </mat-form-field>
         </div>
 
@@ -73,7 +73,7 @@
             <div class="action-buttons">
                 <div class="position-of-buttons">
                     <button mat-button type="submit" class="submit-update" 
-                    (click)="Send()" [disabled]="rowValidation() !== -1 || (date == null || reason == null)">
+                    (click)="Send()" [disabled]="!validForm()">
                         Submit<app-spinning-loader></app-spinning-loader>
                     </button>
                     <button mat-button type="button" class="cancel" (click)="CancelRequest()">Cancel</button>

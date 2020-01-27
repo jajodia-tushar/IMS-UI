@@ -205,5 +205,27 @@ namespace IMS_UI.IMS.Providers
             return JsonConvert.DeserializeObject<Response>(
                 await response.Content.ReadAsStringAsync());
         }
+
+        public async Task<VendorOrderResponse> GetVendorOrderByOrderId(int OrderId)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.VendorOrderProvider;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", token);
+            client.BaseAddress = new Uri(_iConfiguration["BaseURL"]);
+
+
+
+            var response = await client.GetAsync(client.BaseAddress + EndPoint + OrderId);
+            return JsonConvert.DeserializeObject<VendorOrderResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
     }
 }

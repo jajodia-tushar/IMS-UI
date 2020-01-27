@@ -135,5 +135,22 @@ namespace IMS_UI.Controllers
             }
         }
 
+        // GET: api/Vendor/order/5
+        [HttpGet("order/{OrderId}")]
+        public async Task<IActionResult> GetVendorOrderByOrdeId(int OrderId)
+        {
+            try
+            {
+                var response = await _vendorProvider.GetVendorOrderByOrderId(OrderId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

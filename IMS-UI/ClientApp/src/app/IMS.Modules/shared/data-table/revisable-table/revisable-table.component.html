@@ -45,7 +45,7 @@
           <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deletedata(row)">delete</mat-icon>
         </button>
         <ng-container *ngIf="show">
-          <button mat-icon-button class="action-buttons">
+          <button mat-icon-button class="action-buttons" [disabled]="!canEdit">
             <mat-icon aria-hidden="false" aria-label="Example home icon">edit </mat-icon>
           </button>
         </ng-container>
@@ -55,7 +55,7 @@
     <mat-footer-cell *cdkFooterCellDef style="text-align:center; color:white">
       <div *ngIf="column.columnDef == 'actions'">
 
-        <button mat-raised-button class="Add-icon" (click)="AddRow()">
+        <button mat-raised-button class="Add-icon" (click)="AddRow()" [disabled]="!canEdit">
           <mat-icon class="icon">add</mat-icon>Add
         </button>
       </div>

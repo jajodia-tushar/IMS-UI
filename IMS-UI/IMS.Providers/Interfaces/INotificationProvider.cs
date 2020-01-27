@@ -8,6 +8,6 @@ namespace IMS_UI.IMS.Providers.Interfaces
 {
     public interface INotificationProvider
     {
-        Task<NotificationResponse> GetAllNotifications();
+        Task<NotificationResponse> GetAllNotifications(int pageNumber, int pageSize);
     }
 }

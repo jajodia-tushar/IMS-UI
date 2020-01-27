@@ -24,7 +24,7 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
         }
 
-        public async Task<NotificationResponse> GetAllNotifications()
+        public async Task<NotificationResponse> GetAllNotifications(int pageNumber, int pageSize)
         {
             try
             {
@@ -39,6 +39,19 @@ namespace IMS_UI.IMS.Providers
 
                     client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[] {
+
+                        new KeyValuePair<string, string>("pageNumber", pageNumber.ToString()),
+                        new KeyValuePair<string, string>("pageSize", pageSize.ToString())
+
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+
+                    uri.Query = query;
 
                     var response = await client.GetAsync(uri.Uri);
 

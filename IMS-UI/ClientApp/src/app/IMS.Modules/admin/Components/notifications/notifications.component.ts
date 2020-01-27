@@ -24,8 +24,8 @@ export class NotificationsComponent implements OnInit {
   isClickedOn;
   
   ngOnInit() {
+    this.initializePagination();
     this.getAllNotifications();
-    // this.initializePagination();
     this.columns = this.notificationService.getColumnFordataTable();
   }
 
@@ -34,8 +34,9 @@ export class NotificationsComponent implements OnInit {
   }
 
   getAllNotifications() {
-    this.notificationService.getAllNotifications().subscribe(data => {
+    this.notificationService.getAllNotifications(this.pageInfo.pageNumber.toString(), this.pageInfo.pageSize.toString()).subscribe(data => {
       this.notificationsDetail = data.notifications;
+      this.pageInfo = data.pagingInfo;
     });
   }
 
@@ -64,11 +65,11 @@ export class NotificationsComponent implements OnInit {
   //   );
   // }
 
-  // getpageInfo(event){
-  //   this.pageInfo.pageNumber = event.pageIndex + 1;
-  //   this.pageInfo.pageSize = event.pageSize;
-  //   this.GetDataforPendingApprovals();
-  // }
+  getpageInfo(event){
+    this.pageInfo.pageNumber = event.pageIndex + 1;
+    this.pageInfo.pageSize = event.pageSize;
+    this.getAllNotifications();
+  }
 
   changeTab() {
     this.selectedTab += 1;

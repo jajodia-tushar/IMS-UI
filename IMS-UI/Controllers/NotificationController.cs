@@ -23,11 +23,11 @@ namespace IMS_UI.Controllers
 
         // GET: api/notification
         [HttpGet]
-        public async Task<IActionResult> GetAllNotifications()
+        public async Task<IActionResult> GetAllNotifications(int pageNumber, int pageSize)
         {
             try
             {
-                var response = await _notificationProvider.GetAllNotifications();
+                var response = await _notificationProvider.GetAllNotifications(pageNumber, pageSize);
 
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();

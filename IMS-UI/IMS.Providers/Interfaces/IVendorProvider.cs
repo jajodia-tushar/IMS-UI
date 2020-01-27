@@ -14,7 +14,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<VendorOrdersResponse> GetParticularVendorOrder(string vendorId, string toDate, string fromDate, string approved, string pageNumber, string pageSize);
         Task<Response> VendorOrderApproval(VendorOrder vendorOrder);
         Task<Response> VendorOrderReject(int orderId);
-
         Task<VendorResponse> GetAllVendors();
+        Task<VendorOrderResponse> GetVendorOrderByOrderId(int OrderId);
     }
 }

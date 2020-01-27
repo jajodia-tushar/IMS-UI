@@ -23,14 +23,14 @@ export class DataTableComponent implements OnInit {
   
   constructor(public datepipe: DatePipe, public router: Router) { }
 
-  // @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
-  //   this.paginator = mp;
-  // }
-  //  @Input() set pageInfo(data){
-  //    this.pageLength=data.totalResults;
-  //    this.pageSize=data.pageSize;
-  //    this.pageNumber=data.pageNumber;
-  //  }
+  @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+  }
+   @Input() set pageInfo(data){
+     this.pageLength=data.totalResults;
+     this.pageSize=data.pageSize;
+     this.pageNumber=data.pageNumber;
+   }
 
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
@@ -55,9 +55,10 @@ export class DataTableComponent implements OnInit {
     return this.date;
   }
 
-  // pageChange($event){
-  //   this.pageischanged.emit($event);
-  // }
+  pageChange($event){
+    this.pageischanged.emit($event);
+    console.log($event);
+  }
 
   ClickedRow(row){  
     console.log(row);

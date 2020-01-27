@@ -24,6 +24,8 @@ namespace IMS_UI.IMS.Core
 
             public const string VendorOrdersProvider = "api/order/VendorOrders/";
 
+            public const string VendorOrderProvider = "api/order/VendorOrders/";
+
             public const string StoreProvider = "api/Reports/GetStockStatus";
 
             public const string StoreTransferProvider = "api/transfer/transferToShelves";

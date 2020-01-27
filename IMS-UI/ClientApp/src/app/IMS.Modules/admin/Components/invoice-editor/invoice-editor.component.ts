@@ -28,7 +28,7 @@ export class InvoiceEditorComponent implements OnInit {
   public VendorName;
   public InvoiceNo;
   public ChallanNo;
-  public isApprove;
+  public IsApproved;
   public columns;
   public FinalAmount;
   public InvoiceImageUrl;
@@ -90,6 +90,7 @@ export class InvoiceEditorComponent implements OnInit {
           this.VendorOrderdetails = data.vendorOrderDetails;
           this.itemquantityprice = data.vendorOrderDetails.orderItemDetails;
           this.InvoiceNo = data.vendorOrderDetails.invoiceNumber;
+          this.IsApproved = data.vendorOrderDetails.isApproved;
         }
 
         if (data.vendor) {
@@ -126,9 +127,11 @@ export class InvoiceEditorComponent implements OnInit {
     this.router.navigate(["/Admin/Notifications"]);
 
   }
+
   Reject(){
-    this.vendorService.rejectOrder(this.OrderID).subscribe(
+    this.vendorService.rejectOrder(this.orderId).subscribe(
       data=>{
+        console.log(data);
         if (data.status == "Success") {
           showMessage(this.snackBar, 2, "Order Rejected", "success");
           this.reloadComponent();
@@ -139,37 +142,40 @@ export class InvoiceEditorComponent implements OnInit {
       },
     );
   }
+
   approve() {
    
-    if (this.InvoiceNo!=null) {
+    if (this.InvoiceNo.length !== 0) {
       this.reloadPendingApproval.emit(0);
-    this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
-    this.VendorOrderdetails.challanNumber = this.ChallanNo;
-    this.VendorOrderdetails.finalAmount = this.FinalAmount;
-    this.VendorOrderdetails.orderItemDetails = this.itemquantityprice;
-    this.VendorOrderdetails.isApproved = true;
-    this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
-    this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
-    this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-    this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
-      data => {
-        if (data.status == "Success") {
-         
-          showMessage(this.snackBar, 2, "Order Approved", "success");
-          this.reloadComponent();
-        }
-        else {
-          showMessage(this.snackBar, 2, "Something went wrong!", "warn");
-        }
-      },
-    );
+      this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
+      this.VendorOrderdetails.challanNumber = this.ChallanNo;
+      this.VendorOrderdetails.finalAmount = this.FinalAmount;
+      this.VendorOrderdetails.orderItemDetails = this.itemquantityprice;
+      this.VendorOrderdetails.isApproved = true;
+      this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
+      this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
+      this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
+      console.log(this.vendorDetails);
+      this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
+        data => {
+          if (data.status == "Success") {
+            showMessage(this.snackBar, 2, "Order Approved", "success");
+            this.reloadComponent();
+          }
+          else {
+            showMessage(this.snackBar, 2, "Something went wrong!", "warn");
+          }
+        },
+      );
+    }
+    else {
+      showMessage(this.snackBar, 2, "Please fill the InvoiceNo first", "warn");
+    }
   }
-  else {
-    showMessage(this.snackBar, 2, "Please fill the InvoiceNo first", "warn");
+
+  isApprovedAndCannotEdit(): boolean {
+    return (!this.canEdit || this.IsApproved);
   }
 }
-
-  
-  }
 
 

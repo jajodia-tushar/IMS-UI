@@ -68,8 +68,8 @@
             <mat-card-actions>
               <button mat-button class="ViewReceipt" (click)="openDialog()">View Receipt</button>
               <div class="approvals-button">
-                <button mat-button color="accent" (click)="approve()" [disabled]="!canEdit">Approve</button>
-                <button mat-button class="rejectButton" (click)="Reject()" [disabled]="!canEdit">Reject</button>
+                <button mat-button color="accent" (click)="approve()" [disabled]="isApprovedAndCannotEdit()">Approve</button>
+                <button mat-button class="rejectButton" (click)="Reject()" [disabled]="isApprovedAndCannotEdit()">Reject</button>
               </div>
             </mat-card-actions>
           </div>

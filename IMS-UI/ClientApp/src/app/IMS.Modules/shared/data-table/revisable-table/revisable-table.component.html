@@ -9,7 +9,7 @@
       <div *ngIf="column.columnDef == 'itemName'">
         <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
 
-          <mat-select [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
+          <mat-select [disabled]="!canEdit" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
             <mat-option *ngFor="let item of ItemList" [value]="item">
               {{item.name}}
             </mat-option>
@@ -20,7 +20,7 @@
         <form>
           <mat-form-field appearance="outline">
             <mat-label style="color: white;">Quantity</mat-label>
-            <input matInput min="1" maxlength="3" autocomplete="off" value="{{ column.cell(row) }}"
+            <input [disabled]="!canEdit" matInput min="1" maxlength="3" autocomplete="off" value="{{ column.cell(row) }}"
               (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
             <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>
@@ -31,7 +31,7 @@
         <form>
           <mat-form-field appearance="outline">
             <mat-label style="color: white;">Price</mat-label>
-            <input matInput autocomplete="off" min="1" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
+            <input [disabled]="!canEdit" matInput autocomplete="off" min="1" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
               (keydown)="allowOnlyDigits($event)">
             <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>
@@ -41,7 +41,7 @@
 
       <div title="delete" *ngIf="column.columnDef === 'actions' ">
 
-        <button mat-icon-button class="action-buttons">
+        <button mat-icon-button class="action-buttons" [disabled]="!canEdit">
           <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deletedata(row)">delete</mat-icon>
         </button>
         <ng-container *ngIf="show">

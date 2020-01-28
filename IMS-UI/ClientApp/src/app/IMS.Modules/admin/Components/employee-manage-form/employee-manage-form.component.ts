@@ -44,6 +44,8 @@ export class EmployeeManageFormComponent implements OnInit {
       let employeeDetail = this.employeeDetails;
       this.createEmployeeForm.setValue(employeeDetail);
       this.createEmployeeForm.get("id").disable();
+      this.createEmployeeForm.get("email").disable();
+
     }
   }
   get id() {

@@ -77,6 +77,8 @@ export class EmployeeListComponent implements OnInit {
 
       }
       else if ('firstname' in result) {
+        this.applyFilter(this.filter);
+        this.ELEMENT_DATA = this.dataSource.data;
         this.ELEMENT_DATA.push(<Employee>result);
         this.dataSource.data = this.ELEMENT_DATA;
         showMessage(this.snackBar, 2, "Employee was Created", 'success');
@@ -105,12 +107,17 @@ export class EmployeeListComponent implements OnInit {
     })
   }
   editEmployeeIntable(employee) {
+
+    this.applyFilter(this.filter);
+    this.ELEMENT_DATA = this.dataSource.data;
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id == employee.id) {
         this.ELEMENT_DATA[index] = employee;
         break;
       }
     }
+
+
     this.dataSource.data = this.ELEMENT_DATA;
     showMessage(this.snackBar, 2, "Employee Details Updated Successfully", "success")
   }
@@ -146,7 +153,8 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   deleteEmployeeFromTableById(id) {
-
+    this.applyFilter(this.filter);
+    this.ELEMENT_DATA = this.dataSource.data;
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === id) {
         this.ELEMENT_DATA.splice(index, 1);

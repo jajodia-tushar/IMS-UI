@@ -1,6 +1,6 @@
 <div class="filtering-section">
     <mat-form-field appearance="outline">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" id="applyFilter" placeholder="Filter">
     </mat-form-field>
     <div class="action-button-add">
         <button id="add-employee" mat-button (click)="openAddEmployeeDialog()">Add Employee</button>

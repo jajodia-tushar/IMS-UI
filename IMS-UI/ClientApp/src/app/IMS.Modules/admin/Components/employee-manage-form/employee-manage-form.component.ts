@@ -44,7 +44,19 @@ export class EmployeeManageFormComponent implements OnInit {
       let employeeDetail = this.employeeDetails;
       this.createEmployeeForm.setValue(employeeDetail);
       this.createEmployeeForm.get("id").disable();
-      this.createEmployeeForm.get("email").disable();
+      this.createEmployeeForm.get("email").clearAsyncValidators();
+      this.createEmployeeForm.get("email").valueChanges.subscribe(
+        (email: string) => {
+          if (email == this.employeeDetails.email) {
+            this.createEmployeeForm.get("email").clearAsyncValidators();
+          }
+          else {
+            this.createEmployeeForm.get("email").setAsyncValidators(
+              this.employeeValidators.employeeEmailTakenValidator.bind(this.employeeValidators)
+            )
+          }
+        }
+      );
 
     }
   }

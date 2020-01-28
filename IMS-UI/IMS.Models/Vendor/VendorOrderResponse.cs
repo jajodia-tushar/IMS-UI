@@ -10,5 +10,6 @@ namespace IMS_UI.IMS.Models
     {
         public VendorOrder VendorOrder { get; set; }
         public bool CanEdit { get; set; }
+        public string LastModifiedBy { get; set; }
     }
 }

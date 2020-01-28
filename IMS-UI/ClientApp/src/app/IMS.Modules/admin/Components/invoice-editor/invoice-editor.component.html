@@ -6,6 +6,7 @@
           <mat-card-header class="invoice-card-header">
             <mat-card-title>Invoice</mat-card-title>
             <div class="order-id">Order ID:{{OrderID}}</div>
+            <div class="modified-by-name">Last modified by {{ lastModifiedBy }}</div>
           </mat-card-header>
           <mat-divider [inset]="true"></mat-divider>
           <mat-card-content class="invoice-card-content">
@@ -80,7 +81,7 @@
           </mat-card-header>
           <mat-divider [inset]="true"></mat-divider>
           <mat-card-content>
-            <app-revisable-table [canEdit]="canEdit" [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items"
+            <app-revisable-table [disabledCond]="isApprovedAndCannotEdit()" [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items"
               (ChangedFinalAmount)="finalPriceChange($event)">
             </app-revisable-table>
           </mat-card-content>

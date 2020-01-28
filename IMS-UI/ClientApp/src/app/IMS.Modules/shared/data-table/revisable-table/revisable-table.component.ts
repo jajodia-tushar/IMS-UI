@@ -16,7 +16,7 @@ export class RevisableTableComponent implements OnInit {
   displayedColumns;
   public datasource = new MatTableDataSource<ItemQuantityPriceMapping>();
 
-  @Input() canEdit;
+  @Input() disabledCond;
  
   @Input() columnHeader;
   @Input() show;

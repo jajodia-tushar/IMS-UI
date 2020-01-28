@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 
 interface FileUrl {
   locationUrl: string;
@@ -34,15 +35,13 @@ export class InvoiceEditorComponent implements OnInit {
   public InvoiceImageUrl;
   public ChallanImageUrl;
   itemquantityprice: ItemQuantityPriceMapping[];
- // data: MatTableDataSource<OrderItemDetail>;
   public Items: Item[];
   Vendor: Vendor;
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrder;
-
-  // Vendor Order Id
   orderId;
 
+  lastModifiedBy: string;
   canEdit: boolean;
   isDisabled: boolean;
 
@@ -53,7 +52,8 @@ export class InvoiceEditorComponent implements OnInit {
     private snackBar: MatSnackBar,
     private http: HttpClient,
     private dialog : MatDialog, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private centralizedService: CentralizedDataService
   ) { }
 
   @Input() TableData;
@@ -77,8 +77,8 @@ export class InvoiceEditorComponent implements OnInit {
 
     this.vendorService.getVendorOrderByOrderId(this.orderId).subscribe(
       _data => {
-        console.log(_data);
         this.canEdit = _data.canEdit;
+        this.lastModifiedBy = _data.lastModifiedBy;
 
         let data = _data.vendorOrder;
         if (data.vendorOrderDetails) {
@@ -131,7 +131,6 @@ export class InvoiceEditorComponent implements OnInit {
   Reject(){
     this.vendorService.rejectOrder(this.orderId).subscribe(
       data=>{
-        console.log(data);
         if (data.status == "Success") {
           showMessage(this.snackBar, 2, "Order Rejected", "success");
           this.reloadComponent();
@@ -155,11 +154,14 @@ export class InvoiceEditorComponent implements OnInit {
       this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
       this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
       this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-      console.log(this.vendorDetails);
       this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
         data => {
           if (data.status == "Success") {
-            showMessage(this.snackBar, 2, "Order Approved", "success");
+            if (this.isSuperAdmin()) {
+              showMessage(this.snackBar, 2, "Order Approved", "success");
+            } else {
+              showMessage(this.snackBar, 2, "Order is Edited", "success");
+            }
             this.reloadComponent();
           }
           else {
@@ -173,8 +175,17 @@ export class InvoiceEditorComponent implements OnInit {
     }
   }
 
+  isSuperAdmin(): boolean {
+    return (this.centralizedService.getUser().role.id === 4);
+  }
+
   isApprovedAndCannotEdit(): boolean {
-    return (!this.canEdit || this.IsApproved);
+    if (this.isSuperAdmin()) {
+      return this.IsApproved;
+    }
+    else { 
+      return (!this.canEdit || this.IsApproved);
+    }
   }
 }
 

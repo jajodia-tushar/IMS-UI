@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSnackBar } from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { Notification } from 'src/app/IMS.Models/Notification/Notification';
 import { Router } from '@angular/router';
+import { showMessage } from '../../utils/snackbar';
 
 @Component({
   selector: 'app-data-table',
@@ -21,7 +22,7 @@ export class DataTableComponent implements OnInit {
   pageSizeOptions:number[]=[5, 10, 15, 20];
   pageNumber:number;
   
-  constructor(public datepipe: DatePipe, public router: Router) { }
+  constructor(public datepipe: DatePipe, public router: Router, private snackBar: MatSnackBar) { }
 
   @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
@@ -57,14 +58,17 @@ export class DataTableComponent implements OnInit {
 
   pageChange($event){
     this.pageischanged.emit($event);
-    console.log($event);
   }
 
-  ClickedRow(row){  
-    console.log(row);
-    this.router.navigateByUrl(`/Admin/Notifications/${row.requestType}/${row.requestId}`);
-    this.TableData.emit(row);
-    this.isClickedOn.emit(1);
+  ClickedRow(row){ 
+
+    if (row.requestStatus === "Rejected") {
+      showMessage(this.snackBar, 2, "You'cant view a rejected order", "warn");
+    } else {
+      this.router.navigateByUrl(`/Admin/Notifications/${row.requestType}/${row.requestId}`);
+      this.TableData.emit(row);
+      this.isClickedOn.emit(1);
+    }
   }
  
 }

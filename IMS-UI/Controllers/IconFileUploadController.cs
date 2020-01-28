@@ -6,6 +6,7 @@ using IMS_UI.IMS.Models.Shared;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace IMS_UI.Controllers
 {
@@ -13,9 +14,11 @@ namespace IMS_UI.Controllers
     [ApiController]
     public class IconFileUploadController : ControllerBase
     {
+        private IConfiguration _iconfiguration;
         private IFileProvider _IFileProvider;
-        public IconFileUploadController(IFileProvider fileProvider)
+        public IconFileUploadController(IConfiguration configuration, IFileProvider fileProvider)
         {
+            _iconfiguration = configuration;
             _IFileProvider = fileProvider;
         }
         
@@ -26,7 +29,8 @@ namespace IMS_UI.Controllers
             {
                 if (fileInputModel.FileToUpload.Length > 0)
                 {
-                    string locationUrl = _IFileProvider.UploadFile(fileInputModel.FileToUpload, "ItemIconPath");
+                    string FileSavingPath = _iconfiguration["ItemIconPath"];
+                    string locationUrl = _IFileProvider.UploadFile(fileInputModel.FileToUpload, FileSavingPath);
                     return Ok(new { LocationUrl = locationUrl });
                 }
                 else

@@ -1,7 +1,7 @@
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { ItemsResponse } from './../../../../IMS.Models/Item/ItemsResponse';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemManageDialogComponent } from '../item-manage-dialog/item-manage-dialog.component';
 import { ItemDeactivateDialogComponent } from '../item-deactivate-dialog/item-deactivate-dialog.component';
@@ -20,14 +20,13 @@ export class ItemListComponent implements OnInit {
 
   @Input() event: Item;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private itemService: ItemService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     await this.setItems();
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
-    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
@@ -60,13 +59,11 @@ export class ItemListComponent implements OnInit {
       else if (result == "cancelled") {
         //don't show any message.
       }
-      else if ('name' in result) {
-        this.ELEMENT_DATA.push(<Item>result);
-        this.dataSource.data = this.ELEMENT_DATA;
+      else{
+        // this.ELEMENT_DATA.push(<Item>result);
+        // this.dataSource.data = this.ELEMENT_DATA;
+        this.setItems();
         showMessage(this.snackBar, 2, "Item Was Created Successfully", 'success');
-      }
-      else {
-        console.log('Inside else block of item creation dialog')
       }
     });
   }
@@ -106,7 +103,6 @@ export class ItemListComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = item;
     dialogConfig.panelClass = 'dialog-item-manage'
-    // dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(ItemDeactivateDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -145,8 +141,9 @@ export class ItemListComponent implements OnInit {
 
   async setItems() {
     let itemlist: Item[] = (<ItemsResponse>await this.itemService.getAllItem()).items;
-    //console.log("=======");
-    //console.log(itemlist);
     this.ELEMENT_DATA = itemlist;
+    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
+    this.dataSource.sort = this.sort;
   }
 }

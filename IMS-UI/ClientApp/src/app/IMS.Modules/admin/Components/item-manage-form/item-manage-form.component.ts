@@ -48,7 +48,6 @@ export class ItemManageFormComponent implements OnInit {
     }
     if (this.isEditItemForm) {
       let itemDetail = this.itemDetails;
-      console.log(itemDetail)
       this.createItemForm.setValue(itemDetail);
     }
   }
@@ -57,12 +56,14 @@ export class ItemManageFormComponent implements OnInit {
     let item: Item = <Item>this.createItemForm.getRawValue();
     let edittedItem: ItemsResponse = <ItemsResponse>await this.itemService.editItem(item);
     this.itemEditted.emit(edittedItem);
-    console.log(item);
+    if(this.fileToUpload){
+      let urlOfImage=item.id+".svg";
+      await this.uploadImage(urlOfImage);
+    }
   }
 
   async createNewItem() {
     let item: Item = <Item>this.createItemForm.getRawValue();
-    console.log(item);
     let createdItem: ItemsResponse = <ItemsResponse>await this.itemService.createItem(item);
     this.itemCreated.emit(createdItem);
     let newData: Item[] = createdItem.items;
@@ -75,6 +76,7 @@ export class ItemManageFormComponent implements OnInit {
     }
     let urlOfImage=id+".svg";
     await this.uploadImage(urlOfImage);
+    console.log(this.fileUrl);
   }
 
   get name() {

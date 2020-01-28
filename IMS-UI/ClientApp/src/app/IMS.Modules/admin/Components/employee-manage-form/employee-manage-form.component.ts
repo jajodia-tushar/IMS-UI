@@ -78,6 +78,8 @@ export class EmployeeManageFormComponent implements OnInit {
 
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
     let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.editEmployee(employee);
+    console.log(edittedEmployee);
+
     this.employeeEditted.emit(edittedEmployee);
 
   }

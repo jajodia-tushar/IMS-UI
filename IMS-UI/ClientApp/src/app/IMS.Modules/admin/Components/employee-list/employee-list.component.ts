@@ -80,7 +80,8 @@ export class EmployeeListComponent implements OnInit {
 
       }
       else if ('firstname' in result) {
-        this.applyFilter(this.filter);
+        if (this.filter)
+          this.applyFilter(this.filter);
         this.ELEMENT_DATA = this.dataSource.data;
         this.ELEMENT_DATA.push(<Employee>result);
         this.dataSource.data = this.ELEMENT_DATA;
@@ -100,18 +101,20 @@ export class EmployeeListComponent implements OnInit {
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(EmployeeManageDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+
       if (result == false) {
         showMessage(this.snackBar, 2, "Employee Updation Failed", "warn");
       }
       else if (result == "cancelled") {
 
       }
-      else if ('firstname' in result) { this.editEmployeeIntable(result); }
+      else if ('id' in result) { this.editEmployeeIntable(result); }
     })
   }
   editEmployeeIntable(employee) {
-
-    this.applyFilter(this.filter);
+    if (this.filter)
+      this.applyFilter(this.filter);
     this.ELEMENT_DATA = this.dataSource.data;
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id == employee.id) {
@@ -156,7 +159,8 @@ export class EmployeeListComponent implements OnInit {
     });
   }
   deleteEmployeeFromTableById(id) {
-    this.applyFilter(this.filter);
+    if (this.filter)
+      this.applyFilter(this.filter);
     this.ELEMENT_DATA = this.dataSource.data;
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === id) {

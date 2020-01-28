@@ -12,7 +12,7 @@
 <div class="items-container">
     <div class="flex-container">
         <div class="table-container">
-
+            <app-spinning-loader></app-spinning-loader>
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns;let i=index">
                     <ng-container *ngIf="i<numberOfColumns()">
@@ -35,7 +35,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
             <mat-paginator [length]="pagingInfo.totalResults" [pageSize]="pagingInfo.pageSize"
-                [pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)"></mat-paginator>
+                [pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)" showFirstLastButtons></mat-paginator>
         </div>
     </div>
 </div>

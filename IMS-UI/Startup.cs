@@ -49,6 +49,7 @@ namespace IMS_UI
             services.AddSingleton<IVendorProvider, VendorProvider>();
             services.AddSingleton<IItemProvider,ItemProvider>();
             services.AddSingleton<INotificationProvider, NotificationProvider>();
+            services.AddSingleton<IMS.Providers.Interfaces.IFileProvider, FileProvider>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

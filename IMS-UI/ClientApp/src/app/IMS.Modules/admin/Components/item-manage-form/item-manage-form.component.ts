@@ -1,27 +1,31 @@
+import { Item } from './../../../../IMS.Models/Item/Item';
+import { HttpClient } from '@angular/common/http';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
-import { ItemManagementComponent } from '../item-management/item-management.component';
-import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
+
+interface FileUrl {
+  locationUrl: string;
+}
 
 @Component({
   selector: 'app-item-manage-form',
   templateUrl: './item-manage-form.component.html',
   styleUrls: ['./item-manage-form.component.css']
 })
-export class ItemManageFormComponent implements OnInit{
+export class ItemManageFormComponent implements OnInit {
   createItemForm: FormGroup
   updateButtonText: string = "Update";
   submitButtonText: string = "Submit";
-  constructor(formBuilder: FormBuilder, private itemService: ItemService) {
+  constructor(formBuilder: FormBuilder, private itemService: ItemService, private http: HttpClient) {
     this.createItemForm = formBuilder.group({
       id: [-1, []],
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       maxLimit: [null, [Validators.required]],
       isActive: [true, []],
-      imageUrl: ["", [Validators.required, Validators.minLength(2)]],
+      imageUrl: [''],
       rate: [null, [Validators.required]],
       shelvesRedLimit: [null, [Validators.required]],
       shelvesAmberLimit: [null, [Validators.required]],
@@ -34,6 +38,8 @@ export class ItemManageFormComponent implements OnInit{
   @Output() itemEditted: EventEmitter<ItemsResponse> = new EventEmitter<ItemsResponse>();
   @Output() itemCreated: EventEmitter<ItemsResponse> = new EventEmitter<ItemsResponse>();
   isEditItemForm: Boolean;
+  fileToUpload: File;
+  fileUrl: string;
 
   async ngOnInit() {
     if (this.itemDetails) {
@@ -56,9 +62,19 @@ export class ItemManageFormComponent implements OnInit{
 
   async createNewItem() {
     let item: Item = <Item>this.createItemForm.getRawValue();
-    console.log(item)
+    console.log(item);
     let createdItem: ItemsResponse = <ItemsResponse>await this.itemService.createItem(item);
     this.itemCreated.emit(createdItem);
+    let newData: Item[] = createdItem.items;
+    let id;
+    for (var i = 0; i < newData.length-1; i++) {
+      if (newData[i].name == item.name) {
+        id=newData[i].id;
+        break;
+      }
+    }
+    let urlOfImage=id+".svg";
+    await this.uploadImage(urlOfImage);
   }
 
   get name() {
@@ -112,4 +128,19 @@ export class ItemManageFormComponent implements OnInit{
     this.itemCreated.emit(null);
   }
 
+  onFileChanged(event) {
+    if (event.target.files.length > 0) {
+      this.fileToUpload = event.target.files[0];
+    }
+  }
+
+  async uploadImage(fileName) {
+    const formData = new FormData();
+    formData.append('FileToUpload', this.fileToUpload, fileName);
+    this.http.post<FileUrl>('api/IconFileUpload', formData).subscribe(
+      data => {
+        this.fileUrl = data.locationUrl;
+      }
+    );
+  }
 }

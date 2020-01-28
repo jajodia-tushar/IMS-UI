@@ -66,11 +66,11 @@ button.active:focus {
     left: 6%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h4,
-h6 {
-    color: white;
+.dialog-bulk-request  mat-dialog-container  {
+  background-color: #222437;
+  color: aliceblue;
+}
+
+h1, h2, h3, h4, h4, h6{
+  color: white;
 }

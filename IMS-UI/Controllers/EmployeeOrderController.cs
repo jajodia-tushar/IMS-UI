@@ -29,7 +29,7 @@ namespace IMS_UI.Controllers
         {
             try
             {
-                var response = await _employeeOrderProvider.getEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
+                var response = await _employeeOrderProvider.GetEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 
@@ -46,6 +46,23 @@ namespace IMS_UI.Controllers
         {
             var response = await _employeeOrderProvider.PostOrders(placeEmployeeOrderRequest);
             return response;
+        }
+
+        [HttpPost("bulk")]
+        public async Task<IActionResult> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder)
+            {
+            try
+            {
+                var response = await _employeeOrderProvider.PostBulkOrder(employeeBulkOrder);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

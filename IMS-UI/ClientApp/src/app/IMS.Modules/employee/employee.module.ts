@@ -11,10 +11,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 
 import { FilterPipe} from './Components/pick-item/filter.pipe';
 import { OrderSuccessComponent } from './Components/order-success/order-success.component';
+import { BulkRequestComponent } from './Components/bulk-request/bulk-request.component';
 
 
 @NgModule({
-  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe, OrderSuccessComponent],
+  declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe, OrderSuccessComponent, BulkRequestComponent],
   imports: [
     SharedModule,
     MaterialModule,
@@ -24,6 +25,6 @@ import { OrderSuccessComponent } from './Components/order-success/order-success.
   exports: [
     FilterPipe
   ],
-  entryComponents : [OrderSuccessComponent]
+  entryComponents : [OrderSuccessComponent, BulkRequestComponent]
 })
 export class EmployeeModule { }

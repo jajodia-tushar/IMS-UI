@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { CartItem } from '../../../../IMS.Models/CartItem';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { BulkRequestComponent } from '../bulk-request/bulk-request.component';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class PickItemComponent implements OnInit {
   searchText : string;
 
   constructor(private centralizedRepo: CentralizedDataService, private router: Router,
-    private itemService: ItemService,private snackBar : MatSnackBar) { }
+    private itemService: ItemService,private snackBar : MatSnackBar, public dialog: MatDialog) { }
 
 
   searchBox() {
@@ -81,5 +82,17 @@ export class PickItemComponent implements OnInit {
     };
     
     return style;
+  }
+
+  bulkRequest()  {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "auto";
+    dialogConfig.height = "auto";
+    dialogConfig.panelClass = 'dialog-bulk-request';
+    dialogConfig.data = this.employee;
+    dialogConfig.autoFocus = true;
+    let dialogRef = this.dialog.open(BulkRequestComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe();
   }
 }

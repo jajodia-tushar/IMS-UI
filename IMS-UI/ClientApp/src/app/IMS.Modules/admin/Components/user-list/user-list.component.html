@@ -1,7 +1,16 @@
-<button id="add-user" mat-button (click)="openAddUserDialog()">Add User</button>
-<input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+<div class="action-for-user">
+  <div class="filter-user">
+    <p id="filter-user-text">User</p>
+    <input matInput class="filter-input" (keyup)="applyFilter($event.target.value)" id="applyFilter"
+      placeholder="Filter">
+  </div>
+  <div class="add-user-button">
+    <button id="add-user" mat-button (click)="openAddUserDialog()">Add user</button>
+  </div>
+</div>
+
 <table mat-table [dataSource]="dataSource" matSort>
-  
+
   <!-- Username Column -->
   <ng-container matColumnDef="username">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> USERNAME</th>
@@ -34,9 +43,13 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell class="table-header" *matHeaderCellDef> ACTIONS</th>
-    <td mat-cell class="table-cell" *matCellDef="let element"> 
-        <button mat-icon-button (click)="editUserDetails(element)"><mat-icon>edit</mat-icon></button> 
-        <button *ngIf="isSuperAdmin" mat-icon-button (click)="deactivateUser(element)"><mat-icon>delete</mat-icon></button>
+    <td mat-cell class="table-cell" *matCellDef="let element">
+      <button mat-icon-button (click)="editUserDetails(element)" [disableRipple]="true">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="isSuperAdmin" mat-icon-button (click)="deactivateUser(element)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </td>
   </ng-container>
 

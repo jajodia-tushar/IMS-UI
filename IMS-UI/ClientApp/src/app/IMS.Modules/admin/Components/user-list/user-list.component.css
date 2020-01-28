@@ -11,10 +11,9 @@ table {
 }
 
 .filter-input {
-  margin-left: 1%;
+  margin-left: 4%;
   padding: 5px;
   border: 2px solid #222437;
-  ;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background-color: #222437;
@@ -22,7 +21,6 @@ table {
 }
 
 #add-user {
-  position: absolute;
   right: 10px;
   border: 0.5px solid;
   border-radius: 5px;
@@ -41,4 +39,64 @@ table {
 
 :host ::ng-deep .mat-sort-header-arrow {
   color: #fff !important;
+}
+
+.items-container {
+  margin: 0px 0px 0px 0px;
+  top: 24px;
+  background-color: #222437;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+  color: white;
+  overflow: hidden;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > div {
+  margin: 10px;
+  text-align: left;
+}
+
+.table-container {
+  position: relative;
+  top: 5%;
+  width: 100%;
+  height: 90%;
+  margin: 10px 0 0 24px;
+}
+
+.table-container > h4 {
+  margin-top: inherit;
+}
+
+.add-user-button {
+  margin-left: auto;
+}
+.action-for-user {
+  display: flex;
+}
+.action-button-add {
+  margin-left: auto;
+}
+.filter-user {
+  display: flex;
+}
+#filter-user-text {
+  position: relative;
+  top: 6px;
+}
+
+.filter-input {
+  margin-left: 4%;
+  padding: 5px;
+  border: 2px solid #222437;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #222437;
+  color: white;
+  width: 200px;
 }

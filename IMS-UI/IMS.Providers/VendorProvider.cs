@@ -236,7 +236,7 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
-                    var endPoint = "api/Vendor";
+                    var endPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _sessionManager.GetString("token");
@@ -266,14 +266,14 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
-                    var endPoint = "api/Vendor";
+                    var EndPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _sessionManager.GetString("token");
                     http.DefaultRequestHeaders.Authorization =
                                 new AuthenticationHeaderValue("Bearer", token);
                     JObject Json = JObject.Parse(jsonString);
-                    var response = await http.PutAsJsonAsync(endPoint, Json);
+                    var response = await http.PutAsJsonAsync(EndPoint, Json);
                     VendorResponse apiEditVendorResponse = new VendorResponse();
                     var result = await response.Content.ReadAsStringAsync();
                     apiEditVendorResponse = JsonConvert.DeserializeObject<VendorResponse>(result);
@@ -296,7 +296,7 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
-                    var endPoint = "api/Vendor";
+                    var endPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _sessionManager.GetString("token");
@@ -307,6 +307,34 @@ namespace IMS_UI.IMS.Providers
                     var result = await response.Content.ReadAsStringAsync();
                     apiDeactivateVendorResponse = JsonConvert.DeserializeObject<Response>(result);
                     return apiDeactivateVendorResponse;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<Response> IsVendorNameUnique(string vendorName)
+        {
+            try
+            {
+                using (HttpClient http = new HttpClient())
+                {
+                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    var endPoint = "api/Vendor/IsUnique?name="+vendorName;
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _sessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+                    var response = await http.GetAsync(endPoint);
+                   Response apiUniqueVendorNameResponse = new Response();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiUniqueVendorNameResponse = JsonConvert.DeserializeObject<Response>(result);
+                    return apiUniqueVendorNameResponse;
 
                 }
             }

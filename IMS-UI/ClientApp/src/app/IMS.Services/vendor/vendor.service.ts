@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { VendorResponse } from 'src/app/IMS.Models/Vendor/VendorResponse';
 import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
 import { Observable } from 'rxjs';
@@ -36,8 +36,9 @@ export class VendorService {
     return this.http.put<VendorResponse>("api/Vendor", vendor).toPromise()
   }
   deactivateVendor(vendorId: any, isHardDelete: boolean): Promise<Response> {
-
-    return this.http.delete<Response>("api/Vendor/" + vendorId + "?isHardDelete=" + isHardDelete).toPromise();
+    let params = new HttpParams();
+    params = params.append("isHardDelete", isHardDelete.toString());
+    return this.http.delete<Response>("api/Vendor/" + vendorId, { params}).toPromise();
   }
 
   getAllVendors() {

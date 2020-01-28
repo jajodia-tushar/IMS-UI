@@ -20,5 +20,9 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<VendorResponse> AddVendor(Vendor vendor);
         Task<VendorResponse> EditVendor(Vendor vendor);
         Task<Response> DeactivateVendor(int vendorId, bool isHardDelete);
+
+        Task<Response> IsVendorNameUnique(string vendorName);
+
+
     }
 }

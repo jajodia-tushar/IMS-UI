@@ -66,7 +66,6 @@ export class VendorListComponent implements OnInit {
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(VendorManageDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result)
       if (result == false) {
         showMessage(this.snackBar, 2, "Vendor upadation Failed", 'warn');
       }
@@ -96,11 +95,9 @@ export class VendorListComponent implements OnInit {
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(VendorManageDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result == "true") {
         let index = this.indexOfVendor(vendor);
         vendordata.splice(index, 1);
-        console.log(vendordata);
         this.dataSource = new ExampleDataSource();
         showMessage(this.snackBar, 2, "Vendor was Deleted Successfully", 'success');
       }
@@ -175,13 +172,6 @@ export class VendorListComponent implements OnInit {
 }
 let vendordata: Vendor[]=[];
 
-const data: Vendor[] = [
-  {
-    id: 1, name: 'Hydrogen', contactNumber: "jfnsdjiffj", title: "vsdivklsdfd",
-    address: "jdfdjifhufiewfghiohdffklgduighvjknciorhgurghiegieohgjidosfhkcniedfhknsiowejkgfigrhghioergdvioherfgivnierkgirgirgrhgrhgkggkdfdggggggggggdvjnkschujbdvs", pan: "jfndjsfnd",
-    gst: "whfiuhsdjkd", companyIdentificationNumber:"jdfndsjknvsdjk"}, 
-];
-
 /**
  * Data source to provide what data should be rendered in the table. The observable provided
  * in connect should emit exactly the data that should be rendered by the table. If the data is
@@ -192,7 +182,6 @@ export class ExampleDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Element[]> {
     const rows = [];
-    console.log(vendordata)
     vendordata.forEach(element => rows.push(element, { detailRow: true, element }));
     return of(rows);
   }

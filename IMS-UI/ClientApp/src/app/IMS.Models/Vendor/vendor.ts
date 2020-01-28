@@ -1,4 +1,4 @@
- export interface Vendor {
+ export class Vendor {
         id: number;
         name?: any;
         contactNumber: any;

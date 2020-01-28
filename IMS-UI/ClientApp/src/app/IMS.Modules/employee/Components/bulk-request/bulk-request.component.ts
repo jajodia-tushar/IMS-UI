@@ -120,8 +120,11 @@ export class BulkRequestComponent implements OnInit {
               }, 5000);
           }
           else
-            showMessage(this.snackBar, 2, "Something Went Wrong", "warn");
+            this.handleErrorInConnection(data.error.errorMessage);
           this.dialogRef.close();
+        },
+        error => {
+          this.handleErrorInConnection();
         });
     }
     else  {
@@ -131,7 +134,16 @@ export class BulkRequestComponent implements OnInit {
       else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)
         showMessage(this.snackBar, 5, "Quantity of " + this.dataSourceItems[errorRowIndex].item.name + " should be greater than 0", "warn");
     }
-   
+  }
+
+  
+  handleErrorInConnection(message? : string){
+    let errorMessage: string;
+    if(message == null || message == "")
+        errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+    else
+        errorMessage = JSON.parse(JSON.stringify(message));
+    showMessage(this.snackBar, 5, errorMessage);
   }
 
   CancelRequest() {

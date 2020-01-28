@@ -33,6 +33,9 @@ export class EmployeeListComponent implements OnInit {
     this.paginator = mp;
   }
 
+  numberOfColumns() {
+    return (this.displayedColumns.length - 1);
+  }
   constructor(private employeeService: EmployeeService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {

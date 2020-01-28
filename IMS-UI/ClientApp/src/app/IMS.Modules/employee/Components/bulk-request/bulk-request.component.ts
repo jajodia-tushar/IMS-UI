@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { BulkRequest, BulkOrderItemQuantityMapping, EmployeeBulkOrderDetails } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
-import { OrderMessage } from 'src/app/IMS.Models/Shared/OrderMeesage';
+import { OrderSuccessDetails } from 'src/app/IMS.Models/Shared/OrderMeesage';
 
 @Component({
   selector: 'app-bulk-request',
@@ -29,7 +29,7 @@ export class BulkRequestComponent implements OnInit {
   reason: string;
   buttonName: string="Submit";
 
-  orderMessage: OrderMessage = new OrderMessage;
+  orderSuccessDetails: OrderSuccessDetails = new OrderSuccessDetails;
 
   bulkRequest: BulkRequest = new BulkRequest();
 
@@ -73,10 +73,10 @@ export class BulkRequestComponent implements OnInit {
     )
     this.renderTable();
 
-    this.orderMessage.imageUrl = "../../../../../assets/accept.svg";
-    this.orderMessage.greetingText = "Request Sent";
-    this.orderMessage.message = "Your request has been sent and is waiting for approval";
-    this.orderMessage.notification = "You will be notified once your order is approved"
+    this.orderSuccessDetails.imageUrl = "../../../../../assets/accept.svg";
+    this.orderSuccessDetails.greetingText = "Request Sent";
+    this.orderSuccessDetails.message = "Your request has been sent and is waiting for approval";
+    this.orderSuccessDetails.notification = "You will be notified once your order is approved"
   }
 
   createRequest()  {
@@ -112,7 +112,7 @@ export class BulkRequestComponent implements OnInit {
               dialogConfig.disableClose = true;
               dialogConfig.panelClass = 'dialog-order-success';
               dialogConfig.autoFocus = true;
-              dialogConfig.data = this.orderMessage;
+              dialogConfig.data = this.orderSuccessDetails;
               let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
               setTimeout(() => {
                 dialogRef.close();

@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { OrderMessage } from 'src/app/IMS.Models/Shared/OrderMeesage';
+import { OrderSuccessDetails } from 'src/app/IMS.Models/Shared/OrderMeesage';
 
 @Component({
   selector: 'app-order-success',
@@ -8,10 +8,10 @@ import { OrderMessage } from 'src/app/IMS.Models/Shared/OrderMeesage';
   styleUrls: ['./order-success.component.css']
 })
 export class OrderSuccessComponent implements OnInit {
-  orderMessage: OrderMessage = new OrderMessage();
+  orderSuccessMessage: OrderSuccessDetails = new OrderSuccessDetails();
 
-  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public message: OrderMessage) { 
-    this.orderMessage = message; 
+  constructor(@Optional() @Inject(MAT_DIALOG_DATA) public message: OrderSuccessDetails) { 
+    this.orderSuccessMessage = message; 
   }
 
   ngOnInit() {

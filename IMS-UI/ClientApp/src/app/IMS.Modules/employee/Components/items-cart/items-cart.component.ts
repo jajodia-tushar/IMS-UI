@@ -12,7 +12,7 @@ import { publishLast } from 'rxjs/operators';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
 import { PlatformLocation, LocationStrategy } from '@angular/common';
-import { OrderMessage } from 'src/app/IMS.Models/Shared/OrderMeesage';
+import { OrderSuccessDetails } from 'src/app/IMS.Models/Shared/OrderMeesage';
 
 @Component({
   selector: 'app-items-cart',
@@ -34,7 +34,7 @@ constructor(private employeeOrderService: EmployeeOrderService,
   private dialog : MatDialog) { }
 
 durationInSeconds = 5;
-orderMessage: OrderMessage = new OrderMessage();
+orderSuccessMessage: OrderSuccessDetails = new OrderSuccessDetails();
 
 @Input() 
 selectedItems: CartItem[];
@@ -43,10 +43,10 @@ selectedItems: CartItem[];
 onCartItemDeleted: EventEmitter<CartItem[]> = new EventEmitter<CartItem[]>();
 
 ngOnInit() {
-  this.orderMessage.imageUrl = "../../../../../assets/accept.svg"
-  this.orderMessage.greetingText = "Success";
-  this.orderMessage.message = "Your order is placed";
-  this.orderMessage.notification = "You can now collect the items.";
+  this.orderSuccessMessage.imageUrl = "../../../../../assets/accept.svg"
+  this.orderSuccessMessage.greetingText = "Success";
+  this.orderSuccessMessage.message = "Your order is placed";
+  this.orderSuccessMessage.notification = "You can now collect the items.";
 }
 onCancel() {
   if (!this.isSubmitted) {
@@ -70,7 +70,7 @@ onMakingOrder() {
         dialogConfig.disableClose = true;
         dialogConfig.panelClass = 'dialog-order-success';
         dialogConfig.autoFocus = true;
-        dialogConfig.data = this.orderMessage;
+        dialogConfig.data = this.orderSuccessMessage;
         let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
 
         setTimeout(() => {

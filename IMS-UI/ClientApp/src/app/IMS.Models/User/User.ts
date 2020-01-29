@@ -8,4 +8,5 @@ export class User {
     lastname: string;
     email: string;
     role: Role;
+    isDefaultPasswordChanged: boolean;
 }

@@ -44,8 +44,8 @@ namespace IMS_UI.IMS.Providers
                 prepareClient(http);
                 string query;
                 var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                new KeyValuePair<string, string>("startDate", fromDate),
-                new KeyValuePair<string, string>("endDate", toDate),
+                new KeyValuePair<string, string>("fromDate", fromDate),
+                new KeyValuePair<string, string>("toDate", toDate),
                 new KeyValuePair<string, string>("pageNumber", pageNumber),
                 new KeyValuePair<string, string>("pageSize", pageSize)
                 });

@@ -1,121 +1,121 @@
 /* Employee Header */
 
 .employee-header {
-    overflow: hidden;
-    background: #222437;
-    height: 62px
+  overflow: hidden;
+  background: #222437;
+  height: 62px;
+  display: flex;
 }
 
 .employee-header span {
-    float: left;
-    color: #ffc04e;
-    text-align: center;
-    text-decoration: none;
-    font-size: 28px;
-    line-height: 25px;
-    opacity: 0.9;
-    margin-top: 21px;
-    margin-left: 24px;
+  float: left;
+  color: #ffc04e;
+  text-align: center;
+  text-decoration: none;
+  font-size: 28px;
+  line-height: 25px;
+  opacity: 0.9;
+  margin-top: 21px;
+  margin-left: 24px;
 }
 
 .company-logo {
-    font-size: 25px;
-    font-weight: bold;
-    float: left;
+  font-size: 25px;
+  font-weight: bold;
+  float: left;
 }
 
 .icon img {
-    height: 60px;
-    width: auto;
-    margin-top: -15%;
-    margin-left: -15%;
+  height: 60px;
+  width: auto;
+  margin-top: -15%;
+  margin-left: -15%;
 }
 
 /* Field Area */
 
 .field-area {
-    display: flex;
-    position: relative;
-    top: 24px;
+  display: flex;
+  position: relative;
+  top: 24px;
 }
 
 .bulkRequest {
-    color: white;
-    border: 1px solid slateblue;
-    box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
+  color: white;
+  border: 1px solid slateblue;
+  box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
 }
 
 .text-area {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 .text-area p {
-    color: #f3f3f3;
-    position: relative;
-    left: 48px;
+  color: #f3f3f3;
+  position: relative;
+  left: 48px;
 }
 
 .field-area div:last-child {
-    margin-left: auto;
-    margin-right: 18px;
+  margin-left: auto;
+  margin-right: 18px;
 }
 
 #search {
-    background: rgb(224, 225, 232);
-    border-radius: 20px;
-    padding: 8px;
-    z-index: 4;
-    margin-right: 40px;
-    width: 270px;
-    color: black;
-    outline: none;
-    border: none;
-    box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
+  background: rgb(224, 225, 232);
+  border-radius: 20px;
+  padding: 8px;
+  z-index: 4;
+  margin-right: 40px;
+  width: 270px;
+  color: black;
+  outline: none;
+  border: none;
+  box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
 }
 
 .input-box {
-    position: relative;
+  position: relative;
 }
 
 .items-container[_ngcontent-axn-c5] {
-    display: flex;
-    flex-wrap: nowrap;
-    background-color: white;
-    margin: 24px 24px 24px 24px;
-    border-radius: 7px;
-    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: white;
+  margin: 24px 24px 24px 24px;
+  border-radius: 7px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .flex-item-container {
-    display: flex;
-    background-color: #1c1e2f;
-    width: 100%;
+  display: flex;
+  background-color: #1c1e2f;
+  width: 100%;
 }
 
-.flex-item-container>div {
-    margin: 10px;
-    text-align: center;
+.flex-item-container > div {
+  margin: 10px;
+  text-align: center;
 }
 
 .item-form {
-    margin: 10px;
-    margin-right: 20px;
+  margin: 10px;
+  margin-right: 20px;
 }
 
 .item-list {
-    width: 94vw;
+  width: 94vw;
 }
 
 .search-icon {
-    position: absolute;
-    left: 239px;
-    top: 7px;
+  position: absolute;
+  left: 239px;
+  top: 7px;
 }
 
-
 .logout-button {
-    position: absolute;
-    right: 18px;
-    top: 18px;
-    height: 60px;
+  margin-left: auto;
+  margin-top: 12px;
+  margin-right: 24px;
 }

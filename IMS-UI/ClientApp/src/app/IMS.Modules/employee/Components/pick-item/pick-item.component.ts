@@ -22,16 +22,16 @@ export class PickItemComponent implements OnInit {
   cartItems: CartItem[] = [];  // -- To be Set TBD
   shelfItems: Item[] = [];
   employee: Employee;
-  name : string;
-  searchText : string;
+  name: string;
+  searchText: string;
 
   constructor(private centralizedRepo: CentralizedDataService, private router: Router,
-    private itemService: ItemService,private snackBar : MatSnackBar, public dialog: MatDialog) { }
+    private itemService: ItemService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
 
   searchBox() {
   }
-   
+
 
   ngOnInit() {
     this.employee = this.centralizedRepo.getEmployee();
@@ -80,14 +80,14 @@ export class PickItemComponent implements OnInit {
     let style = {
       'width': (this.cartItems.length != 0) ? '50vw' : '100vw'
     };
-    
+
     return style;
   }
 
-  bulkRequest()  {
+  bulkRequest() {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "auto";
-    dialogConfig.height = "auto";
+    dialogConfig.width = "580px";
+    dialogConfig.height = "524px";
     dialogConfig.panelClass = 'dialog-bulk-request';
     dialogConfig.data = this.employee;
     dialogConfig.autoFocus = true;

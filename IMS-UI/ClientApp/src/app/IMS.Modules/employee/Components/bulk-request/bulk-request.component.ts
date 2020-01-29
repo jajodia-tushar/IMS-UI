@@ -76,7 +76,13 @@ export class BulkRequestComponent implements OnInit {
     this.orderSuccessDetails.imageUrl = "../../../../../assets/accept.svg";
     this.orderSuccessDetails.greetingText = "Request Sent";
     this.orderSuccessDetails.message = "Your request has been sent and is waiting for approval";
-    this.orderSuccessDetails.notification = "You will be notified once your order is approved"
+    this.orderSuccessDetails.notification = "You will be notified once your order is approved";
+    let itemData: BulkOrderItemQuantityMapping = {
+      item: { id: 1, name: "", maxLimit: 0, isActive: true, imageUrl: "", rate: 0 },
+      quantityOrdered: 0,
+      quantityUsed: 0
+    };
+    this.dataSource.data.push(itemData);
   }
 
   createRequest()  {

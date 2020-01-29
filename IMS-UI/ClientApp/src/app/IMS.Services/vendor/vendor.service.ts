@@ -27,7 +27,21 @@ export class VendorService {
     params = params.append("pageSize",pageSize.toString());
     return this.http.get<VendorOrderResponse>("api/vendor/orders", { params });
   }
-
+  checkVendorName(name: string) {
+    let params = new HttpParams();
+    params = params.append("name", name);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
+  checkVendorPan(pan: string) {
+    let params = new HttpParams();
+    params = params.append("pan", pan);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
+  checkVendorGst(gst: string) {
+    let params = new HttpParams();
+    params = params.append("gst", gst);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
   createVendor(vendor: Vendor): Promise<VendorResponse> {
     return this.http.post<VendorResponse>("api/Vendor", vendor).toPromise()
   }
@@ -42,7 +56,17 @@ export class VendorService {
   }
 
   getAllVendors() {
-    return this.http.get<VendorResponse>("api/Vendor");
+    let params = new HttpParams();
+    params = params.append("pageNumber", "1");
+    params = params.append("pageSize", "2147483647");
+    return this.http.get<VendorResponse>("api/Vendor", {params});
+  }
+  getVendorOnPagination(name,pageNumber, pagesize) {
+    let params = new HttpParams();
+    params = params.append("name", name);
+    params = params.append("pageNumber", pageNumber);
+    params = params.append("pageSize", pagesize);
+    return this.http.get<VendorResponse>("api/Vendor", { params });
   }
 
   postVendorOrder(vendorOrder: VendorOrder) {

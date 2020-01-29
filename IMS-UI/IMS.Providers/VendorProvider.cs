@@ -26,7 +26,7 @@ namespace IMS_UI.IMS.Providers
             _iConfiguration = iConfiguration;
         }
 
-        public async Task<VendorResponse> GetAllVendors()
+        public async Task<VendorResponse> GetAllVendors(string name,string pageNumber, string pagesize)
         {
             try
             {
@@ -43,8 +43,9 @@ namespace IMS_UI.IMS.Providers
 
                     string query;
                     using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                        new KeyValuePair<string, string>("pageNumber", "1"),
-                        new KeyValuePair<string, string>("pagesize", int.MaxValue.ToString())
+                        new KeyValuePair<string, string>("name", name),
+                        new KeyValuePair<string, string>("pageNumber", pageNumber),
+                        new KeyValuePair<string, string>("pagesize", pagesize)
                     }))
                     {
                         query = content.ReadAsStringAsync().Result;
@@ -317,21 +318,34 @@ namespace IMS_UI.IMS.Providers
 
         }
 
-        public async Task<Response> IsVendorNameUnique(string vendorName)
+        public async Task<Response> IsVendorDetailUnique(string vendorName,string phoneNumber,string pan,string gst,string cin)
         {
             try
             {
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
-                    var endPoint = "api/Vendor/IsUnique?name="+vendorName;
+                    string path = Constants.APIEndpoints.vendorIsUniqueEndpoint;
+                    UriBuilder uriBuilder = new UriBuilder(_iConfiguration["BASEURL"] + path);
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _sessionManager.GetString("token");
                     http.DefaultRequestHeaders.Authorization =
                                 new AuthenticationHeaderValue("Bearer", token);
-                    var response = await http.GetAsync(endPoint);
-                   Response apiUniqueVendorNameResponse = new Response();
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                        new KeyValuePair<string, string>("name", vendorName),
+                        new KeyValuePair<string, string>("mobile", phoneNumber),
+                        new KeyValuePair<string, string>("pan", pan),
+                        new KeyValuePair<string, string>("gst", gst),
+                        new KeyValuePair<string, string>("cin", cin)
+
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+                    uriBuilder.Query = query;
+                    var response = await http.GetAsync(uriBuilder.Uri);
+                    Response apiUniqueVendorNameResponse = new Response();
                     var result = await response.Content.ReadAsStringAsync();
                     apiUniqueVendorNameResponse = JsonConvert.DeserializeObject<Response>(result);
                     return apiUniqueVendorNameResponse;

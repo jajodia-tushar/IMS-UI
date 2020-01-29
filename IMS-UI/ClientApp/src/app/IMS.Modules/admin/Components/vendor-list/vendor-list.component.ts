@@ -6,9 +6,10 @@ import { Observable, of } from 'rxjs';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { Router } from '@angular/router';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
-import { MatDialogConfig, MatDialog, MatSnackBar, MatSort } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatSnackBar, MatSort, MatPaginator } from '@angular/material';
 import { VendorManageDialogComponent } from '../vendor-manage-dialog/vendor-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 @Component({
   selector: 'app-vendor-list',
@@ -30,12 +31,18 @@ export class VendorListComponent implements OnInit {
   displayedColumns = ['name', 'title', 'companyIdentificationNumber', 'contactNumber','actions'];
   dataSource: ExampleDataSource;
   isSuperAdmin: boolean;
+  filterName: string="";
   nameSortAsc: boolean= false;
   titleSortAsc: boolean = false;
   cinSortAsc: boolean = false;
+  displayMessage: string;
+  displayErrorText: boolean;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  pageSizeOptions: number[] = [5, 10, 15, 20];
+  paginator: MatPaginator;
+  pagingInfo: PagingInfo = new PagingInfo();
+
   openAddVendorDialog()
   {
     let dialogConfig = new MatDialogConfig();
@@ -144,17 +151,74 @@ export class VendorListComponent implements OnInit {
     this.dataSource = new ExampleDataSource();
   }
 
+ async pageChange(event) {
+    console.log(event)
+   console.log(event.pageIndex + 1);
+   await this._VendorService.getVendorOnPagination(this.filterName, event.pageIndex + 1, event.pageSize).subscribe(
+     data => {
+       console.log(data.vendors)
+       if (data.status === "Success") {
+         this.displayErrorText = false;
+         vendordata = data.vendors;
+         if (vendordata.length > 0) {
+           this.dataSource = new ExampleDataSource();
+         }
+         else
+           this.displayErrorText = false;
+       }
+       else {
+         if (data.errorCode === 401) {
+            this.router.navigateByUrl("/login");
+          }
+        }
+     }
+   )
+  }
 
+  async applyFilter(name) {
+    this.filterName = name;
+    console.log(this.pagingInfo);
+    await this._VendorService.getVendorOnPagination(name,this.pagingInfo.pageNumber, this.pagingInfo.pageSize).subscribe(
+      data => {
+        console.log(data)
+        if (data.status === "Success") {
+          this.displayErrorText = false;
+          console.log("success")
+          vendordata = data.vendors;
+          this.pagingInfo.totalResults = data.pagingInfo.totalResults;
+          this.dataSource = new ExampleDataSource();  
+        }
+        else if (data.status === "Failure") {
+            vendordata = data.vendors;
+            this.dataSource = new ExampleDataSource();
+            this.displayMessage = "No Results found with Search name " + this.filterName;
+          console.log(this.displayMessage);
+          this.displayErrorText = true;
+        }
+      },
+      error => {
+        console.log(error);
+
+      }
+    )
+  }
  
 
   async ngOnInit() {
-    this._VendorService.getAllVendors().subscribe(
+    this.pagingInfo = new PagingInfo();
+    this.pagingInfo.pageNumber = 1;
+    this.pagingInfo.pageSize = 10;
+    this.pagingInfo.totalResults = 100;
+    await this._VendorService.getAllVendors().subscribe(
       data => {
         if (data.status === "Success") {
           vendordata = data.vendors;
+          this.pagingInfo.totalResults = data.pagingInfo.totalResults;
           if (vendordata.length > 0) {
             this.dataSource = new ExampleDataSource();
           }
+          else
+            this.displayErrorText = true;
         } 
         else {
           if (data.errorCode === 401) {
@@ -163,6 +227,7 @@ export class VendorListComponent implements OnInit {
         }
       }
     )
+    
     await this.centralizedRepo.getLoggedInUser();
     if (this.centralizedRepo.getUser().role.id == 4)
       this.isSuperAdmin = true;

@@ -5,6 +5,7 @@ import { VendorResponse } from 'src/app/IMS.Models/Vendor/VendorResponse';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { Response } from 'src/app/IMS.Models/Response';
+import { VendorValidatorService } from 'src/app/IMS.Services/vendor/vendor-validator.service';
 
 @Component({
   selector: 'app-vendor-manage-form',
@@ -15,16 +16,19 @@ export class VendorManageFormComponent implements OnInit {
   createVendorForm: FormGroup
   updateButtonText: string = "Update";
   submitButtonText: string = "Submit";
-  confirmButtonText:string="Yes"
-  constructor(private formBuilder: FormBuilder,private _vendorService:VendorService) {
+  confirmButtonText: string = "Yes"
+  constructor(private formBuilder: FormBuilder, private _vendorService: VendorService,
+    private vendorValidator: VendorValidatorService) {
     this.createVendorForm = this.formBuilder.group({
       id: [1, []],
-      name: ["", [Validators.required]],
+      name: ["", [Validators.required], this.vendorValidator.vendorNameTakenValidator.bind(this.vendorValidator)],
       title: ["", [Validators.required]],
       companyIdentificationNumber: ["", [Validators.required]],
       contactNumber: ["", [Validators.required, Validators.pattern(("[6-9]\\d{9}")), Validators.maxLength(10)]],
-      pan: ["", [Validators.required, Validators.pattern(("^[A-Z]{5}[0-9]{4}[A-Z]$"))]],
-      gst: ["", [Validators.required, Validators.pattern(("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}"))]],
+      pan: ["", [Validators.required, Validators.pattern(("^[A-Z]{5}[0-9]{4}[A-Z]$"))],
+        this.vendorValidator.vendorPanTakenValidator.bind(this.vendorValidator)],
+      gst: ["", [Validators.required, Validators.pattern(("[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}"))],
+        this.vendorValidator.vendorGstTakenValidator.bind(this.vendorValidator)],
       address: ["", [Validators.required]]
     })
   }

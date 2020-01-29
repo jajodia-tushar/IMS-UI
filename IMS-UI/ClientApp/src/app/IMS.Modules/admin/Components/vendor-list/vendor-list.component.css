@@ -97,3 +97,12 @@ tr.example-element-row:not(.example-expanded-row):active {
 .table-header > mat-header-cell:hover mat-icon {
   display: block !important;
 }
+
+.error-msg-show {
+  height: 50px;
+  text-align: center;
+  margin-top: 5%;
+}
+.error-msg-show > p {
+ padding-top:1.5%;
+}

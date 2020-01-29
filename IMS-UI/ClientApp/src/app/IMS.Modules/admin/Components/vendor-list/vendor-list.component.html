@@ -1,7 +1,11 @@
-<button id="add-vendor" mat-button (click)="openAddVendorDialog()">Add Vendor</button>
+<button matTooltip="Info about the action" id="add-vendor" mat-button (click)="openAddVendorDialog()">Add Vendor</button>
 <input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 <div class="table-margin-top mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+  <div *ngIf="displayErrorText" class="error-msg-show">
+    <p class="error-msg-position" >{{displayMessage}}</p>
+  </div>
+  
+  <mat-table *ngIf="!displayErrorText" #table [dataSource]="dataSource">
 
     <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
@@ -75,12 +79,16 @@
              matRipple
              class="element-row"
              [class.expanded]="expandedElement == row"
-             (click)="expandedElement = row"></mat-row>
+             (click)="expandedElement = expandedElement === row ? null : row"></mat-row>
     <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
              [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
              style="overflow: hidden">
     </mat-row>
   </mat-table>
+  <mat-paginator *ngIf="!displayErrorText" [length]="pagingInfo.totalResults" [pageSize]="pagingInfo.pageSize"
+                 [pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)">
+  </mat-paginator>
+  
 </div>
 
 

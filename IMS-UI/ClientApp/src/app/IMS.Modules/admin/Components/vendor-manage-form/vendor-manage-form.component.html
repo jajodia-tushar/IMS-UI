@@ -7,6 +7,7 @@
     <mat-form-field class="one-row-input" floatLabel="auto">
       <input matInput placeholder="Vendor Name" formControlName="name" required>
       <mat-error *ngIf="createVendorForm.controls['name'].errors?.required">Name is required</mat-error>
+      <mat-error *ngIf="createVendorForm.controls['name'].errors?.vendorNameNotAvailable">vendorname Already Taken</mat-error>
     </mat-form-field>
     <mat-form-field class="one-row-input" floatLabel="auto">
       <input matInput placeholder="Title" formControlName="title" required>
@@ -30,11 +31,13 @@
       <input matInput placeholder="Pan Number" formControlName="pan" required>
       <mat-error *ngIf="createVendorForm.controls['pan'].errors?.required">Pan Number is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['pan'].errors?.pattern">Pan Number is not valid</mat-error>
+      <mat-error *ngIf="createVendorForm.controls['pan'].errors?.vendorPanNotAvailable">Pan Already Exist</mat-error>
     </mat-form-field>
     <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
       <input matInput placeholder="GST Number" formControlName="gst" required>
       <mat-error *ngIf="createVendorForm.controls['gst'].errors?.required">GST Number is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['gst'].errors?.pattern">GST Number is not valid</mat-error>
+      <mat-error *ngIf="createVendorForm.controls['gst'].errors?.vendorGstNotAvailable">Gst Already Exist</mat-error>
     </mat-form-field>
   </div>
   <div >

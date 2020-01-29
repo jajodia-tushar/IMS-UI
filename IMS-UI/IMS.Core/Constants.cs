@@ -46,6 +46,7 @@ namespace IMS_UI.IMS.Core
             public const string PlaceEmployeeBulkOrder = "api/order/EmployeeBulkOrders";
             public const string particularVendorOrder = "api/Order/Vendors/";
             public const string vendorEndpoint = "api/Vendor";
+            public const string vendorIsUniqueEndpoint="api/Vendor/IsUnique";
         }
     }
 

@@ -26,11 +26,11 @@ namespace IMS_UI.Controllers
         }
         // GET: api/Vendor
         [HttpGet]
-        public async Task<IActionResult> GetAllVendors()
+        public async Task<IActionResult> GetAllVendors(string name,string pageNumber,string pagesize)
         {
             try
             {
-                var response = await _vendorProvider.GetAllVendors();
+                var response = await _vendorProvider.GetAllVendors(name,pageNumber, pagesize);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 
@@ -81,6 +81,23 @@ namespace IMS_UI.Controllers
             try
             {
                 var response = await _vendorProvider.DeactivateVendor(vendorId, isHardDelete);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet("IsUnique")]
+        public async Task<IActionResult> CheckUniqueness(string name, string mobile, string pan, string gst, string cin)
+        {
+            try
+            {
+                var response = await _vendorProvider.IsVendorDetailUnique(name, mobile, pan, gst,cin);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

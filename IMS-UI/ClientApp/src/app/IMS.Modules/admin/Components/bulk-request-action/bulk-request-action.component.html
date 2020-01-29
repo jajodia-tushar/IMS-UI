@@ -1,26 +1,32 @@
 <mat-card class="example-card">
-    <mat-card-title class="card-title">
-        Bulk Order Request
+    <mat-card-header>
+    <mat-card-title >
+    Bulk Request
     </mat-card-title>
+</mat-card-header>
     <mat-divider class="divider-position"></mat-divider>
     <mat-card-content>
-        <h4>Requested By:</h4>
-        <h4>Employee ID:</h4>
-        <h4>Requirement Date:</h4>
-        <h4>Reason For </h4>
-        <p></p>
+        <mat-list>
+            <mat-list-item>
+                <h3 mat-line>Request Status : {{requestStatus}} </h3>
+            </mat-list-item>
+            <mat-list-item>
+            <h3 mat-line>Requested By : {{requestedBy}}</h3>
+            </mat-list-item>
+            <mat-list-item>
+                <h3 mat-line>Employee ID : {{empId}} </h3>
+            </mat-list-item>
+            <mat-list-item>
+            <h3 mat-line>Requested Made On Date : {{requestMadeOnDate}}</h3>
+            </mat-list-item>
+            <mat-list-item>
+                <h3 mat-line>Requested For Date : {{requestedForDate}} </h3>
+            </mat-list-item>
+            <mat-list-item>
+                <h3 mat-line>Reason for bulk request : {{reasonForRequest}}</h3>
+            </mat-list-item>
+        </mat-list>
+        
     </mat-card-content>
 </mat-card>
-<mat-card class="example-card">
-    <mat-card-title class="card-title">
-        Bulk Order Request
-    </mat-card-title>
-    <mat-divider class="divider-position"></mat-divider>
-    <mat-card-content>
-        <h4>Requested By:</h4>
-        <h4>Employee ID:</h4>
-        <h4>Requirement Date:</h4>
-        <h4>Reason For </h4>
-        <p></p>
-    </mat-card-content>
-</mat-card>
+

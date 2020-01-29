@@ -22,7 +22,7 @@ export class EmployeeManageFormComponent implements OnInit {
       firstname: ["", [Validators.required, Validators.maxLength(16), this.employeeValidators.cannotContainSpace]],
       lastname: ["", [this.employeeValidators.cannotContainSpace, Validators.maxLength(16)]],
       email: ["", [Validators.required, Validators.email], [this.employeeValidators.employeeEmailTakenValidator.bind(this.employeeValidators)]],
-      contactNumber: ["", [Validators.maxLength(12)]],
+      contactNumber: ["", [Validators.required, Validators.pattern(("[6-9]\\d{9}")), Validators.maxLength(10)]],
       temporaryCardNumber: ["", []],
       accessCardNumber: ["", []],
       isActive: [true, []]
@@ -44,6 +44,20 @@ export class EmployeeManageFormComponent implements OnInit {
       let employeeDetail = this.employeeDetails;
       this.createEmployeeForm.setValue(employeeDetail);
       this.createEmployeeForm.get("id").disable();
+      this.createEmployeeForm.get("email").clearAsyncValidators();
+      this.createEmployeeForm.get("email").valueChanges.subscribe(
+        (email: string) => {
+          if (email == this.employeeDetails.email) {
+            this.createEmployeeForm.get("email").clearAsyncValidators();
+          }
+          else {
+            this.createEmployeeForm.get("email").setAsyncValidators(
+              this.employeeValidators.employeeEmailTakenValidator.bind(this.employeeValidators)
+            )
+          }
+        }
+      );
+
     }
   }
   get id() {
@@ -64,6 +78,8 @@ export class EmployeeManageFormComponent implements OnInit {
 
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
     let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.editEmployee(employee);
+    console.log(edittedEmployee);
+
     this.employeeEditted.emit(edittedEmployee);
 
   }

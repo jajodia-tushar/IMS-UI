@@ -1,22 +1,18 @@
-.users-details {
-  width: 97%;
-  height: 80%;
-
+.user-details {
+  width: 96%;
+  height: 100%;
   position: relative;
-  margin: 30px;
+  left: 24px;
+  /* margin-left: 24px; */
   color: white;
 }
 
-.font-weight-bold {
+h5 {
   margin: 20px;
   color: white;
 }
 
 .table-container {
   position: relative;
-
   top: 5%;
-
-  width: 96%;
-  height: 90%;
 }

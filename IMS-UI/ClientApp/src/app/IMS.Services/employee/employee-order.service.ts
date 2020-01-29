@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EmployeeOrderData } from '../../IMS.Models/Employee/EmployeeOrderData';
 import { EmployeeOrdersResponse } from 'src/app/IMS.Models/Employee/EmployeeOrdersResponse';
+import { BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { EmployeeOrdersResponse } from 'src/app/IMS.Models/Employee/EmployeeOrde
 export class EmployeeOrderService {
   constructor(private http : HttpClient) { }
   postOrderData(body :EmployeeOrderData) : Observable<any>{
-    return this.http.post<any>("api/employeeOrder",body);
+    return this.http.post<any>("api/employee/orders",body);
   }
 
   getOrders(fromDate : string, toDate : string, pageNumber : number, pageSize : number, employeeId : string) 
@@ -22,13 +23,17 @@ export class EmployeeOrderService {
     params = params.append("pageSize",pageSize.toString());
     params = params.append("employeeId",employeeId);
 
-    return this.http.get<EmployeeOrdersResponse>("api/employeeorder",{params});
+    return this.http.get<EmployeeOrdersResponse>("api/employee/orders",{params});
   }
 
   getRecentEntries() : Observable<EmployeeOrdersResponse>{
     let params = new HttpParams();
     params = params.append("pageNumber","1");
     params = params.append("pageSize","11");
-    return this.http.get<EmployeeOrdersResponse>("api/employeeorder", {params});
+    return this.http.get<EmployeeOrdersResponse>("api/employee/orders", {params});
+  }
+
+  placeBulkOrder(bulkRequest: BulkRequest): Observable<any>  {
+    return this.http.post("api/employee/bulk", bulkRequest);
   }
 }

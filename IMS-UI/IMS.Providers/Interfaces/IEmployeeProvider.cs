@@ -16,5 +16,8 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<Response> DeactivateEmployee(string employeeId, bool isHardDelete);
         Task<Response> IsUniqueEmployeeEmail(string email);
         Task<Response> IsUniqueEmployeeId(string employeeId);
+        Task<EmployeeOrdersResponse> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId);
+        Task<EmployeeBulkOrdersResponse> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder);
+        Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest);
     }
 }

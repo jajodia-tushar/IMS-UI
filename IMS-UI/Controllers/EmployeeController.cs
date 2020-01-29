@@ -15,12 +15,12 @@ namespace IMS_UI.Controllers
     {
 
         private IEmployeeProvider _employeeProvider;
-        private SessionManager sessionManager;
+        private SessionManager _sessionManager;
 
-        public EmployeeController(IEmployeeProvider _employeeProviderProvider, SessionManager sessionManager)
+        public EmployeeController(IEmployeeProvider employeeProvider, SessionManager sessionManager)
         {
-            this._employeeProvider = _employeeProviderProvider;
-            this.sessionManager = sessionManager;
+            this._employeeProvider = employeeProvider;
+            this._sessionManager = sessionManager;
                 
         }
 
@@ -31,7 +31,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.GetAllEmployee(filter,pageNumber,pageSize);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -48,7 +48,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.IsUniqueEmployeeId(employeeId);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -66,7 +66,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.IsUniqueEmployeeEmail(email);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -77,8 +77,6 @@ namespace IMS_UI.Controllers
 
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> AddEmployeeDetails([FromBody] Employee employee)
         {
@@ -86,7 +84,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.AddEmployee(employee);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -103,7 +101,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.EditEmployee(employee);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -120,7 +118,7 @@ namespace IMS_UI.Controllers
             {
                 var response = await _employeeProvider.DeactivateEmployee(id, isHardDelete);
                 if (response.Error != null && response.Error.ErrorCode == 401)
-                    sessionManager.ClearSession();
+                    _sessionManager.ClearSession();
 
                 return Ok(response);
             }
@@ -129,5 +127,75 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet("validate/{employeeId}")]
+        public async Task<IActionResult> GetEmployee(string employeeId)
+        {
+            try
+            {
+                var response = await _employeeProvider.ValidateEmployee(employeeId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
+        }
+
+        [HttpGet("orders")]
+        public async Task<IActionResult> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId)
+        {
+            try
+            {
+                var response = await _employeeProvider.GetEmployeeOrders(toDate, fromDate, pageNumber, pageSize, employeeId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost("orders")]
+        public async Task<IActionResult> PostOrder(EmployeeOrder placeEmployeeOrderRequest)
+        {
+            try
+            {
+                var response = await _employeeProvider.PostOrders(placeEmployeeOrderRequest);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpPost("bulk")]
+        public async Task<IActionResult> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder)
+        {
+            try
+            {
+                var response = await _employeeProvider.PostBulkOrder(employeeBulkOrder);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
     }
 }

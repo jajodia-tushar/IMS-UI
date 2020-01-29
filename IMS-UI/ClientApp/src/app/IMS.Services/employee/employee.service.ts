@@ -20,7 +20,7 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   employeeIdValidation(EmployeeID: string): Observable<EmployeeResponse> {
-    return this.http.get<EmployeeResponse>("employee/validate/" + EmployeeID);
+    return this.http.get<EmployeeResponse>("api/employee/validate/" + EmployeeID);
   }
 
   validateEmail(email: string) {

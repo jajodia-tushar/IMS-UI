@@ -16,20 +16,18 @@ namespace IMS_UI.IMS.Providers
     public class EmployeeProvider : IEmployeeProvider
     {
         private IConfiguration _iconfiguration;
-        SessionManager sessionManager;
+        SessionManager _sessionManager;
         public EmployeeProvider(IConfiguration configuration, SessionManager sessionManager)
         {
             _iconfiguration = configuration;
-            this.sessionManager = sessionManager;
+            this._sessionManager = sessionManager;
         }
-
-
 
         public async Task<EmployeesResponse> AddEmployee(Employee employee)
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 JObject employeeJson = JsonMaker(employee);
                 var response = await http.PostAsJsonAsync("api/employee", employeeJson);
                 return await EmployeeResultParser(response);
@@ -40,14 +38,12 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 JObject employeeJson = JsonMaker(employee);
                 var response = await http.PutAsJsonAsync("api/employee", employeeJson);
                 return await EmployeeResultParser(response);
             }
         }
-
-
 
         private async Task<Response> ResultParser(HttpResponseMessage response)
         {
@@ -79,7 +75,7 @@ namespace IMS_UI.IMS.Providers
                         _client.DefaultRequestHeaders.Accept.Add(
                            new MediaTypeWithQualityHeaderValue("application/json"));
                         _client.DefaultRequestHeaders.Authorization =
-                            new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
+                            new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
                         string query;
                         if (filter == "undefined")
                         {
@@ -108,27 +104,24 @@ namespace IMS_UI.IMS.Providers
             return Json;
         }
 
-        private void prepareClient(HttpClient http)
+        private void PrepareClient(HttpClient http)
         {
             http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
-            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessionManager.GetString("token"));
+            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
         }
 
         public async Task<Response> DeactivateEmployee(string id, bool isHardDelete)
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 var response = await http.DeleteAsync("api/employee?id=" + id.ToString() + "&isHardDelete=" + isHardDelete.ToString());
                 return await ResultParser(response);
             }
         }
 
-
-        
- 
         public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
             HttpClient client = new HttpClient();
@@ -145,7 +138,7 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
 
                 var response = await http.GetAsync("api/employee/IdExists?employeeId=" + employeeId);
                 return await ResultParser(response);
@@ -156,10 +149,85 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 var response = await http.GetAsync("api/employee/email?email=" + email);
                 return await ResultParser(response);
             }
+        }
+
+        public async Task<EmployeeOrdersResponse> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize, string employeeId)
+        {
+            try
+            {
+                var endPoint = Constants.APIEndpoints.EmployeeOrder;
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + endPoint);
+                using (HttpClient _client = new HttpClient())
+                {
+                    _client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    _client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("pageNumber", pageNumber),
+                new KeyValuePair<string, string>("pageSize", pageSize),
+                new KeyValuePair<string, string>("endDate", toDate),
+                new KeyValuePair<string, string>("employeeId", employeeId),
+                new KeyValuePair<string, string>("startDate", fromDate),
+
+            }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+
+                    uriBuilder.Query = query;
+
+                    var response = await _client.GetAsync(uriBuilder.Uri);
+                    return JsonConvert.DeserializeObject<EmployeeOrdersResponse>(
+                        await response.Content.ReadAsStringAsync());
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<EmployeeBulkOrdersResponse> PostBulkOrder(EmployeeBulkOrder employeeBulkOrder)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.PlaceEmployeeBulkOrder;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(employeeBulkOrder);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+            var byteData = new ByteArrayContent(buffer);
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
+            return JsonConvert.DeserializeObject<EmployeeBulkOrdersResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+        public async Task<EmployeeOrderResponse> PostOrders(EmployeeOrder placeEmployeeOrderRequest)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.EmployeeOrder;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(placeEmployeeOrderRequest);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+            var byteData = new ByteArrayContent(buffer);
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
+            return JsonConvert.DeserializeObject<EmployeeOrderResponse>(
+                await response.Content.ReadAsStringAsync());
         }
     }
 }

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { VendorOrderResponse } from 'src/app/IMS.Models/Vendor/VendorOrderResponse';
 import { COLUMN_DATA, COLUMN_DATA2 } from 'src/app/IMS.Models/Vendor/Mock';
 import { Response } from 'src/app/IMS.Models/Shared/Response';
+import { SingleVendorOrderResponse } from 'src/app/IMS.Models/Vendor/SingleVendorOrderResponse';
 
 
 
@@ -70,5 +71,7 @@ export class VendorService {
     return COLUMN_DATA2;
   }
 
-  
+  getVendorOrderByOrderId(orderId: string) {
+    return this.http.get<SingleVendorOrderResponse>(`api/vendor/order/${orderId}`);
+  }
 }

@@ -6,6 +6,7 @@
           <mat-card-header class="invoice-card-header">
             <mat-card-title>Invoice</mat-card-title>
             <div class="order-id">Order ID:{{OrderID}}</div>
+            <div class="modified-by-name">Last modified by {{ lastModifiedBy }}</div>
           </mat-card-header>
           <mat-divider [inset]="true"></mat-divider>
           <mat-card-content class="invoice-card-content">
@@ -27,7 +28,7 @@
                     <mat-form-field appearance="outline" class="example-full-width">
                       <mat-label class="input-label">Invoice Number</mat-label>
                       <input matInput [(ngModel)]="InvoiceNo" [ngModelOptions]="{standalone: true}" autocomplete="off"
-                        id="invoice" placeholder="Invoice Number" value="{{InvoiceNo}}">
+                        id="invoice" placeholder="Invoice Number" value="{{InvoiceNo}}" [disabled]="isDisabled">
                     </mat-form-field>
                   </form>
                 </div>
@@ -68,8 +69,8 @@
             <mat-card-actions>
               <button mat-button class="ViewReceipt" (click)="openDialog()">View Receipt</button>
               <div class="approvals-button">
-                <button mat-button color="accent" (click)="approve()">Approve</button>
-                <button mat-button class="rejectButton" (click)="Reject()">Reject</button>
+                <button mat-button color="accent" (click)="approve()" [disabled]="isApprovedAndCannotEdit()">Approve</button>
+                <button mat-button class="rejectButton" (click)="Reject()" [disabled]="isApprovedAndCannotEdit()">Reject</button>
               </div>
             </mat-card-actions>
           </div>
@@ -80,7 +81,7 @@
           </mat-card-header>
           <mat-divider [inset]="true"></mat-divider>
           <mat-card-content>
-            <app-revisable-table [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items"
+            <app-revisable-table [disabledCond]="isApprovedAndCannotEdit()" [columnHeader]=columns [(griddata)]="itemquantityprice" [ItemList]="Items"
               (ChangedFinalAmount)="finalPriceChange($event)">
             </app-revisable-table>
           </mat-card-content>

@@ -1,3 +1,7 @@
+.items-container {
+  width: 99%;
+}
+
 .main-div {
   height: 100%;
   position: static;
@@ -201,4 +205,10 @@
   align-items: baseline;
   box-sizing: border-box;
   width: 90%;
+}
+
+.modified-by-name {
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
 }

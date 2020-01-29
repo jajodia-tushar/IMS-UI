@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EmployeeOrderData } from '../../IMS.Models/Employee/EmployeeOrderData';
 import { EmployeeOrdersResponse } from 'src/app/IMS.Models/Employee/EmployeeOrdersResponse';
+import { BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,9 @@ export class EmployeeOrderService {
     params = params.append("pageNumber","1");
     params = params.append("pageSize","11");
     return this.http.get<EmployeeOrdersResponse>("api/employee/orders", {params});
+  }
+
+  placeBulkOrder(bulkRequest: BulkRequest): Observable<any>  {
+    return this.http.post("api/employee/bulk", bulkRequest);
   }
 }

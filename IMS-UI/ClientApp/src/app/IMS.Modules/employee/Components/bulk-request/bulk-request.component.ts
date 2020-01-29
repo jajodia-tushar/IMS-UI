@@ -5,10 +5,10 @@ import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { Router } from '@angular/router';
-import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { BulkRequest, BulkOrderItemQuantityMapping, EmployeeBulkOrderDetails } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
 import { OrderSuccessDetails } from 'src/app/IMS.Models/Shared/OrderMeesage';
+import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
 
 @Component({
   selector: 'app-bulk-request',
@@ -40,7 +40,7 @@ export class BulkRequestComponent implements OnInit {
     private snackBar: MatSnackBar, private router: Router,
     private dialog: MatDialog,
     @Optional() @Inject(MAT_DIALOG_DATA) public datas: Employee, 
-    private itemService: ItemService, private bulkRequestService: BulkRequestService) {
+    private itemService: ItemService, private employeeOrderService: EmployeeOrderService) {
     this.employeeID = datas.id;
   }
 
@@ -105,7 +105,7 @@ export class BulkRequestComponent implements OnInit {
     if(errorRowIndex === -1)  {
       this.createRequest();
     
-      this.bulkRequestService.placeOrder(this.bulkRequest).subscribe(
+      this.employeeOrderService.placeBulkOrder(this.bulkRequest).subscribe(
         data => {
           if(data.status == "Success")  {
               let dialogConfig = new MatDialogConfig();

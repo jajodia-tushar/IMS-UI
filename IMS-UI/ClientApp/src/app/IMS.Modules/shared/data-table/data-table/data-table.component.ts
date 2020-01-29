@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSnackBar, MatSort, Sort } from '@angular/material';
 import { DatePipe } from '@angular/common';
 import { Notification } from 'src/app/IMS.Models/Notification/Notification';
 import { Router } from '@angular/router';
@@ -27,14 +27,18 @@ export class DataTableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
   }
-   @Input() set pageInfo(data){
-     this.pageLength=data.totalResults;
-     this.pageSize=data.pageSize;
-     this.pageNumber=data.pageNumber;
-   }
+
+  @ViewChild(MatSort, { static: false }) sort : MatSort;
+  
+  @Input() set pageInfo(data){
+    this.pageLength=data.totalResults;
+    this.pageSize=data.pageSize;
+    this.pageNumber=data.pageNumber;
+  }
 
   @Input() set griddata(data) {
     this.datasource = new MatTableDataSource(data);
+    this.datasource.sort = this.sort;
   }
 
   @Input() columnHeader;
@@ -44,13 +48,18 @@ export class DataTableComponent implements OnInit {
   @Output() pageischanged: EventEmitter<any> = new EventEmitter<any> ();
 
   ngOnInit() {
-    this.displayedColumns = this.columnHeader.map(c => c.columnDef)
+    this.displayedColumns = this.columnHeader.map(c => c.columnDef);
+    this.datasource.sort = this.sort;
   }
 
   ngAfterViewInit() {
     this.displayedColumns = this.columnHeader.map(c => c.columnDef);
-
   }
+
+  sortData(sort: Sort) {
+    this.datasource.sort = this.sort;
+  } 
+
   transformDate(row) {
     this.date = this.datepipe.transform(row.lastModified, 'dd/MM/yyyy');
     return this.date;

@@ -15,7 +15,6 @@ export class VendorManageDialogComponent implements OnInit {
   action: string;
   constructor(private dialogRef: MatDialogRef<
     VendorManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
-    console.log(data)
     this.vendorData = data.vendor;
     this.action = data.action;
   }

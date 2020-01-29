@@ -46,7 +46,6 @@ export class VendorService {
     return this.http.post<VendorResponse>("api/Vendor", vendor).toPromise()
   }
   EditVendor(vendor: Vendor): Promise<VendorResponse> {
-    console.log(vendor)
     return this.http.put<VendorResponse>("api/Vendor", vendor).toPromise()
   }
   deactivateVendor(vendorId: any, isHardDelete: boolean): Promise<Response> {

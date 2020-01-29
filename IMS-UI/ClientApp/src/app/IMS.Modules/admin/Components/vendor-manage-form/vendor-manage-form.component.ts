@@ -44,13 +44,11 @@ export class VendorManageFormComponent implements OnInit {
 
   async createNewVendor() {
     let vendor: Vendor = <Vendor>this.createVendorForm.getRawValue();
-    console.log(vendor)
     let createdVendor: VendorResponse = <VendorResponse>await this._vendorService.createVendor(vendor);
     this.vendorCreated.emit(createdVendor);
   }
   async EditVendor() {
     let vendor: Vendor = <Vendor>this.createVendorForm.getRawValue();
-    console.log(vendor);
     let editedVendor: VendorResponse = <VendorResponse>await this._vendorService.EditVendor(vendor);
     this.vendorEditted.emit(editedVendor);
   }

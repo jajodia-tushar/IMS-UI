@@ -152,11 +152,8 @@ export class VendorListComponent implements OnInit {
   }
 
  async pageChange(event) {
-    console.log(event)
-   console.log(event.pageIndex + 1);
    await this._VendorService.getVendorOnPagination(this.filterName, event.pageIndex + 1, event.pageSize).subscribe(
      data => {
-       console.log(data.vendors)
        if (data.status === "Success") {
          this.displayErrorText = false;
          vendordata = data.vendors;
@@ -177,13 +174,10 @@ export class VendorListComponent implements OnInit {
 
   async applyFilter(name) {
     this.filterName = name;
-    console.log(this.pagingInfo);
     await this._VendorService.getVendorOnPagination(name,this.pagingInfo.pageNumber, this.pagingInfo.pageSize).subscribe(
       data => {
-        console.log(data)
         if (data.status === "Success") {
           this.displayErrorText = false;
-          console.log("success")
           vendordata = data.vendors;
           this.pagingInfo.totalResults = data.pagingInfo.totalResults;
           this.dataSource = new ExampleDataSource();  
@@ -192,13 +186,8 @@ export class VendorListComponent implements OnInit {
             vendordata = data.vendors;
             this.dataSource = new ExampleDataSource();
             this.displayMessage = "No Results found with Search name " + this.filterName;
-          console.log(this.displayMessage);
-          this.displayErrorText = true;
+            this.displayErrorText = true;
         }
-      },
-      error => {
-        console.log(error);
-
       }
     )
   }

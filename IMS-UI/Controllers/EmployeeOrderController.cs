@@ -24,23 +24,7 @@ namespace IMS_UI.Controllers
             _sessionManager = sessionManager;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetEmployeeOrders(string toDate, string fromDate, string pageNumber, string pageSize,string employeeId)
-        {
-            try
-            {
-                var response = await _employeeOrderProvider.GetEmployeeOrders(toDate,fromDate,pageNumber, pageSize, employeeId);
-                if (response.Error != null && response.Error.ErrorCode == 401)
-                    _sessionManager.ClearSession();
-
-                return Ok(response);
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
-
+       
         [HttpPost]
         public async Task<EmployeeOrderResponse> PostOrder(EmployeeOrder placeEmployeeOrderRequest)
         {
@@ -64,5 +48,6 @@ namespace IMS_UI.Controllers
                 return StatusCode(500);
             }
         }
+
     }
 }

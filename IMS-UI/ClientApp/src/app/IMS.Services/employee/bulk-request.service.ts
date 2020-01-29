@@ -11,6 +11,6 @@ export class BulkRequestService {
   constructor(private http: HttpClient) { }
 
   placeOrder(bulkRequest: BulkRequest): Observable<any>  {
-    return this.http.post("api/employeeOrder/bulk", bulkRequest);
+    return this.http.post("api/employee/bulk", bulkRequest);
   }
 }

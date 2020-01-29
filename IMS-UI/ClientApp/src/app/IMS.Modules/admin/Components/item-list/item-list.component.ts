@@ -91,6 +91,7 @@ export class ItemListComponent implements OnInit {
       }
       else if(result=="cancelled"){
         //don't show any message.
+        result.getElementById('editItemDetails').focus();
       }
       else if('name' in result){
         this.editItemInTable(result);

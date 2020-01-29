@@ -7,8 +7,6 @@
         <button id="add-item" mat-button (click)="openAddItemDialog()">Add item</button>
     </div>
 </div>
-<!-- <button id="add-item" mat-button (click)="openAddItemDialog()">Add Item</button>
-<input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter"> -->
 <div class="items-container">
     <div class="flex-container">
         <div class="table-container">
@@ -19,7 +17,7 @@
                         <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
                     </ng-container>
                     <ng-container *ngIf="i==numberOfColumns()">
-                        <th mat-header-cell *matHeaderCellDef> {{column | titlecase}} </th>
+                        <th mat-header-cell *matHeaderCellDef> {{column | humanize}} </th>
                         <td mat-cell *matCellDef="let element">
                             <button mat-icon-button (click)="editItemDetails(element)">
                                 <mat-icon>edit</mat-icon>

@@ -153,15 +153,6 @@ body {
     border: 0.5px solid aquamarine;
 }
 
-:host ::ng-deep .mat-radio-label-content {
-    padding-left: 1px;
-    padding-right: 8px;
-}
-
-.roles-radio {
-    margin-right: 10px;
-}
-
 .position-of-buttons .submit-update {
     height: 37px;
     position: absolute;

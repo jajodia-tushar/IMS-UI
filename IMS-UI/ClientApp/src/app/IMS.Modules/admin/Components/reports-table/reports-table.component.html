@@ -40,10 +40,13 @@
                 </ng-container>
 
 
+
+
             </table>
             <mat-paginator class="paginator" [length]="pageInfo.totalResults" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="[5, 10, 25, 100]" (page)="getNext($event)">
             </mat-paginator>
 
         </div>
     </div>
+    <button (click)="clickMe()">Export</button>
 </div>

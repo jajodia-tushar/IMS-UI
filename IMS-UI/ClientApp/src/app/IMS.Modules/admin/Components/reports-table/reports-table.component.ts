@@ -3,6 +3,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 
 @Component({
@@ -55,6 +60,21 @@ export class ReportsTableComponent implements OnInit {
 
   getNext(event) {
     this.paginatorClicked.emit(event);
+  }
+
+  
+
+  clickMe(){
+    let json = this.dataSource;
+    let excelFileName = "Exported FileName";
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+     const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
   }
 }
  

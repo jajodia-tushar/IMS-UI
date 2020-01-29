@@ -1,0 +1,25 @@
+<div class="items-container">
+    <div class="flex-container">
+        <div class="container">
+            <table mat-table [dataSource]="datasource" class="data-table">
+                <div class="table-row">
+                    <ng-container *ngFor="let column of columnHeaders" [cdkColumnDef]="column.columnDef">
+                        <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">
+                            {{ column.displayName }}
+                        </mat-header-cell>
+                        <mat-cell *cdkCellDef="let row" style="text-align:center; color:white">
+
+                            <div>{{ column.cell(row) }}</div>
+                        </mat-cell>
+                    </ng-container>
+                </div>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="ClickedRow(row)"></mat-row>
+            </table>
+            <mat-paginator class="paginator" [length]="pageInfo.totalResults" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)">
+
+            </mat-paginator>
+
+        </div>
+    </div>
+</div>

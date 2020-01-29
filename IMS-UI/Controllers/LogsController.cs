@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IMS_UI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class LogsController : ControllerBase
     {
@@ -19,10 +18,17 @@ namespace IMS_UI.Controllers
             _logsProvider = logsProvider;
         }
 
-        [HttpGet]
+        [HttpGet("api/logs")]
         public async Task<LogsResponse> GetAllLogs()
         {
             var response = await _logsProvider.GetAllLogs();
+            return response;
+        }
+
+        [HttpGet("api/ActivityLogs")]
+        public async Task<ActivityLogsResponse> GetActivityLogs(string fromDate, string toDate, string pageNumber, string pageSize)
+        {
+            var response = await _logsProvider.GetAllActivityLogs(fromDate,toDate,pageNumber,pageSize);
             return response;
         }
     }

@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
 import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
+import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
 
 @Component({
   selector: "app-reports-tabs",
@@ -36,7 +37,8 @@ export class ReportsTabsComponent implements OnInit {
     private reportsService: ReportsService, 
     private route: ActivatedRoute,
     private vendorService : VendorService,
-    private employeeOrderService : EmployeeOrderService) {
+    private employeeOrderService : EmployeeOrderService,
+    private auditingService : AuditingService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
@@ -86,6 +88,41 @@ export class ReportsTabsComponent implements OnInit {
     else if(this.selectedTab == 4){
       this.showItemConsumptionTable();
     }
+    else if(this.selectedTab == 5){
+      this.showAuditsLogs();
+    }
+  }
+
+  showAuditsLogs(){
+    let fromDate = this.changeDateFormat(
+      this.reportsSelectionData[this.selectedTab].reportsFilterOptions[0].dataFromUser);
+    let toDate =
+      this.changeDateFormat(this.reportsSelectionData[this.selectedTab].reportsFilterOptions[1].
+        dataFromUser);
+
+    this.auditingService.getActivityLogs(this.pageInfo.pageSize,this.pageInfo.pageNumber,fromDate,toDate).subscribe(
+        data => {
+          if (data.status == "Success") {
+            let dataToDisplaytemp = []
+            data.activityLogRecords.forEach(
+              data => {
+                dataToDisplaytemp.push({
+                  "UserName" : data.userName,
+                  "action" : data.action,
+                  "details" : data.details,
+                  "performedOn" : data.performedOn,
+                  "createdOn" : data.createdOn,
+                  "remarks" : data.remarks,
+                });
+              });
+            this.columnToDisplay = JSON.parse(JSON.stringify(["UserName", "action","details","performedOn","createdOn","remarks"]));
+            this.dataToDisplay = JSON.parse(JSON.stringify(dataToDisplaytemp));
+            this.pageInfo = data.pagingInfo;
+          }
+          else if(data.status == "Failure"){
+            this.handleErrorInConnection(data.error.errorMessage);
+          }
+        });
   }
 
   showItemConsumptionTable() {    

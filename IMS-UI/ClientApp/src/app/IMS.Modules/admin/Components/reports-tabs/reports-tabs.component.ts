@@ -4,7 +4,14 @@ import { ActivatedRoute } from "@angular/router";
 import { VendorService } from "src/app/IMS.Services/vendor/vendor.service";
 import { PagingInfo } from "src/app/IMS.Models/Shared/PagingInfo";
 import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-order.service";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import { VendorOrderResponse } from "src/app/IMS.Models/Vendor/VendorOrderResponse";
 import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
+
+
+const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_EXTENSION = '.xlsx';
 
 @Component({
   selector: "app-reports-tabs",
@@ -16,6 +23,7 @@ export class ReportsTabsComponent implements OnInit {
   reportsSelectionData: reportsSelectionDataModel[] = [];
   selectedTab: number;
   hasExpandableRows: boolean = true;
+  dataToExport;
 
   locationCode: string;
   locationName: string;
@@ -136,6 +144,7 @@ export class ReportsTabsComponent implements OnInit {
       this.pageInfo.pageSize).subscribe(
         data => {
           if (data.status == "Success") {
+            this.dataToExport = JSON.parse(JSON.stringify(data));
             let dataToDisplaytemp = []
             data.dateWiseItemConsumptionDetails.forEach(
               data => {
@@ -169,6 +178,7 @@ export class ReportsTabsComponent implements OnInit {
     this.reportsService.getPerDayConsumption(fromDate,toDate,this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data =>{
         if (data.status == "Success") {
+          this.dataToExport = JSON.parse(JSON.stringify(data));
           let dataToDisplaytemp = []
           data.dateItemMapping.forEach(
             data => {
@@ -205,6 +215,7 @@ export class ReportsTabsComponent implements OnInit {
       employeeId).subscribe(
       data => {
         if (data.status == "Success") {
+          this.dataToExport = JSON.parse(JSON.stringify(data));
           let dataToDisplaytemp = []
           data.employeeOrders.forEach(
             data => {
@@ -251,6 +262,7 @@ export class ReportsTabsComponent implements OnInit {
       "true",this.pageInfo.pageNumber,this.pageInfo.pageSize).subscribe(
       data => {
         if (data.status == "Success") {
+          this.dataToExport = JSON.parse(JSON.stringify(data));
           let dataToDisplaytemp = []
           data.vendorOrders.forEach(  
             data => {
@@ -300,6 +312,7 @@ export class ReportsTabsComponent implements OnInit {
         this.pageInfo.pageNumber, this.pageInfo.pageSize)
       .subscribe(data => {
         if(data.status == "Success"){
+          this.dataToExport = JSON.parse(JSON.stringify(data));
           data.itemQuantityMappings.forEach(data => this.dataToDisplay.push({
             "item": data.item.name,
             "quantity": data.quantity
@@ -324,6 +337,91 @@ export class ReportsTabsComponent implements OnInit {
     let inputDate: Date = new Date(Date.parse(inputFormat));
     return `${inputDate.getFullYear()}${("0" + (inputDate.getMonth() + 1))
       .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
+  }
+
+  clickMe(){  
+    let firstLevel = this.getTopLevelData(this.dataToExport);
+    let innerData = this.getInnerLevelData(this.dataToExport);
+
+    let excelFileName = "Exported FileName";
+    let ws = XLSX.utils.json_to_sheet(firstLevel);
+
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Main Page");
+    
+    innerData.forEach(
+      (d,i) => {
+        let innerSheet = XLSX.utils.json_to_sheet(d);
+        XLSX.utils.book_append_sheet(wb, innerSheet, firstLevel[i].OrderId.toString());
+      });    
+    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  getTopLevelData(dataToExport : VendorOrderResponse){
+    let data = [];
+    dataToExport.vendorOrders.forEach(d => {
+      let temp = {
+          OrderId : d.vendorOrderDetails.orderId,
+          VendorName : d.vendor.name,
+          InvoiceNumber : d.vendorOrderDetails.invoiceNumber,
+          ApprovedBy : d.vendorOrderDetails.submittedTo,
+          SubmittedBy : d.vendorOrderDetails.submittedTo,
+          Date : d.vendorOrderDetails.date,
+          Amount : d.vendorOrderDetails.finalAmount,
+          ChallanNumber : d.vendorOrderDetails.challanNumber,
+      };
+      data.push(temp);
+    });
+    return data;
+  }
+
+  getInnerLevelData(dataToExport : VendorOrderResponse){
+    let data = [];
+    let finalData = [];
+    dataToExport.vendorOrders.forEach(
+      d=>{
+          d.vendorOrderDetails.orderItemDetails.forEach(
+            e=>{
+              let x = {
+                Item : e.item.name,
+                Quantity : e.quantity
+              }
+              data.push(x);
+            });
+            finalData.push(data);
+            data = [];
+      });
+      return finalData;
+  }
+
+  transformData(dataToExport : VendorOrderResponse){
+    let data = [];
+    dataToExport.vendorOrders.forEach(d => {
+      let temp = {
+          OrderId : d.vendorOrderDetails.orderId,
+          VendorName : d.vendor.name,
+          InvoiceNumber : d.vendorOrderDetails.invoiceNumber,
+          ApprovedBy : d.vendorOrderDetails.submittedTo,
+          SubmittedBy : d.vendorOrderDetails.submittedTo,
+          Date : d.vendorOrderDetails.date,
+          Amount : d.vendorOrderDetails.finalAmount,
+          ChallanNumber : d.vendorOrderDetails.challanNumber,
+          Item : "",
+          Quantity : ""
+      };
+      d.vendorOrderDetails.orderItemDetails.forEach( i=> {
+          let dataToPush = JSON.parse(JSON.stringify(temp));
+          dataToPush.Item = i.item.name;
+          dataToPush.Quantity = i.quantity;
+          data.push(dataToPush);
+      });
+    });
+    return data;
+  }
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+     const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
   }
 
   handleErrorInConnection(message? : string){

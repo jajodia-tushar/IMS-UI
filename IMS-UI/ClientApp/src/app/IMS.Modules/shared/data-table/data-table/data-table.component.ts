@@ -70,5 +70,13 @@ export class DataTableComponent implements OnInit {
       this.isClickedOn.emit(1);
     }
   }
+
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
+    this.datasource.filterPredicate = (data: any, filter) => {
+      const dataStr = JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filter) != -1;
+    }
+  }
  
 }

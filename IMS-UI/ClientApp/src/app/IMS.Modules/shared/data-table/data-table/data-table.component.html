@@ -1,6 +1,7 @@
 <div class="items-container">
     <div class="flex-container">
         <div class="container">
+            <input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             <table mat-table [dataSource]="datasource" class="data-table">
                 <div class="table-row">
                     <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">

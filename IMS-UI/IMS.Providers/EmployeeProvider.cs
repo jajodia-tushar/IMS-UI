@@ -23,13 +23,11 @@ namespace IMS_UI.IMS.Providers
             this.sessionManager = sessionManager;
         }
 
-
-
         public async Task<EmployeesResponse> AddEmployee(Employee employee)
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 JObject employeeJson = JsonMaker(employee);
                 var response = await http.PostAsJsonAsync("api/employee", employeeJson);
                 return await EmployeeResultParser(response);
@@ -40,14 +38,12 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 JObject employeeJson = JsonMaker(employee);
                 var response = await http.PutAsJsonAsync("api/employee", employeeJson);
                 return await EmployeeResultParser(response);
             }
         }
-
-
 
         private async Task<Response> ResultParser(HttpResponseMessage response)
         {
@@ -108,7 +104,7 @@ namespace IMS_UI.IMS.Providers
             return Json;
         }
 
-        private void prepareClient(HttpClient http)
+        private void PrepareClient(HttpClient http)
         {
             http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
             http.DefaultRequestHeaders.Accept.Add(
@@ -120,15 +116,12 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 var response = await http.DeleteAsync("api/employee?id=" + id.ToString() + "&isHardDelete=" + isHardDelete.ToString());
                 return await ResultParser(response);
             }
         }
 
-
-        
- 
         public async Task<EmployeeResponse> ValidateEmployee(string employeeId)
         {
             HttpClient client = new HttpClient();
@@ -145,7 +138,7 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
 
                 var response = await http.GetAsync("api/employee/IdExists?employeeId=" + employeeId);
                 return await ResultParser(response);
@@ -156,7 +149,7 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                prepareClient(http);
+                PrepareClient(http);
                 var response = await http.GetAsync("api/employee/email?email=" + email);
                 return await ResultParser(response);
             }

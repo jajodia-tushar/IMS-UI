@@ -17,9 +17,9 @@ namespace IMS_UI.Controllers
         private IEmployeeProvider _employeeProvider;
         private SessionManager sessionManager;
 
-        public EmployeeController(IEmployeeProvider _employeeProviderProvider, SessionManager sessionManager)
+        public EmployeeController(IEmployeeProvider employeeProvider, SessionManager sessionManager)
         {
-            this._employeeProvider = _employeeProviderProvider;
+            this._employeeProvider = employeeProvider;
             this.sessionManager = sessionManager;
                 
         }
@@ -77,8 +77,6 @@ namespace IMS_UI.Controllers
 
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> AddEmployeeDetails([FromBody] Employee employee)
         {
@@ -128,6 +126,24 @@ namespace IMS_UI.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("validate/{employeeId}")]
+        public async Task<IActionResult> GetEmployee(string employeeId)
+        {
+            try
+            {
+                var response = await _employeeProvider.ValidateEmployee(employeeId);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+
         }
     }
 }

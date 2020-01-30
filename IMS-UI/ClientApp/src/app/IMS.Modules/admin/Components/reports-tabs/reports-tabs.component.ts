@@ -7,6 +7,7 @@ import { EmployeeOrderService } from "src/app/IMS.Services/employee/employee-ord
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import { VendorOrderResponse } from "src/app/IMS.Models/Vendor/VendorOrderResponse";
+import { PerDayConsumptionResponse } from "src/app/IMS.Models/Admin/PerDayConsumptionResponse";
 import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
 
 
@@ -339,26 +340,49 @@ export class ReportsTabsComponent implements OnInit {
       .slice(-2)}${("0" + inputDate.getDate()).slice(-2)}`
   }
 
-  clickMe(){  
-    let firstLevel = this.getTopLevelData(this.dataToExport);
-    let innerData = this.getInnerLevelData(this.dataToExport);
 
-    let excelFileName = "Exported FileName";
-    let ws = XLSX.utils.json_to_sheet(firstLevel);
+  clickMe(){
 
+    if (this.selectedTab == 0) {
+      this.showRAGDataTable();
+    }
+    else if (this.selectedTab == 1) {
+      let firstLevelData = this.getTopLevelDataForVendorOrder(this.dataToExport);
+      let innerLevelData = this.getInnerLevelDataForVendorOrder(this.dataToExport);
+      let fileName = `Vendor-Order-report from -${this.fromDate} To ${this.toDate}`;
+      this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
+    }
+    else if(this.selectedTab == 2){
+      this.showEmployeeOrdersTable();
+    }
+    else if(this.selectedTab == 3){
+      let firstLevelData = this.getTopLevelDataForPerDayConsumption(this.dataToExport);
+      let innerLevelData = this.getInnerLevelDataForPerDayConsumption(this.dataToExport);
+      let fileName = `Per Day Consumption Report from-${this.fromDate} To ${this.toDate}`;
+      this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
+    }
+    else if(this.selectedTab == 4){
+      this.showItemConsumptionTable();
+    }
+  }
+
+  GenerateVendorOrderReports(fileName : string,firstLevelData, innerLevelData?){  
+    let excelFileName = fileName;
+    let ws = XLSX.utils.json_to_sheet(firstLevelData);
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Main Page");
-    
-    innerData.forEach(
-      (d,i) => {
-        let innerSheet = XLSX.utils.json_to_sheet(d);
-        XLSX.utils.book_append_sheet(wb, innerSheet, firstLevel[i].OrderId.toString());
-      });    
+    if(innerLevelData){
+      innerLevelData.forEach(
+        (d,i) => {
+          let innerSheet = XLSX.utils.json_to_sheet(d);
+          XLSX.utils.book_append_sheet(wb, innerSheet, '');
+        });
+    }
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  getTopLevelData(dataToExport : VendorOrderResponse){
+  getTopLevelDataForVendorOrder(dataToExport : VendorOrderResponse){
     let data = [];
     dataToExport.vendorOrders.forEach(d => {
       let temp = {
@@ -376,7 +400,7 @@ export class ReportsTabsComponent implements OnInit {
     return data;
   }
 
-  getInnerLevelData(dataToExport : VendorOrderResponse){
+  getInnerLevelDataForVendorOrder(dataToExport : VendorOrderResponse){
     let data = [];
     let finalData = [];
     dataToExport.vendorOrders.forEach(
@@ -395,30 +419,38 @@ export class ReportsTabsComponent implements OnInit {
       return finalData;
   }
 
-  transformData(dataToExport : VendorOrderResponse){
+  getTopLevelDataForPerDayConsumption(dataToExport : PerDayConsumptionResponse){
     let data = [];
-    dataToExport.vendorOrders.forEach(d => {
+    dataToExport.dateItemMapping.forEach(d => {
       let temp = {
-          OrderId : d.vendorOrderDetails.orderId,
-          VendorName : d.vendor.name,
-          InvoiceNumber : d.vendorOrderDetails.invoiceNumber,
-          ApprovedBy : d.vendorOrderDetails.submittedTo,
-          SubmittedBy : d.vendorOrderDetails.submittedTo,
-          Date : d.vendorOrderDetails.date,
-          Amount : d.vendorOrderDetails.finalAmount,
-          ChallanNumber : d.vendorOrderDetails.challanNumber,
-          Item : "",
-          Quantity : ""
+          Date : d.date,
+          Different_Items : d.itemQuantityMappings.length,
+          Total_Quantity : d.itemQuantityMappings.map(x=>x.quantity).reduce((a,b)=>a+b)
       };
-      d.vendorOrderDetails.orderItemDetails.forEach( i=> {
-          let dataToPush = JSON.parse(JSON.stringify(temp));
-          dataToPush.Item = i.item.name;
-          dataToPush.Quantity = i.quantity;
-          data.push(dataToPush);
-      });
+      data.push(temp);
     });
     return data;
   }
+
+  getInnerLevelDataForPerDayConsumption(dataToExport : PerDayConsumptionResponse){
+    let data = [];
+    let finalData = [];
+    dataToExport.dateItemMapping.forEach(
+      d=>{
+          d.itemQuantityMappings.forEach(
+            e=>{
+              let x = {
+                Item : e.item.name,
+                Quantity : e.quantity
+              }
+              data.push(x);
+            });
+            finalData.push(data);
+            data = [];
+      });
+      return finalData;
+  }
+
   private saveAsExcelFile(buffer: any, fileName: string): void {
      const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
      FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);

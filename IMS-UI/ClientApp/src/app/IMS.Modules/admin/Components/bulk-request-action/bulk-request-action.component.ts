@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { DatePipe } from '@angular/common';
+import { MatDialogConfig,MatDialog} from '@angular/material';
+import { NotificationsComponent } from '../notifications/notifications.component';
+import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
 
 @Component({
   selector: 'app-bulk-request-action',
@@ -10,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class BulkRequestActionComponent implements OnInit {
 
-  constructor(private route : ActivatedRoute, private bulkRequestService:BulkRequestService, public datepipe: DatePipe) { }
+  constructor(private route : ActivatedRoute, private bulkRequestService:BulkRequestService, public datepipe: DatePipe,private dialog: MatDialog) { }
 
   orderId:number;
   requestStatus:string;
@@ -22,7 +25,7 @@ export class BulkRequestActionComponent implements OnInit {
   pageNo = 1;
   pageSize = 1000;
   idsString: string = "";
-
+  itemsQuantityList;
   ngOnInit() {
     this.route.paramMap.subscribe(
       params => {
@@ -40,6 +43,7 @@ export class BulkRequestActionComponent implements OnInit {
         this.requestMadeOnDate = this.transformDate(_data.employeeBulkOrderDetails.createdOn);
         this.requestedForDate = this.transformDate(_data.employeeBulkOrderDetails.requirementDate);
         this.reasonForRequest = _data.employeeBulkOrderDetails.reasonForRequirement;
+        this.itemsQuantityList = _data.employeeBulkOrderDetails.itemsQuantityList;
 
         let len = _data.employeeBulkOrderDetails.itemsQuantityList.length;
         
@@ -63,5 +67,15 @@ export class BulkRequestActionComponent implements OnInit {
   transformDate(data) { 
     return this.datepipe.transform(data,'dd/MM/yyyy');
   }
-
+ 
+  
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.data = itemsQuantityList;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(BulkRequestDialogComponent, dialogConfig);
+  }
+  
 }
+

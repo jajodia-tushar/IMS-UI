@@ -16,7 +16,7 @@ namespace IMS_UI.IMS.Providers
         {
             try
             {
-                var folderName = Path.Combine("Resources", path);
+                var folderName = Path.Combine("Resources","assets","IMS.Images","itemIcons");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                 var fullPath = Path.Combine(pathToSave, fileName);

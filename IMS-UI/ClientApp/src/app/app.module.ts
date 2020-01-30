@@ -43,7 +43,6 @@ import { ReportsService } from './IMS.Services/admin/reports.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
-
   ],
   providers: [
     DatePipe,

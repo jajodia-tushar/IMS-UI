@@ -8,6 +8,47 @@
     display: flex;
 }
 
+.input-button-upload>input {
+    display: none;
+}
+
+#upload-image-text {
+    color: white;
+    position: relative;
+    top: 14px;
+}
+
+#update-icon {
+    height: 40px;
+    width: 40px;
+    font-size: xx-large;
+    cursor: pointer;
+    padding-top: 8px;
+}
+
+.image-upload-section {
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+}
+
+.input-button-upload {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    top: 17px;
+    padding-left: 24px;
+}
+
+
+/* #file-upload-input {
+    height: 30px;
+    width: 216px;
+    position: relative;
+    top: 26px;
+    right: 0px;
+} */
+
 body {
     background: #456;
     font-family: 'Open Sans', sans-serif;
@@ -110,15 +151,6 @@ body {
 [type=submit]:not(:disabled) {
     color: white;
     border: 0.5px solid aquamarine;
-}
-
-:host ::ng-deep .mat-radio-label-content {
-    padding-left: 1px;
-    padding-right: 8px;
-}
-
-.roles-radio {
-    margin-right: 10px;
 }
 
 .position-of-buttons .submit-update {

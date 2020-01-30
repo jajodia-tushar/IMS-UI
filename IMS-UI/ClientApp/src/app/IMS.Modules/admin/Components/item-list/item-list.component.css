@@ -1,26 +1,6 @@
-.mat-column-rate {
-    width: 5% !important;
-}
-
-
-/* .mat-column-maxLimit {
-    width: 5% !important;
-} */
-
-.mat-column-shelvesAmberLimit {
-    width: 11% !important;
-}
-
-.mat-column-shelvesRedLimit {
-    width: 11% !important;
-}
-
-.mat-column-warehouseRedLimit {
-    width: 10% !important;
-}
-
-.mat-column-warehouseAmberLimit {
-    width: 10% !important;
+.mat-column-name {
+    text-align: left !important;
+    width: 20%;
 }
 
 .filter-input {
@@ -33,6 +13,27 @@
     color: white;
 }
 
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.flex-container>div {
+    text-align: left;
+}
+
+.table-container {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    height: 100%;
+    /* margin: 10px 0 0 24px; */
+}
+
+.table-container>h4 {
+    margin-top: inherit;
+}
+
 .mat-form-field {
     font-size: 14px;
     width: 30%;
@@ -43,14 +44,8 @@
 }
 
 table {
-    border-collapse: separate !important;
-    border-radius: 8px;
-    background-color: #222437;
-    border: 8px solid #222437;
-    min-height: 200px;
+    /* min-height: 200px; */
     width: 100%;
-    margin-top: 10px;
-    /* table-layout: fixed; */
 }
 
 #add-item {
@@ -60,11 +55,13 @@ table {
 
 .mat-cell {
     color: white;
+    text-align: center;
 }
 
 .mat-header-cell {
     color: #9597ab;
     font-size: medium;
+    text-align: center;
 }
 
 ::ng-deep .mat-sort-header-arrow {
@@ -78,3 +75,47 @@ table {
     padding: 1px 10px;
     border-color: #42e6a4;
 }
+
+.filter-item {
+    display: flex;
+}
+
+#filter-item-text {
+    position: relative;
+    top: 6px;
+}
+
+.action-for-item {
+    display: flex;
+}
+
+.add-item-button {
+    margin-left: auto;
+}
+
+.filter-input {
+    margin-left: 4%;
+    padding: 5px;
+    border: 2px solid #222437;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #222437;
+    color: white;
+    width: 200px;
+}
+
+.items-container {
+    margin: 0px 0px 16px 0px;
+    top: 20px;
+    background-color: #222437;
+    border-radius: 8px;
+    overflow: auto;
+    position: relative;
+    color: white;
+    overflow: hidden;
+}
+
+
+/* .cdk-program-focused {
+    display: none;
+} */

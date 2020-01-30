@@ -1,8 +1,7 @@
 .item-details {
     width: 97%;
-    height: 80%;
     position: relative;
-    margin: 30px;
+    margin-left: 24px;
     color: white;
 }
 
@@ -14,6 +13,6 @@ h5 {
 .table-container {
     position: relative;
     top: 5%;
-    width: 96%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
 }

@@ -1,126 +1,130 @@
 .mat-form-field {
-  font-size: 14px;
-  width: 30%;
+    font-size: 14px;
+    width: 30%;
 }
 
 .mat-input-flex.mat-form-field-flex {
-  border: 1px solid black;
+    border: 1px solid black;
 }
 
 table {
-  background-color: #222437;
-  min-height: 200px;
-  width: 100%;
+    background-color: #222437;
+    /* min-height: 200px; */
+    width: 100%;
 }
 
 .mat-paginator-outer-container {
-  display: flex;
+    display: flex;
 }
 
 .mat-cell {
-  color: white;
+    color: white;
 }
 
 .mat-header-cell {
-  color: #9597ab;
-  font-size: medium;
+    color: #9597ab;
+    font-size: medium;
 }
 
 .add-employee-button {
-  margin-left: auto;
+    margin-left: auto;
 }
 
 #add-employee {
-  right: 10px;
-  border: 0.5px solid;
-  border-radius: 5px;
-  padding: 1px 10px;
-  border-color: #42e6a4;
+    right: 10px;
+    border: 0.5px solid;
+    border-radius: 5px;
+    padding: 1px 10px;
+    border-color: #42e6a4;
 }
 
 :host ::ng-deep .mat-sort-header-arrow {
-  color: #fff !important;
+    color: #fff !important;
 }
 
 .mat-header-cell {
-  color: #9597ab;
-  font-size: 16px;
+    color: #9597ab;
+    font-size: 16px;
 }
 
 :host ::ng-deep td.mat-cell:last-of-type,
 td.mat-footer-cell:last-of-type,
 th.mat-header-cell:last-of-type {
-  padding-right: 0px;
+    padding-right: 0px;
 }
 
 :host ::ng-deep td.mat-cell,
 td.mat-footer-cell,
 th.mat-header-cell {
-  padding: 0px;
-  padding-left: 4px;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+    padding: 0px;
+    padding-left: 4px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .mat-paginator-container {
-  display: flex;
-  margin-left: auto;
-  padding: 0px 8px;
+    display: flex;
+    margin-left: auto;
+    padding: 0px 8px;
 }
 
 .items-container {
-  margin: 0px 0px 20px 0px;
-  top: 24px;
-  background-color: #222437;
-  border-radius: 8px;
-  overflow: auto;
-  position: relative;
-  color: white;
-  overflow: hidden;
-}
-.flex-container {
-  display: flex;
-  flex-wrap: nowrap;
+    margin: 0px 0px 20px 0px;
+    top: 24px;
+    background-color: #222437;
+    border-radius: 8px;
+    overflow: auto;
+    position: relative;
+    color: white;
+    overflow: hidden;
 }
 
-.flex-container > div {
-  margin: 10px;
-  text-align: left;
+.flex-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.flex-container>div {
+    margin: 10px;
+    text-align: left;
 }
 
 .table-container {
-  position: relative;
-  top: 5%;
-  width: 100%;
-  height: 90%;
-  margin: 10px 0 0 24px;
+    position: relative;
+    top: 5%;
+    width: 100%;
+    height: 90%;
+    margin: 10px 0 0 24px;
 }
 
-.table-container > h4 {
-  margin-top: inherit;
+.table-container>h4 {
+    margin-top: inherit;
 }
 
 .action-for-employee {
-  display: flex;
+    display: flex;
 }
+
 .action-button-add {
-  margin-left: auto;
+    margin-left: auto;
 }
+
 .filter-employee {
-  display: flex;
+    display: flex;
 }
+
 #filter-employee-text {
-  position: relative;
-  top: 6px;
+    position: relative;
+    top: 6px;
 }
 
 .filter-input {
-  margin-left: 4%;
-  padding: 5px;
-  border: 2px solid #222437;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  background-color: #222437;
-  color: white;
-  width: 200px;
+    margin-left: 4%;
+    padding: 5px;
+    border: 2px solid #222437;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #222437;
+    color: white;
+    width: 200px;
 }

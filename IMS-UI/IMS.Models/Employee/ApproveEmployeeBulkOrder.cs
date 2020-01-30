@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IMS_UI.IMS.Models.Employee
+namespace IMS_UI.IMS.Models
 {
-    public class ApproveEmployeeBulkOrder
+    public class ApproveEmployeeBulkOrder : EmployeeBulkOrder
     {
-        public List<ItemLocationQuantityMapping> ItemLocationQuantityMappings { get; set; }
+         public List<ItemLocationQuantityMapping> ItemLocationQuantityMappings { get; set; }
     }
 }

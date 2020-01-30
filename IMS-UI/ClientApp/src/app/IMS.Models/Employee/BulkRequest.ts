@@ -49,3 +49,10 @@ export class LocationQuantityMapping {
 export class BlukOrderApproveResponse extends Response {
     approveEmployeeBulkOrder: ApproveEmployeeBulkOrder;   
 }
+
+export class BlukOrderApprove {
+    itemLocationQuantityMappings: ItemLocationQuantityMapping[];
+    bulkOrderId: number;
+    employee: Employee;
+    employeeBulkOrderDetails: EmployeeBulkOrderDetails;
+}

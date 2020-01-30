@@ -49,6 +49,8 @@ namespace IMS_UI.IMS.Core
             public const string bulkOrderCancel = "api/Order/EmployeeBulkOrders/";
             public const string vendorEndpoint = "api/Vendor";
             public const string vendorIsUniqueEndpoint="api/Vendor/IsUnique";
+            public const string bulkOrderApprove = "api/Order/EmployeeBulkOrders/";
+            public const string GetStockStatus = "api/Reports/GetStockStatus";
         }
     }
 

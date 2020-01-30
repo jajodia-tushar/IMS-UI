@@ -87,6 +87,49 @@ export class VendorManageFormComponent implements OnInit {
     if (this.isEditVendorForm) {
       this.createVendorForm.setValue(this.vendorDetails)
     }
+    if (this.isEditVendorForm) {
+      let vendorDetail = this.vendorDetails;
+      this.createVendorForm.setValue(vendorDetail);
+      this.createVendorForm.get("name").clearAsyncValidators();
+      this.createVendorForm.get("name").valueChanges.subscribe(
+        (name: string) => {
+          if (name == vendorDetail.name) {
+            this.createVendorForm.get("name").clearAsyncValidators();
+          }
+          else {
+            this.createVendorForm.get("name").setAsyncValidators(
+              this.vendorValidator.vendorNameTakenValidator.bind(this.vendorValidator)
+            )
+          }
+        }
+      );
+      this.createVendorForm.get("pan").clearAsyncValidators();
+      this.createVendorForm.get("pan").valueChanges.subscribe(
+        (name: string) => {
+          if (name == vendorDetail.name) {
+            this.createVendorForm.get("pan").clearAsyncValidators();
+          }
+          else {
+            this.createVendorForm.get("pan").setAsyncValidators(
+              this.vendorValidator.vendorPanTakenValidator.bind(this.vendorValidator)
+            )
+          }
+        }
+      );
+      this.createVendorForm.get("gst").clearAsyncValidators();
+      this.createVendorForm.get("gst").valueChanges.subscribe(
+        (name: string) => {
+          if (name == vendorDetail.name) {
+            this.createVendorForm.get("gst").clearAsyncValidators();
+          }
+          else {
+            this.createVendorForm.get("gst").setAsyncValidators(
+              this.vendorValidator.vendorGstTakenValidator.bind(this.vendorValidator)
+            )
+          }
+        }
+      );
+    }
 
   }
 

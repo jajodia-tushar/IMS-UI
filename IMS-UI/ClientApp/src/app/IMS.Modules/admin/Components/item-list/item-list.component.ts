@@ -20,13 +20,13 @@ export class ItemListComponent implements OnInit {
 
   @Input() event: Item;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private itemService: ItemService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     await this.setItems();
-    this.dataSource.paginator = this.paginator;
+
   }
 
   applyFilter(filterValue: string) {
@@ -59,7 +59,7 @@ export class ItemListComponent implements OnInit {
       else if (result == "cancelled") {
         //don't show any message.
       }
-      else{
+      else {
         // this.ELEMENT_DATA.push(<Item>result);
         // this.dataSource.data = this.ELEMENT_DATA;
         this.setItems();
@@ -68,16 +68,16 @@ export class ItemListComponent implements OnInit {
     });
   }
 
-  numberOfColumns(){
+  numberOfColumns() {
     //console.log(this.displayedColumns.length)
     return (this.displayedColumns.length - 1);
   }
 
-  editItemDetails(item:Item) {
+  editItemDetails(item: Item) {
     this.openItemEditDialog(item);
   }
 
-  openItemEditDialog(data:Item) {
+  openItemEditDialog(data: Item) {
     let dialogConfig = new MatDialogConfig();
     //console.log(data)
     dialogConfig.data = data;
@@ -86,58 +86,59 @@ export class ItemListComponent implements OnInit {
     const dialogRef = this.dialog.open(ItemManageDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result==false){
-        showMessage(this.snackBar,2,"Item Updation Failed",'warn');
+      if (result == false) {
+        showMessage(this.snackBar, 2, "Item Updation Failed", 'warn');
       }
-      else if(result=="cancelled"){
+      else if (result == "cancelled") {
         //don't show any message.
         result.getElementById('editItemDetails').focus();
       }
-      else if('name' in result){
+      else {
         this.editItemInTable(result);
       }
 
     });
   }
 
-  deactivateItem(item){
+  deactivateItem(item) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = item;
     dialogConfig.panelClass = 'dialog-item-manage'
     const dialogRef = this.dialog.open(ItemDeactivateDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result==true){
+      if (result == true) {
         this.removeItemFromTableById(item.id);
-        showMessage(this.snackBar,2,"Item was Deleted Successfully",'success');
+        showMessage(this.snackBar, 2, "Item was Deleted Successfully", 'success');
       }
-      else if(result==false){
-        showMessage(this.snackBar,2,"Deleting Item failed",'warn');
+      else if (result == false) {
+        showMessage(this.snackBar, 2, "Deleting Item failed", 'warn');
       }
-      else if(result=="cancelled"){
+      else if (result == "cancelled") {
         //don't show any message.
       }
     });
-  } 
-
-  removeItemFromTableById(id){
-    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
-      if ( this.ELEMENT_DATA[index].id === id) {
-        this.ELEMENT_DATA.splice(index, 1); 
-      }
-   }
-    this.dataSource.data = this.ELEMENT_DATA;  
   }
 
-  editItemInTable(item){
-    for( var index = 0; index < this.ELEMENT_DATA.length; index++){ 
-      if ( this.ELEMENT_DATA[index].id === item.id) {
+  removeItemFromTableById(id) {
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id === id) {
+        this.ELEMENT_DATA.splice(index, 1);
+      }
+    }
+    this.dataSource.data = this.ELEMENT_DATA;
+  }
+
+  editItemInTable(item) {
+    console.log(item)
+    for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
+      if (this.ELEMENT_DATA[index].id === item.id) {
         this.ELEMENT_DATA[index] = item;
         break;
       }
-   }
+    }
     this.dataSource.data = this.ELEMENT_DATA;
-    showMessage(this.snackBar,2,"Item Details Updated Successfully",'success');
+    showMessage(this.snackBar, 2, "Item Details Updated Successfully", 'success');
   }
 
   async setItems() {
@@ -146,5 +147,6 @@ export class ItemListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
     this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 }

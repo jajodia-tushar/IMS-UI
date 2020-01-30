@@ -10,6 +10,8 @@ import { VendorOrderResponse } from "src/app/IMS.Models/Vendor/VendorOrderRespon
 import { PerDayConsumptionResponse } from "src/app/IMS.Models/Admin/PerDayConsumptionResponse";
 import { ItemsAvailabilityResponse } from "src/app/IMS.Models/Admin/ItemsAvailabilityResponse";
 import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
+import { EmployeeOrdersResponse } from "src/app/IMS.Models/Employee/EmployeeOrdersResponse";
+import { ItemConsumptionDetailsResponse } from "src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse";
 
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -356,7 +358,9 @@ export class ReportsTabsComponent implements OnInit {
       this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 2){
-      this.showEmployeeOrdersTable();
+      let firstLevelData = this.getTopLevelDataOfEmployeeOrder(this.dataToExport);
+      let fileName = `Employee-Order-Reports from - ${this.fromDate}  To ${this.toDate} `;
+      this.GenerateVendorOrderReports(fileName,firstLevelData);
     }
     else if(this.selectedTab == 3){
       let firstLevelData = this.getTopLevelDataForPerDayConsumption(this.dataToExport);
@@ -365,7 +369,10 @@ export class ReportsTabsComponent implements OnInit {
       this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 4){
-      this.showItemConsumptionTable();
+      let firstLevelData = this.getTopLevelDataOfItemConsumption(this.dataToExport);
+      let fileName = `Item Consumption Report from ${this.fromDate} To ${this.toDate}`;
+      this.GenerateVendorOrderReports(fileName,firstLevelData);
+
     }
   }
 
@@ -474,6 +481,41 @@ export class ReportsTabsComponent implements OnInit {
           Item_Name : d.item.name,
           Item_Quantity : d.quantity
         }
+        finalData.push(x);
+      });
+      return finalData;
+  }
+
+  getTopLevelDataOfEmployeeOrder(data : EmployeeOrdersResponse){
+    let finalData = [];
+    data.employeeOrders.forEach(
+      d=>{
+        let x = {
+            Employee_Id : d.employee.id,
+            Employee_Name : d.employee.firstname + "  " + d.employee.lastname,
+            Employee_ContactNumber : d.employee.contactNumber,
+            Date : new Date(d.employeeOrderDetails.date).toDateString(),
+            Number_of_Items : d.employeeOrderDetails.employeeItemsQuantityList.length,
+            Total_Quantity : d.employeeOrderDetails.employeeItemsQuantityList.map(x=>x.quantity).reduce((a,b)=>a+b),
+            Shelf : d.employeeOrderDetails.shelf.name,
+          }
+        finalData.push(x);
+      });
+      return finalData;
+  }
+
+  getTopLevelDataOfItemConsumption(data : ItemConsumptionDetailsResponse){
+    let finalData = [];
+    data.dateWiseItemConsumptionDetails.forEach(
+      d=>{
+        let x = {
+            Item_Name : d.item.name,
+          }
+        d.dateItemConsumptions.forEach(
+          a=>{
+            x[a.date] = a.itemsConsumptionCount
+          }
+        ) 
         finalData.push(x);
       });
       return finalData;

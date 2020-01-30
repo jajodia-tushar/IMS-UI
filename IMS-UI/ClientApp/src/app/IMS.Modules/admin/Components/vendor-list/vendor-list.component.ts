@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, ElementRef, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
 import { DataSource } from '@angular/cdk/table';
@@ -6,10 +6,11 @@ import { Observable, of } from 'rxjs';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { Router } from '@angular/router';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
-import { MatDialogConfig, MatDialog, MatSnackBar, MatSort, MatPaginator } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatSnackBar, MatPaginator } from '@angular/material';
 import { VendorManageDialogComponent } from '../vendor-manage-dialog/vendor-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+
 
 @Component({
   selector: 'app-vendor-list',
@@ -40,8 +41,8 @@ export class VendorListComponent implements OnInit {
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
   expandedElement: any;
   pageSizeOptions: number[] = [5, 10, 15, 20];
-  paginator: MatPaginator;
   pagingInfo: PagingInfo = new PagingInfo();
+  
 
   openAddVendorDialog()
   {
@@ -151,7 +152,7 @@ export class VendorListComponent implements OnInit {
     this.dataSource = new ExampleDataSource();
   }
 
- async pageChange(event) {
+  async pageChange(event) {
    await this._VendorService.getVendorOnPagination(this.filterName, event.pageIndex + 1, event.pageSize).subscribe(
      data => {
        if (data.status === "Success") {
@@ -172,6 +173,8 @@ export class VendorListComponent implements OnInit {
    )
   }
 
+
+
   async applyFilter(name) {
     this.filterName = name;
     await this._VendorService.getVendorOnPagination(name,this.pagingInfo.pageNumber, this.pagingInfo.pageSize).subscribe(
@@ -180,7 +183,8 @@ export class VendorListComponent implements OnInit {
           this.displayErrorText = false;
           vendordata = data.vendors;
           this.pagingInfo.totalResults = data.pagingInfo.totalResults;
-          this.dataSource = new ExampleDataSource();  
+          this.dataSource = new ExampleDataSource();
+
         }
         else if (data.status === "Failure") {
             vendordata = data.vendors;
@@ -196,9 +200,9 @@ export class VendorListComponent implements OnInit {
   async ngOnInit() {
     this.pagingInfo = new PagingInfo();
     this.pagingInfo.pageNumber = 1;
-    this.pagingInfo.pageSize = 10;
+    this.pagingInfo.pageSize = 5;
     this.pagingInfo.totalResults = 100;
-    await this._VendorService.getAllVendors().subscribe(
+    await this._VendorService.getVendorOnPagination("", this.pagingInfo.pageNumber, this.pagingInfo.pageSize).subscribe(
       data => {
         if (data.status === "Success") {
           vendordata = data.vendors;

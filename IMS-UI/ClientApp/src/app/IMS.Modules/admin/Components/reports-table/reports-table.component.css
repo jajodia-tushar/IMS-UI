@@ -7,10 +7,12 @@
     color: white;
     overflow: hidden;
 }
-.error  {
-    color: red; 
+
+.error {
+    color: red;
     text-align: center;
 }
+
 .flex-container {
     display: flex;
     flex-wrap: nowrap;
@@ -103,4 +105,9 @@ td {
 
 .paginator {
     color: white;
+    margin-left: auto;
+}
+
+.custom-toolbaar {
+    cursor: pointer;
 }

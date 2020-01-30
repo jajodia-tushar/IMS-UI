@@ -26,7 +26,7 @@ namespace IMS_UI.IMS.Providers
             _iConfiguration = iConfiguration;
         }
 
-        public async Task<VendorResponse> GetAllVendors()
+        public async Task<VendorResponse> GetAllVendors(string name,string pageNumber, string pagesize)
         {
             try
             {
@@ -43,8 +43,9 @@ namespace IMS_UI.IMS.Providers
 
                     string query;
                     using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
-                        new KeyValuePair<string, string>("pageNumber", "1"),
-                        new KeyValuePair<string, string>("pagesize", int.MaxValue.ToString())
+                        new KeyValuePair<string, string>("name", name),
+                        new KeyValuePair<string, string>("pageNumber", pageNumber),
+                        new KeyValuePair<string, string>("pagesize", pagesize)
                     }))
                     {
                         query = content.ReadAsStringAsync().Result;
@@ -226,6 +227,136 @@ namespace IMS_UI.IMS.Providers
             var response = await client.GetAsync(client.BaseAddress + EndPoint + OrderId);
             return JsonConvert.DeserializeObject<VendorOrderResponse>(
                 await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<VendorResponse> AddVendor(Vendor vendor)
+        {
+            try
+            {
+                string jsonString = JsonConvert.SerializeObject(vendor);
+                using (HttpClient http = new HttpClient())
+                {
+                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    var endPoint = Constants.APIEndpoints.vendorEndpoint;
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _sessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+                    JObject Json = JObject.Parse(jsonString);
+                    var response = await http.PostAsJsonAsync(endPoint, Json);
+                    VendorResponse apiAddVendorResponse = new VendorResponse();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiAddVendorResponse = JsonConvert.DeserializeObject<VendorResponse>(result);
+                    return apiAddVendorResponse;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<VendorResponse> EditVendor(Vendor vendor)
+        {
+            try
+            {
+                string jsonString = JsonConvert.SerializeObject(vendor);
+                using (HttpClient http = new HttpClient())
+                {
+                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    var EndPoint = Constants.APIEndpoints.vendorEndpoint;
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _sessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+                    JObject Json = JObject.Parse(jsonString);
+                    var response = await http.PutAsJsonAsync(EndPoint, Json);
+                    VendorResponse apiEditVendorResponse = new VendorResponse();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiEditVendorResponse = JsonConvert.DeserializeObject<VendorResponse>(result);
+                    return apiEditVendorResponse;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<Response> DeactivateVendor(int vendorid, bool isHardDelete)
+        {
+            try
+            {
+               
+                using (HttpClient http = new HttpClient())
+                {
+                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    var endPoint = Constants.APIEndpoints.vendorEndpoint;
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _sessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+                    var response = await http.DeleteAsync("api/vendor/" + vendorid.ToString() + "?isHardDelete=" + "False");
+                    Response apiDeactivateVendorResponse = new Response();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiDeactivateVendorResponse = JsonConvert.DeserializeObject<Response>(result);
+                    return apiDeactivateVendorResponse;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<Response> IsVendorDetailUnique(string vendorName,string phoneNumber,string pan,string gst,string cin)
+        {
+            try
+            {
+                using (HttpClient http = new HttpClient())
+                {
+                    string path = Constants.APIEndpoints.vendorIsUniqueEndpoint;
+                    UriBuilder uriBuilder = new UriBuilder(_iConfiguration["BASEURL"] + path);
+                    http.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json"));
+                    var token = _sessionManager.GetString("token");
+                    http.DefaultRequestHeaders.Authorization =
+                                new AuthenticationHeaderValue("Bearer", token);
+                    string query;
+                    using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                        new KeyValuePair<string, string>("name", vendorName),
+                        new KeyValuePair<string, string>("mobile", phoneNumber),
+                        new KeyValuePair<string, string>("pan", pan),
+                        new KeyValuePair<string, string>("gst", gst),
+                        new KeyValuePair<string, string>("cin", cin)
+
+                    }))
+                    {
+                        query = content.ReadAsStringAsync().Result;
+                    }
+                    uriBuilder.Query = query;
+                    var response = await http.GetAsync(uriBuilder.Uri);
+                    Response apiUniqueVendorNameResponse = new Response();
+                    var result = await response.Content.ReadAsStringAsync();
+                    apiUniqueVendorNameResponse = JsonConvert.DeserializeObject<Response>(result);
+                    return apiUniqueVendorNameResponse;
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
     }
 }

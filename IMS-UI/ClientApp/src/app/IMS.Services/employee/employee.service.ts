@@ -10,7 +10,7 @@ import { Response } from 'src/app/IMS.Models/Shared/Response';
   providedIn: 'root'
 })
 export class EmployeeService {
-  getAllEmployees(pageNumber: number, pageSize: number, filter?: string) {
+  getAllEmployees(pageNumber: number, pageSize: number, filter?: string) : Promise<EmployeesResponse> {
     let params = new HttpParams();
     params = params.append("filter", filter);
     params = params.append("pageNumber", pageNumber.toString());

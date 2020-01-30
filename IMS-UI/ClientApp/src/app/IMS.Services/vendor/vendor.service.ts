@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { VendorOrderResponse } from 'src/app/IMS.Models/Vendor/VendorOrderResponse';
 import { COLUMN_DATA, COLUMN_DATA2 } from 'src/app/IMS.Models/Vendor/Mock';
 import { Response } from 'src/app/IMS.Models/Shared/Response';
+import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
 import { SingleVendorOrderResponse } from 'src/app/IMS.Models/Vendor/SingleVendorOrderResponse';
 
 
@@ -26,10 +27,45 @@ export class VendorService {
     params = params.append("pageSize",pageSize.toString());
     return this.http.get<VendorOrderResponse>("api/vendor/orders", { params });
   }
-
+  checkVendorName(name: string) {
+    let params = new HttpParams();
+    params = params.append("name", name);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
+  checkVendorPan(pan: string) {
+    let params = new HttpParams();
+    params = params.append("pan", pan);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
+  checkVendorGst(gst: string) {
+    let params = new HttpParams();
+    params = params.append("gst", gst);
+    return this.http.get<Response>("api/vendor/IsUnique", { params }).toPromise();
+  }
+  createVendor(vendor: Vendor): Promise<VendorResponse> {
+    return this.http.post<VendorResponse>("api/Vendor", vendor).toPromise()
+  }
+  EditVendor(vendor: Vendor): Promise<VendorResponse> {
+    return this.http.put<VendorResponse>("api/Vendor", vendor).toPromise()
+  }
+  deactivateVendor(vendorId: any, isHardDelete: boolean): Promise<Response> {
+    let params = new HttpParams();
+    params = params.append("isHardDelete", isHardDelete.toString());
+    return this.http.delete<Response>("api/Vendor/" + vendorId, { params}).toPromise();
+  }
 
   getAllVendors() {
-    return this.http.get<VendorResponse>("api/Vendor");
+    let params = new HttpParams();
+    params = params.append("pageNumber", "1");
+    params = params.append("pageSize", "2147483647");
+    return this.http.get<VendorResponse>("api/Vendor", {params});
+  }
+  getVendorOnPagination(name,pageNumber, pagesize) {
+    let params = new HttpParams();
+    params = params.append("name", name);
+    params = params.append("pageNumber", pageNumber);
+    params = params.append("pageSize", pagesize);
+    return this.http.get<VendorResponse>("api/Vendor", { params });
   }
 
   postVendorOrder(vendorOrder: VendorOrder) {

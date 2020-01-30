@@ -10,6 +10,8 @@ import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-edit
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
+import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
+
 
 const routes: Routes = [
   {
@@ -35,10 +37,13 @@ const routes: Routes = [
             component: InvoiceEditorComponent
           }
         ]
-      }
+      },
+      { path: 'Vendors', component: VendorManagementComponent },
+      { path: 'Items', component: ItemManagementComponent }
     ]
   }
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

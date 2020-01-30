@@ -1,3 +1,14 @@
+//import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+//import { Employee } from 'src/app/IMS.Models/Employee/Employee';
+//import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
+//import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
+//import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
+//import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+
+//import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
+
+//import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+//import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
@@ -47,8 +58,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   async applyFilter(filterValue: string) {
-    let employeesResponse = <EmployeesResponse>await this.employeeService.getAllEmployees
-      (this.pagingInfo.pageNumber, this.pagingInfo.pageSize, filterValue)
+    let employeesResponse = <EmployeesResponse>await this.employeeService.getAllEmployees(this.pagingInfo.pageNumber, this.pagingInfo.pageSize, filterValue)
       .then(
         data => {
           this.dataSource.data = data.employees;
@@ -64,7 +74,7 @@ export class EmployeeListComponent implements OnInit {
             this.paginator.pageIndex = 0;
           }
 
-        })
+        });
   }
   openAddEmployeeDialog() {
     let dialogConfig = new MatDialogConfig();

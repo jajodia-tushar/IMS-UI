@@ -10,8 +10,7 @@
   position: relative;
   cursor: pointer;
   font-size: large;
-  border: 1px solid slateblue;
-  border-radius: 5px;
+  border-bottom: 1px solid slateblue;
 }
 
 .heading > p {

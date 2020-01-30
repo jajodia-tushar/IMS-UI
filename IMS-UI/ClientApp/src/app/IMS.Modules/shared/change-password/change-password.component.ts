@@ -14,9 +14,10 @@ export class ChangePasswordComponent implements OnInit {
   confirmPassword: string = "";
   loggedInUser: User = new User();
   UpdateButton: string = "Update";
+  errorMessage: string = "";
 
   constructor(private centrallizedRepo: CentralizedDataService,
-    private router: Router) { 
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -25,13 +26,27 @@ export class ChangePasswordComponent implements OnInit {
     console.log(this.loggedInUser);
   }
 
-  cancel()  {
-    if(this.loggedInUser.role.name == "SuperAdmin")
+  cancel() {
+    if (this.loggedInUser.role.name == "SuperAdmin")
       this.router.navigateByUrl('Admin');
     this.router.navigateByUrl(this.loggedInUser.role.name);
   }
 
-  update()  {
+  validPasswords() {
+    if(this.oldPassword == "" || this.newPassword == "" || this.confirmPassword == "")
+      this.errorMessage = "";
+    else if (this.oldPassword == this.newPassword)
+      this.errorMessage = "New Password cannot be same as Old Password";
+    else if (this.newPassword != this.confirmPassword)
+      this.errorMessage = "New passwords doesn't match";
+    else
+      this.errorMessage = "";
+    console.log(this.errorMessage);
+
+    return this.errorMessage == "" ? true : false;
+  }
+
+  update() {
     console.log(this.oldPassword + " " + this.newPassword + " " + this.confirmPassword);
   }
 

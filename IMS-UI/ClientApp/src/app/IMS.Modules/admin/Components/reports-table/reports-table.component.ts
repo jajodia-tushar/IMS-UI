@@ -32,6 +32,9 @@ export class ReportsTableComponent implements OnInit {
 
   @Input()
   pageInfo: PagingInfo;
+
+  @Input()
+  tabs
   
   paginator: MatPaginator  ;
 
@@ -65,6 +68,10 @@ export class ReportsTableComponent implements OnInit {
 
   getNext(event) {
     this.paginatorClicked.emit(event);
+  }
+
+  showExportOptio(){
+    return this.showDownloadOption && this.tabs != 5;
   }
 }
  

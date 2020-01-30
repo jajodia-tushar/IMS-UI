@@ -122,7 +122,6 @@ export class ReportsTabsComponent implements OnInit {
       this.showItemConsumptionTable();
     }
     else if(this.selectedTab == 5){
-      this.showDownloadOption = false;
       this.showAuditsLogs();
     }
   }

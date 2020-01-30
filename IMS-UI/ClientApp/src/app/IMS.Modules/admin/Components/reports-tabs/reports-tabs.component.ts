@@ -403,14 +403,20 @@ export class ReportsTabsComponent implements OnInit {
     let data = [];
     dataToExport.vendorOrders.forEach(d => {
       let temp = {
-          OrderId : d.vendorOrderDetails.orderId,
-          VendorName : d.vendor.name,
-          InvoiceNumber : d.vendorOrderDetails.invoiceNumber,
-          ApprovedBy : d.vendorOrderDetails.submittedTo,
-          SubmittedBy : d.vendorOrderDetails.submittedTo,
-          Date : this.getDateFormatForDownloadableReports(d.vendorOrderDetails.date),
-          Amount : d.vendorOrderDetails.finalAmount,
+          Order_Id : d.vendorOrderDetails.orderId,
+          Vendor_Name : d.vendor.name,
+          Vendor_Title : d.vendor.title,
+          GST : d.vendor.gst,
+          PAN : d.vendor.pan,
+          Contact_Number : d.vendor.contactNumber,
+          Invoice_Number : d.vendorOrderDetails.invoiceNumber,
           ChallanNumber : d.vendorOrderDetails.challanNumber,
+          Recieved_By : d.vendorOrderDetails.recievedBy,
+          Submitted_To : d.vendorOrderDetails.submittedTo,
+          Date : this.getDateFormatForDownloadableReports(d.vendorOrderDetails.date),
+          Number_of_items : d.vendorOrderDetails.orderItemDetails.length,
+          Total_Quantity : d.vendorOrderDetails.orderItemDetails.map(x=>x.quantity).reduce((a,b)=>a+b),
+          Amount : d.vendorOrderDetails.finalAmount,
       };
       data.push(temp);
     });

@@ -52,24 +52,6 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        
-
-        private async Task<Response> ResultParser(HttpResponseMessage response)
-        {
-            Response apiResponse = new UsersResponse();
-            var result = await response.Content.ReadAsStringAsync();
-            apiResponse = JsonConvert.DeserializeObject<Response>(result);
-            return apiResponse;
-        }
-
-        private async Task<UsersResponse> UsersResultParser(HttpResponseMessage response)
-        {
-            UsersResponse apiParsedResponse = new UsersResponse();
-            var result = await response.Content.ReadAsStringAsync();
-            apiParsedResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
-            return apiParsedResponse;
-        }
-
         public async Task<UsersResponse> GetAllUsers()
         {
             using (HttpClient http = new HttpClient())
@@ -80,20 +62,6 @@ namespace IMS_UI.IMS.Providers
                 var response = await http.GetAsync(uriBuilder.Uri);
                 return await UsersResultParser(response);
             }
-        }
-
-        private JObject JsonMaker(User user)
-        {
-            string jsonString = JsonConvert.SerializeObject(user);
-            JObject Json = JObject.Parse(jsonString);
-            return Json;
-        }
-
-        private void prepareClient(HttpClient http)
-        { 
-            http.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
         }
 
         private void prepareQuery(UriBuilder uriBuilder, Dictionary<string,string> queryParams)
@@ -111,8 +79,13 @@ namespace IMS_UI.IMS.Providers
                 UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users+ userId.ToString());
                 prepareClient(http);
-                
-                var response = await http.DeleteAsync("api/user/"+ userId.ToString()+"?isHardDelete="+"False");
+                var queryParams = new Dictionary<string, string>()
+                {
+                    ["remark"] = remark,
+                    ["isHardDelete"] = isHardDelete.ToString()
+                };
+                prepareQuery(uriBuilder, queryParams);
+                var response = await http.DeleteAsync(uriBuilder.Uri);
                 return await ResultParser(response);
             }
         }
@@ -124,8 +97,12 @@ namespace IMS_UI.IMS.Providers
                 UriBuilder uriBuilder =
                 new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.UsersUserNameUnique);
                 prepareClient(http);
-
-                var response = await http.GetAsync(uriBuilder.Uri + "?username=" + username);
+                var queryParams = new Dictionary<string, string>()
+                {
+                    ["username"] = username
+                };
+                prepareQuery(uriBuilder, queryParams);
+                var response = await http.GetAsync(uriBuilder.Uri);
                 return await ResultParser(response);
             }
         }
@@ -134,8 +111,15 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.UsersEmailUnique);
                 prepareClient(http);
-                var response = await http.GetAsync("api/user/email?email=" + email);
+                var queryParams = new Dictionary<string, string>()
+                {
+                    ["email"] = email
+                };
+                prepareQuery(uriBuilder, queryParams);
+                var response = await http.GetAsync(uriBuilder.Uri);
                 return await ResultParser(response);
             }
         }
@@ -144,11 +128,12 @@ namespace IMS_UI.IMS.Providers
         {
             try
             {
-                string path = Constants.APIEndpoints.getAllAdmins;
                 using (HttpClient http = new HttpClient())
                 {
+                    UriBuilder uriBuilder =
+                    new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.getAllAdmins);
                     prepareClient(http);
-                    var response = await http.GetAsync(path);
+                    var response = await http.GetAsync(uriBuilder.Uri);
                     var result = await response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<UsersResponse>(result);
                 }
@@ -161,14 +146,46 @@ namespace IMS_UI.IMS.Providers
 
         public async Task<RolesResponse> GetAllRoles()
         {
-            string path = Constants.APIEndpoints.getAllRoles;
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.getAllRoles);
                 prepareClient(http);
-                var response = await http.GetAsync(path);
+                var response = await http.GetAsync(uriBuilder.Uri);
                 var result = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<RolesResponse>(result);
             }
         }
+
+        private async Task<Response> ResultParser(HttpResponseMessage response)
+        {
+            Response apiResponse = new UsersResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiResponse = JsonConvert.DeserializeObject<Response>(result);
+            return apiResponse;
+        }
+
+        private async Task<UsersResponse> UsersResultParser(HttpResponseMessage response)
+        {
+            UsersResponse apiParsedResponse = new UsersResponse();
+            var result = await response.Content.ReadAsStringAsync();
+            apiParsedResponse = JsonConvert.DeserializeObject<UsersResponse>(result);
+            return apiParsedResponse;
+        }
+
+        private JObject JsonMaker(User user)
+        {
+            string jsonString = JsonConvert.SerializeObject(user);
+            JObject Json = JObject.Parse(jsonString);
+            return Json;
+        }
+
+        private void prepareClient(HttpClient http)
+        {
+            http.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+            http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+        }
+
     }
 }

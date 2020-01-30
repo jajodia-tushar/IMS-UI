@@ -8,16 +8,35 @@
 .heading {
   text-align: center;
   position: relative;
-
+  cursor: pointer;
   font-size: large;
   border: 1px solid slateblue;
   border-radius: 5px;
-  box-shadow: 1px 1px 6px rgba(224, 225, 232, 0.7);
 }
 
 .heading > p {
   position: relative;
   top: 7px;
+}
+
+.heading .tooltiptext {
+  visibility: hidden;
+  width: 76%;
+  background-color: #606a96;
+  color: #fff;
+
+  font-size: 14px;
+  align-items: left;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  top: 28px;
+  left: 66px;
+  z-index: 1;
+}
+
+.heading:hover .tooltiptext {
+  visibility: visible;
 }
 
 .table-container-items {

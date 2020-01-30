@@ -12,6 +12,7 @@ import { ItemsAvailabilityResponse } from "src/app/IMS.Models/Admin/ItemsAvailab
 import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
 import { EmployeeOrdersResponse } from "src/app/IMS.Models/Employee/EmployeeOrdersResponse";
 import { ItemConsumptionDetailsResponse } from "src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse";
+import { DatePipe } from "@angular/common";
 
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -345,34 +346,36 @@ export class ReportsTabsComponent implements OnInit {
 
 
   clickMe(){
+    let dFromDate = this.getDateFormatForDownloadableReports(this.fromDate);
+    let dToDate = this.getDateFormatForDownloadableReports(this.toDate);
+    let onDate = this.getDateFormatForDownloadableReports(new Date());
 
     if (this.selectedTab == 0) {
       let firstLevelData = this.getTopLevelDataOfRAG(this.dataToExport);
-      let fileName = `RAG-Report-Of -- ${this.locationName} in ${this.colour} on ${new Date().toDateString()}`
+      let fileName = `RAG-Report-Of -- ${this.locationName} in ${this.colour} on ${onDate}`
       this.GenerateVendorOrderReports(fileName,firstLevelData);
     }
     else if (this.selectedTab == 1) {
       let firstLevelData = this.getTopLevelDataForVendorOrder(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForVendorOrder(this.dataToExport);
-      let fileName = `Vendor-Order-report from -${this.fromDate} To ${this.toDate}`;
+      let fileName = `Vendor-Order-report from -${dFromDate} To ${dToDate}`;
       this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 2){
       let firstLevelData = this.getTopLevelDataOfEmployeeOrder(this.dataToExport);
-      let fileName = `Employee-Order-Reports from - ${this.fromDate}  To ${this.toDate} `;
+      let fileName = `Employee-Order-Reports from - ${dFromDate}  To ${dToDate} `;
       this.GenerateVendorOrderReports(fileName,firstLevelData);
     }
     else if(this.selectedTab == 3){
       let firstLevelData = this.getTopLevelDataForPerDayConsumption(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForPerDayConsumption(this.dataToExport);
-      let fileName = `Per Day Consumption Report from-${this.fromDate} To ${this.toDate}`;
+      let fileName = `Per Day Consumption Report from ${dFromDate} To ${dToDate}`;
       this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 4){
       let firstLevelData = this.getTopLevelDataOfItemConsumption(this.dataToExport);
-      let fileName = `Item Consumption Report from ${this.fromDate} To ${this.toDate}`;
+      let fileName = `Item Consumption Report from ${dFromDate} To ${dToDate}`;
       this.GenerateVendorOrderReports(fileName,firstLevelData);
-
     }
   }
 
@@ -388,6 +391,7 @@ export class ReportsTabsComponent implements OnInit {
           let dataToPlot = d.sheetData;
           let nameOfSheet = d.sheetName.toString();
           let innerSheet = XLSX.utils.json_to_sheet(dataToPlot);
+          console.log(nameOfSheet);
           XLSX.utils.book_append_sheet(wb, innerSheet, nameOfSheet);
         });
     }
@@ -404,7 +408,7 @@ export class ReportsTabsComponent implements OnInit {
           InvoiceNumber : d.vendorOrderDetails.invoiceNumber,
           ApprovedBy : d.vendorOrderDetails.submittedTo,
           SubmittedBy : d.vendorOrderDetails.submittedTo,
-          Date : d.vendorOrderDetails.date,
+          Date : this.getDateFormatForDownloadableReports(d.vendorOrderDetails.date),
           Amount : d.vendorOrderDetails.finalAmount,
           ChallanNumber : d.vendorOrderDetails.challanNumber,
       };
@@ -440,7 +444,7 @@ export class ReportsTabsComponent implements OnInit {
     let data = [];
     dataToExport.dateItemMapping.forEach(d => {
       let temp = {
-          Date : new Date(d.date).toDateString(),
+          Date : this.getDateFormatForDownloadableReports(d.date),
           Different_Items : d.itemQuantityMappings.length,
           Total_Quantity : d.itemQuantityMappings.map(x=>x.quantity).reduce((a,b)=>a+b)
       };
@@ -463,7 +467,7 @@ export class ReportsTabsComponent implements OnInit {
               data.push(x);
             });
            let x = {
-              sheetName : new Date(d.date).toDateString(),
+              sheetName : this.getDateFormatForDownloadableReports(d.date),
               sheetData : data
             }
             finalData.push(x);
@@ -494,7 +498,7 @@ export class ReportsTabsComponent implements OnInit {
             Employee_Id : d.employee.id,
             Employee_Name : d.employee.firstname + "  " + d.employee.lastname,
             Employee_ContactNumber : d.employee.contactNumber,
-            Date : new Date(d.employeeOrderDetails.date).toDateString(),
+            Date : this.getDateFormatForDownloadableReports(d.employeeOrderDetails.date,true),
             Number_of_Items : d.employeeOrderDetails.employeeItemsQuantityList.length,
             Total_Quantity : d.employeeOrderDetails.employeeItemsQuantityList.map(x=>x.quantity).reduce((a,b)=>a+b),
             Shelf : d.employeeOrderDetails.shelf.name,
@@ -513,12 +517,25 @@ export class ReportsTabsComponent implements OnInit {
           }
         d.dateItemConsumptions.forEach(
           a=>{
-            x[a.date] = a.itemsConsumptionCount
+            let date = this.getDateFormatForDownloadableReports(a.date);
+            x[date] = a.itemsConsumptionCount
           }
         ) 
         finalData.push(x);
       });
       return finalData;
+  }
+
+  getDateFormatForDownloadableReports(date,requireTime? : boolean){
+    let datePipe = new DatePipe('en-US');
+    let newDate = new Date(date);
+
+    if(requireTime){
+      return datePipe.transform(newDate,"dd-MM-yyyy h:mm");
+    }
+    else{
+      return datePipe.transform(newDate,"dd-MM-yyyy");
+    }
   }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {

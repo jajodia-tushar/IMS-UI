@@ -29,20 +29,25 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
                 prepareClient(http);
                 JObject userJson = JsonMaker(user);
-                var response = await http.PostAsJsonAsync("api/user", userJson);
+                var response = await http.PostAsJsonAsync(uriBuilder.Uri, userJson);
                 return await UsersResultParser(response);
             }
         }
 
-        public async Task<UsersResponse> EditUser(User user)
+        public async Task<UsersResponse> EditUser(User user, string remark)
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
                 prepareClient(http);
+                prepareQuery(uriBuilder,new Dictionary<string, string>() {["remark"] = remark });
                 JObject userJson = JsonMaker(user);
-                var response = await http.PutAsJsonAsync("api/user", userJson);
+                var response = await http.PutAsJsonAsync(uriBuilder.Uri, userJson);
                 return await UsersResultParser(response);
             }
         }
@@ -69,8 +74,10 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
                 prepareClient(http);
-                var response = await http.GetAsync("api/user");
+                var response = await http.GetAsync(uriBuilder.Uri);
                 return await UsersResultParser(response);
             }
         }
@@ -83,17 +90,26 @@ namespace IMS_UI.IMS.Providers
         }
 
         private void prepareClient(HttpClient http)
-        {
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+        { 
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
         }
 
-        public async Task<Response> DeactivateUser(int userId, bool isHardDelete)
+        private void prepareQuery(UriBuilder uriBuilder, Dictionary<string,string> queryParams)
+        {
+            var content = new FormUrlEncodedContent(
+                queryParams.ToList<KeyValuePair<string, string>>()
+        );
+            uriBuilder.Query = content.ReadAsStringAsync().Result;
+        }
+
+        public async Task<Response> DeactivateUser(int userId, bool isHardDelete,string remark)
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users+ userId.ToString());
                 prepareClient(http);
                 
                 var response = await http.DeleteAsync("api/user/"+ userId.ToString()+"?isHardDelete="+"False");
@@ -105,9 +121,11 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
+                UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.UsersUserNameUnique);
                 prepareClient(http);
 
-                var response = await http.GetAsync("api/user/username?username=" + username);
+                var response = await http.GetAsync(uriBuilder.Uri + "?username=" + username);
                 return await ResultParser(response);
             }
         }

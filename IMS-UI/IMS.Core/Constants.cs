@@ -22,6 +22,10 @@ namespace IMS_UI.IMS.Core
             public const string reportsGetRAGReports = "api/Reports/GetItemsAvailability";
 
             public const string LoginProviderLogout = "api/logout";
+            public const string Users = "api/user/";
+            public const string UsersUserNameUnique = "api/user/username";
+            public const string UsersEmailUnique = "api/user/email";
+
 
             public const string VendorOrdersProvider = "api/order/VendorOrders/";
 

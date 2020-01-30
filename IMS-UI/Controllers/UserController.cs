@@ -93,11 +93,11 @@ namespace IMS_UI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditUserDetails([FromBody] User user)
+        public async Task<IActionResult> EditUserDetails([FromBody] User user, string remark)
         {
             try
             {
-                var response = await _userProvider.EditUser(user);
+                var response = await _userProvider.EditUser(user, remark);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 
@@ -110,11 +110,11 @@ namespace IMS_UI.Controllers
         }
 
         [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeactivateUser(int userId, bool isHardDelete)
+        public async Task<IActionResult> DeactivateUser(int userId, bool isHardDelete, string remark)
         {
             try
             {
-                var response = await _userProvider.DeactivateUser(userId, isHardDelete);
+                var response = await _userProvider.DeactivateUser(userId, isHardDelete, remark);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     sessionManager.ClearSession();
 

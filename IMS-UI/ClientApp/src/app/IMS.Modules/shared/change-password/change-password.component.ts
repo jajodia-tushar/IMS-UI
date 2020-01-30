@@ -23,7 +23,6 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
     this.centrallizedRepo.getLoggedInUser();
     this.loggedInUser = this.centrallizedRepo.getUser();
-    console.log(this.loggedInUser);
   }
 
   cancel() {
@@ -41,13 +40,10 @@ export class ChangePasswordComponent implements OnInit {
       this.errorMessage = "New passwords doesn't match";
     else
       this.errorMessage = "";
-    console.log(this.errorMessage);
-
     return this.errorMessage == "" ? true : false;
   }
 
   update() {
-    console.log(this.oldPassword + " " + this.newPassword + " " + this.confirmPassword);
   }
 
 }

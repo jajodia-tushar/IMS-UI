@@ -38,6 +38,7 @@ export class UserManageFormComponent implements OnInit{
           userValidators.patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, {hasSpecialCharacters: true}),
         ]],
         email : ["", [Validators.required, Validators.email], this.userValidators.emailTakenValidator.bind(this.userValidators)],
+        isDefaultPasswordChanged: [false]
     })
   }
 

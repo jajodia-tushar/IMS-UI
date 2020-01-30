@@ -13,28 +13,36 @@
   border-bottom: 1px solid slateblue;
 }
 
-.heading > p {
+.submit-update > p {
   position: relative;
   top: 7px;
 }
 
-.heading .tooltiptext {
+#warn {
+  position: relative;
+
+  bottom: 6px;
+}
+
+.submit-update .tooltiptext {
   visibility: hidden;
-  width: 76%;
+  height: 32px;
+  /* width: 76%; */
+  text-align: center;
   background-color: #606a96;
   color: #fff;
-
   font-size: 14px;
   align-items: left;
   border-radius: 6px;
   padding: 5px 5px;
   position: absolute;
-  top: 28px;
-  left: 66px;
+  top: -45px;
+  right: 10px;
+  /* left: -77px; */
   z-index: 1;
 }
 
-.heading:hover .tooltiptext {
+.submit-update:hover .tooltiptext {
   visibility: visible;
 }
 
@@ -121,17 +129,19 @@ th.mat-header-cell {
 
 .position-of-buttons .submit-update {
   height: 37px;
+  position: relative;
   min-height: 37px;
+  right: 76px;
   min-width: 75px;
 }
-
 .cancel {
-  height: 40px;
-  position: relative;
+  height: 35px;
+  position: absolute;
+  position: absolute;
+  right: 5px;
   min-height: 39px;
   min-width: 30px;
 }
-
 [type="submit"]:not(:disabled) {
   color: white;
   border: 0.5px solid aquamarine;

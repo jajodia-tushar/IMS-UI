@@ -17,17 +17,17 @@ import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-ord
 })
 export class BulkRequestComponent implements OnInit {
   private navigationKeys = [
-    'Backspace', 'Delete', 'Tab','Escape', 'Enter', 'Home', 'End', 'ArrowLeft',
+    'Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'Home', 'End', 'ArrowLeft',
     'ArrowRight', 'Clear', 'Copy', 'Paste'
   ];
   today: Date = new Date();
-  minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate()+2);  
+  minDate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2);
   employeeID: string;
   displayedColumns: string[] = ['itemName', 'requestQuantity', 'action'];
   Items: Item[] = [];
   date: Date;
   reason: string;
-  buttonName: string="Submit";
+  buttonName: string = "Submit";
 
   orderSuccessDetails: OrderSuccessDetails = new OrderSuccessDetails;
 
@@ -36,23 +36,23 @@ export class BulkRequestComponent implements OnInit {
   dataSource: MatTableDataSource<BulkOrderItemQuantityMapping>;
   dataSourceItems: BulkOrderItemQuantityMapping[] = [];
 
-  constructor(public dialogRef: MatDialogRef<BulkRequestComponent>, 
+  constructor(public dialogRef: MatDialogRef<BulkRequestComponent>,
     private snackBar: MatSnackBar, private router: Router,
     private dialog: MatDialog,
-    @Optional() @Inject(MAT_DIALOG_DATA) public datas: Employee, 
+    @Optional() @Inject(MAT_DIALOG_DATA) public datas: Employee,
     private itemService: ItemService, private employeeOrderService: EmployeeOrderService) {
     this.employeeID = datas.id;
   }
 
-  validForm()  {
+  validForm() {
     let errorRowIndex = this.rowValidation();
-    if(this.date == null || this.reason == null)
+    if (this.date == null || this.reason == null)
       return false;
-    if(this.dataSourceItems.length == 0)
+    if (this.dataSourceItems.length == 0)
       return false;
-    if(errorRowIndex == -1)
+    if (errorRowIndex == -1)
       return true;
-    if(errorRowIndex < this.dataSourceItems.length)
+    if (errorRowIndex < this.dataSourceItems.length)
       return false;
     return true;
   }
@@ -85,7 +85,7 @@ export class BulkRequestComponent implements OnInit {
     this.dataSource.data.push(itemData);
   }
 
-  createRequest()  {
+  createRequest() {
     this.bulkRequest.employee = new Employee();
     this.bulkRequest.employee.id = this.employeeID;
 
@@ -106,35 +106,36 @@ export class BulkRequestComponent implements OnInit {
   }
 
   Send() {
-    this.buttonName="";
+    this.buttonName = "";
     let errorRowIndex = this.rowValidation();
-    if(errorRowIndex === -1)  {
+    if (errorRowIndex === -1) {
       this.createRequest();
-    
+
       this.employeeOrderService.placeBulkOrder(this.bulkRequest).subscribe(
         data => {
-          if(data.status == "Success")  {
-              let dialogConfig = new MatDialogConfig();
-              dialogConfig.disableClose = true;
-              dialogConfig.panelClass = 'dialog-order-success';
-              dialogConfig.autoFocus = true;
-              dialogConfig.data = this.orderSuccessDetails;
-              let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
-              setTimeout(() => {
-                dialogRef.close();
-                this.router.navigateByUrl('/Shelf');
-              }, 5000);
+          if (data.status == "Success") {
+            let dialogConfig = new MatDialogConfig();
+            dialogConfig.disableClose = true;
+            dialogConfig.panelClass = 'dialog-order-success';
+            dialogConfig.autoFocus = true;
+            dialogConfig.data = this.orderSuccessDetails;
+            let dialogRef = this.dialog.open(OrderSuccessComponent, dialogConfig);
+            setTimeout(() => {
+              dialogRef.close();
+              this.router.navigateByUrl('/Shelf');
+            }, 5000);
           }
           else
             this.handleErrorInConnection(data.error.errorMessage);
+          this.buttonName = "Submit"
           this.dialogRef.close();
         },
         error => {
           this.handleErrorInConnection();
         });
     }
-    else  {
-      this.buttonName="Submit";
+    else {
+      this.buttonName = "Submit";
       if (this.dataSourceItems[errorRowIndex].item.name == "")
         showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
       else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)
@@ -142,13 +143,13 @@ export class BulkRequestComponent implements OnInit {
     }
   }
 
-  
-  handleErrorInConnection(message? : string){
+
+  handleErrorInConnection(message?: string) {
     let errorMessage: string;
-    if(message == null || message == "")
-        errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
+    if (message == null || message == "")
+      errorMessage = JSON.parse(JSON.stringify("No Data To Display"));
     else
-        errorMessage = JSON.parse(JSON.stringify(message));
+      errorMessage = JSON.parse(JSON.stringify(message));
     showMessage(this.snackBar, 5, errorMessage);
   }
 
@@ -160,14 +161,14 @@ export class BulkRequestComponent implements OnInit {
     let errorRowIndex = this.rowValidation();
     if (errorRowIndex === -1) {
       let itemData: BulkOrderItemQuantityMapping = {
-        item: { id: 1, name: "",  maxLimit: 0, isActive: true, imageUrl: "", rate: 0},
+        item: { id: 1, name: "", maxLimit: 0, isActive: true, imageUrl: "", rate: 0 },
         quantityOrdered: 0,
         quantityUsed: 0
       };
       this.dataSourceItems.unshift(itemData);
       this.renderTable();
     }
-    else {      
+    else {
       if (this.dataSourceItems[errorRowIndex].item.name == "")
         showMessage(this.snackBar, 5, "Item In Row " + (errorRowIndex + 1) + " Is Not Selected", "warn");
       else if (this.dataSourceItems[errorRowIndex].quantityOrdered == 0)
@@ -198,7 +199,7 @@ export class BulkRequestComponent implements OnInit {
   renderTable() {
     this.dataSource = new MatTableDataSource(this.dataSourceItems);
   }
-  
+
   allowOnlyDigits(e: KeyboardEvent) {
     if (
       this.navigationKeys.indexOf(e.key) > -1 || // Allow: navigation keys: backspace, delete, arrows etc.

@@ -1,6 +1,6 @@
 <div class="bulk-container">
     <div class="heading">
-        <p>Send Request<span class="tooltiptext">Note: Request will be sent to Admin Team for Approval</span></p>
+        <p>Bulk Request</p>
     </div>
 
     <form class="form-container" autocomplete="off">
@@ -82,7 +82,11 @@
 
         <div class="position-of-buttons">
             <button mat-button type="submit" class="submit-update" (click)="Send()" [disabled]="!validForm()">
-                Submit<app-spinning-loader></app-spinning-loader>
+                <app-spinning-loader></app-spinning-loader>{{buttonName}}<span class="tooltiptext">
+
+                    <p id="warn">Note: Request will be sent to Admin Team for Approval</p>
+                </span>
+
             </button>
             <button mat-button type="button" class="cancel" (click)="CancelRequest()">Cancel</button>
         </div>

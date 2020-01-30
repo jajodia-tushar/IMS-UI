@@ -40,10 +40,8 @@ export class LoginComponent implements OnInit {
             }
           }
           else {
-            console.log(data.user);
-            
             if (!data.user.isDefaultPasswordChanged) {
-              this.changePassword();
+              this.router.navigateByUrl('changePassword');
             }
             else {
               if (this.role == 'SuperAdmin')
@@ -63,12 +61,6 @@ export class LoginComponent implements OnInit {
         this.error = true
       }
     );
-  }
-
-  changePassword() {
-    this.router.navigateByUrl('changePassword')
-    console.log("redirect to change passwrd");
-
   }
   ngOnInit() {
   }

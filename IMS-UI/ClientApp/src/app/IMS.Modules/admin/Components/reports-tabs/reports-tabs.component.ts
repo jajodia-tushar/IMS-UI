@@ -8,6 +8,7 @@ import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import { VendorOrderResponse } from "src/app/IMS.Models/Vendor/VendorOrderResponse";
 import { PerDayConsumptionResponse } from "src/app/IMS.Models/Admin/PerDayConsumptionResponse";
+import { ItemsAvailabilityResponse } from "src/app/IMS.Models/Admin/ItemsAvailabilityResponse";
 import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
 
 
@@ -344,7 +345,9 @@ export class ReportsTabsComponent implements OnInit {
   clickMe(){
 
     if (this.selectedTab == 0) {
-      this.showRAGDataTable();
+      let firstLevelData = this.getTopLevelDataOfRAG(this.dataToExport);
+      let fileName = `RAG-Report-Of -- ${this.locationName} in ${this.colour} on ${new Date().toDateString()}`
+      this.GenerateVendorOrderReports(fileName,firstLevelData);
     }
     else if (this.selectedTab == 1) {
       let firstLevelData = this.getTopLevelDataForVendorOrder(this.dataToExport);
@@ -372,10 +375,13 @@ export class ReportsTabsComponent implements OnInit {
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Main Page");
     if(innerLevelData){
+      console.log(innerLevelData);
       innerLevelData.forEach(
-        (d,i) => {
-          let innerSheet = XLSX.utils.json_to_sheet(d);
-          XLSX.utils.book_append_sheet(wb, innerSheet, '');
+        d => {
+          let dataToPlot = d.sheetData;
+          let nameOfSheet = d.sheetName.toString();
+          let innerSheet = XLSX.utils.json_to_sheet(dataToPlot);
+          XLSX.utils.book_append_sheet(wb, innerSheet, nameOfSheet);
         });
     }
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
@@ -413,7 +419,11 @@ export class ReportsTabsComponent implements OnInit {
               }
               data.push(x);
             });
-            finalData.push(data);
+            let x = {
+              sheetName : d.vendorOrderDetails.orderId,
+              sheetData : data
+            }
+            finalData.push(x);
             data = [];
       });
       return finalData;
@@ -423,7 +433,7 @@ export class ReportsTabsComponent implements OnInit {
     let data = [];
     dataToExport.dateItemMapping.forEach(d => {
       let temp = {
-          Date : d.date,
+          Date : new Date(d.date).toDateString(),
           Different_Items : d.itemQuantityMappings.length,
           Total_Quantity : d.itemQuantityMappings.map(x=>x.quantity).reduce((a,b)=>a+b)
       };
@@ -445,8 +455,26 @@ export class ReportsTabsComponent implements OnInit {
               }
               data.push(x);
             });
-            finalData.push(data);
+           let x = {
+              sheetName : new Date(d.date).toDateString(),
+              sheetData : data
+            }
+            finalData.push(x);
             data = [];
+      });
+      return finalData;
+  }
+
+  getTopLevelDataOfRAG(data : ItemsAvailabilityResponse){
+    let finalData = [];
+
+    data.itemQuantityMappings.forEach(
+      d=>{
+        let x = {
+          Item_Name : d.item.name,
+          Item_Quantity : d.quantity
+        }
+        finalData.push(x);
       });
       return finalData;
   }

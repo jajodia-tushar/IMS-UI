@@ -79,11 +79,11 @@ export class ReportsTabsComponent implements OnInit {
   }
 
   tabChanged(event: Event) {
+    this.initializePaging();
     this.searchButtonClicked();
   }
 
   searchButtonClicked() {
-    this.initializePaging();
     this.refreshColumnsAndTables();
     
     if (this.selectedTab == 0) {

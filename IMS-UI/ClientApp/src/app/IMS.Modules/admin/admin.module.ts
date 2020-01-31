@@ -94,6 +94,6 @@ import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component
     AdminRoutingModule,
     SharedModule
   ],
-  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent]
+  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent,BulkRequestDialogComponent]
 })
 export class AdminModule { }

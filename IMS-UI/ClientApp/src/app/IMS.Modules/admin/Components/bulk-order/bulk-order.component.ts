@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
+import { Item } from 'src/app/IMS.Models/Item/Item';
 
 @Component({
   selector: 'app-bulk-order',
@@ -10,7 +13,7 @@ import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service'
 export class BulkOrderComponent implements OnInit {
 
   listOfFieldToBeDisplayed : FieldToBeDisplayed[] = [];
-  dataSource = [];
+  dataSource : TableData[] = [];
   displayedColumns = ["itemName","itemQuantity","action"];
   orderId : number;
   reasonForRequirement: string;
@@ -20,7 +23,8 @@ export class BulkOrderComponent implements OnInit {
   }
   
   constructor(private route : ActivatedRoute,
-    private bulkOrderService : BulkOrderService) {
+    private bulkOrderService : BulkOrderService,
+    private dialog: MatDialog,) {
     this.route.paramMap.subscribe(
       params => {
         this.orderId =  parseInt(params.get("id"));
@@ -69,6 +73,7 @@ export class BulkOrderComponent implements OnInit {
             orderDetails.itemsQuantityList.forEach(
               iq => {
                   let x = {
+                    itemId : iq.item.id,
                     itemName : iq.item.name,
                     itemQuantity : iq.quantityOrdered
                   }
@@ -83,14 +88,18 @@ export class BulkOrderComponent implements OnInit {
   ngOnInit() {
   }
 
-  addButtonClicked(data){
-    console.log(data);
+  addButtonClicked(data : TableData){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = data;
+    dialogConfig.panelClass = 'dialog-user-manage';
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(BulkRequestDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
-
-
-
 }
-
 
 export class FieldToBeDisplayed{
   fieldName : string;
@@ -98,6 +107,7 @@ export class FieldToBeDisplayed{
 }
 
 export class TableData{
+  itemId : string;
   itemName : string;
   itemQuantity : number;
 }

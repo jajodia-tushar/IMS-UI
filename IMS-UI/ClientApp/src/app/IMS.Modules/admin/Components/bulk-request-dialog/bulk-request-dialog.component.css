@@ -1,0 +1,22 @@
+.bulk-order-card {
+    margin: 10px;
+}
+
+.bulk-card-content {
+    margin-top: 10px;
+    color: white;
+}
+
+.form-label-inclosing-class {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-labels-input {
+    margin-top: 10px;
+}
+
+.table-class {
+    min-width: 100%;
+}

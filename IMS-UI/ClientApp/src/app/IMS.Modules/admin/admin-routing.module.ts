@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './Components/admin/admin.component';
 import { AdminRouteGuardService } from 'src/app/IMS.Services/Route/admin-route-guard.service';
@@ -11,6 +11,7 @@ import { NotificationsComponent } from './Components/notifications/notifications
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
 import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
+import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
           {
             path: 'VendorOrder/:id',
             component: InvoiceEditorComponent
+          },
+          {
+            path : 'BulkOrder/:id',
+            component : BulkOrderComponent
           }
         ]
       },

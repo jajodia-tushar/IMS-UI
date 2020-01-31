@@ -40,6 +40,7 @@ import { VendorListComponent } from './Components/vendor-list/vendor-list.compon
 import { VendorManageDialogComponent } from './Components/vendor-manage-dialog/vendor-manage-dialog.component';
 import { VendorManageFormComponent } from './Components/vendor-manage-form/vendor-manage-form.component';
 import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bulk-request-dialog.component';
+import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 
 
 @NgModule({
@@ -84,6 +85,8 @@ import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bul
       VendorListComponent,
       VendorManageDialogComponent,
       VendorManageFormComponent,
+      BulkOrderComponent,
+     
       BulkRequestDialogComponent
     ],
   imports: [

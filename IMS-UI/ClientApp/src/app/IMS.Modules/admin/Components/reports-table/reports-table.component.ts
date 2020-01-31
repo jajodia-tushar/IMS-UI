@@ -33,11 +33,24 @@ export class ReportsTableComponent implements OnInit {
   @Input()
   pageInfo: PagingInfo;
 
+  @Input()
+  tabs
+  
   paginator: MatPaginator  ;
+
+  @Output()
+  exportData : EventEmitter<any> = new EventEmitter<any>();
+
+  @Input()
+  showDownloadOption : boolean;
 
   @ViewChild(MatPaginator, {static: true}) set matPaginator(mp: MatPaginator) {
   this.paginator = mp;
   }  
+
+  exportCsv(){
+    this.exportData.emit();
+  }
   
   ngOnInit() { 
     this.pageInfo = new PagingInfo();
@@ -55,6 +68,10 @@ export class ReportsTableComponent implements OnInit {
 
   getNext(event) {
     this.paginatorClicked.emit(event);
+  }
+
+  showExportOptio(){
+    return this.showDownloadOption && this.tabs != 5;
   }
 }
  

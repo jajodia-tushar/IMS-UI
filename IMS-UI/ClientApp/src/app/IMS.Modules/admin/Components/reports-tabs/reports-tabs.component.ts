@@ -13,6 +13,7 @@ import { AuditingService } from "src/app/IMS.Services/logging/auditing.service";
 import { EmployeeOrdersResponse } from "src/app/IMS.Models/Employee/EmployeeOrdersResponse";
 import { ItemConsumptionDetailsResponse } from "src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse";
 import { DatePipe } from "@angular/common";
+import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-data.service";
 
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -40,6 +41,8 @@ export class ReportsTabsComponent implements OnInit {
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
 
+  showDownloadOption : boolean;
+
 
   // ====================== Pagination Support================
     pageInfo: PagingInfo;
@@ -51,7 +54,8 @@ export class ReportsTabsComponent implements OnInit {
     private route: ActivatedRoute,
     private vendorService : VendorService,
     private employeeOrderService : EmployeeOrderService,
-    private auditingService : AuditingService) {
+    private auditingService : AuditingService,
+    private centralizedRepo : CentralizedDataService) {
     this.locationName = this.route.snapshot.queryParams.locationName;
     this.locationCode = this.route.snapshot.queryParams.locationCode;
     this.colour = this.route.snapshot.queryParams.colour;
@@ -76,6 +80,22 @@ export class ReportsTabsComponent implements OnInit {
   async ngOnInit() {
     await this.initializeEmptyData();
     this.searchButtonClicked();
+    this.initializeExportOption();
+    
+  }
+
+  async initializeExportOption(){
+    let user = this.centralizedRepo.getUser();
+    if(user){
+      await this.centralizedRepo.getLoggedInUser();
+      user = this.centralizedRepo.getUser();
+    }
+    if(user.role.name == "SuperAdmin"){
+        this.showDownloadOption = true;
+    }
+    else{
+      this.showDownloadOption = false;
+    }
   }
 
   tabChanged(event: Event) {

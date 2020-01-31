@@ -22,11 +22,8 @@
                                 <input class="report-page-input-field" autocomplete="off" [(ngModel)]="reportsData.dataFromUser" placeholder="{{ reportsData.placeHolderName }}">
                             </ng-container>
                         </mat-list-item>
+                        <button class="submit-button" (click)="searchButtonClicked()" style="outline: none;">GO</button>
 
-                        <button class="submit-button" (click)="searchButtonClicked()" style="outline: none;">
-                            GO
-                        </button>
-                        <button class="submit-button" style="outline: none;" (click)="clickMe()">Export</button>
                     </mat-nav-list>
                 </div>
             </div>
@@ -34,4 +31,4 @@
     </mat-tab>
 </mat-tab-group>
 
-<app-reports-table [errorMessage]="errorMessage" [columnsToDisplay]='columnToDisplay' [dataSource]='dataToDisplay' (paginatorClicked)="paginatorClicked($event)" [pageInfo]="pageInfo"></app-reports-table>
+<app-reports-table (exportData)="clickMe()" [errorMessage]="errorMessage" [columnsToDisplay]='columnToDisplay' [dataSource]='dataToDisplay' (paginatorClicked)="paginatorClicked($event)" [pageInfo]="pageInfo" [showDownloadOption]="showDownloadOption" [(tabs)]="selectedTab"></app-reports-table>

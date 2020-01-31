@@ -84,5 +84,25 @@ namespace IMS_UI.Controllers
                 });
             }
         }
+
+        [HttpPatch("updatePassword/{userId}")]
+        public async Task<IActionResult> UpdateUserPassword(int userId, [FromBody] ChangePasswordDetails changePasswordDetails)
+        {
+            try
+            {
+                var response = await _loginProvider.ChangePassword(userId, changePasswordDetails);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                {
+                    _SessionManager.ClearSession();
+                    return BadRequest(response);
+                }
+                _SessionManager.ClearSession();
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

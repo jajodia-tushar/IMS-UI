@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,6 @@ namespace IMS_UI.IMS.Providers
             _sessionManager = sessionManager;
             _Configuration = configuration;
         }
-
-
 
         public async Task<LoginResponse>  ApiCaller(Object requestData)
         {
@@ -94,6 +93,34 @@ namespace IMS_UI.IMS.Providers
 
         }
 
-
+        public async Task<Response> ChangePassword(int userId, ChangePasswordDetails changePasswordDetails)
+        {
+            try
+            {
+                using (HttpClient _client = new HttpClient())
+                {
+                    var content = new ObjectContent<ChangePasswordDetails>(changePasswordDetails, new JsonMediaTypeFormatter());
+                    var EndPoint = Constants.APIEndpoints.UpdatePassword;
+                    _client.BaseAddress = new Uri(_Configuration["BASEURL"]);
+                    _client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+                    _client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+                    HttpMethod method = new HttpMethod("PATCH");
+                    var httpRequest = new HttpRequestMessage(method, _client.BaseAddress + EndPoint + userId)
+                    {
+                        Content = content
+                    };
+                    var response = await _client.SendAsync(httpRequest);
+                    var parsed = JsonConvert.DeserializeObject<Response>(
+                        await response.Content.ReadAsStringAsync());
+                    return parsed;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

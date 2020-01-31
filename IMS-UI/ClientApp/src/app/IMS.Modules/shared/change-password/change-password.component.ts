@@ -20,6 +20,10 @@ export class ChangePasswordComponent implements OnInit {
     private router: Router) {
   }
 
+  canUpdate()  {
+    return (this.oldPassword=='' || this.newPassword=='' || this.confirmPassword=='' || !this.validPasswords());
+  }
+
   ngOnInit() {
     this.centrallizedRepo.getLoggedInUser();
     this.loggedInUser = this.centrallizedRepo.getUser();

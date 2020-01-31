@@ -41,6 +41,7 @@ import { VendorManageDialogComponent } from './Components/vendor-manage-dialog/v
 import { VendorManageFormComponent } from './Components/vendor-manage-form/vendor-manage-form.component';
 import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bulk-request-dialog.component';
 import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
+import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-return-dialog.component';
 
 
 @NgModule({
@@ -87,13 +88,15 @@ import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component
       VendorManageFormComponent,
       BulkOrderComponent,
      
-      BulkRequestDialogComponent
+      BulkRequestDialogComponent,
+     
+      BulkReturnDialogComponent
     ],
   imports: [
     MaterialModule,
     AdminRoutingModule,
     SharedModule
   ],
-  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent,BulkRequestDialogComponent]
+  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent,BulkRequestDialogComponent,BulkReturnDialogComponent]
 })
 export class AdminModule { }

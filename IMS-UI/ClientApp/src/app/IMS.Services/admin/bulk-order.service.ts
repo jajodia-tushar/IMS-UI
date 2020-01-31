@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmployeeBulkOrderResponse, ItemLocationQuantityMapping, BulkOrderApproveModel, BlukOrderApprove, BlukOrderApproveResponse } from 'src/app/IMS.Models/Employee/BulkRequest';
+import { EmployeeBulkOrderResponse, ItemLocationQuantityMapping, BulkOrderApproveModel, BlukOrderApprove, BlukOrderApproveResponse, EmployeeBulkOrderDetails, BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { StockStatusResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
@@ -41,6 +41,11 @@ export class BulkOrderService {
   rejectBulkOrder(orderId : number){
     let path : string   = "api/employee/EmployeeBulkOrders/reject/" + orderId;
     return this.http.put<Response>(path,null);
+  }
+
+  returnBulkOrder(orderId: number , employeeBulkOrder : BulkRequest) : Observable<EmployeeBulkOrderResponse>{
+    let path : string   = "api/employee/EmployeeBulkOrders/return/" + orderId;
+    return this.http.put<EmployeeBulkOrderResponse>(path,employeeBulkOrder);
   }
 
 

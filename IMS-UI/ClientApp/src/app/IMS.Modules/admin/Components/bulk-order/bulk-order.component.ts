@@ -4,8 +4,9 @@ import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
 import { Item } from 'src/app/IMS.Models/Item/Item';
-import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove } from 'src/app/IMS.Models/Employee/BulkRequest';
+import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove, BulkOrderItemQuantityMapping, BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
+import { BulkReturnDialogComponent } from '../bulk-return-dialog/bulk-return-dialog.component';
 
 @Component({
   selector: 'app-bulk-order',
@@ -22,6 +23,7 @@ export class BulkOrderComponent implements OnInit {
   itemLocationQuaListToBeSent : ItemLocationQuantityMapping[] = [];
   employee : Employee;
   employeeBulkOrderDetails: EmployeeBulkOrderDetails;
+  bulkOrderItemQuantityMapping : BulkOrderItemQuantityMapping[] = [];
   
   numberOfColumns() {
     return (this.displayedColumns.length - 1);
@@ -83,6 +85,7 @@ export class BulkOrderComponent implements OnInit {
                     itemQuantity : iq.quantityOrdered
                   }
                   tempDataSource.push(x);
+                  this.bulkOrderItemQuantityMapping.push(iq);
               });
               this.dataSource = JSON.parse(JSON.stringify(tempDataSource));
           }
@@ -142,8 +145,32 @@ export class BulkOrderComponent implements OnInit {
     this.bulkOrderService.rejectBulkOrder(this.orderId).subscribe(
       data=>{
         console.log(data);
+      });
+  }
+
+  returnClicked(){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = this.bulkOrderItemQuantityMapping;
+    dialogConfig.panelClass = 'dialog-user-manage';
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(BulkReturnDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);
+        let bulkOrder = new BulkRequest();
+        bulkOrder.bulkOrderId = this.orderId;
+        bulkOrder.employee = this.employee;
+        bulkOrder.employeeBulkOrderDetails = this.employeeBulkOrderDetails;
+        console.log(bulkOrder.employeeBulkOrderDetails.itemsQuantityList);
+        bulkOrder.employeeBulkOrderDetails.itemsQuantityList = result;
+
+        this.bulkOrderService.returnBulkOrder(this.orderId,bulkOrder).subscribe(
+          data=>{
+            console.log(data);
+          });
       }
-    )
+    });
 
   }
 }

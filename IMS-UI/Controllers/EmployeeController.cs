@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IMS_UI.IMS.Core.Infra;
 using IMS_UI.IMS.Models;
+using IMS_UI.IMS.Models.Admin;
 using IMS_UI.IMS.Providers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -195,6 +196,52 @@ namespace IMS_UI.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("EmployeeBulkOrders/{orderId}")]
+        public async Task<EmployeeBulkOrdersResponse> GetEmployeeBulkOrderById(int orderId)
+        {
+            var response = await _employeeProvider.GetEmployeeBulkOrderById(orderId);
+            return response;
+
+            //try catch
+        }
+
+        [HttpPut("EmployeeBulkOrders/Cancel/{orderId}")]
+        public async Task<Response> CancelEmployeeBulkOrder(int orderId)
+        {
+            var response = await _employeeProvider.CancelEmployeeBulkOrder(orderId);
+            return response;
+        }
+
+        [HttpPut("EmployeeBulkOrders/Reject/{orderId}")]
+        public async Task<Response> RejectEmployeeBulkOrder(int orderId)
+        {
+            var response = await _employeeProvider.RejectEmployeeBulkOrder(orderId);
+            return response;
+        }
+
+        [HttpPut("EmployeeBulkOrders/Approve/{orderId}")]
+        public async Task<ApproveBulkOrderResponse> ApproveEmployeeBulkOrder(int orderid, [FromBody] ApproveEmployeeBulkOrder approveEmployeeBulkOrder)
+        {
+
+
+            var response = await _employeeProvider.ApproveEmployeeBulkOrder(orderid, approveEmployeeBulkOrder);
+            return response;
+
+        }
+        [HttpGet("GetStockStatus")]
+        public async Task<StockStatusResponse> GetStockStatus(int pageNumber, int pageSize, string itemIds)
+        {
+            var response = await _employeeProvider.GetStockStatus(pageNumber, pageSize, itemIds);
+            return response;
+        }
+
+        [HttpPut("EmployeeBulkOrders/return/{orderId}")]
+        public async Task<EmployeeBulkOrdersResponse> ReturnBulkOrderById(int orderId, [FromBody] EmployeeBulkOrder employeeBulkOrder)
+        {
+            var response = await _employeeProvider.ReturnBulkOrderById(orderId, employeeBulkOrder);
+            return response;
         }
 
     }

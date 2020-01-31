@@ -10,6 +10,7 @@ using IMS_UI.IMS.Core;
 using IMS_UI.IMS.Core.Infra;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using IMS_UI.IMS.Models.Admin;
 
 namespace IMS_UI.IMS.Providers
 {
@@ -227,6 +228,167 @@ namespace IMS_UI.IMS.Providers
             byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PostAsync(client.BaseAddress + EndPoint, byteData);
             return JsonConvert.DeserializeObject<EmployeeOrderResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<EmployeeBulkOrdersResponse> GetEmployeeBulkOrderById(int orderId)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.bulkOrderDetails;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                         new AuthenticationHeaderValue("Bearer", token);
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var response = await client.GetAsync(client.BaseAddress + EndPoint + orderId);
+
+            return JsonConvert.DeserializeObject<EmployeeBulkOrdersResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<Response> CancelEmployeeBulkOrder(int orderId)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.bulkOrderCancel;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                         new AuthenticationHeaderValue("Bearer", token);
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/Cancel", null);
+
+            return JsonConvert.DeserializeObject<Response>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<Response> RejectEmployeeBulkOrder(int orderId)
+        {
+            HttpClient client = new HttpClient();
+            var EndPoint = Constants.APIEndpoints.bulkOrderCancel;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                         new AuthenticationHeaderValue("Bearer", token);
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/Reject", null);
+
+            return JsonConvert.DeserializeObject<Response>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<ApproveBulkOrderResponse> ApproveEmployeeBulkOrder(int orderId, ApproveEmployeeBulkOrder approveEmployeeBulkOrder)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.bulkOrderApprove;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", token);
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(approveEmployeeBulkOrder);
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+
+            var byteData = new ByteArrayContent(buffer);
+
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/Approve", byteData);
+
+            return JsonConvert.DeserializeObject<ApproveBulkOrderResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<StockStatusResponse> GetStockStatus(int pageNumber, int pageSize, string itemIds)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.GetStockStatus;
+
+            UriBuilder uriBuilder =
+                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
+
+
+
+            string query;
+            using (var content = new FormUrlEncodedContent(new KeyValuePair<string, string>[]{
+                new KeyValuePair<string, string>("pageNumber", pageNumber.ToString()),
+                new KeyValuePair<string, string>("pageSize", pageSize.ToString()),
+                new KeyValuePair<string, string>("itemIds",itemIds),
+
+
+            }))
+            {
+                query = content.ReadAsStringAsync().Result;
+            }
+
+            uriBuilder.Query = query;
+
+            var response =
+                await client.GetAsync(uriBuilder.Uri);
+
+            return JsonConvert.DeserializeObject<StockStatusResponse>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<EmployeeBulkOrdersResponse> ReturnBulkOrderById(int orderId, EmployeeBulkOrder employeeBulkOrder)
+        {
+            HttpClient client = new HttpClient();
+
+            var EndPoint = Constants.APIEndpoints.bulkOrderApprove;
+
+            client.DefaultRequestHeaders.Accept.
+                Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = _sessionManager.GetString("token");
+
+            client.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", token);
+
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+
+            var myData = JsonConvert.SerializeObject(employeeBulkOrder);
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
+
+            var byteData = new ByteArrayContent(buffer);
+
+            byteData.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/return", byteData);
+
+            return JsonConvert.DeserializeObject<EmployeeBulkOrdersResponse>(
                 await response.Content.ReadAsStringAsync());
         }
     }

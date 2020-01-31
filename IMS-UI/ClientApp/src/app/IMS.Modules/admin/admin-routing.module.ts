@@ -12,7 +12,6 @@ import { ItemManagementComponent } from './Components/item-management/item-manag
 import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
 import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
 
-
 const routes: Routes = [
   {
     path: '', component: AdminComponent, canActivate: [AdminRouteGuardService], data: { allowedRoles: ["Admin", "SuperAdmin"] },

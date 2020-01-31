@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BulkRequestService } from 'src/app/IMS.Services/employee/bulk-request.service';
 import { DatePipe } from '@angular/common';
 import { MatDialogConfig,MatDialog} from '@angular/material';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
+import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
 
 @Component({
   selector: 'app-bulk-request-action',
@@ -13,7 +13,7 @@ import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-
 })
 export class BulkRequestActionComponent implements OnInit {
 
-  constructor(private route : ActivatedRoute, private bulkRequestService:BulkRequestService, public datepipe: DatePipe,private dialog: MatDialog) { }
+  constructor(private route : ActivatedRoute, private bulkOrderService:BulkOrderService, public datepipe: DatePipe,private dialog: MatDialog) { }
 
   orderId:number;
   requestStatus:string;
@@ -32,7 +32,7 @@ export class BulkRequestActionComponent implements OnInit {
         this.orderId = +params.get("id");
       }
     )
-    this.bulkRequestService.GetBulkOrderDetails(this.orderId).subscribe(
+    this.bulkOrderService.GetBulkOrderDetails(this.orderId).subscribe(
       data => {
         console.log(data);
         let _data = data.employeeBulkOrders[0];
@@ -55,7 +55,7 @@ export class BulkRequestActionComponent implements OnInit {
             this.idsString += `${itemData.item.id}, `;
         });
 
-        this.bulkRequestService.GetStockStatus(this.pageNo,this.pageSize,this.idsString).subscribe(
+        this.bulkOrderService.GetStockStatus(this.pageNo,this.pageSize,this.idsString).subscribe(
           data =>{
             console.log(data);
           }
@@ -72,7 +72,7 @@ export class BulkRequestActionComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.data = itemsQuantityList;
+    // dialogConfig.data = itemsQuantityList;
     dialogConfig.autoFocus = true;
     this.dialog.open(BulkRequestDialogComponent, dialogConfig);
   }

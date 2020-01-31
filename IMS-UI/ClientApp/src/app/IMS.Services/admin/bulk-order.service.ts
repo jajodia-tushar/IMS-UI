@@ -3,6 +3,7 @@ import { EmployeeBulkOrderResponse, ItemLocationQuantityMapping, BulkOrderApprov
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { StockStatusResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
+import { Response } from 'src/app/IMS.Models/Shared/Response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,16 @@ export class BulkOrderService {
     console.log(bulkOrderApprove);
     alert("Firing request Now in 1 second");
     return this.http.put<BlukOrderApproveResponse>(path,bulkOrderApprove);
+  }
+
+  cancelBulkOrder(orderId : number){
+    let path : string   = "api/employee/EmployeeBulkOrders/cancel/" + orderId;
+    return this.http.put<Response>(path,null);
+  }
+
+  rejectBulkOrder(orderId : number){
+    let path : string   = "api/employee/EmployeeBulkOrders/reject/" + orderId;
+    return this.http.put<Response>(path,null);
   }
 
 

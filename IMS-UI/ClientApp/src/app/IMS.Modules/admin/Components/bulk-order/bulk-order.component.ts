@@ -128,6 +128,24 @@ export class BulkOrderComponent implements OnInit {
       }
     )
   }
+
+  cancelClicked(){
+  this.bulkOrderService.cancelBulkOrder(this.orderId).subscribe(
+    data=>{
+      console.log(data);
+    }
+  )
+
+  }
+
+  rejectClicked(){
+    this.bulkOrderService.rejectBulkOrder(this.orderId).subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
+
+  }
 }
 
 export class FieldToBeDisplayed{

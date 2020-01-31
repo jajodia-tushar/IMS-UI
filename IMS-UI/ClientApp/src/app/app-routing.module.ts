@@ -4,6 +4,7 @@ import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { LoginComponent } from './Components/login/login.component';
 import { LoggingComponent } from './Components/logging/logging.component';
 import { ChangePasswordComponent } from './IMS.Modules/shared/change-password/change-password.component';
+import { ChangePasswordGuardService } from './IMS.Services/Route/change-password-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Admin' , pathMatch : 'full'},
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'Admin', loadChildren: () => import('./IMS.Modules/admin/admin.module').then(m => m.AdminModule)},
   { path: 'Clerk', loadChildren: () => import('./IMS.Modules/clerk/clerk.module').then(m => m.ClerkModule) },
   { path: 'logs', component: LoggingComponent, pathMatch: 'full' },
-  { path: "changePassword", component: ChangePasswordComponent, pathMatch: "full"},
+  { path: "changePassword", component: ChangePasswordComponent, pathMatch: "full", canActivate: [ChangePasswordGuardService]},
   { path: '**', redirectTo : 'login' }
 ];
 

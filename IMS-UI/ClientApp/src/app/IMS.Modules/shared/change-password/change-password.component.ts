@@ -62,7 +62,6 @@ export class ChangePasswordComponent implements OnInit {
 
     this.loginService.updatePassword(this.loggedInUser.id, passwordDetails).subscribe(
       data => {
-        console.log(data);
         if (data.status == "Success") {
           showMessage(this.snackBar, 5, "Password Updated Successfully!", "success");
           this.router.navigateByUrl('login');
@@ -70,6 +69,9 @@ export class ChangePasswordComponent implements OnInit {
         else {
           showMessage(this.snackBar, 3, data.error.errorMessage, "warn");
         }
+      },
+      error =>  {
+        showMessage(this.snackBar,5, error, "warn");
       }
     );
   }

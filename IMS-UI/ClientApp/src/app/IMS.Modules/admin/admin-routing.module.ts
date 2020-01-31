@@ -10,7 +10,6 @@ import { InvoiceEditorComponent } from './Components/invoice-editor/invoice-edit
 import { NotificationsComponent } from './Components/notifications/notifications.component';
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
-import { BulkRequestActionComponent } from './Components/bulk-request-action/bulk-request-action.component';
 import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
 
 const routes: Routes = [
@@ -23,8 +22,9 @@ const routes: Routes = [
       { path: 'Users', component: UserManagementComponent },
       { path: 'Employee', component: EmployeeManagementComponent },
       { path: 'Reports', component: ReportsComponent },
+      { path: 'Items', component: ItemManagementComponent },
       { 
-        path: 'Notifications', 
+        path: 'Notifications',
         children: [
           {
             path: '',
@@ -32,12 +32,13 @@ const routes: Routes = [
             component: NotificationsComponent
           },
           {
-            path: 'bulkOrder/:id',
-            component: BulkRequestActionComponent
+            path: 'VendorOrder/:id',
+            component: InvoiceEditorComponent
           }
         ]
       },
-      { path: 'EditInvoice', component: InvoiceEditorComponent }
+      { path: 'Vendors', component: VendorManagementComponent },
+      { path: 'Items', component: ItemManagementComponent }
     ]
   }
 ];

@@ -1,0 +1,24 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<form class="form-container" [formGroup]="createShelfForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+    <div class="one-row">
+        <mat-form-field hideRequiredMarker="false" floatLabel="auto">
+            <input matInput formControlName="name" placeholder="Shelf Name" required>
+            <mat-error *ngIf="name.invalid">Invalid Shelf Name</mat-error>
+            <mat-error *ngIf="name.errors?.minlength">Length{{name.errors.minlength.requiredLength}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <br><br>
+    <div class="action-buttons one-row">
+        <div class="position-of-buttons">
+            <button *ngIf="isEditShelfForm==null" [disabled]="!createShelfForm.valid" mat-button type="submit" class="submit-update">
+                {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
+            </button>
+            <button *ngIf="isEditShelfForm==true" [disabled]="!createShelfForm.valid" mat-button type="submit" class="submit-update">
+                {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
+            </button>
+            <button *ngIf="isEditShelfForm==null" mat-button type="button" (click)="cancelCreate()" class="cancel">Cancel</button>
+            <button *ngIf="isEditShelfForm==true" mat-button type="button" (click)="cancelUpdate()" class="cancel">Cancel</button>
+        </div>
+    </div>
+</form>

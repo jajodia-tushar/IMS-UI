@@ -27,5 +27,12 @@ export class ShelfService {
     return this.http.post("api/shelf",shelf).subscribe();
   }
 
-  
+  editShelf(shelf: Shelf): Promise<ShelfListResponse>{
+    return this.http.put<ShelfListResponse>("api/shelf",shelf).toPromise();
+  }
+
+  createShelf(shelf: Shelf): Promise<ShelfListResponse> {
+    return this.http.post<ShelfListResponse>("api/Item", shelf).toPromise();
+  }
+
 }

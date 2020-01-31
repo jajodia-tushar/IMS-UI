@@ -4,6 +4,7 @@ import { MatSort, MatPaginator, MatDialog, MatSnackBar, MatDialogConfig, MatTabl
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
+import { ShelfManageDialogComponent } from '../shelf-manage-dialog/shelf-manage-dialog.component';
 
 @Component({
   selector: 'app-shelf-list',
@@ -42,60 +43,60 @@ export class ShelfListComponent implements OnInit {
     return item[property];
   }
 
-  // openAddShelfDialog() {
-  //   let dialogConfig = new MatDialogConfig();
-  //   dialogConfig.data = null;
-  //   dialogConfig.panelClass = 'dialog-shelf-manage';
-  //   dialogConfig.disableClose = true;
-  //   const dialogRef = this.dialog.open(ShelfManageDialogComponent, dialogConfig);
+  openAddShelfDialog() {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = null;
+    dialogConfig.panelClass = 'dialog-shelf-manage';
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(ShelfManageDialogComponent, dialogConfig);
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result == false) {
-  //       showMessage(this.snackBar, 2, "Shelf Creation Failed", 'warn');
-  //     }
-  //     else if (result == "cancelled") {
-  //       //don't show any message.
-  //     }
-  //     else {
-  //       // this.ELEMENT_DATA.push(<Item>result);
-  //       // this.dataSource.data = this.ELEMENT_DATA;
-  //       this.setShelves();
-  //       showMessage(this.snackBar, 2, "Shelf Was Created Successfully", 'success');
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result == false) {
+        showMessage(this.snackBar, 2, "Shelf Creation Failed", 'warn');
+      }
+      else if (result == "cancelled") {
+        //don't show any message.
+      }
+      else {
+        // this.ELEMENT_DATA.push(<Item>result);
+        // this.dataSource.data = this.ELEMENT_DATA;
+        this.setShelves();
+        showMessage(this.snackBar, 2, "Shelf Was Created Successfully", 'success');
+      }
+    });
+  }
 
   numberOfColumns() {
     //console.log(this.displayedColumns.length)
     return (this.displayedColumns.length - 1);
   }
 
-  // editItemDetails(shelf: Shelf) {
-  //   this.openItemEditDialog(shelf);
-  // }
+  editShelfDetails(shelf: Shelf) {
+    this.openShelfEditDialog(shelf);
+  }
 
-  // openItemEditDialog(data: Shelf) {
-  //   let dialogConfig = new MatDialogConfig();
-  //   //console.log(data)
-  //   dialogConfig.data = data;
-  //   dialogConfig.panelClass = 'dialog-shelf-manage';
-  //   dialogConfig.disableClose = true;
-  //   const dialogRef = this.dialog.open(ShelfManageDialogComponent, dialogConfig);
+  openShelfEditDialog(data: Shelf) {
+    let dialogConfig = new MatDialogConfig();
+    //console.log(data)
+    dialogConfig.data = data;
+    dialogConfig.panelClass = 'dialog-shelf-manage';
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(ShelfManageDialogComponent, dialogConfig);
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result == false) {
-  //       showMessage(this.snackBar, 2, "Shelf Updation Failed", 'warn');
-  //     }
-  //     else if (result == "cancelled") {
-  //       //don't show any message.
-  //       result.getElementById('editShelfDetails').focus();
-  //     }
-  //     else {
-  //       this.editShelfInTable(result);
-  //     }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == false) {
+        showMessage(this.snackBar, 2, "Shelf Updation Failed", 'warn');
+      }
+      else if (result == "cancelled") {
+        //don't show any message.
+        result.getElementById('editShelfDetails').focus();
+      }
+      else {
+        this.editShelfInTable(result);
+      }
 
-  //   });
-  // }
+    });
+  }
 
   // deactivateShelf(shelf) {
   //   let dialogConfig = new MatDialogConfig();

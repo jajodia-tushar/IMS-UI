@@ -22,8 +22,7 @@ export class VendordetailsComponent implements OnInit {
     challanNumber: "",
     vendor: null,
     submitedTo: null,
-    receivedBy: "",
-    date: null
+    receivedBy: ""
   };
   public Admins = [];
   public Vendors = [];
@@ -46,13 +45,8 @@ export class VendordetailsComponent implements OnInit {
     this.orderDetails.submitedTo = this.SelectedAdmin;
     this.isDataToBeSend();
   }
-  SelectedDate() {
-    let utcDate = Date.UTC(this.RecievedDate.getFullYear(), this.RecievedDate.getMonth(), this.RecievedDate.getDate());
-    this.orderDetails.date = new Date(utcDate);    
-    this.isDataToBeSend();
-  }
   isDataToBeSend() {
-    if (this.orderDetails.date != null && this.orderDetails.receivedBy != null
+    if ( this.orderDetails.receivedBy != null
              && this.orderDetails.vendor != null && this.orderDetails.submitedTo != null)
     {
        this._CentralizedDataService.setSiblingData(this.orderDetails);

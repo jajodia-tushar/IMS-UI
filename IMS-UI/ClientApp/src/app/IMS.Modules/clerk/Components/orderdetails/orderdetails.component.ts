@@ -70,8 +70,7 @@ export class OrderdetailsComponent implements OnInit {
     challanNumber: "",
     vendor: null,
     submitedTo: "",
-    receivedBy: "",
-    date: null
+    receivedBy: ""
   };
   public MockItems: Item[] = [
     {
@@ -214,10 +213,10 @@ export class OrderdetailsComponent implements OnInit {
     if (this.orderDetails) {
       if (errorRowIndex=== -1 && this.dataSourceItems.length > 0) {
         this.vendorOrder.vendorOrderDetails.challanNumber = this.orderDetails.challanNumber;
-        this.vendorOrder.vendorOrderDetails.date = this.orderDetails.date;
         this.vendorOrder.vendorOrderDetails.orderItemDetails = this.dataSourceItems;
         this.vendorOrder.vendorOrderDetails.recievedBy = this.orderDetails.receivedBy;
         this.vendorOrder.vendorOrderDetails.submittedTo = this.orderDetails.submitedTo;
+        this.vendorOrder.vendorOrderDetails.date = new Date();
         this.vendorOrder.vendor = this.orderDetails.vendor;
         if (this.fileToUpload) {
           const formData = new FormData();
@@ -230,6 +229,7 @@ export class OrderdetailsComponent implements OnInit {
             }
           );
         }
+        console.log(this.vendorOrder)
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
             this.reloadComponent();

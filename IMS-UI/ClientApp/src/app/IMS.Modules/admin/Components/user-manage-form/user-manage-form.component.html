@@ -63,20 +63,24 @@
     </mat-form-field>
   </div>
   <br><br>
-  <div class="action-buttons one-row">
-    <div class="position-of-buttons">
-      <button *ngIf="isEditUserForm==null" [disabled]="!createUserForm.valid" mat-button type="submit"
-        class="submit-update">
-        {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
-      </button>
-      <button *ngIf="isEditUserForm==true" [disabled]="!createUserForm.valid" mat-button type="submit"
-        class="submit-update">
-        {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
-      </button>
-      <button *ngIf="isEditUserForm==null" mat-button type="button" (click)="cancelCreate()"
-        class="cancel">Cancel</button>
-      <button *ngIf="isEditUserForm==true" mat-button type="button" (click)="cancelUpdate()"
-        class="cancel">Cancel</button>
-    </div>
-  </div>
+  
 </form>
+<mat-form-field *ngIf="isEditUserForm==true">
+  <input matInput placeholder="Remarks" [(ngModel)]="remark" class="remark">
+</mat-form-field>
+<div class="action-buttons one-row">
+  <div class="position-of-buttons">
+    <button *ngIf="isEditUserForm==null" [disabled]="!createUserForm.valid" mat-button type="submit" (click)="submitForm()"
+      class="submit-update">
+      {{submitButtonText}}<app-spinning-loader></app-spinning-loader>
+    </button>
+    <button *ngIf="isEditUserForm==true" [disabled]="!createUserForm.valid || remark==''" mat-button type="submit" (click)="submitForm()"
+      class="submit-update">
+      {{updateButtonText}}<app-spinning-loader></app-spinning-loader>
+    </button>
+    <button *ngIf="isEditUserForm==null" mat-button type="button" (click)="cancelCreate()"
+      class="cancel">Cancel</button>
+    <button *ngIf="isEditUserForm==true" mat-button type="button" (click)="cancelUpdate()"
+      class="cancel">Cancel</button>
+  </div>
+</div>

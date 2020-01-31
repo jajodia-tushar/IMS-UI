@@ -21,17 +21,38 @@ export class UserManagementService {
   
   constructor(private http: HttpClient) { }
   
-  deactivate(userId: any,isHardDelete:boolean) : Promise<Response>{
+  deactivate(userId: any,isHardDelete:boolean, remark?:string) : Promise<Response>{
    let headers=new HttpHeaders().set('Content-Type','application/json; charset=utf8');
-   return this.http.delete<Response>("api/users/"+ userId+ "?isHardDelete="+isHardDelete).toPromise(); 
+   return this.http.delete<Response>(
+     "api/users/"+ userId,
+     {
+       params : {
+        isHardDelete:isHardDelete.toString(),
+        remark : remark
+       }
+     }
+     )
+     .toPromise(); 
   }
 
   createUser(user : User): Promise<UsersResponse>{
-    return this.http.post<UsersResponse>("api/users", user).toPromise();
+    return this.http.post<UsersResponse>(
+      "api/users/",
+      user
+      )
+      .toPromise();
   }
 
-  editUser(user : User) :Promise<UsersResponse>{
-    return this.http.put<UsersResponse>("api/users", user).toPromise();
+  editUser(user : User, remark?:string) :Promise<UsersResponse>{
+    return this.http.put<UsersResponse>(
+      "api/users",
+      user,
+      {
+        params : {
+          remark : remark
+        }
+      }
+      ).toPromise();
   }
 
   getAllUsers() : Promise<UsersResponse>{

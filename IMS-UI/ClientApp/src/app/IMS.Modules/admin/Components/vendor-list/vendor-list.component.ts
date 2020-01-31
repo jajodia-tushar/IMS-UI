@@ -61,6 +61,7 @@ export class VendorListComponent implements OnInit {
       else if (result[name]!== null) {
         vendordata.push(<Vendor>result);
         this.dataSource = new ExampleDataSource();
+        this.reloadComponent();
         showMessage(this.snackBar, 2, "Vendor Was Created Successfully", 'success');
       } 
     });
@@ -107,6 +108,7 @@ export class VendorListComponent implements OnInit {
         let index = this.indexOfVendor(vendor);
         vendordata.splice(index, 1);
         this.dataSource = new ExampleDataSource();
+        this.reloadComponent();
         showMessage(this.snackBar, 2, "Vendor was Deleted Successfully", 'success');
       }
       else if (result == "false") {
@@ -194,6 +196,11 @@ export class VendorListComponent implements OnInit {
         }
       }
     )
+  }
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(["Admin/Vendors"]);
   }
  
 

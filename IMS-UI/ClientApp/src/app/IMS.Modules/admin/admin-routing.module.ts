@@ -11,6 +11,7 @@ import { NotificationsComponent } from './Components/notifications/notifications
 import { ItemManagementComponent } from './Components/item-management/item-management.component';
 import { EmployeeManagementComponent } from './Components/employee-management/employee-management.component';
 import { VendorManagementComponent } from './Components/vendor-management/vendor-management.component';
+import { ShelfManagementComponent } from './Components/shelf-management/shelf-management.component';
 import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'Employee', component: EmployeeManagementComponent },
       { path: 'Reports', component: ReportsComponent },
       { path: 'Items', component: ItemManagementComponent },
+      { path: 'Shelves', component: ShelfManagementComponent },
       { 
         path: 'Notifications',
         children: [

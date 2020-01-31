@@ -12,7 +12,7 @@ export class ShelfService {
   constructor(private http: HttpClient) { }
 
   getAllShelves() {
-    return this.http.get<ShelfListResponse>('api/Shelf');
+    return this.http.get<ShelfListResponse>('api/Shelf').toPromise();
   }
 
   getShelfByShelfCode(shelfCode : string){

@@ -39,6 +39,8 @@ import { VendorManagementComponent } from './Components/vendor-management/vendor
 import { VendorListComponent } from './Components/vendor-list/vendor-list.component';
 import { VendorManageDialogComponent } from './Components/vendor-manage-dialog/vendor-manage-dialog.component';
 import { VendorManageFormComponent } from './Components/vendor-manage-form/vendor-manage-form.component';
+import { ShelfManagementComponent } from './Components/shelf-management/shelf-management.component';
+import { ShelfListComponent } from './Components/shelf-list/shelf-list.component';
 import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bulk-request-dialog.component';
 import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-return-dialog.component';
@@ -86,6 +88,8 @@ import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-
       VendorListComponent,
       VendorManageDialogComponent,
       VendorManageFormComponent,
+      ShelfManagementComponent,
+      ShelfListComponent,
       BulkOrderComponent,
      
       BulkRequestDialogComponent,

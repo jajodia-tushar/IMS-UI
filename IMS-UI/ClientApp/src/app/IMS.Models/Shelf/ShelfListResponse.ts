@@ -1,6 +1,6 @@
 import { Shelf } from "./Shelf";
+import { Response } from 'src/app/IMS.Models/Shared/Response';
 
-export class ShelfListResponse extends Error{
+export class ShelfListResponse extends Response{
   shelves: Shelf[];
-  status: number; 
 }

@@ -35,6 +35,11 @@ export class AdminHeader implements OnDestroy, OnInit {
     color: "#46b5d1",
 
   },
+  {
+    tab:"Shelves",
+    icon:"person_pin",
+    color:"#46b5d5",
+  },
 
   {
     tab: "Employee",

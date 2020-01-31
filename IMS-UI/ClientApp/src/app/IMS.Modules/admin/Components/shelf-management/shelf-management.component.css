@@ -1,0 +1,18 @@
+.shelf-details {
+    width: 97%;
+    position: relative;
+    margin-left: 24px;
+    color: white;
+}
+
+h5 {
+    margin: 20px;
+    color: white;
+}
+
+.table-container {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    height: 100%;
+}

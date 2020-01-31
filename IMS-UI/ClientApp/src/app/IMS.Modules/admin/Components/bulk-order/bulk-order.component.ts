@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
 
 @Component({
   selector: 'app-bulk-order',
@@ -10,45 +12,79 @@ export class BulkOrderComponent implements OnInit {
   listOfFieldToBeDisplayed : FieldToBeDisplayed[] = [];
   dataSource = [];
   displayedColumns = ["itemName","itemQuantity","action"];
+  orderId : number;
+  reasonForRequirement: string;
   
   numberOfColumns() {
     return (this.displayedColumns.length - 1);
   }
   
-  constructor() { 
+  constructor(private route : ActivatedRoute,
+    private bulkOrderService : BulkOrderService) {
+    this.route.paramMap.subscribe(
+      params => {
+        this.orderId =  parseInt(params.get("id"));
+      });
 
-    let x : FieldToBeDisplayed = {
-      fieldName : "Requested By",
-      fieldValue : "Shirin"
-    }
+    this.bulkOrderService.GetBulkOrderDetails(this.orderId).subscribe(
+      data => {
+        if(data.status == "Success"){
+          if(data.employeeBulkOrders.length > 0){
+            let orderDetails = data.employeeBulkOrders[0].employeeBulkOrderDetails;
+            let requestedEmployee = data.employeeBulkOrders[0].employee;
 
-    let y : FieldToBeDisplayed = {
-      fieldName : "Requested on",
-      fieldValue : "Today"
-    }
+            let bulkRequestStatus : FieldToBeDisplayed = {
+              fieldName : "Request Status",
+              fieldValue : orderDetails.bulkOrderRequestStatus
+            }
 
-    let z : TableData = {
-        itemName : "Pen",
-        itemQuantity : 500
-    }
+            let requestBy : FieldToBeDisplayed = {
+              fieldName : "Request By",
+              fieldValue : requestedEmployee.firstname
+            }
 
+            let requestOn : FieldToBeDisplayed = {
+              fieldName : "Request On",
+              fieldValue : orderDetails.createdOn.toString()
+            }
 
-    this.listOfFieldToBeDisplayed.push(x);
-    this.listOfFieldToBeDisplayed.push(y);
-    this.listOfFieldToBeDisplayed.push(y);
-    this.listOfFieldToBeDisplayed.push(y);
-    this.listOfFieldToBeDisplayed.push(y);
+            let requiredOn : FieldToBeDisplayed = {
+              fieldName : "Required On",
+              fieldValue : orderDetails.requirementDate.toString()
+            }
 
-    this.dataSource.push(z);
-    this.dataSource.push(z);
-    this.dataSource.push(z);
-    this.dataSource.push(z);
-    this.dataSource.push(z);
+            let employeeId : FieldToBeDisplayed = {
+              fieldName : "Employee Id",
+              fieldValue : requestedEmployee.id
+            }
 
-    
+            this.reasonForRequirement = orderDetails.reasonForRequirement;
+            this.listOfFieldToBeDisplayed.push(employeeId);
+            this.listOfFieldToBeDisplayed.push(requestBy);
+            this.listOfFieldToBeDisplayed.push(bulkRequestStatus);
+            this.listOfFieldToBeDisplayed.push(requestOn);
+            this.listOfFieldToBeDisplayed.push(requiredOn);
+            
+            let tempDataSource = [];
+            orderDetails.itemsQuantityList.forEach(
+              iq => {
+                  let x = {
+                    itemName : iq.item.name,
+                    itemQuantity : iq.quantityOrdered
+                  }
+                  tempDataSource.push(x);
+              });
+              this.dataSource = JSON.parse(JSON.stringify(tempDataSource));
+          }
+        }
+      });
   }
 
   ngOnInit() {
+  }
+
+  addButtonClicked(data){
+    console.log(data);
   }
 
 

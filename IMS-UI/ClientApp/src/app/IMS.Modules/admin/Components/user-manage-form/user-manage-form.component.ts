@@ -19,6 +19,7 @@ import { UserValidators as userValidators } from '../../../../IMS.Services/admin
 export class UserManageFormComponent implements OnInit{
   createUserForm : FormGroup
   roles : Role[];
+  remark = ""
   updateButtonText : string = "Update";
   submitButtonText : string = "Submit";
   constructor(private formBuilder: FormBuilder, private userManageService: UserManagementService,
@@ -92,7 +93,7 @@ export class UserManageFormComponent implements OnInit{
   
   async editUserDetails(){
     let user: User = <User>this.createUserForm.getRawValue();
-    let edittedUser: UsersResponse = <UsersResponse> await this.userManageService.editUser(user);
+    let edittedUser: UsersResponse = <UsersResponse> await this.userManageService.editUser(user,this.remark);
     this.userEditted.emit(edittedUser);
   }
 

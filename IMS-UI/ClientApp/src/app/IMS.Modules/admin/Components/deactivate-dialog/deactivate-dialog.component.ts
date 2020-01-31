@@ -16,6 +16,7 @@ import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.servi
 })
 export class DeactivateDialogComponent implements OnInit {
   user: User;
+  remark = "";
   confirmButtonText : string = "Yes";
   constructor(private dialogRef: MatDialogRef<DeactivateDialogComponent>,@Inject(MAT_DIALOG_DATA) data,
               private userManageService : UserManagementService,
@@ -28,7 +29,7 @@ export class DeactivateDialogComponent implements OnInit {
 
   async onConfirm() {
     this.confirmButtonText = ""
-    let response = <Response>await this.userManageService.deactivate(this.user.id,false);
+    let response = <Response>await this.userManageService.deactivate(this.user.id,false,this.remark);
     if(response.error==null){
       this.dialogRef.close(true);
     }

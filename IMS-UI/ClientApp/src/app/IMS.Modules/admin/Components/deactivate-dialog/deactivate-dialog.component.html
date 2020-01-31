@@ -5,10 +5,13 @@
 
 <div mat-dialog-content>
   <p>Do you Want to Delete {{user.firstname}}'s account?</p>
+  <mat-form-field>
+    <input matInput placeholder="Remarks" [(ngModel)]="remark" class="remark">
+  </mat-form-field>
 </div>
 
 <div mat-dialog-actions class="action-buttons">
-  <button mat-raised-button  (click)="onConfirm()">{{confirmButtonText}}
+  <button mat-raised-button [disabled]="remark==''" (click)="onConfirm()">{{confirmButtonText}}
     <app-spinning-loader></app-spinning-loader>
 
   </button>

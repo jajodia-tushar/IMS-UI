@@ -47,6 +47,13 @@
     height: 60%;
     top: 20%;
 }
+::placeholder {
+    color: black;
+    opacity: 1; /* Firefox */
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: black;
+  }
 
 .form-input {
     position: absolute;

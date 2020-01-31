@@ -1,25 +1,25 @@
 .image-container > img {
-    width: 30%;
-    height: 30%;
+  width: 30%;
+  height: 30%;
 }
 
-.image-container  {
-    display: flex; 
-    justify-content: space-around;
+.image-container {
+  display: flex;
+  justify-content: space-around;
 }
 
 .container {
-    padding: 0px;
+  padding: 0px;
 }
 
-.greeting-text  {
-    display: flex; 
-    justify-content: center; 
-    padding-top: 40px; 
-    padding-bottom: 20px;
+.greeting-text {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
-.sub-text  {
-    display: flex; 
-    justify-content: center;
+.sub-text {
+  display: flex;
+  justify-content: center;
 }

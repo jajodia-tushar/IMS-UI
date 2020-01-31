@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material'
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { FloorComponent } from '../floor/floor.component';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   private role: string;
   public error: boolean = false;
 
-  constructor(private loginService: LoginService, 
+  constructor(private loginService: LoginService,
+    private snackBar: MatSnackBar,
     private router: Router,
     private dialog: MatDialog) { }
 
@@ -35,17 +36,19 @@ export class LoginComponent implements OnInit {
               dialogConfig.disableClose = true;
               dialogConfig.panelClass = 'dialog-floor-select';
               dialogConfig.autoFocus = true;
-              // dialogConfig.width = "%";
               let dialogRef = this.dialog.open(FloorComponent, dialogConfig);
-              // this.ButtonName = "LOGIN";
-              // dialogRef.close(false);
             }
           }
           else {
-            if (this.role == 'SuperAdmin')
-              this.router.navigateByUrl('Admin')
-            else
-              this.router.navigateByUrl(this.role);
+            if (!data.user.isDefaultPasswordChanged) {
+              this.router.navigateByUrl('changePassword');
+            }
+            else {
+              if (this.role == 'SuperAdmin')
+                this.router.navigateByUrl('Admin')
+              else
+                this.router.navigateByUrl(this.role);
+            }
           }
         }
         else {

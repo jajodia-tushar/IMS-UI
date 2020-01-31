@@ -11,10 +11,11 @@ import { RevisableTableComponent } from './data-table/revisable-table/revisable-
 import { LogoutComponent } from './logout/logout.component';
 import { DataTableComponent } from './data-table/data-table/data-table.component';
 import { GenericTableComponent } from './generic-table/generic-table.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
-    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent, HumanizePipe, GenericTableComponent],
+    declarations: [SpinningLoaderComponent, SnackbarComponent, HeaderComponent, RevisableTableComponent, LogoutComponent, DataTableComponent, HumanizePipe, GenericTableComponent, ChangePasswordComponent],
   imports: [
     MaterialModule
   ],

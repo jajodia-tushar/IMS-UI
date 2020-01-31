@@ -99,6 +99,9 @@ export class AdminHeader implements OnDestroy, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  changePassword()  {
+    this.router.navigateByUrl('changePassword');
+  }
 
   logout() {
     this.loginService.logOut().subscribe(

@@ -19,7 +19,10 @@
 
               <div class="matMenuItems">
                 <mat-menu #menu="matMenu">
-
+                <button (click)='changePassword()' mat-menu-item>
+                  <mat-icon>vpn_key</mat-icon>
+                  <span>Change Password</span>
+                </button>
 
                   <button (click)='logout()' mat-menu-item>
                     <mat-icon>power_settings_new</mat-icon>

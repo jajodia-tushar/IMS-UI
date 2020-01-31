@@ -7,5 +7,7 @@ namespace IMS_UI.IMS.Models
 {
     public class ChangePasswordDetails
     {
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

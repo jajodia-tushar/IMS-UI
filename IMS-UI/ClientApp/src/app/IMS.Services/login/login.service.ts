@@ -27,4 +27,8 @@ export class LoginService {
   logOut() {
     return this.http.delete<Response>('api/logout');
   }
+
+  updatePassword(userId, passwordDetails)  {
+    return this.http.patch<Response>('api/updatePassword/'+userId.toString(), passwordDetails);
+  }
 }

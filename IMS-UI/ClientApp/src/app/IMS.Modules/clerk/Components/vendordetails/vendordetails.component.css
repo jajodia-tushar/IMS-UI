@@ -4,6 +4,10 @@
     background-color: #1f2132;
 }
 
+.fields-size {
+  margin: 9% 0% !important;
+}
+
 .field-position {
   width: 80%;
   margin-top: 7%;

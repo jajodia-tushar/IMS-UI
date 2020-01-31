@@ -4,6 +4,8 @@ import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service'
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
 import { Item } from 'src/app/IMS.Models/Item/Item';
+import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove } from 'src/app/IMS.Models/Employee/BulkRequest';
+import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 
 @Component({
   selector: 'app-bulk-order',
@@ -17,6 +19,9 @@ export class BulkOrderComponent implements OnInit {
   displayedColumns = ["itemName","itemQuantity","action"];
   orderId : number;
   reasonForRequirement: string;
+  itemLocationQuaListToBeSent : ItemLocationQuantityMapping[] = [];
+  employee : Employee;
+  employeeBulkOrderDetails: EmployeeBulkOrderDetails;
   
   numberOfColumns() {
     return (this.displayedColumns.length - 1);
@@ -24,7 +29,7 @@ export class BulkOrderComponent implements OnInit {
   
   constructor(private route : ActivatedRoute,
     private bulkOrderService : BulkOrderService,
-    private dialog: MatDialog,) {
+    private dialog: MatDialog) {
     this.route.paramMap.subscribe(
       params => {
         this.orderId =  parseInt(params.get("id"));
@@ -81,6 +86,9 @@ export class BulkOrderComponent implements OnInit {
               });
               this.dataSource = JSON.parse(JSON.stringify(tempDataSource));
           }
+
+          this.employee = data.employeeBulkOrders[0].employee;
+          this.employeeBulkOrderDetails = data.employeeBulkOrders[0].employeeBulkOrderDetails;
         }
       });
   }
@@ -96,8 +104,29 @@ export class BulkOrderComponent implements OnInit {
     const dialogRef = this.dialog.open(BulkRequestDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if(result){
+          this.itemLocationQuaListToBeSent.push(result);
+      }
+      else{
+        alert("Not Selected")
+      }
     });
+  }
+
+  approveClicked(){
+    alert("Approve Clicked");
+    let blukOrderApproveData = new BlukOrderApprove();
+    blukOrderApproveData.employee = this.employee;
+    blukOrderApproveData.employeeBulkOrderDetails = this.employeeBulkOrderDetails;
+    blukOrderApproveData.bulkOrderId = this.orderId;
+    blukOrderApproveData.itemLocationQuantityMappings = this.itemLocationQuaListToBeSent;
+    
+    
+    this.bulkOrderService.approveBulkOrder(this.orderId,blukOrderApproveData).subscribe(
+      data=>{
+        console.log(data);
+      }
+    )
   }
 }
 

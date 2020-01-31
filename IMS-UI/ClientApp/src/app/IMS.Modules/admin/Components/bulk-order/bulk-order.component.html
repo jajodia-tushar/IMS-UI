@@ -41,4 +41,9 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
     </mat-card-content>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <button mat-button (click)="approveClicked()" class="cancel">Approve</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
 </mat-card>

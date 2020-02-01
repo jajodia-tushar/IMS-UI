@@ -1,19 +1,19 @@
 <div *ngIf="isFloorNotSelected" class="floor-page">
   <img src="../../../assets/IMS.Images/LoginPage.jpg" id="image-container">
   <div class="floor-title">
-    <p style="font-size: smaller;">Select a floor</p>
+    <p style="font-size: 24px;">Select a floor</p>
   </div>
   <div class="cards">
-    <div 
-      class="card"
-      *ngFor="let shelf of shelves"
-      (click)="onSubmitShelf(shelf)">
-          <div class="floor">
-            <img src="../../../assets/IMS.Images/floor_grey.png" alt="{{shelf.name}}">
-          </div>
-          <h6 class="title">
-              {{shelf.name}}
-          </h6>
+
+    <div class="all-floors">
+      <div class="card" *ngFor="let shelf of shelves" (click)="onSubmitShelf(shelf)">
+        <div class="floor">
+          <img src="../../../assets/IMS.Images/floor_grey.png" alt="{{shelf.name}}">
+        </div>
+        <h6 class="title">
+          {{shelf.name}}
+        </h6>
+      </div>
     </div>
   </div>
 </div>

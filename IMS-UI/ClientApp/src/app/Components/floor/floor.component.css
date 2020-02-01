@@ -1,65 +1,92 @@
 .floor-page {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 28em;
-    height: 24em;
-    margin-top: -12em;
-    /*set to a negative number 1/2 of your height*/
-    margin-left: -14em;
-    /*set to a negative number 1/2 of your width*/
-    text-align: center;
-    /* border: 4px solid white; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 28em;
+  height: 24em;
+  margin-top: -12em;
+  /*set to a negative number 1/2 of your height*/
+  margin-left: -14em;
+  /*set to a negative number 1/2 of your width*/
+  text-align: center;
+  /* border: 4px solid white; */
+}
+
+.floor > img {
+  vertical-align: middle;
+  position: relative;
+  top: 5px;
+  margin: auto;
+  border-style: none;
+  width: 76px;
+}
+
+.floor {
+  display: flex;
 }
 
 #image-container {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* border: 1px solid red; */
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
 }
 
 .floor-title {
-    position: absolute;
-    top: 85px;
-    left: 150px;
-    font-size: xx-large;
-    color: white;
+  font-size: xx-large;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 28em;
+  /* height: 24em; */
+  margin-top: -4em;
+  margin-left: -14em;
+  text-align: center;
 }
 
 .cards {
-    position: relative;
-    /* align-items: center;
-  justify-content: center;
-  border:4px solid blue ; */
+  position: fixed;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  width: 24rem;
+  height: 14em;
+  margin-top: -4em;
+  margin-left: -12em;
+  text-align: center;
 }
 
+.all-floors {
+  margin: auto;
+  width: 100%;
+  position: relative;
+  bottom: 40px;
+}
 .card {
-    position: relative;
-    background: #2B2F4C;
-    display: inline-block;
-    width: 100px;
-    height: 133px;
-    border: 2px solid #5e7af5;
-    margin: 2%;
-    box-sizing: border-box;
-    border-radius: 16px;
-    bottom: 215px;
+  position: relative;
+  background: #2b2f4c;
+  left: 4px;
+  display: inline-block;
+  width: 96px;
+  height: 123px;
+  border: 2px solid #5e7af5;
+  margin: 2%;
+  box-sizing: border-box;
+  border-radius: 48px;
 }
 
 .card:hover {
-    cursor: pointer;
-    -webkit-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
-    -moz-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
-    -o-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
-    box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
-    background: #5e7af5;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+  -moz-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+  -o-box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+  box-shadow: 0px 0px 30px #5e7af5, inset 0px 0px 30px #5e7af5;
+  background: #5e7af5;
 }
 
 .title {
-    color: aliceblue;
-    text-align: center;
+  font-size: small;
 }
-

@@ -56,3 +56,7 @@ export class BlukOrderApprove {
     employee: Employee;
     employeeBulkOrderDetails: EmployeeBulkOrderDetails;
 }
+
+export class BulkOrderApproveModel{
+    itemLocationQuantityMappings: ItemLocationQuantityMapping[];
+}

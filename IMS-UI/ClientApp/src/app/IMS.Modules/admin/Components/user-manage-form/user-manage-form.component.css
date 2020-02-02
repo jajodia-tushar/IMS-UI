@@ -1,50 +1,49 @@
 .form-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .name {
-  display: flex;
+    display: flex;
 }
 
 body {
-  background: #456;
-  font-family: 'Open Sans', sans-serif;
+    background: #456;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.one-row mat-form-field{
-  width: 90%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 10px;
+.one-row mat-form-field {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px;
 }
 
 .one-row {
-  display: flex;
+    display: flex;
 }
 
 .action-buttons {
-  position: relative;
+    position: relative;
 }
 
 .position-of-buttons {
-  position: absolute;
-  right: 0;
-  bottom: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
 }
 
 :host ::ng-deep .mat-form-field-subscript-wrapper {
-  font-size: 58%;
-  margin-top: 0.66667em;
-  top: calc(100% - 1.79167em);
+    font-size: 58%;
+    margin-top: 0.66667em;
+    top: calc(100% - 1.79167em);
 }
 
 :host ::ng-deep .mat-form-field-appearance-legacy .mat-hint {
-  color: #808e9c;
+    color: #808e9c;
 }
-
 
 :host ::ng-deep .mat-button-toggle {
     border: 0.5px solid slategray;
@@ -52,41 +51,52 @@ body {
     color: slategray;
 }
 
-.mat-button.mat-accent[disabled], .mat-button.mat-primary[disabled], .mat-button.mat-warn[disabled], .mat-button[disabled][disabled], .mat-icon-button.mat-accent[disabled], .mat-icon-button.mat-primary[disabled], .mat-icon-button.mat-warn[disabled], .mat-icon-button[disabled][disabled], .mat-stroked-button.mat-accent[disabled], .mat-stroked-button.mat-primary[disabled], .mat-stroked-button.mat-warn[disabled], .mat-stroked-button[disabled][disabled] {
-  color: slategray;
-  border: 0.5px solid slategray;
+.mat-button.mat-accent[disabled],
+.mat-button.mat-primary[disabled],
+.mat-button.mat-warn[disabled],
+.mat-button[disabled][disabled],
+.mat-icon-button.mat-accent[disabled],
+.mat-icon-button.mat-primary[disabled],
+.mat-icon-button.mat-warn[disabled],
+.mat-icon-button[disabled][disabled],
+.mat-stroked-button.mat-accent[disabled],
+.mat-stroked-button.mat-primary[disabled],
+.mat-stroked-button.mat-warn[disabled],
+.mat-stroked-button[disabled][disabled] {
+    color: slategray;
+    border: 0.5px solid slategray;
 }
 
 [type=submit]:not(:disabled) {
-  color: white;
-  border: 0.5px solid aquamarine;
+    color: white;
+    border: 0.5px solid aquamarine;
 }
 
 :host ::ng-deep .mat-radio-label-content {
-  padding-left: 1px;
-  padding-right: 8px;
+    padding-left: 1px;
+    padding-right: 8px;
 }
 
 .roles-radio {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .position-of-buttons .submit-update {
-  height: 37px;
-  position: absolute;
-  min-height: 37px;
-  min-width: 75px;
-  right: 72px;
+    height: 37px;
+    position: absolute;
+    min-height: 37px;
+    min-width: 75px;
+    right: 72px;
 }
 
 .cancel {
-  height: 40px;
-  position: relative;
-  min-height: 39px;
-  min-width: 30px;
+    height: 40px;
+    position: relative;
+    min-height: 39px;
+    min-width: 30px;
 }
 
-.roles-radio-gtoup  {
-  display: flex;
-  justify-content: space-between;
+.roles-radio-gtoup {
+    display: flex;
+    justify-content: space-between;
 }

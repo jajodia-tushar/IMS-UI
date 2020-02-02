@@ -26,7 +26,7 @@ namespace IMS_UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response =await _shelfProvider.ApiGetCaller("/api/Shelf");
+            var response = await _shelfProvider.ApiGetCaller("/api/Shelf");
             try {
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
@@ -43,7 +43,7 @@ namespace IMS_UI.Controllers
         [HttpGet("{id}", Name = "GetShelf")]
         public async Task<IActionResult> GetShelfById(string id)
         {
-            var response = await _shelfProvider.ApiGetCaller("/api/Shelf/"+id);
+            var response = await _shelfProvider.ApiGetCaller("/api/Shelf/" + id);
             try
             {
                 if (response.Error != null && response.Error.ErrorCode == 401)
@@ -57,17 +57,55 @@ namespace IMS_UI.Controllers
             }
         }
 
-       
+        [HttpPost("new")]
+        public async Task<IActionResult> AddShelf([FromBody] Shelf shelf)
+        {
+            try
+            {
+                var response = await _shelfProvider.AddShelf(shelf);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
 
         // PUT: api/Shelf/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> EditShelfDetails([FromBody] Shelf shelf)
         {
+            try
+            {
+                var response = await _shelfProvider.EditShelf(shelf);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{shelfCode}")]
+        public async Task<IActionResult> DeactivateShelf(string shelfCode)
         {
+            try
+            {
+                var response = await _shelfProvider.DeactivateShelf(shelfCode);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
+
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpGet("inventory/{shelfId}")]

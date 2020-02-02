@@ -39,6 +39,11 @@ import { VendorManagementComponent } from './Components/vendor-management/vendor
 import { VendorListComponent } from './Components/vendor-list/vendor-list.component';
 import { VendorManageDialogComponent } from './Components/vendor-manage-dialog/vendor-manage-dialog.component';
 import { VendorManageFormComponent } from './Components/vendor-manage-form/vendor-manage-form.component';
+import { ShelfManagementComponent } from './Components/shelf-management/shelf-management.component';
+import { ShelfListComponent } from './Components/shelf-list/shelf-list.component';
+import { ShelfManageFormComponent } from './Components/shelf-manage-form/shelf-manage-form.component';
+import { ShelfManageDialogComponent } from './Components/shelf-manage-dialog/shelf-manage-dialog.component';
+import { ShelfDeactivateDialogComponent } from './Components/shelf-deactivate-dialog/shelf-deactivate-dialog.component';
 import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bulk-request-dialog.component';
 import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-return-dialog.component';
@@ -86,6 +91,11 @@ import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-
       VendorListComponent,
       VendorManageDialogComponent,
       VendorManageFormComponent,
+      ShelfManagementComponent,
+      ShelfListComponent,
+      ShelfManageFormComponent,
+      ShelfManageDialogComponent,
+      ShelfDeactivateDialogComponent,
       BulkOrderComponent,
      
       BulkRequestDialogComponent,
@@ -97,6 +107,6 @@ import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-
     AdminRoutingModule,
     SharedModule
   ],
-  entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent,BulkRequestDialogComponent,BulkReturnDialogComponent]
+    entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent, BulkRequestDialogComponent, BulkReturnDialogComponent, ShelfManageDialogComponent, ShelfDeactivateDialogComponent]
 })
 export class AdminModule { }

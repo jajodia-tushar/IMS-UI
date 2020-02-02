@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
+import { HttpClient, HttpParams } from '@angular/common/http';import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
 import { ShelfResponse } from 'src/app/IMS.Models/Shelf/ShelfResponse';
 import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
 ;
@@ -27,5 +27,16 @@ export class ShelfService {
     return this.http.post("api/shelf",shelf).subscribe();
   }
 
-  
+  editShelf(shelf: Shelf): Promise<ShelfListResponse>{
+    return this.http.put<ShelfListResponse>("api/shelf",shelf).toPromise();
+  }
+
+  deactivate(shelfCode: any) : Promise<ShelfListResponse>{
+    return this.http.delete<ShelfListResponse>("api/Shelf/"+shelfCode).toPromise();
+  }
+
+  createShelf(shelf: Shelf): Promise<ShelfListResponse> {
+    return this.http.post<ShelfListResponse>("api/Shelf/new", shelf).toPromise();
+  }
+
 }

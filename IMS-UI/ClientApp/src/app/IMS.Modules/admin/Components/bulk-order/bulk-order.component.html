@@ -43,10 +43,10 @@
     </mat-card-content>
     <mat-toolbar>
         <mat-toolbar-row>
-            <button mat-button (click)="approveClicked()" class="cancel">Approve</button>
-            <button mat-button (click)="cancelClicked()" class="cancel">Cancel</button>
-            <button mat-button (click)="rejectClicked()" class="cancel">Reject</button>
-            <button mat-button (click)="returnClicked()" class="cancel">Return</button>
+            <button mat-button *ngIf="showApproveButton()" (click)="approveClicked()" class="cancel">Approve</button>
+            <button mat-button *ngIf="showCancelButton()" (click)="cancelClicked()" class="cancel">Cancel</button>
+            <button mat-button *ngIf="showRejectButton()" (click)="rejectClicked()" class="cancel">Reject</button>
+            <button mat-button *ngIf="showReturnButton()" (click)="returnClicked()" class="cancel">Return</button>
         </mat-toolbar-row>
     </mat-toolbar>
 </mat-card>

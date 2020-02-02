@@ -24,6 +24,12 @@ export class BulkOrderComponent implements OnInit {
   employee : Employee;
   employeeBulkOrderDetails: EmployeeBulkOrderDetails;
   bulkOrderItemQuantityMapping : BulkOrderItemQuantityMapping[] = [];
+  bulkRequestStatus : FieldToBeDisplayed;
+  requestBy : FieldToBeDisplayed;
+  requestOn : FieldToBeDisplayed;
+  requiredOn : FieldToBeDisplayed;
+  employeeId :FieldToBeDisplayed;
+  
   
   numberOfColumns() {
     return (this.displayedColumns.length - 1);
@@ -44,37 +50,37 @@ export class BulkOrderComponent implements OnInit {
             let orderDetails = data.employeeBulkOrders[0].employeeBulkOrderDetails;
             let requestedEmployee = data.employeeBulkOrders[0].employee;
 
-            let bulkRequestStatus : FieldToBeDisplayed = {
+            this.bulkRequestStatus = {
               fieldName : "Request Status",
               fieldValue : orderDetails.bulkOrderRequestStatus
             }
 
-            let requestBy : FieldToBeDisplayed = {
+            this.requestBy  = {
               fieldName : "Request By",
               fieldValue : requestedEmployee.firstname
             }
 
-            let requestOn : FieldToBeDisplayed = {
+            this.requestOn  = {
               fieldName : "Request On",
               fieldValue : orderDetails.createdOn.toString()
             }
 
-            let requiredOn : FieldToBeDisplayed = {
+            this.requiredOn  = {
               fieldName : "Required On",
               fieldValue : orderDetails.requirementDate.toString()
             }
 
-            let employeeId : FieldToBeDisplayed = {
+            this.employeeId  = {
               fieldName : "Employee Id",
               fieldValue : requestedEmployee.id
             }
 
             this.reasonForRequirement = orderDetails.reasonForRequirement;
-            this.listOfFieldToBeDisplayed.push(employeeId);
-            this.listOfFieldToBeDisplayed.push(requestBy);
-            this.listOfFieldToBeDisplayed.push(bulkRequestStatus);
-            this.listOfFieldToBeDisplayed.push(requestOn);
-            this.listOfFieldToBeDisplayed.push(requiredOn);
+            this.listOfFieldToBeDisplayed.push(this.employeeId);
+            this.listOfFieldToBeDisplayed.push(this.requestBy);
+            this.listOfFieldToBeDisplayed.push(this.bulkRequestStatus);
+            this.listOfFieldToBeDisplayed.push(this.requestOn);
+            this.listOfFieldToBeDisplayed.push(this.requiredOn);
             
             let tempDataSource = [];
             orderDetails.itemsQuantityList.forEach(
@@ -171,6 +177,25 @@ export class BulkOrderComponent implements OnInit {
           });
       }
     });
+
+  }
+
+  showApproveButton(){
+    return this.bulkRequestStatus != null && this.bulkRequestStatus.fieldValue == "Pending";
+
+  }
+
+  showCancelButton(){
+    return this.bulkRequestStatus != null && this.bulkRequestStatus.fieldValue == "Approved";
+
+  }
+
+  showRejectButton(){
+    return this.bulkRequestStatus != null && this.bulkRequestStatus.fieldValue == "Pending";
+  }
+
+  showReturnButton(){
+    return this.bulkRequestStatus != null && this.bulkRequestStatus.fieldValue == "Approved";
 
   }
 }

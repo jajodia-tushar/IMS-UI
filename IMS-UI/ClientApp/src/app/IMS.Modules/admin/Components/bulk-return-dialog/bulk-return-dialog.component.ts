@@ -29,7 +29,6 @@ export class BulkReturnDialogComponent implements OnInit {
   }
 
   cancelClikced(){
-    alert("Cancel");
     this.dialogRef.close();
   }
 

@@ -20,6 +20,7 @@ export class BulkRequestDialogComponent implements OnInit {
   ItemName : string;
   ItemQuantity : string;
   allShelfs : StockStatusWithSelectedDate[] = [];
+  quantityRem : number;
 
   constructor(private dialogRef: MatDialogRef<BulkRequestDialogComponent>,
      @Inject(MAT_DIALOG_DATA) public data:TableData,
@@ -30,6 +31,7 @@ export class BulkRequestDialogComponent implements OnInit {
     this.submitButtonText = "Submit";
     this.ItemName = this.data.itemName;
     this.ItemQuantity = this.data.itemQuantity.toString();
+    this.quantityRem = this.data.itemQuantity;
 
     this.bulkOrderService.GetStockStatus(1,10000,this.data.itemId).subscribe(
       data => {
@@ -43,6 +45,13 @@ export class BulkRequestDialogComponent implements OnInit {
             }
             this.allShelfs.push(stockStatusWithSelectedDate);
           });
+          this.allShelfs.sort((shelfA,shelfB) =>{
+            if(shelfA.location < shelfB.location)
+                return 1;
+            if(shelfA.location < shelfB.location)
+                return -1;
+            return 0;
+          })
       });
   }
 
@@ -68,6 +77,21 @@ export class BulkRequestDialogComponent implements OnInit {
         itemLocQua.locationQuantityMappings.push(locationQuantityMapping);
       });
     this.dialogRef.close(itemLocQua);
+  }
+
+  quantityChanged(value){
+
+    if(value == null || value == "")
+      return;
+    let totalSelected : number = 0;
+    this.allShelfs.forEach(s=>{
+      totalSelected += parseInt(s.quantitySelected);
+    });
+    this.quantityRem = (parseInt(this.ItemQuantity) - totalSelected);
+  }
+
+  showSubmitButton(){
+    return this.quantityRem == 0;
   }
 }
 

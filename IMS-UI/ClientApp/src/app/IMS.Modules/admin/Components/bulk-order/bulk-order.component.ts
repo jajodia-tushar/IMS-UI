@@ -123,7 +123,6 @@ export class BulkOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-          console.log(event); 
           const classList = event.target.parentNode.parentNode.parentNode.parentNode.classList;
           const classes = event.target.parentNode.parentNode.parentNode.parentNode.className;
           this.itemLocationQuaListToBeSent.push(result);

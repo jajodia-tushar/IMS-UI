@@ -1,1 +1,42 @@
-.input-box {}
+.return-order-card {
+    margin: 10px;
+    min-width: 100%;
+}
+
+.bulk-card-content {
+    margin-top: 10px;
+    color: white;
+}
+
+.table-class {
+    min-width: 100%;
+    cursor: pointer;
+}
+
+.position-of-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-input-element {
+    color: white;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+}
+
+.input-box {
+    border: 1px #4b4e71 solid;
+    background-color: #222437;
+    padding: 7px;
+    color: white;
+}
+
+td {
+    padding: 10px!important;
+}
+
+th {
+    padding: 10px !important;
+}

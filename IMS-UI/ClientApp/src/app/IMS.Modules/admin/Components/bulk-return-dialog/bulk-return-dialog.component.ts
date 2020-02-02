@@ -33,7 +33,6 @@ export class BulkReturnDialogComponent implements OnInit {
   }
 
   SubmitClicked(){
-    alert("Submit");
     this.dialogRef.close(this.data);
   }
 

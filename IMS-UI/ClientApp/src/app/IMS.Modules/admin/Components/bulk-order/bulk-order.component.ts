@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
 import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove, BulkOrderItemQuantityMapping, BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { BulkReturnDialogComponent } from '../bulk-return-dialog/bulk-return-dialog.component';
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bulk-order',
@@ -37,7 +39,10 @@ export class BulkOrderComponent implements OnInit {
   
   constructor(private route : ActivatedRoute,
     private bulkOrderService : BulkOrderService,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private router : Router,
+    private datePipe : DatePipe) {
     this.route.paramMap.subscribe(
       params => {
         this.orderId =  parseInt(params.get("id"));
@@ -56,18 +61,18 @@ export class BulkOrderComponent implements OnInit {
             }
 
             this.requestBy  = {
-              fieldName : "Request By",
-              fieldValue : requestedEmployee.firstname
+              fieldName : "Requested By Employee",
+              fieldValue : requestedEmployee.firstname + " " + requestedEmployee.lastname
             }
 
             this.requestOn  = {
-              fieldName : "Request On",
-              fieldValue : orderDetails.createdOn.toString()
+              fieldName : "Requested On",
+              fieldValue : this.transform(orderDetails.createdOn)
             }
 
             this.requiredOn  = {
               fieldName : "Required On",
-              fieldValue : orderDetails.requirementDate.toString()
+              fieldValue : this.transform(orderDetails.requirementDate)
             }
 
             this.employeeId  = {
@@ -76,8 +81,8 @@ export class BulkOrderComponent implements OnInit {
             }
 
             this.reasonForRequirement = orderDetails.reasonForRequirement;
-            this.listOfFieldToBeDisplayed.push(this.employeeId);
             this.listOfFieldToBeDisplayed.push(this.requestBy);
+            this.listOfFieldToBeDisplayed.push(this.employeeId);
             this.listOfFieldToBeDisplayed.push(this.bulkRequestStatus);
             this.listOfFieldToBeDisplayed.push(this.requestOn);
             this.listOfFieldToBeDisplayed.push(this.requiredOn);
@@ -88,7 +93,7 @@ export class BulkOrderComponent implements OnInit {
                   let x = {
                     itemId : iq.item.id,
                     itemName : iq.item.name,
-                    itemQuantity : iq.quantityOrdered
+                    itemQuantity : iq.quantityOrdered,
                   }
                   tempDataSource.push(x);
                   this.bulkOrderItemQuantityMapping.push(iq);
@@ -105,7 +110,11 @@ export class BulkOrderComponent implements OnInit {
   ngOnInit() {
   }
 
-  addButtonClicked(data : TableData){
+  transform(date){
+    return this.datePipe.transform(date, "dd/MM/yyyy")
+  }
+
+  addButtonClicked(data : TableData,event){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     dialogConfig.panelClass = 'dialog-user-manage';
@@ -114,26 +123,44 @@ export class BulkOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
+          const classList = event.target.parentNode.parentNode.parentNode.parentNode.classList;
+          const classes = event.target.parentNode.parentNode.parentNode.parentNode.className;
           this.itemLocationQuaListToBeSent.push(result);
+
+          if(classes.includes('clicked'))
+            showMessage(this.snackBar, 2, "Allocated Quantity for item "+data.itemName+" has been Changed");
+          else{
+            classList.add('clicked');
+            showMessage(this.snackBar, 2, "Allocated Quantity for item "+data.itemName);
+          }          
       }
       else{
-        alert("Not Selected")
+        showMessage(this.snackBar, 2, "Quantity for item "+data.itemName+" not Allocated");
       }
     });
   }
 
   approveClicked(){
-    alert("Approve Clicked");
     let blukOrderApproveData = new BlukOrderApprove();
     blukOrderApproveData.employee = this.employee;
     blukOrderApproveData.employeeBulkOrderDetails = this.employeeBulkOrderDetails;
     blukOrderApproveData.bulkOrderId = this.orderId;
     blukOrderApproveData.itemLocationQuantityMappings = this.itemLocationQuaListToBeSent;
-    
+
+    if(blukOrderApproveData.itemLocationQuantityMappings.length != this.dataSource.length){
+      showMessage(this.snackBar, 2, "Please Select The Quantity for All items in List ");
+      return;
+    }
     
     this.bulkOrderService.approveBulkOrder(this.orderId,blukOrderApproveData).subscribe(
       data=>{
-        console.log(data);
+        if(data.status == "Success"){
+          showMessage(this.snackBar, 2, "The Order Has Been Approved");
+          this.router.navigateByUrl("/Admin/Notifications");
+        }
+        else{
+          showMessage(this.snackBar, 2, data.error.errorMessage);
+        }
       }
     )
   }
@@ -141,21 +168,29 @@ export class BulkOrderComponent implements OnInit {
   cancelClicked(){
   this.bulkOrderService.cancelBulkOrder(this.orderId).subscribe(
     data=>{
-      console.log(data);
+      if(data.status == "Success"){
+        showMessage(this.snackBar, 2, "The Order Has Been Cancelled");
+        this.router.navigateByUrl("/Admin/Notifications");
+      }
+      else{
+        showMessage(this.snackBar, 2, data.error.errorMessage);
+      }
     }
   )
 
   }
 
-  callMe(column){
-    console.log(column);
-    return true;
-  }
 
   rejectClicked(){
     this.bulkOrderService.rejectBulkOrder(this.orderId).subscribe(
       data=>{
-        console.log(data);
+        if(data.status == "Success"){
+          showMessage(this.snackBar, 2, "The Order Has Been Rejected");
+          this.router.navigateByUrl("/Admin/Notifications");
+        }
+        else{
+          showMessage(this.snackBar, 2, data.error.errorMessage);
+        }
       });
   }
 
@@ -168,18 +203,26 @@ export class BulkOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log(result);
         let bulkOrder = new BulkRequest();
         bulkOrder.bulkOrderId = this.orderId;
         bulkOrder.employee = this.employee;
         bulkOrder.employeeBulkOrderDetails = this.employeeBulkOrderDetails;
-        console.log(bulkOrder.employeeBulkOrderDetails.itemsQuantityList);
         bulkOrder.employeeBulkOrderDetails.itemsQuantityList = result;
 
         this.bulkOrderService.returnBulkOrder(this.orderId,bulkOrder).subscribe(
           data=>{
-            console.log(data);
+            if(data.status == "Success"){
+              showMessage(this.snackBar, 2, "The Order Has Been Returned");
+              this.router.navigateByUrl("/Admin/Notifications");
+            }
+            else{
+              showMessage(this.snackBar, 2, data.error.errorMessage);
+            }
           });
+      }
+      else{
+        showMessage(this.snackBar, 2, "The Action was Cancelled");
+
       }
     });
 

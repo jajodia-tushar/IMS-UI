@@ -26,8 +26,8 @@
 
 <div class="action-buttons one-row">
     <div class="position-of-buttons">
-        <button *ngIf="showSubmitButton()" mat-button (click)="SubmitClicked()" class="submit-update">
-        {{submitButtonText}}<app-spinning-loader></app-spinning-loader></button>
-        <button mat-button (click)="cancelClikced()" class="cancel">Cancel</button>
+        <button style="border: 1px rgb(63, 7, 7) solid;" mat-button (click)="cancelClikced()" class="cancel">Cancel</button>
+        <button style="border: 1px green solid;" *ngIf="showSubmitButton()" mat-button (click)="SubmitClicked()" class="submit-update">
+            {{submitButtonText}}<app-spinning-loader></app-spinning-loader></button>
     </div>
 </div>

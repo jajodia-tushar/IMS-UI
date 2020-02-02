@@ -45,10 +45,10 @@ export class BulkRequestDialogComponent implements OnInit {
             }
             this.allShelfs.push(stockStatusWithSelectedDate);
           });
-          this.allShelfs.sort((shelfA,shelfB) =>{
-            if(shelfA.location < shelfB.location)
+          this.allShelfs = this.allShelfs.sort((shelfA,shelfB) =>{
+            if(shelfA.location.toLowerCase() < shelfB.location.toLowerCase())
                 return 1;
-            if(shelfA.location < shelfB.location)
+            if(shelfA.location.toLowerCase() > shelfB.location.toLowerCase())
                 return -1;
             return 0;
           })
@@ -56,12 +56,10 @@ export class BulkRequestDialogComponent implements OnInit {
   }
 
   cancelClikced(){
-    alert("Cancel");
     this.dialogRef.close();
   }
 
   SubmitClicked(){
-    alert("Submit");
     let itemLocQua : ItemLocationQuantityMapping = new ItemLocationQuantityMapping();
     itemLocQua.item = new Item();
     itemLocQua.locationQuantityMappings = [];
@@ -80,7 +78,6 @@ export class BulkRequestDialogComponent implements OnInit {
   }
 
   quantityChanged(value){
-
     if(value == null || value == "")
       return;
     let totalSelected : number = 0;

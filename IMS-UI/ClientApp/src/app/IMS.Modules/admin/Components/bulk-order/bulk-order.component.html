@@ -42,11 +42,11 @@
         </table>
     </mat-card-content>
     <mat-toolbar>
-        <mat-toolbar-row>
-            <button mat-button *ngIf="showApproveButton()" (click)="approveClicked()" class="cancel">Approve</button>
-            <button mat-button *ngIf="showCancelButton()" (click)="cancelClicked()" class="cancel">Cancel</button>
-            <button mat-button *ngIf="showRejectButton()" (click)="rejectClicked()" class="cancel">Reject</button>
-            <button mat-button *ngIf="showReturnButton()" (click)="returnClicked()" class="cancel">Return</button>
+        <mat-toolbar-row class="form-label-inclosing-class">
+            <button mat-button style="border: 1px red solid;" *ngIf="showCancelButton()" (click)="cancelClicked()" class="cancel">Cancel</button>
+            <button mat-button style="border: 1px green solid;" *ngIf="showApproveButton()" (click)="approveClicked()" class="cancel">Approve</button>
+            <button mat-button style="border: 1px red solid;" *ngIf="showRejectButton()" (click)="rejectClicked()" class="cancel">Reject</button>
+            <button mat-button style="border: 1px red solid;" *ngIf="showReturnButton()" (click)="returnClicked()" class="cancel">Return</button>
         </mat-toolbar-row>
     </mat-toolbar>
 </mat-card>

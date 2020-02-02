@@ -20,3 +20,19 @@
 .table-class {
     min-width: 100%;
 }
+
+.rejectButton {
+    border: 1px solid red !important;
+}
+
+.approveButton {
+    border: 1px solid green !important;
+}
+
+.mat-input-element:disabled {
+    color: white;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+}

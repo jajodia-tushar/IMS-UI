@@ -45,10 +45,10 @@ export class BulkRequestDialogComponent implements OnInit {
             }
             this.allShelfs.push(stockStatusWithSelectedDate);
           });
-          this.allShelfs.sort((shelfA,shelfB) =>{
-            if(shelfA.location < shelfB.location)
+          this.allShelfs = this.allShelfs.sort((shelfA,shelfB) =>{
+            if(shelfA.location.toLowerCase() < shelfB.location.toLowerCase())
                 return 1;
-            if(shelfA.location < shelfB.location)
+            if(shelfA.location.toLowerCase() > shelfB.location.toLowerCase())
                 return -1;
             return 0;
           })

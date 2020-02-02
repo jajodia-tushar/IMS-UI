@@ -19,3 +19,16 @@
     display: flex;
     justify-content: space-between;
 }
+
+.mat-input-element {
+    color: white;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+}
+
+.example-form {
+    display: flex;
+    justify-content: space-between;
+}

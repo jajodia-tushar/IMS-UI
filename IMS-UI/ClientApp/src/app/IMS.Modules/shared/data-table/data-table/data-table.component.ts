@@ -19,7 +19,7 @@ export class DataTableComponent implements OnInit {
   date;
   pageLength:number;
   pageSize:number;
-  pageSizeOptions:number[]=[5, 10, 15, 20];
+  pageSizeOptions:number[]=[5, 10, 15, 20,100,200];
   pageNumber:number;
   
   constructor(public datepipe: DatePipe, public router: Router, private snackBar: MatSnackBar) { }

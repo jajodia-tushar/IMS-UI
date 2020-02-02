@@ -8,6 +8,7 @@ import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { BulkReturnDialogComponent } from '../bulk-return-dialog/bulk-return-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bulk-order',
@@ -40,7 +41,8 @@ export class BulkOrderComponent implements OnInit {
     private bulkOrderService : BulkOrderService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router : Router) {
+    private router : Router,
+    private datePipe : DatePipe) {
     this.route.paramMap.subscribe(
       params => {
         this.orderId =  parseInt(params.get("id"));
@@ -59,18 +61,18 @@ export class BulkOrderComponent implements OnInit {
             }
 
             this.requestBy  = {
-              fieldName : "Request By",
-              fieldValue : requestedEmployee.firstname
+              fieldName : "Requested By Employee",
+              fieldValue : requestedEmployee.firstname + " " + requestedEmployee.lastname
             }
 
             this.requestOn  = {
-              fieldName : "Request On",
-              fieldValue : orderDetails.createdOn.toString()
+              fieldName : "Requested On",
+              fieldValue : this.transform(orderDetails.createdOn)
             }
 
             this.requiredOn  = {
               fieldName : "Required On",
-              fieldValue : orderDetails.requirementDate.toString()
+              fieldValue : this.transform(orderDetails.requirementDate)
             }
 
             this.employeeId  = {
@@ -79,8 +81,8 @@ export class BulkOrderComponent implements OnInit {
             }
 
             this.reasonForRequirement = orderDetails.reasonForRequirement;
-            this.listOfFieldToBeDisplayed.push(this.employeeId);
             this.listOfFieldToBeDisplayed.push(this.requestBy);
+            this.listOfFieldToBeDisplayed.push(this.employeeId);
             this.listOfFieldToBeDisplayed.push(this.bulkRequestStatus);
             this.listOfFieldToBeDisplayed.push(this.requestOn);
             this.listOfFieldToBeDisplayed.push(this.requiredOn);
@@ -106,6 +108,10 @@ export class BulkOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  transform(date){
+    return this.datePipe.transform(date, "dd/MM/yyyy")
   }
 
   addButtonClicked(data : TableData,event){

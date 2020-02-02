@@ -89,7 +89,7 @@ export class ShelfListComponent implements OnInit {
       }
       else if (result == "cancelled") {
         //don't show any message.
-        result.getElementById('editShelfDetails').focus();
+        // result.getElementBy('editShelfDetails').focus();
       }
       else {
         this.editShelfInTable(result);
@@ -139,12 +139,21 @@ export class ShelfListComponent implements OnInit {
     showMessage(this.snackBar, 2, "Shelf Details Updated Successfully", 'success');
   }
 
-  async setShelves() {
-    let shelflist: Shelf[] = (<ShelfListResponse>await this.shelfService.getAllShelves()).shelves;
-    this.ELEMENT_DATA = shelflist;
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  setShelves() {
+
+    this.shelfService.getAllShelves().subscribe(
+      data => {
+        let shelflist: Shelf[];
+        shelflist = data.shelves;
+        console.log(data);
+        this.ELEMENT_DATA = shelflist;
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    )
+    //let shelflist: Shelf[] = (<ShelfListResponse>await this.shelfService.getAllShelves()).shelves;
+
   }
 }

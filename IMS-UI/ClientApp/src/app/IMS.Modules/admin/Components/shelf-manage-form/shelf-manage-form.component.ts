@@ -19,7 +19,7 @@ export class ShelfManageFormComponent implements OnInit {
     this.createShelfForm = formBuilder.group({
       id: [-1, []],
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      code: [null, [Validators.required]],
+      code: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
       isActive: [true, []]
     })
    }
@@ -48,7 +48,9 @@ export class ShelfManageFormComponent implements OnInit {
 
   async createNewShelf() {
     let shelf: Shelf = <Shelf>this.createShelfForm.getRawValue();
+    console.log(shelf);
     let createdShelf: ShelfListResponse = <ShelfListResponse>await this.shelfService.createShelf(shelf);
+    console.log(createdShelf);
     this.shelfCreated.emit(createdShelf);
   }
 

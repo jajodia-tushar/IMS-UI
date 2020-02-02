@@ -11,5 +11,7 @@ namespace IMS_UI.IMS.Providers.Interfaces
         Task<ShelfDataResponse> GetShelfData(string shelfId);
 
         Task<ShelfListResponse> ApiGetCaller(string path);
+        Task<ShelfListResponse> EditShelf(Shelf shelf);
+        Task<ShelfListResponse> DeactivateShelf(int shelfId);
     }
 }

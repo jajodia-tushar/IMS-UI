@@ -12,11 +12,12 @@ export class ShelfManageDialogComponent implements OnInit {
   shelfData: Shelf;
   constructor(private dialogRef: MatDialogRef<ShelfManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.shelfData = data;
+    console.log(data);
    }
 
   ngOnInit() {  }
 
-  notifyTableEditted(shelvesResponse: ShelfListResponse) {
+  notifyTableShelfEditted(shelvesResponse: ShelfListResponse) {
     if (shelvesResponse == null) {
       this.dialogRef.close("cancelled");
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
 import { MatDialogConfig, MatDialog, MatSnackBar } from '@angular/material';
 import { BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
@@ -39,7 +39,8 @@ export class BulkOrderComponent implements OnInit {
   constructor(private route : ActivatedRoute,
     private bulkOrderService : BulkOrderService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private router : Router) {
     this.route.paramMap.subscribe(
       params => {
         this.orderId =  parseInt(params.get("id"));
@@ -150,6 +151,7 @@ export class BulkOrderComponent implements OnInit {
       data=>{
         if(data.status == "Success"){
           showMessage(this.snackBar, 2, "The Order Has Been Approved");
+          this.router.navigateByUrl("/Admin/Notifications");
         }
         else{
           showMessage(this.snackBar, 2, data.error.errorMessage);
@@ -163,6 +165,7 @@ export class BulkOrderComponent implements OnInit {
     data=>{
       if(data.status == "Success"){
         showMessage(this.snackBar, 2, "The Order Has Been Cancelled");
+        this.router.navigateByUrl("/Admin/Notifications");
       }
       else{
         showMessage(this.snackBar, 2, data.error.errorMessage);
@@ -172,16 +175,13 @@ export class BulkOrderComponent implements OnInit {
 
   }
 
-  callMe(column){
-    console.log(column);
-    return true;
-  }
 
   rejectClicked(){
     this.bulkOrderService.rejectBulkOrder(this.orderId).subscribe(
       data=>{
         if(data.status == "Success"){
           showMessage(this.snackBar, 2, "The Order Has Been Rejected");
+          this.router.navigateByUrl("/Admin/Notifications");
         }
         else{
           showMessage(this.snackBar, 2, data.error.errorMessage);
@@ -198,23 +198,26 @@ export class BulkOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        console.log(result);
         let bulkOrder = new BulkRequest();
         bulkOrder.bulkOrderId = this.orderId;
         bulkOrder.employee = this.employee;
         bulkOrder.employeeBulkOrderDetails = this.employeeBulkOrderDetails;
-        console.log(bulkOrder.employeeBulkOrderDetails.itemsQuantityList);
         bulkOrder.employeeBulkOrderDetails.itemsQuantityList = result;
 
         this.bulkOrderService.returnBulkOrder(this.orderId,bulkOrder).subscribe(
           data=>{
             if(data.status == "Success"){
               showMessage(this.snackBar, 2, "The Order Has Been Returned");
+              this.router.navigateByUrl("/Admin/Notifications");
             }
             else{
               showMessage(this.snackBar, 2, data.error.errorMessage);
             }
           });
+      }
+      else{
+        showMessage(this.snackBar, 2, "The Action was Cancelled");
+
       }
     });
 

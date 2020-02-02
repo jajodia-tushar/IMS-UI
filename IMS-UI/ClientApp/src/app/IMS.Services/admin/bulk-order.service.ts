@@ -27,9 +27,6 @@ export class BulkOrderService {
 
   approveBulkOrder(orderId : number , bulkOrderApprove : BlukOrderApprove) : Observable<BlukOrderApproveResponse>{
     let path : string   = "api/employee/EmployeeBulkOrders/Approve/" + orderId;
-    console.log(path);
-    console.log(bulkOrderApprove);
-    alert("Firing request Now in 1 second");
     return this.http.put<BlukOrderApproveResponse>(path,bulkOrderApprove);
   }
 

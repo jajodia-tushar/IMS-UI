@@ -147,6 +147,11 @@ export class BulkOrderComponent implements OnInit {
 
   }
 
+  callMe(column){
+    console.log(column);
+    return true;
+  }
+
   rejectClicked(){
     this.bulkOrderService.rejectBulkOrder(this.orderId).subscribe(
       data=>{

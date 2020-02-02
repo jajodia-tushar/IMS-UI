@@ -56,12 +56,10 @@ export class BulkRequestDialogComponent implements OnInit {
   }
 
   cancelClikced(){
-    alert("Cancel");
     this.dialogRef.close();
   }
 
   SubmitClicked(){
-    alert("Submit");
     let itemLocQua : ItemLocationQuantityMapping = new ItemLocationQuantityMapping();
     itemLocQua.item = new Item();
     itemLocQua.locationQuantityMappings = [];
@@ -80,7 +78,6 @@ export class BulkRequestDialogComponent implements OnInit {
   }
 
   quantityChanged(value){
-
     if(value == null || value == "")
       return;
     let totalSelected : number = 0;

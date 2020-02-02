@@ -31,7 +31,7 @@
 
                 <ng-container *ngIf="i==numberOfColumns()">
                     <th mat-header-cell *matHeaderCellDef> {{column | humanize}} </th>
-                    <td mat-cell *matCellDef="let element"> <button *ngIf="showApproveButton()" mat-icon-button (click)="addButtonClicked(element)">
+                    <td mat-cell *matCellDef="let element"> <button *ngIf="showApproveButton()" mat-icon-button (click)="addButtonClicked(element,$event)">
                             <mat-icon >add_circle</mat-icon>
                         </button>
                         <button *ngIf="!showApproveButton()" mat-icon-button>

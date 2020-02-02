@@ -88,7 +88,7 @@ export class BulkOrderComponent implements OnInit {
                   let x = {
                     itemId : iq.item.id,
                     itemName : iq.item.name,
-                    itemQuantity : iq.quantityOrdered
+                    itemQuantity : iq.quantityOrdered,
                   }
                   tempDataSource.push(x);
                   this.bulkOrderItemQuantityMapping.push(iq);
@@ -105,7 +105,7 @@ export class BulkOrderComponent implements OnInit {
   ngOnInit() {
   }
 
-  addButtonClicked(data : TableData){
+  addButtonClicked(data : TableData,event){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = data;
     dialogConfig.panelClass = 'dialog-user-manage';
@@ -114,6 +114,10 @@ export class BulkOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
+          console.log(event); 
+          const classList = event.target.parentNode.parentNode.parentNode.parentNode.classList;
+          const classes = event.target.className;
+          classes.includes('clicked') ? classList.remove('clicked') : classList.add('clicked');
           this.itemLocationQuaListToBeSent.push(result);
       }
       else{

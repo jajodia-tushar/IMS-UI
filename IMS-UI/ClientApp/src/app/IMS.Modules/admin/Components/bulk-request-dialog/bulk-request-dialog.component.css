@@ -14,3 +14,8 @@
 .table-class {
     min-width: 100%;
 }
+
+.position-of-buttons {
+    display: flex;
+    justify-content: space-between;
+}

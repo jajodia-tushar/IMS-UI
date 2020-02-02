@@ -57,7 +57,22 @@ namespace IMS_UI.Controllers
             }
         }
 
+        [HttpPost("new")]
+        public async Task<IActionResult> AddShelf([FromBody] Shelf shelf)
+        {
+            try
+            {
+                var response = await _shelfProvider.AddShelf(shelf);
+                if (response.Error != null && response.Error.ErrorCode == 401)
+                    _sessionManager.ClearSession();
 
+                return Ok(response);
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
 
         // PUT: api/Shelf/5
         [HttpPut]
@@ -76,12 +91,12 @@ namespace IMS_UI.Controllers
             }
         }
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{shelfId}")]
-        public async Task<IActionResult> DeactivateItem(int shelfId)
+        [HttpDelete("{shelfCode}")]
+        public async Task<IActionResult> DeactivateShelf(string shelfCode)
         {
             try
             {
-                var response = await _shelfProvider.DeactivateShelf(shelfId);
+                var response = await _shelfProvider.DeactivateShelf(shelfCode);
                 if (response.Error != null && response.Error.ErrorCode == 401)
                     _sessionManager.ClearSession();
 

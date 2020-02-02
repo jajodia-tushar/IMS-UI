@@ -99,12 +99,22 @@ namespace IMS_UI.IMS.Providers
             }
         }
 
-        public async Task<ShelfListResponse> DeactivateShelf(int shelfId)
+        public async Task<ShelfListResponse> DeactivateShelf(string shelfCode)
         {
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);
-                var response = await http.DeleteAsync("api/shelf/"+shelfId);
+                var response = await http.DeleteAsync("api/shelf/"+shelfCode);
+                return await ShelvesResultParser(response);
+            }
+        }
+
+        public async Task<ShelfListResponse> AddShelf(Shelf shelf)
+        {
+            using (HttpClient http = new HttpClient())
+            {
+                JObject shelfJson = JsonMaker(shelf, http);
+                var response = await http.PostAsJsonAsync("api/shelf", shelfJson);
                 return await ShelvesResultParser(response);
             }
         }

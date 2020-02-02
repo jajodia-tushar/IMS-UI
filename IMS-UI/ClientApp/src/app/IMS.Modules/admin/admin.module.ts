@@ -43,6 +43,7 @@ import { ShelfManagementComponent } from './Components/shelf-management/shelf-ma
 import { ShelfListComponent } from './Components/shelf-list/shelf-list.component';
 import { ShelfManageFormComponent } from './Components/shelf-manage-form/shelf-manage-form.component';
 import { ShelfManageDialogComponent } from './Components/shelf-manage-dialog/shelf-manage-dialog.component';
+import { ShelfDeactivateDialogComponent } from './Components/shelf-deactivate-dialog/shelf-deactivate-dialog.component';
 import { BulkRequestDialogComponent } from './Components/bulk-request-dialog/bulk-request-dialog.component';
 import { BulkOrderComponent } from './Components/bulk-order/bulk-order.component';
 import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-return-dialog.component';
@@ -94,6 +95,7 @@ import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-
       ShelfListComponent,
       ShelfManageFormComponent,
       ShelfManageDialogComponent,
+      ShelfDeactivateDialogComponent,
       BulkOrderComponent,
      
       BulkRequestDialogComponent,
@@ -105,6 +107,6 @@ import { BulkReturnDialogComponent } from './Components/bulk-return-dialog/bulk-
     AdminRoutingModule,
     SharedModule
   ],
-    entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent, BulkRequestDialogComponent, BulkReturnDialogComponent, ShelfManageDialogComponent]
+    entryComponents: [UserManageDialogComponent, VendorManageDialogComponent, DeactivateDialogComponent, StoreUpdateComponent, ImageDialogComponent, ItemManageDialogComponent, ItemDeactivateDialogComponent, EmployeeManageDialogComponent, DeactivateDialogcomponentEmployeeComponent, BulkRequestDialogComponent, BulkReturnDialogComponent, ShelfManageDialogComponent, ShelfDeactivateDialogComponent]
 })
 export class AdminModule { }

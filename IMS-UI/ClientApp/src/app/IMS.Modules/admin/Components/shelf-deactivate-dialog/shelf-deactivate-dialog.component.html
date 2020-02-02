@@ -1,0 +1,16 @@
+<div class="deactivate-dialog">
+    <h1 mat-dialog-title>
+        Delete Shelf
+    </h1>
+
+    <div mat-dialog-content>
+        <p>Do you Want to Delete {{shelf.name}}?</p>
+    </div>
+
+    <div mat-dialog-actions class="action-buttons">
+        <button mat-raised-button (click)="onConfirm()">{{confirmButtonText}}
+        <app-spinning-loader></app-spinning-loader>
+      </button>
+        <button mat-button (click)="onDismiss()">No</button>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
 import { ShelfManageDialogComponent } from '../shelf-manage-dialog/shelf-manage-dialog.component';
+import { ShelfDeactivateDialogComponent } from '../shelf-deactivate-dialog/shelf-deactivate-dialog.component';
 
 @Component({
   selector: 'app-shelf-list',
@@ -98,25 +99,25 @@ export class ShelfListComponent implements OnInit {
     });
   }
 
-  // deactivateShelf(shelf) {
-  //   let dialogConfig = new MatDialogConfig();
-  //   dialogConfig.data = shelf;
-  //   dialogConfig.panelClass = 'dialog-shelf-manage'
-  //   const dialogRef = this.dialog.open(ShelfDeactivateDialogComponent, dialogConfig);
+  deactivateShelf(shelf) {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.data = shelf;
+    dialogConfig.panelClass = 'dialog-shelf-manage'
+    const dialogRef = this.dialog.open(ShelfDeactivateDialogComponent, dialogConfig);
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result == true) {
-  //       this.removeShelfFromTableById(shelf.id);
-  //       showMessage(this.snackBar, 2, "Shelf was Deleted Successfully", 'success');
-  //     }
-  //     else if (result == false) {
-  //       showMessage(this.snackBar, 2, "Deleting Shelf failed", 'warn');
-  //     }
-  //     else if (result == "cancelled") {
-  //       //don't show any message.
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.removeShelfFromTableById(shelf.id);
+        showMessage(this.snackBar, 2, "Shelf was Deleted Successfully", 'success');
+      }
+      else if (result == false) {
+        showMessage(this.snackBar, 2, "Deleting Shelf failed", 'warn');
+      }
+      else if (result == "cancelled") {
+        //don't show any message.
+      }
+    });
+  }
 
   removeShelfFromTableById(id) {
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {

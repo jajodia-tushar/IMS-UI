@@ -31,14 +31,12 @@ export class ShelfService {
     return this.http.put<ShelfListResponse>("api/shelf",shelf).toPromise();
   }
 
-  createShelf(shelf: Shelf): Promise<ShelfListResponse> {
-    return this.http.post<ShelfListResponse>("api/Item", shelf).toPromise();
+  deactivate(shelfCode: any) : Promise<ShelfListResponse>{
+    return this.http.delete<ShelfListResponse>("api/Shelf/"+shelfCode).toPromise();
   }
 
-  deactivate(shelfId: any) : Promise<ShelfListResponse>{
-    let params = new HttpParams();
-    params = params.append("shlefId",shelfId);
-    return this.http.delete<ShelfListResponse>("api/Item",{params}).toPromise();
+  createShelf(shelf: Shelf): Promise<ShelfListResponse> {
+    return this.http.post<ShelfListResponse>("api/Shelf/new", shelf).toPromise();
   }
 
 }

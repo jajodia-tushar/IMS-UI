@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material'
 import { FloorComponent } from '../floor/floor.component';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private centralizedRepo : CentralizedDataService) { }
 
   Login() {
     this.ButtonName = null;
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.role = data.user.role.name;
         if (this.role != null) {
+          this.centralizedRepo.setUser(data.user);
           if (this.role == 'Shelf') {
             if (!this.isPopedUp) {
               let dialogConfig = new MatDialogConfig();

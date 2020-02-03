@@ -42,8 +42,9 @@
   </div>
   <div >
     <mat-form-field class="address-position" hideRequiredMarker="false" floatLabel="auto">
-      <textarea matInput class="address-size"  placeholder="Address" formControlName="address" required></textarea>
+      <textarea #input matInput class="address-size" maxlength="500" placeholder="Address" formControlName="address" autocomplete="off" required></textarea>
       <mat-error *ngIf="createVendorForm.controls['address'].errors?.required">Address is required</mat-error>
+      <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
     </mat-form-field>
   </div>
   <div class="action-buttons one-row">

@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/IMS.Services/login/login.service';
+import { MatSnackBar } from '@angular/material';
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +17,8 @@ export class HeaderComponent implements OnInit {
   email : string;
   @Input() isUser : boolean;
   constructor(private centralizedRepo : CentralizedDataService,
-    private router: Router) { }
+    private router: Router, private loginService: LoginService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if(this.isUser){
@@ -24,7 +28,22 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  updatePassword()  {
+  changePassword()  {
     this.router.navigateByUrl('changePassword');
+  }
+
+  logout()  {
+    this.loginService.logOut().subscribe(
+      data => {
+        if (data.status == "Success") {
+          this.router.navigateByUrl("/login");
+        }
+        else {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            duration: 1000 * 2, data: { message: "Something Went Wrong" }
+          });
+        }
+      }
+    )
   }
 }

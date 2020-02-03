@@ -23,10 +23,6 @@
     float: left;
 }
 
-.header-right {
-    float: right;
-}
-
 .icon img {
     margin: 10px;
     height: 52px;
@@ -35,20 +31,29 @@
     position: relative;
     width: 100px;
 }
-
-.logout-button {
-    position: absolute;
-    right: 18px;
-    top: 18px;
-    display: flex;
+.header-right  {
+    float: right;
 }
 
-.logout-button > a  {
-    color: white;
-    margin-right: 10px;
-    cursor: pointer;
+.avatar-image  {
+    margin: 10px 10px 0 0;
+    height: 45px;
+    border-radius: 20px;
 }
 
-.logout-button > a :hover  {
-    color: white;
-}
+.material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 29px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+  
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    color: #606a96;
+  }

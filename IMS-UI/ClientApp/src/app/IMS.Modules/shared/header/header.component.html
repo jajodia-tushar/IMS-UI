@@ -4,12 +4,23 @@
         <span class="icon company-logo">
             <img src="../../../assets/IMS.Images/157595914143509549 (1).png" />
         </span>
- 
-    </div>
 
-    <div class="logout-button">
-        <a class="update-password" (click)="updatePassword()">Change Password</a>
-        <app-logout></app-logout>
+    </div>
+    <div class="header-right">
+        <img class="avatar-image" src="../../../../../assets/employee.png" [matMenuTriggerFor]="menu">
+        <div class="matMenuItems">
+            <mat-menu #menu="matMenu">
+            <button (click)='changePassword()' mat-menu-item>
+              <mat-icon>vpn_key</mat-icon>
+              <span>Change Password</span>
+            </button>
+
+              <button (click)='logout()' mat-menu-item>
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </div>
     </div>
 
 </div>

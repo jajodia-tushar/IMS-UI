@@ -29,7 +29,6 @@
 }
 
 .flex-container>div {
-    margin: 10px;
     text-align: left;
 }
 
@@ -127,11 +126,3 @@ td {
     color: white;
 }
 
-.filter-notification {
-    display: flex;
-}
-
-#filter-notification-text {
-    position: relative;
-    top: 6px;
-}

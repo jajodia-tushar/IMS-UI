@@ -107,3 +107,12 @@
   color: white;
   cursor: pointer;
 }
+
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}

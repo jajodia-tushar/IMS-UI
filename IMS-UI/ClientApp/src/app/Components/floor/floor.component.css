@@ -18,7 +18,7 @@
   top: 5px;
   margin: auto;
   border-style: none;
-  width: 76px;
+  width: 64px;
 }
 
 .floor {
@@ -54,19 +54,21 @@
   left: 50%;
   width: 24rem;
   height: 14em;
-  margin-top: -4em;
+  margin-top: -5em;
   margin-left: -12em;
   text-align: center;
 }
 
 .all-floors {
-  margin: auto;
   width: 100%;
   position: relative;
-  bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 14px;
 }
 .card {
-  position: relative;
+  /* position: relative;
   background: #2b2f4c;
   left: 4px;
   display: inline-block;
@@ -75,7 +77,18 @@
   border: 2px solid #5e7af5;
   margin: 2%;
   box-sizing: border-box;
-  border-radius: 48px;
+  border-radius: 48px; */
+  background: #2b2f4c;
+  left: 4px;
+  display: inline-block;
+  width: 99px;
+  border: 0px;
+  /* height: 107px; */
+  /* border: 2px solid #5e7af5; */
+  margin: 2%;
+  box-sizing: border-box;
+  height: max-content;
+  /* border-radius: 43px;*/
 }
 
 .card:hover {
@@ -88,5 +101,5 @@
 }
 
 .title {
-  font-size: small;
+  font-size: 12px;
 }

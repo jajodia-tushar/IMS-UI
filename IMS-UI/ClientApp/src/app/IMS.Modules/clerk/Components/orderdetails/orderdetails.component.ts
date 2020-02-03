@@ -224,23 +224,23 @@ export class OrderdetailsComponent implements OnInit {
           this.http.post<FileUrl>('/api/FileUpload', formData).subscribe(
             data => {
               this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
+              this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
+                data => {
+                  console.log(data);
+                  this.reloadComponent();
+                  showMessage(this.snackBar, 5, "Order Is Placed", "success");
+                },
+                error => {
+                  showMessage(this.snackBar, 5, error.errorMessage, "warn");
+                }
+              )
               // showMessage(this.snackBar,5, "image is uploaded","success");
               this.imageUploaded = true;
             }
           );
         }
         console.log(this.vendorOrder)
-        this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
-          data => {
-            this.orderDetails = null;
-            this._CentralizedDataService.setSiblingData(this.orderDetails)
-            this.reloadComponent();
-            showMessage(this.snackBar, 5, "Order Is Placed","success");
-          },
-          error => {
-            showMessage(this.snackBar,5, error.errorMessage,"warn");
-          }
-        )
+        
         
       }
       else {
@@ -266,10 +266,7 @@ export class OrderdetailsComponent implements OnInit {
   }
   ngDoCheck() {
     
-    this.orderDetails = this._CentralizedDataService.getSiblingData();
-    if (this.orderDetails)
-      console.log(this.orderDetails)
-    
+    this.orderDetails = this._CentralizedDataService.getSiblingData();    
   }
 
   ngOnInit() {  

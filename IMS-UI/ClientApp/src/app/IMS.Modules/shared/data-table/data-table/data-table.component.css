@@ -126,3 +126,12 @@ td {
 :host ::ng-deep .mat-select-arrow {
     color: white;
 }
+
+.filter-notification {
+    display: flex;
+}
+
+#filter-notification-text {
+    position: relative;
+    top: 6px;
+}

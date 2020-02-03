@@ -20,8 +20,8 @@ export class RevisableTableComponent implements OnInit {
  
   @Input() columnHeader;
   @Input() show;
-  aloo: any;
    public totalcost;
+   
   @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
   }

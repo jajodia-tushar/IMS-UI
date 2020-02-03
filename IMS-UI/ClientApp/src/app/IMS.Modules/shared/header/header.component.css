@@ -40,4 +40,15 @@
     position: absolute;
     right: 18px;
     top: 18px;
+    display: flex;
+}
+
+.logout-button > a  {
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.logout-button > a :hover  {
+    color: white;
 }

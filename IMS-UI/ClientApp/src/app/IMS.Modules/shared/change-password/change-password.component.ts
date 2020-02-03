@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { User } from 'src/app/IMS.Models/User/User';
 import { Router } from '@angular/router';
+import { ChangePasswordDetails } from 'src/app/IMS.Models/ChangePasswordDetails';
+import { LoginService } from 'src/app/IMS.Services/login/login.service';
+import { showMessage } from '../utils/snackbar';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-change-password',
@@ -17,16 +21,20 @@ export class ChangePasswordComponent implements OnInit {
   errorMessage: string = "";
 
   constructor(private centrallizedRepo: CentralizedDataService,
-    private router: Router) {
-  }
-
-  canUpdate()  {
-    return (this.oldPassword=='' || this.newPassword=='' || this.confirmPassword=='' || !this.validPasswords());
-  }
-
-  ngOnInit() {
+    private loginService: LoginService, private snackBar: MatSnackBar, private router: Router) {
     this.centrallizedRepo.getLoggedInUser();
     this.loggedInUser = this.centrallizedRepo.getUser();
+    if (!this.loggedInUser) {
+      this.router.navigateByUrl('login');
+    }
+  }
+
+  canUpdate() {
+    return (this.oldPassword == '' || this.newPassword == '' || this.confirmPassword == '' || !this.validPasswords());
+  }
+
+   ngOnInit() {
+    
   }
 
   cancel() {
@@ -36,7 +44,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   validPasswords() {
-    if(this.oldPassword == "" || this.newPassword == "" || this.confirmPassword == "")
+    if (this.oldPassword == "" || this.newPassword == "" || this.confirmPassword == "")
       this.errorMessage = "";
     else if (this.oldPassword == this.newPassword)
       this.errorMessage = "New Password cannot be same as Old Password";
@@ -48,6 +56,24 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   update() {
+    let passwordDetails = new ChangePasswordDetails();
+    passwordDetails.oldPassword = this.oldPassword;
+    passwordDetails.newPassword = this.newPassword;
+
+    this.loginService.updatePassword(this.loggedInUser.id, passwordDetails).subscribe(
+      data => {
+        if (data.status == "Success") {
+          showMessage(this.snackBar, 5, "Password Updated Successfully!", "success");
+          this.router.navigateByUrl('login');
+        }
+        else {
+          showMessage(this.snackBar, 3, data.error.errorMessage, "warn");
+        }
+      },
+      error =>  {
+        showMessage(this.snackBar,5, error, "warn");
+      }
+    );
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit {
   name : string
   email : string;
   @Input() isUser : boolean;
-  constructor(private centralizedRepo : CentralizedDataService) { }
+  constructor(private centralizedRepo : CentralizedDataService,
+    private router: Router) { }
 
   ngOnInit() {
     if(this.isUser){
@@ -22,4 +24,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  updatePassword()  {
+    this.router.navigateByUrl('changePassword');
+  }
 }

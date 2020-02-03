@@ -5,15 +5,9 @@
 }
 
 .employee-header span {
-    float: left;
-    color: #ffc04e;
-    text-align: center;
-    text-decoration: none;
-    font-size: 28px;
-    line-height: 25px;
-    opacity: 0.9;
-    margin-top: 21px;
-    margin-left: 24px;
+    left: 24px;
+    top: 18px;
+ 
     position: relative;
 }
 
@@ -36,8 +30,10 @@
 }
 
 .avatar-image  {
-    margin: 10px 10px 0 0;
-    height: 45px;
+    position: relative;
+    top: 10px;
+    right: 10px;
+    height: 40px;
     border-radius: 20px;
 }
 

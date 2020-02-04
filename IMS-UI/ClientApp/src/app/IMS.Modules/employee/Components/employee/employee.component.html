@@ -13,7 +13,7 @@
     </h6>
   </div>
   <div class="input-box">
-    <p class="invalid-employee" *ngIf="errorMessage">Invalid Employee ID</p>
+    <p class="invalid-employee" *ngIf="errorMessage">{{errorMessage}}</p>
 
     <form class="form-input">
       <input type="text" maxlength="4" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}"

@@ -8,7 +8,6 @@
 .heading {
   text-align: center;
   position: relative;
-  cursor: pointer;
   font-size: large;
   border-bottom: 1px solid slateblue;
 }
@@ -153,7 +152,7 @@ th.mat-header-cell {
 
 @media (min-height: 400px) {
   .table-height {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 }
 

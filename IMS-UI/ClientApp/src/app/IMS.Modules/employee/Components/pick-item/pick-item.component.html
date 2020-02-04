@@ -19,10 +19,9 @@
         </div>
         <div class="action-container">
             <div class="input-box">
-            <input id="search" (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text"
-                placeholder="Search for an item..." >
-            <i class="material-icons search-icon">search</i>    
-        </div>
+                <input id="search" (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text" placeholder="Search for an item...">
+                <i class="material-icons search-icon">search</i>
+            </div>
         </div>
 
     </div>
@@ -31,7 +30,7 @@
             <app-items-list (onItemAdd)="onItemClicked($event)" [shelfItems]="shelfItems | filter : searchText">
             </app-items-list>
         </div>
-        <app-items-cart class="item-form" [selectedItems]="cartItems" (onCartItemDeleted)="onItemDeleted($event)">
+        <app-items-cart class="item-form" [selectedItems]="cartItems" [itemQuantityMappings]="itemQuantityMappings" (onCartItemDeleted)="onItemDeleted($event)">
         </app-items-cart>
     </div>
 </div>

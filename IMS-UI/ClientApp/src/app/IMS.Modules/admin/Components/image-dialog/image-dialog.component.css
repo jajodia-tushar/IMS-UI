@@ -6,3 +6,8 @@ img {
     margin: auto;
     scroll-behavior: none;
 }
+
+.color-cursor{
+    cursor: pointer;
+    color: red;
+}

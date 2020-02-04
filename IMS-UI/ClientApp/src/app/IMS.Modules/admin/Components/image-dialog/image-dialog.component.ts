@@ -18,5 +18,7 @@ export class ImageDialogComponent implements OnInit {
   ngOnInit() {
     
   }
-
+  cancelClikced(){
+    this.dialogRef.close();
+  }
 }

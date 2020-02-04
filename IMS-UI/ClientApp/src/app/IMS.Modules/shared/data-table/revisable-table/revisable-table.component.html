@@ -10,7 +10,7 @@
         <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
 
           <mat-select [disabled]="disabledCond" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
-            <mat-option *ngFor="let item of ItemList" [value]="item">
+            <mat-option *ngFor="let item of ItemList" [value]="item" [disabled]="isItemAlreadySelected(item)">
               {{item.name}}
             </mat-option>
           </mat-select>
@@ -20,7 +20,7 @@
         <form>
           <mat-form-field appearance="outline">
             <mat-label style="color: white;">Quantity</mat-label>
-            <input [disabled]="disabledCond" matInput min="1" maxlength="3" autocomplete="off" value="{{ column.cell(row) }}"
+            <input [disabled]="disabledCond" matInput min="1" maxlength="5" autocomplete="off" value="{{ column.cell(row) }}"
               (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
             <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>
@@ -31,7 +31,7 @@
         <form>
           <mat-form-field appearance="outline">
             <mat-label style="color: white;">Price</mat-label>
-            <input [disabled]="disabledCond" matInput autocomplete="off" min="1" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
+            <input [disabled]="disabledCond" matInput autocomplete="off" min="1" maxlength="5" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
               (keydown)="allowOnlyDigits($event)">
             <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>

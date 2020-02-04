@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
 
 interface FileUrl {
   locationUrl: string;
@@ -77,6 +78,7 @@ export class InvoiceEditorComponent implements OnInit {
 
     this.vendorService.getVendorOrderByOrderId(this.orderId).subscribe(
       _data => {
+        console.log(_data);
         this.canEdit = _data.canEdit;
         this.lastModifiedBy = _data.lastModifiedBy;
 
@@ -110,15 +112,17 @@ export class InvoiceEditorComponent implements OnInit {
   }
 
   openDialog(){
+    console.log(this.ChallanImageUrl);
     if(this.ChallanImageUrl==""){
       showMessage(this.snackBar, 2, "Sorry, No Image Found","warn");
       return;
     }
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.ChallanImageUrl;
     dialogConfig.panelClass = "dialog-notification-image";
+    const dialogRef = this.dialog.open(ImageDialogComponent, dialogConfig);
   }
 
   reloadComponent() {
@@ -154,6 +158,7 @@ export class InvoiceEditorComponent implements OnInit {
       this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
       this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
       this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
+      console.log(this.vendorDetails);
       this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
         data => {
           if (data.status == "Success") {

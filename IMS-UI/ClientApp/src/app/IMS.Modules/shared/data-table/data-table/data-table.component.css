@@ -29,7 +29,6 @@
 }
 
 .flex-container>div {
-    margin: 10px;
     text-align: left;
 }
 
@@ -126,3 +125,4 @@ td {
 :host ::ng-deep .mat-select-arrow {
     color: white;
 }
+

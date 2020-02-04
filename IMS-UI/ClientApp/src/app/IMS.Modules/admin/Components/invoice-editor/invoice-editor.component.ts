@@ -118,7 +118,7 @@ export class InvoiceEditorComponent implements OnInit {
       return;
     }
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = this.ChallanImageUrl;
     dialogConfig.panelClass = "dialog-notification-image";

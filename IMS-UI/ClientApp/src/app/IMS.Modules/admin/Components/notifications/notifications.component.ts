@@ -47,7 +47,7 @@ export class NotificationsComponent implements OnInit {
     } else {
       this.selectedTab -= 1;
     }
-  }
+  } 
 
   initializePagination(){
     this.pageInfo = new PagingInfo();
@@ -56,15 +56,7 @@ export class NotificationsComponent implements OnInit {
     this.pageInfo.totalResults = 0;
   }
 
-  // GetDataforPendingApprovals(){
-  //   this.vendorService.getUnApprovedOrders(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(
-  //     data => {
-  //       this.vendorsOrdersDetails = data.vendorOrders;
-  //       this.pageInfo=data.pagingInfo;
-  //     }
-  //   );
-  // }
-
+   
   getpageInfo(event){
     this.pageInfo.pageNumber = event.pageIndex + 1;
     this.pageInfo.pageSize = event.pageSize;
@@ -76,10 +68,4 @@ export class NotificationsComponent implements OnInit {
     if (this.selectedTab >= 2) this.selectedTab = 0;
   }
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(NotificationsComponent, dialogConfig);
-  }
 }

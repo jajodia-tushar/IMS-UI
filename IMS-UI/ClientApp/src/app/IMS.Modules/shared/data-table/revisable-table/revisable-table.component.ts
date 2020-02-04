@@ -93,6 +93,9 @@ export class RevisableTableComponent implements OnInit {
      if(this.datasource.data[datasoucelength-1].item.id==null){
       showMessage(this.snackBar, 2, "First select the item", "warn");
      }
+    
+     else if(this.datasource.data[datasoucelength-1].quantity==0 ||this.datasource.data[datasoucelength-1].totalPrice==0)
+     showMessage(this.snackBar, 2, "Quantity or Price cannot be 0", "warn");
      else
      {
     this.datasource.data[datasoucelength]={

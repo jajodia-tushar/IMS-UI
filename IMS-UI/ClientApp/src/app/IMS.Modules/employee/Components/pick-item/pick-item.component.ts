@@ -10,6 +10,7 @@ import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.
 
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { BulkRequestComponent } from '../bulk-request/bulk-request.component';
+import { ItemQuantityMapping } from 'src/app/IMS.Models/Item/ItemQuantityMapping';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { BulkRequestComponent } from '../bulk-request/bulk-request.component';
 export class PickItemComponent implements OnInit {
 
   cartItems: CartItem[] = [];  // -- To be Set TBD
+  itemQuantityMappings : ItemQuantityMapping[] = [];
   shelfItems: Item[] = [];
   employee: Employee;
   name: string;
@@ -45,6 +47,10 @@ export class PickItemComponent implements OnInit {
     this.itemService.getShelfData(floorCode).subscribe(shelfData => {
       shelfData.itemQuantityMappings.forEach(itemQuantityMapping => {
         this.shelfItems.push(itemQuantityMapping.item);
+        this.itemQuantityMappings.push({
+          item : itemQuantityMapping.item,
+          availableQuantity : itemQuantityMapping.quantity
+        });
       });
       this.shelfItems = JSON.parse(JSON.stringify(this.shelfItems));
     });
@@ -55,9 +61,15 @@ export class PickItemComponent implements OnInit {
   }
 
   onItemClicked(event: Item) {
-    var cartItem = this.cartItems.find(obj => {
+    let cartItem = this.cartItems.find(obj => {
       return obj.item.id == event.id;
     });
+
+    let itemInStock = this.itemQuantityMappings.find(obj => {
+      return obj.item.id == event.id;
+    });
+
+
 
     if (cartItem == null) {
       this.cartItems.push({
@@ -66,11 +78,11 @@ export class PickItemComponent implements OnInit {
       });
     }
     else {
-      if (cartItem.quantity < cartItem.item.maxLimit) {
+      if (cartItem.quantity < cartItem.item.maxLimit && itemInStock.availableQuantity < cartItem.quantity) {
         cartItem.quantity += 1;
       }
       else {
-        showMessage(this.snackBar, 2, `You cannot add more than ${cartItem.item.maxLimit} "${cartItem.item.name}"`, "warn");
+        showMessage(this.snackBar, 2, `You cannot add more than ${cartItem.quantity} "${cartItem.item.name}"`, "warn");
       }
     }
     this.cartItems = JSON.parse(JSON.stringify(this.cartItems));

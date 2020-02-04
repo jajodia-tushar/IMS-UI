@@ -1,6 +1,6 @@
 .card-size {
-    height: 450px;
     width: 100%;
+    height: 424px;
     background-color: #1f2132;
 }
 
@@ -32,7 +32,8 @@
 }
 
 .Add-icon{
-  margin-top:0%;
+  margin-left: auto;
+  top: 8px;
 }
 
 .table-text {
@@ -110,6 +111,12 @@
   color: #f5f5f5;
   background-color: inherit;
   border: 1px solid slategrey;
+  
+  
+}
+
+.buttons-right{
+  margin-left: auto;
 }
 
 .upload-icon-size {
@@ -128,6 +135,7 @@
 .upload-submit-button-position {
   text-align: right;
   padding-top: 10px;
+  display: flex;
 }
 
 .upload-button {
@@ -139,9 +147,12 @@
   padding: 0px 9px 0px 4px;
   min-height: 36px !important;
   min-width: 76.53px !important;
-  position: relative;
+  /* position: relative; */
+  position: absolute;
+    right: 188px;
   /*float: right !important;
   margin-top: 2%;*/
+  
 }
 
 .submit-button {
@@ -149,7 +160,7 @@
   color: white !important;
   min-height: 36px !important;
   min-width: 76.53px !important;
-  /*position: absolute;*/
+  
   /*float: right !important;
   margin-top: 2%;*/
 }
@@ -159,8 +170,7 @@
 }
 
 .add-row {
-    margin-top: 4%;
-    float: right;
+    display: flex;
 }
 
 .mat-column-Quantity {

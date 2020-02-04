@@ -1,5 +1,5 @@
 .invoice-order-position{
-  margin-top:1%;
+ display: flex;
 }
 
 .vendor {
@@ -16,5 +16,5 @@ h2{
   padding-left:5%;
   padding-top:1%;
   color:#f0f8ff;
-  font-size:30px;
+  font-size:24px;
 }

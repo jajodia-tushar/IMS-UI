@@ -232,6 +232,8 @@ export class OrderdetailsComponent implements OnInit {
         console.log(this.vendorOrder)
         this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
           data => {
+            this.orderDetails = null;
+            this._CentralizedDataService.setSiblingData(this.orderDetails)
             this.reloadComponent();
             showMessage(this.snackBar, 5, "Order Is Placed","success");
           },
@@ -266,7 +268,7 @@ export class OrderdetailsComponent implements OnInit {
     
     this.orderDetails = this._CentralizedDataService.getSiblingData();
     if (this.orderDetails)
-      console.log("yess")
+      console.log(this.orderDetails)
     
   }
 

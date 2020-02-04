@@ -211,7 +211,7 @@ export class OrderdetailsComponent implements OnInit {
     this.buttonName = " ";
     let errorRowIndex = this.rowValidation();
     if (this.orderDetails) {
-      if (errorRowIndex=== -1 && this.dataSourceItems.length > 0) {
+      if (errorRowIndex === -1 && this.dataSourceItems.length > 0) {
         this.vendorOrder.vendorOrderDetails.challanNumber = this.orderDetails.challanNumber;
         this.vendorOrder.vendorOrderDetails.orderItemDetails = this.dataSourceItems;
         this.vendorOrder.vendorOrderDetails.recievedBy = this.orderDetails.receivedBy;
@@ -240,7 +240,20 @@ export class OrderdetailsComponent implements OnInit {
             }
           );
         }
-        console.log(this.vendorOrder)
+        else {
+          this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
+            data => {
+              this.orderDetails = null;
+              this._CentralizedDataService.setSiblingData(this.orderDetails)
+              this.reloadComponent();
+              showMessage(this.snackBar, 5, "Order Is Placed", "success");
+            },
+            error => {
+              showMessage(this.snackBar, 5, error.errorMessage, "warn");
+            }
+          )
+
+        }
         
         
       }

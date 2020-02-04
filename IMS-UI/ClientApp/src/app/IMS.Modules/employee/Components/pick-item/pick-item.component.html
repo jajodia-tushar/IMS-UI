@@ -19,7 +19,7 @@
         </div>
         <div class="action-container">
             <div class="input-box">
-                <input id="search" (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text" placeholder="Search for an item...">
+                <input autocomplete="off" id="search" (onKeyUp)="searchBox()" [(ngModel)]="searchText" type="text" placeholder="Search for an item...">
                 <i class="material-icons search-icon">search</i>
             </div>
         </div>

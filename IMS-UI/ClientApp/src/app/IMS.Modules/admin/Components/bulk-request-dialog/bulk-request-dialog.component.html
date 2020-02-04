@@ -9,7 +9,7 @@
             <div class="form-labels-input" *ngFor="let shelf of allShelfs">
                 <div>{{shelf.location}}</div>
                 <div>
-                    <form class="example-form">
+                    <form class="example-form" autocomplete="off">
                         <mat-form-field appearance="outline" class="example-full-width">
                             <input matInput value="{{shelf.quantity}}" disabled="true">
                         </mat-form-field>

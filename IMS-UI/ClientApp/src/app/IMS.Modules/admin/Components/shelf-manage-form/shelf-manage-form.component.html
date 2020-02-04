@@ -2,13 +2,13 @@
 <form class="form-container" [formGroup]="createShelfForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
     <div class="one-row">
         <mat-form-field hideRequiredMarker="false" floatLabel="auto">
-            <input matInput formControlName="name" placeholder="Shelf Name" required>
+            <input autocomplete="off" matInput formControlName="name" placeholder="Shelf Name" required>
             <mat-error *ngIf="name.invalid">Invalid Shelf Name</mat-error>
             <mat-error *ngIf="name.errors?.minlength">Length{{name.errors.minlength.requiredLength}}
             </mat-error>
         </mat-form-field>
         <mat-form-field hideRequiredMarker="false" floatLabel="auto">
-            <input matInput formControlName="code" placeholder="Shelf Code" required>
+            <input autocomplete="off" matInput formControlName="code" placeholder="Shelf Code" required>
             <mat-error *ngIf="code.invalid">Invalid Code Name</mat-error>
             <mat-error *ngIf="code.errors?.minlength">Length{{code.errors.minlength.requiredLength}}
             </mat-error>

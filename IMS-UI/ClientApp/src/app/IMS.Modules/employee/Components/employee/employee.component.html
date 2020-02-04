@@ -15,7 +15,7 @@
   <div class="input-box">
     <p class="invalid-employee" *ngIf="errorMessage">{{errorMessage}}</p>
 
-    <form class="form-input">
+    <form class="form-input" autocomplete="off">
       <input type="text" maxlength="4" matInput [(ngModel)]="employeeID" [ngModelOptions]="{standalone: true}"
         id="employee-id" placeholder="Enter Employee ID" required />
 

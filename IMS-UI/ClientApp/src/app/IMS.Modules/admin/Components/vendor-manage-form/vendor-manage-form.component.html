@@ -1,26 +1,26 @@
 <form *ngIf="!isDeleteAction" class="form-container"  [formGroup]="createVendorForm" (ngSubmit)="submitForm()" autocomplete="off">
   <mat-form-field hidden="true">
-    <input matInput formControlName="id" placeholder="id" type="number">
+    <input autocomplete="off" matInput formControlName="id" placeholder="id" type="number">
   </mat-form-field>
 
   <div class="one-row">
     <mat-form-field class="one-row-input" floatLabel="auto">
-      <input matInput placeholder="Vendor Name" formControlName="name" required>
+      <input autocomplete="off" matInput placeholder="Vendor Name" formControlName="name" required>
       <mat-error *ngIf="createVendorForm.controls['name'].errors?.required">Name is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['name'].errors?.vendorNameNotAvailable">vendorname Already Taken</mat-error>
     </mat-form-field>
     <mat-form-field class="one-row-input" floatLabel="auto">
-      <input matInput placeholder="Title" formControlName="title" required>
+      <input autocomplete="off" matInput placeholder="Title" formControlName="title" required>
       <mat-error *ngIf="createVendorForm.controls['title'].errors?.required">Title is required</mat-error>
     </mat-form-field>
   </div>
   <div class="one-row">
     <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
-      <input matInput placeholder="Company Id Number" formControlName="companyIdentificationNumber" required>
+      <input autocomplete="off" matInput placeholder="Company Id Number" formControlName="companyIdentificationNumber" required>
       <mat-error *ngIf="createVendorForm.controls['companyIdentificationNumber'].errors?.required">Company Id Number is required</mat-error>
     </mat-form-field>
     <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
-      <input matInput placeholder="Contact Number" formControlName="contactNumber" required>
+      <input autocomplete="off" matInput placeholder="Contact Number" formControlName="contactNumber" required>
       <mat-error *ngIf="createVendorForm.controls['contactNumber'].errors?.required">Contact Number is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['contactNumber'].errors?.pattern">Contact Number is not valid</mat-error>
       <mat-error *ngIf="createVendorForm.controls['contactNumber'].errors?.maxLength">Contact Number should contain 10 digits</mat-error>
@@ -28,13 +28,13 @@
   </div>
   <div class="one-row">
     <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
-      <input matInput placeholder="Pan Number" formControlName="pan" required>
+      <input autocomplete="off" matInput placeholder="Pan Number" formControlName="pan" required>
       <mat-error *ngIf="createVendorForm.controls['pan'].errors?.required">Pan Number is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['pan'].errors?.pattern">Pan Number is not valid</mat-error>
       <mat-error *ngIf="createVendorForm.controls['pan'].errors?.vendorPanNotAvailable">Pan Already Exist</mat-error>
     </mat-form-field>
     <mat-form-field class="one-row-input" hideRequiredMarker="false" floatLabel="auto">
-      <input matInput placeholder="GST Number" formControlName="gst" required>
+      <input autocomplete="off" matInput placeholder="GST Number" formControlName="gst" required>
       <mat-error *ngIf="createVendorForm.controls['gst'].errors?.required">GST Number is required</mat-error>
       <mat-error *ngIf="createVendorForm.controls['gst'].errors?.pattern">GST Number is not valid</mat-error>
       <mat-error *ngIf="createVendorForm.controls['gst'].errors?.vendorGstNotAvailable">Gst Already Exist</mat-error>

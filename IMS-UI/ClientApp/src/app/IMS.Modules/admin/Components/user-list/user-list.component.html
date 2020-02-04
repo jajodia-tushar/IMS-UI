@@ -2,7 +2,7 @@
   <div class="filter-user">
     <p id="filter-user-text">User</p>
     <input matInput class="filter-input" (keyup)="applyFilter($event.target.value)" id="applyFilter"
-      placeholder="Filter">
+      placeholder="Filter" autocomplete="off">
   </div>
   <div class="add-user-button">
     <button id="add-user" mat-button (click)="openAddUserDialog()">Add user</button>

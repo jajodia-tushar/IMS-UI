@@ -63,6 +63,7 @@ export class EmployeeComponent implements OnInit {
       },
       err => {
         this.errorMessage = "Something Went Wrong";
+        this.buttonName = "NEXT";
       }
     );
   } 

@@ -13,6 +13,7 @@ import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { OrderSuccessComponent } from '../order-success/order-success.component';
 import { PlatformLocation, LocationStrategy } from '@angular/common';
 import { OrderSuccessDetails } from 'src/app/IMS.Models/Shared/OrderMeesage';
+import { ItemQuantityMapping } from 'src/app/IMS.Models/Item/ItemQuantityMapping';
 
 @Component({
   selector: 'app-items-cart',
@@ -38,6 +39,9 @@ orderSuccessMessage: OrderSuccessDetails = new OrderSuccessDetails();
 
 @Input() 
 selectedItems: CartItem[];
+
+@Input()
+itemQuantityMappings : ItemQuantityMapping[];
 
 @Output()
 onCartItemDeleted: EventEmitter<CartItem[]> = new EventEmitter<CartItem[]>();
@@ -129,13 +133,18 @@ delete(element) {
 }
 
 plus(element) {
+
+  let itemInStock = this.itemQuantityMappings.find(obj => {
+    return obj.item.id == element.item.id;
+  });
+
   if (!this.isSubmitted) {
     this.selectedItems.forEach(obj => {
       if (obj == element) {
-        if (element.quantity < obj.item.maxLimit) {
+        if (element.quantity < obj.item.maxLimit && element.quantity < itemInStock.availableQuantity) {
           obj.quantity++;
         } else {
-          showMessage(this.snackBar, 2, `You cannot add more than ${obj.item.maxLimit} "${obj.item.name}"`, "warn");
+          showMessage(this.snackBar, 2, `You cannot add more than ${element.quantity} "${obj.item.name}"`, "warn");
         }
       }
     });

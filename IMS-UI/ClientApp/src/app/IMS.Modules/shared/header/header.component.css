@@ -4,13 +4,6 @@
     height: 60px;
 }
 
-.employee-header span {
-    left: 24px;
-    top: 18px;
- 
-    position: relative;
-}
-
 .company-logo {
     font-size: 25px;
     font-weight: bold;
@@ -18,21 +11,19 @@
 }
 
 .icon img {
-    margin: 10px;
+    margin: 4px 4px 4px 10px;
     height: 52px;
-    top: -24px;
-    right: 32px;
-    position: relative;
     width: 100px;
 }
+
 .header-right  {
+    position: relative;
+    top: 10px;
+    right: 10px;
     float: right;
 }
 
 .avatar-image  {
-    position: relative;
-    top: 10px;
-    right: 10px;
     height: 40px;
     border-radius: 20px;
 }
@@ -48,7 +39,6 @@
     display: inline-block;
     white-space: nowrap;
     word-wrap: normal;
-  
     direction: ltr;
     -webkit-font-smoothing: antialiased;
     color: #606a96;

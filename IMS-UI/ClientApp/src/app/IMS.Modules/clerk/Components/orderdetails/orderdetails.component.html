@@ -1,4 +1,4 @@
-<div>
+<div class="add-items">
     <mat-card class="card-size">
         <mat-card-title class="card-title">Items Details</mat-card-title>
         <mat-divider class="divider-position"></mat-divider>
@@ -60,6 +60,7 @@
     </mat-card>
 
     <div class="upload-submit-button-position">
+        <div class="buttons-right">
         <input type="file" #file id="fileUpload" class="input_fileupload--hidden" (change)="uploadImage(file.files)">
         <button mat-raised-button class="upload-button" (click)="file.click()">
             <mat-icon class="upload-icon-size">file_upload</mat-icon>Upload
@@ -67,5 +68,6 @@
         <button mat-raised-button class="submit-button" (click)="onSubmit()">
             <app-spinning-loader ></app-spinning-loader>{{buttonName}}
         </button>
+    </div>
     </div>
 </div>

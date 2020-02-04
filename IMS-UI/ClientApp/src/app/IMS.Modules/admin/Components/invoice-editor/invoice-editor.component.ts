@@ -146,11 +146,21 @@ export class InvoiceEditorComponent implements OnInit {
 
   approve() {
    
+    if(this.itemquantityprice[this.itemquantityprice.length-1].item.id==null||
+      this.itemquantityprice[this.itemquantityprice.length-1].quantity==0||
+      this.itemquantityprice[this.itemquantityprice.length-1].totalPrice==0)
+      {
+        showMessage(this.snackBar, 2, "Please make sure you have filled all the items details", "success");
+      }
+      else
+      {
+      
     if (this.InvoiceNo.length !== 0) {
       this.reloadPendingApproval.emit(0);
       this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
       this.VendorOrderdetails.challanNumber = this.ChallanNo;
       this.VendorOrderdetails.finalAmount = this.FinalAmount;
+
       this.VendorOrderdetails.orderItemDetails = this.itemquantityprice;
       this.VendorOrderdetails.isApproved = true;
       this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
@@ -176,6 +186,7 @@ export class InvoiceEditorComponent implements OnInit {
       showMessage(this.snackBar, 2, "Please fill the InvoiceNo first", "warn");
     }
   }
+}
 
   isSuperAdmin(): boolean {
     return (this.centralizedService.getUser().role.id === 4);

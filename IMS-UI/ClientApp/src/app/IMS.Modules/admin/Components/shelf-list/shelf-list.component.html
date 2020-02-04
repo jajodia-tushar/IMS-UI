@@ -1,7 +1,7 @@
 <div class="action-for-shelf">
     <div class="filter-shelf">
         <p id="filter-shelf-text">Item</p>
-        <input matInput class="filter-input" (keyup)="applyFilter($event.target.value)" id="applyFilter" placeholder="Filter">
+        <input autocomplete="off" matInput class="filter-input" (keyup)="applyFilter($event.target.value)" id="applyFilter" placeholder="Filter">
     </div>
     <div class="add-shelf-button">
         <button id="add-shelf" mat-button (click)="openAddShelfDialog()">Add shelf</button>

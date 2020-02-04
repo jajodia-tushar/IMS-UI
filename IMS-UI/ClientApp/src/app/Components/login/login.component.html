@@ -5,10 +5,10 @@
   </div>
   <div class="user-id-input-box">
     <p class="invalid-user" *ngIf="error">Invalid username or password</p>
-    <form class="form-input">
+    <form class="form-input" autocomplete="off">
 
 
-      <input type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" id="user-id"
+      <input  type="text" [(ngModel)]="Username" matInput [ngModelOptions]="{standalone: true}" id="user-id"
         placeholder="Enter Username" required />
 
 

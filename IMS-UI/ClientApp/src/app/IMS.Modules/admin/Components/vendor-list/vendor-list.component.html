@@ -1,5 +1,5 @@
 <button matTooltip="Info about the action" id="add-vendor" mat-button (click)="openAddVendorDialog()">Add Vendor</button>
-<input class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+<input autocomplete="off" class="filter-input" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 <div class="table-margin-top mat-elevation-z8">
   <div *ngIf="displayErrorText" class="error-msg-show">
     <p class="error-msg-position" >{{displayMessage}}</p>

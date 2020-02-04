@@ -1,5 +1,6 @@
 .example-card {
-    margin: 3% -3% 0% 15%;
+    /*margin: 3% -3% 0% 15%;*/
+    /*margin-left:14%;*/
     height: 450px;
     background-color: #1f2132;
 }

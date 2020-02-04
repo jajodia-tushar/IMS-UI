@@ -1,10 +1,16 @@
-.vendor{
-  float :left;
-  width:35%;
+.invoice-order-position{
+  margin-top:1%;
+}
+
+.vendor {
+  float: left;
+  width: 35%;
+  margin-left:5%;
 }
 .order{
   float:left;
   width:50%;
+  margin-left:1%
 }
 h2{
   padding-left:5%;

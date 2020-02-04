@@ -263,7 +263,10 @@ export class OrderdetailsComponent implements OnInit {
     }
   }
   ngDoCheck() {
+    
     this.orderDetails = this._CentralizedDataService.getSiblingData();
+    if (this.orderDetails)
+      console.log("yess")
     
   }
 

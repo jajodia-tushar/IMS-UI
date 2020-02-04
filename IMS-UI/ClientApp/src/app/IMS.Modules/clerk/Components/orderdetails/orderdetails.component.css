@@ -1,7 +1,8 @@
 .card-size {
     height: 450px;
-    margin-top: 2%;
-    margin-left: 4%;
+    /*margin-top: 2%;
+    margin-left: 4%;*/
+    /*margin-left:3%;*/
     width: 100%;
     background-color: #1f2132;
 }
@@ -128,12 +129,8 @@
 
 
 .upload-submit-button-position {
-  float: right !important;
-  /*margin: 2% 1%;*/
-  padding-top: 2%;
-  margin-bottom: 5%;
-  margin-right: 8%;
- 
+  text-align: right;
+  padding-top: 10px;
 }
 
 .upload-button {
@@ -155,7 +152,7 @@
   color: white !important;
   min-height: 36px !important;
   min-width: 76.53px !important;
-  position: absolute;
+  /*position: absolute;*/
   /*float: right !important;
   margin-top: 2%;*/
 }

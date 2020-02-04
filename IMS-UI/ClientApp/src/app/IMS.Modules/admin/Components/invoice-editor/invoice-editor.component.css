@@ -104,10 +104,6 @@
   background: black !important;
   color: white !important;
 }
-.mat-divider.mat-divider-inset {
-  margin-left: 20px;
-  margin-right: 20px;
-}
 
 :host ::ng-deep .mat-divider {
   display: block;

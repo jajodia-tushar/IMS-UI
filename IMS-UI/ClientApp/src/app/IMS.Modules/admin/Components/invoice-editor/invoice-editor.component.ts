@@ -150,7 +150,7 @@ export class InvoiceEditorComponent implements OnInit {
       this.itemquantityprice[this.itemquantityprice.length-1].quantity==0||
       this.itemquantityprice[this.itemquantityprice.length-1].totalPrice==0)
       {
-        showMessage(this.snackBar, 2, "Please make sure you have filled all the items details", "success");
+        showMessage(this.snackBar, 2, "Please make sure you have filled all the items details", "warn");
       }
       else
       {

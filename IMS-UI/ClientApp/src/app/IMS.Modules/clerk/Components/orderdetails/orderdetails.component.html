@@ -1,4 +1,4 @@
-<div style="width:100%">
+<div>
     <mat-card class="card-size">
         <mat-card-title class="card-title">Items Details</mat-card-title>
         <mat-divider class="divider-position"></mat-divider>
@@ -65,7 +65,7 @@
             <mat-icon class="upload-icon-size">file_upload</mat-icon>Upload
         </button>
         <button mat-raised-button class="submit-button" (click)="onSubmit()">
-            <app-spinning-loader *ngIf="imageUploaded"></app-spinning-loader>{{buttonName}}
+            <app-spinning-loader ></app-spinning-loader>{{buttonName}}
         </button>
     </div>
 </div>

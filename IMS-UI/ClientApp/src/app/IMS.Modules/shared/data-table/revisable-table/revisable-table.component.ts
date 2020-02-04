@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderItemDetail } from 'src/app/IMS.Models/Vendor/OrderItemDetail';
-
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { ItemQuantityPriceMapping } from 'src/app/IMS.Models/Item/ItemQuantityPriceMapping';
+import { Item } from 'src/app/IMS.Models/Item/Item';
 
 @Component({
   selector: 'app-revisable-table',
@@ -17,7 +18,6 @@ export class RevisableTableComponent implements OnInit {
   public datasource = new MatTableDataSource<ItemQuantityPriceMapping>();
 
   @Input() disabledCond;
- 
   @Input() columnHeader;
   @Input() show;
    public totalcost;
@@ -31,7 +31,9 @@ export class RevisableTableComponent implements OnInit {
   @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
   @Output() ChangedFinalAmount: EventEmitter<any> = new EventEmitter<any>();
 
-
+  constructor(
+    private snackBar: MatSnackBar,
+  ) { }
   private navigationKeys = [
     'Backspace',
     'Delete',
@@ -87,9 +89,14 @@ export class RevisableTableComponent implements OnInit {
    }
 
  
-   AddRow(){
+   AddRow(){ 
+     
      let datasoucelength=this.datasource.data.length;
-    
+     if(this.datasource.data[datasoucelength-1].item.id==null){
+      showMessage(this.snackBar, 2, "First select the item", "warn");
+     }
+     else
+     {
     this.datasource.data[datasoucelength]={
         item: { id: null, name: "", maxLimit: 0, isActive: false, imageUrl: "", rate: 0},
            quantity: 1,
@@ -97,8 +104,11 @@ export class RevisableTableComponent implements OnInit {
          };
     this.renderTable();
    }
+  }
 
-
+   isItemAlreadySelected(item: Item) {
+    return this.datasource.data.find(i => i.item.name == item.name) != null;
+  }
 
  
 getTotalCost(){

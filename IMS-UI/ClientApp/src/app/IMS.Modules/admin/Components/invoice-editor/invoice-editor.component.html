@@ -27,7 +27,7 @@
                   <form class="example-form" autocomplete="off">
                     <mat-form-field appearance="outline" class="example-full-width">
                       <mat-label class="input-label">Invoice Number</mat-label>
-                      <input matInput [(ngModel)]="InvoiceNo" [ngModelOptions]="{standalone: true}" autocomplete="off"
+                      <input matInput [(ngModel)]="InvoiceNo"  min="1" maxlength="12"[ngModelOptions]="{standalone: true}" autocomplete="off"
                         id="invoice" placeholder="Invoice Number" value="{{InvoiceNo}}" [disabled]="isDisabled">
                     </mat-form-field>
                   </form>

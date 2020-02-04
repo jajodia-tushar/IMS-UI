@@ -61,6 +61,8 @@ tr.example-element-row:not(.example-expanded-row):active {
     color: white;
     overflow: hidden;
     display: flex;
+    position: relative;
+    bottom: 10px;
 }
 
 .example-detail-row td {

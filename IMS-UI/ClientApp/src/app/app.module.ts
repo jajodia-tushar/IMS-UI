@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-
-import { RouterModule } from '@angular/router';
 import { LoginGuard } from './IMS.Services/Route/login-gaurd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +12,6 @@ import { SharedModule } from './IMS.Modules/shared/shared.module';
 import { LoginComponent } from './Components/login/login.component';
 import { FloorComponent } from './Components/floor/floor.component';
 import { MaterialModule } from './IMS.Modules/material/material.module';
-
 import { EmployeeService } from './IMS.Services/employee/employee.service';
 import { ItemService } from './IMS.Services/item/item.service';
 import { EmployeeOrderService } from './IMS.Services/employee/employee-order.service';

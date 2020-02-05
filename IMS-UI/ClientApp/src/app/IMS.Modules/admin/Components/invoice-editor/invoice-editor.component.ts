@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Item } from 'src/app/IMS.Models/Item/Item';
@@ -78,7 +78,6 @@ export class InvoiceEditorComponent implements OnInit {
 
     this.vendorService.getVendorOrderByOrderId(this.orderId).subscribe(
       _data => {
-        console.log(_data);
         this.canEdit = _data.canEdit;
         this.lastModifiedBy = _data.lastModifiedBy;
 
@@ -112,7 +111,6 @@ export class InvoiceEditorComponent implements OnInit {
   }
 
   openDialog(){
-    console.log(this.ChallanImageUrl);
     if(this.ChallanImageUrl==""){
       showMessage(this.snackBar, 2, "Sorry, No Image Found","warn");
       return;
@@ -158,7 +156,6 @@ export class InvoiceEditorComponent implements OnInit {
       this.VendorOrderdetails.invoiceImageUrl = this.InvoiceImageUrl;
       this.VendorOrderdetails.invoiceNumber = this.InvoiceNo;
       this.vendorDetails = { vendor: this.Vendor, vendorOrderDetails: this.VendorOrderdetails }
-      console.log(this.vendorDetails);
       this.vendorService.changeOrderDetails(this.vendorDetails).subscribe(
         data => {
           if (data.status == "Success") {

@@ -8,11 +8,9 @@ import { ItemsCartComponent } from './Components/items-cart/items-cart.component
 import { ItemsListComponent } from './Components/items-list/items-list.component';
 import { SharedModule } from '../shared/shared.module';
 import {MatGridListModule} from '@angular/material/grid-list';
-
 import { FilterPipe} from './Components/pick-item/filter.pipe';
 import { OrderSuccessComponent } from './Components/order-success/order-success.component';
 import { BulkRequestComponent } from './Components/bulk-request/bulk-request.component';
-
 
 @NgModule({
   declarations: [EmployeeComponent, PickItemComponent, ItemComponent, ItemsCartComponent, ItemsListComponent, FilterPipe, OrderSuccessComponent, BulkRequestComponent],

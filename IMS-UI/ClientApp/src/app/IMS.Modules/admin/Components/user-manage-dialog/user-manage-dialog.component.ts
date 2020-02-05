@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from 'src/app/IMS.Models/User/User';
-import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 
 @Component({

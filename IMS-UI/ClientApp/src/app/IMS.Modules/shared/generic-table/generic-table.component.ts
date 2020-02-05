@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
-import { DatePipe } from '@angular/common';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 @Component({

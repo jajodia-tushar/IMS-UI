@@ -7,9 +7,6 @@
   
   <mat-table *ngIf="!displayErrorText" #table [dataSource]="dataSource">
 
-    <!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition" -->
-    <!-- Position Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef (click)="sortByName()">
         Name<mat-icon class="sort-icon" *ngIf="nameSortAsc">arrow_upward</mat-icon> <mat-icon *ngIf="!nameSortAsc">arrow_downward</mat-icon>
@@ -17,7 +14,6 @@
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef (click)="sortByTitle()">
         Title<mat-icon class="sort-icon" *ngIf="titleSortAsc">arrow_upward</mat-icon> <mat-icon *ngIf="!titleSortAsc">arrow_downward</mat-icon>
@@ -25,7 +21,6 @@
       <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="companyIdentificationNumber">
       <mat-header-cell *matHeaderCellDef (click)="sortByCin()">
         Company Id Number<mat-icon class="sort-icon" *ngIf="cinSortAsc">arrow_upward</mat-icon> <mat-icon *ngIf="!cinSortAsc">arrow_downward</mat-icon>
@@ -44,7 +39,6 @@
       </mat-cell>
     </ng-container>
 
-    <!-- Expanded Content Column - The detail row is made up of this one column -->
     <ng-container matColumnDef="expandedDetail">
       <mat-cell *matCellDef="let detail">
 
@@ -90,8 +84,3 @@
   </mat-paginator>
   
 </div>
-
-
-<!-- Copyright 2017 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

@@ -1,12 +1,13 @@
-import { Component, OnInit, Inject, Optional, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { StoreResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { TransferRequest, ShelfID, ItemID, CartItemID, ShelvesItemsQuantityList } from 'src/app/IMS.Models/Shelf/TransferRequest';
 import { Status } from 'src/app/IMS.Models/Status';
 import { StoreService } from 'src/app/IMS.Services/admin/store.service';
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 
 @Component({
   selector: 'app-store-update',
@@ -39,8 +40,11 @@ export class StoreUpdateComponent implements OnInit {
     'Copy',
     'Paste'
   ];
-  constructor(private shelfService: ShelfService, public dialogRef: MatDialogRef<StoreUpdateComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public datas: StoreResponse, private storeService: StoreService, private itemService: ItemService) {
+  constructor(private shelfService: ShelfService,
+    public dialogRef: MatDialogRef<StoreUpdateComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public datas: StoreResponse, 
+    private storeService: StoreService, private itemService: ItemService,
+    private snackBar: MatSnackBar) {
     this.itemName = datas['Item Name'];
   }
 
@@ -59,10 +63,8 @@ export class StoreUpdateComponent implements OnInit {
       (e.key === 'v' && e.metaKey === true) || // Allow: Cmd+V (Mac)
       (e.key === 'x' && e.metaKey === true)  // Allow: Cmd+X (Mac)
     ) {
-      // let it happen, don't do anything
       return;
     }
-    // Ensure that it is a number and stop the keypress
     if (e.key === ' ' || isNaN(Number(e.key))) {
       this.notANumber = true;
       return false;
@@ -76,7 +78,7 @@ export class StoreUpdateComponent implements OnInit {
         });
       },
       error => {
-        console.log(error);
+        showMessage(this.snackBar, 5, error, "warn");
       });
 
     this.itemService.getAllItems().subscribe(
@@ -86,7 +88,7 @@ export class StoreUpdateComponent implements OnInit {
         });
       },
       error => {
-        console.log(error);
+        showMessage(this.snackBar, 5, error, "warn");
       });
   }
 

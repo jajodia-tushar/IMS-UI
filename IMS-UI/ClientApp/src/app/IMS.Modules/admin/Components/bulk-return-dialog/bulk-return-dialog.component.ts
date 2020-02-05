@@ -1,11 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { StockStatusWithSelectedDate, BulkRequestDialogComponent } from '../bulk-request-dialog/bulk-request-dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { TableData } from '../bulk-order/bulk-order.component';
-import { BulkOrderService } from 'src/app/IMS.Services/admin/bulk-order.service';
-import { ItemLocationQuantityMapping, LocationQuantityMapping, BulkOrderItemQuantityMapping } from 'src/app/IMS.Models/Employee/BulkRequest';
-import { Item } from 'src/app/IMS.Models/Item/Item';
-
+import { BulkOrderItemQuantityMapping } from 'src/app/IMS.Models/Employee/BulkRequest';
 @Component({
   selector: 'app-bulk-return-dialog',
   templateUrl: './bulk-return-dialog.component.html',
@@ -25,7 +21,6 @@ export class BulkReturnDialogComponent implements OnInit {
 
   ngOnInit() {
     this.submitButtonText = "Submit";
-    console.log(this.data);
   }
 
   cancelClikced(){

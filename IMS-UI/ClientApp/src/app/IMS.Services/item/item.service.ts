@@ -19,7 +19,6 @@ export class ItemService {
   }
 
   deactivate(itemId: any,isHardDelete:string) : Promise<ItemsResponse>{
-    //let header= new HttpHeaders().set('Content-Type','application/json; charset=utf8');
     let params = new HttpParams();
     params = params.append("itemId",itemId);
     params = params.append("isHardDelete",isHardDelete);

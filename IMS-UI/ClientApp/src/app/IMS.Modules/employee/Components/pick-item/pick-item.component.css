@@ -1,5 +1,3 @@
-/* Employee Header */
-
 .employee-header {
   overflow: hidden;
   background: #222437;
@@ -31,8 +29,6 @@
   margin-top: -15%;
   margin-left: -15%;
 }
-
-/* Field Area */
 
 .field-area {
   display: flex;
@@ -107,7 +103,6 @@
 }
 
 .flex-item-container > div {
-  /* margin: 10px; */
   text-align: center;
 }
 

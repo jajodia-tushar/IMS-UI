@@ -1,6 +1,5 @@
 import { Vendor } from "./vendor";
 
-
 export class OrderDetails {
   challanNumber: string;
   vendor: Vendor;

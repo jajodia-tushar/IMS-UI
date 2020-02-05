@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { log } from 'util';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../IMS.Models/User/UserResponse';
 import { CentralizedDataService } from '../shared/centralized-data.service';

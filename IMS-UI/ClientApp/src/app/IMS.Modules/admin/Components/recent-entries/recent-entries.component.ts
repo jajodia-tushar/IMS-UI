@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { EmployeeOrderMapping } from 'src/app/IMS.Models/Employee/EmployeeOrderMapping';
-import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
 import { EmployeeOrderService } from 'src/app/IMS.Services/employee/employee-order.service';
+import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 
 @Component({
   selector: 'app-recent-entries',
@@ -25,7 +25,8 @@ export class RecentEntriesComponent implements OnInit {
   columnsToDisplay = ['employeeDetails', 'date'];
   expandedElement: CustomRecentEntriesResponse | null;
 
-  constructor(private employeeOrderService: EmployeeOrderService) { }
+  constructor(private employeeOrderService: EmployeeOrderService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     return this.employeeOrderService.getRecentEntries().subscribe(
@@ -46,7 +47,7 @@ export class RecentEntriesComponent implements OnInit {
         this.dataSource.data = this.recentEntriesData;
       },
       error => {
-        console.log("error");
+        showMessage(this.snackBar, 5, error, "warn");
       });
   }
   extractEmployeeDetails(recentOrder: EmployeeOrderMapping, response: CustomRecentEntriesResponse): void {

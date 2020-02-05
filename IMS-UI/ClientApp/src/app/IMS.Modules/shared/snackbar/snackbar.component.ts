@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, HostBinding } from '@angular/core';
+import { Component, OnInit, Inject, HostBinding } from '@angular/core';
 import { MAT_SNACK_BAR_DATA } from '@angular/material';
 
 @Component({

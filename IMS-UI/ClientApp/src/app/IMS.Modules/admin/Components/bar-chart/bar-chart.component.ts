@@ -87,7 +87,6 @@ export class BarChartComponent implements OnInit {
   }
 
   getData(): Promise<ItemWiseAnalysisResponse> {
-    // This can change according to The API of Varsha
     return this.reportsService.getItemWiseTotalData(this.fromDate, this.toDate).toPromise();
   }
 

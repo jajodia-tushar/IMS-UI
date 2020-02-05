@@ -2,7 +2,6 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { Injectable } from "@angular/core";
 import { UserManagementService } from "./user-management.service";
 import { Response } from "src/app/IMS.Models/Response";
-import { FindValueSubscriber } from "rxjs/internal/operators/find";
 import 'rxjs/add/operator/map';
 
 @Injectable({
@@ -54,9 +53,6 @@ export class UserValidators{
             }
           }, 2000);
         });
-        
-          
-        
     }
     
 
@@ -79,6 +75,4 @@ export class UserValidators{
         return false;
       }
     }
-
-
 }

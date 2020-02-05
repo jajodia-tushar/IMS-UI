@@ -12,7 +12,6 @@ export class ShelfManageDialogComponent implements OnInit {
   shelfData: Shelf;
   constructor(private dialogRef: MatDialogRef<ShelfManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.shelfData = data;
-    console.log(data);
    }
 
   ngOnInit() {  }

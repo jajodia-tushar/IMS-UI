@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
@@ -22,7 +22,6 @@ export class ItemDeactivateDialogComponent {
 
   async onConfirm() {
     this.confirmButtonText = ""
-    //this.item.isActive=false;
     let response = <ItemsResponse>await this.itemService.deactivate(this.item.id,"false");
     if (response.error == null) {
       this.dialogRef.close(true);
@@ -31,8 +30,6 @@ export class ItemDeactivateDialogComponent {
       this.dialogRef.close(false)
     }
     this.dialogRef.close(true);
-    // this.showMessage(2, "Item deleted Successfully");
-    // this.dialogRef.close(true);
   }
 
   onDismiss(): void {

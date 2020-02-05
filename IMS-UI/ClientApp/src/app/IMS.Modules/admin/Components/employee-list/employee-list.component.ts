@@ -1,14 +1,3 @@
-//import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
-//import { Employee } from 'src/app/IMS.Models/Employee/Employee';
-//import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
-//import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
-//import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
-//import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
-
-//import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
-
-//import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
-//import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { MatSort, MatDialog, MatTableDataSource, MatDialogConfig, MatSnackBar, MatPaginator } from '@angular/material';
@@ -16,9 +5,7 @@ import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service'
 import { EmployeesResponse } from 'src/app/IMS.Models/Employee/EmployeesResponse';
 import { EmployeeManageDialogComponent } from '../employee-manage-dialog/employee-manage-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
-import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
 import { DeactivateDialogcomponentEmployeeComponent } from '../deactivate-dialogcomponent-employee/deactivate-dialogcomponent-employee.component';
-import { PagingInformation } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 @Component({
@@ -111,8 +98,6 @@ export class EmployeeListComponent implements OnInit {
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(EmployeeManageDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-
       if (result == false) {
         showMessage(this.snackBar, 2, "Employee Updation Failed", "warn");
       }

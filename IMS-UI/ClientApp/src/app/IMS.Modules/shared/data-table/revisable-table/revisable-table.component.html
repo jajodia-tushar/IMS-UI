@@ -22,7 +22,6 @@
             <mat-label style="color: white;">Quantity</mat-label>
             <input [disabled]="disabledCond" matInput min="1" maxlength="5" autocomplete="off" value="{{ column.cell(row) }}"
               (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
-            <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>
         </form>
 
@@ -33,23 +32,9 @@
             <mat-label style="color: white;">Price</mat-label>
             <input [disabled]="disabledCond" matInput autocomplete="off" min="1" maxlength="5" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
               (keydown)="allowOnlyDigits($event)">
-            <!-- <mat-error>Please enter a value greater than 0 </mat-error> -->
           </mat-form-field>
         </form>
       </div>
-
-
-      <!-- <div title="delete" *ngIf="column.columnDef === 'actions' ">
-
-         <button mat-icon-button class="action-buttons" [disabled]="disabledCond">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="deletedata(row)">delete</mat-icon>
-        </button> 
-        <ng-container *ngIf="show">
-          <button mat-icon-button class="action-buttons" [disabled]="disabledCond">
-            <mat-icon aria-hidden="false" aria-label="Example home icon">edit </mat-icon>
-          </button>
-        </ng-container>
-      </div> -->
 
     </mat-cell>
     <mat-footer-cell *cdkFooterCellDef style="text-align:center; color:white">

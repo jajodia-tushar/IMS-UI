@@ -2,8 +2,8 @@ import { Item } from './../../../../IMS.Models/Item/Item';
 import { HttpClient } from '@angular/common/http';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { ItemsResponse } from 'src/app/IMS.Models/Item/ItemsResponse';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 
@@ -45,7 +45,6 @@ export class ItemManageFormComponent implements OnInit {
   async ngOnInit() {
     if (this.itemDetails) {
       this.isEditItemForm = this.itemDetails ? true : false;
-      //this.createItemForm.setValue(this.itemDetails);
     }
     if (this.isEditItemForm) {
       let itemDetail = this.itemDetails;
@@ -78,7 +77,6 @@ export class ItemManageFormComponent implements OnInit {
     let urlOfImage = id + ".svg";
     if (this.uploadImage) {
       await this.uploadImage(urlOfImage);
-      console.log(this.fileUrl);
     }
   }
 
@@ -115,7 +113,6 @@ export class ItemManageFormComponent implements OnInit {
   }
 
   submitForm() {
-    //create item or update existing user based on editUserForm variable
     if (this.isEditItemForm) {
       this.editItemDetails();
     }

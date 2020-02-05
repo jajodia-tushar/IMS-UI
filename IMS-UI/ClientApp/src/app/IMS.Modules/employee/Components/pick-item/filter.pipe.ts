@@ -15,8 +15,6 @@ export class FilterPipe implements PipeTransform {
    }
 
    isNameInSecondHalf(searchText : string, item : string) : boolean{
-    // if(item == "")   
-    // console.log("This is the text ---- > "+ searchText+"  ---"+ item);
     return item.split(" ").filter( part => part.startsWith(searchText)).length > 0;
    }
 }

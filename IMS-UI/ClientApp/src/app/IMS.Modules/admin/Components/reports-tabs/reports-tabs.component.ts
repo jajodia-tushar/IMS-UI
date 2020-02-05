@@ -405,13 +405,11 @@ export class ReportsTabsComponent implements OnInit {
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Main Page");
     if(innerLevelData){
-      console.log(innerLevelData);
       innerLevelData.forEach(
         d => {
           let dataToPlot = d.sheetData;
           let nameOfSheet = d.sheetName.toString();
           let innerSheet = XLSX.utils.json_to_sheet(dataToPlot);
-          console.log(nameOfSheet);
           XLSX.utils.book_append_sheet(wb, innerSheet, nameOfSheet);
         });
     }

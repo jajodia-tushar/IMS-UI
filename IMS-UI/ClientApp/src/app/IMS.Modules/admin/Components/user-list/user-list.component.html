@@ -11,31 +11,26 @@
 
 <table mat-table [dataSource]="dataSource" matSort>
 
-  <!-- Username Column -->
   <ng-container matColumnDef="username">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> USERNAME</th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.username}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="firstname">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> FIRST NAME </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.firstname}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
   <ng-container matColumnDef="lastname">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header>LAST NAME </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.lastname}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> EMAIL </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
-  <!-- Role Column -->
   <ng-container matColumnDef="role.name">
     <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> ROLE </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.role.name}} </td>

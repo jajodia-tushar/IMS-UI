@@ -80,15 +80,11 @@
   top: 4px;
 }
 
-/* Clear floats after the columns */
-
 .container-stock-recent-entries:after {
   content: "";
   display: table;
   clear: both;
 }
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 
 @media screen and (max-width: 1000px) {
   .column-recent-entries {

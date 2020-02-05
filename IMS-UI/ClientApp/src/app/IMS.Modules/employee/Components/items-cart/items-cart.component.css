@@ -63,8 +63,6 @@ th.mat-header-cell {
   text-align: center;
 }
 
-/* Stepper Styling */
-
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

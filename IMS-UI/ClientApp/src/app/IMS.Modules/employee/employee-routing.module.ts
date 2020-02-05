@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { Routes, RouterModule } from '@angular/router'
 import { EmployeeComponent } from './Components/employee/employee.component';
-import { LoginGuard } from 'src/app/IMS.Services/Route/login-gaurd';
 import { EmployeeRouteGuardService } from 'src/app/IMS.Services/Route/employee-route-guard.service';
 import { PickItemComponent } from './Components/pick-item/pick-item.component';
 

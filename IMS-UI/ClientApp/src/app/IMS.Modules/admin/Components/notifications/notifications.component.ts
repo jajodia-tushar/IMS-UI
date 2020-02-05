@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VendorOrder } from 'src/app/IMS.Models/Vendor/VendorOrder';
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
+import {MatDialog } from "@angular/material";
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 import { NotificationService } from 'src/app/IMS.Services/notification/notification.service';
 import { Notification } from 'src/app/IMS.Models/Notification/Notification';

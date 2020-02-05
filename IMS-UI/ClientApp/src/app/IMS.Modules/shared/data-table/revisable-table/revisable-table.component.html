@@ -36,6 +36,15 @@
         </form>
       </div>
 
+
+      <div title="delete" *ngIf="column.columnDef === 'actions' ">
+
+         <button mat-icon-button class="action-buttons" class="test"  (click)="deletedata(row)" [disabled]="disabledCond">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+        </button> 
+        
+      </div>
+
     </mat-cell>
     <mat-footer-cell *cdkFooterCellDef style="text-align:center; color:white">
       <div *ngIf="column.columnDef == 'actions'">

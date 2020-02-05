@@ -224,8 +224,8 @@ export class OrderdetailsComponent implements OnInit {
               this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
               this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
                 data => {
-                  this.orderDetails = null;
-                  this._CentralizedDataService.setSiblingData(this.orderDetails)
+                   this.orderDetails = null;
+            this._CentralizedDataService.setSiblingData(this.orderDetails)
                   this.reloadComponent();
                   showMessage(this.snackBar, 5, "Order Is Placed", "success");
                 },

@@ -8,7 +8,7 @@ import { ItemLocationQuantityMapping, EmployeeBulkOrderDetails, BlukOrderApprove
 import { Employee } from 'src/app/IMS.Models/Employee/Employee';
 import { BulkReturnDialogComponent } from '../bulk-return-dialog/bulk-return-dialog.component';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
-import { DatePipe } from '@angular/common';
+import { DatePipe, I18nPluralPipe } from '@angular/common';
 
 @Component({
   selector: 'app-bulk-order',
@@ -125,7 +125,17 @@ export class BulkOrderComponent implements OnInit {
       if(result){
           const classList = event.target.parentNode.parentNode.parentNode.parentNode.classList;
           const classes = event.target.parentNode.parentNode.parentNode.parentNode.className;
-          this.itemLocationQuaListToBeSent.push(result);
+
+          let itemInList = this.itemLocationQuaListToBeSent.find(itelocQuan =>{
+            return itelocQuan.item.id == result.item.id;
+          });
+
+          if(itemInList){
+            itemInList.locationQuantityMappings = result.locationQuantityMappings;
+          }
+          else{
+            this.itemLocationQuaListToBeSent.push(result);
+          }
 
           if(classes.includes('clicked'))
             showMessage(this.snackBar, 2, "Allocated Quantity for item "+data.itemName+" has been Changed");

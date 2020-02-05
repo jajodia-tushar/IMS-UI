@@ -14,7 +14,7 @@
                             <input matInput value="{{shelf.quantity}}" disabled="true">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput name="itemAlloted" (keyup)="quantityChanged(shelf.quantitySelected)" [(ngModel)]="shelf.quantitySelected">
+                            <input matInput type="number" name="itemAlloted" (input)="quantityChanged(shelf.quantitySelected)" [(ngModel)]="shelf.quantitySelected">
                         </mat-form-field>
                     </form>
                 </div>

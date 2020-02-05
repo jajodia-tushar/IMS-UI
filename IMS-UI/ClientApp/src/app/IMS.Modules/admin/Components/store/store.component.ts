@@ -89,7 +89,7 @@ export class StoreComponent implements OnInit {
 
   editStore(item) {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "40%";
+    dialogConfig.width = "auto";
     dialogConfig.height = "auto";
     dialogConfig.panelClass = 'dialog-edit-store';
     dialogConfig.data = item;

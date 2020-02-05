@@ -77,12 +77,14 @@ export class BulkRequestDialogComponent implements OnInit {
     this.dialogRef.close(itemLocQua);
   }
 
-  quantityChanged(value){
-    if(value == null || value == "")
-      return;
+  quantityChanged(value,i){    
     let totalSelected : number = 0;
     this.allShelfs.forEach(s=>{
-      totalSelected += parseInt(s.quantitySelected);
+      let quantitySelected = parseInt(s.quantitySelected);
+      if(isNaN(quantitySelected)){
+        quantitySelected = 0;
+      }
+      totalSelected += quantitySelected;
     });
     this.quantityRem = (parseInt(this.ItemQuantity) - totalSelected);
   }

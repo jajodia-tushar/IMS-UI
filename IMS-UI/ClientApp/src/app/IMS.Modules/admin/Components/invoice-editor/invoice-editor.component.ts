@@ -41,7 +41,6 @@ export class InvoiceEditorComponent implements OnInit {
   VendorOrderdetails: VendorOrderDetails;
   vendorDetails: VendorOrder;
   orderId;
-
   lastModifiedBy: string;
   canEdit: boolean;
   isDisabled: boolean;
@@ -78,6 +77,7 @@ export class InvoiceEditorComponent implements OnInit {
 
     this.vendorService.getVendorOrderByOrderId(this.orderId).subscribe(
       _data => {
+       
         this.canEdit = _data.canEdit;
         this.lastModifiedBy = _data.lastModifiedBy;
 

@@ -19,12 +19,12 @@ export class RevisableTableComponent implements OnInit {
   @Input() columnHeader;
   @Input() show;
    public totalcost;
-   
+   aloo=true;
   @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
   }
   @Input() ItemList;
- 
+  disableDeleteIcon=true;
   
   @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
   @Output() ChangedFinalAmount: EventEmitter<any> = new EventEmitter<any>();
@@ -59,6 +59,7 @@ export class RevisableTableComponent implements OnInit {
     }
   }
 
+ 
   renderTable() {
     
     this.datasource = new MatTableDataSource(this.datasource.data);
@@ -70,7 +71,7 @@ export class RevisableTableComponent implements OnInit {
   editAction(data: any): void {
     this.selectedEditRow.next(data);
   }
- 
+  
 
   changeprice(row,event){
      
@@ -87,8 +88,9 @@ export class RevisableTableComponent implements OnInit {
    }
 
  
-   AddRow(){ 
-     
+   AddRow(){   
+   
+  
      let datasoucelength=this.datasource.data.length;
      if(this.datasource.data[datasoucelength-1].item.id==null){
       showMessage(this.snackBar, 2, "First select the item", "warn");
@@ -103,6 +105,7 @@ export class RevisableTableComponent implements OnInit {
            quantity: 1,
            totalPrice:1
          };
+         this.aloo=false;
     this.renderTable();
    }
   }
@@ -152,16 +155,27 @@ getTotalCost(){
   }
   ngOnInit() {
     this.displayedColumns= this.columnHeader.map(c => c.columnDef)
-   
+    
   }
 
   ngAfterViewInit(){  
     this.displayedColumns = this.columnHeader.map(c => c.columnDef);
-    
+   
   } 
+ 
+  ngAfterViewChecked(){
 
-
- quantityControl = new FormControl("", [Validators.max(100), Validators.min(1)])
- priceControl = new FormControl("", [Validators.max(100), Validators.min(1)])
+    if(this.disableDeleteIcon)
+    {
+    var listlength=document.getElementsByClassName("test").length
+    for(let i=0;i<listlength;i++){
+     var list = document.getElementsByClassName("test")[i];
+      list.setAttribute("disabled","true");
+      this.disableDeleteIcon=false;
+    }
+  }
+ 
 }
 
+
+}

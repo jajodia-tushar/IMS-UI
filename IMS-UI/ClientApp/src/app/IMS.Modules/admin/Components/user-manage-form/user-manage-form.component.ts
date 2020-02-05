@@ -1,13 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 import { User } from 'src/app/IMS.Models/User/User';
 import { Role } from 'src/app/IMS.Models/User/Role';
-import { RolesResponse } from 'src/app/IMS.Models/User/RolesResponse';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
-import { LoginService } from 'src/app/IMS.Services/login/login.service';
-import { UserResponse } from 'src/app/IMS.Models/User/UserResponse';
 import { UsersResponse } from 'src/app/IMS.Models/User/UsersResponse';
 import { UserValidators as userValidators } from '../../../../IMS.Services/admin/UserValidator';
 

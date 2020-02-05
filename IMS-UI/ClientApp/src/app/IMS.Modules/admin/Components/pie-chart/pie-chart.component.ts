@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { Component, OnInit, } from "@angular/core";
 import { Chart } from "chart.js";
 import { FrequentlyUsedItemModel } from "src/app/IMS.Models/Admin/FrequentlyUsedItemModel";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
-import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";

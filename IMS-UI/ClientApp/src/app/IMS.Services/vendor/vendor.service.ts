@@ -9,8 +9,6 @@ import { Response } from 'src/app/IMS.Models/Shared/Response';
 import { Vendor } from 'src/app/IMS.Models/Vendor/vendor';
 import { SingleVendorOrderResponse } from 'src/app/IMS.Models/Vendor/SingleVendorOrderResponse';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

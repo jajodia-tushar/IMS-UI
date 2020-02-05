@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Logs } from 'src/app/IMS.Models/Logging/logs';
 import { LogsResponse } from 'src/app/IMS.Models/Logging/LogsResponse';
 import { HttpClient } from '@angular/common/http';
 

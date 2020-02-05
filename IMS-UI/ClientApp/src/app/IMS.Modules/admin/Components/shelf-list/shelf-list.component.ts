@@ -3,7 +3,6 @@ import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
 import { MatSort, MatPaginator, MatDialog, MatSnackBar, MatDialogConfig, MatTableDataSource } from '@angular/material';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
-import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
 import { ShelfManageDialogComponent } from '../shelf-manage-dialog/shelf-manage-dialog.component';
 import { ShelfDeactivateDialogComponent } from '../shelf-deactivate-dialog/shelf-deactivate-dialog.component';
 
@@ -56,11 +55,8 @@ export class ShelfListComponent implements OnInit {
         showMessage(this.snackBar, 2, "Shelf Creation Failed", 'warn');
       }
       else if (result == "cancelled") {
-        //don't show any message.
       }
       else {
-        // this.ELEMENT_DATA.push(<Item>result);
-        // this.dataSource.data = this.ELEMENT_DATA;
         this.setShelves();
         showMessage(this.snackBar, 2, "Shelf Was Created Successfully", 'success');
       }
@@ -68,7 +64,6 @@ export class ShelfListComponent implements OnInit {
   }
 
   numberOfColumns() {
-    //console.log(this.displayedColumns.length)
     return (this.displayedColumns.length - 1);
   }
 
@@ -78,7 +73,6 @@ export class ShelfListComponent implements OnInit {
 
   openShelfEditDialog(data: Shelf) {
     let dialogConfig = new MatDialogConfig();
-    //console.log(data)
     dialogConfig.data = data;
     dialogConfig.panelClass = 'dialog-shelf-manage';
     dialogConfig.disableClose = true;
@@ -90,7 +84,6 @@ export class ShelfListComponent implements OnInit {
       }
       else if (result == "cancelled") {
         //don't show any message.
-        // result.getElementBy('editShelfDetails').focus();
       }
       else {
         this.editShelfInTable(result);
@@ -129,7 +122,6 @@ export class ShelfListComponent implements OnInit {
   }
 
   editShelfInTable(shelf) {
-    console.log(Shelf)
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === shelf.id) {
         this.ELEMENT_DATA[index] = shelf;
@@ -146,7 +138,6 @@ export class ShelfListComponent implements OnInit {
       data => {
         let shelflist: Shelf[];
         shelflist = data.shelves;
-        console.log(data);
         this.ELEMENT_DATA = shelflist;
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
         this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
@@ -154,7 +145,5 @@ export class ShelfListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       }
     )
-    //let shelflist: Shelf[] = (<ShelfListResponse>await this.shelfService.getAllShelves()).shelves;
-
   }
 }

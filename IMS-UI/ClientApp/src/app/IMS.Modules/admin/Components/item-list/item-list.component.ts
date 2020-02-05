@@ -57,11 +57,8 @@ export class ItemListComponent implements OnInit {
         showMessage(this.snackBar, 2, "Item Creation Failed", 'warn');
       }
       else if (result == "cancelled") {
-        //don't show any message.
       }
       else {
-        // this.ELEMENT_DATA.push(<Item>result);
-        // this.dataSource.data = this.ELEMENT_DATA;
         this.setItems();
         showMessage(this.snackBar, 2, "Item Was Created Successfully", 'success');
       }
@@ -69,7 +66,6 @@ export class ItemListComponent implements OnInit {
   }
 
   numberOfColumns() {
-    //console.log(this.displayedColumns.length)
     return (this.displayedColumns.length - 1);
   }
 
@@ -79,7 +75,6 @@ export class ItemListComponent implements OnInit {
 
   openItemEditDialog(data: Item) {
     let dialogConfig = new MatDialogConfig();
-    //console.log(data)
     dialogConfig.data = data;
     dialogConfig.panelClass = 'dialog-item-manage';
     dialogConfig.disableClose = true;
@@ -90,7 +85,6 @@ export class ItemListComponent implements OnInit {
         showMessage(this.snackBar, 2, "Item Updation Failed", 'warn');
       }
       else if (result == "cancelled") {
-        //don't show any message.
         result.getElementById('editItemDetails').focus();
       }
       else {
@@ -115,7 +109,6 @@ export class ItemListComponent implements OnInit {
         showMessage(this.snackBar, 2, "Deleting Item failed", 'warn');
       }
       else if (result == "cancelled") {
-        //don't show any message.
       }
     });
   }
@@ -130,7 +123,6 @@ export class ItemListComponent implements OnInit {
   }
 
   editItemInTable(item) {
-    console.log(item)
     for (var index = 0; index < this.ELEMENT_DATA.length; index++) {
       if (this.ELEMENT_DATA[index].id === item.id) {
         this.ELEMENT_DATA[index] = item;

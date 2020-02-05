@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Shelf } from "src/app/IMS.Models/Shelf/Shelf";
 import { RAGDataModel } from "src/app/IMS.Models/Admin/RAGDataModel";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";
 
@@ -35,7 +34,3 @@ export class MainnavComponent implements OnInit {
 
   }
 }
-
-
-
-export class dataFromAPI { }

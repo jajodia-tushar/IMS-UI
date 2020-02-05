@@ -32,7 +32,6 @@ export class ShelfManageFormComponent implements OnInit {
    async ngOnInit() {
     if (this.shelfDetails) {
       this.isEditShelfForm = this.shelfDetails ? true : false;
-      //this.createShelfForm.setValue(this.shelfDetails);
     }
     if (this.isEditShelfForm) {
       let shelfDetail = this.shelfDetails;
@@ -48,9 +47,7 @@ export class ShelfManageFormComponent implements OnInit {
 
   async createNewShelf() {
     let shelf: Shelf = <Shelf>this.createShelfForm.getRawValue();
-    console.log(shelf);
     let createdShelf: ShelfListResponse = <ShelfListResponse>await this.shelfService.createShelf(shelf);
-    console.log(createdShelf);
     this.shelfCreated.emit(createdShelf);
   }
 
@@ -63,7 +60,6 @@ export class ShelfManageFormComponent implements OnInit {
   }
 
   submitForm() {
-    //create shelf or update existing user based on editUserForm variable
     if (this.isEditShelfForm) {
       this.editShelfDetails();
     }

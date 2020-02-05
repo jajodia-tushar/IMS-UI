@@ -78,10 +78,7 @@ export class EmployeeManageFormComponent implements OnInit {
 
     let employee: Employee = <Employee>this.createEmployeeForm.getRawValue();
     let edittedEmployee: EmployeesResponse = <EmployeesResponse>await this.employeeService.editEmployee(employee);
-    console.log(edittedEmployee);
-
     this.employeeEditted.emit(edittedEmployee);
-
   }
 
   async createNewEmployee() {
@@ -91,7 +88,6 @@ export class EmployeeManageFormComponent implements OnInit {
   }
 
   submitForm() {
-    //create employee or update existing employee based on editEmployeeForm variable
     if (this.isEditEmployeeForm) {
       this.editEmployeeDetails();
     }

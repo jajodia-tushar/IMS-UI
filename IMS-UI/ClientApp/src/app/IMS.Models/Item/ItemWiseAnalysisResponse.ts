@@ -6,7 +6,6 @@ export class ItemWiseAnalysisModel {
 }
 
 export class ItemWiseAnalysisResponse {
-
   itemConsumptions: ItemWiseAnalysisModel[];
   error: Error;
   status: string;

@@ -14,7 +14,6 @@ export class ItemManageDialogComponent implements OnInit {
   itemData: Item;
   constructor(private dialogRef: MatDialogRef<ItemManageDialogComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.itemData = data;
-    console.log(data)
   }
   ngOnInit() { }
 

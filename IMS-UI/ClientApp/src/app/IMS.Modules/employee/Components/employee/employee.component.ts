@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { EmployeeService } from 'src/app/IMS.Services/employee/employee.service';
-import { LogoutComponent } from 'src/app/IMS.Modules/shared/logout/logout.component';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 import { LocationStrategy } from '@angular/common';
 

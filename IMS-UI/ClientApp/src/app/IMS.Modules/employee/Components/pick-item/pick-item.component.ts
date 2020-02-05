@@ -6,12 +6,9 @@ import { CartItem } from '../../../../IMS.Models/CartItem';
 import { Item } from 'src/app/IMS.Models/Item/Item';
 import { ItemService } from 'src/app/IMS.Services/item/item.service';
 import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
-import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
-
 import { showMessage } from 'src/app/IMS.Modules/shared/utils/snackbar';
 import { BulkRequestComponent } from '../bulk-request/bulk-request.component';
 import { ItemQuantityMapping } from 'src/app/IMS.Models/Item/ItemQuantityMapping';
-
 
 @Component({
   selector: 'app-pick-item',

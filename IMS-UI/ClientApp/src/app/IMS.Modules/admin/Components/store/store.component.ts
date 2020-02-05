@@ -3,10 +3,7 @@ import { StoreService } from 'src/app/IMS.Services/admin/store.service';
 import { StoreResponse, PagingInformation } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 import { MatDialogConfig, MatDialog, MatDialogRef, MatSnackBar, PageEvent, MatTableDataSource, MatPaginator } from '@angular/material';
 import { StoreUpdateComponent } from '../store-update/store-update.component';
-import { SnackbarComponent } from 'src/app/IMS.Modules/shared/snackbar/snackbar.component';
 import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
-import { pairs } from 'rxjs';
-import { Shelf } from 'src/app/IMS.Models/Shelf/Shelf';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
 
@@ -16,15 +13,12 @@ import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  // dataSource: StoreResponse[] = [];
   dataSource: StoreResponse[] = [];
-  // source: MatTableDataSource<StoreResponse> = new MatTableDataSource<StoreResponse>([]);
   columns: string[] = [];
   columnsToDisplay: string[] = [];
   snackbarMessage: string = "";
 
   pageSizeOptions: number[] = [5, 10, 15, 20];
-  // pageEvent: PageEvent;
 
   paginator: MatPaginator;
 
@@ -175,7 +169,7 @@ export class StoreComponent implements OnInit {
       });
     }
     catch (error) {
-      console.log(error);
+      showMessage(this.snackBar, 5, error, "warn");
     }
   }
 }

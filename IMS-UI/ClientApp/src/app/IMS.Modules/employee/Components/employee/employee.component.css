@@ -33,11 +33,8 @@
   width: 28em;
   height: 24em;
   margin-top: -12em;
-  /*set to a negative number 1/2 of your height*/
   margin-left: -14em;
-  /*set to a negative number 1/2 of your width*/
   text-align: center;
-  /* border: 4px solid white; */
 }
 
 #image-container {

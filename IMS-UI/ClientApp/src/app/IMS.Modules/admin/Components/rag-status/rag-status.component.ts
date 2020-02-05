@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Chart } from "chart.js";
-import { Shelf } from "src/app/IMS.Models/Shelf/Shelf";
 import { RAGDataModel } from "src/app/IMS.Models/Admin/RAGDataModel";
 import { Router } from "@angular/router";
-import { Route } from "@angular/compiler/src/core";
-import { HttpParams } from "@angular/common/http";
 
 @Component({
   selector: "app-rag-status",

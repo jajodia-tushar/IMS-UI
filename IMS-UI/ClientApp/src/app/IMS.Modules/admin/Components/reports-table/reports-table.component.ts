@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
 
 

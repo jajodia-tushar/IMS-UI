@@ -11,7 +11,6 @@
 :host ::ng-deep .mat-card {
     padding: 50px;
     margin: 20px;
-    /* height: auto; */
 }
 
 .dropdownBoxes {

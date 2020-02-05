@@ -26,7 +26,6 @@
 .submit-update .tooltiptext {
   visibility: hidden;
   height: 32px;
-  /* width: 76%; */
   text-align: center;
   background-color: #606a96;
   color: #fff;
@@ -37,7 +36,6 @@
   position: absolute;
   top: -45px;
   right: 10px;
-  /* left: -77px; */
   z-index: 1;
 }
 
@@ -55,12 +53,6 @@
   position: relative;
   top: 16px;
 }
-/* 
-.one-row {
-  display: flex;
-  flex-direction: row;
-  flex: 1 1 auto;
-} */
 
 .one-row mat-form-field {
   width: 100%;

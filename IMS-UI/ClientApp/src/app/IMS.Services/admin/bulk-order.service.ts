@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EmployeeBulkOrderResponse, ItemLocationQuantityMapping, BulkOrderApproveModel, BlukOrderApprove, BlukOrderApproveResponse, EmployeeBulkOrderDetails, BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
+import { EmployeeBulkOrderResponse, BlukOrderApprove, BlukOrderApproveResponse, BulkRequest } from 'src/app/IMS.Models/Employee/BulkRequest';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { StockStatusResponse } from 'src/app/IMS.Models/Admin/StockStatusResponse';

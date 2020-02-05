@@ -1,6 +1,5 @@
 <mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)" [(selectedIndex)]="selectedTab">
     <mat-tab mat-stretch-tabs *ngFor="let reportsData of reportsSelectionData; let i = index" label="{{ reportsData.reportName }}">
-        <!-- <app-reports-filter [reportsFilterDataList]="reportsData.reportsFilterOptions"></app-reports-filter> -->
         <mat-card>
             <div class="dropdownBoxes">
                 <div class="content">

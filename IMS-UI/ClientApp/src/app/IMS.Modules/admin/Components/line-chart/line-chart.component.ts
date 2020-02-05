@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, SimpleChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
 import { RandomColorGeneratorService } from "src/app/IMS.Services/random-color-generator.service";
 import { ShelfWiseOrderCountResponse } from "src/app/IMS.Models/Shelf/ShelfWiseOrderCountResponse";
-import { ChartsComponentComponent } from "../charts-component/charts-component.component";
 import { Router } from "@angular/router";
 import { DateUtils } from "src/app/IMS.Modules/shared/utils/dateutils";
 import { ReportsService } from "src/app/IMS.Services/admin/reports.service";

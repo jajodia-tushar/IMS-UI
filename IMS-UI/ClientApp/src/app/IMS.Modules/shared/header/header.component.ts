@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/IMS.Services/login/login.service';
 import { MatSnackBar } from '@angular/material';

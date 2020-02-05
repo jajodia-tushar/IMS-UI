@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 import { OrderDetails } from 'src/app/IMS.Models/Vendor/OrderDetails';
 import { FormControl, Validators } from '@angular/forms';
@@ -6,8 +6,6 @@ import { VendorService } from 'src/app/IMS.Services/vendor/vendor.service';
 import { Router } from '@angular/router';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
 
-
-  
 @Component({
   selector: 'app-vendordetails',
   templateUrl: './vendordetails.component.html',

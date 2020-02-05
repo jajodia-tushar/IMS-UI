@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input, AfterViewInit } from '@angular/core';
-import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { User } from 'src/app/IMS.Models/User/User';
 import { UserManagementService } from 'src/app/IMS.Services/admin/user-management.service';
@@ -81,9 +81,6 @@ export class UserListComponent implements OnInit {
           showMessage(this.snackBar, 2, "User was Created and is up for Review By SuperAdmin", 'success');
         }
       }
-      else {
-        console.log('inside else block of user creation dialog')
-      }
     });
   }
 
@@ -117,7 +114,6 @@ export class UserListComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.data = user;
     dialogConfig.panelClass = 'dialog-user-manage'
-    // dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(DeactivateDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {

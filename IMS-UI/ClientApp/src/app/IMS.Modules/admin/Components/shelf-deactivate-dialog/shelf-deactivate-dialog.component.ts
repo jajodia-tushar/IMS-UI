@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Item } from 'src/app/IMS.Models/Item/Item';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DeactivateDialogComponent } from '../deactivate-dialog/deactivate-dialog.component';
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
@@ -22,7 +21,6 @@ export class ShelfDeactivateDialogComponent {
   }
   async onConfirm() {
     this.confirmButtonText = ""
-    //this.item.isActive=false;
     let response = <ShelfListResponse>await this.shelfService.deactivate(this.shelf.code);
     if (response.error == null) {
       this.dialogRef.close(true);
@@ -31,8 +29,6 @@ export class ShelfDeactivateDialogComponent {
       this.dialogRef.close(false)
     }
     this.dialogRef.close(true);
-    // this.showMessage(2, "Shelf deleted Successfully");
-    // this.dialogRef.close(true);
   }
 
   onDismiss(): void {

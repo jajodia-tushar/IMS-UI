@@ -1,7 +1,5 @@
 <form class="form-container" [formGroup]="createEmployeeForm" (ngSubmit)="submitForm()" autocomplete="off">
 
-
-
     <div class="one-row">
         <mat-form-field>
             <input matInput formControlName="id" placeholder="Id">
@@ -25,8 +23,6 @@
 
         <mat-form-field>
             <input matInput formControlName="contactNumber" placeholder="Mobile No">
-            <!-- <mat-error *ngIf="createEmployeeForm.controls['contactNumber'].errors?.required">Contact Number is required
-            </mat-error> -->
             <mat-error *ngIf="createEmployeeForm.controls['contactNumber'].errors?.pattern">Contact Number is not valid
             </mat-error>
             <mat-error *ngIf="createEmployeeForm.controls['contactNumber'].errors?.maxLength">Contact Number should

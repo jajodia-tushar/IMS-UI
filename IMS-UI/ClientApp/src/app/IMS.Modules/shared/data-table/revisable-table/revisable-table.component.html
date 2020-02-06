@@ -1,78 +1,76 @@
 <table mat-table [dataSource]="datasource" class="revisable-table">
 
-  <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
+    <ng-container *ngFor="let column of columnHeader" [cdkColumnDef]="column.columnDef">
 
-    <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">{{ column.header }}
+        <mat-header-cell *cdkHeaderCellDef style="text-align:center; color: white; font-size: initial;">{{ column.header }}
 
-    </mat-header-cell>
-    <mat-cell *cdkCellDef="let row" style="text-align:left; color:white">
-      <div *ngIf="column.columnDef == 'itemName'">
-        <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
+        </mat-header-cell>
+        <mat-cell *cdkCellDef="let row" style="text-align:left; color:white">
+            <div *ngIf="column.columnDef == 'itemName'">
+                <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
 
-          <mat-select [disabled]="true" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
-            <mat-option *ngFor="let item of ItemList" [value]="item" [disabled]="isItemAlreadySelected(item)">
-              {{item.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div *ngIf="column.columnDef == 'Quantity'">
-        <form>
-          <mat-form-field appearance="outline">
-            <mat-label style="color: white;">Quantity</mat-label>
-            <input [disabled]="disabledCond" matInput min="1" maxlength="5" autocomplete="off" value="{{ column.cell(row) }}"
-              (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
-          </mat-form-field>
-        </form>
+                    <mat-select [disabled]="disabledCond" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
+                        <mat-option *ngFor="let item of ItemList" [value]="item" [disabled]="isItemAlreadySelected(item)">
+                            {{item.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="column.columnDef == 'Quantity'">
+                <form>
+                    <mat-form-field appearance="outline">
+                        <mat-label style="color: white;">Quantity</mat-label>
+                        <input [disabled]="disabledCond" matInput min="1" maxlength="5" autocomplete="off" value="{{ column.cell(row) }}" (keyup)="changequantity(row,$event)" (keydown)="allowOnlyDigits($event)">
+                    </mat-form-field>
+                </form>
 
-      </div>
-      <div *ngIf="column.columnDef == 'Price'">
-        <form>
-          <mat-form-field appearance="outline">
-            <mat-label style="color: white;">Price</mat-label>
-            <input [disabled]="disabledCond" matInput autocomplete="off" min="1" maxlength="5" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)"
-              (keydown)="allowOnlyDigits($event)">
-          </mat-form-field>
-        </form>
-      </div>
+            </div>
+            <div *ngIf="column.columnDef == 'Price'">
+                <form>
+                    <mat-form-field appearance="outline">
+                        <mat-label style="color: white;">Price</mat-label>
+                        <input [disabled]="disabledCond" matInput autocomplete="off" min="1" maxlength="5" value="{{ column.cell(row) }}" (keyup)="changeprice(row,$event)" (keydown)="allowOnlyDigits($event)">
+                    </mat-form-field>
+                </form>
+            </div>
 
 
-      <div title="delete" *ngIf="column.columnDef === 'actions' ">
+            <div title="delete" *ngIf="column.columnDef === 'actions' ">
 
-         <button mat-icon-button class="action-buttons" class="test"  (click)="deletedata(row)" [disabled]="disabledCond">
+                <button mat-icon-button class="action-buttons" class="test" (click)="deletedata(row)" [disabled]="disabledCond">
           <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
-        </button> 
-        
-      </div>
+        </button>
 
-    </mat-cell>
-    <mat-footer-cell *cdkFooterCellDef style="text-align:center; color:white">
-      <div *ngIf="column.columnDef == 'actions'">
+            </div>
 
-        <button mat-raised-button class="Add-icon" (click)="AddRow()" [disabled]="disabledCond">
+        </mat-cell>
+        <mat-footer-cell *cdkFooterCellDef style="text-align:center; color:white">
+            <div *ngIf="column.columnDef == 'actions'">
+
+                <button mat-raised-button class="Add-icon" (click)="AddRow()" [disabled]="disabledCond">
           <mat-icon class="icon">add</mat-icon>Add
         </button>
-      </div>
-      <div *ngIf="column.columnDef == 'itemName'">
+            </div>
+            <div *ngIf="column.columnDef == 'itemName'">
 
-        TOTAL
-      </div>
+                TOTAL
+            </div>
 
-      <div *ngIf="column.columnDef == 'Price'">
+            <div *ngIf="column.columnDef == 'Price'">
 
-        {{getTotalCost() | currency:"₹"}}
-      </div>
+                {{getTotalCost() | currency:"₹"}}
+            </div>
 
-      <div *ngIf="column.columnDef == 'Quantity'">
+            <div *ngIf="column.columnDef == 'Quantity'">
 
-        {{getTotalQuantity()}}
-      </div>
-    </mat-footer-cell>
+                {{getTotalQuantity()}}
+            </div>
+        </mat-footer-cell>
 
 
-  </ng-container>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  <mat-footer-row *cdkFooterRowDef="displayedColumns"></mat-footer-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *cdkFooterRowDef="displayedColumns"></mat-footer-row>
 </table>

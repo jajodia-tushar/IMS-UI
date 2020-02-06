@@ -595,9 +595,21 @@ export class ReportsTabsComponent implements OnInit {
 
     let reportsPageConfigFile = require("src/assets/JSON/reportsPageConfig.json");
     this.reportsSelectionData = reportsPageConfigFile as reportsSelectionDataModel[];
+    
+    let loggedInUser = this.centralizedRepo.getUser();
+    if(!loggedInUser){
+      await this.centralizedRepo.getLoggedInUser();
+      loggedInUser = this.centralizedRepo.getUser();
+    }
+
 
     this.reportsSelectionData.forEach(
-      item =>{
+      (item,index) =>{
+        if(item.reportName == "Audit Logs"){
+          if(loggedInUser != null && loggedInUser.role.id != 4){
+            this.reportsSelectionData.splice(index);
+          }
+        }
         if(item.reportName =="RAG"){
           item.reportsFilterOptions[0].dataFromUser = this.locationCode;
           item.reportsFilterOptions[1].dataFromUser = this.colour; 

@@ -30,46 +30,46 @@ export class AdminHeader implements OnDestroy, OnInit {
     color: "#ff7315"
   },
   {
+    tab: "Reports",
+    icon: "bar_chart",
+    color: "#ffd800"
+
+  },
+  {
+    tab: "Notifications",
+    icon: "notifications_active",
+    color: "#ff1111"
+  },
+  {
     tab: "Users",
     icon: "person_pin",
     color: "#46b5d1",
 
   },
   {
-    tab:"Shelves",
-    icon:"person_pin",
-    color:"#46b5d5",
-  },
-
-  {
     tab: "Employee",
     icon: "person",
-    color: "#faf5e4",
+    color: "#46b5d1",
 
   },
+  {
+    tab: "Shelves",
+    icon: "domain",
+    color: "#46b5d1",
+  },
+
   {
     tab: "Items",
     icon: "local_grocery_store",
-    color: "#a278b5"
+    color: "#46b5d1"
 
   },
   {
-    tab: "Reports",
-    icon: "bar_chart",
-    color: "#ffd800"
+    tab: "Vendors",
+    icon: "people_alt",
+    color: "#46b5d1",
+  }]
 
-    },
-    {
-      tab: "Notifications",
-      icon: "notifications_active",
-      color: "#ff1111"
-    },
-    {
-      tab: "Vendors",
-      icon: "person_pin",
-      color: "#46b5d1",
-    }]
-  
   async ngOnInit() {
     await this.centralizedRepo.getLoggedInUser();
     this.name = this.centralizedRepo.getUser().firstname + " " +
@@ -104,7 +104,7 @@ export class AdminHeader implements OnDestroy, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  changePassword()  {
+  changePassword() {
     this.router.navigateByUrl('changePassword');
   }
 

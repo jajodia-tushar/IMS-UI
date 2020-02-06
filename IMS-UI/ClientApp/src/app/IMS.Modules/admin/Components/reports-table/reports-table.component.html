@@ -6,7 +6,7 @@
             <app-spinning-loader></app-spinning-loader>
             <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-                    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                    <th mat-header-cell *matHeaderCellDef> {{column | humanize}} </th>
                     <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
                 </ng-container>
 
@@ -15,7 +15,7 @@
                         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                             <table class="inner-table" mat-table [dataSource]="element.innerData">
                                 <ng-container matColumnDef="{{innerColumn}}" *ngFor="let innerColumn of element.innerColumns">
-                                    <th mat-header-cell *matHeaderCellDef> {{innerColumn}} </th>
+                                    <th mat-header-cell *matHeaderCellDef> {{innerColumn | humanize}} </th>
                                     <td mat-cell *matCellDef="let innerRow" style="color:white;"> {{innerRow[innerColumn]}} </td>
                                 </ng-container>
 

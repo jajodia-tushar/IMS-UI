@@ -24,11 +24,20 @@ export class ReportsTableComponent implements OnInit {
   paginatorClicked: EventEmitter<any> = new EventEmitter();
   @Input()
   errorMessage: string;
+  paginationOption : number[] = [5, 10, 25, 100];
 
   @Input()
   columnsToDisplay: string[];
   @Input()
   dataSource = [];
+
+  getPaginationOption(){
+    this.paginationOption = [5, 10, 25, 100];
+    if(this.dataSource.length > 100){
+      this.paginationOption.push(this.dataSource.length);
+    }
+    return this.paginationOption;
+  }
 
   @Input()
   pageInfo: PagingInfo;

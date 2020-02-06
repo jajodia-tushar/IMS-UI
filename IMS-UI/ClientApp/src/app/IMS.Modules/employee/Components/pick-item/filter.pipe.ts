@@ -10,11 +10,7 @@ export class FilterPipe implements PipeTransform {
     searchText = searchText.toLowerCase();
     
     return items.filter( item => {
-        return (item.name.toLowerCase().startsWith(searchText) || this.isNameInSecondHalf(searchText, item.name.toLowerCase()));
+      return item.name.toLowerCase().includes(searchText);
     })
-   }
-
-   isNameInSecondHalf(searchText : string, item : string) : boolean{
-    return item.split(" ").filter( part => part.startsWith(searchText)).length > 0;
    }
 }

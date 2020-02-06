@@ -9,7 +9,7 @@
       <div *ngIf="column.columnDef == 'itemName'">
         <mat-form-field style="width: 80%;" appearance="outline" class="form-field-size">
 
-          <mat-select [disabled]="disabledCond" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
+          <mat-select [disabled]="true" [(ngModel)]="row.item" placeholder="{{ column.cell(row) }}">
             <mat-option *ngFor="let item of ItemList" [value]="item" [disabled]="isItemAlreadySelected(item)">
               {{item.name}}
             </mat-option>

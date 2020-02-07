@@ -34,8 +34,8 @@ pipeline {
 				// sshCommand remote: remote, command: "docker service rm ims-ui || echo 'service dosent exist'"
 				// sshCommand remote: remote, command: "docker images $DOCKER_REGISTRY/$DOCKER_REPO -q| xargs docker rmi -f || echo 'no tags for this image'"
 				// sshCommand remote: remote, command: "docker pull $DOCKER_REGISTRY/$DOCKER_REPO:$IMAGE_TAG"
-				sshCommand remote: remote, command: "$pwd"
-				sshCommand remote: remote, command: "pwd"
+				sshCommand remote: remote, command: """echo $(pwd) || echo failed 1"""
+				sshCommand remote: remote, command: """pwd || echo failed 2"""
 				//sshCommand remote: remote, command: """docker service create --name ims-ui --network ims --publish 5002:80 --env-file ./env_ims_ui.list --mount type=bind,source=$pwd/Resources,destination=/app/Resources $DOCKER_REGISTRY/$DOCKER_REPO:121afb3"""
 				
 			}

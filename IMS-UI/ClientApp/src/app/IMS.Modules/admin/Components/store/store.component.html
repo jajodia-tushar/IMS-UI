@@ -1,7 +1,14 @@
 <div class="items-container">
   <div class="flex-container">
     <div class="table-container">
-      <h4 class="font-weight-bold">Store</h4>
+      <div class="filter-section-store">
+        <h4 class="font-weight-bold">Store</h4>
+        <div class="filter-store" *ngIf="!numberOfItems">
+          <!-- <p id="filter-store-text">Store</p> -->
+          <input matInput class="filter-input" (keyup)="applyFilter($event.target.value)" id="applyFilter"
+            placeholder="Filter">
+        </div>
+      </div>
       <app-spinning-loader *ngIf="!numberOfItems"></app-spinning-loader>
       <table mat-table [dataSource]="dataSource" *ngIf="dataSource">
         <ng-container *ngFor="let column of columns" [matColumnDef]="column">

@@ -13,12 +13,12 @@ import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
   styleUrls: ['./store.component.css'],
 })
 export class StoreComponent implements OnInit {
-  dataSource: StoreResponse[] = [];
+  dataSource: MatTableDataSource<StoreResponse> = new MatTableDataSource<StoreResponse>();
   columns: string[] = [];
   columnsToDisplay: string[] = [];
   snackbarMessage: string = "";
 
-  pageSizeOptions: number[] = [5, 10, 15, 20];
+  pageSizeOptions: number[] = [10, 50, 100];
 
   paginator: MatPaginator;
 
@@ -56,7 +56,7 @@ export class StoreComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.dataSource = [];
+    this.dataSource.data = [];
     this.pageInfo = new PagingInformation();
     this.pageInfo.pageSize = 10;
     this.pageInfo.pageNumber = 1;
@@ -67,7 +67,7 @@ export class StoreComponent implements OnInit {
     this.columns.push("Item Name");
     this.columns.push("Warehouse");
 
-    let shelfList: ShelfListResponse =  await this.shelfService.getAllShelves().toPromise();
+    let shelfList: ShelfListResponse = await this.shelfService.getAllShelves().toPromise();
 
     shelfList.shelves.forEach(shelf => {
       this.columns.push(shelf.name);
@@ -86,6 +86,16 @@ export class StoreComponent implements OnInit {
       this.getStoreData(data);
     });
   }
+
+  applyFilter(filterValue) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filterPredicate = (data: any, filter) => {
+      const dataStr = JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filter) != -1;
+    }
+
+  }
+
 
   editStore(item) {
     let dialogConfig = new MatDialogConfig();
@@ -124,7 +134,7 @@ export class StoreComponent implements OnInit {
 
   editItem(result) {
 
-    this.dataSource.forEach(element => {
+    this.dataSource.data.forEach(element => {
       if (element["Item Name"] == result.itemName) {
         if (element[result.shelf] == '-')
           element[result.shelf] = result.quantity;
@@ -145,7 +155,7 @@ export class StoreComponent implements OnInit {
   }
 
   getStoreData(data) {
-    this.dataSource = [];
+    this.dataSource.data = [];
     try {
       data.stockStatusList.forEach(element => {
         let object = new StoreResponse();
@@ -159,7 +169,7 @@ export class StoreComponent implements OnInit {
             object[child.location] = child.quantity;
           });
         }
-        this.dataSource.push(object);
+        this.dataSource.data.push(object);
 
         if (!this.numberOfItems) {
           this.columnsToDisplay = this.columns.concat(['actions']);
@@ -171,5 +181,8 @@ export class StoreComponent implements OnInit {
     catch (error) {
       showMessage(this.snackBar, 5, error, "warn");
     }
+
+    this.dataSource.data = JSON.parse(JSON.stringify(this.dataSource.data));
   }
+
 }

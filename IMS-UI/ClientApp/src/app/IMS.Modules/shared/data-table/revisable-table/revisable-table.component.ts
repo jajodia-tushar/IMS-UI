@@ -19,12 +19,13 @@ export class RevisableTableComponent implements OnInit {
   @Input() columnHeader;
   @Input() show;
    public totalcost;
-   aloo=true;
-  @Input() set griddata(data){
+   
+     @Input() set griddata(data){
     this.datasource= new MatTableDataSource(data);
   }
   @Input() ItemList;
   disableDeleteIcon=true;
+  disableDropDownSelect=true;
   
   @Output() selectedEditRow: EventEmitter<any> = new EventEmitter();
   @Output() ChangedFinalAmount: EventEmitter<any> = new EventEmitter<any>();
@@ -32,6 +33,7 @@ export class RevisableTableComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
   ) { }
+  
   private navigationKeys = [
     'Backspace',
     'Delete',
@@ -105,7 +107,6 @@ export class RevisableTableComponent implements OnInit {
            quantity: 1,
            totalPrice:1
          };
-         this.aloo=false;
     this.renderTable();
    }
   }
@@ -113,13 +114,21 @@ export class RevisableTableComponent implements OnInit {
    isItemAlreadySelected(item: Item) {
     return this.datasource.data.find(i => i.item.name == item.name) != null;
   }
+  
+  isDropDownAvailable(item: Item) {
+   if(item.name=="")
+      return false;
+    else
+      return true ;
+  }
+
 
  
 getTotalCost(){
   
  
    this.totalcost=this.datasource.data.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-  
+   
   this.ChangedFinalAmount.emit(this.totalcost);
   return this.totalcost;
   }
@@ -167,14 +176,25 @@ getTotalCost(){
 
     if(this.disableDeleteIcon)
     {
-    var listlength=document.getElementsByClassName("test").length
+    var listlength=document.getElementsByClassName("delete-button").length
     for(let i=0;i<listlength;i++){
-     var list = document.getElementsByClassName("test")[i];
+     var list = document.getElementsByClassName("delete-button")[i];
       list.setAttribute("disabled","true");
       this.disableDeleteIcon=false;
     }
   }
  
+  if(this.disableDropDownSelect)
+  {
+  var listlength=document.getElementsByClassName("aloo").length
+ 
+  for(let i=0;i<listlength;i++){
+    var list = document.getElementsByClassName("aloo")[i];
+ list.setAttribute("disabled","true")
+      
+  }
+  
+}
 }
 
 

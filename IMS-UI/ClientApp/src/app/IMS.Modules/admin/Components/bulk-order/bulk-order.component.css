@@ -1,43 +1,43 @@
 .bulk-order-card {
-    margin: 10px;
+  margin: 10px;
 }
 
 .bulk-card-content {
-    margin-top: 10px;
-    color: white;
+  margin-top: 10px;
+  color: white;
 }
 
 .form-label-inclosing-class {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .form-labels-input {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .table-class {
-    min-width: 100%;
-    cursor: auto;
+  min-width: 100%;
+  cursor: auto;
 }
 
 .rejectButton {
-    border: 1px solid red !important;
+  border: 1px solid #da2d2d !important;
 }
 
 .approveButton {
-    border: 1px solid green !important;
+  border: 1px solid aquamarine !important;
 }
 
 .mat-input-element:disabled {
-    color: white;
+  color: white;
 }
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    color: white;
+  color: white;
 }
 
 .clicked {
-    background-color: #555877;
+  background-color: #555877;
 }

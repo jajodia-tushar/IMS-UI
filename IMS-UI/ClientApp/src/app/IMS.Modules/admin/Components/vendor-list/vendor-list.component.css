@@ -2,15 +2,15 @@ table {
   width: 100%;
 }
 
-.element-row{
-  cursor:pointer;
+.element-row {
+  cursor: pointer;
 }
 
 tr.example-detail-row {
   height: 0;
 }
-.table-margin-top{
-  margin-top:10px;
+.table-margin-top {
+  margin-top: 10px;
 }
 tr.example-element-row:not(.example-expanded-row):hover {
   background: #777;
@@ -38,21 +38,21 @@ tr.example-element-row:not(.example-expanded-row):active {
   cursor: pointer;
 }
 
-  .table-header > mat-header-cell > mat-icon {
-    font-size: 18px;
-    margin-top: 8px;
-    display: none;
-  }
-  #add-vendor {
-    position: absolute;
-    right: 10px;
-    border: 0.5px solid;
-    border-radius: 5px;
-    padding: 1px 10px;
-    border-color: #42e6a4;
-  }
+.table-header > mat-header-cell > mat-icon {
+  font-size: 18px;
+  margin-top: 8px;
+  display: none;
+}
+#add-vendor {
+  position: absolute;
+  right: 10px;
+  border: 0.5px solid;
+  border-radius: 5px;
+  padding: 1px 10px;
+  border-color: slateblue;
+}
 .pan-gst-border-size {
-  border: 2px solid #9597AB;
+  border: 2px solid #9597ab;
   min-width: 225px;
   min-height: 36px;
   padding: 3% 3%;
@@ -73,7 +73,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-diagram {
   min-width: 400px;
-  border: 2px solid #9597AB;
+  border: 2px solid #9597ab;
   padding: 8px;
   font-weight: lighter;
   margin: 2% 0;
@@ -109,5 +109,5 @@ tr.example-element-row:not(.example-expanded-row):active {
   margin-top: 5%;
 }
 .error-msg-show > p {
- padding-top:1.5%;
+  padding-top: 1.5%;
 }

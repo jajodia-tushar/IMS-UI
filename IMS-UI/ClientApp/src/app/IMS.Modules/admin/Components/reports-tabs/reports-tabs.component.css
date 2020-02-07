@@ -1,119 +1,120 @@
 :host ::ng-deep .mat-tab-label .mat-tab-label-content {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    color: white;
-    height: 65px;
-    min-width: 190px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  color: white;
+  height: 65px;
+  min-width: 190px;
 }
 
 :host ::ng-deep .mat-card {
-    padding: 50px;
-    margin: 20px;
+  padding: 50px;
+  margin: 20px;
 }
 
 .dropdownBoxes {
-    position: relative;
+  position: relative;
 }
 
 .list-horizontal {
-    padding: 0;
+  padding: 0;
 }
 
 .list-item {
-    display: inline-block;
+  display: inline-block;
 }
 
 .mat-list-base {
-    display: flex;
+  display: flex;
 }
 
 .mat-list-base .mat-list-item,
 .mat-list-base .mat-list-option {
-    display: block;
-    height: 45px;
-    -webkit-tap-highlight-color: transparent;
-    width: 460px;
-    padding: 0;
+  display: block;
+  height: 45px;
+  -webkit-tap-highlight-color: transparent;
+  width: 460px;
+  padding: 0;
 }
 
 :host ::ng-deep .mat-select-value {
-    display: table-cell;
-    max-width: 0;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: white;
+  display: table-cell;
+  max-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: white;
 }
 
 .mat-tab-label {
-    width: 50% !important
+  width: 50% !important;
 }
 
 :host ::ng-deep .mat-select-placeholder {
-    color: white;
+  color: white;
 }
 
 .dropDownList {
-    width: 100%;
-    padding: 3%;
-    border-radius: 4px;
-    border: none;
-    background-color: #1c1e2f;
-    height: 100%;
-    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  width: 100%;
+  padding: 3%;
+  border-radius: 4px;
+  border: none;
+  background-color: #1c1e2f;
+  height: 100%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .mat-fab.mat-primary,
 .mat-flat-button.mat-primary,
 .mat-mini-fab.mat-primary,
 .mat-raised-button.mat-primary {
-    background-color: #333748;
-    height: 45px;
-    margin-left: 16px;
+  background-color: #333748;
+  height: 45px;
+  margin-left: 16px;
 }
 
 .submit-button {
-    min-height: 30px;
-    border: 0.5px solid;
-    border-radius: 5px;
-    padding: 1px 10px;
-    border-color: #42e6a4;
-    color: white;
-    background-color: #1c1e2f;
+  width: 48px;
+  border-radius: 5px;
+  padding: 0px 10px;
+  border-color: slateblue;
+  color: white;
+  background-color: #1c1e2f;
 }
 
 .report-page-input-field {
-    margin-top: -.0625em;
-    width: 100%;
-    padding: 3%;
-    border-radius: 4px;
-    color: white;
-    border: none;
-    background-color: #1c1e2f;
-    height: 100%;
-    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+  margin-top: -0.0625em;
+  width: 100%;
+  padding: 3%;
+  border-radius: 4px;
+  color: white;
+  border: none;
+  background-color: #1c1e2f;
+  height: 100%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .mat-option-dropDown {
-    background-color: #1c1e2f;
-    color: white;
+  background-color: #1c1e2f;
+  color: white;
 }
 
 :host ::ng-deep .mat-select-arrow {
-    color: white;
+  color: white;
 }
 
 .not-empty-select.mat-selected {
-    color: green !important;
+  color: green !important;
 }
 
 .mat-option-dropDown[aria-selected="true"] {
-    background: #262d4a !important
+  background: #262d4a !important;
 }
 
 .mat-option:hover:not(.mat-option-disabled) {
-    background: rgb(39, 43, 60) !important
+  background: rgb(39, 43, 60) !important;
 }

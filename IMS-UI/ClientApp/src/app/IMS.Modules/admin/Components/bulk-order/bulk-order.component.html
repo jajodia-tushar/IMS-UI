@@ -31,11 +31,12 @@
 
                 <ng-container *ngIf="i==numberOfColumns()">
                     <th mat-header-cell *matHeaderCellDef> {{column | humanize}} </th>
-                    <td mat-cell *matCellDef="let element"> <button *ngIf="showApproveButton()" mat-icon-button (click)="addButtonClicked(element,$event)">
-                            <mat-icon >add_circle</mat-icon>
+                    <td mat-cell *matCellDef="let element"> <button *ngIf="showApproveButton()" mat-icon-button
+                            (click)="addButtonClicked(element,$event)">
+                            <mat-icon>add_circle</mat-icon>
                         </button>
                         <button *ngIf="!showApproveButton()" mat-icon-button>
-                            <mat-icon >done</mat-icon>
+                            <mat-icon>done</mat-icon>
                         </button>
 
                     </td>
@@ -48,10 +49,14 @@
     </mat-card-content>
     <mat-toolbar>
         <mat-toolbar-row class="form-label-inclosing-class">
-            <button mat-button style="border: 1px red solid;" *ngIf="showCancelButton()" (click)="cancelClicked()" class="cancel">Cancel</button>
-            <button mat-button style="border: 1px green solid;" *ngIf="showApproveButton()" (click)="approveClicked()" class="cancel">Approve</button>
-            <button mat-button style="border: 1px red solid;" *ngIf="showRejectButton()" (click)="rejectClicked()" class="cancel">Reject</button>
-            <button mat-button style="border: 1px red solid;" *ngIf="showReturnButton()" (click)="returnClicked()" class="cancel">Return</button>
+            <button mat-button style="border: 1px #da2d2d solid;" *ngIf="showCancelButton()" (click)="cancelClicked()"
+                class="cancel">Cancel</button>
+            <button mat-button style="border: 1px aquamarine solid;" *ngIf="showApproveButton()"
+                (click)="approveClicked()" class="cancel">Approve</button>
+            <button mat-button style="border: 1px #da2d2d solid;" *ngIf="showRejectButton()" (click)="rejectClicked()"
+                class="cancel">Reject</button>
+            <button mat-button style="border: 1px #da2d2d solid;" *ngIf="showReturnButton()" (click)="returnClicked()"
+                class="cancel">Return</button>
         </mat-toolbar-row>
     </mat-toolbar>
 </mat-card>

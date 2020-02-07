@@ -28,7 +28,7 @@ namespace IMS_UI.IMS.Providers
         {
             using (HttpClient http = new HttpClient())
             {
-                http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+                http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
                 var response = await http.GetAsync("api/logs");
                 return await LogsResultParser(response);
             }
@@ -38,7 +38,7 @@ namespace IMS_UI.IMS.Providers
         {
             var EndPoint = Constants.APIEndpoints.AuditLogs;
             UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]) + EndPoint);
             using (HttpClient http = new HttpClient())
             {
                 prepareClient(http);

@@ -62,7 +62,7 @@ namespace IMS_UI.IMS.Providers
 
         private void prepareClient(HttpClient http)
         {
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
@@ -77,7 +77,7 @@ namespace IMS_UI.IMS.Providers
         private JObject JsonMaker(Item item, HttpClient http)
         {
             string jsonString = JsonConvert.SerializeObject(item);
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));

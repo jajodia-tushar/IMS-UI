@@ -30,7 +30,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.Users);
                 prepareClient(http);
                 JObject userJson = JsonMaker(user);
                 var response = await http.PostAsJsonAsync(uriBuilder.Uri, userJson);
@@ -43,7 +43,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.Users);
                 prepareClient(http);
                 prepareQuery(uriBuilder,new Dictionary<string, string>() {["remark"] = remark });
                 JObject userJson = JsonMaker(user);
@@ -57,7 +57,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.Users);
                 prepareClient(http);
                 var response = await http.GetAsync(uriBuilder.Uri);
                 return await UsersResultParser(response);
@@ -77,7 +77,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.Users+ userId.ToString());
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.Users+ userId.ToString());
                 prepareClient(http);
                 var queryParams = new Dictionary<string, string>()
                 {
@@ -95,7 +95,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.UsersUserNameUnique);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.UsersUserNameUnique);
                 prepareClient(http);
                 var queryParams = new Dictionary<string, string>()
                 {
@@ -112,7 +112,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.UsersEmailUnique);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.UsersEmailUnique);
                 prepareClient(http);
                 var queryParams = new Dictionary<string, string>()
                 {
@@ -131,7 +131,7 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     UriBuilder uriBuilder =
-                    new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.getAllAdmins);
+                    new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.getAllAdmins);
                     prepareClient(http);
                     var response = await http.GetAsync(uriBuilder.Uri);
                     var result = await response.Content.ReadAsStringAsync();
@@ -149,7 +149,7 @@ namespace IMS_UI.IMS.Providers
             using (HttpClient http = new HttpClient())
             {
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + Constants.APIEndpoints.getAllRoles);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + Constants.APIEndpoints.getAllRoles);
                 prepareClient(http);
                 var response = await http.GetAsync(uriBuilder.Uri);
                 var result = await response.Content.ReadAsStringAsync();

@@ -43,7 +43,7 @@ namespace IMS_UI.IMS.Providers
                 var endPoint = Constants.APIEndpoints.LoginProvider;
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_Configuration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_Configuration["BASEURL"]));
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     JObject Json = JObject.Parse(jsonString);
@@ -71,7 +71,7 @@ namespace IMS_UI.IMS.Providers
                 var endPoint = Constants.APIEndpoints.LoginProviderLogout;
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_Configuration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_Configuration["BASEURL"]));
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -101,7 +101,7 @@ namespace IMS_UI.IMS.Providers
                 {
                     var content = new ObjectContent<ChangePasswordDetails>(changePasswordDetails, new JsonMediaTypeFormatter());
                     var EndPoint = Constants.APIEndpoints.UpdatePassword;
-                    _client.BaseAddress = new Uri(_Configuration["BASEURL"]);
+                    _client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_Configuration["BASEURL"]));
                     _client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =

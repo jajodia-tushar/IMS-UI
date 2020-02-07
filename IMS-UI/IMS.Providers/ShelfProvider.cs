@@ -31,7 +31,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var response = await client.GetAsync(client.BaseAddress + EndPoint + shelfId);
             return JsonConvert.DeserializeObject<ShelfDataResponse>(
@@ -44,7 +44,7 @@ namespace IMS_UI.IMS.Providers
                 //var jsonString = JsonConvert.SerializeObject(requestData);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     //JObject Json = JObject.Parse(jsonString);
@@ -64,7 +64,7 @@ namespace IMS_UI.IMS.Providers
 
         private void prepareClient(HttpClient http)
         {
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
@@ -73,7 +73,7 @@ namespace IMS_UI.IMS.Providers
         private JObject JsonMaker(Shelf shelf, HttpClient http)
         {
             string jsonString = JsonConvert.SerializeObject(shelf);
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));

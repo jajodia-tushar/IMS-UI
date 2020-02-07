@@ -72,7 +72,7 @@ namespace IMS_UI.IMS.Providers
                     {
                         var EndPoint = Constants.APIEndpoints.EmployeeProvider;
                         UriBuilder uriBuilder =
-                            new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+                            new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + EndPoint);
                         _client.DefaultRequestHeaders.Accept.Add(
                            new MediaTypeWithQualityHeaderValue("application/json"));
                         _client.DefaultRequestHeaders.Authorization =
@@ -107,7 +107,7 @@ namespace IMS_UI.IMS.Providers
 
         private void PrepareClient(HttpClient http)
         {
-            http.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
+            http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
             http.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
             http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
@@ -129,7 +129,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.EmployeeProvider;
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
             var response = await client.GetAsync(client.BaseAddress + EndPoint + employeeId);
             return JsonConvert.DeserializeObject<EmployeeResponse>(
                 await response.Content.ReadAsStringAsync());
@@ -162,7 +162,7 @@ namespace IMS_UI.IMS.Providers
             {
                 var endPoint = Constants.APIEndpoints.EmployeeOrder;
                 UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + endPoint);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + endPoint);
                 using (HttpClient _client = new HttpClient())
                 {
                     _client.DefaultRequestHeaders.Accept.Add(
@@ -202,7 +202,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var myData = JsonConvert.SerializeObject(employeeBulkOrder);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
@@ -220,7 +220,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var myData = JsonConvert.SerializeObject(placeEmployeeOrderRequest);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
@@ -244,7 +244,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                          new AuthenticationHeaderValue("Bearer", token);
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var response = await client.GetAsync(client.BaseAddress + EndPoint + orderId);
 
@@ -265,7 +265,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                          new AuthenticationHeaderValue("Bearer", token);
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/Cancel", null);
 
@@ -286,7 +286,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                          new AuthenticationHeaderValue("Bearer", token);
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var response = await client.PutAsync(client.BaseAddress + EndPoint + orderId + "/Reject", null);
 
@@ -308,7 +308,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var myData = JsonConvert.SerializeObject(approveEmployeeBulkOrder);
 
@@ -331,7 +331,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.GetStockStatus;
 
             UriBuilder uriBuilder =
-                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"] + EndPoint));
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -376,7 +376,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
 
-            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
 
             var myData = JsonConvert.SerializeObject(employeeBulkOrder);
 

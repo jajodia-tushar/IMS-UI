@@ -33,7 +33,7 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     string path = Constants.APIEndpoints.getAllVendors;
-                    UriBuilder uriBuilder = new UriBuilder(_iConfiguration["BASEURL"] + path);
+                    UriBuilder uriBuilder = new UriBuilder(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]) + path);
 
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -71,7 +71,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.VendorOrdersProvider;
 
             UriBuilder uriBuilder =
-                new UriBuilder(_iConfiguration["BASEURL"] + EndPoint);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]) + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -110,7 +110,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.particularVendorOrder;
 
             UriBuilder uriBuilder =
-                new UriBuilder(_iConfiguration["BASEURL"] + EndPoint + vendorId);
+                new UriBuilder(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]) + EndPoint + vendorId);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -147,7 +147,7 @@ namespace IMS_UI.IMS.Providers
                 string jsonString= JsonConvert.SerializeObject(vendorOrder);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]));
                     var endPoint = "api/order/VendorOrders";
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -179,7 +179,7 @@ namespace IMS_UI.IMS.Providers
             var token = _sessionManager.GetString("token");
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
-            client.BaseAddress = new Uri(_iConfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BaseURL"]));
 
             var myData = JsonConvert.SerializeObject(vendorOrder);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myData);
@@ -200,7 +200,7 @@ namespace IMS_UI.IMS.Providers
             var token = _sessionManager.GetString("token");
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
-            client.BaseAddress = new Uri(_iConfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BaseURL"]));
 
             var response = await client.DeleteAsync(client.BaseAddress + EndPoint + OrderID);
             return JsonConvert.DeserializeObject<Response>(
@@ -220,7 +220,7 @@ namespace IMS_UI.IMS.Providers
 
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", token);
-            client.BaseAddress = new Uri(_iConfiguration["BaseURL"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BaseURL"]));
 
 
 
@@ -236,7 +236,7 @@ namespace IMS_UI.IMS.Providers
                 string jsonString = JsonConvert.SerializeObject(vendor);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]));
                     var endPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -266,7 +266,7 @@ namespace IMS_UI.IMS.Providers
                 string jsonString = JsonConvert.SerializeObject(vendor);
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]));
                     var EndPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -296,7 +296,7 @@ namespace IMS_UI.IMS.Providers
                
                 using (HttpClient http = new HttpClient())
                 {
-                    http.BaseAddress = new Uri(_iConfiguration["BASEURL"]);
+                    http.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]));
                     var endPoint = Constants.APIEndpoints.vendorEndpoint;
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -325,7 +325,7 @@ namespace IMS_UI.IMS.Providers
                 using (HttpClient http = new HttpClient())
                 {
                     string path = Constants.APIEndpoints.vendorIsUniqueEndpoint;
-                    UriBuilder uriBuilder = new UriBuilder(_iConfiguration["BASEURL"] + path);
+                    UriBuilder uriBuilder = new UriBuilder(Environment.GetEnvironmentVariable(_iConfiguration["BASEURL"]) + path);
                     http.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
                     var token = _sessionManager.GetString("token");

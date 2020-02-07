@@ -12,32 +12,32 @@
 <table mat-table [dataSource]="dataSource" matSort>
 
   <ng-container matColumnDef="username">
-    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> USERNAME</th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> Username</th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.username}} </td>
   </ng-container>
 
   <ng-container matColumnDef="firstname">
-    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> FIRST NAME </th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> First Name </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.firstname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastname">
-    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header>LAST NAME </th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header>Last Name </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.lastname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="email">
-    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> EMAIL </th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> Email </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
   <ng-container matColumnDef="role.name">
-    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> ROLE </th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef mat-sort-header> Role </th>
     <td mat-cell class="table-cell" *matCellDef="let element"> {{element.role.name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell class="table-header" *matHeaderCellDef> ACTIONS</th>
+    <th mat-header-cell class="table-header" *matHeaderCellDef> Actions</th>
     <td mat-cell class="table-cell" *matCellDef="let element">
       <button mat-icon-button (click)="editUserDetails(element)" [disableRipple]="true">
         <mat-icon>edit</mat-icon>

@@ -1,105 +1,105 @@
 table {
-    width: 100%;
-    margin-top: 10px;
-    position: absolute;
-    border-collapse: separate !important;
-    border-radius: 8px;
-    background-color: #222437;
-    border: 8px solid #222437;
+  width: 100%;
+  margin-top: 10px;
+  position: absolute;
+  border-collapse: separate !important;
+  border-radius: 8px;
+  background-color: #222437;
+  border: 8px solid #222437;
 }
 
 .filter-input {
-    margin-left: 4%;
-    padding: 5px;
-    border: 2px solid #222437;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #222437;
-    color: white;
+  margin-left: 4%;
+  padding: 5px;
+  border: 2px solid #222437;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #222437;
+  color: white;
 }
 
 #add-user {
-    right: 10px;
-    border: 0.5px solid;
-    border-radius: 5px;
-    padding: 1px 10px;
-    border-color: #42e6a4;
+  right: 10px;
+  border: 0.5px solid;
+  border-radius: 5px;
+  padding: 1px 10px;
+  border-color: slateblue;
 }
 
 .table-cell {
-    color: white;
+  color: white;
 }
 
 .table-header {
-    color: #9597ab;
-    font-size: medium;
+  color: #9597ab;
+  font-size: medium;
 }
 
 :host ::ng-deep .mat-sort-header-arrow {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .items-container {
-    margin: 0px 0px 0px 0px;
-    top: 24px;
-    background-color: #222437;
-    border-radius: 8px;
-    overflow: auto;
-    position: relative;
-    color: white;
-    overflow: hidden;
+  margin: 0px 0px 0px 0px;
+  top: 24px;
+  background-color: #222437;
+  border-radius: 8px;
+  overflow: auto;
+  position: relative;
+  color: white;
+  overflow: hidden;
 }
 
 .flex-container {
-    display: flex;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
-.flex-container>div {
-    margin: 10px;
-    text-align: left;
+.flex-container > div {
+  margin: 10px;
+  text-align: left;
 }
 
 .table-container {
-    position: relative;
-    top: 5%;
-    width: 100%;
-    height: 90%;
-    margin: 10px 0 0 24px;
+  position: relative;
+  top: 5%;
+  width: 100%;
+  height: 90%;
+  margin: 10px 0 0 24px;
 }
 
-.table-container>h4 {
-    margin-top: inherit;
+.table-container > h4 {
+  margin-top: inherit;
 }
 
 .add-user-button {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .action-for-user {
-    display: flex;
+  display: flex;
 }
 
 .action-button-add {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .filter-user {
-    display: flex;
+  display: flex;
 }
 
 #filter-user-text {
-    position: relative;
-    top: 6px;
+  position: relative;
+  top: 6px;
 }
 
 .filter-input {
-    margin-left: 4%;
-    padding: 5px;
-    border: 2px solid #222437;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    background-color: #222437;
-    color: white;
-    width: 200px;
+  margin-left: 4%;
+  padding: 5px;
+  border: 2px solid #222437;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #222437;
+  color: white;
+  width: 200px;
 }

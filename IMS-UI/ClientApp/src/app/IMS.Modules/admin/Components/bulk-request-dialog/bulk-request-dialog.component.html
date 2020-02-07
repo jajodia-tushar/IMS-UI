@@ -14,7 +14,8 @@
                             <input matInput value="{{shelf.quantity}}" disabled="true">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="example-full-width">
-                            <input matInput type="number" name="itemAlloted" (input)="quantityChanged(shelf.quantitySelected)" [(ngModel)]="shelf.quantitySelected">
+                            <input matInput type="number" name="itemAlloted"
+                                (input)="quantityChanged(shelf.quantitySelected)" [(ngModel)]="shelf.quantitySelected">
                         </mat-form-field>
                     </form>
                 </div>
@@ -26,8 +27,9 @@
 
 <div class="action-buttons one-row">
     <div class="position-of-buttons">
-        <button style="border: 1px rgb(63, 7, 7) solid;" mat-button (click)="cancelClikced()" class="cancel">Cancel</button>
-        <button style="border: 1px green solid;" *ngIf="showSubmitButton()" mat-button (click)="SubmitClicked()" class="submit-update">
+        <button style="border: 1px #da2d2d solid;" mat-button (click)="cancelClikced()" class="cancel">Cancel</button>
+        <button style="border: 1px aquamarine solid;" *ngIf="showSubmitButton()" mat-button (click)="SubmitClicked()"
+            class="submit-update">
             {{submitButtonText}}<app-spinning-loader></app-spinning-loader></button>
     </div>
 </div>

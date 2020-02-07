@@ -57,7 +57,7 @@
 }
 
 :host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-  padding: 10px!important;
+  padding: 10px !important;
   margin-bottom: 5px;
 }
 
@@ -104,7 +104,7 @@
 .mat-raised-button {
   color: #f5f5f5;
   background-color: inherit;
-  border: 1px solid slategrey;
+  border: 1px solid slateblue;
 }
 
 .buttons-right {
@@ -120,7 +120,7 @@
 }
 
 .edit-delete-icon-center {
-  align-content: center
+  align-content: center;
 }
 
 .upload-submit-button-position {
@@ -146,6 +146,7 @@
   color: white !important;
   min-height: 36px !important;
   min-width: 76.53px !important;
+  border: 1px solid aquamarine;
 }
 
 .mat-column-ItemName {
@@ -164,7 +165,9 @@
   width: 10% !important;
 }
 
-:host ::ng-deep .mat-column-ItemName div.mat-form-field-infix, :host ::ng-deep .mat-column-Quantity div.mat-form-field-infix, :host ::ng-deep .mat-column-action div.mat-form-field-infix {
+:host ::ng-deep .mat-column-ItemName div.mat-form-field-infix,
+:host ::ng-deep .mat-column-Quantity div.mat-form-field-infix,
+:host ::ng-deep .mat-column-action div.mat-form-field-infix {
   color: white;
   width: 33% !important;
 }

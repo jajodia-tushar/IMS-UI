@@ -7,46 +7,46 @@
   position: static;
 }
 
-.invoice-card  {
-  background-color:#222437;
+.invoice-card {
+  background-color: #222437;
 }
 
-.items-card  {
-  background-color:#222437; 
+.items-card {
+  background-color: #222437;
   margin-top: 30px;
 }
 
-.invoice-card-header  {
-  color:white;
+.invoice-card-header {
+  color: white;
 }
 
-.invoice-card-content  {
+.invoice-card-content {
   margin-top: 10px;
   color: white;
 }
 
-.order-id  {
-  position: relative; 
+.order-id {
+  position: relative;
   left: 16px;
   top: 4px;
 }
 
-.input-label  {
+.input-label {
   color: slategray;
 }
 
-#invoice  {
+#invoice {
   color: white;
 }
 
-.approvals-button  {
+.approvals-button {
   float: right;
   justify-content: space-between;
 }
 
 .rejectButton {
-  color: red !important;
-  border: 1px solid red !important;
+  color: white !important;
+  border: 1px solid #da2d2d !important;
   margin-left: 15px;
 }
 
@@ -85,8 +85,8 @@
 .mat-button.mat-accent,
 .mat-icon-button.mat-accent,
 .mat-stroked-button.mat-accent {
-  color: springgreen;
-  border: 1px solid springgreen;
+  color: white;
+  border: 1px solid aquamarine;
   margin-left: 15px;
 }
 .upload-submit-button-position {

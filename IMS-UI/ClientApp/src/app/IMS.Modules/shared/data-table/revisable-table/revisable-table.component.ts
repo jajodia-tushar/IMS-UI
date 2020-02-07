@@ -184,17 +184,7 @@ getTotalCost(){
     }
   }
  
-  if(this.disableDropDownSelect)
-  {
-  var listlength=document.getElementsByClassName("aloo").length
  
-  for(let i=0;i<listlength;i++){
-    var list = document.getElementsByClassName("aloo")[i];
- list.setAttribute("disabled","true")
-      
-  }
-  
-}
 }
 
 

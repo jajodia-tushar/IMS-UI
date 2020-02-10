@@ -41,8 +41,6 @@ export class ReportsTabsComponent implements OnInit {
   columnToDisplay: string[];
   dataToDisplay: any[] = [];
 
-  showDownloadOption : boolean;
-
 
   // ====================== Pagination Support================
     pageInfo: PagingInfo;
@@ -80,22 +78,6 @@ export class ReportsTabsComponent implements OnInit {
   async ngOnInit() {
     await this.initializeEmptyData();
     this.searchButtonClicked();
-    this.initializeExportOption();
-    
-  }
-
-  async initializeExportOption(){
-    let user = this.centralizedRepo.getUser();
-    if(user){
-      await this.centralizedRepo.getLoggedInUser();
-      user = this.centralizedRepo.getUser();
-    }
-    if(user.role.name == "SuperAdmin"){
-        this.showDownloadOption = true;
-    }
-    else{
-      this.showDownloadOption = false;
-    }
   }
 
   tabChanged(event: Event) {
@@ -136,6 +118,7 @@ export class ReportsTabsComponent implements OnInit {
     this.auditingService.getActivityLogs(this.pageInfo.pageSize,this.pageInfo.pageNumber,fromDate,toDate).subscribe(
         data => {
           if (data.status == "Success") {
+            this.dataToExport = JSON.parse(JSON.stringify(data));
             let dataToDisplaytemp = []
             data.activityLogRecords.forEach(
               data => {
@@ -144,7 +127,7 @@ export class ReportsTabsComponent implements OnInit {
                   "action" : data.action,
                   "details" : data.details,
                   "performedOn" : data.performedOn,
-                  "createdOn" : data.createdOn,
+                  "createdOn" : data.createdOn.toString().replace("T"," "),
                   "remarks" : data.remarks,
                 });
               });
@@ -373,33 +356,39 @@ export class ReportsTabsComponent implements OnInit {
     if (this.selectedTab == 0) {
       let firstLevelData = this.getTopLevelDataOfRAG(this.dataToExport);
       let fileName = `RAG-Report-Of -- ${this.locationName} in ${this.colour} on ${onDate}`
-      this.GenerateVendorOrderReports(fileName,firstLevelData);
+      this.DownloadReport(fileName,firstLevelData);
     }
     else if (this.selectedTab == 1) {
       let firstLevelData = this.getTopLevelDataForVendorOrder(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForVendorOrder(this.dataToExport);
       let fileName = `Vendor-Order-report from -${dFromDate} To ${dToDate}`;
-      this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
+      this.DownloadReport(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 2){
       let firstLevelData = this.getTopLevelDataOfEmployeeOrder(this.dataToExport);
       let fileName = `Employee-Order-Reports from - ${dFromDate}  To ${dToDate} `;
-      this.GenerateVendorOrderReports(fileName,firstLevelData);
+      this.DownloadReport(fileName,firstLevelData);
     }
     else if(this.selectedTab == 3){
       let firstLevelData = this.getTopLevelDataForPerDayConsumption(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForPerDayConsumption(this.dataToExport);
       let fileName = `Per Day Consumption Report from ${dFromDate} To ${dToDate}`;
-      this.GenerateVendorOrderReports(fileName,firstLevelData,innerLevelData);
+      this.DownloadReport(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 4){
       let firstLevelData = this.getTopLevelDataOfItemConsumption(this.dataToExport);
       let fileName = `Item Consumption Report from ${dFromDate} To ${dToDate}`;
-      this.GenerateVendorOrderReports(fileName,firstLevelData);
+      this.DownloadReport(fileName,firstLevelData);
+    }
+    else if (this.selectedTab == 5){
+      let firstLevelData = this.getTopLevelDataOfAuditLogs();
+      let fileName = `Audit Logs Report from ${dFromDate} To ${dToDate}`;
+      this.DownloadReport(fileName,firstLevelData);
     }
   }
+  
 
-  GenerateVendorOrderReports(fileName : string,firstLevelData, innerLevelData?){  
+  DownloadReport(fileName : string,firstLevelData, innerLevelData?){  
     let excelFileName = fileName;
     let ws = XLSX.utils.json_to_sheet(firstLevelData);
     let wb = XLSX.utils.book_new();
@@ -415,6 +404,22 @@ export class ReportsTabsComponent implements OnInit {
     }
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
     this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  getTopLevelDataOfAuditLogs() {
+    let data = [];
+    this.dataToExport.activityLogRecords.forEach(
+      d=>{
+        data.push({
+          "UserName" : d.userName,
+          "action" : d.action,
+          "details" : d.details,
+          "performedOn" : d.performedOn,
+          "createdOn" : d.createdOn.toString().replace("T"," "),
+          "remarks" : d.remarks,
+        });
+      });
+      return data;
   }
 
   getTopLevelDataForVendorOrder(dataToExport : VendorOrderResponse){

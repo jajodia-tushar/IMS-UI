@@ -23,7 +23,7 @@ export class ItemManageFormComponent implements OnInit {
   constructor(formBuilder: FormBuilder, private itemService: ItemService, private http: HttpClient, private snackBar: MatSnackBar) {
     this.createItemForm = formBuilder.group({
       id: [-1, []],
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       maxLimit: [null, [Validators.required]],
       isActive: [true, []],
       imageUrl: [''],

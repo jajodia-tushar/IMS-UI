@@ -324,14 +324,16 @@ namespace IMS_UI.IMS.Providers
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<StockStatusResponse> GetStockStatus(int pageNumber, int pageSize, string itemIds)
+         public async Task<StockStatusResponse> GetStockStatus(int pageNumber, int pageSize, string itemIds)
         {
             HttpClient client = new HttpClient();
 
             var EndPoint = Constants.APIEndpoints.GetStockStatus;
 
+          
+
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"] + EndPoint));
+                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));

@@ -50,9 +50,6 @@ export class ReportsTableComponent implements OnInit {
   @Output()
   exportData : EventEmitter<any> = new EventEmitter<any>();
 
-  @Input()
-  showDownloadOption : boolean;
-
   @ViewChild(MatPaginator, {static: true}) set matPaginator(mp: MatPaginator) {
   this.paginator = mp;
   }  
@@ -77,10 +74,6 @@ export class ReportsTableComponent implements OnInit {
 
   getNext(event) {
     this.paginatorClicked.emit(event);
-  }
-
-  showExportOptio(){
-    return this.showDownloadOption && this.tabs != 5;
   }
 }
  

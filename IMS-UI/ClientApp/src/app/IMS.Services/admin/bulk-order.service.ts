@@ -44,6 +44,4 @@ export class BulkOrderService {
     let path : string   = "api/employee/EmployeeBulkOrders/return/" + orderId;
     return this.http.put<EmployeeBulkOrderResponse>(path,employeeBulkOrder);
   }
-
-
 }

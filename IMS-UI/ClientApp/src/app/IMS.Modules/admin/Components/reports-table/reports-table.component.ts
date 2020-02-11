@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SpinLoaderService } from 'src/app/IMS.Services/shared/spin-loader.service';
 import { MatPaginator } from '@angular/material';
 import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
+import { CentralizedDataService } from 'src/app/IMS.Services/shared/centralized-data.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { PagingInfo } from 'src/app/IMS.Models/Shared/PagingInfo';
   ],
 })
 export class ReportsTableComponent implements OnInit {
-  constructor(private spinLoaderService : SpinLoaderService) { }
+  constructor(private spinLoaderService : SpinLoaderService,private centralizedService : CentralizedDataService) { }
 
   @Output()
   paginatorClicked: EventEmitter<any> = new EventEmitter();
@@ -74,6 +75,21 @@ export class ReportsTableComponent implements OnInit {
 
   getNext(event) {
     this.paginatorClicked.emit(event);
+  }
+
+  showDownloadOption(){
+    let user = this.centralizedService.getUser();
+
+    if(user || user.role || user.role.id){
+      if(user.role.id == 4)
+        return true;
+      else
+        return false;
+    }
+    else{
+      this.centralizedService.getLoggedInUser();
+      return false;
+    }
   }
 }
  

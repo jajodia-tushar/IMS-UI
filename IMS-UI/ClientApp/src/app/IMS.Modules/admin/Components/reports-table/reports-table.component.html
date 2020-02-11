@@ -44,7 +44,7 @@
             </table>
             <mat-toolbar>
                 <mat-toolbar-row>
-                    <mat-icon class="custom-toolbaar" (click)="exportCsv()" title="Export as CSV">save_alt</mat-icon>
+                    <mat-icon *ngIf="showDownloadOption()" class="custom-toolbaar" (click)="exportCsv()" title="Export as CSV">save_alt</mat-icon>
                     <span class="example-spacer"></span>
                     <mat-paginator class="paginator" [length]="pageInfo.totalResults" [pageSize]="pageInfo.pageSize" [pageSizeOptions]="getPaginationOption()" (page)="getNext($event)">
                     </mat-paginator>

@@ -1,11 +1,14 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { StoreService } from 'src/app/IMS.Services/admin/store.service';
-import { StoreResponse, PagingInformation } from 'src/app/IMS.Models/Admin/StockStatusResponse';
+import { StoreResponse, PagingInformation, ItemStockStatus } from 'src/app/IMS.Models/Admin/StockStatusResponse';
 import { MatDialogConfig, MatDialog, MatDialogRef, MatSnackBar, PageEvent, MatTableDataSource, MatPaginator } from '@angular/material';
 import { StoreUpdateComponent } from '../store-update/store-update.component';
 import { showMessage } from "src/app/IMS.Modules/shared/utils/snackbar";
 import { ShelfService } from 'src/app/IMS.Services/Shelf/shelf.service';
 import { ShelfListResponse } from 'src/app/IMS.Models/Shelf/ShelfListResponse';
+import { Role } from 'src/app/IMS.Models/User/Role';
+import { DatePipe } from '@angular/common';
+import { ReportsUtils } from 'src/app/IMS.Modules/shared/utils/ReportsUtils';
 
 @Component({
   selector: 'app-store',
@@ -17,6 +20,8 @@ export class StoreComponent implements OnInit {
   columns: string[] = [];
   columnsToDisplay: string[] = [];
   snackbarMessage: string = "";
+
+  dataToExport : ItemStockStatus[] = [];
 
   pageSizeOptions: number[] = [10, 50, 100];
 
@@ -46,11 +51,47 @@ export class StoreComponent implements OnInit {
 
     this.storeService.getAdminStoreStatus(event.pageIndex + 1, event.pageSize).subscribe(
       data => {
+        this.dataToExport = data.stockStatusList;
+        console.log(data.stockStatusList);
+        console.log(this.dataToExport);
         this.pageSize = data.pagingInfo.pageSize.toString();
         this.pageLength = data.pagingInfo.totalResults.toString();
 
         this.getStoreData(data);
       });
+  }
+
+  showDownloadOption(){
+    return true;
+  }
+
+  exportCsv(){
+  let firstLevelData =  this.getData();
+  console.log(firstLevelData);
+  let date  = new DatePipe('en-US').transform(new Date(), "dd-MM-yyyy");
+  let fileName = `Store Status on ${date}`;
+  ReportsUtils.DownloadReport(fileName,firstLevelData);
+  }
+
+  getData(){
+    let data = [];
+    console.log(this.dataToExport);
+    this.dataToExport.forEach(
+      d=>{
+        let row = 
+            {
+              ItemName : d.item.name
+            }
+
+          if(d.storeStatus){
+            d.storeStatus.forEach(
+              store =>{
+                row[store.location] = store.quantity;
+              });
+              data.push(row);
+            }
+          });
+      return data;
   }
 
 
@@ -77,6 +118,7 @@ export class StoreComponent implements OnInit {
 
 
     this.storeService.getAdminStoreStatus(this.pageInfo.pageNumber, this.pageInfo.pageSize).subscribe(data => {
+      this.dataToExport = data.stockStatusList;
       this.pageInfo = new PagingInformation();
       this.pageInfo.pageNumber = data.pagingInfo.pageNumber;
       this.pageInfo.pageSize = data.pagingInfo.pageSize;

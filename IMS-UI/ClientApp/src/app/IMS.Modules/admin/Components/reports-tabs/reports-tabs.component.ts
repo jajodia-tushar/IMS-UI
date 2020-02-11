@@ -14,6 +14,7 @@ import { EmployeeOrdersResponse } from "src/app/IMS.Models/Employee/EmployeeOrde
 import { ItemConsumptionDetailsResponse } from "src/app/IMS.Models/Admin/ItemConsumptionDetailsResponse";
 import { DatePipe } from "@angular/common";
 import { CentralizedDataService } from "src/app/IMS.Services/shared/centralized-data.service";
+import { ReportsUtils } from "src/app/IMS.Modules/shared/utils/ReportsUtils";
 
 
 const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -356,55 +357,55 @@ export class ReportsTabsComponent implements OnInit {
     if (this.selectedTab == 0) {
       let firstLevelData = this.getTopLevelDataOfRAG(this.dataToExport);
       let fileName = `RAG-Report-Of -- ${this.locationName} in ${this.colour} on ${onDate}`
-      this.DownloadReport(fileName,firstLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData);
     }
     else if (this.selectedTab == 1) {
       let firstLevelData = this.getTopLevelDataForVendorOrder(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForVendorOrder(this.dataToExport);
       let fileName = `Vendor-Order-report from -${dFromDate} To ${dToDate}`;
-      this.DownloadReport(fileName,firstLevelData,innerLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 2){
       let firstLevelData = this.getTopLevelDataOfEmployeeOrder(this.dataToExport);
       let fileName = `Employee-Order-Reports from - ${dFromDate}  To ${dToDate} `;
-      this.DownloadReport(fileName,firstLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData);
     }
     else if(this.selectedTab == 3){
       let firstLevelData = this.getTopLevelDataForPerDayConsumption(this.dataToExport);
       let innerLevelData = this.getInnerLevelDataForPerDayConsumption(this.dataToExport);
       let fileName = `Per Day Consumption Report from ${dFromDate} To ${dToDate}`;
-      this.DownloadReport(fileName,firstLevelData,innerLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData,innerLevelData);
     }
     else if(this.selectedTab == 4){
       let firstLevelData = this.getTopLevelDataOfItemConsumption(this.dataToExport);
       let fileName = `Item Consumption Report from ${dFromDate} To ${dToDate}`;
-      this.DownloadReport(fileName,firstLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData);
     }
     else if (this.selectedTab == 5){
       let firstLevelData = this.getTopLevelDataOfAuditLogs();
       let fileName = `Audit Logs Report from ${dFromDate} To ${dToDate}`;
-      this.DownloadReport(fileName,firstLevelData);
+      ReportsUtils.DownloadReport(fileName,firstLevelData);
     }
   }
   
 
-  DownloadReport(fileName : string,firstLevelData, innerLevelData?){  
-    let excelFileName = fileName;
-    let ws = XLSX.utils.json_to_sheet(firstLevelData);
-    let wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Main Page");
-    if(innerLevelData){
-      innerLevelData.forEach(
-        d => {
-          let dataToPlot = d.sheetData;
-          let nameOfSheet = d.sheetName.toString();
-          let innerSheet = XLSX.utils.json_to_sheet(dataToPlot);
-          XLSX.utils.book_append_sheet(wb, innerSheet, nameOfSheet);
-        });
-    }
-    const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, excelFileName);
-  }
+  // DownloadReport(fileName : string,firstLevelData, innerLevelData?){  
+  //   let excelFileName = fileName;
+  //   let ws = XLSX.utils.json_to_sheet(firstLevelData);
+  //   let wb = XLSX.utils.book_new();
+  //   XLSX.utils.book_append_sheet(wb, ws, "Main Page");
+  //   if(innerLevelData){
+  //     innerLevelData.forEach(
+  //       d => {
+  //         let dataToPlot = d.sheetData;
+  //         let nameOfSheet = d.sheetName.toString();
+  //         let innerSheet = XLSX.utils.json_to_sheet(dataToPlot);
+  //         XLSX.utils.book_append_sheet(wb, innerSheet, nameOfSheet);
+  //       });
+  //   }
+  //   const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  //   this.saveAsExcelFile(excelBuffer, excelFileName);
+  // }
 
   getTopLevelDataOfAuditLogs() {
     let data = [];
@@ -567,10 +568,10 @@ export class ReportsTabsComponent implements OnInit {
     }
   }
 
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-     const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
-     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
-  }
+  // private saveAsExcelFile(buffer: any, fileName: string): void {
+  //    const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
+  //    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
+  // }
 
   handleErrorInConnection(message? : string){
     if(message == null || message == "")

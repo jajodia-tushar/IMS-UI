@@ -33,6 +33,10 @@ export class LoginComponent implements OnInit {
         this.role = data.user.role.name;
         if (this.role != null) {
           this.centralizedRepo.setUser(data.user);
+          if (!data.user.isDefaultPasswordChanged) {
+            this.router.navigateByUrl('changePassword');
+            return;
+          }
           if (this.role == 'Shelf') {
             if (!this.isPopedUp) {
               let dialogConfig = new MatDialogConfig();
@@ -43,15 +47,10 @@ export class LoginComponent implements OnInit {
             }
           }
           else {
-            if (!data.user.isDefaultPasswordChanged) {
-              this.router.navigateByUrl('changePassword');
-            }
-            else {
               if (this.role == 'SuperAdmin')
                 this.router.navigateByUrl('Admin')
               else
                 this.router.navigateByUrl(this.role);
-            }
           }
         }
         else {

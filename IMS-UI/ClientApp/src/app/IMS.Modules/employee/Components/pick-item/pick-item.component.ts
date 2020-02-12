@@ -75,7 +75,7 @@ export class PickItemComponent implements OnInit {
       });
     }
     else {
-      if (cartItem.quantity < cartItem.item.maxLimit && itemInStock.availableQuantity < cartItem.quantity) {
+      if (cartItem.quantity < cartItem.item.maxLimit && itemInStock.availableQuantity > cartItem.quantity) {
         cartItem.quantity += 1;
       }
       else {

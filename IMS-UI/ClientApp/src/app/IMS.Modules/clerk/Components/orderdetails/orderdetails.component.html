@@ -24,7 +24,7 @@
                             <th class="table-text" mat-header-cell *matHeaderCellDef> Quantity </th>
                             <td class="table-text" mat-cell *matCellDef="let element">
                                 <mat-form-field appearance="outline" class="form-field-size">
-                                    <input matInput #quantity="ngModel" maxlength="4" [(ngModel)]="element.quantity"
+                                    <input matInput #quantity="ngModel" maxlength="5" [(ngModel)]="element.quantity"
                                         (keydown)="allowOnlyDigits($event)">
                                 </mat-form-field>
                             </td>

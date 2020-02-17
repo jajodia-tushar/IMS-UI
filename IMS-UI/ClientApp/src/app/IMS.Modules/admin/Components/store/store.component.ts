@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit {
 
   dataToExport : ItemStockStatus[] = [];
 
-  pageSizeOptions: number[] = [10, 50, 100];
+  pageSizeOptions: number[] = [10,50,100];
 
   paginator: MatPaginator;
 
@@ -56,7 +56,6 @@ export class StoreComponent implements OnInit {
         console.log(this.dataToExport);
         this.pageSize = data.pagingInfo.pageSize.toString();
         this.pageLength = data.pagingInfo.totalResults.toString();
-
         this.getStoreData(data);
       });
   }
@@ -99,7 +98,7 @@ export class StoreComponent implements OnInit {
   async ngOnInit() {
     this.dataSource.data = [];
     this.pageInfo = new PagingInformation();
-    this.pageInfo.pageSize = 10;
+    this.pageInfo.pageSize = 10000;
     this.pageInfo.pageNumber = 1;
     this.pageInfo.totalResults = 100;
     this.pageLength = "0";
@@ -124,7 +123,7 @@ export class StoreComponent implements OnInit {
       this.pageInfo.pageSize = data.pagingInfo.pageSize;
       this.pageInfo.totalResults = data.pagingInfo.totalResults;
       this.pageLength = data.pagingInfo.totalResults.toString();
-      this.pageSize = data.pagingInfo.pageSize.toString();
+      this.pageSize = data.pagingInfo.totalResults.toString();
       this.getStoreData(data);
     });
   }

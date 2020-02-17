@@ -67,7 +67,7 @@ export class VendorService {
   }
 
   postVendorOrder(vendorOrder: VendorOrder) {
-    return this.http.post<VendorOrder>("api/Vendor/orders", vendorOrder);
+    return this.http.post<VendorOrderResponse>("api/Vendor/orders", vendorOrder);
   }
 
   getVendorOrder(vendorId: string, toDate: string, fromDate: string, approved : string, pageNumber : number, pageSize : number): Observable<VendorOrderResponse>{

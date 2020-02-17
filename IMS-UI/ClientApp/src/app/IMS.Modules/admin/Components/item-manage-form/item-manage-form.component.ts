@@ -27,7 +27,7 @@ export class ItemManageFormComponent implements OnInit {
       maxLimit: [null, [Validators.required]],
       isActive: [true, []],
       imageUrl: [''],
-      rate: [null, [Validators.required]],
+      rate: [null, [Validators.required, Validators.min(1)]],
       shelvesRedLimit: [null, [Validators.required]],
       shelvesAmberLimit: [null, [Validators.required]],
       warehouseRedLimit: [null, [Validators.required]],

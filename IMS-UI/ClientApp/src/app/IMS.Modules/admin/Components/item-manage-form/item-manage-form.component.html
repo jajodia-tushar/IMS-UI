@@ -8,8 +8,9 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field hideRequiredMarker="false" floatLabel="auto">
-            <input type="number" min="0" matInput formControlName="rate" placeholder="Rate" required>
-            <mat-error *ngIf="rate.invalid">Invalid Rate</mat-error>
+            <input type="number" matInput formControlName="rate" placeholder="Rate" required>
+            <mat-error *ngIf="rate.errors?.min">Rate should be greater than 0</mat-error>
+            <mat-error *ngIf="rate.errors?.required">Rate is Required Field</mat-error>
         </mat-form-field>
     </div>
     <div class="one-row">

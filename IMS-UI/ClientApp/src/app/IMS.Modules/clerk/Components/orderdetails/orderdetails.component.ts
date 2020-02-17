@@ -224,12 +224,23 @@ export class OrderdetailsComponent implements OnInit {
               this.vendorOrder.vendorOrderDetails.challanImageUrl = data.locationUrl;
               this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
                 data => {
-                   this.orderDetails = null;
-            this._CentralizedDataService.setSiblingData(this.orderDetails)
-                  this.reloadComponent();
-                  showMessage(this.snackBar, 5, "Order Is Placed", "success");
+                   if(data.error==null){
+                    this.orderDetails = null;
+                    this._CentralizedDataService.setSiblingData(this.orderDetails)
+                    this.reloadComponent();
+                    showMessage(this.snackBar, 5, "Order Is Placed", "success");
+                   }
+                   else{
+                    this.canLoad = false;
+                    this.buttonName = "Submit";
+                    showMessage(this.snackBar, 5, "Order Placing failed", "warn");
+
+                   }
+                  
                 },
                 error => {
+                  this.canLoad = false;
+                  this.buttonName = "Submit";
                   showMessage(this.snackBar, 5, error.errorMessage, "warn");
                 }
               )
@@ -241,12 +252,22 @@ export class OrderdetailsComponent implements OnInit {
         else {
           this._VendorSerice.postVendorOrder(this.vendorOrder).subscribe(
             data => {
-              this.orderDetails = null;
-              this._CentralizedDataService.setSiblingData(this.orderDetails)
-              this.reloadComponent();
-              showMessage(this.snackBar, 5, "Order Is Placed", "success");
+              if(data.error==null){
+                this.orderDetails = null;
+                this._CentralizedDataService.setSiblingData(this.orderDetails)
+                this.reloadComponent();
+                showMessage(this.snackBar, 5, "Order Is Placed", "success");
+              }
+              else{
+                this.canLoad = false;
+                this.buttonName = "Submit";
+                showMessage(this.snackBar, 5, "Order Placing Failed", "warn")
+              }
+              
             },
             error => {
+              this.canLoad = false;
+              this.buttonName = "Submit";
               showMessage(this.snackBar, 5, error.errorMessage, "warn");
             }
           )

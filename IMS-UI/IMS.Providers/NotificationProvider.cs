@@ -32,7 +32,7 @@ namespace IMS_UI.IMS.Providers
                 {
                     var EndPoint = Constants.APIEndpoints.NotificationProvider;
 
-                    UriBuilder uri = new UriBuilder(Environment.GetEnvironmentVariable(_iConfiguration["BaseURL"]) + EndPoint);
+                    UriBuilder uri = new UriBuilder(_iConfiguration["BaseURL"] + EndPoint);
 
                     client.DefaultRequestHeaders.Accept.
                         Add(item: new MediaTypeWithQualityHeaderValue("application/json"));

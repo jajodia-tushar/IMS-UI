@@ -34,7 +34,7 @@ namespace IMS_UI.IMS.Providers
                 {
                     var EndPoint = Constants.APIEndpoints.StoreProvider;
                     UriBuilder uriBuilder =
-                        new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + EndPoint);
+                        new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
                     _client.DefaultRequestHeaders.Accept.Add(
                        new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =
@@ -70,7 +70,7 @@ namespace IMS_UI.IMS.Providers
                 {
                     var EndPoint = Constants.APIEndpoints.StoreTransferProvider;
                     var content = new ObjectContent<TransferToShelvesRequest>(request, new JsonMediaTypeFormatter());
-                    _client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]));
+                    _client.BaseAddress = new Uri(_iconfiguration["BASEURL"]);
                     _client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
                     _client.DefaultRequestHeaders.Authorization =

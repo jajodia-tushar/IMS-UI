@@ -32,7 +32,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.reportsGetRAGReports;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -72,7 +72,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.FrequentlyUsedItemProvider;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -110,7 +110,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.ItemWiseAnalysisProvider;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(item: new MediaTypeWithQualityHeaderValue("application/json"));
@@ -149,7 +149,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.ShelfWiseOrderCountProvider;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BASEURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BASEURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -186,7 +186,7 @@ namespace IMS_UI.IMS.Providers
             client.DefaultRequestHeaders.Authorization =
                         new AuthenticationHeaderValue("Bearer", _sessionManager.GetString("token"));
 
-            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]));
+            client.BaseAddress = new Uri(_iconfiguration["BaseURL"]);
 
             var response = await client.GetAsync(client.BaseAddress + EndPoint);
 
@@ -201,7 +201,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.PerDayConsumptionReports;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(item: new MediaTypeWithQualityHeaderValue("application/json"));
@@ -237,7 +237,7 @@ namespace IMS_UI.IMS.Providers
             var EndPoint = Constants.APIEndpoints.ItemConsumptionReports;
 
             UriBuilder uriBuilder =
-                new UriBuilder(Environment.GetEnvironmentVariable(_iconfiguration["BaseURL"]) + EndPoint);
+                new UriBuilder(_iconfiguration["BaseURL"] + EndPoint);
 
             client.DefaultRequestHeaders.Accept.
                 Add(item: new MediaTypeWithQualityHeaderValue("application/json"));
